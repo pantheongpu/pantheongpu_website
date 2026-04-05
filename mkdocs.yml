@@ -1,0 +1,102 @@
+site_name: PANTHEON
+site_description: Universal GPU Stress & Diagnostics Suite
+site_url: https://pantheongpu.com
+repo_url: https://github.com/saqibkh/pantheon
+repo_name: saqibkh/pantheon
+edit_uri: ""
+
+nav:
+  - Home: index.md
+  - Live Benchmarks: benchmarks.md
+  - Test Documentation:
+    - Overview: tests/index.md
+    - Core & Compute:
+      - Omni Virus: tests/omni_virus.md
+      - Voltage Virus: tests/voltage.md
+      - Pulse Virus: tests/pulse_virus.md
+      - Tensor Virus: tests/tensor_virus.md
+      - MMA Virus: tests/mma_virus.md
+      - Transformer Virus: tests/transformer_virus.md
+      - FP64 Chokehold: tests/fp64_virus.md
+      - Integer Virus: tests/int_virus.md
+      - SFU Virus: tests/sfu_stress.md
+      - Incinerator: tests/incinerator.md
+    - Fixed-Function & Accelerators:
+      - RT Virus: tests/rt_virus.md
+      - Media Encoder Virus: tests/media_enc_virus.md
+    - Memory & Cache:
+      - Atomic Virus: tests/atomic_virus.md
+      - Cache Latency: tests/cache_lat.md
+      - Memory Write (Aggressive): tests/memory_write_agg.md
+      - Memory Write (Standard): tests/memory_write.md
+      - Memory Read (Aggressive): tests/memory_read_agg.md
+      - Memory Read (Standard): tests/memory_read.md
+      - Memory Bank Thrasher: tests/memory_bank_thrash.md
+      - Memory Cache Fracturing: tests/memory_cache_fracture.md
+      - Memory Retention Bake: tests/memory_retention_bake.md
+      - Memory Asymmetric Thermal: tests/memory_thermal_asym.md
+    - Interconnect & Architecture:
+      - P2P Thrasher: tests/p2p_thrasher.md
+      - TLB Avalanche: tests/tlb_avalanche.md
+      - PCIe Thrasher: tests/pcie_bandwidth.md
+      - RAS Validator: tests/ras_validator.md
+      - Memory TSV Thrasher: tests/memory_tsv_thrasher.md
+      - Memory PC Ping-Pong: tests/memory_pc_pingpong.md
+      - Scheduler Virus: tests/scheduler.md
+      - Baseline Metrics: tests/baseline_metrics.md 
+
+
+theme:
+  name: material
+  logo: assets/icon.png
+  favicon: assets/favicon.png
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+  palette:
+    # Dark Mode (Default)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    # Light Mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+# Extensions for better tables, grid layouts, and code blocks
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - css/extra.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/apexcharts
+  - js/charts.js
+  - js/tables.js

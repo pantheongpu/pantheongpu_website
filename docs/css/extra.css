@@ -1,0 +1,162 @@
+/* --- Global Aesthetics --- */
+:root {
+  --md-hue: 260;
+  --md-primary-fg-color: #6200ea; /* Deep Purple */
+  --md-primary-bg-color: #000000; /* True Black */
+  
+  /* Custom Variables (Universal) */
+  --pantheon-neon-blue: #00f3ff;
+  --pantheon-neon-green: #00e396;
+}
+
+/* --- DARK MODE OVERRIDES (Slate) --- */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #050505; 
+  --pantheon-card-bg: #111111;
+  --pantheon-border: #333;
+  --pantheon-h1-start: #ffffff;
+  --pantheon-h1-end: #aaaaaa;
+  --pantheon-th-bg: #1a1a1a;
+  --pantheon-nav-bg: rgba(0,0,0,0.85);
+  --pantheon-test-color: #00f3ff; /* Neon Cyberpunk Blue */
+  --pantheon-text-default: #ffffff;
+  --pantheon-temp-good: #00e676; /* Bright Green */
+  --pantheon-temp-warn: #ffeb3b; /* Bright Yellow */
+  --pantheon-temp-crit: #ff3d00; /* Neon Red */
+}
+
+/* --- LIGHT MODE OVERRIDES (Default) --- */
+[data-md-color-scheme="default"] {
+  --pantheon-card-bg: #ffffff;
+  --pantheon-border: #e0e0e0;
+  --pantheon-h1-start: #000000;
+  --pantheon-h1-end: #555555;
+  --pantheon-th-bg: #f5f5f5;
+  --pantheon-nav-bg: rgba(255,255,255,0.85);
+  --pantheon-test-color: #0055cc; /* Deeper, readable blue for white backgrounds */
+  --pantheon-text-default: #000000;
+  --pantheon-temp-good: #008a00; /* Darker Forest Green */
+  --pantheon-temp-warn: #d48806; /* Darker Amber/Orange */
+  --pantheon-temp-crit: #cc0000; /* Deep Crimson */
+}
+
+/* Force header text and icons to be dark in Light Mode */
+[data-md-color-scheme="default"] .md-header,
+[data-md-color-scheme="default"] .md-header .md-header__button,
+[data-md-color-scheme="default"] .md-header .md-header__topic,
+[data-md-color-scheme="default"] .md-tabs__link {
+    color: #333333 !important;
+}
+
+/* --- Typography --- */
+body, input, .md-nav__link {
+  font-family: 'Roboto', sans-serif;
+}
+pre, code, .md-code {
+  font-family: 'Roboto Mono', 'Fira Code', monospace !important;
+}
+
+/* --- Hero / Headers --- */
+h1 {
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(to right, var(--pantheon-h1-start), var(--pantheon-h1-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Benchmark Cards (The "Wow" Factor) --- */
+.chart-container {
+  background: var(--pantheon-card-bg);
+  border: 1px solid var(--pantheon-border);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softened the shadow globally */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle glowing border animation on hover */
+.chart-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 243, 255, 0.15);
+  border-color: var(--pantheon-neon-blue);
+}
+
+.chart-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pantheon-neon-blue), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.chart-container:hover::before {
+  opacity: 1;
+}
+
+/* --- Navigation Bar (Glassmorphism) --- */
+.md-header {
+  background-color: var(--pantheon-nav-bg) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--pantheon-border);
+}
+
+/* --- Tables --- */
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: 1px solid var(--pantheon-border);
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--pantheon-th-bg);
+  color: var(--md-primary-fg-color); /* Matches the primary purple instead of just neon blue for better light mode readability */
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+/* 1. Force the main container to span 95% of the viewport */
+.md-grid {
+  max-width: 95vw !important;
+  padding: 0 20px; /* Minimal padding on sides */
+}
+
+/* 2. Optimize Table for Wide Screens */
+#benchmarkTable {
+  width: 100%;
+  table-layout: auto; /* Allow columns to stretch based on content */
+}
+
+/* 3. Prevent awkward text wrapping in data cells */
+#benchmarkTable th,
+#benchmarkTable td {
+  white-space: nowrap;  /* Keep "RTX 4090" on one line */
+  padding: 12px 15px;   /* More breathing room */
+  font-size: 0.9rem;    /* Slight adjust for density */
+}
+
+/* 4. Keep the search bar and filters wide as well */
+#textSearch, #gpuFilter, #testFilter {
+  font-size: 1rem;
+}
+
+/* Target the first column (GPU Model) specifically */
+#benchmarkTable td:nth-child(1),
+#benchmarkTable th:nth-child(1) {
+    white-space: normal !important;  /* Override the 'nowrap' to allow breaking lines */
+    max-width: 200px;                /* Force a maximum width */
+    min-width: 150px;                /* Ensure it doesn't get too small */
+    word-wrap: break-word;           /* Break long words/names if necessary */
+    line-height: 1.4;                /* Improve readability for wrapped text */
+}
+
+/* Optional: Ensure other columns stay on one line for neatness */
+#benchmarkTable td:not(:nth-child(1)) {
+    white-space: nowrap;
+}
