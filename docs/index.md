@@ -67,10 +67,8 @@ Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate
 ## Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/saqibkh/pantheon.git
-cd pantheon
-
 # Run the full suite (30 seconds per test)
-python3 pantheon.py --test all --duration 30
+./pantheon.py --test all --duration 30
 ```
+
+
