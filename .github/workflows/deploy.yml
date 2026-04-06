@@ -1,0 +1,32 @@
+name: Publish Website
+
+on:
+  push:
+    branches:
+      - main  # Only runs when code is merged into main
+
+permissions:
+  contents: write # Allows the Action to push to the gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: |
+          pip install mkdocs-material
+          # Add any other mkdocs plugins you use here
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          mkdocs gh-deploy --force
