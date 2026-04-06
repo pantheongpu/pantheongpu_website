@@ -44,6 +44,7 @@ nav:
       - Memory PC Ping-Pong: tests/memory_pc_pingpong.md
       - Scheduler Virus: tests/scheduler.md
       - Baseline Metrics: tests/baseline_metrics.md 
+  - Releases: release.md
 
 
 theme:
