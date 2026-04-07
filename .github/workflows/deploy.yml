@@ -25,6 +25,9 @@ jobs:
           pip install mkdocs-material
           # Add any other mkdocs plugins you use here
 
+      - name: Generate Web Data
+        run: python3 website_utils/generate_web_data.py # Runs your custom script
+
       - name: Deploy to GitHub Pages
         run: |
           git config --global user.name "github-actions[bot]"
