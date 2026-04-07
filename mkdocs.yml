@@ -101,3 +101,22 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/apexcharts
   - js/charts.js
   - js/tables.js
+
+extra:
+  analytics:
+    provider: google
+    property: G-XLT0RNXMXS
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            opening an issue on GitHub.
