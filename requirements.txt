@@ -1,0 +1,9 @@
+psutil
+pandas
+openpyxl
+numpy
+cmake
+customtkinter
+pyinstaller
+#fastapi
+uvicorn
