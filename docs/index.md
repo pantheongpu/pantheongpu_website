@@ -9,8 +9,8 @@ hide:
   <img src="assets/logo.png" width="200" alt="Pantheon Logo">
   <h3>Universal GPU Stress & Diagnostics Suite</h3>
   <p>
-    <a href="https://github.com/saqibkh/pantheon" class="md-button md-button--primary">
-       View on GitHub
+    <a href="release/" class="md-button md-button--primary">
+       Latest Release
     </a>
     <a href="benchmarks/" class="md-button">
        Live Benchmarks
