@@ -71,7 +71,7 @@ Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate
 sudo apt-get update
 sudo apt-get install python3-tk python3-pip
 sudo apt-get install nvidia-cuda-toolkit (replace with hipcc on ROCm devices)
-sudo pip install -r requirements.txt
+sudo pip install numpy psutil pandas openpyxl cmake customtkinter pyinstaller uvicorn 
 
 # Run the full suite (30 seconds per test)
 ./pantheon.py --test all --duration 30
