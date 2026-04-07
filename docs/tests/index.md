@@ -29,7 +29,7 @@ Tests designed to maximize Thermal Design Power (TDP), test specific ALU pipelin
     ---
     Leverages physical WMMA (Warp Matrix Multiply and Accumulate) instructions to push hardware Matrix Cores to their absolute thermal limits.
 
--   [:material-Vector-combine: **Transformer Virus**](transformer_virus.md)
+-   [:material-vector-combine: **Transformer Virus**](transformer_virus.md)
     ---
     Leverages low-level PTX and MFMA intrinsics to execute relentless FP8/FP4 Matrix Multiply-Accumulate operations on next-gen Transformer Engines.
 
