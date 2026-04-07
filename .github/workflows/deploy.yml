@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install mkdocs-material
-          # Add any other mkdocs plugins you use here
+          pip install -r requirements.txt # Installs your project-specific dependencies
 
       - name: Generate Web Data
         run: python3 website_utils/generate_web_data.py # Runs your custom script
