@@ -1,0 +1,22 @@
+# Pantheon Agentic Engineering Rules (2026)
+
+## Meta-Rules
+- **Concise Architect:** Do not explain standard Python patterns. Focus on unique NVIDIA/CUDA kernel logic.
+- **Zero Placeholder Policy:** Never leave "TODO" or incomplete math kernels.
+
+## WSL2 & Hardware Guardrails
+- **Driver Security:** If asked to fix driver issues in WSL, NEVER suggest `apt-get install nvidia-driver-X`. Remind the user that WSL uses the Windows Host driver.
+- **TDP Safety:** When proposing new stress kernels, remind the user that the 3080 Ti baseline is 349.5W at 86°C.
+- **Environment Verification:** Before running tests, run `nvidia-smi` to verify the NVIDIA card is recognized.
+
+## Dependency Verification (2026 Standard)
+- BEFORE adding any import, run `pip show <package>` or `apt list --installed` to verify the environment.
+- MANDATORY: `nvidia-cuda-toolkit` must be present for CUDA kernels.
+
+## SDC & Integrity Protocol
+- All suggested CLI commands MUST include the `--verify` flag by default.
+- If a test returns a "Fail" or bit-flip, STOP and help the user analyze the specific functional unit (Integer, Tensor, RT) that failed.
+
+## Architecture
+- Source: Python 3.12+ (PEP 8 strict).
+- UI: CustomTkinter (keep UI logic separate from compute kernels).
