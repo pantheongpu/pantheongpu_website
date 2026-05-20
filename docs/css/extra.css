@@ -69,9 +69,9 @@ h1 {
 .chart-container {
   background: var(--pantheon-card-bg);
   border: 1px solid var(--pantheon-border);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softened the shadow globally */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
@@ -127,9 +127,95 @@ h1 {
   padding: 0 20px; /* Minimal padding on sides */
 }
 
+.benchmark-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.benchmark-filter {
+  position: relative;
+  display: inline-block;
+  flex: 1 1 120px;
+  min-width: 120px;
+}
+
+.benchmark-filter-button,
+.benchmark-export-button,
+#textSearch {
+  width: 100%;
+  min-height: 42px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.benchmark-filter-button {
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
+.benchmark-export-button {
+  flex: 1 1 140px;
+  min-width: 140px;
+  padding: 10px;
+  background: var(--pantheon-neon-green, #00e396);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#textSearch {
+  flex: 3 1 200px;
+  min-width: 200px;
+  padding: 10px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.benchmark-menu {
+  display: none;
+  position: absolute;
+  background-color: #1a1a1a;
+  min-width: 200px;
+  max-width: min(320px, calc(100vw - 32px));
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+  z-index: 2;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.benchmark-menu--compact {
+  min-width: 150px;
+}
+
+.benchmark-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 20px;
+  margin: 16px 0 24px;
+}
+
+.benchmark-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* 2. Optimize Table for Wide Screens */
 #benchmarkTable {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   table-layout: auto; /* Allow columns to stretch based on content */
 }
 
@@ -139,11 +225,6 @@ h1 {
   white-space: nowrap;  /* Keep "RTX 4090" on one line */
   padding: 12px 15px;   /* More breathing room */
   font-size: 0.9rem;    /* Slight adjust for density */
-}
-
-/* 4. Keep the search bar and filters wide as well */
-#textSearch, #gpuFilter, #testFilter {
-  font-size: 1rem;
 }
 
 /* Target the first column (GPU Model) specifically */
@@ -159,4 +240,29 @@ h1 {
 /* Optional: Ensure other columns stay on one line for neatness */
 #benchmarkTable td:not(:nth-child(1)) {
     white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .md-grid {
+    max-width: 100vw !important;
+    padding: 0 16px;
+  }
+
+  .benchmark-filter {
+    flex-basis: calc(50% - 5px);
+    min-width: 0;
+  }
+
+  .benchmark-export-button,
+  #textSearch {
+    flex-basis: 100%;
+  }
+
+  .benchmark-menu {
+    min-width: 100%;
+  }
+
+  .chart-container {
+    padding: 16px;
+  }
 }

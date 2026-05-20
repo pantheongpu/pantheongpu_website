@@ -32,16 +32,19 @@ function renderChart(rawData, testName, elementId, title) {
     
     // Group by GPU and take the MAX score (best run)
     const bestScores = {};
+    const units = {};
     filtered.forEach(r => {
         const score = Number(r.score || r.throughput || 0);
         if (!bestScores[r.gpu] || score > bestScores[r.gpu]) {
             bestScores[r.gpu] = score;
+            units[r.gpu] = r.unit || "";
         }
     });
 
     // Prepare arrays for ApexCharts
     const categories = Object.keys(bestScores);
     const seriesData = Object.values(bestScores);
+    const unit = Object.values(units).find(Boolean) || "";
 
     const options = {
         chart: {
@@ -60,7 +63,7 @@ function renderChart(rawData, testName, elementId, title) {
             labels: { style: { colors: '#b8b8b8' } }
         },
         yaxis: {
-            title: { text: 'GB/s' },
+            title: { text: unit },
             labels: { style: { colors: '#b8b8b8' } }
         },
         title: {
