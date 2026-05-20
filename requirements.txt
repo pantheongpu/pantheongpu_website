@@ -1,3 +1,5 @@
+mkdocs-material
+pytest
 psutil
 pandas
 openpyxl

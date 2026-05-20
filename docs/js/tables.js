@@ -37,14 +37,20 @@ let currentSort = { key: 'score', dir: 'desc' };
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const dataUrl = "../assets/web_data.json";
+    const table = document.getElementById("benchmarkTable");
+    if (!table) return;
+
+    const dataUrl = getBenchmarkAssetUrl("web_data.json");
 
     fetch(dataUrl)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP ${response.status} loading ${dataUrl}`);
+            return response.json();
+        })
         .then(data => {
             rawData = data;
-	    bestRuns = rawData;
-	    //bestRuns = getBestRunsOnly(rawData);
+            bestRuns = rawData;
+            //bestRuns = getBestRunsOnly(rawData);
             
             initColumnMenu();     
             populateFilters(bestRuns);
@@ -52,6 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(err => console.error("Error loading benchmark data:", err));
 });
+
+function getBenchmarkAssetUrl(fileName) {
+    const script = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes("/js/tables.js"));
+    if (script && script.src) {
+        return new URL(`../assets/${fileName}`, script.src).href;
+    }
+    return new URL(`assets/${fileName}`, document.baseURI).href;
+}
 
 function getBestRunsOnly(data) {
     const groups = {};
@@ -64,11 +78,50 @@ function getBestRunsOnly(data) {
     return Object.values(groups);
 }
 
+function isMissingValue(val) {
+    return val === undefined || val === null || val === "" || val === "N/A";
+}
+
+function formatMetric(value, unit) {
+    if (isMissingValue(value) || value === 0 || value === "0") return "N/A";
+    return unit ? `${value} ${unit}` : String(value);
+}
+
+function formatCellValue(row, key) {
+    let val = row[key];
+
+    if (key === "score") {
+        return formatMetric(val, row.unit);
+    }
+    if (key === "throughput") {
+        return formatMetric(val, row.unit);
+    }
+    if (key === "duration") {
+        return isMissingValue(val) ? "N/A" : `${val}s`;
+    }
+    if (key.includes("temp")) {
+        return formatMetric(val, "C");
+    }
+    if (key.includes("power")) {
+        return formatMetric(val, "W");
+    }
+    if (key === "version") {
+        return val || "Legacy";
+    }
+    if (val === undefined || val === null || val === "" || val === 0 || val === "0") {
+        return "N/A";
+    }
+    return val;
+}
+
 // --- 2. Dynamic Table Rendering ---
 function renderTable(data) {
     const table = document.getElementById("benchmarkTable");
+    if (!table) return;
+
     const thead = table.querySelector("thead");
     const tbody = table.querySelector("tbody");
+    if (!thead || !tbody) return;
 
     thead.innerHTML = "";
     let headerRow = document.createElement("tr");
@@ -97,18 +150,10 @@ function renderTable(data) {
         COL_DEFS.forEach(col => {
             if (col.visible) {
                 let td = document.createElement("td");
-                let val = row[col.key];
+                let val = formatCellValue(row, col.key);
 
-                // Formatting
                 if (col.key === "score") {
-                    val = (val === "N/A" || val === undefined) ? "N/A" : `${val} ${row.unit}`;
                     td.style.fontWeight = "bold";
-                }
-                else if (col.key === "throughput") {
-                    val = (val !== "N/A" && val !== undefined && val !== 0) ? `${val} GB/s` : "N/A";
-                }
-                else if (col.key === "duration") {
-                    val = val + "s";
                 }
                 else if (col.key === "gpu") {
                     td.style.fontWeight = "bold";
@@ -117,19 +162,13 @@ function renderTable(data) {
                     td.style.color = "var(--pantheon-test-color)";
                 }
                 else if (col.key.includes("temp")) {
-                    td.style.color = getColorForTemp(val);
-                    if(val) val += "°C";
-                }
-                else if (col.key.includes("power")) {
-                    if(val !== "N/A" && val !== undefined) val += " W";
+                    td.style.color = getColorForTemp(row[col.key]);
                 }
                 else if (col.key === "version") {
                     td.style.fontSize = "0.8em";
                     td.style.color = "#aaa";
-                    if(!val) val = "Legacy";
                 }
                 
-                if (val === undefined || val === 0 || val === "0") val = "N/A";
                 td.textContent = val;
                 tr.appendChild(td);
             }
@@ -157,6 +196,8 @@ function getCheckedValues(menuId) {
 
 function buildCheckboxMenu(menuId, items, defaultChecked = null) {
     const menu = document.getElementById(menuId);
+    if (!menu) return;
+
     menu.innerHTML = "";
 
     // Determine if "Select All" should be checked on load
@@ -296,7 +337,10 @@ function populateFilters(data) {
 }
 
 function applyFilters() {
-    const searchVal = document.getElementById("textSearch").value.toLowerCase();
+    const searchInput = document.getElementById("textSearch");
+    if (!searchInput) return;
+
+    const searchVal = searchInput.value.toLowerCase();
     const selectedGPUs = getCheckedValues("gpuMenu");
     const selectedTests = getCheckedValues("testMenu");
     const selectedVersions = getCheckedValues("versionMenu");
@@ -343,16 +387,34 @@ function toggleMenu(menuId) {
     const menus = ["gpuMenu", "testMenu", "versionMenu", "columnMenu"];
     menus.forEach(id => {
         const m = document.getElementById(id);
+        if (!m) return;
+        const button = document.querySelector(`[aria-controls="${id}"]`);
+
         if (id === menuId) {
-            m.style.display = m.style.display === "block" ? "none" : "block";
+            const willOpen = m.style.display !== "block";
+            m.style.display = willOpen ? "block" : "none";
+            if (button) button.setAttribute("aria-expanded", String(willOpen));
         } else {
-            if (m) m.style.display = "none";
+            m.style.display = "none";
+            if (button) button.setAttribute("aria-expanded", "false");
         }
+    });
+}
+
+function closeBenchmarkMenus() {
+    const menus = ["gpuMenu", "testMenu", "versionMenu", "columnMenu"];
+    menus.forEach(id => {
+        const menu = document.getElementById(id);
+        const button = document.querySelector(`[aria-controls="${id}"]`);
+        if (menu) menu.style.display = "none";
+        if (button) button.setAttribute("aria-expanded", "false");
     });
 }
 
 function initColumnMenu() {
     const menu = document.getElementById("columnMenu");
+    if (!menu) return;
+
     menu.innerHTML = "";
 
     // --- Create "Select All" Checkbox ---
@@ -418,18 +480,17 @@ function initColumnMenu() {
     };
 }
 
-// Close menus if clicked outside
-window.onclick = function(event) {
-    if (!event.target.matches('button')) {
-        const menus = ["gpuMenu", "testMenu", "versionMenu", "columnMenu"];
-        menus.forEach(id => {
-            const menu = document.getElementById(id);
-            if (menu && menu.style.display === "block" && !menu.contains(event.target)) {
-                menu.style.display = "none";
-            }
-        });
+document.addEventListener("click", function(event) {
+    if (!event.target.closest(".benchmark-filter")) {
+        closeBenchmarkMenus();
     }
-}
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeBenchmarkMenus();
+    }
+});
 
 function getColorForTemp(temp) {
     if (!temp || temp === "N/A") return "var(--pantheon-text-default)";
@@ -439,7 +500,7 @@ function getColorForTemp(temp) {
     return "var(--pantheon-text-default)";
 }
 
-// --- 6. Export to Excel (CSV) ---
+// --- 6. Export to CSV ---
 function exportToCSV() {
     if (currentFilteredData.length === 0) {
         alert("No data available to export!");
@@ -455,20 +516,7 @@ function exportToCSV() {
         return visibleCols.map(col => {
             let val = row[col.key];
 
-            // Apply the exact same formatting as the HTML table
-            if (col.key === "score") {
-                val = (val === "N/A" || val === undefined) ? "N/A" : `${val} ${row.unit}`;
-            } else if (col.key === "throughput") {
-                val = (val !== "N/A" && val !== undefined && val !== 0) ? `${val} GB/s` : "N/A";
-            } else if (col.key === "duration") {
-                val = val + "s";
-            } else if (col.key.includes("temp") && val) {
-                val += "°C";
-            } else if (col.key.includes("power") && val !== "N/A" && val !== undefined) {
-                val += " W";
-            } else if (val === undefined || val === 0 || val === "0") {
-                val = "N/A";
-            }
+            val = formatCellValue(row, col.key);
 
             // Escape quotes by doubling them (CSV standard) and wrap in quotes
             let strVal = String(val).replace(/"/g, '""');
