@@ -1,20 +1,80 @@
-# Pantheon: Universal GPU Stress & Diagnostics Suite
+# Pantheon GPU Website
 
-Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate and hammer specific GPU subsystems. Unlike generic benchmarks (Furmark, 3DMark), Pantheon allows you to test specific silicon limits.
+This repository contains the MkDocs website for Pantheon, a cross-platform
+CUDA/ROCm GPU stress and diagnostics suite. The site publishes documentation,
+release links, and a live benchmark dashboard generated from Pantheon report
+JSON files.
 
-## Website Dashboard
+## Repository Layout
 
-Pantheon includes a built-in web dashboard to visualize your benchmark results and compare different GPUs.
+- `docs/` - MkDocs pages, styles, JavaScript, images, and generated web assets.
+- `database/` - Raw `pantheon_report_*.json` benchmark reports.
+- `website_utils/generate_web_data.py` - Converts raw reports into
+  `docs/assets/web_data.json`.
+- `mkdocs.yml` - Site navigation, theme, analytics, CSS, and JavaScript config.
+- `.github/workflows/deploy.yml` - GitHub Pages deployment workflow.
 
-### 1. Install Dependencies
-The dashboard is built with MkDocs. You need to install the material theme:
+## Local Setup
+
+Use a virtual environment if possible:
+
 ```bash
-pip install mkdocs-material
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
 ```
 
-### 2. Generate Data
-The website reads from docs/assets/web_data.json. You must generate this file from your local database/ reports:
+On Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+## Generate Benchmark Data
+
+The benchmark dashboard reads from `docs/assets/web_data.json`. Regenerate it
+after adding or updating reports in `database/`:
+
 ```bash
-# parse local results and update the website JSON
 python3 website_utils/generate_web_data.py
 ```
+
+The generator keeps the best score per GPU, test, and Pantheon version. When a
+report does not include a real GPU UUID, it falls back to GPU metadata so
+different cards are not collapsed into the same benchmark row.
+
+## Run the Site Locally
+
+```bash
+mkdocs serve
+```
+
+Then open the local URL printed by MkDocs, usually
+`http://127.0.0.1:8000/`.
+
+## Build Check
+
+```bash
+python3 -m pytest
+python3 -m mkdocs build --strict
+```
+
+Use this before opening a pull request or publishing changes.
+
+## Continuous Integration
+
+The CI workflow runs on every push and pull request. It installs the Python
+dependencies, runs the pytest suite, regenerates benchmark data, and builds the
+MkDocs site in strict mode. The deploy workflow repeats those checks before
+publishing to GitHub Pages from `main`.
+
+## Deployment
+
+Pushing to `main` runs the GitHub Actions workflow in
+`.github/workflows/deploy.yml`. The workflow installs dependencies, regenerates
+`docs/assets/web_data.json`, verifies the site, and publishes the MkDocs site
+to GitHub Pages.

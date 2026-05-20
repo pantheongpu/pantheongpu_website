@@ -37,14 +37,20 @@ let currentSort = { key: 'score', dir: 'desc' };
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const dataUrl = "../assets/web_data.json";
+    const table = document.getElementById("benchmarkTable");
+    if (!table) return;
+
+    const dataUrl = getBenchmarkAssetUrl("web_data.json");
 
     fetch(dataUrl)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP ${response.status} loading ${dataUrl}`);
+            return response.json();
+        })
         .then(data => {
             rawData = data;
-	    bestRuns = rawData;
-	    //bestRuns = getBestRunsOnly(rawData);
+            bestRuns = rawData;
+            //bestRuns = getBestRunsOnly(rawData);
             
             initColumnMenu();     
             populateFilters(bestRuns);
@@ -52,6 +58,14 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(err => console.error("Error loading benchmark data:", err));
 });
+
+function getBenchmarkAssetUrl(fileName) {
+    const script = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes("/js/tables.js"));
+    if (script && script.src) {
+        return new URL(`../assets/${fileName}`, script.src).href;
+    }
+    return new URL(`assets/${fileName}`, document.baseURI).href;
+}
 
 function getBestRunsOnly(data) {
     const groups = {};
@@ -67,8 +81,11 @@ function getBestRunsOnly(data) {
 // --- 2. Dynamic Table Rendering ---
 function renderTable(data) {
     const table = document.getElementById("benchmarkTable");
+    if (!table) return;
+
     const thead = table.querySelector("thead");
     const tbody = table.querySelector("tbody");
+    if (!thead || !tbody) return;
 
     thead.innerHTML = "";
     let headerRow = document.createElement("tr");
@@ -118,7 +135,7 @@ function renderTable(data) {
                 }
                 else if (col.key.includes("temp")) {
                     td.style.color = getColorForTemp(val);
-                    if(val) val += "°C";
+                    if(val) val += " C";
                 }
                 else if (col.key.includes("power")) {
                     if(val !== "N/A" && val !== undefined) val += " W";
@@ -157,6 +174,8 @@ function getCheckedValues(menuId) {
 
 function buildCheckboxMenu(menuId, items, defaultChecked = null) {
     const menu = document.getElementById(menuId);
+    if (!menu) return;
+
     menu.innerHTML = "";
 
     // Determine if "Select All" should be checked on load
@@ -296,7 +315,10 @@ function populateFilters(data) {
 }
 
 function applyFilters() {
-    const searchVal = document.getElementById("textSearch").value.toLowerCase();
+    const searchInput = document.getElementById("textSearch");
+    if (!searchInput) return;
+
+    const searchVal = searchInput.value.toLowerCase();
     const selectedGPUs = getCheckedValues("gpuMenu");
     const selectedTests = getCheckedValues("testMenu");
     const selectedVersions = getCheckedValues("versionMenu");
@@ -343,16 +365,20 @@ function toggleMenu(menuId) {
     const menus = ["gpuMenu", "testMenu", "versionMenu", "columnMenu"];
     menus.forEach(id => {
         const m = document.getElementById(id);
+        if (!m) return;
+
         if (id === menuId) {
             m.style.display = m.style.display === "block" ? "none" : "block";
         } else {
-            if (m) m.style.display = "none";
+            m.style.display = "none";
         }
     });
 }
 
 function initColumnMenu() {
     const menu = document.getElementById("columnMenu");
+    if (!menu) return;
+
     menu.innerHTML = "";
 
     // --- Create "Select All" Checkbox ---
@@ -463,7 +489,7 @@ function exportToCSV() {
             } else if (col.key === "duration") {
                 val = val + "s";
             } else if (col.key.includes("temp") && val) {
-                val += "°C";
+                val += " C";
             } else if (col.key.includes("power") && val !== "N/A" && val !== undefined) {
                 val += " W";
             } else if (val === undefined || val === 0 || val === "0") {

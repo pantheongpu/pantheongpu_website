@@ -1,39 +1,73 @@
 import json
-import os
 import glob
-import numpy as np
+from pathlib import Path
+
+try:
+    import numpy as np
+except ImportError:
+    np = None
 
 # Paths
-DB_DIR = "database"
-OUTPUT_FILE = "docs/assets/web_data.json"
+ROOT_DIR = Path(__file__).resolve().parents[1]
+DB_DIR = ROOT_DIR / "database"
+OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "web_data.json"
 
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, np.integer): return int(obj)
-        if isinstance(obj, np.floating): return float(obj)
-        if isinstance(obj, np.ndarray): return obj.tolist()
+        if np is not None:
+            if isinstance(obj, np.integer): return int(obj)
+            if isinstance(obj, np.floating): return float(obj)
+            if isinstance(obj, np.ndarray): return obj.tolist()
         return super(NumpyEncoder, self).default(obj)
 
-def main():
+
+def normalize(value, default="Unknown"):
+    value = str(value if value is not None else default).strip()
+    return value or default
+
+
+def record_key(row):
+    uuid = normalize(row.get("uuid"))
+    test = normalize(row.get("test"), "unknown").lower()
+    version = normalize(row.get("version"), "1.0.0")
+    if uuid.lower() not in {"unknown", "n/a", "none"}:
+        identity = uuid
+    else:
+        identity = "|".join([
+            normalize(row.get("gpu")),
+            normalize(row.get("serial")),
+            normalize(row.get("vram"), "N/A"),
+            normalize(row.get("driver"), "N/A"),
+        ])
+    return f"{identity}|{test}|{version}"
+
+
+def to_float(value, default=0.0):
+    if value in (None, "", "N/A"):
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
+    db_dir = Path(db_dir)
+    output_file = Path(output_file)
     best_runs = {}
 
     # 1. LOAD EXISTING
-    if os.path.exists(OUTPUT_FILE):
+    if output_file.exists():
         try:
-            with open(OUTPUT_FILE, 'r') as f:
+            with open(output_file, 'r') as f:
                 existing_data = json.load(f)
                 for row in existing_data:
-                    # STRICT NORMALIZATION: Strip whitespace and match casing
-                    c_uuid = str(row.get("uuid", "Unknown")).strip()
-                    c_test = str(row.get("test", "unknown")).strip().lower()
-                    c_ver  = str(row.get("version", "1.0.0")).strip()
-
-                    key = f"{c_uuid}|{c_test}|{c_ver}"
-                    best_runs[key] = row
-        except: pass
+                    best_runs[record_key(row)] = row
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"Warning: could not load existing {output_file}: {e}")
 
     # 2. PROCESS NEW REPORTS
-    files = glob.glob(os.path.join(DB_DIR, "pantheon_report_*.json"))
+    files = sorted(glob.glob(str(db_dir / "pantheon_report_*.json")))
 
     for f in files:
         try:
@@ -44,10 +78,10 @@ def main():
                 gpu_info_map = {}
                 if data.get("gpu_static_info"):
                     for g in data["gpu_static_info"]:
-                        gpu_info_map[g["id"]] = g
+                        gpu_info_map[g.get("id", 0)] = g
 
                 for test in data.get("test_results", []):
-                    test_name = test["Test Name"]
+                    test_name = test.get("Test Name", "unknown")
                     gid = test.get("GPU ID", 0)
                     
                     # Fetch the specific GPU's info safely
@@ -68,10 +102,12 @@ def main():
                     score_val = 0.0
 
                     if raw_score != "N/A":
-                        score_val = float(raw_score)
+                        score_val = to_float(raw_score)
                     else:
-                        score_val = float(test.get("Max Power (W)", 0))
+                        score_val = to_float(test.get("Max Power (W)", 0))
                         unit = "Watts"
+
+                    version_str = data.get("Version", data.get("pantheon_version", "1.0.0"))
 
                     # --- CAPTURE ALL FIELDS ---
                     record = {
@@ -81,7 +117,7 @@ def main():
                         "serial": serial,
                         "power_limit": power_limit,
                         "test": test_name,
-                        "version": data.get("pantheon_version", "1.0.0"),
+                        "version": version_str,
                         "score": score_val,
                         "unit": unit,
                         "throughput": raw_score,
@@ -89,7 +125,7 @@ def main():
                         "temp_max": test.get("Max Temp (C)", 0),
                         "power_max": test.get("Max Power (W)", 0),
                         "clock_avg": test.get("Avg Clock (MHz)", 0),
-                        "date": data["timestamp"],
+                        "date": data.get("timestamp", "Unknown"),
                         "efficiency": test.get("Efficiency (MB/J)", 0),
                         "pcie_gen": test.get("PCIe Gen", 0),
                         "pcie_width": test.get("PCIe Width", 0),
@@ -104,14 +140,7 @@ def main():
                     }
                     
                     # TRACK BY UNIQUE SILICON AND SOFTWARE VERSION
-                    version_str = data.get("Version", data.get("pantheon_version", "1.0.0"))
-
-                    # STRICT NORMALIZATION: Prevent invisible whitespace duplicates
-                    c_uuid = str(uuid).strip()
-                    c_test = str(test_name).strip().lower()
-                    c_ver  = str(version_str).strip()
-
-                    key = f"{c_uuid}|{c_test}|{c_ver}"
+                    key = record_key(record)
 
                     if key not in best_runs:
                         print(f"[NEW ID] Added: {key} (Score: {score_val})")
@@ -129,13 +158,13 @@ def main():
             print(f"Skipping {f}: {e}")
 
     # 3. SAVE
-    output_dir = os.path.dirname(OUTPUT_FILE)
-    if not os.path.exists(output_dir): os.makedirs(output_dir, exist_ok=True)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(OUTPUT_FILE, 'w') as f:
+    with open(output_file, 'w') as f:
         json.dump(list(best_runs.values()), f, indent=2, cls=NumpyEncoder)
 
     print(f"[Generate] Database updated with {len(best_runs)} records.")
+    return list(best_runs.values())
 
 if __name__ == "__main__":
     main()

@@ -1,14 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const dataUrl = "../assets/web_data.json";
+    if (!document.getElementById("chart-memory") && !document.getElementById("chart-tensor")) return;
+
+    const dataUrl = getChartAssetUrl("web_data.json");
 
     fetch(dataUrl)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP ${response.status} loading ${dataUrl}`);
+            return response.json();
+        })
         .then(data => {
             renderChart(data, "memory_write_agg", "chart-memory", "Memory Write Bandwidth (GB/s)");
             renderChart(data, "tensor_virus", "chart-tensor", "Tensor Compute Throughput");
         })
         .catch(err => console.error("Error loading benchmark data:", err));
 });
+
+function getChartAssetUrl(fileName) {
+    const script = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes("/js/charts.js"));
+    if (script && script.src) {
+        return new URL(`../assets/${fileName}`, script.src).href;
+    }
+    return new URL(`assets/${fileName}`, document.baseURI).href;
+}
 
 function renderChart(rawData, testName, elementId, title) {
     const element = document.getElementById(elementId);
@@ -20,8 +33,9 @@ function renderChart(rawData, testName, elementId, title) {
     // Group by GPU and take the MAX score (best run)
     const bestScores = {};
     filtered.forEach(r => {
-        if (!bestScores[r.gpu] || r.throughput > bestScores[r.gpu]) {
-            bestScores[r.gpu] = r.throughput;
+        const score = Number(r.score || r.throughput || 0);
+        if (!bestScores[r.gpu] || score > bestScores[r.gpu]) {
+            bestScores[r.gpu] = score;
         }
     });
 

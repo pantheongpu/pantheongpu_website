@@ -38,5 +38,3 @@ Complete registry of stress test results.
     <tbody></tbody>
   </table>
 </div>
-
-<script src="../js/tables.js"></script>
