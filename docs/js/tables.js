@@ -380,6 +380,9 @@ function applyFilters() {
 
     currentFilteredData = filtered;
     renderTable(filtered);
+    if (window.renderBenchmarkCharts) {
+        window.renderBenchmarkCharts(filtered);
+    }
 }
 
 // --- Menu Toggling ---

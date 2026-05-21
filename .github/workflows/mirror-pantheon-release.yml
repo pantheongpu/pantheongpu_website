@@ -114,6 +114,14 @@ jobs:
             exit 1
           fi
 
+          for archive in release-assets/*.tar.gz; do
+            tar -tzf "${archive}" >/dev/null
+          done
+
+          for archive in release-assets/*.zip; do
+            zip -T "${archive}" >/dev/null
+          done
+
       - name: Delete existing mirrored release
         if: ${{ inputs.overwrite }}
         env:

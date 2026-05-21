@@ -121,8 +121,8 @@ h1 {
   letter-spacing: 0.5px;
 }
 
-/* 1. Force the main container to span 95% of the viewport */
-.md-grid {
+/* 1. Give the benchmark dashboard enough room without stretching every docs page */
+body:has(#benchmarkTable) .md-grid {
   max-width: 95vw !important;
   padding: 0 20px; /* Minimal padding on sides */
 }
@@ -243,7 +243,7 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .md-grid {
+  body:has(#benchmarkTable) .md-grid {
     max-width: 100vw !important;
     padding: 0 16px;
   }

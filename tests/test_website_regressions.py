@@ -33,6 +33,18 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
     assert 'id="chart-tensor"' in benchmarks
 
 
+def test_benchmark_charts_follow_table_filters_and_expected_units():
+    charts_js = read("docs/js/charts.js")
+    tables_js = read("docs/js/tables.js")
+
+    assert "window.renderBenchmarkCharts = renderBenchmarkCharts" in charts_js
+    assert 'window.renderBenchmarkCharts(filtered)' in tables_js
+    assert '"memory_write_agg", "chart-memory", "Memory Write Bandwidth", "GB/s"' in charts_js
+    assert '"tensor_virus", "chart-tensor", "Tensor Compute Throughput", "TFLOPS"' in charts_js
+    assert "d.unit === expectedUnit" in charts_js
+    assert "chart-empty" in charts_js
+
+
 def test_throughput_formatting_uses_row_unit_not_hardcoded_bandwidth():
     tables_js = read("docs/js/tables.js")
 
@@ -83,8 +95,17 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     assert "Scope: repo" in workflow
     assert "Source release is missing a .tar.gz asset." in workflow
     assert "Source release is missing a .zip asset." in workflow
+    assert 'tar -tzf "${archive}"' in workflow
+    assert 'zip -T "${archive}"' in workflow
     assert "overwrite" in workflow
     assert "gh release create" in workflow
+
+
+def test_wide_layout_is_scoped_to_benchmark_page():
+    css = read("docs/css/extra.css")
+
+    assert "body:has(#benchmarkTable) .md-grid" in css
+    assert "\n.md-grid {\n  max-width: 95vw" not in css
 
 
 def test_readme_documents_release_mirroring_secret():
