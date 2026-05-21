@@ -29,24 +29,20 @@ jobs:
           set -euo pipefail
 
           if [ -n "${INPUT_TAG}" ]; then
-            tag="${INPUT_TAG}"
+            gh api "repos/saqibkh/pantheongpu/releases/tags/${INPUT_TAG}" > source-release.json
           else
-            tag="$(gh release list --repo saqibkh/pantheongpu --limit 1 --json tagName --jq '.[0].tagName')"
+            gh api "repos/saqibkh/pantheongpu/releases/latest" > source-release.json
           fi
 
+          tag="$(jq -r '.tag_name // ""' source-release.json)"
           if [ -z "${tag}" ]; then
             echo "No source release found in saqibkh/pantheongpu."
             exit 1
           fi
 
-          gh release view "${tag}" \
-            --repo saqibkh/pantheongpu \
-            --json tagName,name,body,isPrerelease,isDraft \
-            > source-release.json
-
-          name="$(jq -r '.name // .tagName' source-release.json)"
-          prerelease="$(jq -r '.isPrerelease' source-release.json)"
-          draft="$(jq -r '.isDraft' source-release.json)"
+          name="$(jq -r '.name // .tag_name' source-release.json)"
+          prerelease="$(jq -r '.prerelease' source-release.json)"
+          draft="$(jq -r '.draft' source-release.json)"
 
           {
             echo "tag=${tag}"
@@ -64,12 +60,19 @@ jobs:
           set -euo pipefail
 
           mkdir -p release-assets
-          gh release download "${{ steps.source.outputs.tag }}" \
-            --repo saqibkh/pantheongpu \
-            --pattern "*.tar.gz" \
-            --pattern "*.zip" \
-            --pattern "SHA256SUMS" \
-            --dir release-assets
+
+          jq -r '
+            .assets[]
+            | select(.name | test("(\\.tar\\.gz$)|(\\.zip$)|(^SHA256SUMS$)"))
+            | [.id, .name]
+            | @tsv
+          ' source-release.json | while IFS=$'\t' read -r asset_id asset_name; do
+            echo "Downloading ${asset_name}"
+            gh api \
+              -H "Accept: application/octet-stream" \
+              "repos/saqibkh/pantheongpu/releases/assets/${asset_id}" \
+              > "release-assets/${asset_name}"
+          done
 
           find release-assets -maxdepth 1 -type f -print
 
