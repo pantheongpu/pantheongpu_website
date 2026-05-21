@@ -68,6 +68,19 @@ def test_filter_controls_expose_menu_state():
     assert 'event.key === "Escape"' in tables_js
 
 
+def test_mirror_release_workflow_is_manual_and_validates_assets():
+    workflow = read(".github/workflows/mirror-pantheon-release.yml")
+
+    assert "workflow_dispatch:" in workflow
+    assert "saqibkh/pantheongpu" in workflow
+    assert "--pattern \"*.tar.gz\"" in workflow
+    assert "--pattern \"*.zip\"" in workflow
+    assert "Source release is missing a .tar.gz asset." in workflow
+    assert "Source release is missing a .zip asset." in workflow
+    assert "overwrite" in workflow
+    assert "gh release create" in workflow
+
+
 def test_no_known_mojibake_in_user_facing_sources():
     paths = [
         "README.md",
