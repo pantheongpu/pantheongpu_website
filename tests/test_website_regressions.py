@@ -87,6 +87,15 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     assert "gh release create" in workflow
 
 
+def test_readme_documents_release_mirroring_secret():
+    readme = read("README.md")
+
+    assert "Mirror Pantheon Releases" in readme
+    assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
+    assert "saqibkh/pantheongpu" in readme
+    assert "overwrite" in readme
+
+
 def test_no_known_mojibake_in_user_facing_sources():
     paths = [
         "README.md",
