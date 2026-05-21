@@ -78,6 +78,7 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     assert "repos/saqibkh/pantheongpu/releases/assets/" in workflow
     assert "gh release download" not in workflow
     assert "PANTHEON_SOURCE_REPO_TOKEN" in workflow
+    assert "GH_REPO: ${{ github.repository }}" in workflow
     assert "Check source repository token access" in workflow
     assert "Scope: repo" in workflow
     assert "Source release is missing a .tar.gz asset." in workflow

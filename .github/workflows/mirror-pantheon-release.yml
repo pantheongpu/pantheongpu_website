@@ -118,6 +118,7 @@ jobs:
         if: ${{ inputs.overwrite }}
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           gh release delete "${{ steps.source.outputs.tag }}" --yes --cleanup-tag || true
 
@@ -125,6 +126,7 @@ jobs:
         if: ${{ !inputs.overwrite }}
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
           if gh release view "${{ steps.source.outputs.tag }}" >/dev/null 2>&1; then
             echo "Release ${{ steps.source.outputs.tag }} already exists in this website repo."
@@ -135,6 +137,7 @@ jobs:
       - name: Create mirrored website release
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ steps.source.outputs.tag }}
           RELEASE_NAME: ${{ steps.source.outputs.name }}
           RELEASE_PRERELEASE: ${{ steps.source.outputs.prerelease }}
