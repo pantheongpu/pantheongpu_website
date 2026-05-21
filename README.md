@@ -94,6 +94,11 @@ The workflow copies release notes plus these source release assets:
 - `*.zip`
 - `SHA256SUMS`, when present
 
+After mirroring the GitHub Release, the workflow also regenerates
+`docs/release.md`, commits that page update back to the selected branch, runs
+the website checks, and deploys the MkDocs site to GitHub Pages. Run the
+workflow from `main` when the public site should be updated immediately.
+
 If `saqibkh/pantheongpu` is private, add this repository secret under
 **Settings -> Secrets and variables -> Actions**:
 

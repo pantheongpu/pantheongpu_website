@@ -20,6 +20,11 @@ jobs:
   mirror-release:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout website repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
       - name: Check source repository token access
         env:
           GH_TOKEN: ${{ secrets.PANTHEON_SOURCE_REPO_TOKEN || github.token }}
@@ -122,27 +127,28 @@ jobs:
             zip -T "${archive}" >/dev/null
           done
 
-      - name: Delete existing mirrored release
-        if: ${{ inputs.overwrite }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          gh release delete "${{ steps.source.outputs.tag }}" --yes --cleanup-tag || true
-
-      - name: Ensure mirrored release does not already exist
-        if: ${{ !inputs.overwrite }}
+      - name: Check mirrored release status
+        id: mirrored
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
           if gh release view "${{ steps.source.outputs.tag }}" >/dev/null 2>&1; then
-            echo "Release ${{ steps.source.outputs.tag }} already exists in this website repo."
-            echo "Re-run this workflow with overwrite=true if you want to recreate it."
-            exit 1
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Delete existing mirrored release
+        if: ${{ inputs.overwrite && steps.mirrored.outputs.exists == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release delete "${{ steps.source.outputs.tag }}" --yes --cleanup-tag
+
       - name: Create mirrored website release
+        if: ${{ inputs.overwrite || steps.mirrored.outputs.exists != 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -166,3 +172,49 @@ jobs:
             --title "${RELEASE_NAME}" \
             --notes-file release-notes.md \
             "${args[@]}"
+
+      - name: Update website release page
+        run: |
+          set -euo pipefail
+          python website_utils/update_release_page.py \
+            --release-json source-release.json \
+            --assets-dir release-assets \
+            --output docs/release.md \
+            --repo "${GITHUB_REPOSITORY}"
+
+      - name: Commit release page update
+        env:
+          RELEASE_TAG: ${{ steps.source.outputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet -- docs/release.md; then
+            echo "docs/release.md is already current for ${RELEASE_TAG}."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/release.md
+          git commit -m "Update release page for ${RELEASE_TAG}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install website dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+
+      - name: Verify website
+        run: |
+          python -m pytest
+          python website_utils/generate_web_data.py
+          python -m mkdocs build --strict
+
+      - name: Deploy website
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          mkdocs gh-deploy --force

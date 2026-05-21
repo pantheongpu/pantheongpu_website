@@ -1,3 +1,4 @@
+import importlib.util
 from pathlib import Path
 
 
@@ -84,6 +85,8 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     workflow = read(".github/workflows/mirror-pantheon-release.yml")
 
     assert "workflow_dispatch:" in workflow
+    assert "actions/checkout@v4" in workflow
+    assert "ref: ${{ github.ref_name }}" in workflow
     assert "saqibkh/pantheongpu" in workflow
     assert "repos/saqibkh/pantheongpu/releases/latest" in workflow
     assert "repos/saqibkh/pantheongpu/releases/tags/" in workflow
@@ -98,7 +101,52 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     assert 'tar -tzf "${archive}"' in workflow
     assert 'zip -T "${archive}"' in workflow
     assert "overwrite" in workflow
+    assert "Check mirrored release status" in workflow
+    assert "exists=true" in workflow
+    assert "steps.mirrored.outputs.exists != 'true'" in workflow
     assert "gh release create" in workflow
+    assert "website_utils/update_release_page.py" in workflow
+    assert "git add docs/release.md" in workflow
+    assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
+    assert "mkdocs gh-deploy --force" in workflow
+
+
+def test_release_page_generator_is_available():
+    script = read("website_utils/update_release_page.py")
+
+    assert "def build_page" in script
+    assert "docs/release.md" not in script
+    assert "GitHub Releases page" in script
+
+
+def test_release_page_generator_writes_latest_release(tmp_path):
+    module_path = ROOT / "website_utils/update_release_page.py"
+    spec = importlib.util.spec_from_file_location("update_release_page", module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    assets_dir = tmp_path / "assets"
+    assets_dir.mkdir()
+    (assets_dir / "pantheon-1.0.8.tar.gz").write_bytes(b"tar")
+    (assets_dir / "pantheon-1.0.8.zip").write_bytes(b"zip")
+    release = {
+        "tag_name": "v1.0.8",
+        "name": "Pantheon v1.0.8",
+        "published_at": "2026-05-21T05:00:02Z",
+        "body": "## What's Changed\n* Fixed releases",
+        "assets": [
+            {"name": "pantheon-1.0.8.tar.gz", "size": 999},
+            {"name": "pantheon-1.0.8.zip", "size": 999},
+        ],
+    }
+
+    page = module.build_page(release, assets_dir, "saqibkh/pantheongpu_website")
+
+    assert "## Pantheon v1.0.8 (Latest)" in page
+    assert "**Release Date:** May 21, 2026" in page
+    assert "#### What's Changed" in page
+    assert "pantheon-1.0.8.tar.gz" in page
+    assert "pantheon-1.0.8.zip" in page
 
 
 def test_wide_layout_is_scoped_to_benchmark_page():
