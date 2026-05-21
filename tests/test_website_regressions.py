@@ -73,8 +73,10 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
 
     assert "workflow_dispatch:" in workflow
     assert "saqibkh/pantheongpu" in workflow
-    assert "--pattern \"*.tar.gz\"" in workflow
-    assert "--pattern \"*.zip\"" in workflow
+    assert "repos/saqibkh/pantheongpu/releases/latest" in workflow
+    assert "repos/saqibkh/pantheongpu/releases/tags/" in workflow
+    assert "repos/saqibkh/pantheongpu/releases/assets/" in workflow
+    assert "gh release download" not in workflow
     assert "PANTHEON_SOURCE_REPO_TOKEN" in workflow
     assert "Source release is missing a .tar.gz asset." in workflow
     assert "Source release is missing a .zip asset." in workflow
