@@ -20,6 +20,27 @@ jobs:
   mirror-release:
     runs-on: ubuntu-latest
     steps:
+      - name: Check source repository token access
+        env:
+          GH_TOKEN: ${{ secrets.PANTHEON_SOURCE_REPO_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+
+          if ! gh api "repos/saqibkh/pantheongpu" >/dev/null 2>&1; then
+            echo "Unable to read saqibkh/pantheongpu with the token available to this workflow."
+            echo ""
+            echo "If saqibkh/pantheongpu is private, add or replace the"
+            echo "PANTHEON_SOURCE_REPO_TOKEN repository secret in pantheongpu_website."
+            echo ""
+            echo "Recommended token options:"
+            echo "1. Fine-grained PAT owned by an account that can read saqibkh/pantheongpu:"
+            echo "   - Repository access: Only saqibkh/pantheongpu"
+            echo "   - Repository permissions: Contents = Read-only"
+            echo "2. Classic PAT owned by an account that can read saqibkh/pantheongpu:"
+            echo "   - Scope: repo"
+            exit 1
+          fi
+
       - name: Resolve source release
         id: source
         env:
