@@ -1,0 +1,133 @@
+name: Mirror Pantheon Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Pantheon release tag to mirror, for example v1.0.8. Leave blank for latest."
+        required: false
+        type: string
+      overwrite:
+        description: "Delete and recreate the website release if it already exists."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  mirror-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve source release
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "${INPUT_TAG}" ]; then
+            tag="${INPUT_TAG}"
+          else
+            tag="$(gh release list --repo saqibkh/pantheongpu --limit 1 --json tagName --jq '.[0].tagName')"
+          fi
+
+          if [ -z "${tag}" ]; then
+            echo "No source release found in saqibkh/pantheongpu."
+            exit 1
+          fi
+
+          gh release view "${tag}" \
+            --repo saqibkh/pantheongpu \
+            --json tagName,name,body,isPrerelease,isDraft \
+            > source-release.json
+
+          name="$(jq -r '.name // .tagName' source-release.json)"
+          prerelease="$(jq -r '.isPrerelease' source-release.json)"
+          draft="$(jq -r '.isDraft' source-release.json)"
+
+          {
+            echo "tag=${tag}"
+            echo "name=${name}"
+            echo "prerelease=${prerelease}"
+            echo "draft=${draft}"
+          } >> "$GITHUB_OUTPUT"
+
+          jq -r '.body // ""' source-release.json > release-notes.md
+
+      - name: Download source release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p release-assets
+          gh release download "${{ steps.source.outputs.tag }}" \
+            --repo saqibkh/pantheongpu \
+            --pattern "*.tar.gz" \
+            --pattern "*.zip" \
+            --pattern "SHA256SUMS" \
+            --dir release-assets
+
+          find release-assets -maxdepth 1 -type f -print
+
+      - name: Validate required assets
+        run: |
+          set -euo pipefail
+
+          tar_count="$(find release-assets -maxdepth 1 -name '*.tar.gz' | wc -l)"
+          zip_count="$(find release-assets -maxdepth 1 -name '*.zip' | wc -l)"
+
+          if [ "${tar_count}" -lt 1 ]; then
+            echo "Source release is missing a .tar.gz asset."
+            exit 1
+          fi
+
+          if [ "${zip_count}" -lt 1 ]; then
+            echo "Source release is missing a .zip asset."
+            exit 1
+          fi
+
+      - name: Delete existing mirrored release
+        if: ${{ inputs.overwrite }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete "${{ steps.source.outputs.tag }}" --yes --cleanup-tag || true
+
+      - name: Ensure mirrored release does not already exist
+        if: ${{ !inputs.overwrite }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.source.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Release ${{ steps.source.outputs.tag }} already exists in this website repo."
+            echo "Re-run this workflow with overwrite=true if you want to recreate it."
+            exit 1
+          fi
+
+      - name: Create mirrored website release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.source.outputs.tag }}
+          RELEASE_NAME: ${{ steps.source.outputs.name }}
+          RELEASE_PRERELEASE: ${{ steps.source.outputs.prerelease }}
+          RELEASE_DRAFT: ${{ steps.source.outputs.draft }}
+        run: |
+          set -euo pipefail
+
+          args=()
+          if [ "${RELEASE_PRERELEASE}" = "true" ]; then
+            args+=(--prerelease)
+          fi
+          if [ "${RELEASE_DRAFT}" = "true" ]; then
+            args+=(--draft)
+          fi
+
+          gh release create "${RELEASE_TAG}" \
+            release-assets/* \
+            --title "${RELEASE_NAME}" \
+            --notes-file release-notes.md \
+            "${args[@]}"
