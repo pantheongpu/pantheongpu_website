@@ -81,6 +81,14 @@ def test_filter_controls_expose_menu_state():
     assert 'event.key === "Escape"' in tables_js
 
 
+def test_benchmark_version_filter_defaults_to_all_versions():
+    tables_js = read("docs/js/tables.js")
+
+    assert 'buildCheckboxMenu("versionMenu", versions);' in tables_js
+    assert "latestVersion" not in tables_js
+    assert 'buildCheckboxMenu("versionMenu", versions, latestVersion' not in tables_js
+
+
 def test_mirror_release_workflow_is_manual_and_validates_assets():
     workflow = read(".github/workflows/mirror-pantheon-release.yml")
 

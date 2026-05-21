@@ -326,14 +326,9 @@ function populateFilters(data) {
         return 0;
     });
 
-    // The first item is guaranteed to be the newest version
-    const latestVersion = versions.length > 0 ? versions[0] : null;
-
     buildCheckboxMenu("gpuMenu", Array.from(gpuSet).sort());
     buildCheckboxMenu("testMenu", Array.from(testSet).sort());
-
-    // Pass ONLY the latest version to be checked by default
-    buildCheckboxMenu("versionMenu", versions, latestVersion ? [latestVersion] : null);
+    buildCheckboxMenu("versionMenu", versions);
 }
 
 function applyFilters() {
