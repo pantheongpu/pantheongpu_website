@@ -65,6 +65,17 @@ def test_performance_comparisons_are_nested_under_database_nav():
     assert "    - Comparisons: benchmark-comparisons.md" in mkdocs
 
 
+def test_performance_pages_disclose_data_provenance():
+    benchmarks = read("docs/benchmarks.md")
+    comparisons = read("docs/benchmark-comparisons.md")
+
+    for page in (benchmarks, comparisons):
+        assert '!!! note "Data provenance"' in page
+        assert "third-party cloud and community systems" in page
+        assert "Vast.ai and RunPod" in page
+        assert "not collected, certified, or endorsed by NVIDIA, AMD, or their employees" in page
+
+
 def test_research_reports_page_is_available():
     mkdocs = read("mkdocs.yml")
     reports = read("docs/reports.md")
@@ -131,7 +142,11 @@ def test_benchmark_charts_follow_table_filters_and_expected_units():
     assert "Best reported result per GPU" in charts_js
     assert "sort((a, b) => b[1] - a[1])" in charts_js
     assert "dataLabels" in charts_js
-    assert "enabled: false" in charts_js
+    assert "enabled: true" in charts_js
+    assert "formatter: value => `${formatChartValue(value)}${unit ? ` ${unit}` : \"\"}`" in charts_js
+    assert "offsetX: 8" in charts_js
+    assert "textAnchor: 'start'" in charts_js
+    assert "right: 96" in charts_js
     assert "background: {" not in charts_js
 
 
@@ -326,6 +341,7 @@ def test_report_pages_have_figures_and_wider_layout():
     assert ".report-figure" in css
     assert ".report-chart-svg" in css
     assert ".report-chart-title" in css
+    assert "reportChartGradient" not in css
 
 
 def test_release_page_uses_builtin_table_of_contents():
@@ -353,6 +369,9 @@ def test_no_known_mojibake_in_user_facing_sources():
         "README.md",
         "docs/benchmarks.md",
         "docs/release.md",
+        "docs/reports.md",
+        "docs/reports/silicon-segregation.md",
+        "docs/reports/tensor-lineage.md",
         "docs/js/tables.js",
         "docs/js/charts.js",
     ]

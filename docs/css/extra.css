@@ -298,15 +298,6 @@ body:has(.report-byline) .md-content__inner {
 }
 
 .report-chart-svg rect {
-  fill: url(#reportChartGradient);
-}
-
-.report-chart-svg {
-  --report-chart-start: #2563eb;
-  --report-chart-end: #00e396;
-}
-
-.report-chart-svg rect {
   fill: #2563eb;
 }
 

@@ -2,6 +2,9 @@
 
 Complete registry of stress test results.
 
+!!! note "Data provenance"
+    Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
+
 [Compare GPU memory bandwidth across releases and devices.](benchmark-comparisons.md){ .md-button }
 
 <div class="benchmark-controls">

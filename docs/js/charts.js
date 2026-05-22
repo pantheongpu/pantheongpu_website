@@ -130,7 +130,15 @@ function renderChart(rawData, chartConfig) {
             data: seriesData
         }],
         dataLabels: {
-            enabled: false,
+            enabled: true,
+            formatter: value => `${formatChartValue(value)}${unit ? ` ${unit}` : ""}`,
+            offsetX: 8,
+            textAnchor: 'start',
+            style: {
+                colors: [theme.foreground],
+                fontSize: '12px',
+                fontWeight: 700,
+            },
         },
         xaxis: {
             categories: categories,
@@ -180,7 +188,7 @@ function renderChart(rawData, chartConfig) {
             strokeDashArray: 4,
             xaxis: { lines: { show: true } },
             yaxis: { lines: { show: false } },
-            padding: { top: 0, right: 14, bottom: 0, left: 4 },
+            padding: { top: 0, right: 96, bottom: 0, left: 4 },
         },
         tooltip: {
             theme: theme.tooltipTheme,

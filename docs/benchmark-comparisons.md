@@ -2,6 +2,9 @@
 
 Compare the best reported results across GPUs.
 
+!!! note "Data provenance"
+    Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
+
 ## Memory Bandwidth
 
 <div class="benchmark-chart-grid">
