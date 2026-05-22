@@ -238,6 +238,15 @@ def test_benchmark_table_sorts_versions_semantically_latest_first():
     assert "if (versionCompare !== 0) return -versionCompare;" in tables_js
 
 
+def test_unknown_version_fp64_result_is_not_published():
+    web_data = read("docs/assets/web_data.json")
+
+    assert not (ROOT / "database/pantheon_report_20260406-122531.json").exists()
+    assert '"version": "vUnknown"' not in web_data
+    assert '"date": "2026-04-06 12:25:34"' not in web_data
+    assert '"score": 0.571593' not in web_data
+
+
 def test_mirror_release_workflow_is_manual_and_validates_assets():
     workflow = read(".github/workflows/mirror-pantheon-release.yml")
 
