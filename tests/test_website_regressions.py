@@ -27,11 +27,16 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
     charts_js = read("docs/js/charts.js")
     benchmarks = read("docs/benchmarks.md")
 
-    assert 'document.getElementById("chart-memory")' in charts_js
-    assert 'document.getElementById("chart-tensor")' in charts_js
+    assert 'elementId: "chart-memory-read"' in charts_js
+    assert 'elementId: "chart-memory"' in charts_js
+    assert 'elementId: "chart-tensor"' in charts_js
+    assert 'elementId: "chart-fp64"' in charts_js
+    assert "BENCHMARK_CHARTS.some" in charts_js
     assert "getChartAssetUrl" in charts_js
+    assert 'id="chart-memory-read"' in benchmarks
     assert 'id="chart-memory"' in benchmarks
     assert 'id="chart-tensor"' in benchmarks
+    assert 'id="chart-fp64"' in benchmarks
 
 
 def test_benchmark_charts_follow_table_filters_and_expected_units():
@@ -40,8 +45,12 @@ def test_benchmark_charts_follow_table_filters_and_expected_units():
 
     assert "window.renderBenchmarkCharts = renderBenchmarkCharts" in charts_js
     assert 'window.renderBenchmarkCharts(filtered)' in tables_js
-    assert '"memory_write_agg", "chart-memory", "Memory Write Bandwidth", "GB/s"' in charts_js
-    assert '"tensor_virus", "chart-tensor", "Tensor Compute Throughput", "TFLOPS"' in charts_js
+    assert 'testName: "memory_read_agg"' in charts_js
+    assert 'testName: "memory_write_agg"' in charts_js
+    assert 'testName: "tensor_virus"' in charts_js
+    assert 'testName: "fp64_virus"' in charts_js
+    assert 'title: "Memory Read Bandwidth"' in charts_js
+    assert 'title: "FP64 Compute Throughput"' in charts_js
     assert "d.unit === expectedUnit" in charts_js
     assert "chart-empty" in charts_js
 

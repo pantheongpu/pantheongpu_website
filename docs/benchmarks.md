@@ -34,10 +34,16 @@ Complete registry of stress test results.
 
 <div class="benchmark-chart-grid">
   <div class="chart-container">
+    <div id="chart-memory-read"></div>
+  </div>
+  <div class="chart-container">
     <div id="chart-memory"></div>
   </div>
   <div class="chart-container">
     <div id="chart-tensor"></div>
+  </div>
+  <div class="chart-container">
+    <div id="chart-fp64"></div>
   </div>
 </div>
 

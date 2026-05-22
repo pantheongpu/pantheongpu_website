@@ -1,7 +1,13 @@
 let benchmarkCharts = {};
+const BENCHMARK_CHARTS = [
+    { testName: "memory_read_agg", elementId: "chart-memory-read", title: "Memory Read Bandwidth", unit: "GB/s" },
+    { testName: "memory_write_agg", elementId: "chart-memory", title: "Memory Write Bandwidth", unit: "GB/s" },
+    { testName: "tensor_virus", elementId: "chart-tensor", title: "Tensor Compute Throughput", unit: "TFLOPS" },
+    { testName: "fp64_virus", elementId: "chart-fp64", title: "FP64 Compute Throughput", unit: "TFLOPS" },
+];
 
 document.addEventListener("DOMContentLoaded", function () {
-    if (!document.getElementById("chart-memory") && !document.getElementById("chart-tensor")) return;
+    if (!BENCHMARK_CHARTS.some(chart => document.getElementById(chart.elementId))) return;
     if (document.getElementById("benchmarkTable")) return;
 
     const dataUrl = getChartAssetUrl("web_data.json");
@@ -26,8 +32,9 @@ function getChartAssetUrl(fileName) {
 }
 
 function renderBenchmarkCharts(data) {
-    renderChart(data, "memory_write_agg", "chart-memory", "Memory Write Bandwidth", "GB/s");
-    renderChart(data, "tensor_virus", "chart-tensor", "Tensor Compute Throughput", "TFLOPS");
+    BENCHMARK_CHARTS.forEach(chart => {
+        renderChart(data, chart.testName, chart.elementId, chart.title, chart.unit);
+    });
 }
 
 function getChartScore(row) {
