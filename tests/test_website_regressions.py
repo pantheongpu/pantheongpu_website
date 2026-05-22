@@ -233,8 +233,8 @@ def test_release_page_generator_is_available():
     assert "def build_page" in script
     assert "docs/release.md" not in script
     assert "def build_release_section" in script
-    assert "def build_version_nav" in script
-    assert "def release_anchor" in script
+    assert "def build_version_nav" not in script
+    assert "def release_anchor" not in script
     assert "releases-json" in script
 
 
@@ -279,11 +279,8 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
     assert "## Pantheon v1.0.8 (Latest)" in page
     assert "## Pantheon v1.0.7 (Latest)" not in page
     assert "## Pantheon v1.0.7" in page
-    assert 'class="release-version-nav"' in page
-    assert '<a href="#v1-0-8">v1.0.8</a>' in page
-    assert '<a href="#v1-0-7">v1.0.7</a>' in page
-    assert '<section id="v1-0-8"' in page
-    assert '<section id="v1-0-7"' in page
+    assert 'class="release-version-nav"' not in page
+    assert '<section id=' not in page
     assert page.index("## Pantheon v1.0.8 (Latest)") < page.index("## Pantheon v1.0.7")
     assert "**Release Date:** May 21, 2026" in page
     assert "#### What's Changed" in page
@@ -302,18 +299,15 @@ def test_wide_layout_is_scoped_to_benchmark_page():
     assert "\n.md-grid {\n  max-width: 95vw" not in css
 
 
-def test_release_page_has_version_jump_nav():
+def test_release_page_uses_builtin_table_of_contents():
     release = read("docs/release.md")
     css = read("docs/css/extra.css")
 
-    assert 'class="release-version-nav"' in release
-    assert '<a href="#v1-0-8">v1.0.8</a>' in release
-    assert '<a href="#v1-0-7">v1.0.7</a>' in release
-    assert '<section id="v1-0-8"' in release
-    assert '<section id="v1-0-7"' in release
-    assert ".release-page" in css
-    assert ".release-version-nav" in css
-    assert "position: sticky" in css
+    assert "## Pantheon v1.0.8 (Latest)" in release
+    assert "## v1.0.7" in release
+    assert 'class="release-version-nav"' not in release
+    assert ".release-page" not in css
+    assert ".release-version-nav" not in css
 
 
 def test_readme_documents_release_mirroring_secret():
