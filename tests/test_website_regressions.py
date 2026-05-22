@@ -30,8 +30,14 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
 
     assert 'elementId: "chart-memory-read"' in charts_js
     assert 'elementId: "chart-memory"' in charts_js
-    assert 'elementId: "chart-tensor"' not in charts_js
-    assert 'elementId: "chart-fp64"' not in charts_js
+    assert 'elementId: "chart-pcie"' in charts_js
+    assert 'elementId: "chart-p2p"' not in charts_js
+    assert 'elementId: "chart-tensor"' in charts_js
+    assert 'elementId: "chart-fp64"' in charts_js
+    assert 'elementId: "chart-integer"' in charts_js
+    assert 'elementId: "chart-mma"' in charts_js
+    assert 'elementId: "chart-rt"' in charts_js
+    assert 'elementId: "chart-scheduler"' in charts_js
     assert "BENCHMARK_CHARTS.some" in charts_js
     assert "getChartAssetUrl" in charts_js
     assert 'id="chart-memory-read"' not in benchmarks
@@ -39,10 +45,16 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
     assert "benchmark-comparisons.md" in benchmarks
     assert 'id="chart-memory-read"' in comparisons
     assert 'id="chart-memory"' in comparisons
+    assert 'id="chart-pcie"' in comparisons
+    assert 'id="chart-p2p"' not in comparisons
     assert 'id="chart-tensor"' not in benchmarks
     assert 'id="chart-fp64"' not in benchmarks
-    assert 'id="chart-tensor"' not in comparisons
-    assert 'id="chart-fp64"' not in comparisons
+    assert 'id="chart-tensor"' in comparisons
+    assert 'id="chart-fp64"' in comparisons
+    assert 'id="chart-integer"' in comparisons
+    assert 'id="chart-mma"' in comparisons
+    assert 'id="chart-rt"' in comparisons
+    assert 'id="chart-scheduler"' in comparisons
 
 
 def test_performance_comparisons_are_nested_under_database_nav():
@@ -61,12 +73,23 @@ def test_benchmark_charts_follow_table_filters_and_expected_units():
     assert 'window.renderBenchmarkCharts(filtered)' in tables_js
     assert 'testName: "memory_read_agg"' in charts_js
     assert 'testName: "memory_write_agg"' in charts_js
-    assert 'testName: "tensor_virus"' not in charts_js
-    assert 'testName: "fp64_virus"' not in charts_js
+    assert 'testName: "pcie_bandwidth"' in charts_js
+    assert 'testName: "p2p_thrasher"' not in charts_js
+    assert 'testName: "tensor_virus"' in charts_js
+    assert 'testName: "fp64_virus"' in charts_js
+    assert 'testName: "int_virus"' in charts_js
+    assert 'testName: "mma_virus"' in charts_js
+    assert 'testName: "rt_virus"' in charts_js
+    assert 'testName: "scheduler"' in charts_js
     assert 'title: "Memory Read Bandwidth"' in charts_js
     assert 'title: "Memory Write Bandwidth"' in charts_js
+    assert 'title: "PCIe Bandwidth"' in charts_js
+    assert 'title: "Ray Tracing Throughput"' in charts_js
     assert "d.unit === expectedUnit" in charts_js
     assert "chart-empty" in charts_js
+    assert "chart-container--empty" in charts_js
+    assert "Best reported result per GPU" in charts_js
+    assert "sort((a, b) => b[1] - a[1])" in charts_js
 
 
 def test_throughput_formatting_uses_row_unit_not_hardcoded_bandwidth():

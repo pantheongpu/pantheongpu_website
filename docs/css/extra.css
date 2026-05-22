@@ -74,24 +74,23 @@ h1 {
   object-fit: contain;
 }
 
-/* --- Benchmark Cards (The "Wow" Factor) --- */
+/* --- Benchmark Cards --- */
 .chart-container {
   background: var(--pantheon-card-bg);
   border: 1px solid var(--pantheon-border);
   border-radius: 8px;
-  padding: 25px;
+  padding: 22px;
   margin-bottom: 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softened the shadow globally */
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle glowing border animation on hover */
 .chart-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 243, 255, 0.15);
-  border-color: var(--pantheon-neon-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.18);
+  border-color: color-mix(in srgb, var(--md-primary-fg-color), var(--pantheon-border) 45%);
 }
 
 .chart-container::before {
@@ -99,12 +98,11 @@ h1 {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 2px;
   background: linear-gradient(90deg, transparent, var(--pantheon-neon-blue), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
+  opacity: 0.25;
 }
 
-.chart-container:hover::before {
-  opacity: 1;
+.chart-container--empty {
+  display: none;
 }
 
 /* --- Navigation Bar (Glassmorphism) --- */
@@ -211,7 +209,17 @@ body:has(#benchmarkTable) .md-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 20px;
-  margin: 16px 0 24px;
+  margin: 12px 0 28px;
+}
+
+body:has(#chart-memory-read):not(:has(#benchmarkTable)) .md-grid {
+  max-width: min(1500px, 96vw) !important;
+}
+
+body:has(#chart-memory-read):not(:has(#benchmarkTable)) .md-typeset h2 {
+  margin-top: 1.8rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--pantheon-border);
 }
 
 .benchmark-table-wrap {
