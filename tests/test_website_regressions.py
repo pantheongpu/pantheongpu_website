@@ -118,6 +118,9 @@ def test_benchmark_charts_follow_table_filters_and_expected_units():
     assert "chart-container--empty" in charts_js
     assert "Best reported result per GPU" in charts_js
     assert "sort((a, b) => b[1] - a[1])" in charts_js
+    assert "dataLabels" in charts_js
+    assert "enabled: false" in charts_js
+    assert "background: {" not in charts_js
 
 
 def test_throughput_formatting_uses_row_unit_not_hardcoded_bandwidth():

@@ -130,18 +130,7 @@ function renderChart(rawData, chartConfig) {
             data: seriesData
         }],
         dataLabels: {
-            enabled: true,
-            formatter: value => `${formatChartValue(value)}${unit ? ` ${unit}` : ""}`,
-            style: {
-                colors: [theme.foreground],
-                fontWeight: 700,
-            },
-            background: {
-                enabled: true,
-                borderWidth: 0,
-                borderRadius: 4,
-                opacity: 0.75,
-            },
+            enabled: false,
         },
         xaxis: {
             categories: categories,
