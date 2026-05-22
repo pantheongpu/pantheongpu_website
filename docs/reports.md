@@ -2,17 +2,17 @@
 
 Long-form analysis, papers, benchmark notes, and data-backed conclusions from Pantheon GPU testing.
 
-This section is prepared for future publications. Add each article or paper as a new Markdown page, then list it here with the report date, topic, and source data.
+This section collects published articles, papers, benchmark notes, and data-backed conclusions.
 
 ## Featured
 
-No published reports yet.
+- [Silicon Segregation: What Low-Level Telemetry Reveals About Enterprise vs. Consumer GPUs](reports/silicon-segregation.md)
 
 ## Archive
 
 | Date | Title | Topic | Data |
 | :--- | :--- | :--- | :--- |
-| Coming soon | Upcoming Pantheon GPU analysis | Benchmarks, stress testing, and hardware behavior | TBD |
+| May 2026 | [Silicon Segregation](reports/silicon-segregation.md) | Enterprise vs. consumer GPU telemetry | Pantheon low-level benchmark runs |
 
 ## Suggested Report Format
 

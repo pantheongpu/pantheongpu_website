@@ -10,7 +10,9 @@ nav:
   - Performance Database:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
-  - Research & Reports: reports.md
+  - Research & Reports:
+    - Overview: reports.md
+    - "Silicon Segregation": reports/silicon-segregation.md
   - Test Documentation:
     - Overview: tests/index.md
     - Core & Compute:

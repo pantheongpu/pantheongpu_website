@@ -68,13 +68,21 @@ def test_performance_comparisons_are_nested_under_database_nav():
 def test_research_reports_page_is_available():
     mkdocs = read("mkdocs.yml")
     reports = read("docs/reports.md")
+    article = read("docs/reports/silicon-segregation.md")
 
-    assert "  - Research & Reports: reports.md" in mkdocs
+    assert "  - Research & Reports:" in mkdocs
+    assert "    - Overview: reports.md" in mkdocs
+    assert '    - "Silicon Segregation": reports/silicon-segregation.md' in mkdocs
     assert "# Research & Reports" in reports
     assert "Long-form analysis, papers, benchmark notes" in reports
     assert "## Featured" in reports
     assert "## Archive" in reports
     assert "## Suggested Report Format" in reports
+    assert "Silicon Segregation" in reports
+    assert "# Silicon Segregation: What Low-Level Telemetry Reveals About Enterprise vs. Consumer GPUs" in article
+    assert "## 1. The FP64 Chasm: Artificial Silicon Fusing" in article
+    assert "## The Takeaway" in article
+    assert "https://pantheongpu.com/" in article
 
 
 def test_benchmark_charts_follow_table_filters_and_expected_units():
