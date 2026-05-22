@@ -71,6 +71,19 @@ def test_export_button_is_labeled_as_csv():
     assert "Export to CSV" in tables_js
 
 
+def test_home_quick_start_uses_valid_install_commands():
+    index = read("docs/index.md")
+
+    assert "sudo pip install" not in index
+    assert "nvidia-cuda-toolkit (replace" not in index
+    assert "python3 -m venv .venv" in index
+    assert "python -m pip install -r requirements.txt" in index
+    assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
+    assert "# sudo apt-get install -y hipcc" in index
+    assert "python3 pantheon.py --test all --duration 30 --verify" in index
+    assert "./pantheon --test all --duration 30 --verify" in index
+
+
 def test_benchmark_table_has_mobile_scroll_wrapper():
     benchmarks = read("docs/benchmarks.md")
     css = read("docs/css/extra.css")
