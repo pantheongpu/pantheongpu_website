@@ -26,6 +26,7 @@ def test_benchmark_script_is_scoped_to_benchmark_page():
 def test_chart_script_only_fetches_when_chart_targets_exist():
     charts_js = read("docs/js/charts.js")
     benchmarks = read("docs/benchmarks.md")
+    comparisons = read("docs/benchmark-comparisons.md")
 
     assert 'elementId: "chart-memory-read"' in charts_js
     assert 'elementId: "chart-memory"' in charts_js
@@ -33,10 +34,23 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
     assert 'elementId: "chart-fp64"' not in charts_js
     assert "BENCHMARK_CHARTS.some" in charts_js
     assert "getChartAssetUrl" in charts_js
-    assert 'id="chart-memory-read"' in benchmarks
-    assert 'id="chart-memory"' in benchmarks
+    assert 'id="chart-memory-read"' not in benchmarks
+    assert 'id="chart-memory"' not in benchmarks
+    assert "benchmark-comparisons.md" in benchmarks
+    assert 'id="chart-memory-read"' in comparisons
+    assert 'id="chart-memory"' in comparisons
     assert 'id="chart-tensor"' not in benchmarks
     assert 'id="chart-fp64"' not in benchmarks
+    assert 'id="chart-tensor"' not in comparisons
+    assert 'id="chart-fp64"' not in comparisons
+
+
+def test_performance_comparisons_are_nested_under_database_nav():
+    mkdocs = read("mkdocs.yml")
+
+    assert "  - Performance Database:" in mkdocs
+    assert "    - Live Benchmarks: benchmarks.md" in mkdocs
+    assert "    - Comparisons: benchmark-comparisons.md" in mkdocs
 
 
 def test_benchmark_charts_follow_table_filters_and_expected_units():

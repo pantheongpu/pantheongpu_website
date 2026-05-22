@@ -2,6 +2,8 @@
 
 Complete registry of stress test results.
 
+[Compare GPU memory bandwidth across releases and devices.](benchmark-comparisons.md){ .md-button }
+
 <div class="benchmark-controls">
   
   <div class="benchmark-filter">
@@ -30,15 +32,6 @@ Complete registry of stress test results.
 
   <input type="text" id="textSearch" onkeyup="applyFilters()" placeholder="Search..." aria-label="Search benchmarks">
 
-</div>
-
-<div class="benchmark-chart-grid">
-  <div class="chart-container">
-    <div id="chart-memory-read"></div>
-  </div>
-  <div class="chart-container">
-    <div id="chart-memory"></div>
-  </div>
 </div>
 
 <div class="benchmark-table-wrap">

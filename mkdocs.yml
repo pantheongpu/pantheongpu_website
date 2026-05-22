@@ -7,7 +7,9 @@ edit_uri: ""
 
 nav:
   - Home: index.md
-  - Live Benchmarks: benchmarks.md
+  - Performance Database:
+    - Live Benchmarks: benchmarks.md
+    - Comparisons: benchmark-comparisons.md
   - Test Documentation:
     - Overview: tests/index.md
     - Core & Compute:
