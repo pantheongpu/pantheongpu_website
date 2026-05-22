@@ -84,6 +84,14 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "./pantheon --test all --duration 30 --verify" in index
 
 
+def test_mkdocs_points_to_pantheongpu_repository():
+    mkdocs = read("mkdocs.yml")
+
+    assert "repo_url: https://github.com/saqibkh/pantheongpu" in mkdocs
+    assert "repo_name: saqibkh/pantheongpu" in mkdocs
+    assert "saqibkh/pantheon\n" not in mkdocs
+
+
 def test_home_logo_uses_uncropped_responsive_class():
     index = read("docs/index.md")
     css = read("docs/css/extra.css")
