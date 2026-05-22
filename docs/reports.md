@@ -6,12 +6,14 @@ This section collects published articles, papers, benchmark notes, and data-back
 
 ## Featured
 
+- [Tracing the Tensor Lineage: How Ampere, Hopper, and Blackwell Scale at the Silicon Level](reports/tensor-lineage.md)
 - [Silicon Segregation: What Low-Level Telemetry Reveals About Enterprise vs. Consumer GPUs](reports/silicon-segregation.md)
 
 ## Archive
 
 | Date | Title | Topic | Data |
 | :--- | :--- | :--- | :--- |
+| May 2026 | [Tracing the Tensor Lineage](reports/tensor-lineage.md) | Ampere, Hopper, and Blackwell silicon scaling | Pantheon low-level benchmark runs |
 | May 2026 | [Silicon Segregation](reports/silicon-segregation.md) | Enterprise vs. consumer GPU telemetry | Pantheon low-level benchmark runs |
 
 ## Suggested Report Format

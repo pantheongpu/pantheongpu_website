@@ -69,20 +69,28 @@ def test_research_reports_page_is_available():
     mkdocs = read("mkdocs.yml")
     reports = read("docs/reports.md")
     article = read("docs/reports/silicon-segregation.md")
+    tensor_article = read("docs/reports/tensor-lineage.md")
 
     assert "  - Research & Reports:" in mkdocs
     assert "    - Overview: reports.md" in mkdocs
     assert '    - "Silicon Segregation": reports/silicon-segregation.md' in mkdocs
+    assert '    - "Tracing the Tensor Lineage": reports/tensor-lineage.md' in mkdocs
     assert "# Research & Reports" in reports
     assert "Long-form analysis, papers, benchmark notes" in reports
     assert "## Featured" in reports
     assert "## Archive" in reports
     assert "## Suggested Report Format" in reports
     assert "Silicon Segregation" in reports
+    assert "Tracing the Tensor Lineage" in reports
     assert "# Silicon Segregation: What Low-Level Telemetry Reveals About Enterprise vs. Consumer GPUs" in article
     assert "## 1. The FP64 Chasm: Artificial Silicon Fusing" in article
     assert "## The Takeaway" in article
     assert "https://pantheongpu.com/" in article
+    assert "# Tracing the Tensor Lineage: How Ampere, Hopper, and Blackwell Scale at the Silicon Level" in tensor_article
+    assert "## 1. The Tensor Core Explosion and Plateau" in tensor_article
+    assert "## 5. Thermal Density and the Death of Air Cooling" in tensor_article
+    assert "572,143 MAPS" in tensor_article
+    assert "https://pantheongpu.com/" in tensor_article
 
 
 def test_benchmark_charts_follow_table_filters_and_expected_units():

@@ -13,6 +13,7 @@ nav:
   - Research & Reports:
     - Overview: reports.md
     - "Silicon Segregation": reports/silicon-segregation.md
+    - "Tracing the Tensor Lineage": reports/tensor-lineage.md
   - Test Documentation:
     - Overview: tests/index.md
     - Core & Compute:
