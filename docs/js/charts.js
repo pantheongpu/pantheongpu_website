@@ -2,8 +2,6 @@ let benchmarkCharts = {};
 const BENCHMARK_CHARTS = [
     { testName: "memory_read_agg", elementId: "chart-memory-read", title: "Memory Read Bandwidth", unit: "GB/s" },
     { testName: "memory_write_agg", elementId: "chart-memory", title: "Memory Write Bandwidth", unit: "GB/s" },
-    { testName: "tensor_virus", elementId: "chart-tensor", title: "Tensor Compute Throughput", unit: "TFLOPS" },
-    { testName: "fp64_virus", elementId: "chart-fp64", title: "FP64 Compute Throughput", unit: "TFLOPS" },
 ];
 
 document.addEventListener("DOMContentLoaded", function () {

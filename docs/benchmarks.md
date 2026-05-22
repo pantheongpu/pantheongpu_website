@@ -39,12 +39,6 @@ Complete registry of stress test results.
   <div class="chart-container">
     <div id="chart-memory"></div>
   </div>
-  <div class="chart-container">
-    <div id="chart-tensor"></div>
-  </div>
-  <div class="chart-container">
-    <div id="chart-fp64"></div>
-  </div>
 </div>
 
 <div class="benchmark-table-wrap">

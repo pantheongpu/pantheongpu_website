@@ -6,7 +6,7 @@ hide:
 # PANTHEON
 
 <div align="center">
-  <img src="assets/logo.png" width="200" alt="Pantheon Logo">
+  <img src="assets/logo.png" class="home-logo" alt="Pantheon Logo">
   <h3>Universal GPU Stress & Diagnostics Suite</h3>
   <p>
     <a href="release/" class="md-button md-button--primary">

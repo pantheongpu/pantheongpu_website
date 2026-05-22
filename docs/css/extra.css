@@ -65,6 +65,15 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
+.home-logo {
+  display: block;
+  width: min(220px, 60vw);
+  height: auto;
+  margin: 0 auto 12px;
+  padding-bottom: 8px;
+  object-fit: contain;
+}
+
 /* --- Benchmark Cards (The "Wow" Factor) --- */
 .chart-container {
   background: var(--pantheon-card-bg);

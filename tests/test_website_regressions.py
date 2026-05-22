@@ -29,14 +29,14 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
 
     assert 'elementId: "chart-memory-read"' in charts_js
     assert 'elementId: "chart-memory"' in charts_js
-    assert 'elementId: "chart-tensor"' in charts_js
-    assert 'elementId: "chart-fp64"' in charts_js
+    assert 'elementId: "chart-tensor"' not in charts_js
+    assert 'elementId: "chart-fp64"' not in charts_js
     assert "BENCHMARK_CHARTS.some" in charts_js
     assert "getChartAssetUrl" in charts_js
     assert 'id="chart-memory-read"' in benchmarks
     assert 'id="chart-memory"' in benchmarks
-    assert 'id="chart-tensor"' in benchmarks
-    assert 'id="chart-fp64"' in benchmarks
+    assert 'id="chart-tensor"' not in benchmarks
+    assert 'id="chart-fp64"' not in benchmarks
 
 
 def test_benchmark_charts_follow_table_filters_and_expected_units():
@@ -47,10 +47,10 @@ def test_benchmark_charts_follow_table_filters_and_expected_units():
     assert 'window.renderBenchmarkCharts(filtered)' in tables_js
     assert 'testName: "memory_read_agg"' in charts_js
     assert 'testName: "memory_write_agg"' in charts_js
-    assert 'testName: "tensor_virus"' in charts_js
-    assert 'testName: "fp64_virus"' in charts_js
+    assert 'testName: "tensor_virus"' not in charts_js
+    assert 'testName: "fp64_virus"' not in charts_js
     assert 'title: "Memory Read Bandwidth"' in charts_js
-    assert 'title: "FP64 Compute Throughput"' in charts_js
+    assert 'title: "Memory Write Bandwidth"' in charts_js
     assert "d.unit === expectedUnit" in charts_js
     assert "chart-empty" in charts_js
 
@@ -82,6 +82,16 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "# sudo apt-get install -y hipcc" in index
     assert "python3 pantheon.py --test all --duration 30 --verify" in index
     assert "./pantheon --test all --duration 30 --verify" in index
+
+
+def test_home_logo_uses_uncropped_responsive_class():
+    index = read("docs/index.md")
+    css = read("docs/css/extra.css")
+
+    assert 'class="home-logo"' in index
+    assert ".home-logo" in css
+    assert "object-fit: contain" in css
+    assert "height: auto" in css
 
 
 def test_benchmark_table_has_mobile_scroll_wrapper():
