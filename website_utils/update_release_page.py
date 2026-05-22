@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import datetime, timezone
+from html import escape
 from pathlib import Path
 
 
@@ -80,6 +82,20 @@ def release_sort_value(release: dict) -> str:
     return release.get("published_at") or release.get("created_at") or ""
 
 
+def release_anchor(tag: str) -> str:
+    anchor = re.sub(r"[^a-z0-9]+", "-", tag.lower()).strip("-")
+    return anchor or "release"
+
+
+def build_version_nav(releases: list[dict]) -> str:
+    links = []
+    for release in releases:
+        tag = release["tag_name"]
+        links.append(f'<a href="#{release_anchor(tag)}">{escape(tag)}</a>')
+
+    return "\n".join(links)
+
+
 def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bool = False) -> str:
     tag = release["tag_name"]
     name = release.get("name") or tag
@@ -112,7 +128,9 @@ def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bo
     downloads = "\n".join(rows) if rows else "| No downloadable assets found. | | |"
     latest_label = " (Latest)" if latest else ""
 
-    return f"""## {name}{latest_label}
+    return f"""<section id="{release_anchor(tag)}" class="release-entry" markdown="1">
+
+## {name}{latest_label}
 **Release Date:** {date}
 
 ### Release Notes
@@ -122,6 +140,8 @@ def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bo
 | File | Format | Size |
 | :--- | :--- | :--- |
 {downloads}
+
+</section>
 """
 
 
@@ -136,6 +156,7 @@ def build_page(release: dict, assets_dir: Path, repo: str, releases: list[dict] 
         sections.append(build_release_section(item, assets_dir, repo, latest=index == 0))
 
     release_sections = "\n---\n\n".join(sections)
+    version_nav = build_version_nav(sorted_releases)
 
     return f"""# Releases
 
@@ -143,7 +164,20 @@ Download stable builds of the Pantheon GPU toolkit. The newest release is listed
 
 ---
 
+<div class="release-page" markdown="1">
+
+<nav class="release-version-nav" aria-label="Release versions">
+  <span>Versions</span>
+{version_nav}
+</nav>
+
+<div class="release-sections" markdown="1">
+
 {release_sections}
+
+</div>
+
+</div>
 """
 
 

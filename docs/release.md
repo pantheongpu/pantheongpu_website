@@ -4,6 +4,18 @@ Download stable builds of the Pantheon GPU toolkit. The newest release is listed
 
 ---
 
+<div class="release-page" markdown="1">
+
+<nav class="release-version-nav" aria-label="Release versions">
+  <span>Versions</span>
+<a href="#v1-0-8">v1.0.8</a>
+<a href="#v1-0-7">v1.0.7</a>
+</nav>
+
+<div class="release-sections" markdown="1">
+
+<section id="v1-0-8" class="release-entry" markdown="1">
+
 ## Pantheon v1.0.8 (Latest)
 **Release Date:** May 21, 2026
 
@@ -26,7 +38,11 @@ Download stable builds of the Pantheon GPU toolkit. The newest release is listed
 | [Pantheon v1.0.8 ZipFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.zip) | `.zip` | 247.6 KB |
 | [Pantheon v1.0.8 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/SHA256SUMS) | `SHA256SUMS` | 173 B |
 
+</section>
+
 ---
+
+<section id="v1-0-7" class="release-entry" markdown="1">
 
 ## v1.0.7
 **Release Date:** April 6, 2026
@@ -46,3 +62,9 @@ This update introduces critical diagnostic enhancements for memory integrity and
 | [Pantheon v1.0.7 TarFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.tar.gz) | `.tar.gz` | 131.2 MB |
 | [Pantheon v1.0.7 ZipFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.zip) | `.zip` | 131.2 MB |
 
+</section>
+
+
+</div>
+
+</div>

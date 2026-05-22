@@ -222,6 +222,55 @@ body:has(#chart-memory-read):not(:has(#benchmarkTable)) .md-typeset h2 {
   border-bottom: 1px solid var(--pantheon-border);
 }
 
+.release-page {
+  display: grid;
+  grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.release-version-nav {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--pantheon-border);
+  border-radius: 8px;
+  background: var(--pantheon-card-bg);
+}
+
+.release-version-nav span {
+  margin-bottom: 4px;
+  color: var(--pantheon-text-default);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.release-version-nav a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: var(--md-default-fg-color);
+  font-weight: 700;
+}
+
+.release-version-nav a:hover {
+  background: color-mix(in srgb, var(--md-primary-fg-color), transparent 86%);
+  color: var(--md-primary-fg-color);
+}
+
+.release-sections {
+  min-width: 0;
+}
+
+.release-entry {
+  scroll-margin-top: 5rem;
+}
+
 .benchmark-table-wrap {
   width: 100%;
   max-width: 100%;
@@ -281,5 +330,15 @@ body:has(#chart-memory-read):not(:has(#benchmarkTable)) .md-typeset h2 {
 
   .chart-container {
     padding: 16px;
+  }
+
+  .release-page {
+    grid-template-columns: 1fr;
+  }
+
+  .release-version-nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
