@@ -83,11 +83,19 @@ def test_research_reports_page_is_available():
     assert "Silicon Segregation" in reports
     assert "Tracing the Tensor Lineage" in reports
     assert "# Silicon Segregation: What Low-Level Telemetry Reveals About Enterprise vs. Consumer GPUs" in article
+    assert "By Saqib Khan" in article
+    assert "https://www.linkedin.com/in/saqib-khan-2a0ab164/" in article
     assert "## 1. The FP64 Chasm: Artificial Silicon Fusing" in article
+    assert article.count('class="report-figure"') >= 3
+    assert "FP64 throughput exposes the enterprise precision unlock." in article
     assert "## The Takeaway" in article
     assert "https://pantheongpu.com/" in article
     assert "# Tracing the Tensor Lineage: How Ampere, Hopper, and Blackwell Scale at the Silicon Level" in tensor_article
+    assert "By Saqib Khan" in tensor_article
+    assert "https://www.linkedin.com/in/saqib-khan-2a0ab164/" in tensor_article
     assert "## 1. The Tensor Core Explosion and Plateau" in tensor_article
+    assert tensor_article.count('class="report-figure"') >= 3
+    assert "Atomic throughput is where Blackwell's cache fabric makes the biggest jump." in tensor_article
     assert "## 5. Thermal Density and the Death of Air Cooling" in tensor_article
     assert "572,143 MAPS" in tensor_article
     assert "https://pantheongpu.com/" in tensor_article
@@ -300,6 +308,18 @@ def test_wide_layout_is_scoped_to_benchmark_page():
 
     assert "body:has(#benchmarkTable) .md-grid" in css
     assert "\n.md-grid {\n  max-width: 95vw" not in css
+
+
+def test_report_pages_have_figures_and_wider_layout():
+    css = read("docs/css/extra.css")
+
+    assert "body:has(.report-byline) .md-grid" in css
+    assert "max-width: min(1680px, 96vw)" in css
+    assert "body:has(.report-byline) .md-content__inner" in css
+    assert "max-width: 900px" in css
+    assert ".report-figure" in css
+    assert ".report-bar-row" in css
+    assert ".report-bar-fill" in css
 
 
 def test_release_page_uses_builtin_table_of_contents():

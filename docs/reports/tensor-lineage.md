@@ -1,5 +1,10 @@
 # Tracing the Tensor Lineage: How Ampere, Hopper, and Blackwell Scale at the Silicon Level
 
+<div class="report-byline">
+  <span>By Saqib Khan</span>
+  <a href="https://www.linkedin.com/in/saqib-khan-2a0ab164/">LinkedIn</a>
+</div>
+
 When NVIDIA introduced the Volta architecture in 2017, it quietly changed the trajectory of the entire semiconductor industry by introducing the Tensor Core. But it was not until the subsequent data center architectures that we saw what this silicon was truly built to do.
 
 To measure exactly how NVIDIA's architectural philosophy has scaled over the last few generations, we deployed Pantheon, a custom diagnostic suite of low-level, orthogonal micro-kernels designed to bypass driver abstractions and directly attack specific hardware subsystems.
@@ -15,6 +20,15 @@ The primary differentiator of modern NVIDIA architectures is how aggressively th
 **Fourth-Gen Hopper H100:** Hopper fundamentally redesigned the Streaming Multiprocessor to feed the beast. Under the exact same workload, the H100 delivered 57.84 TFLOPS, a massive approximately 68% physical throughput increase over Ampere.
 
 **The FP16 Plateau Blackwell B200:** Interestingly, running standard FP16 math on the B200 yielded 58.48 TFLOPS, a shockingly marginal bump over Hopper. This exposes NVIDIA's architectural pivot: Blackwell's true power lies not in legacy FP16, but in its physically distinct FP8 and FP4 hardware Transformer Engines, requiring entirely new instruction sets to unlock its density.
+
+<figure class="report-figure">
+  <figcaption>FP16 tensor throughput rises sharply from Ampere to Hopper, then plateaus on Blackwell.</figcaption>
+  <div class="report-bars">
+    <div class="report-bar-row"><span>A100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 58.7%"></div></div><strong>34.35 TFLOPS</strong></div>
+    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 98.9%"></div></div><strong>57.84 TFLOPS</strong></div>
+    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>58.48 TFLOPS</strong></div>
+  </div>
+</figure>
 
 ## 2. The Vector Math Reality: INT32 and Transcendentals
 
@@ -32,6 +46,15 @@ Deep learning frequently requires massive scatter/gather operations across memor
 
 **The Blackwell Breakthrough:** The B200 absolutely obliterated this test, jumping to an astonishing 572,143 MAPS, more than double the Hopper architecture. This telemetry proves NVIDIA fundamentally redesigned the L2 cache pathways and atomic arbiters in Blackwell to ensure the execution engines are never starved by memory locks.
 
+<figure class="report-figure">
+  <figcaption>Atomic throughput is where Blackwell's cache fabric makes the biggest jump.</figcaption>
+  <div class="report-bars">
+    <div class="report-bar-row"><span>A100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 30.0%"></div></div><strong>171,532 MAPS</strong></div>
+    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 41.9%"></div></div><strong>239,792 MAPS</strong></div>
+    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>572,143 MAPS</strong></div>
+  </div>
+</figure>
+
 ## 4. Feeding the Beast: The HBM Memory Wall
 
 You cannot quadruple compute without quadrupling the data pipes. Testing the High Bandwidth Memory controllers across these architectures reveals the brute-force engineering required to feed modern models.
@@ -41,6 +64,15 @@ You cannot quadruple compute without quadrupling the data pipes. Testing the Hig
 **Hopper HBM3:** The H100 widened the highway significantly, pushing a verifiable 3,162 GB/s of true physical read throughput.
 
 **Blackwell HBM3e:** The B200 completely shatters previous limits, achieving an astonishing 7,213 GB/s. To move 7.2 terabytes of data every single second across a silicon interposer is a marvel of signal integrity and physical packaging.
+
+<figure class="report-figure">
+  <figcaption>HBM bandwidth scales faster than legacy FP16 throughput.</figcaption>
+  <div class="report-bars">
+    <div class="report-bar-row"><span>A100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 26.5%"></div></div><strong>1,912 GB/s</strong></div>
+    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 43.8%"></div></div><strong>3,162 GB/s</strong></div>
+    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>7,213 GB/s</strong></div>
+  </div>
+</figure>
 
 ## 5. Thermal Density and the Death of Air Cooling
 

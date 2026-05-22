@@ -1,5 +1,10 @@
 # Silicon Segregation: What Low-Level Telemetry Reveals About Enterprise vs. Consumer GPUs
 
+<div class="report-byline">
+  <span>By Saqib Khan</span>
+  <a href="https://www.linkedin.com/in/saqib-khan-2a0ab164/">LinkedIn</a>
+</div>
+
 When NVIDIA drops a new flagship consumer GPU, the gaming and PC enthusiast communities understandably lose their minds over the raw performance. The new RTX 5090 is an absolute behemoth. But how does that $2,000 consumer card actually compare to a $40,000 enterprise data center chip like the NVIDIA B200 or the H100?
 
 If you run standard PyTorch benchmarks or 3DMark, you only see the software-level abstractions. To find the actual physical differences forged into the silicon, we deployed Pantheon, a custom diagnostic suite of low-level, orthogonal micro-kernels designed to bypass driver abstractions and directly attack specific hardware subsystems.
@@ -14,6 +19,15 @@ While modern AI heavily relies on low-precision math such as FP8 and FP16, tradi
 
 **The Enterprise Uncaging:** Run that exact same kernel on the enterprise dies, and the chains come off. The Hopper-based H100 pushed 20.66 TFLOPS, and the flagship B200 delivered a staggering 22.86 TFLOPS of true double-precision compute.
 
+<figure class="report-figure">
+  <figcaption>FP64 throughput exposes the enterprise precision unlock.</figcaption>
+  <div class="report-bars">
+    <div class="report-bar-row"><span>RTX 5090</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 8.3%"></div></div><strong>1.89 TFLOPS</strong></div>
+    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 90.4%"></div></div><strong>20.66 TFLOPS</strong></div>
+    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>22.86 TFLOPS</strong></div>
+  </div>
+</figure>
+
 ## 2. The Memory Architecture: GDDR7 vs. HBM3e
 
 Consumer GPUs rely on standard GDDR memory soldered to the PCB, while enterprise GPUs use High Bandwidth Memory physically stacked directly on the silicon package. Testing the physical memory controllers reveals why enterprise scaling is so expensive.
@@ -22,6 +36,16 @@ Consumer GPUs rely on standard GDDR memory soldered to the PCB, while enterprise
 
 **Enterprise HBM:** Those consumer numbers look like child's play next to the data center cards. The H100, with HBM3, pulled 3,162 GB/s, and the B200, with HBM3e, achieved a mind-bending 7,213 GB/s of true physical read throughput. It takes an incredibly wide, complex memory interface to feed data to an enterprise die without starving the ALUs.
 
+<figure class="report-figure">
+  <figcaption>Physical read bandwidth separates GDDR boards from HBM packages.</figcaption>
+  <div class="report-bars">
+    <div class="report-bar-row"><span>RTX 3080 Ti</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 12.0%"></div></div><strong>869 GB/s</strong></div>
+    <div class="report-bar-row"><span>RTX 5090</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 23.4%"></div></div><strong>1,687 GB/s</strong></div>
+    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 43.8%"></div></div><strong>3,162 GB/s</strong></div>
+    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>7,213 GB/s</strong></div>
+  </div>
+</figure>
+
 ## 3. The Ray Tracing Advantage: Where Consumer Silicon Wins
 
 Enterprise dies do not sweep every category. By running Pantheon's `rt_virus`, which floods the dedicated Ray Tracing intersection engines with billions of non-coherent ray-triangle tests, we can measure the physical die area dedicated to graphics.
@@ -29,6 +53,15 @@ Enterprise dies do not sweep every category. By running Pantheon's `rt_virus`, w
 **Enterprise Focus:** The B200 is built for AI, not rendering. Under the RT payload, it managed just 1.03 GRays/s.
 
 **The Graphics King:** The RTX 5090 absolutely annihilated the enterprise hardware here, pushing 2.16 GRays/s, triple the throughput of the older RTX 3080 Ti, which managed just 0.72 GRays/s. NVIDIA is spending massive amounts of the consumer silicon budget exclusively on fixed-function rendering hardware.
+
+<figure class="report-figure">
+  <figcaption>Ray tracing reverses the enterprise lead.</figcaption>
+  <div class="report-bars">
+    <div class="report-bar-row"><span>RTX 3080 Ti</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 33.3%"></div></div><strong>0.72 GRays/s</strong></div>
+    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 47.7%"></div></div><strong>1.03 GRays/s</strong></div>
+    <div class="report-bar-row"><span>RTX 5090</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>2.16 GRays/s</strong></div>
+  </div>
+</figure>
 
 ## 4. Thermal Realities: Vapor Chambers vs. Liquid Cooling
 
