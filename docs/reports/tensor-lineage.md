@@ -23,11 +23,12 @@ The primary differentiator of modern NVIDIA architectures is how aggressively th
 
 <figure class="report-figure">
   <figcaption>FP16 tensor throughput rises sharply from Ampere to Hopper, then plateaus on Blackwell.</figcaption>
-  <div class="report-bars">
-    <div class="report-bar-row"><span>A100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 58.7%"></div></div><strong>34.35 TFLOPS</strong></div>
-    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 98.9%"></div></div><strong>57.84 TFLOPS</strong></div>
-    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>58.48 TFLOPS</strong></div>
-  </div>
+  <svg class="report-chart-svg" role="img" aria-label="FP16 tensor throughput chart" viewBox="0 0 760 230">
+    <text x="0" y="22" class="report-chart-title">FP16 Tensor Throughput (TFLOPS)</text>
+    <text x="0" y="68">A100</text><rect x="150" y="48" width="320" height="26" rx="5"></rect><text x="486" y="67">34.35</text>
+    <text x="0" y="118">H100</text><rect x="150" y="98" width="539" height="26" rx="5"></rect><text x="706" y="117">57.84</text>
+    <text x="0" y="168">B200</text><rect x="150" y="148" width="545" height="26" rx="5"></rect><text x="712" y="167">58.48</text>
+  </svg>
 </figure>
 
 ## 2. The Vector Math Reality: INT32 and Transcendentals
@@ -48,11 +49,12 @@ Deep learning frequently requires massive scatter/gather operations across memor
 
 <figure class="report-figure">
   <figcaption>Atomic throughput is where Blackwell's cache fabric makes the biggest jump.</figcaption>
-  <div class="report-bars">
-    <div class="report-bar-row"><span>A100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 30.0%"></div></div><strong>171,532 MAPS</strong></div>
-    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 41.9%"></div></div><strong>239,792 MAPS</strong></div>
-    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>572,143 MAPS</strong></div>
-  </div>
+  <svg class="report-chart-svg" role="img" aria-label="Atomic throughput chart" viewBox="0 0 760 230">
+    <text x="0" y="22" class="report-chart-title">Atomic Throughput (MAPS)</text>
+    <text x="0" y="68">A100</text><rect x="150" y="48" width="164" height="26" rx="5"></rect><text x="330" y="67">171,532</text>
+    <text x="0" y="118">H100</text><rect x="150" y="98" width="228" height="26" rx="5"></rect><text x="394" y="117">239,792</text>
+    <text x="0" y="168">B200</text><rect x="150" y="148" width="545" height="26" rx="5"></rect><text x="712" y="167">572,143</text>
+  </svg>
 </figure>
 
 ## 4. Feeding the Beast: The HBM Memory Wall
@@ -67,11 +69,12 @@ You cannot quadruple compute without quadrupling the data pipes. Testing the Hig
 
 <figure class="report-figure">
   <figcaption>HBM bandwidth scales faster than legacy FP16 throughput.</figcaption>
-  <div class="report-bars">
-    <div class="report-bar-row"><span>A100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 26.5%"></div></div><strong>1,912 GB/s</strong></div>
-    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 43.8%"></div></div><strong>3,162 GB/s</strong></div>
-    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>7,213 GB/s</strong></div>
-  </div>
+  <svg class="report-chart-svg" role="img" aria-label="HBM bandwidth chart" viewBox="0 0 760 230">
+    <text x="0" y="22" class="report-chart-title">HBM Read Bandwidth (GB/s)</text>
+    <text x="0" y="68">A100</text><rect x="150" y="48" width="144" height="26" rx="5"></rect><text x="310" y="67">1,912</text>
+    <text x="0" y="118">H100</text><rect x="150" y="98" width="239" height="26" rx="5"></rect><text x="405" y="117">3,162</text>
+    <text x="0" y="168">B200</text><rect x="150" y="148" width="545" height="26" rx="5"></rect><text x="712" y="167">7,213</text>
+  </svg>
 </figure>
 
 ## 5. Thermal Density and the Death of Air Cooling

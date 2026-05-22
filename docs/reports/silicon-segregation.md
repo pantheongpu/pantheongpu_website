@@ -21,11 +21,12 @@ While modern AI heavily relies on low-precision math such as FP8 and FP16, tradi
 
 <figure class="report-figure">
   <figcaption>FP64 throughput exposes the enterprise precision unlock.</figcaption>
-  <div class="report-bars">
-    <div class="report-bar-row"><span>RTX 5090</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 8.3%"></div></div><strong>1.89 TFLOPS</strong></div>
-    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 90.4%"></div></div><strong>20.66 TFLOPS</strong></div>
-    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>22.86 TFLOPS</strong></div>
-  </div>
+  <svg class="report-chart-svg" role="img" aria-label="FP64 throughput chart" viewBox="0 0 760 230">
+    <text x="0" y="22" class="report-chart-title">FP64 Throughput (TFLOPS)</text>
+    <text x="0" y="68">RTX 5090</text><rect x="150" y="48" width="36" height="26" rx="5"></rect><text x="202" y="67">1.89</text>
+    <text x="0" y="118">H100</text><rect x="150" y="98" width="493" height="26" rx="5"></rect><text x="660" y="117">20.66</text>
+    <text x="0" y="168">B200</text><rect x="150" y="148" width="545" height="26" rx="5"></rect><text x="712" y="167">22.86</text>
+  </svg>
 </figure>
 
 ## 2. The Memory Architecture: GDDR7 vs. HBM3e
@@ -38,12 +39,13 @@ Consumer GPUs rely on standard GDDR memory soldered to the PCB, while enterprise
 
 <figure class="report-figure">
   <figcaption>Physical read bandwidth separates GDDR boards from HBM packages.</figcaption>
-  <div class="report-bars">
-    <div class="report-bar-row"><span>RTX 3080 Ti</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 12.0%"></div></div><strong>869 GB/s</strong></div>
-    <div class="report-bar-row"><span>RTX 5090</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 23.4%"></div></div><strong>1,687 GB/s</strong></div>
-    <div class="report-bar-row"><span>H100</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 43.8%"></div></div><strong>3,162 GB/s</strong></div>
-    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>7,213 GB/s</strong></div>
-  </div>
+  <svg class="report-chart-svg" role="img" aria-label="Memory read bandwidth chart" viewBox="0 0 760 270">
+    <text x="0" y="22" class="report-chart-title">Physical Read Bandwidth (GB/s)</text>
+    <text x="0" y="68">RTX 3080 Ti</text><rect x="150" y="48" width="66" height="26" rx="5"></rect><text x="232" y="67">869</text>
+    <text x="0" y="118">RTX 5090</text><rect x="150" y="98" width="127" height="26" rx="5"></rect><text x="293" y="117">1,687</text>
+    <text x="0" y="168">H100</text><rect x="150" y="148" width="239" height="26" rx="5"></rect><text x="405" y="167">3,162</text>
+    <text x="0" y="218">B200</text><rect x="150" y="198" width="545" height="26" rx="5"></rect><text x="712" y="217">7,213</text>
+  </svg>
 </figure>
 
 ## 3. The Ray Tracing Advantage: Where Consumer Silicon Wins
@@ -56,11 +58,12 @@ Enterprise dies do not sweep every category. By running Pantheon's `rt_virus`, w
 
 <figure class="report-figure">
   <figcaption>Ray tracing reverses the enterprise lead.</figcaption>
-  <div class="report-bars">
-    <div class="report-bar-row"><span>RTX 3080 Ti</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 33.3%"></div></div><strong>0.72 GRays/s</strong></div>
-    <div class="report-bar-row"><span>B200</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 47.7%"></div></div><strong>1.03 GRays/s</strong></div>
-    <div class="report-bar-row"><span>RTX 5090</span><div class="report-bar-track"><div class="report-bar-fill" style="width: 100%"></div></div><strong>2.16 GRays/s</strong></div>
-  </div>
+  <svg class="report-chart-svg" role="img" aria-label="Ray tracing throughput chart" viewBox="0 0 760 230">
+    <text x="0" y="22" class="report-chart-title">Ray Tracing Throughput (GRays/s)</text>
+    <text x="0" y="68">RTX 3080 Ti</text><rect x="150" y="48" width="182" height="26" rx="5"></rect><text x="348" y="67">0.72</text>
+    <text x="0" y="118">B200</text><rect x="150" y="98" width="260" height="26" rx="5"></rect><text x="426" y="117">1.03</text>
+    <text x="0" y="168">RTX 5090</text><rect x="150" y="148" width="545" height="26" rx="5"></rect><text x="712" y="167">2.16</text>
+  </svg>
 </figure>
 
 ## 4. Thermal Realities: Vapor Chambers vs. Liquid Cooling

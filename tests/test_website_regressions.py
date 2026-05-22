@@ -87,7 +87,9 @@ def test_research_reports_page_is_available():
     assert "https://www.linkedin.com/in/saqib-khan-2a0ab164/" in article
     assert "## 1. The FP64 Chasm: Artificial Silicon Fusing" in article
     assert article.count('class="report-figure"') >= 3
+    assert article.count('class="report-chart-svg"') >= 3
     assert "FP64 throughput exposes the enterprise precision unlock." in article
+    assert "FP64 Throughput (TFLOPS)" in article
     assert "## The Takeaway" in article
     assert "https://pantheongpu.com/" in article
     assert "# Tracing the Tensor Lineage: How Ampere, Hopper, and Blackwell Scale at the Silicon Level" in tensor_article
@@ -95,7 +97,9 @@ def test_research_reports_page_is_available():
     assert "https://www.linkedin.com/in/saqib-khan-2a0ab164/" in tensor_article
     assert "## 1. The Tensor Core Explosion and Plateau" in tensor_article
     assert tensor_article.count('class="report-figure"') >= 3
+    assert tensor_article.count('class="report-chart-svg"') >= 3
     assert "Atomic throughput is where Blackwell's cache fabric makes the biggest jump." in tensor_article
+    assert "Atomic Throughput (MAPS)" in tensor_article
     assert "## 5. Thermal Density and the Death of Air Cooling" in tensor_article
     assert "572,143 MAPS" in tensor_article
     assert "https://pantheongpu.com/" in tensor_article
@@ -314,12 +318,14 @@ def test_report_pages_have_figures_and_wider_layout():
     css = read("docs/css/extra.css")
 
     assert "body:has(.report-byline) .md-grid" in css
-    assert "max-width: min(1680px, 96vw)" in css
+    assert "max-width: min(1760px, 98vw)" in css
+    assert "body:has(.report-byline) .md-main__inner" in css
+    assert "column-gap: 2.4rem" in css
     assert "body:has(.report-byline) .md-content__inner" in css
     assert "max-width: 900px" in css
     assert ".report-figure" in css
-    assert ".report-bar-row" in css
-    assert ".report-bar-fill" in css
+    assert ".report-chart-svg" in css
+    assert ".report-chart-title" in css
 
 
 def test_release_page_uses_builtin_table_of_contents():

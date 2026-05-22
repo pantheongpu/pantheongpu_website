@@ -223,7 +223,11 @@ body:has(#chart-memory-read):not(:has(#benchmarkTable)) .md-typeset h2 {
 }
 
 body:has(.report-byline) .md-grid {
-  max-width: min(1680px, 96vw) !important;
+  max-width: min(1760px, 98vw) !important;
+}
+
+body:has(.report-byline) .md-main__inner {
+  column-gap: 2.4rem;
 }
 
 body:has(.report-byline) .md-content__inner {
@@ -275,42 +279,43 @@ body:has(.report-byline) .md-content__inner {
   font-weight: 800;
 }
 
-.report-bars {
-  display: grid;
-  gap: 10px;
+.report-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.report-bar-row {
-  display: grid;
-  grid-template-columns: minmax(96px, 132px) minmax(120px, 1fr) minmax(96px, auto);
-  gap: 12px;
-  align-items: center;
-  font-size: 0.86rem;
-}
-
-.report-bar-row span {
-  color: var(--pantheon-text-default);
+.report-chart-svg text {
+  fill: var(--md-default-fg-color);
+  font-size: 16px;
   font-weight: 700;
 }
 
-.report-bar-row strong {
-  color: var(--md-default-fg-color);
+.report-chart-svg .report-chart-title {
+  fill: var(--pantheon-text-default);
+  font-size: 18px;
   font-weight: 800;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.report-bar-track {
-  height: 12px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--pantheon-border), transparent 35%);
+.report-chart-svg rect {
+  fill: url(#reportChartGradient);
 }
 
-.report-bar-fill {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #2563eb, #00e396);
+.report-chart-svg {
+  --report-chart-start: #2563eb;
+  --report-chart-end: #00e396;
+}
+
+.report-chart-svg rect {
+  fill: #2563eb;
+}
+
+.report-chart-svg rect:nth-of-type(2n) {
+  fill: #0f9f6e;
+}
+
+.report-chart-svg rect:nth-of-type(3n) {
+  fill: #7c3aed;
 }
 
 .benchmark-table-wrap {
@@ -374,12 +379,7 @@ body:has(.report-byline) .md-content__inner {
     padding: 16px;
   }
 
-  .report-bar-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .report-bar-row strong {
-    text-align: left;
+  .report-figure {
+    padding: 14px;
   }
 }
