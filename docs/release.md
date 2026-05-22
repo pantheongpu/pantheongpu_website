@@ -1,6 +1,6 @@
 # Releases
 
-Download the latest stable builds of the Pantheon GPU toolkit.
+Download stable builds of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 
@@ -28,4 +28,21 @@ Download the latest stable builds of the Pantheon GPU toolkit.
 
 ---
 
-Older releases are available on the [GitHub Releases page](https://github.com/saqibkh/pantheongpu_website/releases).
+## v1.0.7
+**Release Date:** April 6, 2026
+
+### Release Notes
+### Pantheon v1.0.7 - SDC Validation & FP64 Fixes
+What's New in this Release:
+This update introduces critical diagnostic enhancements for memory integrity and patches the double-precision compute stressor.
+
+- Active SDC Catching (--verify): Added the --verify flag to actively hunt for Silent Data Corruption (SDC). Instead of just generating extreme heat and waiting for a hardware crash or driver timeout, Pantheon will now actively validate the data payloads returning from the GPU. If the hardware ECC fails to catch a bit-flip caused by thermal or electrical stress, Pantheon will immediately flag the corrupted block.
+
+- fp64_virus Patched: Fixed the execution and reporting logic for the Double Precision Chokehold (fp64_virus). The kernel now properly saturates the FP64 datapath, accurately exposing physical and artificial silicon limits (such as the strict 1/64th FP64 throttle implemented on consumer NVIDIA GeForce cards).
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.0.7 TarFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.tar.gz) | `.tar.gz` | 131.2 MB |
+| [Pantheon v1.0.7 ZipFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.zip) | `.zip` | 131.2 MB |
+

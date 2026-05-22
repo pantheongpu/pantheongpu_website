@@ -153,7 +153,10 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     assert "exists=true" in workflow
     assert "steps.mirrored.outputs.exists != 'true'" in workflow
     assert "gh release create" in workflow
+    assert "Fetch source release list" in workflow
+    assert "source-releases.json" in workflow
     assert "website_utils/update_release_page.py" in workflow
+    assert "--releases-json source-releases.json" in workflow
     assert "git add docs/release.md" in workflow
     assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
     assert "mkdocs gh-deploy --force" in workflow
@@ -164,10 +167,11 @@ def test_release_page_generator_is_available():
 
     assert "def build_page" in script
     assert "docs/release.md" not in script
-    assert "GitHub Releases page" in script
+    assert "def build_release_section" in script
+    assert "releases-json" in script
 
 
-def test_release_page_generator_writes_latest_release(tmp_path):
+def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
     module_path = ROOT / "website_utils/update_release_page.py"
     spec = importlib.util.spec_from_file_location("update_release_page", module_path)
     module = importlib.util.module_from_spec(spec)
@@ -187,14 +191,36 @@ def test_release_page_generator_writes_latest_release(tmp_path):
             {"name": "pantheon-1.0.8.zip", "size": 999},
         ],
     }
+    older_release = {
+        "tag_name": "v1.0.7",
+        "name": "Pantheon v1.0.7",
+        "published_at": "2026-04-06T05:00:02Z",
+        "body": "Previous release",
+        "assets": [
+            {"name": "pantheon-1.0.7.tar.gz", "size": 2048},
+            {"name": "pantheon-1.0.7.zip", "size": 4096},
+        ],
+    }
 
-    page = module.build_page(release, assets_dir, "saqibkh/pantheongpu_website")
+    page = module.build_page(
+        release,
+        assets_dir,
+        "saqibkh/pantheongpu_website",
+        [older_release, release],
+    )
 
     assert "## Pantheon v1.0.8 (Latest)" in page
+    assert "## Pantheon v1.0.7 (Latest)" not in page
+    assert "## Pantheon v1.0.7" in page
+    assert page.index("## Pantheon v1.0.8 (Latest)") < page.index("## Pantheon v1.0.7")
     assert "**Release Date:** May 21, 2026" in page
     assert "#### What's Changed" in page
     assert "pantheon-1.0.8.tar.gz" in page
     assert "pantheon-1.0.8.zip" in page
+    assert "pantheon-1.0.7.tar.gz" in page
+    assert "pantheon-1.0.7.zip" in page
+    assert "2.0 KB" in page
+    assert "4.0 KB" in page
 
 
 def test_wide_layout_is_scoped_to_benchmark_page():

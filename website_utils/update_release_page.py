@@ -12,6 +12,7 @@ from pathlib import Path
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--release-json", required=True, type=Path)
+    parser.add_argument("--releases-json", type=Path)
     parser.add_argument("--assets-dir", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--repo", default="saqibkh/pantheongpu_website")
@@ -75,7 +76,11 @@ def release_notes(body: str) -> str:
     return "\n".join(lines)
 
 
-def build_page(release: dict, assets_dir: Path, repo: str) -> str:
+def release_sort_value(release: dict) -> str:
+    return release.get("published_at") or release.get("created_at") or ""
+
+
+def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bool = False) -> str:
     tag = release["tag_name"]
     name = release.get("name") or tag
     date = format_date(release.get("published_at") or release.get("created_at") or "")
@@ -105,14 +110,9 @@ def build_page(release: dict, assets_dir: Path, repo: str) -> str:
         )
 
     downloads = "\n".join(rows) if rows else "| No downloadable assets found. | | |"
+    latest_label = " (Latest)" if latest else ""
 
-    return f"""# Releases
-
-Download the latest stable builds of the Pantheon GPU toolkit.
-
----
-
-## {name} (Latest)
+    return f"""## {name}{latest_label}
 **Release Date:** {date}
 
 ### Release Notes
@@ -122,17 +122,38 @@ Download the latest stable builds of the Pantheon GPU toolkit.
 | File | Format | Size |
 | :--- | :--- | :--- |
 {downloads}
+"""
+
+
+def build_page(release: dict, assets_dir: Path, repo: str, releases: list[dict] | None = None) -> str:
+    all_releases = releases or [release]
+    releases_by_tag = {item["tag_name"]: item for item in all_releases if item.get("tag_name")}
+    releases_by_tag[release["tag_name"]] = release
+    sorted_releases = sorted(releases_by_tag.values(), key=release_sort_value, reverse=True)
+
+    sections = []
+    for index, item in enumerate(sorted_releases):
+        sections.append(build_release_section(item, assets_dir, repo, latest=index == 0))
+
+    release_sections = "\n---\n\n".join(sections)
+
+    return f"""# Releases
+
+Download stable builds of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 
-Older releases are available on the [GitHub Releases page](https://github.com/{repo}/releases).
+{release_sections}
 """
 
 
 def main() -> None:
     args = parse_args()
     release = json.loads(args.release_json.read_text(encoding="utf-8"))
-    args.output.write_text(build_page(release, args.assets_dir, args.repo), encoding="utf-8")
+    releases = None
+    if args.releases_json:
+        releases = json.loads(args.releases_json.read_text(encoding="utf-8"))
+    args.output.write_text(build_page(release, args.assets_dir, args.repo, releases), encoding="utf-8")
 
 
 if __name__ == "__main__":
