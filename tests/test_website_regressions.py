@@ -224,6 +224,20 @@ def test_benchmark_version_filter_defaults_to_all_versions():
     assert 'buildCheckboxMenu("versionMenu", versions, latestVersion' not in tables_js
 
 
+def test_benchmark_table_sorts_versions_semantically_latest_first():
+    tables_js = read("docs/js/tables.js")
+
+    assert "let currentSort = { key: 'version', dir: 'desc' };" in tables_js
+    assert "function normalizeVersion" in tables_js
+    assert "function compareVersions" in tables_js
+    assert 'String(value).replace(/^v/i, "")' in tables_js
+    assert "parseInt(part.replace(/\\D/g, \"\"), 10)" in tables_js
+    assert "versions.sort((a, b) => compareVersions(b, a));" in tables_js
+    assert 'if (currentSort.key !== "version")' in tables_js
+    assert "const versionCompare = compareVersions(a.version || \"Legacy\", b.version || \"Legacy\");" in tables_js
+    assert "if (versionCompare !== 0) return -versionCompare;" in tables_js
+
+
 def test_mirror_release_workflow_is_manual_and_validates_assets():
     workflow = read(".github/workflows/mirror-pantheon-release.yml")
 

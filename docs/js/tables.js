@@ -33,7 +33,7 @@ const COL_DEFS = [
 let rawData = [];
 let bestRuns = [];
 let currentFilteredData = [];
-let currentSort = { key: 'score', dir: 'desc' };
+let currentSort = { key: 'version', dir: 'desc' };
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -80,6 +80,65 @@ function getBestRunsOnly(data) {
 
 function isMissingValue(val) {
     return val === undefined || val === null || val === "" || val === "N/A";
+}
+
+function normalizeVersion(value) {
+    if (isMissingValue(value) || value === "Legacy") return [];
+    return String(value).replace(/^v/i, "").split(".").map(part => {
+        const parsed = parseInt(part.replace(/\D/g, ""), 10);
+        return Number.isFinite(parsed) ? parsed : 0;
+    });
+}
+
+function compareVersions(a, b) {
+    const legacyA = isMissingValue(a) || a === "Legacy";
+    const legacyB = isMissingValue(b) || b === "Legacy";
+    if (legacyA && legacyB) return 0;
+    if (legacyA) return -1;
+    if (legacyB) return 1;
+
+    const vA = normalizeVersion(a);
+    const vB = normalizeVersion(b);
+    const length = Math.max(vA.length, vB.length);
+    for (let i = 0; i < length; i++) {
+        const partA = vA[i] || 0;
+        const partB = vB[i] || 0;
+        if (partA !== partB) return partA > partB ? 1 : -1;
+    }
+    return String(a).localeCompare(String(b));
+}
+
+function compareDates(a, b) {
+    const timeA = Date.parse(a || "");
+    const timeB = Date.parse(b || "");
+    if (Number.isNaN(timeA) && Number.isNaN(timeB)) return 0;
+    if (Number.isNaN(timeA)) return -1;
+    if (Number.isNaN(timeB)) return 1;
+    return timeA - timeB;
+}
+
+function compareValues(a, b, key) {
+    if (key === "version") return compareVersions(a || "Legacy", b || "Legacy");
+    if (key === "date") return compareDates(a, b);
+
+    let valA = a;
+    let valB = b;
+
+    if (isMissingValue(valA)) valA = -999999;
+    if (isMissingValue(valB)) valB = -999999;
+
+    let numA = parseFloat(valA);
+    let numB = parseFloat(valB);
+
+    if (!isNaN(numA) && !isNaN(numB)) {
+        return numA - numB;
+    }
+
+    valA = String(valA).toLowerCase();
+    valB = String(valB).toLowerCase();
+    if (valA < valB) return -1;
+    if (valA > valB) return 1;
+    return 0;
 }
 
 function formatMetric(value, unit) {
@@ -312,19 +371,9 @@ function populateFilters(data) {
         versionSet.add(row.version || "Legacy");
     });
 
-    // Extract and sort versions mathematically
+    // Extract and sort versions semantically, newest first.
     let versions = Array.from(versionSet);
-    versions.sort((a, b) => {
-        if (a === "Legacy") return 1;
-        if (b === "Legacy") return -1;
-        const vA = a.replace(/[^0-9.]/g, '').split('.').map(Number);
-        const vB = b.replace(/[^0-9.]/g, '').split('.').map(Number);
-        for (let i = 0; i < Math.max(vA.length, vB.length); i++) {
-            if ((vA[i] || 0) > (vB[i] || 0)) return -1;
-            if ((vA[i] || 0) < (vB[i] || 0)) return 1;
-        }
-        return 0;
-    });
+    versions.sort((a, b) => compareVersions(b, a));
 
     buildCheckboxMenu("gpuMenu", Array.from(gpuSet).sort());
     buildCheckboxMenu("testMenu", Array.from(testSet).sort());
@@ -351,26 +400,18 @@ function applyFilters() {
     });
 
     filtered.sort((a, b) => {
-        let valA = a[currentSort.key];
-        let valB = b[currentSort.key];
-
-        if (valA === undefined || valA === "N/A") valA = -999999;
-        if (valB === undefined || valB === "N/A") valB = -999999;
-
-        let numA = parseFloat(valA);
-        let numB = parseFloat(valB);
-
-        if (!isNaN(numA) && !isNaN(numB)) {
-            valA = numA;
-            valB = numB;
-        } else {
-            valA = String(valA).toLowerCase();
-            valB = String(valB).toLowerCase();
+        if (currentSort.key !== "version") {
+            const versionCompare = compareVersions(a.version || "Legacy", b.version || "Legacy");
+            if (versionCompare !== 0) return -versionCompare;
         }
 
-        if (valA < valB) return currentSort.dir === 'asc' ? -1 : 1;
-        if (valA > valB) return currentSort.dir === 'asc' ? 1 : -1;
-        return 0;
+        const valueCompare = compareValues(a[currentSort.key], b[currentSort.key], currentSort.key);
+        if (valueCompare !== 0) return currentSort.dir === 'asc' ? valueCompare : -valueCompare;
+
+        const dateCompare = compareDates(a.date, b.date);
+        if (dateCompare !== 0) return -dateCompare;
+
+        return compareValues(a.gpu, b.gpu, "gpu");
     });
 
     currentFilteredData = filtered;
