@@ -65,6 +65,18 @@ def test_performance_comparisons_are_nested_under_database_nav():
     assert "    - Comparisons: benchmark-comparisons.md" in mkdocs
 
 
+def test_research_reports_page_is_available():
+    mkdocs = read("mkdocs.yml")
+    reports = read("docs/reports.md")
+
+    assert "  - Research & Reports: reports.md" in mkdocs
+    assert "# Research & Reports" in reports
+    assert "Long-form analysis, papers, benchmark notes" in reports
+    assert "## Featured" in reports
+    assert "## Archive" in reports
+    assert "## Suggested Report Format" in reports
+
+
 def test_benchmark_charts_follow_table_filters_and_expected_units():
     charts_js = read("docs/js/charts.js")
     tables_js = read("docs/js/tables.js")

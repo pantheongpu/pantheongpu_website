@@ -10,6 +10,7 @@ nav:
   - Performance Database:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
+  - Research & Reports: reports.md
   - Test Documentation:
     - Overview: tests/index.md
     - Core & Compute:
