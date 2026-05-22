@@ -1,5 +1,8 @@
+let benchmarkCharts = {};
+
 document.addEventListener("DOMContentLoaded", function () {
     if (!document.getElementById("chart-memory") && !document.getElementById("chart-tensor")) return;
+    if (document.getElementById("benchmarkTable")) return;
 
     const dataUrl = getChartAssetUrl("web_data.json");
 
@@ -9,8 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(data => {
-            renderChart(data, "memory_write_agg", "chart-memory", "Memory Write Bandwidth (GB/s)");
-            renderChart(data, "tensor_virus", "chart-tensor", "Tensor Compute Throughput");
+            renderBenchmarkCharts(data);
         })
         .catch(err => console.error("Error loading benchmark data:", err));
 });
@@ -23,28 +25,52 @@ function getChartAssetUrl(fileName) {
     return new URL(`assets/${fileName}`, document.baseURI).href;
 }
 
-function renderChart(rawData, testName, elementId, title) {
+function renderBenchmarkCharts(data) {
+    renderChart(data, "memory_write_agg", "chart-memory", "Memory Write Bandwidth", "GB/s");
+    renderChart(data, "tensor_virus", "chart-tensor", "Tensor Compute Throughput", "TFLOPS");
+}
+
+function getChartScore(row) {
+    const score = Number(row.score);
+    if (Number.isFinite(score) && score > 0) return score;
+
+    const throughput = Number(row.throughput);
+    if (Number.isFinite(throughput) && throughput > 0) return throughput;
+
+    return null;
+}
+
+function renderChart(rawData, testName, elementId, title, expectedUnit) {
     const element = document.getElementById(elementId);
     if (!element) return;
 
-    // Filter data for this specific test
-    const filtered = rawData.filter(d => d.test === testName);
+    const filtered = rawData.filter(d => d.test === testName && (!expectedUnit || d.unit === expectedUnit));
     
-    // Group by GPU and take the MAX score (best run)
     const bestScores = {};
-    const units = {};
     filtered.forEach(r => {
-        const score = Number(r.score || r.throughput || 0);
+        const score = getChartScore(r);
+        if (score === null) return;
+
         if (!bestScores[r.gpu] || score > bestScores[r.gpu]) {
             bestScores[r.gpu] = score;
-            units[r.gpu] = r.unit || "";
         }
     });
 
-    // Prepare arrays for ApexCharts
     const categories = Object.keys(bestScores);
     const seriesData = Object.values(bestScores);
-    const unit = Object.values(units).find(Boolean) || "";
+    const unit = expectedUnit || "";
+
+    if (benchmarkCharts[elementId]) {
+        benchmarkCharts[elementId].destroy();
+        delete benchmarkCharts[elementId];
+    }
+
+    if (categories.length === 0) {
+        element.innerHTML = `<p class="chart-empty">No ${title.toLowerCase()} data matches the current filters.</p>`;
+        return;
+    }
+
+    element.innerHTML = "";
 
     const options = {
         chart: {
@@ -67,7 +93,7 @@ function renderChart(rawData, testName, elementId, title) {
             labels: { style: { colors: '#b8b8b8' } }
         },
         title: {
-            text: title,
+            text: unit ? `${title} (${unit})` : title,
             align: 'center',
             style: { color: '#fff', fontSize: '18px' }
         },
@@ -84,5 +110,8 @@ function renderChart(rawData, testName, elementId, title) {
     };
 
     const chart = new ApexCharts(element, options);
+    benchmarkCharts[elementId] = chart;
     chart.render();
 }
+
+window.renderBenchmarkCharts = renderBenchmarkCharts;
