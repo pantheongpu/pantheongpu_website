@@ -67,10 +67,20 @@ Use this before opening a pull request or publishing changes.
 
 ## Continuous Integration
 
-The CI workflow runs on every push and pull request. It installs the Python
-dependencies, runs the pytest suite, regenerates benchmark data, and builds the
-MkDocs site in strict mode. The deploy workflow repeats those checks before
-publishing to GitHub Pages from `main`.
+The CI workflow runs on every push, pull request, and manual dispatch. It
+installs the Python dependencies on Python 3.11 and 3.12, runs `pip check`,
+runs the pytest suite, regenerates benchmark data, verifies that
+`docs/assets/web_data.json` has no uncommitted drift, and builds the MkDocs
+site in strict mode. The deploy workflow repeats the same data freshness,
+test, and build checks before publishing to GitHub Pages from `main`.
+
+If CI reports that `docs/assets/web_data.json` is out of sync, regenerate and
+commit it:
+
+```bash
+python3 website_utils/generate_web_data.py
+git add docs/assets/web_data.json
+```
 
 ## Mirror Pantheon Releases
 

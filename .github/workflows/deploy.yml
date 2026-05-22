@@ -3,10 +3,14 @@ name: Publish Website
 on:
   push:
     branches:
-      - main  # Only runs when code is merged into main
+      - main
 
 permissions:
-  contents: write # Allows the Action to push to the gh-pages branch
+  contents: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -18,16 +22,27 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
+          cache: pip
 
       - name: Install Dependencies
-        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip check
 
       - name: Run Unit Tests
         run: python -m pytest
 
       - name: Generate Web Data
         run: python website_utils/generate_web_data.py
+
+      - name: Ensure Generated Data Is Current
+        run: |
+          git diff --exit-code -- docs/assets/web_data.json || {
+            echo "::error::docs/assets/web_data.json is not in sync with database/*.json. Run python website_utils/generate_web_data.py and commit the result."
+            exit 1
+          }
 
       - name: Build Docs
         run: python -m mkdocs build --strict

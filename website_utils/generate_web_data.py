@@ -56,17 +56,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
     output_file = Path(output_file)
     best_runs = {}
 
-    # 1. LOAD EXISTING
-    if output_file.exists():
-        try:
-            with open(output_file, 'r') as f:
-                existing_data = json.load(f)
-                for row in existing_data:
-                    best_runs[record_key(row)] = row
-        except (json.JSONDecodeError, OSError) as e:
-            print(f"Warning: could not load existing {output_file}: {e}")
-
-    # 2. PROCESS NEW REPORTS
+    # 1. PROCESS SOURCE REPORTS
     files = sorted(glob.glob(str(db_dir / "pantheon_report_*.json")))
 
     for f in files:
@@ -157,14 +147,15 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
         except Exception as e:
             print(f"Skipping {f}: {e}")
 
-    # 3. SAVE
+    # 2. SAVE
     output_file.parent.mkdir(parents=True, exist_ok=True)
+    rows = sorted(best_runs.values(), key=record_key)
 
     with open(output_file, 'w') as f:
-        json.dump(list(best_runs.values()), f, indent=2, cls=NumpyEncoder)
+        json.dump(rows, f, indent=2, cls=NumpyEncoder)
 
-    print(f"[Generate] Database updated with {len(best_runs)} records.")
-    return list(best_runs.values())
+    print(f"[Generate] Database updated with {len(rows)} records.")
+    return rows
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,8 @@
+import json
 import importlib.util
 from pathlib import Path
+
+from website_utils.generate_web_data import main as generate_web_data
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -245,6 +248,31 @@ def test_unknown_version_fp64_result_is_not_published():
     assert '"version": "vUnknown"' not in web_data
     assert '"date": "2026-04-06 12:25:34"' not in web_data
     assert '"score": 0.571593' not in web_data
+
+
+def test_committed_web_data_matches_database_reports(tmp_path):
+    generated_file = tmp_path / "web_data.json"
+
+    generated_rows = generate_web_data(output_file=generated_file)
+    committed_rows = json.loads(read("docs/assets/web_data.json"))
+
+    assert generated_rows == committed_rows
+
+
+def test_ci_checks_generated_data_drift_and_dependency_health():
+    ci = read(".github/workflows/ci.yml")
+    deploy = read(".github/workflows/deploy.yml")
+    mirror = read(".github/workflows/mirror-pantheon-release.yml")
+
+    assert 'python-version: ["3.11", "3.12"]' in ci
+    assert "python -m pip check" in ci
+    assert "git diff --exit-code -- docs/assets/web_data.json" in ci
+    assert "python -m mkdocs build --strict" in ci
+    assert "cancel-in-progress: true" in ci
+    assert "python -m pip check" in deploy
+    assert "git diff --exit-code -- docs/assets/web_data.json" in deploy
+    assert "python -m pip check" in mirror
+    assert "git diff --exit-code -- docs/assets/web_data.json" in mirror
 
 
 def test_mirror_release_workflow_is_manual_and_validates_assets():

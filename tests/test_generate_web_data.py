@@ -87,6 +87,67 @@ def test_same_gpu_test_and_version_keeps_highest_score(tmp_path):
     assert rows[0]["score"] == 25
 
 
+def test_existing_output_is_rebuilt_from_source_reports(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    output_file.parent.mkdir(parents=True)
+    output_file.write_text(
+        json.dumps([{
+            "gpu": "Stale GPU",
+            "uuid": "GPU-STALE",
+            "test": "fp64_virus",
+            "version": "vUnknown",
+            "score": 0.571593,
+        }]),
+        encoding="utf-8",
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows == []
+    assert json.loads(output_file.read_text(encoding="utf-8")) == []
+
+
+def test_generated_rows_are_written_in_stable_key_order(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    gpu_beta = [{
+        "id": 0,
+        "name": "GPU Beta",
+        "uuid": "GPU-BETA",
+        "serial": "S2",
+        "memory_total": "24576 MB",
+        "driver_version": "580.1",
+    }]
+    gpu_alpha = [{
+        "id": 0,
+        "name": "GPU Alpha",
+        "uuid": "GPU-ALPHA",
+        "serial": "S1",
+        "memory_total": "12288 MB",
+        "driver_version": "580.1",
+    }]
+
+    write_report(
+        db_dir,
+        "pantheon_report_b.json",
+        gpu_beta,
+        [{"Test Name": "tensor_virus", "GPU ID": 0, "Score": 20, "Unit": "TFLOPS"}],
+    )
+    write_report(
+        db_dir,
+        "pantheon_report_a.json",
+        gpu_alpha,
+        [{"Test Name": "memory_write", "GPU ID": 0, "Score": 10, "Unit": "GB/s"}],
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert [record_key(row) for row in rows] == sorted(record_key(row) for row in rows)
+
+
 def test_missing_score_falls_back_to_power_metric(tmp_path):
     db_dir = tmp_path / "database"
     db_dir.mkdir()
