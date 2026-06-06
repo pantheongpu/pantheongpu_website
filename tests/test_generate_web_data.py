@@ -1,6 +1,6 @@
 import json
 
-from website_utils.generate_web_data import main, record_key, to_float
+from website_utils.generate_web_data import first_present, main, record_key, to_float
 
 
 def write_report(db_dir, name, gpu_info, test_results, version="1.0.0"):
@@ -166,6 +166,34 @@ def test_missing_score_falls_back_to_power_metric(tmp_path):
     assert rows[0]["unit"] == "Watts"
 
 
+def test_report_parser_accepts_historical_telemetry_keys(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(
+        db_dir,
+        "pantheon_report_legacy_keys.json",
+        [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-UUID"}],
+        [{
+            "Test Name": "fp64_virus",
+            "Version": "1.0.9",
+            "GPU ID": 0,
+            "Score": 1.25,
+            "Unit": "TFLOPS",
+            "Avg Clock(MHz)": 1875.5,
+            "Efficiency": 8.25,
+        }],
+        version="vUnknown",
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows[0]["version"] == "1.0.9"
+    assert rows[0]["clock_avg"] == 1875.5
+    assert rows[0]["efficiency"] == 8.25
+
+
 def test_record_key_normalizes_test_name_and_version():
     row = {
         "uuid": " GPU-UUID ",
@@ -180,3 +208,9 @@ def test_to_float_returns_default_for_bad_values():
     assert to_float("12.5") == 12.5
     assert to_float("N/A") == 0.0
     assert to_float("not-a-number", default=-1.0) == -1.0
+
+
+def test_first_present_returns_first_existing_key_even_when_value_is_zero():
+    assert first_present({"new": 0, "old": 5}, ["new", "old"], default=9) == 0
+    assert first_present({"old": 5}, ["new", "old"], default=9) == 5
+    assert first_present({}, ["new", "old"], default=9) == 9

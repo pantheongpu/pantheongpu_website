@@ -51,6 +51,13 @@ def to_float(value, default=0.0):
         return default
 
 
+def first_present(mapping, keys, default=0):
+    for key in keys:
+        if key in mapping:
+            return mapping[key]
+    return default
+
+
 def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
@@ -97,7 +104,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
                         score_val = to_float(test.get("Max Power (W)", 0))
                         unit = "Watts"
 
-                    version_str = data.get("Version", data.get("pantheon_version", "1.0.0"))
+                    version_str = first_present(test, ["Version"], first_present(data, ["Version", "pantheon_version"], "1.0.0"))
 
                     # --- CAPTURE ALL FIELDS ---
                     record = {
@@ -114,9 +121,9 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
                         "duration": test.get("Duration (s)", 0),
                         "temp_max": test.get("Max Temp (C)", 0),
                         "power_max": test.get("Max Power (W)", 0),
-                        "clock_avg": test.get("Avg Clock (MHz)", 0),
+                        "clock_avg": first_present(test, ["Avg Clock (MHz)", "Avg Clock(MHz)"], 0),
                         "date": data.get("timestamp", "Unknown"),
-                        "efficiency": test.get("Efficiency (MB/J)", 0),
+                        "efficiency": first_present(test, ["Efficiency (MB/J)", "Efficiency"], 0),
                         "pcie_gen": test.get("PCIe Gen", 0),
                         "pcie_width": test.get("PCIe Width", 0),
                         "throttle": test.get("Limit Reason", "N/A"),
