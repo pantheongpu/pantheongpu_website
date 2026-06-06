@@ -1,5 +1,6 @@
 import json
 import glob
+import math
 from pathlib import Path
 
 try:
@@ -46,9 +47,11 @@ def to_float(value, default=0.0):
     if value in (None, "", "N/A"):
         return default
     try:
-        return float(value)
+        parsed = float(value)
     except (TypeError, ValueError):
         return default
+
+    return parsed if math.isfinite(parsed) else default
 
 
 def first_present(mapping, keys, default=0):
@@ -58,17 +61,22 @@ def first_present(mapping, keys, default=0):
     return default
 
 
+def is_unknown_version(value):
+    return normalize(value, "").lower() in {"", "unknown", "vunknown", "n/a", "none"}
+
+
 def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
     best_runs = {}
+    errors = []
 
     # 1. PROCESS SOURCE REPORTS
     files = sorted(glob.glob(str(db_dir / "pantheon_report_*.json")))
 
     for f in files:
         try:
-            with open(f, 'r') as fp:
+            with open(f, 'r', encoding="utf-8") as fp:
                 data = json.load(fp)
 
                 # Store the entire GPU info dictionary by ID
@@ -104,7 +112,14 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
                         score_val = to_float(test.get("Max Power (W)", 0))
                         unit = "Watts"
 
-                    version_str = first_present(test, ["Version"], first_present(data, ["Version", "pantheon_version"], "1.0.0"))
+                    version_str = first_present(
+                        test,
+                        ["Version"],
+                        first_present(data, ["Version", "pantheon_version"], "1.0.0"),
+                    )
+                    if is_unknown_version(version_str):
+                        print(f"[SKIPPED] Unknown Pantheon version in {f}: {test_name}")
+                        continue
 
                     # --- CAPTURE ALL FIELDS ---
                     record = {
@@ -152,14 +167,18 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
                             pass
 
         except Exception as e:
-            print(f"Skipping {f}: {e}")
+            errors.append(f"{f}: {e}")
+
+    if errors:
+        details = "\n".join(errors)
+        raise RuntimeError(f"Failed to parse benchmark report(s):\n{details}")
 
     # 2. SAVE
     output_file.parent.mkdir(parents=True, exist_ok=True)
     rows = sorted(best_runs.values(), key=record_key)
 
-    with open(output_file, 'w') as f:
-        json.dump(rows, f, indent=2, cls=NumpyEncoder)
+    with open(output_file, 'w', encoding="utf-8") as f:
+        json.dump(rows, f, indent=2, cls=NumpyEncoder, allow_nan=False)
 
     print(f"[Generate] Database updated with {len(rows)} records.")
     return rows

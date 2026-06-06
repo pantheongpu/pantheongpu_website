@@ -234,7 +234,8 @@ def test_benchmark_table_sorts_versions_semantically_latest_first():
     assert "function normalizeVersion" in tables_js
     assert "function compareVersions" in tables_js
     assert 'String(value).replace(/^v/i, "")' in tables_js
-    assert "parseInt(part.replace(/\\D/g, \"\"), 10)" in tables_js
+    assert "part.match(/\\d+/)" in tables_js
+    assert "parseInt(match[0], 10)" in tables_js
     assert "versions.sort((a, b) => compareVersions(b, a));" in tables_js
     assert 'if (currentSort.key !== "version")' in tables_js
     assert "const versionCompare = compareVersions(a.version || \"Legacy\", b.version || \"Legacy\");" in tables_js

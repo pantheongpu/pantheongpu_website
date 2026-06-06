@@ -85,7 +85,8 @@ function isMissingValue(val) {
 function normalizeVersion(value) {
     if (isMissingValue(value) || value === "Legacy") return [];
     return String(value).replace(/^v/i, "").split(".").map(part => {
-        const parsed = parseInt(part.replace(/\D/g, ""), 10);
+        const match = part.match(/\d+/);
+        const parsed = match ? parseInt(match[0], 10) : 0;
         return Number.isFinite(parsed) ? parsed : 0;
     });
 }
