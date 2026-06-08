@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from website_utils.generate_web_data import first_present, is_unknown_version, main, record_key, to_float
+from website_utils.generate_web_data import first_present, infer_unit, is_unknown_version, main, record_key, to_float
 
 
 def write_report(db_dir, name, gpu_info, test_results, version="1.0.0"):
@@ -168,6 +168,30 @@ def test_missing_score_falls_back_to_power_metric(tmp_path):
     assert rows[0]["unit"] == "Watts"
 
 
+def test_legacy_score_without_unit_uses_known_test_unit(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(
+        db_dir,
+        "pantheon_report_legacy_atomic.json",
+        [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-UUID"}],
+        [{
+            "Test Name": "atomic_virus",
+            "GPU ID": 0,
+            "Throughput (GB/s)": 1408.96,
+            "Max Power (W)": 189.3,
+        }],
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows[0]["score"] == 1408.96
+    assert rows[0]["throughput"] == 1408.96
+    assert rows[0]["unit"] == "MAPS"
+
+
 def test_report_parser_accepts_historical_telemetry_keys(tmp_path):
     db_dir = tmp_path / "database"
     db_dir.mkdir()
@@ -254,3 +278,10 @@ def test_is_unknown_version_identifies_unpublishable_versions():
     assert is_unknown_version("unknown")
     assert is_unknown_version("")
     assert not is_unknown_version("1.0.9")
+
+
+def test_infer_unit_preserves_declared_unit_and_falls_back_to_power():
+    assert infer_unit("atomic_virus", "MAPS", 123) == "MAPS"
+    assert infer_unit("atomic_virus", None, 123) == "MAPS"
+    assert infer_unit("unknown_test", None, 123) == "Watts"
+    assert infer_unit("tensor_virus", "", "N/A") == "Watts"

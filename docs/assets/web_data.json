@@ -3984,7 +3984,7 @@
     "test": "atomic_virus",
     "version": "1.0.0",
     "score": 1408.96,
-    "unit": "GB/s",
+    "unit": "MAPS",
     "throughput": 1408.96,
     "duration": 30,
     "temp_max": 78.0,

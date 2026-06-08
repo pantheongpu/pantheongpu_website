@@ -260,6 +260,13 @@ def test_committed_web_data_matches_database_reports(tmp_path):
     assert generated_rows == committed_rows
 
 
+def test_published_atomic_results_use_maps_units():
+    rows = json.loads(read("docs/assets/web_data.json"))
+    atomic_units = {row["unit"] for row in rows if row.get("test") == "atomic_virus"}
+
+    assert atomic_units == {"MAPS"}
+
+
 def test_ci_checks_generated_data_drift_and_dependency_health():
     ci = read(".github/workflows/ci.yml")
     deploy = read(".github/workflows/deploy.yml")

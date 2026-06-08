@@ -13,6 +13,29 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DB_DIR = ROOT_DIR / "database"
 OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "web_data.json"
 
+KNOWN_TEST_UNITS = {
+    "atomic_virus": "MAPS",
+    "fp64_virus": "TFLOPS",
+    "int_virus": "TOPS",
+    "memory_bank_thrash": "GB/s",
+    "memory_cache_fracture": "GB/s",
+    "memory_pc_pingpong": "GB/s",
+    "memory_read": "GB/s",
+    "memory_read_agg": "GB/s",
+    "memory_retention_bake": "GB/s",
+    "memory_tsv_thrasher": "GB/s",
+    "memory_write": "GB/s",
+    "memory_write_agg": "GB/s",
+    "mma_virus": "TFLOPS",
+    "pcie_bandwidth": "GB/s",
+    "ras_validator": "GB/s",
+    "rt_virus": "GRays/s",
+    "scheduler": "KIPS",
+    "tlb_avalanche": "GB/s",
+    "transformer_virus": "TFLOPS",
+}
+
+
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
         if np is not None:
@@ -65,6 +88,19 @@ def is_unknown_version(value):
     return normalize(value, "").lower() in {"", "unknown", "vunknown", "n/a", "none"}
 
 
+def infer_unit(test_name, declared_unit, raw_score):
+    declared_unit = normalize(declared_unit, "")
+    if declared_unit:
+        return declared_unit
+
+    if raw_score not in (None, "", "N/A"):
+        known_unit = KNOWN_TEST_UNITS.get(normalize(test_name, "").lower())
+        if known_unit:
+            return known_unit
+
+    return "Watts"
+
+
 def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
@@ -103,14 +139,13 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
 
                     # Score Normalization
                     raw_score = test.get("Score", test.get("Throughput (GB/s)", "N/A"))
-                    unit = test.get("Unit", "GB/s")
+                    unit = infer_unit(test_name, test.get("Unit"), raw_score)
                     score_val = 0.0
 
                     if raw_score != "N/A":
                         score_val = to_float(raw_score)
                     else:
                         score_val = to_float(test.get("Max Power (W)", 0))
-                        unit = "Watts"
 
                     version_str = first_present(
                         test,
