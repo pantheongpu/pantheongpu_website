@@ -45,6 +45,8 @@ def format_size(size: int) -> str:
 
 
 def asset_format(name: str) -> str:
+    if name.endswith(".deb"):
+        return ".deb"
     if name.endswith(".tar.gz"):
         return ".tar.gz"
     if name.endswith(".zip"):
@@ -53,13 +55,27 @@ def asset_format(name: str) -> str:
 
 
 def asset_label(tag: str, name: str) -> str:
+    if name.endswith(".deb"):
+        return f"Pantheon {tag} Debian Package"
     if name.endswith(".tar.gz"):
-        return f"Pantheon {tag} TarFile"
+        return f"Pantheon {tag} Tarball"
     if name.endswith(".zip"):
-        return f"Pantheon {tag} ZipFile"
+        return f"Pantheon {tag} ZIP Bundle"
     if name == "SHA256SUMS":
         return f"Pantheon {tag} Checksums"
     return name
+
+
+def asset_sort_value(name: str) -> tuple[int, str]:
+    if name.endswith(".deb"):
+        return (0, name)
+    if name.endswith(".tar.gz"):
+        return (1, name)
+    if name.endswith(".zip"):
+        return (2, name)
+    if name == "SHA256SUMS":
+        return (3, name)
+    return (4, name)
 
 
 def release_notes(body: str) -> str:
@@ -90,7 +106,8 @@ def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bo
     for asset in release.get("assets", []):
         asset_name = asset.get("name", "")
         if not (
-            asset_name.endswith(".tar.gz")
+            asset_name.endswith(".deb")
+            or asset_name.endswith(".tar.gz")
             or asset_name.endswith(".zip")
             or asset_name == "SHA256SUMS"
         ):
@@ -100,7 +117,7 @@ def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bo
         size = local_path.stat().st_size if local_path.exists() else int(asset.get("size") or 0)
         downloadable_assets.append((asset_name, size))
 
-    downloadable_assets.sort(key=lambda item: (item[0] == "SHA256SUMS", item[0]))
+    downloadable_assets.sort(key=lambda item: asset_sort_value(item[0]))
 
     rows = []
     for asset_name, size in downloadable_assets:
@@ -139,7 +156,7 @@ def build_page(release: dict, assets_dir: Path, repo: str, releases: list[dict] 
 
     return f"""# Releases
 
-Download stable builds of the Pantheon GPU toolkit. The newest release is listed first.
+Download stable binary builds of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 

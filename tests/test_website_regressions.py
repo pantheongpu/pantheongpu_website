@@ -174,12 +174,20 @@ def test_home_quick_start_uses_valid_install_commands():
 
     assert "sudo pip install" not in index
     assert "nvidia-cuda-toolkit (replace" not in index
-    assert "python3 -m venv .venv" in index
-    assert "python -m pip install -r requirements.txt" in index
+    assert "python3 -m venv .venv" not in index
+    assert "python -m pip install -r requirements.txt" not in index
+    assert "python3 pantheon.py" not in index
+    assert "./pantheon --test all" not in index
+    assert "--platform cuda" not in index
+    assert "sudo apt-get install -y make g++" in index
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
     assert "# sudo apt-get install -y hipcc" in index
-    assert "python3 pantheon.py --test all --duration 30 --verify" in index
-    assert "./pantheon --test all --duration 30 --verify" in index
+    assert "sudo apt install ./pantheongpu_<version>_amd64.deb" in index
+    assert "sudo apt install ./packages/pantheongpu_<version>_amd64.deb" in index
+    assert "pantheon --test baseline_metrics --duration 10" in index
+    assert "pantheon --test fp64_virus --duration 30 --gpu 0" in index
+    assert "pantheon-tuning --iterations 8 --test fp64_virus --duration 30 --gpu 0 --objective max-power" in index
+    assert "Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime." in index
 
 
 def test_mkdocs_points_to_pantheongpu_repository():
@@ -283,12 +291,17 @@ def test_ci_checks_generated_data_drift_and_dependency_health():
     assert "git diff --exit-code -- docs/assets/web_data.json" in mirror
 
 
-def test_mirror_release_workflow_is_manual_and_validates_assets():
+def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validates_assets():
     workflow = read(".github/workflows/mirror-pantheon-release.yml")
 
     assert "workflow_dispatch:" in workflow
+    assert "repository_dispatch:" in workflow
+    assert "types: [pantheongpu_released]" in workflow
     assert "actions/checkout@v4" in workflow
     assert "ref: ${{ github.ref_name }}" in workflow
+    assert "Resolve workflow options" in workflow
+    assert "github.event.client_payload.tag" in workflow
+    assert "github.event.inputs.tag" in workflow
     assert "saqibkh/pantheongpu" in workflow
     assert "repos/saqibkh/pantheongpu/releases/latest" in workflow
     assert "repos/saqibkh/pantheongpu/releases/tags/" in workflow
@@ -298,13 +311,17 @@ def test_mirror_release_workflow_is_manual_and_validates_assets():
     assert "GH_REPO: ${{ github.repository }}" in workflow
     assert "Check source repository token access" in workflow
     assert "Scope: repo" in workflow
+    assert ".deb$" in workflow
+    assert "Source release is missing a .deb asset." in workflow
     assert "Source release is missing a .tar.gz asset." in workflow
     assert "Source release is missing a .zip asset." in workflow
+    assert 'dpkg-deb --info "${package}"' in workflow
     assert 'tar -tzf "${archive}"' in workflow
     assert 'zip -T "${archive}"' in workflow
     assert "overwrite" in workflow
     assert "Check mirrored release status" in workflow
     assert "exists=true" in workflow
+    assert "steps.options.outputs.overwrite == 'true'" in workflow
     assert "steps.mirrored.outputs.exists != 'true'" in workflow
     assert "gh release create" in workflow
     assert "Fetch source release list" in workflow
@@ -322,9 +339,11 @@ def test_release_page_generator_is_available():
     assert "def build_page" in script
     assert "docs/release.md" not in script
     assert "def build_release_section" in script
+    assert "def asset_sort_value" in script
     assert "def build_version_nav" not in script
     assert "def release_anchor" not in script
     assert "releases-json" in script
+    assert 'name.endswith(".deb")' in script
 
 
 def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
@@ -335,6 +354,7 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
 
     assets_dir = tmp_path / "assets"
     assets_dir.mkdir()
+    (assets_dir / "pantheongpu_1.0.8_amd64.deb").write_bytes(b"deb")
     (assets_dir / "pantheon-1.0.8.tar.gz").write_bytes(b"tar")
     (assets_dir / "pantheon-1.0.8.zip").write_bytes(b"zip")
     release = {
@@ -343,6 +363,7 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
         "published_at": "2026-05-21T05:00:02Z",
         "body": "## What's Changed\n* Fixed releases",
         "assets": [
+            {"name": "pantheongpu_1.0.8_amd64.deb", "size": 999},
             {"name": "pantheon-1.0.8.tar.gz", "size": 999},
             {"name": "pantheon-1.0.8.zip", "size": 999},
         ],
@@ -373,8 +394,13 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
     assert page.index("## Pantheon v1.0.8 (Latest)") < page.index("## Pantheon v1.0.7")
     assert "**Release Date:** May 21, 2026" in page
     assert "#### What's Changed" in page
+    assert "Pantheon v1.0.8 Debian Package" in page
+    assert "pantheongpu_1.0.8_amd64.deb" in page
     assert "pantheon-1.0.8.tar.gz" in page
     assert "pantheon-1.0.8.zip" in page
+    assert "Tarball" in page
+    assert "ZIP Bundle" in page
+    assert page.index("pantheongpu_1.0.8_amd64.deb") < page.index("pantheon-1.0.8.tar.gz")
     assert "pantheon-1.0.7.tar.gz" in page
     assert "pantheon-1.0.7.zip" in page
     assert "2.0 KB" in page
@@ -409,6 +435,9 @@ def test_release_page_uses_builtin_table_of_contents():
 
     assert "## Pantheon v1.0.8 (Latest)" in release
     assert "## v1.0.7" in release
+    assert "Download stable binary builds" in release
+    assert "TarFile" not in release
+    assert "ZipFile" not in release
     assert 'class="release-version-nav"' not in release
     assert ".release-page" not in css
     assert ".release-version-nav" not in css
@@ -419,6 +448,9 @@ def test_readme_documents_release_mirroring_secret():
 
     assert "Mirror Pantheon Releases" in readme
     assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
+    assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
+    assert "`*.deb`" in readme
+    assert "repository dispatch" in readme
     assert "saqibkh/pantheongpu" in readme
     assert "overwrite" in readme
 

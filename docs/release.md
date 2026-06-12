@@ -1,6 +1,6 @@
 # Releases
 
-Download stable builds of the Pantheon GPU toolkit. The newest release is listed first.
+Download stable binary builds of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 
@@ -22,8 +22,8 @@ Download stable builds of the Pantheon GPU toolkit. The newest release is listed
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.8 TarFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.tar.gz) | `.tar.gz` | 181.1 KB |
-| [Pantheon v1.0.8 ZipFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.zip) | `.zip` | 247.6 KB |
+| [Pantheon v1.0.8 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.tar.gz) | `.tar.gz` | 181.1 KB |
+| [Pantheon v1.0.8 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.zip) | `.zip` | 247.6 KB |
 | [Pantheon v1.0.8 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/SHA256SUMS) | `SHA256SUMS` | 173 B |
 
 ---
@@ -43,6 +43,5 @@ This update introduces critical diagnostic enhancements for memory integrity and
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.7 TarFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.tar.gz) | `.tar.gz` | 131.2 MB |
-| [Pantheon v1.0.7 ZipFile](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.zip) | `.zip` | 131.2 MB |
-
+| [Pantheon v1.0.7 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.tar.gz) | `.tar.gz` | 131.2 MB |
+| [Pantheon v1.0.7 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.zip) | `.zip` | 131.2 MB |

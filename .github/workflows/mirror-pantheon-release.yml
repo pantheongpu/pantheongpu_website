@@ -12,6 +12,8 @@ on:
         required: false
         default: false
         type: boolean
+  repository_dispatch:
+    types: [pantheongpu_released]
 
 permissions:
   contents: write
@@ -24,6 +26,23 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
+
+      - name: Resolve workflow options
+        id: options
+        env:
+          DISPATCH_TAG: ${{ github.event.client_payload.tag }}
+          MANUAL_TAG: ${{ github.event.inputs.tag }}
+          MANUAL_OVERWRITE: ${{ github.event.inputs.overwrite }}
+        run: |
+          set -euo pipefail
+
+          tag="${MANUAL_TAG:-${DISPATCH_TAG:-}}"
+          overwrite="${MANUAL_OVERWRITE:-false}"
+
+          {
+            echo "tag=${tag}"
+            echo "overwrite=${overwrite}"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Check source repository token access
         env:
@@ -50,7 +69,7 @@ jobs:
         id: source
         env:
           GH_TOKEN: ${{ secrets.PANTHEON_SOURCE_REPO_TOKEN || github.token }}
-          INPUT_TAG: ${{ inputs.tag }}
+          INPUT_TAG: ${{ steps.options.outputs.tag }}
         run: |
           set -euo pipefail
 
@@ -89,7 +108,7 @@ jobs:
 
           jq -r '
             .assets[]
-            | select(.name | test("(\\.tar\\.gz$)|(\\.zip$)|(^SHA256SUMS$)"))
+            | select(.name | test("(\\.deb$)|(\\.tar\\.gz$)|(\\.zip$)|(^SHA256SUMS$)"))
             | [.id, .name]
             | @tsv
           ' source-release.json | while IFS=$'\t' read -r asset_id asset_name; do
@@ -116,8 +135,14 @@ jobs:
         run: |
           set -euo pipefail
 
+          deb_count="$(find release-assets -maxdepth 1 -name '*.deb' | wc -l)"
           tar_count="$(find release-assets -maxdepth 1 -name '*.tar.gz' | wc -l)"
           zip_count="$(find release-assets -maxdepth 1 -name '*.zip' | wc -l)"
+
+          if [ "${deb_count}" -lt 1 ]; then
+            echo "Source release is missing a .deb asset."
+            exit 1
+          fi
 
           if [ "${tar_count}" -lt 1 ]; then
             echo "Source release is missing a .tar.gz asset."
@@ -128,6 +153,10 @@ jobs:
             echo "Source release is missing a .zip asset."
             exit 1
           fi
+
+          for package in release-assets/*.deb; do
+            dpkg-deb --info "${package}" >/dev/null
+          done
 
           for archive in release-assets/*.tar.gz; do
             tar -tzf "${archive}" >/dev/null
@@ -150,7 +179,7 @@ jobs:
           fi
 
       - name: Delete existing mirrored release
-        if: ${{ inputs.overwrite && steps.mirrored.outputs.exists == 'true' }}
+        if: ${{ steps.options.outputs.overwrite == 'true' && steps.mirrored.outputs.exists == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -158,7 +187,7 @@ jobs:
           gh release delete "${{ steps.source.outputs.tag }}" --yes --cleanup-tag
 
       - name: Create mirrored website release
-        if: ${{ inputs.overwrite || steps.mirrored.outputs.exists != 'true' }}
+        if: ${{ steps.options.outputs.overwrite == 'true' || steps.mirrored.outputs.exists != 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}

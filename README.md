@@ -84,9 +84,10 @@ git add docs/assets/web_data.json
 
 ## Mirror Pantheon Releases
 
-The `Mirror Pantheon Release` workflow is manual-only. Use it when the main
-`saqibkh/pantheongpu` repo has a GitHub Release that should be copied into this
-website repo's Releases page.
+The `Mirror Pantheon Release` workflow copies binary release artifacts from the
+main `saqibkh/pantheongpu` repo into this website repo's GitHub Releases page.
+It can run manually, and it also listens for the `pantheongpu_released`
+repository dispatch event emitted by the Pantheon release workflow.
 
 To run it:
 
@@ -100,6 +101,7 @@ To run it:
 
 The workflow copies release notes plus these source release assets:
 
+- `*.deb`
 - `*.tar.gz`
 - `*.zip`
 - `SHA256SUMS`, when present
@@ -120,6 +122,10 @@ The token must belong to a GitHub account that can read `saqibkh/pantheongpu`.
 A classic personal access token with `repo` scope is the most reliable option.
 For a fine-grained token, grant repository access to `saqibkh/pantheongpu` and
 set **Contents** to **Read-only**.
+
+For automatic mirroring from the source repository, configure the
+`PANTHEON_WEBSITE_RELEASE_TOKEN` secret in `saqibkh/pantheongpu` with permission
+to create repository dispatch events in `saqibkh/pantheongpu_website`.
 
 ## Deployment
 

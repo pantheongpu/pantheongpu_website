@@ -67,9 +67,9 @@ Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate
 ## Quick Start
 
 ```bash
-# Ubuntu/Debian system packages
+# Ubuntu/Debian runtime prerequisites
 sudo apt-get update
-sudo apt-get install -y python3-venv python3-tk python3-pip
+sudo apt-get install -y make g++
 
 # Install one GPU compiler stack:
 # NVIDIA CUDA:
@@ -77,15 +77,18 @@ sudo apt-get install -y nvidia-cuda-toolkit
 # AMD ROCm/HIP:
 # sudo apt-get install -y hipcc
 
-# Source checkout only: install Python dependencies in a virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+# Choose one install path. Direct Debian package:
+sudo apt install ./pantheongpu_<version>_amd64.deb
 
-# Source checkout: run the Python entry point
-python3 pantheon.py --test all --duration 30 --verify
+# Or from the release bundle:
+tar -xzf pantheongpu_<version>_amd64.tar.gz
+cd pantheongpu_<version>_amd64
+sudo apt install ./packages/pantheongpu_<version>_amd64.deb
 
-# Release archive: run the bundled executable instead
-./pantheon --test all --duration 30 --verify
+# Run installed commands
+pantheon --test baseline_metrics --duration 10
+pantheon --test fp64_virus --duration 30 --gpu 0
+pantheon-tuning --iterations 8 --test fp64_virus --duration 30 --gpu 0 --objective max-power
 ```
+
+Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime. For normal installed use, run the `pantheon` and `pantheon-tuning` commands directly from your shell.
