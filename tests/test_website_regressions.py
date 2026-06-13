@@ -198,6 +198,19 @@ def test_mkdocs_points_to_pantheongpu_repository():
     assert "saqibkh/pantheon\n" not in mkdocs
 
 
+def test_site_declares_compact_favicon_assets():
+    mkdocs = read("mkdocs.yml")
+    favicon = ROOT / "docs/assets/favicon.ico"
+    favicon_png = ROOT / "docs/assets/favicon.png"
+
+    assert "favicon: assets/favicon.ico" in mkdocs
+    assert favicon.exists()
+    assert favicon.read_bytes()[:4] == b"\x00\x00\x01\x00"
+    assert favicon.stat().st_size < 50_000
+    assert favicon_png.exists()
+    assert favicon_png.stat().st_size < 50_000
+
+
 def test_home_logo_uses_uncropped_responsive_class():
     index = read("docs/index.md")
     css = read("docs/css/extra.css")
