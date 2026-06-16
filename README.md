@@ -109,7 +109,14 @@ The workflow copies release notes plus these source release assets:
 After mirroring the GitHub Release, the workflow also regenerates
 `docs/release.md`, commits that page update back to the selected branch, runs
 the website checks, and deploys the MkDocs site to GitHub Pages. Run the
-workflow from `main` when the public site should be updated immediately.
+workflow from `main` when the public site should be updated immediately. The
+release page is generated from releases that exist in this public website repo,
+so private source releases that were not mirrored do not produce broken public
+download links.
+
+Before publishing, the workflow validates that binary bundles do not contain
+private source repository paths such as `pantheon.py`, `tuning.py`, `monitor.py`,
+`kernels/`, `tests/`, `website_utils/`, or `.git/`.
 
 If `saqibkh/pantheongpu` is private, add this repository secret under
 **Settings -> Secrets and variables -> Actions**:

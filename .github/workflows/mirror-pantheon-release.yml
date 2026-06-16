@@ -121,16 +121,6 @@ jobs:
 
           find release-assets -maxdepth 1 -type f -print
 
-      - name: Fetch source release list
-        env:
-          GH_TOKEN: ${{ secrets.PANTHEON_SOURCE_REPO_TOKEN || github.token }}
-        run: |
-          set -euo pipefail
-
-          gh api --paginate "repos/saqibkh/pantheongpu/releases" --jq '.[]' \
-            | jq -s 'sort_by(.published_at // .created_at // "") | reverse' \
-            > source-releases.json
-
       - name: Validate required assets
         run: |
           set -euo pipefail
@@ -165,6 +155,39 @@ jobs:
           for archive in release-assets/*.zip; do
             zip -T "${archive}" >/dev/null
           done
+
+      - name: Reject source repository files in release bundles
+        run: |
+          set -euo pipefail
+
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          import tarfile
+          import zipfile
+
+          blocked_exact = {"pantheon.py", "tuning.py", "monitor.py"}
+          blocked_dirs = {".git", "kernels", "tests", "website_utils"}
+
+          def is_blocked(name: str) -> bool:
+              parts = name.replace("\\", "/").lstrip("./").split("/")
+              return any(part in blocked_exact or part in blocked_dirs for part in parts)
+
+          bad = []
+          for archive in Path("release-assets").glob("*.tar.gz"):
+              with tarfile.open(archive, "r:gz") as handle:
+                  bad.extend(f"{archive.name}:{member.name}" for member in handle.getmembers() if is_blocked(member.name))
+
+          for archive in Path("release-assets").glob("*.zip"):
+              with zipfile.ZipFile(archive) as handle:
+                  bad.extend(f"{archive.name}:{name}" for name in handle.namelist() if is_blocked(name))
+
+          if bad:
+              print("Release bundles include files from the private source repository:")
+              for name in bad:
+                  print(f"- {name}")
+              sys.exit(1)
+          PY
 
       - name: Check mirrored release status
         id: mirrored
@@ -212,12 +235,22 @@ jobs:
             --notes-file release-notes.md \
             "${args[@]}"
 
+      - name: Fetch website release list
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[]' \
+            | jq -s 'sort_by(.published_at // .created_at // "") | reverse' \
+            > website-releases.json
+
       - name: Update website release page
         run: |
           set -euo pipefail
           python website_utils/update_release_page.py \
             --release-json source-release.json \
-            --releases-json source-releases.json \
+            --releases-json website-releases.json \
             --assets-dir release-assets \
             --output docs/release.md \
             --repo "${GITHUB_REPOSITORY}"

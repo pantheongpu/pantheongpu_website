@@ -331,16 +331,22 @@ def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validate
     assert 'dpkg-deb --info "${package}"' in workflow
     assert 'tar -tzf "${archive}"' in workflow
     assert 'zip -T "${archive}"' in workflow
+    assert "Reject source repository files in release bundles" in workflow
+    assert 'blocked_exact = {"pantheon.py", "tuning.py", "monitor.py"}' in workflow
+    assert 'blocked_dirs = {".git", "kernels", "tests", "website_utils"}' in workflow
+    assert "Release bundles include files from the private source repository:" in workflow
     assert "overwrite" in workflow
     assert "Check mirrored release status" in workflow
     assert "exists=true" in workflow
     assert "steps.options.outputs.overwrite == 'true'" in workflow
     assert "steps.mirrored.outputs.exists != 'true'" in workflow
     assert "gh release create" in workflow
-    assert "Fetch source release list" in workflow
-    assert "source-releases.json" in workflow
+    assert "Fetch website release list" in workflow
+    assert 'repos/${GITHUB_REPOSITORY}/releases' in workflow
+    assert "website-releases.json" in workflow
+    assert "source-releases.json" not in workflow
     assert "website_utils/update_release_page.py" in workflow
-    assert "--releases-json source-releases.json" in workflow
+    assert "--releases-json website-releases.json" in workflow
     assert "git add docs/release.md" in workflow
     assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
     assert "mkdocs gh-deploy --force" in workflow
@@ -464,6 +470,8 @@ def test_readme_documents_release_mirroring_secret():
     assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
     assert "`*.deb`" in readme
     assert "repository dispatch" in readme
+    assert "private source repository paths" in readme
+    assert "public website repo" in readme
     assert "saqibkh/pantheongpu" in readme
     assert "overwrite" in readme
 
