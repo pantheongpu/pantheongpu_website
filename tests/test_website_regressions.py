@@ -382,7 +382,7 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
         "published_at": "2026-05-21T05:00:02Z",
         "body": "## What's Changed\n* Fixed releases",
         "assets": [
-            {"name": "pantheongpu_1.0.8_amd64.deb", "size": 999},
+            {"name": "pantheongpu_1.0.8_amd64.deb", "size": 12345},
             {"name": "pantheon-1.0.8.tar.gz", "size": 999},
             {"name": "pantheon-1.0.8.zip", "size": 999},
         ],
@@ -415,6 +415,7 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
     assert "#### What's Changed" in page
     assert "Pantheon v1.0.8 Debian Package" in page
     assert "pantheongpu_1.0.8_amd64.deb" in page
+    assert "12.1 KB" in page
     assert "pantheon-1.0.8.tar.gz" in page
     assert "pantheon-1.0.8.zip" in page
     assert "Tarball" in page
@@ -452,7 +453,12 @@ def test_release_page_uses_builtin_table_of_contents():
     release = read("docs/release.md")
     css = read("docs/css/extra.css")
 
-    assert "## Pantheon v1.0.8 (Latest)" in release
+    assert "## Pantheon v1.0.10 (Latest)" in release
+    assert "Pantheon v1.0.10 Debian Package" in release
+    assert "pantheongpu_1.0.10_amd64.tar.gz" in release
+    assert "## Pantheon v1.0.8" in release
+    assert "## Pantheon v1.0.8 (Latest)" not in release
+    assert "v1.0.9" not in release
     assert "## v1.0.7" in release
     assert "Download stable binary builds" in release
     assert "TarFile" not in release

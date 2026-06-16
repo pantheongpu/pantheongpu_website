@@ -113,8 +113,10 @@ def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bo
         ):
             continue
 
+        size = int(asset.get("size") or 0)
         local_path = assets_dir / asset_name
-        size = local_path.stat().st_size if local_path.exists() else int(asset.get("size") or 0)
+        if not size and local_path.exists():
+            size = local_path.stat().st_size
         downloadable_assets.append((asset_name, size))
 
     downloadable_assets.sort(key=lambda item: asset_sort_value(item[0]))
