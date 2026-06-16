@@ -67,6 +67,8 @@ Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate
 ## Quick Start
 
 ```bash
+VERSION=1.0.10
+
 # Ubuntu/Debian runtime prerequisites
 sudo apt-get update
 sudo apt-get install -y make g++
@@ -78,17 +80,20 @@ sudo apt-get install -y nvidia-cuda-toolkit
 # sudo apt-get install -y hipcc
 
 # Choose one install path. Direct Debian package:
-sudo apt install ./pantheongpu_<version>_amd64.deb
+wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
+sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 
 # Or from the release bundle:
-tar -xzf pantheongpu_<version>_amd64.tar.gz
-cd pantheongpu_<version>_amd64
-sudo apt install ./packages/pantheongpu_<version>_amd64.deb
+wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz"
+tar -xzf "pantheongpu_${VERSION}_amd64.tar.gz"
+cd "pantheongpu_${VERSION}_amd64"
+sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"
 
 # Run installed commands
 pantheon --test baseline_metrics --duration 10
 pantheon --test fp64_virus --duration 30 --gpu 0
-pantheon-tuning --iterations 8 --test fp64_virus --duration 30 --gpu 0 --objective max-power
 ```
 
-Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime. For normal installed use, run the `pantheon` and `pantheon-tuning` commands directly from your shell.
+Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime. For normal installed use, run the `pantheon` command directly from your shell and do not pass `--platform cuda`.
+
+The release bundle also includes `install.sh` for RHEL-family and other Linux distributions that cannot install the Debian package directly. First-run workload builds are cached under `/opt/pantheongpu/cache/builds/`; set `PANTHEON_BUILD_CACHE_DIR` to use a user-writable cache instead.

@@ -78,6 +78,6 @@ Running isolated power viruses exposes the reality of the cooling solutions requ
 
 If you only look at high-level AI benchmarks, the lines between consumer flagships and enterprise servers start to blur. But when you dive into the low-level silicon telemetry, the segregation is absolute. Consumer hardware is artificially bottlenecked in precision and memory but reigns supreme in fixed-function graphics. Meanwhile, enterprise hardware is a physically distinct beast: an unfused, memory-bandwidth monster designed to run at 100% capacity under liquid cooling for years.
 
-If you want to run these diagnostics on your own system, or just see where your local hardware breaks, Pantheon is fully open-source.
+If you want to run these diagnostics on your own system, or just see where your local hardware breaks, Pantheon publishes public binary releases.
 
 [Read the documentation and run the suite](https://pantheongpu.com/)

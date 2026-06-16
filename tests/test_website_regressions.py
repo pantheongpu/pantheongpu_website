@@ -104,6 +104,8 @@ def test_research_reports_page_is_available():
     assert article.count('class="report-chart-svg"') >= 3
     assert "FP64 throughput exposes the enterprise precision unlock." in article
     assert "FP64 Throughput (TFLOPS)" in article
+    assert "publishes public binary releases" in article
+    assert "fully open-source" not in article
     assert "## The Takeaway" in article
     assert "https://pantheongpu.com/" in article
     assert "# Tracing the Tensor Lineage: How Ampere, Hopper, and Blackwell Scale at the Silicon Level" in tensor_article
@@ -177,17 +179,22 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "python3 -m venv .venv" not in index
     assert "python -m pip install -r requirements.txt" not in index
     assert "python3 pantheon.py" not in index
+    assert "pantheon-tuning" not in index
     assert "./pantheon --test all" not in index
-    assert "--platform cuda" not in index
     assert "sudo apt-get install -y make g++" in index
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
     assert "# sudo apt-get install -y hipcc" in index
-    assert "sudo apt install ./pantheongpu_<version>_amd64.deb" in index
-    assert "sudo apt install ./packages/pantheongpu_<version>_amd64.deb" in index
+    assert "VERSION=1.0.10" in index
+    assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in index
+    assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz" in index
+    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in index
+    assert 'sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"' in index
     assert "pantheon --test baseline_metrics --duration 10" in index
     assert "pantheon --test fp64_virus --duration 30 --gpu 0" in index
-    assert "pantheon-tuning --iterations 8 --test fp64_virus --duration 30 --gpu 0 --objective max-power" in index
     assert "Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime." in index
+    assert "do not pass `--platform cuda`" in index
+    assert "install.sh" in index
+    assert "PANTHEON_BUILD_CACHE_DIR" in index
 
 
 def test_mkdocs_points_to_pantheongpu_repository():
@@ -474,6 +481,11 @@ def test_readme_documents_release_mirroring_secret():
     assert "Mirror Pantheon Releases" in readme
     assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
     assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
+    assert "Public Binary Downloads" in readme
+    assert "VERSION=1.0.10" in readme
+    assert "pantheon --test baseline_metrics --duration 10" in readme
+    assert "tag like `v1.0.10`" in readme
+    assert "tag like `v1.0.8`" not in readme
     assert "`*.deb`" in readme
     assert "repository dispatch" in readme
     assert "private source repository paths" in readme
