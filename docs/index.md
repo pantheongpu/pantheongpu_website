@@ -67,7 +67,7 @@ Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate
 ## Quick Start
 
 ```bash
-VERSION=1.0.10
+VERSION=1.0.12
 
 # Ubuntu/Debian runtime prerequisites
 sudo apt-get update
