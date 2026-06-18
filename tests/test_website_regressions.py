@@ -1,5 +1,6 @@
 import json
 import importlib.util
+import re
 from pathlib import Path
 
 from website_utils.generate_web_data import main as generate_web_data
@@ -496,9 +497,14 @@ def test_release_page_uses_builtin_table_of_contents():
     release = read("docs/release.md")
     css = read("docs/css/extra.css")
 
-    assert "## Pantheon v1.0.12 (Latest)" in release
-    assert "Pantheon v1.0.12 Debian Package" in release
-    assert "pantheongpu_1.0.12_amd64.tar.gz" in release
+    latest = re.search(r"^## Pantheon (v[\d.]+) \(Latest\)$", release, re.MULTILINE)
+
+    assert latest is not None
+    latest_tag = latest.group(1)
+    latest_version = latest_tag.removeprefix("v")
+    assert release.count("(Latest)") == 1
+    assert f"Pantheon {latest_tag} Debian Package" in release
+    assert f"pantheongpu_{latest_version}_amd64.tar.gz" in release
     assert "## Pantheon v1.0.8" in release
     assert "## Pantheon v1.0.8 (Latest)" not in release
     assert "v1.0.9" not in release
