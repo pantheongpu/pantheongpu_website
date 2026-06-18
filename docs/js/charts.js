@@ -1,4 +1,5 @@
 let benchmarkCharts = {};
+let lastChartData = [];
 const BENCHMARK_CHARTS = [
     { testName: "memory_read_agg", elementId: "chart-memory-read", title: "Memory Read Bandwidth", unit: "GB/s", color: "#2563eb" },
     { testName: "memory_write_agg", elementId: "chart-memory", title: "Memory Write Bandwidth", unit: "GB/s", color: "#0f9f6e" },
@@ -37,6 +38,7 @@ function getChartAssetUrl(fileName) {
 }
 
 function renderBenchmarkCharts(data) {
+    lastChartData = data;
     BENCHMARK_CHARTS.forEach(chart => {
         renderChart(data, chart);
     });
@@ -59,7 +61,7 @@ function formatChartValue(value) {
 }
 
 function getChartTheme() {
-    const scheme = document.documentElement.getAttribute("data-md-color-scheme");
+    const scheme = document.body.getAttribute("data-md-color-scheme");
     const dark = scheme !== "default";
     return {
         mode: dark ? "dark" : "light",
@@ -95,6 +97,7 @@ function renderChart(rawData, chartConfig) {
     const seriesData = sortedScores.map(([, score]) => Number(score.toFixed(2)));
     const unit = expectedUnit || "";
     const theme = getChartTheme();
+    const compact = window.matchMedia("(max-width: 600px)").matches;
 
     if (benchmarkCharts[elementId]) {
         benchmarkCharts[elementId].destroy();
@@ -103,17 +106,21 @@ function renderChart(rawData, chartConfig) {
 
     if (categories.length === 0) {
         if (container) container.classList.add("chart-container--empty");
+        element.setAttribute("role", "status");
+        element.removeAttribute("aria-label");
         element.innerHTML = `<p class="chart-empty">No ${title.toLowerCase()} data matches the current filters.</p>`;
         return;
     }
 
     if (container) container.classList.remove("chart-container--empty");
+    element.setAttribute("role", "img");
+    element.setAttribute("aria-label", `${title}. Best reported result per GPU in ${unit}.`);
     element.innerHTML = "";
 
     const options = {
         chart: {
             type: 'bar',
-            height: Math.max(320, categories.length * 34 + 96),
+            height: Math.max(320, categories.length * (compact ? 30 : 34) + (compact ? 84 : 96)),
             background: 'transparent',
             foreColor: theme.foreground,
             fontFamily: 'Roboto, sans-serif',
@@ -136,7 +143,7 @@ function renderChart(rawData, chartConfig) {
             textAnchor: 'start',
             style: {
                 colors: [theme.foreground],
-                fontSize: '12px',
+                fontSize: compact ? '10px' : '12px',
                 fontWeight: 700,
             },
         },
@@ -151,8 +158,12 @@ function renderChart(rawData, chartConfig) {
         },
         yaxis: {
             labels: {
-                maxWidth: 180,
-                style: { colors: theme.foreground, fontWeight: 600 },
+                maxWidth: compact ? 112 : 180,
+                style: {
+                    colors: theme.foreground,
+                    fontSize: compact ? '10px' : '12px',
+                    fontWeight: 600,
+                },
             }
         },
         title: {
@@ -161,7 +172,7 @@ function renderChart(rawData, chartConfig) {
             margin: 18,
             style: {
                 color: theme.foreground,
-                fontSize: '17px',
+                fontSize: compact ? '15px' : '17px',
                 fontWeight: 800,
             },
         },
@@ -188,7 +199,7 @@ function renderChart(rawData, chartConfig) {
             strokeDashArray: 4,
             xaxis: { lines: { show: true } },
             yaxis: { lines: { show: false } },
-            padding: { top: 0, right: 96, bottom: 0, left: 4 },
+            padding: { top: 0, right: compact ? 52 : 96, bottom: 0, left: compact ? 0 : 4 },
         },
         tooltip: {
             theme: theme.tooltipTheme,
@@ -208,3 +219,22 @@ function renderChart(rawData, chartConfig) {
 }
 
 window.renderBenchmarkCharts = renderBenchmarkCharts;
+
+let chartResizeTimer;
+window.addEventListener("resize", () => {
+    if (!lastChartData.length) return;
+    window.clearTimeout(chartResizeTimer);
+    chartResizeTimer = window.setTimeout(() => renderBenchmarkCharts(lastChartData), 150);
+});
+
+const chartThemeObserver = new MutationObserver(mutations => {
+    if (!lastChartData.length) return;
+    if (mutations.some(mutation => mutation.attributeName === "data-md-color-scheme")) {
+        renderBenchmarkCharts(lastChartData);
+    }
+});
+
+chartThemeObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ["data-md-color-scheme"],
+});

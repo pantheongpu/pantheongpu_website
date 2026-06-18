@@ -66,34 +66,71 @@ Pantheon is a cross-platform (CUDA/ROCm) stress testing tool designed to isolate
 
 ## Quick Start
 
-```bash
-VERSION=1.0.12
+The Debian package is the simplest installation path for Ubuntu and Debian systems.
 
-# Ubuntu/Debian runtime prerequisites
+### 1. Install prerequisites
+
+Install the basic build tools:
+
+```bash
 sudo apt-get update
 sudo apt-get install -y make g++
+```
 
-# Install one GPU compiler stack:
-# NVIDIA CUDA:
-sudo apt-get install -y nvidia-cuda-toolkit
-# AMD ROCm/HIP:
-# sudo apt-get install -y hipcc
+Then install the compiler for your GPU platform. You only need one:
 
-# Choose one install path. Direct Debian package:
+=== "NVIDIA CUDA"
+
+    ```bash
+    sudo apt-get install -y nvidia-cuda-toolkit
+    ```
+
+=== "AMD ROCm/HIP"
+
+    ```bash
+    sudo apt-get install -y hipcc
+    ```
+
+### 2. Install Pantheon
+
+Download and install the latest Debian package:
+
+```bash
+VERSION=1.0.12
 wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
+```
 
-# Or from the release bundle:
-wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz"
-tar -xzf "pantheongpu_${VERSION}_amd64.tar.gz"
-cd "pantheongpu_${VERSION}_amd64"
-sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"
+### 3. Verify the installation
 
-# Run installed commands
+Run a short hardware inventory test:
+
+```bash
 pantheon --test baseline_metrics --duration 10
+```
+
+Then run a targeted stress test on GPU 0:
+
+```bash
 pantheon --test fp64_virus --duration 30 --gpu 0
 ```
 
-Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime. For normal installed use, run the `pantheon` command directly from your shell and do not pass `--platform cuda`.
+!!! note
+    Pantheon automatically detects CUDA, ROCm/HIP, or mock mode. Run the `pantheon`
+    command directly; you do not need to pass `--platform cuda`.
 
-The release bundle also includes `install.sh` for RHEL-family and other Linux distributions that cannot install the Debian package directly. First-run workload builds are cached under `/opt/pantheongpu/cache/builds/`; set `PANTHEON_BUILD_CACHE_DIR` to use a user-writable cache instead.
+??? info "Alternative: install from the release bundle"
+    The release bundle contains the Debian package and an `install.sh` helper for
+    RHEL-family and other Linux distributions.
+
+    ```bash
+    VERSION=1.0.12
+    wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz"
+    tar -xzf "pantheongpu_${VERSION}_amd64.tar.gz"
+    cd "pantheongpu_${VERSION}_amd64"
+    sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"
+    ```
+
+!!! tip "Build cache"
+    First-run workload builds are cached under `/opt/pantheongpu/cache/builds/`.
+    Set `PANTHEON_BUILD_CACHE_DIR` if you need a user-writable cache directory.

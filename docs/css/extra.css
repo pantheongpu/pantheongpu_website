@@ -316,6 +316,44 @@ body:has(.report-byline) .md-content__inner {
   -webkit-overflow-scrolling: touch;
 }
 
+.benchmark-status {
+  min-height: 1.4em;
+  margin: -8px 0 10px;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.82rem;
+}
+
+.benchmark-status--error {
+  color: var(--pantheon-temp-crit);
+  font-weight: 700;
+}
+
+.benchmark-sort-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.benchmark-sort-button:focus-visible {
+  outline: 2px solid var(--pantheon-neon-blue);
+  outline-offset: 3px;
+}
+
+.benchmark-sort-indicator {
+  flex: 0 0 auto;
+}
+
 /* 2. Optimize Table for Wide Screens */
 #benchmarkTable {
   width: max-content;
@@ -367,7 +405,7 @@ body:has(.report-byline) .md-content__inner {
   }
 
   .chart-container {
-    padding: 16px;
+    padding: 12px;
   }
 
   .report-figure {

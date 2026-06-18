@@ -151,8 +151,13 @@ def test_benchmark_charts_follow_table_filters_and_expected_units():
     assert "formatter: value => `${formatChartValue(value)}${unit ? ` ${unit}` : \"\"}`" in charts_js
     assert "offsetX: 8" in charts_js
     assert "textAnchor: 'start'" in charts_js
-    assert "right: 96" in charts_js
     assert "background: {" not in charts_js
+    assert 'const compact = window.matchMedia("(max-width: 600px)").matches;' in charts_js
+    assert "maxWidth: compact ? 112 : 180" in charts_js
+    assert "right: compact ? 52 : 96" in charts_js
+    assert "chartThemeObserver" in charts_js
+    assert 'document.body.getAttribute("data-md-color-scheme")' in charts_js
+    assert "chartThemeObserver.observe(document.body" in charts_js
 
 
 def test_throughput_formatting_uses_row_unit_not_hardcoded_bandwidth():
@@ -173,6 +178,7 @@ def test_export_button_is_labeled_as_csv():
 
 def test_home_quick_start_uses_valid_install_commands():
     index = read("docs/index.md")
+    mkdocs = read("mkdocs.yml")
 
     assert "sudo pip install" not in index
     assert "nvidia-cuda-toolkit (replace" not in index
@@ -181,9 +187,17 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "python3 pantheon.py" not in index
     assert "pantheon-tuning" not in index
     assert "./pantheon --test all" not in index
+    assert "### 1. Install prerequisites" in index
+    assert "### 2. Install Pantheon" in index
+    assert "### 3. Verify the installation" in index
+    assert '=== "NVIDIA CUDA"' in index
+    assert '=== "AMD ROCm/HIP"' in index
+    assert "  - pymdownx.tabbed:" in mkdocs
+    assert "      alternate_style: true" in mkdocs
+    assert '??? info "Alternative: install from the release bundle"' in index
     assert "sudo apt-get install -y make g++" in index
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
-    assert "# sudo apt-get install -y hipcc" in index
+    assert "sudo apt-get install -y hipcc" in index
     assert "VERSION=1.0.12" in index
     assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in index
     assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz" in index
@@ -191,8 +205,8 @@ def test_home_quick_start_uses_valid_install_commands():
     assert 'sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"' in index
     assert "pantheon --test baseline_metrics --duration 10" in index
     assert "pantheon --test fp64_virus --duration 30 --gpu 0" in index
-    assert "Pantheon auto-detects CUDA, ROCm/HIP, or mock mode at runtime." in index
-    assert "do not pass `--platform cuda`" in index
+    assert "Pantheon automatically detects CUDA, ROCm/HIP, or mock mode." in index
+    assert "you do not need to pass `--platform cuda`" in index
     assert "install.sh" in index
     assert "PANTHEON_BUILD_CACHE_DIR" in index
 
@@ -243,8 +257,30 @@ def test_filter_controls_expose_menu_state():
 
     assert 'aria-controls="gpuMenu"' in benchmarks
     assert 'aria-expanded="false"' in benchmarks
+    assert 'aria-haspopup="true"' in benchmarks
     assert "closeBenchmarkMenus" in tables_js
     assert 'event.key === "Escape"' in tables_js
+
+
+def test_benchmark_search_responds_to_all_input_changes_and_reports_result_count():
+    benchmarks = read("docs/benchmarks.md")
+    tables_js = read("docs/js/tables.js")
+
+    assert 'type="search"' in benchmarks
+    assert "onkeyup=" not in benchmarks
+    assert 'id="benchmarkStatus"' in benchmarks
+    assert 'searchInput.addEventListener("input", applyFilters)' in tables_js
+    assert "${filtered.length} ${filteredLabel} shown out of ${bestRuns.length}" in tables_js
+
+
+def test_benchmark_sort_headers_are_keyboard_accessible():
+    tables_js = read("docs/js/tables.js")
+    css = read("docs/css/extra.css")
+
+    assert 'button.className = "benchmark-sort-button"' in tables_js
+    assert 'th.setAttribute("aria-sort", sortDirectionFor(col.key))' in tables_js
+    assert 'button.addEventListener("click", () => sortData(col.key))' in tables_js
+    assert ".benchmark-sort-button:focus-visible" in css
 
 
 def test_benchmark_version_filter_defaults_to_all_versions():

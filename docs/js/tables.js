@@ -40,6 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const table = document.getElementById("benchmarkTable");
     if (!table) return;
 
+    const searchInput = document.getElementById("textSearch");
+    if (searchInput) {
+        searchInput.addEventListener("input", applyFilters);
+    }
+
     const dataUrl = getBenchmarkAssetUrl("web_data.json");
 
     fetch(dataUrl)
@@ -56,7 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
             populateFilters(bestRuns);
             applyFilters();
         })
-        .catch(err => console.error("Error loading benchmark data:", err));
+        .catch(err => {
+            console.error("Error loading benchmark data:", err);
+            setBenchmarkStatus("Benchmark data could not be loaded. Please refresh the page or try again later.", true);
+        });
 });
 
 function getBenchmarkAssetUrl(fileName) {
@@ -160,7 +168,7 @@ function formatCellValue(row, key) {
         return isMissingValue(val) ? "N/A" : `${val}s`;
     }
     if (key.includes("temp")) {
-        return formatMetric(val, "C");
+        return formatMetric(val, "°C");
     }
     if (key.includes("power")) {
         return formatMetric(val, "W");
@@ -172,6 +180,18 @@ function formatCellValue(row, key) {
         return "N/A";
     }
     return val;
+}
+
+function setBenchmarkStatus(message, isError = false) {
+    const status = document.getElementById("benchmarkStatus");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("benchmark-status--error", isError);
+}
+
+function sortDirectionFor(key) {
+    if (currentSort.key !== key) return "none";
+    return currentSort.dir === "asc" ? "ascending" : "descending";
 }
 
 // --- 2. Dynamic Table Rendering ---
@@ -190,8 +210,29 @@ function renderTable(data) {
     COL_DEFS.forEach(col => {
         if (col.visible) {
             let th = document.createElement("th");
-            th.innerHTML = `${col.label} &#8597;`;
-            th.onclick = () => sortData(col.key);
+            th.setAttribute("scope", "col");
+            th.setAttribute("aria-sort", sortDirectionFor(col.key));
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "benchmark-sort-button";
+            button.dataset.sortKey = col.key;
+            button.textContent = col.label;
+            button.setAttribute(
+                "aria-label",
+                `Sort by ${col.label}${currentSort.key === col.key ? `, currently ${currentSort.dir === "asc" ? "ascending" : "descending"}` : ""}`
+            );
+
+            const indicator = document.createElement("span");
+            indicator.className = "benchmark-sort-indicator";
+            indicator.setAttribute("aria-hidden", "true");
+            indicator.textContent = currentSort.key === col.key
+                ? (currentSort.dir === "asc" ? "↑" : "↓")
+                : "↕";
+
+            button.appendChild(indicator);
+            button.addEventListener("click", () => sortData(col.key));
+            th.appendChild(button);
             headerRow.appendChild(th);
         }
     });
@@ -269,6 +310,7 @@ function buildCheckboxMenu(menuId, items, defaultChecked = null) {
         let searchInput = document.createElement("input");
         searchInput.type = "text";
         searchInput.placeholder = "Search...";
+        searchInput.setAttribute("aria-label", `Search ${menuId.replace("Menu", "").toLowerCase()} options`);
         searchInput.style.width = "100%";
         searchInput.style.marginBottom = "8px";
         searchInput.style.padding = "6px";
@@ -417,6 +459,13 @@ function applyFilters() {
 
     currentFilteredData = filtered;
     renderTable(filtered);
+    const totalLabel = bestRuns.length === 1 ? "result" : "results";
+    const filteredLabel = filtered.length === 1 ? "result" : "results";
+    setBenchmarkStatus(
+        filtered.length === bestRuns.length
+            ? `${bestRuns.length} ${totalLabel}`
+            : `${filtered.length} ${filteredLabel} shown out of ${bestRuns.length}`
+    );
     if (window.renderBenchmarkCharts) {
         window.renderBenchmarkCharts(filtered);
     }
@@ -582,4 +631,5 @@ function exportToCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 }

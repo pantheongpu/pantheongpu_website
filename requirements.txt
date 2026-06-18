@@ -1,11 +1,2 @@
-mkdocs-material
-pytest
-psutil
-pandas
-openpyxl
-numpy
-cmake
-customtkinter
-pyinstaller
-#fastapi
-uvicorn
+mkdocs-material>=9.5,<10
+pytest>=8,<10
