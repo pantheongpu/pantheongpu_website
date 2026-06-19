@@ -28,9 +28,18 @@ EOF
     test -d /opt/pantheongpu
     test -d /root/.cache/pantheongpu
 
-    sh /workspace/docs/uninstall.sh
+    apt-get remove -y pantheongpu
 
     ! dpkg-query -W pantheongpu
+    ! test -e /usr/bin/pantheon
+
+    # Runtime-created files and portable-install files are not owned by dpkg.
+    test -e /usr/local/bin/pantheon
+    test -d /opt/pantheongpu
+    test -d /root/.cache/pantheongpu
+
+    sh /workspace/docs/uninstall.sh
+
     ! test -e /usr/bin/pantheon
     ! test -e /usr/local/bin/pantheon
     ! test -e /opt/pantheongpu

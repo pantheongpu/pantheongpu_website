@@ -210,6 +210,8 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "you do not need to pass `--platform cuda`" in index
     assert "install.sh" in index
     assert "PANTHEON_BUILD_CACHE_DIR" in index
+    assert index.count("sudo apt-get remove pantheongpu") >= 2
+    assert "sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu" in index
     assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in index
     assert '${XDG_CACHE_HOME:-$HOME/.cache}/pantheongpu/builds/' in index
 
@@ -226,8 +228,19 @@ def test_clean_uninstall_script_covers_package_portable_and_cache_files():
     assert 'rm -rf "${cache_home}/pantheongpu"' in uninstall
     assert "SUDO_USER" in uninstall
     assert "ubuntu:24.04" in docker_test
+    assert "apt-get remove -y pantheongpu" in docker_test
     assert "sh /workspace/docs/uninstall.sh" in docker_test
     assert "uninstall-smoke:" in workflow
+
+
+def test_readme_pairs_install_commands_with_native_uninstall_commands():
+    readme = read("README.md")
+
+    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in readme
+    assert "sudo apt-get remove pantheongpu" in readme
+    assert "sudo ./install.sh" in readme
+    assert "sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu" in readme
+    assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in readme
 
 
 def test_mkdocs_points_to_pantheongpu_repository():

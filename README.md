@@ -95,6 +95,26 @@ sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 pantheon --test baseline_metrics --duration 10
 ```
 
+Uninstall the Ubuntu/Debian package with:
+
+```bash
+sudo apt-get remove pantheongpu
+```
+
+For a portable installation made with `sudo ./install.sh` on RHEL, Fedora,
+Rocky Linux, AlmaLinux, or another Linux distribution:
+
+```bash
+sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu
+```
+
+To completely remove either installation type and the current user's compiled
+workload cache:
+
+```bash
+curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh
+```
+
 Release bundles are binary-only and must not include private source files such
 as `pantheon.py`, `tuning.py`, `monitor.py`, `kernels/`, `tests/`,
 `website_utils/`, or `.git/`.

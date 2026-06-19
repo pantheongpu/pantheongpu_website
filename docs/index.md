@@ -101,6 +101,12 @@ wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSIO
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 ```
 
+To uninstall the Debian package later:
+
+```bash
+sudo apt-get remove pantheongpu
+```
+
 ### 3. Verify the installation
 
 Run a short hardware inventory test:
@@ -119,10 +125,12 @@ pantheon --test fp64_virus --duration 30 --gpu 0
     Pantheon automatically detects CUDA, ROCm/HIP, or mock mode. Run the `pantheon`
     command directly; you do not need to pass `--platform cuda`.
 
-### Uninstall Pantheon
+### Completely remove Pantheon
 
-Remove either the Debian-package or portable installation, along with Pantheon
-files and the current user's compiled workload cache:
+The native package command above removes Pantheon's package-managed files.
+To also remove runtime-created files and the current user's compiled workload
+cache—or to remove a portable installation on RHEL, Fedora, Rocky Linux,
+AlmaLinux, or another Linux distribution—run:
 
 ```bash
 curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh
@@ -142,6 +150,22 @@ Pantheon's installation and cache directories untouched.
     cd "pantheongpu_${VERSION}_amd64"
     sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"
     ```
+
+    Uninstall a Debian package installation with:
+
+    ```bash
+    sudo apt-get remove pantheongpu
+    ```
+
+    On RHEL-family and other Linux systems, install the portable bundle with
+    `sudo ./install.sh`. Remove that installation with:
+
+    ```bash
+    sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu
+    ```
+
+    Use the complete-removal command above if you also want to clear the
+    current user's compiled workload cache.
 
 !!! tip "Build cache"
     First-run workload builds are cached under
