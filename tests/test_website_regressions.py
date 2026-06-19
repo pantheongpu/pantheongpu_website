@@ -218,7 +218,7 @@ def test_home_quick_start_uses_valid_install_commands():
 
 def test_clean_uninstall_script_covers_package_portable_and_cache_files():
     uninstall = read("docs/uninstall.sh")
-    docker_test = read("tests/test_uninstall_in_docker.sh")
+    container_test = read("tests/test_uninstall_in_container.sh")
     workflow = read(".github/workflows/ci.yml")
 
     assert "apt-get purge -y pantheongpu" in uninstall
@@ -227,9 +227,9 @@ def test_clean_uninstall_script_covers_package_portable_and_cache_files():
     assert "rm -rf /opt/pantheongpu" in uninstall
     assert 'rm -rf "${cache_home}/pantheongpu"' in uninstall
     assert "SUDO_USER" in uninstall
-    assert "ubuntu:24.04" in docker_test
-    assert "apt-get remove -y pantheongpu" in docker_test
-    assert "sh /workspace/docs/uninstall.sh" in docker_test
+    assert "apt-get remove -y pantheongpu" in container_test
+    assert 'sh "${repo_root}/docs/uninstall.sh"' in container_test
+    assert "docker run" not in container_test
     assert "uninstall-smoke:" in workflow
 
 
@@ -249,6 +249,8 @@ def test_all_workflow_jobs_use_self_hosted_linux_runners():
             line == "runs-on: [self-hosted, Linux, X64]"
             for line in runs_on_lines
         ), f"{workflow_path.name} contains a non-self-hosted runner"
+        assert workflow.count("container:") == len(runs_on_lines)
+        assert workflow.count("image: ubuntu:24.04") == len(runs_on_lines)
         assert "ubuntu-latest" not in workflow
         assert "windows-latest" not in workflow
         assert "macos-latest" not in workflow

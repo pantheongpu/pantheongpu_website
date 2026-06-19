@@ -18,10 +18,22 @@ on:
 permissions:
   contents: write
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   mirror-release:
     runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
     steps:
+      - name: Bootstrap job container
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl git gh jq python3 python-is-python3 tar gzip zip unzip
+
       - name: Checkout website repository
         uses: actions/checkout@v4
         with:

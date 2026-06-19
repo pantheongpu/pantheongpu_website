@@ -12,10 +12,22 @@ concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   deploy:
     runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
     steps:
+      - name: Bootstrap job container
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates git
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
