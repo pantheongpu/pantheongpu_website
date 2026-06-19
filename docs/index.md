@@ -119,6 +119,18 @@ pantheon --test fp64_virus --duration 30 --gpu 0
     Pantheon automatically detects CUDA, ROCm/HIP, or mock mode. Run the `pantheon`
     command directly; you do not need to pass `--platform cuda`.
 
+### Uninstall Pantheon
+
+Remove either the Debian-package or portable installation, along with Pantheon
+files and the current user's compiled workload cache:
+
+```bash
+curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh
+```
+
+This leaves CUDA, ROCm, system compilers, and benchmark reports stored outside
+Pantheon's installation and cache directories untouched.
+
 ??? info "Alternative: install from the release bundle"
     The release bundle contains the Debian package and an `install.sh` helper for
     RHEL-family and other Linux distributions.
@@ -132,5 +144,6 @@ pantheon --test fp64_virus --duration 30 --gpu 0
     ```
 
 !!! tip "Build cache"
-    First-run workload builds are cached under `/opt/pantheongpu/cache/builds/`.
-    Set `PANTHEON_BUILD_CACHE_DIR` if you need a user-writable cache directory.
+    First-run workload builds are cached under
+    `${XDG_CACHE_HOME:-$HOME/.cache}/pantheongpu/builds/`.
+    Set `PANTHEON_BUILD_CACHE_DIR` to choose another writable cache directory.

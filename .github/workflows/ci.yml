@@ -51,3 +51,13 @@ jobs:
 
       - name: Build Docs
         run: python -m mkdocs build --strict
+
+  uninstall-smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Test clean uninstall in Ubuntu
+        run: bash tests/test_uninstall_in_docker.sh
