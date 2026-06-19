@@ -233,6 +233,27 @@ def test_clean_uninstall_script_covers_package_portable_and_cache_files():
     assert "uninstall-smoke:" in workflow
 
 
+def test_all_workflow_jobs_use_self_hosted_linux_runners():
+    workflow_dir = ROOT / ".github/workflows"
+    workflows = list(workflow_dir.glob("*.yml")) + list(workflow_dir.glob("*.yaml"))
+
+    assert workflows
+    for workflow_path in workflows:
+        workflow = workflow_path.read_text(encoding="utf-8")
+        runs_on_lines = [
+            line.strip() for line in workflow.splitlines()
+            if line.strip().startswith("runs-on:")
+        ]
+        assert runs_on_lines, f"{workflow_path.name} does not define a runner"
+        assert all(
+            line == "runs-on: [self-hosted, Linux, X64]"
+            for line in runs_on_lines
+        ), f"{workflow_path.name} contains a non-self-hosted runner"
+        assert "ubuntu-latest" not in workflow
+        assert "windows-latest" not in workflow
+        assert "macos-latest" not in workflow
+
+
 def test_readme_pairs_install_commands_with_native_uninstall_commands():
     readme = read("README.md")
 
