@@ -199,7 +199,7 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in index
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
     assert "sudo apt-get install -y hipcc" in index
-    assert "VERSION=1.0.12" in index
+    assert "VERSION=1.0.13" in index
     assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in index
     assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz" in index
     assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in index
@@ -578,9 +578,9 @@ def test_readme_documents_release_mirroring_secret():
     assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
     assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
     assert "Public Binary Downloads" in readme
-    assert "VERSION=1.0.12" in readme
+    assert "VERSION=1.0.13" in readme
     assert "pantheon --test baseline_metrics --duration 10" in readme
-    assert "tag like `v1.0.12`" in readme
+    assert "tag like `v1.0.13`" in readme
     assert "tag like `v1.0.8`" not in readme
     assert "`*.deb`" in readme
     assert "repository dispatch" in readme

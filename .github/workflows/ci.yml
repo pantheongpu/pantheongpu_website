@@ -31,7 +31,7 @@ jobs:
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates git
+            ca-certificates git tar gzip xz-utils zstd
 
       - name: Checkout Code
         uses: actions/checkout@v4

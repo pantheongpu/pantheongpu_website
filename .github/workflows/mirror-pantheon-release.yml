@@ -32,7 +32,7 @@ jobs:
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates curl git gh jq python3 python-is-python3 tar gzip zip unzip
+            ca-certificates curl git gh jq python3 python-is-python3 tar gzip xz-utils zstd zip unzip
 
       - name: Checkout website repository
         uses: actions/checkout@v4

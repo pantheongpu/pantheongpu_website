@@ -96,7 +96,7 @@ Then install the compiler for your GPU platform. You only need one:
 Download and install the latest Debian package:
 
 ```bash
-VERSION=1.0.12
+VERSION=1.0.13
 wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 ```
@@ -144,7 +144,7 @@ Pantheon's installation and cache directories untouched.
     RHEL-family and other Linux distributions.
 
     ```bash
-    VERSION=1.0.12
+    VERSION=1.0.13
     wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz"
     tar -xzf "pantheongpu_${VERSION}_amd64.tar.gz"
     cd "pantheongpu_${VERSION}_amd64"
