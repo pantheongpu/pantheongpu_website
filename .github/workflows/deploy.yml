@@ -50,7 +50,7 @@ jobs:
 
       - name: Ensure Generated Data Is Current
         run: |
-          git diff --exit-code -- docs/assets/web_data.json || {
+          git -C "${GITHUB_WORKSPACE}" diff --exit-code -- docs/assets/web_data.json || {
             echo "::error::docs/assets/web_data.json is not in sync with database/*.json. Run python website_utils/generate_web_data.py and commit the result."
             exit 1
           }
