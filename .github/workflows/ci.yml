@@ -51,11 +51,13 @@ jobs:
         run: python -m pytest
 
       - name: Generate Web Data
-        run: python website_utils/generate_web_data.py
+        run: |
+          cp docs/assets/web_data.json /tmp/pantheon-web-data-before.json
+          python website_utils/generate_web_data.py
 
       - name: Ensure Generated Data Is Current
         run: |
-          git -C "${GITHUB_WORKSPACE}" diff --exit-code -- docs/assets/web_data.json || {
+          cmp -s /tmp/pantheon-web-data-before.json docs/assets/web_data.json || {
             echo "::error::docs/assets/web_data.json is not in sync with database/*.json. Run python website_utils/generate_web_data.py and commit the result."
             exit 1
           }
