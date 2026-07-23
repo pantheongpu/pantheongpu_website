@@ -394,11 +394,11 @@ def test_ci_checks_generated_data_drift_and_dependency_health():
 
     assert 'python-version: ["3.11", "3.12"]' in ci
     assert "python -m pip check" in ci
-    assert "git diff --exit-code -- docs/assets/web_data.json" in ci
+    assert 'git -C "${GITHUB_WORKSPACE}" diff --exit-code -- docs/assets/web_data.json' in ci
     assert "python -m mkdocs build --strict" in ci
     assert "cancel-in-progress: true" in ci
     assert "python -m pip check" in deploy
-    assert "git diff --exit-code -- docs/assets/web_data.json" in deploy
+    assert 'git -C "${GITHUB_WORKSPACE}" diff --exit-code -- docs/assets/web_data.json' in deploy
     assert "python -m pip check" in mirror
     assert "git diff --exit-code -- docs/assets/web_data.json" in mirror
 
