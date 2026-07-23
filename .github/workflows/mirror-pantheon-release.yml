@@ -39,6 +39,12 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
+      # The self-hosted runner mounts the checkout into this disposable
+      # container with a different UID. Trust that mounted path for the
+      # workflow's commit, freshness, and Pages deployment steps.
+      - name: Trust checkout repository
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       - name: Resolve workflow options
         id: options
         env:
@@ -288,7 +294,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-          cache: pip
 
       - name: Install website dependencies
         run: |

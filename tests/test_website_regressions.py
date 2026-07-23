@@ -399,8 +399,10 @@ def test_ci_checks_generated_data_drift_and_dependency_health():
     assert "cancel-in-progress: true" in ci
     assert "python -m pip check" in deploy
     assert "cmp -s /tmp/pantheon-web-data-before.json docs/assets/web_data.json" in deploy
+    assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in deploy
     assert "python -m pip check" in mirror
     assert "git diff --exit-code -- docs/assets/web_data.json" in mirror
+    assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in mirror
 
 
 def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validates_assets():
@@ -448,6 +450,8 @@ def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validate
     assert "--releases-json website-releases.json" in workflow
     assert "git add docs/release.md" in workflow
     assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
+    assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in workflow
+    assert "cache: pip" not in workflow
     assert "mkdocs gh-deploy --force" in workflow
 
 
