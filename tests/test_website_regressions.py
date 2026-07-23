@@ -227,6 +227,7 @@ def test_clean_uninstall_script_covers_package_portable_and_cache_files():
     assert "rm -rf /opt/pantheongpu" in uninstall
     assert 'rm -rf "${cache_home}/pantheongpu"' in uninstall
     assert "SUDO_USER" in uninstall
+    assert "uninstall_home=/root" in uninstall
     assert "apt-get remove -y pantheongpu" in container_test
     assert 'sh "${repo_root}/docs/uninstall.sh"' in container_test
     assert "docker run" not in container_test

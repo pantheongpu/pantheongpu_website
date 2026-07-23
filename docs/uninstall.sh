@@ -39,7 +39,9 @@ elif [ -n "${uninstall_user}" ] && [ "${uninstall_user}" != root ] &&
     command -v getent >/dev/null 2>&1; then
     uninstall_home=$(getent passwd "${uninstall_user}" | cut -d: -f6)
 else
-    uninstall_home=${HOME:-/root}
+    # CI systems commonly override HOME while invoking this script as root.
+    # In that case, remove root's actual cache rather than an ephemeral job-home.
+    uninstall_home=/root
 fi
 
 cache_home=${PANTHEON_CACHE_HOME:-"${uninstall_home}/.cache"}
