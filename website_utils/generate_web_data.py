@@ -93,7 +93,7 @@ def infer_unit(test_name, declared_unit, raw_score):
     if declared_unit:
         return declared_unit
 
-    if raw_score not in (None, "", "N/A"):
+    if to_float(raw_score, default=None) is not None:
         known_unit = KNOWN_TEST_UNITS.get(normalize(test_name, "").lower())
         if known_unit:
             return known_unit
@@ -139,19 +139,17 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
 
                     # Score Normalization
                     raw_score = test.get("Score", test.get("Throughput (GB/s)", "N/A"))
-                    unit = infer_unit(test_name, test.get("Unit"), raw_score)
-                    score_val = 0.0
-
-                    if raw_score != "N/A":
-                        score_val = to_float(raw_score)
-                    else:
+                    score_val = to_float(raw_score, default=None)
+                    if score_val is None:
                         score_val = to_float(test.get("Max Power (W)", 0))
+                        unit = "Watts"
+                    else:
+                        unit = infer_unit(test_name, test.get("Unit"), raw_score)
 
-                    version_str = first_present(
-                        test,
-                        ["Version"],
-                        first_present(data, ["Version", "pantheon_version"], "1.0.0"),
-                    )
+                    report_version = first_present(data, ["Version", "pantheon_version"], "1.0.0")
+                    version_str = test.get("Version", report_version)
+                    if is_unknown_version(version_str) and not is_unknown_version(report_version):
+                        version_str = report_version
                     if is_unknown_version(version_str):
                         print(f"[SKIPPED] Unknown Pantheon version in {f}: {test_name}")
                         continue

@@ -168,6 +168,54 @@ def test_missing_score_falls_back_to_power_metric(tmp_path):
     assert rows[0]["unit"] == "Watts"
 
 
+def test_null_score_falls_back_to_power_metric_and_unit(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(
+        db_dir,
+        "pantheon_report_null_score.json",
+        [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-UUID"}],
+        [{
+            "Test Name": "atomic_virus",
+            "GPU ID": 0,
+            "Score": None,
+            "Unit": "MAPS",
+            "Max Power (W)": 350,
+        }],
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows[0]["score"] == 350
+    assert rows[0]["unit"] == "Watts"
+
+
+def test_missing_test_version_falls_back_to_report_version(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(
+        db_dir,
+        "pantheon_report_missing_test_version.json",
+        [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-UUID"}],
+        [{
+            "Test Name": "fp64_virus",
+            "GPU ID": 0,
+            "Version": None,
+            "Score": 1.25,
+            "Unit": "TFLOPS",
+        }],
+        version="1.0.13",
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows[0]["version"] == "1.0.13"
+
+
 def test_legacy_score_without_unit_uses_known_test_unit(tmp_path):
     db_dir = tmp_path / "database"
     db_dir.mkdir()
