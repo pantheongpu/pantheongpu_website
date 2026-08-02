@@ -5,6 +5,13 @@ CUDA/ROCm GPU stress and diagnostics suite. The site publishes documentation,
 release links, and a live benchmark dashboard generated from Pantheon report
 JSON files.
 
+## Community
+
+Use [GitHub Discussions](https://github.com/saqibkh/pantheongpu_website/discussions)
+for questions, result showcases, and workload ideas. Use the repository's issue
+forms for benchmark submissions and reproducible hardware regressions. See
+[Community](docs/community.md) for the reporting and Discord-launch policy.
+
 ## Repository Layout
 
 - `docs/` - MkDocs pages, styles, JavaScript, images, and generated web assets.

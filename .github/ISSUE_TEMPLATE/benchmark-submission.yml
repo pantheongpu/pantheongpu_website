@@ -1,0 +1,65 @@
+name: Benchmark submission
+description: Submit a Pantheon report for the public benchmark dashboard.
+title: "[Benchmark]: "
+labels: ["benchmark-submission", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing a result. Submit raw output from Pantheon and never include credentials, hostnames, or personal data.
+  - type: input
+    id: pantheon-version
+    attributes:
+      label: Pantheon version
+      placeholder: "1.0.13"
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: GPU model and VRAM
+      placeholder: "NVIDIA GeForce RTX 3060, 12 GB"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, kernel/WSL status, GPU driver, and CUDA or ROCm version.
+      placeholder: |
+        OS: Ubuntu 24.04 on WSL2
+        Driver: 595.97
+        CUDA: 12.0
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command
+      render: shell
+      placeholder: pantheon --test all --duration 60 --gpu 0
+    validations:
+      required: true
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Test conditions
+      description: State duration, cooling, power limit, overclock/undervolt state, and anything unusual about the environment.
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Raw report
+      description: Drag and drop the generated pantheon_report_*.json file here. Remove hostnames or other information you do not want published first.
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Publication consent
+      options:
+        - label: I allow Pantheon to publish this anonymized benchmark result and its raw report on the public dashboard.
+          required: true
+        - label: I confirm this result was collected from hardware I am authorized to test.
+          required: true

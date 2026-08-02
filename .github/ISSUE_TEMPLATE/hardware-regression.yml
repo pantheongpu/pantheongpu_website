@@ -1,0 +1,71 @@
+name: Hardware regression or reproducible failure
+description: Report a repeatable crash, artifact, throttling anomaly, or changed result.
+title: "[Regression]: "
+labels: ["hardware-regression", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form only for reproducible behavior. For general help, use GitHub Discussions. Do not include credentials or sensitive host information.
+  - type: input
+    id: affected-version
+    attributes:
+      label: First affected Pantheon version
+      placeholder: "1.0.13"
+    validations:
+      required: true
+  - type: input
+    id: last-known-good
+    attributes:
+      label: Last known good version
+      placeholder: "1.0.12, or N/A"
+    validations:
+      required: true
+  - type: input
+    id: workload
+    attributes:
+      label: Workload
+      placeholder: "ras_validator"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command and reproduction steps
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include GPU, VRAM, OS, driver, CUDA/ROCm version, power settings, and cooling.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected and actual behavior
+      placeholder: |
+        Expected: workload completes after 60 seconds.
+        Actual: process exits with ...
+    validations:
+      required: true
+  - type: checkboxes
+    id: symptoms
+    attributes:
+      label: Observed symptoms
+      options:
+        - label: Crash or driver reset
+        - label: Visual artifact or display issue
+        - label: Unexpected throttling or power limit behavior
+        - label: System hang or WSL failure
+        - label: Score regression without a crash
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs and report
+      description: Attach the report JSON and paste the relevant log output.
+      render: shell
+    validations:
+      required: true
