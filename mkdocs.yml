@@ -1,8 +1,8 @@
 site_name: PANTHEON
 site_description: Universal GPU Stress & Diagnostics Suite
 site_url: https://pantheongpu.com
-repo_url: https://github.com/saqibkh/pantheongpu
-repo_name: saqibkh/pantheongpu
+repo_url: https://github.com/saqibkh/pantheongpu_website
+repo_name: saqibkh/pantheongpu_website
 edit_uri: ""
 
 nav:
@@ -10,6 +10,7 @@ nav:
   - Performance Database:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
+  - Community: community.md
   - Research & Reports:
     - Overview: reports.md
     - "Silicon Segregation": reports/silicon-segregation.md

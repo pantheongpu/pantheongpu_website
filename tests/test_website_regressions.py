@@ -270,8 +270,8 @@ def test_readme_pairs_install_commands_with_native_uninstall_commands():
 def test_mkdocs_points_to_pantheongpu_repository():
     mkdocs = read("mkdocs.yml")
 
-    assert "repo_url: https://github.com/saqibkh/pantheongpu" in mkdocs
-    assert "repo_name: saqibkh/pantheongpu" in mkdocs
+    assert "repo_url: https://github.com/saqibkh/pantheongpu_website" in mkdocs
+    assert "repo_name: saqibkh/pantheongpu_website" in mkdocs
     assert "saqibkh/pantheon\n" not in mkdocs
 
 

@@ -15,6 +15,9 @@ hide:
     <a href="benchmarks/" class="md-button">
        Live Benchmarks
     </a>
+    <a href="community/" class="md-button">
+       Join the Community
+    </a>
   </p>
 </div>
 
