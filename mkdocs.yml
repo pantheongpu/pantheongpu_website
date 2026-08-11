@@ -1,8 +1,6 @@
 site_name: PANTHEON
 site_description: Universal GPU Stress & Diagnostics Suite
 site_url: https://pantheongpu.com
-repo_url: https://github.com/saqibkh/pantheongpu_website
-repo_name: saqibkh/pantheongpu_website
 edit_uri: ""
 
 nav:
@@ -24,6 +22,9 @@ nav:
       - Tensor Virus: tests/tensor_virus.md
       - MMA Virus: tests/mma_virus.md
       - Transformer Virus: tests/transformer_virus.md
+      - LLM Decode: tests/llm_decode.md
+      - LLM Prefill: tests/llm_prefill.md
+      - KV Cache Churn: tests/kv_cache_churn.md
       - FP64 Chokehold: tests/fp64_virus.md
       - Integer Virus: tests/int_virus.md
       - SFU Virus: tests/sfu_stress.md
@@ -63,6 +64,9 @@ theme:
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
     - toc.follow
     - content.code.copy
     - content.action.edit
@@ -71,21 +75,21 @@ theme:
     # Dark Mode (Default)
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
-      accent: teal
+      primary: indigo
+      accent: cyan
       toggle:
         icon: material/weather-night
         name: Switch to light mode
     # Light Mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep purple
-      accent: teal
+      primary: indigo
+      accent: cyan
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
   font:
-    text: Roboto
+    text: Inter
     code: Roboto Mono
 
 # Extensions for better tables, grid layouts, and code blocks
@@ -105,9 +109,10 @@ markdown_extensions:
 
 extra_css:
   - css/extra.css
+  - css/modern.css
 
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/apexcharts
+  - js/apexcharts.min.js
   - js/charts.js
   - js/tables.js
 

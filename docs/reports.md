@@ -1,8 +1,9 @@
 # Research & Reports
 
-Long-form analysis, papers, benchmark notes, and data-backed conclusions from Pantheon GPU testing.
-
-This section collects published articles, papers, benchmark notes, and data-backed conclusions.
+<div class="page-intro">
+  <p class="page-intro__eyebrow">From counters to conclusions</p>
+  <p>Long-form analysis, papers, benchmark notes, and data-backed conclusions from Pantheon GPU testing.</p>
+</div>
 
 ## Featured
 

@@ -90,7 +90,7 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ---
 
-## v1.0.7
+## Pantheon v1.0.7
 **Release Date:** April 6, 2026
 
 ### Release Notes
