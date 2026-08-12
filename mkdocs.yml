@@ -22,9 +22,6 @@ nav:
       - Tensor Virus: tests/tensor_virus.md
       - MMA Virus: tests/mma_virus.md
       - Transformer Virus: tests/transformer_virus.md
-      - LLM Decode: tests/llm_decode.md
-      - LLM Prefill: tests/llm_prefill.md
-      - KV Cache Churn: tests/kv_cache_churn.md
       - FP64 Chokehold: tests/fp64_virus.md
       - Integer Virus: tests/int_virus.md
       - SFU Virus: tests/sfu_stress.md
@@ -45,6 +42,7 @@ nav:
       - Memory Asymmetric Thermal: tests/memory_thermal_asym.md
     - Interconnect & Architecture:
       - P2P Thrasher: tests/p2p_thrasher.md
+      - All-Reduce: tests/all_reduce.md
       - TLB Avalanche: tests/tlb_avalanche.md
       - PCIe Thrasher: tests/pcie_bandwidth.md
       - RAS Validator: tests/ras_validator.md
@@ -52,6 +50,22 @@ nav:
       - Memory PC Ping-Pong: tests/memory_pc_pingpong.md
       - Scheduler Virus: tests/scheduler.md
       - Baseline Metrics: tests/baseline_metrics.md 
+    - AI & ML:
+      - AI Workload Suites: ai-workloads.md
+      - LLM Decode: tests/llm_decode.md
+      - LLM Prefill: tests/llm_prefill.md
+      - KV Cache Churn: tests/kv_cache_churn.md
+      - Fused Attention: tests/fused_attention.md
+      - RoPE Stress: tests/rope_stress.md
+      - Quantized GEMM: tests/quantized_gemm.md
+      - Serving Mix: tests/serving_mix.md
+      - Speculative Decode: tests/speculative_decode.md
+      - MoE Router: tests/moe_router.md
+      - Transformer Train Step: tests/transformer_train_step.md
+      - Allocation Fragmentation: tests/allocation_fragmentation.md
+      - Graph Replay: tests/graph_replay.md
+      - RAG Embedding: tests/rag_embedding.md
+      - Vision Encoder: tests/vision_encoder.md
   - Releases: release.md
 
 

@@ -71,10 +71,23 @@ def test_charts_use_a_vendored_versioned_dependency():
     assert apexcharts.stat().st_size > 500_000
 
 
-def test_test_documentation_card_separators_render_as_markdown_dividers():
+def test_test_documentation_index_places_ai_category_last():
     tests_index = read("docs/tests/index.md")
 
-    assert tests_index.count("\n\n    ---\n\n") == 33
+    assert "## AI & ML" in tests_index
+    assert tests_index.index("## AI & ML") > tests_index.index("## Interconnect & Architecture")
+    assert "**Vision Encoder**](vision_encoder.md)" in tests_index
+
+
+def test_all_reduce_is_documented_in_the_interconnect_navigation():
+    nav = read("mkdocs.yml")
+    tests_index = read("docs/tests/index.md")
+    test_page = read("docs/tests/all_reduce.md")
+
+    assert "- All-Reduce: tests/all_reduce.md" in nav
+    assert "**All-Reduce**](all_reduce.md)" in tests_index
+    assert "host-staged fallback" in test_page
+    assert "--inject_error" in test_page
 
 
 def test_performance_comparisons_are_nested_under_database_nav():

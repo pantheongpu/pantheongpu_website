@@ -18,7 +18,7 @@ Pantheon tests GPU compute, memory, cache, interconnect, and power behavior. Run
 
 <div class="pantheon-signal-grid" markdown>
 
-<div class="pantheon-signal"><span>30 workloads</span><small>focused stress tests</small></div>
+<div class="pantheon-signal"><span>45 workloads</span><small>focused stress tests</small></div>
 <div class="pantheon-signal"><span>CUDA + ROCm</span><small>NVIDIA and AMD support</small></div>
 <div class="pantheon-signal"><span>Local reports</span><small>exportable telemetry</small></div>
 </div>
