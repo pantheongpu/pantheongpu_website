@@ -1,8 +1,6 @@
 site_name: PANTHEON
 site_description: Universal GPU Stress & Diagnostics Suite
 site_url: https://pantheongpu.com
-repo_url: https://github.com/saqibkh/pantheongpu_website
-repo_name: saqibkh/pantheongpu_website
 edit_uri: ""
 
 nav:
@@ -44,6 +42,7 @@ nav:
       - Memory Asymmetric Thermal: tests/memory_thermal_asym.md
     - Interconnect & Architecture:
       - P2P Thrasher: tests/p2p_thrasher.md
+      - All-Reduce: tests/all_reduce.md
       - TLB Avalanche: tests/tlb_avalanche.md
       - PCIe Thrasher: tests/pcie_bandwidth.md
       - RAS Validator: tests/ras_validator.md
@@ -51,6 +50,22 @@ nav:
       - Memory PC Ping-Pong: tests/memory_pc_pingpong.md
       - Scheduler Virus: tests/scheduler.md
       - Baseline Metrics: tests/baseline_metrics.md 
+    - AI & ML:
+      - AI Workload Suites: ai-workloads.md
+      - LLM Decode: tests/llm_decode.md
+      - LLM Prefill: tests/llm_prefill.md
+      - KV Cache Churn: tests/kv_cache_churn.md
+      - Fused Attention: tests/fused_attention.md
+      - RoPE Stress: tests/rope_stress.md
+      - Quantized GEMM: tests/quantized_gemm.md
+      - Serving Mix: tests/serving_mix.md
+      - Speculative Decode: tests/speculative_decode.md
+      - MoE Router: tests/moe_router.md
+      - Transformer Train Step: tests/transformer_train_step.md
+      - Allocation Fragmentation: tests/allocation_fragmentation.md
+      - Graph Replay: tests/graph_replay.md
+      - RAG Embedding: tests/rag_embedding.md
+      - Vision Encoder: tests/vision_encoder.md
   - Releases: release.md
 
 
@@ -63,6 +78,9 @@ theme:
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
     - toc.follow
     - content.code.copy
     - content.action.edit
@@ -71,21 +89,21 @@ theme:
     # Dark Mode (Default)
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
-      accent: teal
+      primary: indigo
+      accent: cyan
       toggle:
         icon: material/weather-night
         name: Switch to light mode
     # Light Mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep purple
-      accent: teal
+      primary: indigo
+      accent: cyan
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
   font:
-    text: Roboto
+    text: Inter
     code: Roboto Mono
 
 # Extensions for better tables, grid layouts, and code blocks
@@ -105,9 +123,10 @@ markdown_extensions:
 
 extra_css:
   - css/extra.css
+  - css/modern.css
 
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/apexcharts
+  - js/apexcharts.min.js
   - js/charts.js
   - js/tables.js
 

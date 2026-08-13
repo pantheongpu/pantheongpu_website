@@ -61,6 +61,35 @@ def test_chart_script_only_fetches_when_chart_targets_exist():
     assert 'id="chart-scheduler"' in comparisons
 
 
+def test_charts_use_a_vendored_versioned_dependency():
+    mkdocs = read("mkdocs.yml")
+    apexcharts = ROOT / "docs/js/apexcharts.min.js"
+
+    assert "- js/apexcharts.min.js" in mkdocs
+    assert "cdn.jsdelivr.net/npm/apexcharts" not in mkdocs
+    assert apexcharts.exists()
+    assert apexcharts.stat().st_size > 500_000
+
+
+def test_test_documentation_index_places_ai_category_last():
+    tests_index = read("docs/tests/index.md")
+
+    assert "## AI & ML" in tests_index
+    assert tests_index.index("## AI & ML") > tests_index.index("## Interconnect & Architecture")
+    assert "**Vision Encoder**](vision_encoder.md)" in tests_index
+
+
+def test_all_reduce_is_documented_in_the_interconnect_navigation():
+    nav = read("mkdocs.yml")
+    tests_index = read("docs/tests/index.md")
+    test_page = read("docs/tests/all_reduce.md")
+
+    assert "- All-Reduce: tests/all_reduce.md" in nav
+    assert "**All-Reduce**](all_reduce.md)" in tests_index
+    assert "host-staged fallback" in test_page
+    assert "--inject_error" in test_page
+
+
 def test_performance_comparisons_are_nested_under_database_nav():
     mkdocs = read("mkdocs.yml")
 
@@ -270,8 +299,8 @@ def test_readme_pairs_install_commands_with_native_uninstall_commands():
 def test_mkdocs_points_to_pantheongpu_repository():
     mkdocs = read("mkdocs.yml")
 
-    assert "repo_url: https://github.com/saqibkh/pantheongpu_website" in mkdocs
-    assert "repo_name: saqibkh/pantheongpu_website" in mkdocs
+    assert "repo_url:" not in mkdocs
+    assert "repo_name:" not in mkdocs
     assert "saqibkh/pantheon\n" not in mkdocs
 
 
@@ -288,14 +317,19 @@ def test_site_declares_compact_favicon_assets():
     assert favicon_png.stat().st_size < 50_000
 
 
-def test_home_logo_uses_uncropped_responsive_class():
-    index = read("docs/index.md")
-    css = read("docs/css/extra.css")
+def test_brand_assets_are_sized_for_web_delivery():
+    icon = ROOT / "docs/assets/icon.png"
+    logo = ROOT / "docs/assets/logo.png"
 
-    assert 'class="home-logo"' in index
-    assert ".home-logo" in css
-    assert "object-fit: contain" in css
-    assert "height: auto" in css
+    assert icon.stat().st_size < 100_000
+    assert logo.stat().st_size < 1_000_000
+
+
+def test_homepage_does_not_repeat_the_header_logo():
+    index = read("docs/index.md")
+
+    assert 'class="home-logo"' not in index
+    assert 'src="assets/logo.png"' not in index
 
 
 def test_benchmark_table_has_mobile_scroll_wrapper():
@@ -567,7 +601,7 @@ def test_release_page_uses_builtin_table_of_contents():
     assert "## Pantheon v1.0.8" in release
     assert "## Pantheon v1.0.8 (Latest)" not in release
     assert "v1.0.9" not in release
-    assert "## v1.0.7" in release
+    assert "## Pantheon v1.0.7" in release
     assert "Download stable binary builds" in release
     assert "TarFile" not in release
     assert "ZipFile" not in release
