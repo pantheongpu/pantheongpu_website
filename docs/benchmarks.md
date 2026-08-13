@@ -1,11 +1,19 @@
-# Performance Database
+---
+hide:
+  - navigation
+---
 
-Complete registry of stress test results.
+# Benchmark Explorer
+
+<div class="page-intro">
+  <p class="page-intro__eyebrow">Performance database</p>
+  <p>Explore submitted Pantheon runs across hardware, driver stacks, releases, and targeted workloads. Filter for the signal you need, then export the slice for your own analysis.</p>
+</div>
 
 !!! note "Data provenance"
     Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
 
-[Compare GPU memory bandwidth across releases and devices.](benchmark-comparisons.md){ .md-button }
+[Compare leaders by workload](benchmark-comparisons.md){ .md-button .md-button--primary }
 
 <div class="benchmark-controls">
   

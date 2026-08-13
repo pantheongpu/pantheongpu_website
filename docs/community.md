@@ -1,6 +1,9 @@
 # Community
 
-Pantheon is a GPU stress and diagnostics tool. Use the community channels below to get help, share results, and report reproducible failures.
+<div class="page-intro">
+  <p class="page-intro__eyebrow">Build a better hardware record</p>
+  <p>Get help, share a reproducible result, or report a regression. Pantheon’s public channels are organized around useful, actionable evidence.</p>
+</div>
 
 ## GitHub Discussions
 

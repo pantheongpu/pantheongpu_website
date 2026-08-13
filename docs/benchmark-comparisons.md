@@ -1,6 +1,14 @@
+---
+hide:
+  - navigation
+---
+
 # Performance Comparisons
 
-Compare the best reported results across GPUs.
+<div class="page-intro">
+  <p class="page-intro__eyebrow">Benchmark leaders</p>
+  <p>Compare the best submitted result per GPU for each workload. Use the explorer for the complete run-level dataset and filtering controls.</p>
+</div>
 
 !!! note "Data provenance"
     Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
