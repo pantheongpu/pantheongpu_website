@@ -4,7 +4,23 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ---
 
-## Pantheon v1.0.13 (Latest)
+## Pantheon v1.0.14 (Latest)
+**Release Date:** August 15, 2026
+
+### Release Notes
+**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.13...v1.0.14
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.0.14 Debian Package](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.deb) | `.deb` | 33.5 MB |
+| [Pantheon v1.0.14 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.tar.gz) | `.tar.gz` | 67.1 MB |
+| [Pantheon v1.0.14 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.zip) | `.zip` | 67.1 MB |
+| [Pantheon v1.0.14 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/SHA256SUMS) | `SHA256SUMS` | 303 B |
+
+---
+
+## Pantheon v1.0.13
 **Release Date:** June 18, 2026
 
 ### Release Notes
@@ -90,7 +106,7 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ---
 
-## Pantheon v1.0.7
+## v1.0.7
 **Release Date:** April 6, 2026
 
 ### Release Notes
