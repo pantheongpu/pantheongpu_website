@@ -4,7 +4,7 @@ const COL_DEFS = [
     { key: "manufacturer",label: "Vendor",      visible: true },
     { key: "test",        label: "Test Name",   visible: true },
     { key: "version",     label: "Ver",         visible: true },
-    { key: "score",       label: "Score",       visible: true },
+    { key: "score",       label: "Score",       visible: false },
     { key: "throughput",  label: "Throughput",  visible: true },
     { key: "duration",    label: "Duration",    visible: true },
     { key: "temp_max",    label: "Peak Temp",   visible: true },
