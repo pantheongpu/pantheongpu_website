@@ -1,0 +1,75 @@
+{
+  "pantheon_version": "1.0.14",
+  "timestamp": "2026-08-15 20:43:04",
+  "os_info": {
+    "system": "Linux",
+    "release": "6.18.33.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026",
+    "arch": "x86_64"
+  },
+  "cpu_info": {
+    "physical_cores": 4,
+    "logical_cores": 8,
+    "freq": "3187.20Mhz"
+  },
+  "ram_info": {
+    "total": "23.59GB",
+    "available": "22.62GB"
+  },
+  "gpu_static_info": [
+    {
+      "id": 0,
+      "type": "NVIDIA",
+      "manufacturer": "NVIDIA",
+      "name": "NVIDIA GeForce RTX 3060",
+      "memory_total": "12288 MB",
+      "driver_version": "596.36",
+      "power_limit": 170.0,
+      "uuid": "benchmark-rtx3060-gpu0",
+      "serial": "[N/A]"
+    },
+    {
+      "id": 1,
+      "type": "NVIDIA",
+      "manufacturer": "NVIDIA",
+      "name": "NVIDIA GeForce RTX 3060",
+      "memory_total": "12288 MB",
+      "driver_version": "596.36",
+      "power_limit": 170.0,
+      "uuid": "benchmark-rtx3060-gpu0",
+      "serial": "[N/A]"
+    }
+  ],
+  "toolkit_version": "13.2",
+  "network_info": {
+    "hostname": "[redacted]",
+    "ip_address": "[redacted]"
+  },
+  "test_results": [
+    {
+      "Test Name": "cache_lat",
+      "Version": "1.0.14",
+      "Description": "Cache Latency",
+      "GPU ID": 0,
+      "Duration (s)": 60,
+      "Mem Usage (%)": 50,
+      "Score": 3431320000.0,
+      "Unit": "dependent-loads/s",
+      "Avg Temp (C)": 54.5,
+      "Max Temp (C)": 60.0,
+      "Avg Mem Temp (C)": 0.0,
+      "Max Mem Temp (C)": 0.0,
+      "Avg Power (W)": 107.4,
+      "Max Power (W)": 112.2,
+      "Avg Clock(MHz)": 1939.5,
+      "Efficiency": 31948975.79,
+      "PCIe Gen": 4.0,
+      "PCIe Width": 16.0,
+      "Limit Reason": "None",
+      "Max Fan (%)": 65.0,
+      "Volts Core (mV)": 0.0,
+      "Volts SoC (mV)": 0.0,
+      "Command Lines": "/home/saqib/tools/pantheongpu/build/cache_latency 0 60 50 --verify"
+    }
+  ]
+}
