@@ -1,0 +1,654 @@
+[2026-08-16 04:04:29] [PANTHEON] Detected Platform: CUDA. Compiling kernels into /root/.cache/pantheongpu/builds/1.0.14/cuda-86...
+[2026-08-16 04:05:49] [PANTHEON] Build Complete.
+
+============================================================
+PANTHEON SYSTEM DETECTED (v1.0.14)
+============================================================
+GPU 0: [NVIDIA] NVIDIA A40 | 46068 MB VRAM | UUID: GPU-d46d0f66-9d69-de44-1b30-d3ecbeb2b8d4
+============================================================
+
+[2026-08-16 04:05:49] [PANTHEON] Run ID: 20260816-040549
+[2026-08-16 04:05:49] [PANTHEON] --- STARTING TEST: BASELINE_METRICS ---
+[2026-08-16 04:05:49] [PANTHEON] Launching baseline_metrics on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:07:50] [PANTHEON] GPU 0: Running BASELINE IDLE test...
+[2026-08-16 04:07:50] [RESULT] GPU 0 | 0.0 GB/s | 39.1C Avg / 40.0C Max | 88.2W Avg / 90.9W Max
+[2026-08-16 04:07:50] [PANTHEON] --- FINISHED TEST: BASELINE_METRICS ---
+
+[2026-08-16 04:07:50] [PANTHEON] --- STARTING TEST: MEMORY_THERMAL_ASYM ---
+[2026-08-16 04:07:50] [PANTHEON] Launching memory_thermal_asym on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:09:52] [PANTHEON] GPU 0: ASYMMETRIC THERMAL STRESS | 17.1799 GB Target...
+[2026-08-16 04:09:52] -> Duration (s):  120
+[2026-08-16 04:09:52] -> Mem Alloc (%): 99
+[2026-08-16 04:09:52] -> Block Size:    256
+[2026-08-16 04:09:52] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:09:52] -> Kernel Loops:  1000
+[2026-08-16 04:09:52] -> Warmup Iters:  5
+[2026-08-16 04:09:52] -> Sync Mode:     2
+[2026-08-16 04:09:52] -> Init Pattern:  1
+[2026-08-16 04:09:52] -> Verify Mode:   ON
+[2026-08-16 04:09:52] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:09:52] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:09:52] [PANTHEON] Running Asymmetric Thermal Verification Pass...
+[2026-08-16 04:09:52] [RESULT] GPU 0 | 2.18148 TFLOPS | 58.3C Avg / 64.0C Max | 219.5W Avg / 227.7W Max
+[2026-08-16 04:09:52] [PANTHEON] --- FINISHED TEST: MEMORY_THERMAL_ASYM ---
+
+[2026-08-16 04:09:52] [PANTHEON] --- STARTING TEST: MEMORY_CACHE_FRACTURE ---
+[2026-08-16 04:09:52] [PANTHEON] Launching memory_cache_fracture on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:11:55] [PANTHEON] GPU 0: CACHE-LINE FRACTURING (Queue Stress) | 99% VRAM...
+[2026-08-16 04:11:55] -> Duration (s):  120
+[2026-08-16 04:11:55] -> Block Size:    256
+[2026-08-16 04:11:55] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:11:55] -> Kernel Loops:  10000
+[2026-08-16 04:11:55] -> Warmup Iters:  5
+[2026-08-16 04:11:55] -> Sync Mode:     2
+[2026-08-16 04:11:55] -> Init Pattern:  0
+[2026-08-16 04:11:55] -> Verify Mode:   ON
+[2026-08-16 04:11:55] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:11:55] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:11:55] [PANTHEON] Running Cache-Line Fracture Verification Pass...
+[2026-08-16 04:11:55] [RESULT] GPU 0 | 168.848 GB/s | 65.1C Avg / 66.0C Max | 238.4W Avg / 242.6W Max
+[2026-08-16 04:11:55] [PANTHEON] --- FINISHED TEST: MEMORY_CACHE_FRACTURE ---
+
+[2026-08-16 04:11:55] [PANTHEON] --- STARTING TEST: MEMORY_RETENTION_BAKE ---
+[2026-08-16 04:11:55] [PANTHEON] Launching memory_retention_bake on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:13:56] [PANTHEON] GPU 0: BAKING (Thermal Leakage Test)...
+[2026-08-16 04:13:56] -> Duration (s):  120
+[2026-08-16 04:13:56] -> Block Size:    256
+[2026-08-16 04:13:56] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:13:56] -> Kernel Loops:  50000
+[2026-08-16 04:13:56] -> Warmup Iters:  5 (ALU only)
+[2026-08-16 04:13:56] -> Sync Mode:     2
+[2026-08-16 04:13:56] -> Init Pattern:  2
+[2026-08-16 04:13:56] -> Verify Mode:   ON
+[2026-08-16 04:13:56] [PANTHEON] GPU 0: Writing Payload to VRAM...
+[2026-08-16 04:13:56] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:13:56] [PANTHEON] Starting active thermal bake telemetry phase...
+[2026-08-16 04:13:56] [PANTHEON] GPU 0: Verifying Data Retention...
+[2026-08-16 04:13:56] [RESULT] GPU 0 | 33.9576 TFLOPS | 73.3C Avg / 74.0C Max | 280.4W Avg / 285.0W Max
+[2026-08-16 04:13:56] [PANTHEON] --- FINISHED TEST: MEMORY_RETENTION_BAKE ---
+
+[2026-08-16 04:13:56] [PANTHEON] --- STARTING TEST: MEMORY_PC_PINGPONG ---
+[2026-08-16 04:13:56] [PANTHEON] Launching memory_pc_pingpong on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:15:59] [PANTHEON] GPU 0: PSEUDO-CHANNEL PING-PONG (Crossbar Stress) | 99% VRAM...
+[2026-08-16 04:15:59] -> Duration (s):  120
+[2026-08-16 04:15:59] -> Block Size:    256
+[2026-08-16 04:15:59] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:15:59] -> Kernel Loops:  1 (Ignored for Ping-Pong)
+[2026-08-16 04:15:59] -> Warmup Iters:  5
+[2026-08-16 04:15:59] -> Sync Mode:     2
+[2026-08-16 04:15:59] -> Init Pattern:  0
+[2026-08-16 04:15:59] -> Verify Mode:   ON
+[2026-08-16 04:15:59] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:15:59] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:15:59] [PANTHEON] Running Crossbar Ping-Pong Verification Pass...
+[2026-08-16 04:15:59] [RESULT] GPU 0 | 481.466 GB/s | 61.5C Avg / 67.0C Max | 199.7W Avg / 206.1W Max
+[2026-08-16 04:15:59] [PANTHEON] --- FINISHED TEST: MEMORY_PC_PINGPONG ---
+
+[2026-08-16 04:15:59] [PANTHEON] --- STARTING TEST: MEMORY_BANK_THRASH ---
+[2026-08-16 04:15:59] [PANTHEON] Launching memory_bank_thrash on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:18:03] [PANTHEON] GPU 0: Memory BANK THRASHER (Row Misses) | 99% VRAM...
+[2026-08-16 04:18:03] -> Duration (s):  120
+[2026-08-16 04:18:03] -> Block Size:    256
+[2026-08-16 04:18:03] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:18:03] -> Kernel Loops:  50000
+[2026-08-16 04:18:03] -> Warmup Iters:  5
+[2026-08-16 04:18:03] -> Sync Mode:     2
+[2026-08-16 04:18:03] -> Init Pattern:  0
+[2026-08-16 04:18:03] -> Verify Mode:   ON
+[2026-08-16 04:18:03] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:18:03] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:18:03] [PANTHEON] Running Memory Row Buffer Verification Pass...
+[2026-08-16 04:18:03] [RESULT] GPU 0 | 181.527 GB/s | 63.1C Avg / 64.0C Max | 227.1W Avg / 232.6W Max
+[2026-08-16 04:18:03] [PANTHEON] --- FINISHED TEST: MEMORY_BANK_THRASH ---
+
+[2026-08-16 04:18:03] [PANTHEON] --- STARTING TEST: MEMORY_TSV_THRASHER ---
+[2026-08-16 04:18:03] [PANTHEON] Launching memory_tsv_thrasher on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:20:09] [PANTHEON] GPU 0: TSV TOGGLE-RATE THRASHER (Interposer Stress) | 99% VRAM...
+[2026-08-16 04:20:09] -> Duration (s):  120
+[2026-08-16 04:20:09] -> Block Size:    256
+[2026-08-16 04:20:09] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:20:09] -> Kernel Loops:  10
+[2026-08-16 04:20:09] -> Warmup Iters:  5
+[2026-08-16 04:20:09] -> Sync Mode:     2
+[2026-08-16 04:20:09] -> Init Pattern:  0 (Overridden: Forced Toggle Pattern)
+[2026-08-16 04:20:09] -> Verify Mode:   ON
+[2026-08-16 04:20:09] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:20:09] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:20:09] [PANTHEON] Running TSV Toggle-Rate Verification Pass...
+[2026-08-16 04:20:09] [RESULT] GPU 0 | 553.061 GB/s | 59.7C Avg / 62.0C Max | 187.1W Avg / 191.0W Max
+[2026-08-16 04:20:09] [PANTHEON] --- FINISHED TEST: MEMORY_TSV_THRASHER ---
+
+[2026-08-16 04:20:09] [PANTHEON] --- STARTING TEST: TLB_AVALANCHE ---
+[2026-08-16 04:20:09] [PANTHEON] Launching tlb_avalanche on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:22:14] [PANTHEON] GPU 0: TLB AVALANCHE (MMU Thrashing) | 99% VRAM...
+[2026-08-16 04:22:14] -> Duration (s):  120
+[2026-08-16 04:22:14] -> Block Size:    256
+[2026-08-16 04:22:14] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:22:14] -> Kernel Loops:  20000
+[2026-08-16 04:22:14] -> Warmup Iters:  5
+[2026-08-16 04:22:14] -> Sync Mode:     2
+[2026-08-16 04:22:14] -> Init Pattern:  0 (Page Stride: 256 uint4s)
+[2026-08-16 04:22:14] -> Verify Mode:   ON
+[2026-08-16 04:22:14] [PANTHEON] Generating expected MMU Translation baseline (Golden Pass)...
+[2026-08-16 04:22:14] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:22:14] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:22:14] [PANTHEON] Running MMU Translation State Verification Pass...
+[2026-08-16 04:22:14] [RESULT] GPU 0 | 86.2538 GB/s | 61.6C Avg / 63.0C Max | 218.5W Avg / 221.6W Max
+[2026-08-16 04:22:14] [PANTHEON] --- FINISHED TEST: TLB_AVALANCHE ---
+
+[2026-08-16 04:22:14] [PANTHEON] --- STARTING TEST: RAS_VALIDATOR ---
+[2026-08-16 04:22:14] [PANTHEON] Launching ras_validator on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:24:19] [PANTHEON] GPU 0: RAS VALIDATOR (Active Scrubbing) | 99% VRAM...
+[2026-08-16 04:24:19] -> Duration (s):  120
+[2026-08-16 04:24:19] -> Block Size:    256
+[2026-08-16 04:24:19] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:24:19] -> Kernel Loops:  10
+[2026-08-16 04:24:19] -> Warmup Iters:  5
+[2026-08-16 04:24:19] -> Sync Mode:     2
+[2026-08-16 04:24:19] -> Init Pattern:  2
+[2026-08-16 04:24:19] -> Verify Mode:   ON
+[2026-08-16 04:24:19] [PANTHEON] Init Pristine Pattern on 44779 MB...
+[2026-08-16 04:24:19] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:24:19] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:24:19] [RESULT] GPU 0 | 586.349 GB/s | 65.3C Avg / 66.0C Max | 236.6W Avg / 239.7W Max
+[2026-08-16 04:24:19] [PANTHEON] --- FINISHED TEST: RAS_VALIDATOR ---
+
+[2026-08-16 04:24:19] [PANTHEON] --- STARTING TEST: INT_VIRUS ---
+[2026-08-16 04:24:19] [PANTHEON] Launching int_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:26:20] [PANTHEON] GPU 0: Running INT VIRUS (Integer ALU Stress)...
+[2026-08-16 04:26:20] -> Duration (s):  120
+[2026-08-16 04:26:20] -> Block Size:    256
+[2026-08-16 04:26:20] -> Grid Size:     420 (Auto-calculated)
+[2026-08-16 04:26:20] -> Kernel Loops:  10000
+[2026-08-16 04:26:20] -> Warmup Iters:  5
+[2026-08-16 04:26:20] -> Sync Mode:     2
+[2026-08-16 04:26:20] -> Init Pattern:  0
+[2026-08-16 04:26:20] -> Verify Mode:   ON
+[2026-08-16 04:26:20] [PANTHEON] Generating expected integer baselines (Golden Pass)...
+[2026-08-16 04:26:20] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:26:20] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:26:20] [PANTHEON] Running INT32 Arithmetic Verification Pass...
+[2026-08-16 04:26:20] [RESULT] GPU 0 | 17.1331 TOPS | 74.0C Avg / 75.0C Max | 294.0W Avg / 298.5W Max
+[2026-08-16 04:26:20] [PANTHEON] --- FINISHED TEST: INT_VIRUS ---
+
+[2026-08-16 04:26:20] [PANTHEON] --- STARTING TEST: SCHEDULER ---
+[2026-08-16 04:26:20] [PANTHEON] Launching scheduler on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:28:21] [PANTHEON] GPU 0: Running SCHEDULER VIRUS (Context Switching)...
+[2026-08-16 04:28:21] -> Duration (s):  120
+[2026-08-16 04:28:21] -> Block Size:    64 (Fragment Size)
+[2026-08-16 04:28:21] -> Grid Size:     64 (Overridden: Queue/Stream Count)
+[2026-08-16 04:28:21] -> Kernel Loops:  10 (Launches per Sync Batch)
+[2026-08-16 04:28:21] -> Warmup Iters:  5
+[2026-08-16 04:28:21] -> Sync Mode:     2
+[2026-08-16 04:28:21] -> Init Pattern:  100 (Overridden: Micro-Kernel Inner Loops)
+[2026-08-16 04:28:21] -> Verify Mode:   ON
+[2026-08-16 04:28:21] [PANTHEON] Generating expected Context State baseline (Golden Pass)...
+[2026-08-16 04:28:21] [PANTHEON] Running 5 warmup scheduling batches...
+[2026-08-16 04:28:21] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:28:21] [PANTHEON] Running Hardware Scheduler Context Verification Pass...
+[2026-08-16 04:28:21] [RESULT] GPU 0 | 502.282 KIPS | 50.3C Avg / 67.0C Max | 99.3W Avg / 213.5W Max
+[2026-08-16 04:28:21] [PANTHEON] --- FINISHED TEST: SCHEDULER ---
+
+[2026-08-16 04:28:21] [PANTHEON] --- STARTING TEST: MMA_VIRUS ---
+[2026-08-16 04:28:21] [PANTHEON] Launching mma_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:30:23] [PANTHEON] GPU 0: Running MMA VIRUS (Physical Tensor Cores)...
+[2026-08-16 04:30:23] -> Duration (s):  120
+[2026-08-16 04:30:23] -> Block Size:    256
+[2026-08-16 04:30:23] -> Grid Size:     420 (Auto-calculated)
+[2026-08-16 04:30:23] -> Kernel Loops:  10000
+[2026-08-16 04:30:23] -> Warmup Iters:  5
+[2026-08-16 04:30:23] -> Sync Mode:     2
+[2026-08-16 04:30:23] -> Init Pattern:  0 (0=Pos Matrix, 1=Neg Matrix)
+[2026-08-16 04:30:23] -> Verify Mode:   ON
+[2026-08-16 04:30:23] [PANTHEON] Generating expected Tensor Core baseline (Golden Pass)...
+[2026-08-16 04:30:23] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:30:23] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:30:23] [PANTHEON] Running Tensor Core State Verification Pass...
+[2026-08-16 04:30:23] [RESULT] GPU 0 | 295.695 TFLOPS | 56.0C Avg / 58.0C Max | 177.0W Avg / 181.7W Max
+[2026-08-16 04:30:23] [PANTHEON] --- FINISHED TEST: MMA_VIRUS ---
+
+[2026-08-16 04:30:23] [PANTHEON] --- STARTING TEST: FP64_VIRUS ---
+[2026-08-16 04:30:23] [PANTHEON] Launching fp64_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:32:27] [PANTHEON] GPU 0: Running FP64 VIRUS (Double Precision Chokehold)...
+[2026-08-16 04:32:27] -> Duration (s):  120
+[2026-08-16 04:32:27] -> Block Size:    256
+[2026-08-16 04:32:27] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:32:27] -> Kernel Loops:  10000
+[2026-08-16 04:32:27] -> Warmup Iters:  5
+[2026-08-16 04:32:27] -> Sync Mode:     2
+[2026-08-16 04:32:27] -> Init Pattern:  0
+[2026-08-16 04:32:27] -> Verify Mode:   ON
+[2026-08-16 04:32:27] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:32:27] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:32:27] [PANTHEON] Running 64-Bit Arithmetic Verification Pass...
+[2026-08-16 04:32:27] [RESULT] GPU 0 | 0.577432 TFLOPS | 50.3C Avg / 55.0C Max | 122.0W Avg / 123.7W Max
+[2026-08-16 04:32:27] [PANTHEON] --- FINISHED TEST: FP64_VIRUS ---
+
+[2026-08-16 04:32:27] [PANTHEON] --- STARTING TEST: MEMORY_WRITE ---
+[2026-08-16 04:32:27] [PANTHEON] Launching memory_write on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:34:32] [PANTHEON] GPU 0: Memory WRITE (NT Store | Rail-to-Rail) | 99% VRAM...
+[2026-08-16 04:34:32] -> Duration (s):  120
+[2026-08-16 04:34:32] -> Block Size:    256
+[2026-08-16 04:34:32] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:34:32] -> Kernel Loops:  10
+[2026-08-16 04:34:32] -> Warmup Iters:  5
+[2026-08-16 04:34:32] -> Sync Mode:     2
+[2026-08-16 04:34:32] -> Init Pattern:  2
+[2026-08-16 04:34:32] -> Verify Mode:   ON
+[2026-08-16 04:34:32] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:34:32] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:34:32] [PANTHEON] Running Memory Write Verification Pass...
+[2026-08-16 04:34:32] [RESULT] GPU 0 | 554.83 GB/s | 62.4C Avg / 67.0C Max | 243.8W Avg / 251.9W Max
+[2026-08-16 04:34:32] [PANTHEON] --- FINISHED TEST: MEMORY_WRITE ---
+
+[2026-08-16 04:34:32] [PANTHEON] --- STARTING TEST: MEMORY_WRITE_AGG ---
+[2026-08-16 04:34:32] [PANTHEON] Launching memory_write_agg on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:36:39] [PANTHEON] GPU 0: Memory AGGRESSIVE WRITE (Crosstalk) | 99% VRAM...
+[2026-08-16 04:36:39] -> Duration (s):  120
+[2026-08-16 04:36:39] -> Block Size:    256
+[2026-08-16 04:36:39] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:36:39] -> Kernel Loops:  10
+[2026-08-16 04:36:39] -> Warmup Iters:  5
+[2026-08-16 04:36:39] -> Sync Mode:     2
+[2026-08-16 04:36:39] -> Init Pattern:  2
+[2026-08-16 04:36:39] -> Verify Mode:   ON
+[2026-08-16 04:36:39] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:36:39] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:36:39] [PANTHEON] Running Aggressive Write Verification Pass...
+[2026-08-16 04:36:39] [RESULT] GPU 0 | 554.911 GB/s | 67.5C Avg / 68.0C Max | 251.8W Avg / 254.2W Max
+[2026-08-16 04:36:39] [PANTHEON] --- FINISHED TEST: MEMORY_WRITE_AGG ---
+
+[2026-08-16 04:36:39] [PANTHEON] --- STARTING TEST: MEMORY_READ ---
+[2026-08-16 04:36:39] [PANTHEON] Launching memory_read on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:38:44] [PANTHEON] GPU 0: Memory READ (Entropy Coalesced) | 99% VRAM...
+[2026-08-16 04:38:44] -> Duration (s):  120
+[2026-08-16 04:38:44] -> Block Size:    256
+[2026-08-16 04:38:44] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:38:44] -> Kernel Loops:  10
+[2026-08-16 04:38:44] -> Warmup Iters:  5
+[2026-08-16 04:38:44] -> Sync Mode:     2
+[2026-08-16 04:38:44] -> Init Pattern:  2
+[2026-08-16 04:38:44] -> Verify Mode:   ON
+[2026-08-16 04:38:44] [PANTHEON] Initializing VRAM pattern...
+[2026-08-16 04:38:44] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:38:44] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:38:44] [PANTHEON] Running Memory Read Verification Pass...
+[2026-08-16 04:38:44] [RESULT] GPU 0 | 585.809 GB/s | 68.1C Avg / 69.0C Max | 259.6W Avg / 262.2W Max
+[2026-08-16 04:38:44] [PANTHEON] --- FINISHED TEST: MEMORY_READ ---
+
+[2026-08-16 04:38:44] [PANTHEON] --- STARTING TEST: MEMORY_READ_AGG ---
+[2026-08-16 04:38:44] [PANTHEON] Launching memory_read_agg on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:40:50] [PANTHEON] GPU 0: Memory READ AGGRESSIVE (Rail-to-Rail) | 99% VRAM...
+[2026-08-16 04:40:50] -> Duration (s):  120
+[2026-08-16 04:40:50] -> Block Size:    256
+[2026-08-16 04:40:50] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:40:50] -> Kernel Loops:  10
+[2026-08-16 04:40:50] -> Warmup Iters:  5
+[2026-08-16 04:40:50] -> Sync Mode:     2
+[2026-08-16 04:40:50] -> Init Pattern:  2
+[2026-08-16 04:40:50] -> Verify Mode:   ON
+[2026-08-16 04:40:50] [PANTHEON] Initializing VRAM with pattern...
+[2026-08-16 04:40:50] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:40:50] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:40:50] [PANTHEON] Running Memory Aggressive Read Verification Pass...
+[2026-08-16 04:40:50] [RESULT] GPU 0 | 585.793 GB/s | 68.6C Avg / 69.0C Max | 260.1W Avg / 262.4W Max
+[2026-08-16 04:40:50] [PANTHEON] --- FINISHED TEST: MEMORY_READ_AGG ---
+
+[2026-08-16 04:40:50] [PANTHEON] --- STARTING TEST: VOLTAGE ---
+[2026-08-16 04:40:50] [PANTHEON] Launching voltage on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:42:51] [PANTHEON] GPU 0: Running VOLTAGE DROOP VIRUS (ALU Hammer)...
+[2026-08-16 04:42:51] -> Duration (s):  120
+[2026-08-16 04:42:51] -> Block Size:    256
+[2026-08-16 04:42:51] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:42:51] -> Kernel Loops:  20000
+[2026-08-16 04:42:51] -> Warmup Iters:  5
+[2026-08-16 04:42:51] -> Sync Mode:     2
+[2026-08-16 04:42:51] -> Init Pattern:  0
+[2026-08-16 04:42:51] -> Verify Mode:   ON
+[2026-08-16 04:42:51] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:42:51] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:42:51] [PANTHEON] Running Bitwise Arithmetic Verification Pass...
+[2026-08-16 04:42:51] [RESULT] GPU 0 | 9.143 TFLOPS | 63.3C Avg / 67.0C Max | 193.2W Avg / 205.1W Max
+[2026-08-16 04:42:51] [PANTHEON] --- FINISHED TEST: VOLTAGE ---
+
+[2026-08-16 04:42:51] [PANTHEON] --- STARTING TEST: INCINERATOR ---
+[2026-08-16 04:42:51] [PANTHEON] Launching incinerator on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:44:52] [PANTHEON] GPU 0: Running INCINERATOR (FP16/Half2 + SRAM Stress)...
+[2026-08-16 04:44:52] -> Duration (s):  120
+[2026-08-16 04:44:52] -> Block Size:    256
+[2026-08-16 04:44:52] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:44:52] -> Kernel Loops:  20000
+[2026-08-16 04:44:52] -> Warmup Iters:  5
+[2026-08-16 04:44:52] -> Sync Mode:     2
+[2026-08-16 04:44:52] -> Init Pattern:  0
+[2026-08-16 04:44:52] -> Verify Mode:   ON
+[2026-08-16 04:44:52] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:44:52] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:44:52] [PANTHEON] Running Bitwise FP16 Verification Pass...
+[2026-08-16 04:44:52] [RESULT] GPU 0 | 16.5959 TFLOPS | 72.7C Avg / 75.0C Max | 297.7W Avg / 308.0W Max
+[2026-08-16 04:44:52] [PANTHEON] --- FINISHED TEST: INCINERATOR ---
+
+[2026-08-16 04:44:52] [PANTHEON] --- STARTING TEST: CACHE_LAT ---
+[2026-08-16 04:44:52] [PANTHEON] Launching cache_lat on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:46:57] [PANTHEON] GPU 0: Running CACHE LATENCY STRESS...
+[2026-08-16 04:46:57] -> Duration (s):  120
+[2026-08-16 04:46:57] -> Mem Alloc (%): 99
+[2026-08-16 04:46:57] -> Block Size:    256
+[2026-08-16 04:46:57] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:46:57] -> Kernel Loops:  20000
+[2026-08-16 04:46:57] -> Warmup Iters:  5
+[2026-08-16 04:46:57] -> Sync Mode:     2
+[2026-08-16 04:46:57] -> Init Pattern:  0 (Overridden: Forced LCG Pointer Gen)
+[2026-08-16 04:46:57] -> Verify Mode:   ON
+[2026-08-16 04:46:57] [PANTHEON] GPU 0: Init Random Walk on 32768 MB (4294967296 nodes)...
+[2026-08-16 04:46:57] [PANTHEON] Generating expected pointer chains (Golden Pass)...
+[2026-08-16 04:46:57] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:46:57] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:46:57] [PANTHEON] Running Cache Pointer Chain Verification Pass...
+[2026-08-16 04:46:57] [RESULT] GPU 0 | N/A  | 65.0C Avg / 69.0C Max | 235.9W Avg / 243.0W Max
+[2026-08-16 04:46:57] [PANTHEON] --- FINISHED TEST: CACHE_LAT ---
+
+[2026-08-16 04:46:57] [PANTHEON] --- STARTING TEST: SFU_STRESS ---
+[2026-08-16 04:46:57] [PANTHEON] Launching sfu_stress on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:48:58] [PANTHEON] GPU 0: Running SFU VIRUS (Transcendental Math)...
+[2026-08-16 04:48:58] -> Duration (s):  120
+[2026-08-16 04:48:58] -> Block Size:    256
+[2026-08-16 04:48:58] -> Grid Size:     420 (Auto-calculated)
+[2026-08-16 04:48:58] -> Kernel Loops:  5000
+[2026-08-16 04:48:58] -> Warmup Iters:  5
+[2026-08-16 04:48:58] -> Sync Mode:     2
+[2026-08-16 04:48:58] -> Init Pattern:  0 (Transcendental Math Seed)
+[2026-08-16 04:48:58] -> Verify Mode:   ON
+[2026-08-16 04:48:58] [PANTHEON] Generating expected SFU baseline (Golden Pass)...
+[2026-08-16 04:48:58] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:48:58] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:48:58] [PANTHEON] Running Transcendental ALU Verification Pass...
+[2026-08-16 04:48:58] [RESULT] GPU 0 | 1.77556 TFLOPS | 73.9C Avg / 75.0C Max | 295.2W Avg / 300.4W Max
+[2026-08-16 04:48:58] [PANTHEON] --- FINISHED TEST: SFU_STRESS ---
+
+[2026-08-16 04:48:58] [PANTHEON] --- STARTING TEST: PCIE_BANDWIDTH ---
+[2026-08-16 04:48:58] [PANTHEON] Launching pcie_bandwidth on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:51:00] [PANTHEON] GPU 0: Running PCIE BANDWIDTH THRASHER (Duplex)...
+[2026-08-16 04:51:00] -> Duration (s):  120
+[2026-08-16 04:51:00] -> Block Size:    256
+[2026-08-16 04:51:00] -> Grid Size:     1344 (Auto-calculated)
+[2026-08-16 04:51:00] -> Kernel Loops:  10 (DMA Batches per Sync)
+[2026-08-16 04:51:00] -> Warmup Iters:  5
+[2026-08-16 04:51:00] -> Sync Mode:     2
+[2026-08-16 04:51:00] -> Init Pattern:  2
+[2026-08-16 04:51:00] -> Verify Mode:   ON
+[2026-08-16 04:51:00] [PANTHEON] Running 5 warmup DMA iterations...
+[2026-08-16 04:51:00] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:51:00] [PANTHEON] Running Bidirectional PCIe Verification Pass...
+[2026-08-16 04:51:00] [RESULT] GPU 0 | 23.2653 GB/s | 50.8C Avg / 66.0C Max | 104.5W Avg / 149.3W Max
+[2026-08-16 04:51:00] [PANTHEON] --- FINISHED TEST: PCIE_BANDWIDTH ---
+
+[2026-08-16 04:51:00] [PANTHEON] --- STARTING TEST: PULSE_VIRUS ---
+[2026-08-16 04:51:00] [PANTHEON] Launching pulse_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:53:01] [PANTHEON] GPU 0: Running PULSE VIRUS (Transient Load)...
+[2026-08-16 04:53:01] -> Duration (s):  120
+[2026-08-16 04:53:01] -> Block Size:    256
+[2026-08-16 04:53:01] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:53:01] -> Kernel Loops:  20000
+[2026-08-16 04:53:01] -> Warmup Iters:  5
+[2026-08-16 04:53:01] -> Sync Mode:     2
+[2026-08-16 04:53:01] -> Init Pattern:  50 (Overridden: Used as Sleep ms)
+[2026-08-16 04:53:01] -> Verify Mode:   ON
+[2026-08-16 04:53:01] [PANTHEON] Generating expected ALU baselines (Golden Pass)...
+[2026-08-16 04:53:01] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:53:01] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:53:01] [PANTHEON] Running Transient Load Verification Pass...
+[2026-08-16 04:53:01] [RESULT] GPU 0 | 6.78045 TFLOPS | 49.1C Avg / 50.0C Max | 132.0W Avg / 134.7W Max
+[2026-08-16 04:53:01] [PANTHEON] --- FINISHED TEST: PULSE_VIRUS ---
+
+[2026-08-16 04:53:01] [PANTHEON] --- STARTING TEST: TENSOR_VIRUS ---
+[2026-08-16 04:53:01] [PANTHEON] Launching tensor_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:55:02] [PANTHEON] GPU 0: Running TENSOR VIRUS (FP16 Stress)...
+[2026-08-16 04:55:02] -> Duration (s):  120
+[2026-08-16 04:55:02] -> Block Size:    256
+[2026-08-16 04:55:02] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:55:02] -> Kernel Loops:  20000
+[2026-08-16 04:55:02] -> Warmup Iters:  5
+[2026-08-16 04:55:02] -> Sync Mode:     2
+[2026-08-16 04:55:02] -> Init Pattern:  0 (0=Standard Polarity, 1=Inverted Polarity)
+[2026-08-16 04:55:02] -> Verify Mode:   ON
+[2026-08-16 04:55:02] [PANTHEON] Generating expected FP16 baseline (Golden Pass)...
+[2026-08-16 04:55:02] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:55:02] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:55:02] [PANTHEON] Running FP16 Tensor Core State Verification Pass...
+[2026-08-16 04:55:02] [RESULT] GPU 0 | 18.3124 TFLOPS | 68.4C Avg / 74.0C Max | 278.6W Avg / 298.7W Max
+[2026-08-16 04:55:02] [PANTHEON] --- FINISHED TEST: TENSOR_VIRUS ---
+
+[2026-08-16 04:55:02] [PANTHEON] --- STARTING TEST: ATOMIC_VIRUS ---
+[2026-08-16 04:55:02] [PANTHEON] Launching atomic_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:57:04] [PANTHEON] atomic_virus: clamping GPU buffer to 128 MiB (requested ~44779 MiB would stall one kernel launch far beyond any reasonable timeout). Lower --mem or use another test for full-VRAM allocation checks.
+[2026-08-16 04:57:04] [PANTHEON] GPU 0: Running ATOMIC VIRUS (L2/ROP Stress)...
+[2026-08-16 04:57:04] -> Duration (s):  120
+[2026-08-16 04:57:04] -> Mem Alloc (%): 99
+[2026-08-16 04:57:04] -> Buffer size:   128 MiB (actual GPU allocation for this test)
+[2026-08-16 04:57:04] -> Block Size:    256
+[2026-08-16 04:57:04] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:57:04] -> Kernel Loops:  100
+[2026-08-16 04:57:04] -> Warmup Iters:  5
+[2026-08-16 04:57:04] -> Sync Mode:     2
+[2026-08-16 04:57:04] -> Init Pattern:  0
+[2026-08-16 04:57:04] -> Verify Mode:   ON
+[2026-08-16 04:57:04] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:57:04] [PANTHEON] Warmup complete. Memory reset to baseline.
+[2026-08-16 04:57:04] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:57:04] [PANTHEON] Running L2 Arbiter Verification Pass...
+[2026-08-16 04:57:04] [RESULT] GPU 0 | 325826.0 MAPS | 60.4C Avg / 67.0C Max | 177.8W Avg / 185.3W Max
+[2026-08-16 04:57:04] [PANTHEON] --- FINISHED TEST: ATOMIC_VIRUS ---
+
+[2026-08-16 04:57:04] [PANTHEON] --- STARTING TEST: OMNI_VIRUS ---
+[2026-08-16 04:57:04] [PANTHEON] Launching omni_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:59:05] [PANTHEON] GPU 0: Running OMNI VIRUS (Multi-Stream Pipeline Saturator)...
+[2026-08-16 04:59:05] -> Duration (s):  120
+[2026-08-16 04:59:05] -> Block Size:    256
+[2026-08-16 04:59:05] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 04:59:05] -> Kernel Loops:  5000 (Auto-Scaled for Memory/SFU pipelines)
+[2026-08-16 04:59:05] -> Warmup Iters:  5
+[2026-08-16 04:59:05] -> Sync Mode:     2
+[2026-08-16 04:59:05] -> Init Pattern:  0
+[2026-08-16 04:59:05] -> Verify Mode:   ON
+[2026-08-16 04:59:05] [PANTHEON] Generating expected stream baselines (Golden Pass)...
+[2026-08-16 04:59:05] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 04:59:05] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 04:59:05] [PANTHEON] Running Multi-Stream Cross-Verification Pass...
+[2026-08-16 04:59:05] [RESULT] GPU 0 | 11.6453 TFLOPS | 66.1C Avg / 69.0C Max | 254.9W Avg / 267.4W Max
+[2026-08-16 04:59:05] [PANTHEON] --- FINISHED TEST: OMNI_VIRUS ---
+
+[2026-08-16 04:59:05] [PANTHEON] --- STARTING TEST: P2P_THRASHER ---
+[2026-08-16 04:59:05] [PANTHEON] Launching p2p_thrasher on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:59:06] [PANTHEON] GPU 0: Skipping P2P_THRASHER (Only 1 GPU detected).
+[2026-08-16 04:59:06] [RESULT] GPU 0 | 0.0 GB/s | 63.0C Avg / 63.0C Max | 181.7W Avg / 181.7W Max
+[2026-08-16 04:59:06] [PANTHEON] --- FINISHED TEST: P2P_THRASHER ---
+
+[2026-08-16 04:59:06] [PANTHEON] --- STARTING TEST: ALL_REDUCE ---
+[2026-08-16 04:59:06] [PANTHEON] Launching all_reduce on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 04:59:08] [PANTHEON] Skipping ALL_REDUCE: fewer than two GPUs.
+[2026-08-16 04:59:08] [RESULT] GPU 0 | 0.0 GB/s | 61.5C Avg / 62.0C Max | 108.0W Avg / 111.9W Max
+[2026-08-16 04:59:08] [PANTHEON] --- FINISHED TEST: ALL_REDUCE ---
+
+[2026-08-16 04:59:08] [PANTHEON] --- STARTING TEST: TRANSFORMER_VIRUS ---
+[2026-08-16 04:59:08] [PANTHEON] Launching transformer_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:01:09] [PANTHEON] GPU 0: Running TRANSFORMER VIRUS (Matrix Core Hammer)...
+[2026-08-16 05:01:09] -> Duration (s):  120
+[2026-08-16 05:01:09] -> Block Size:    256
+[2026-08-16 05:01:09] -> Grid Size:     504 (Auto-calculated)
+[2026-08-16 05:01:09] -> Kernel Loops:  1000
+[2026-08-16 05:01:09] -> Warmup Iters:  5
+[2026-08-16 05:01:09] -> Sync Mode:     2
+[2026-08-16 05:01:09] -> Init Pattern:  0 (0=Standard Polarity, 1=Inverted Polarity)
+[2026-08-16 05:01:09] -> Verify Mode:   ON
+[2026-08-16 05:01:09] [PANTHEON] Generating expected Tensor/Matrix baseline (Golden Pass)...
+[2026-08-16 05:01:09] [PANTHEON] Running 5 warmup iterations...
+[2026-08-16 05:01:09] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 05:01:09] [PANTHEON] Running Tensor/Matrix Verification Pass...
+[2026-08-16 05:01:09] [RESULT] GPU 0 | 141.594 TFLOPS | 60.5C Avg / 64.0C Max | 177.3W Avg / 183.0W Max
+[2026-08-16 05:01:09] [PANTHEON] --- FINISHED TEST: TRANSFORMER_VIRUS ---
+
+[2026-08-16 05:01:09] [PANTHEON] --- STARTING TEST: LLM_DECODE ---
+[2026-08-16 05:01:09] [PANTHEON] Launching llm_decode on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:03:10] [PANTHEON] GPU 0: LLM Decode (KV-cache gather and projection)
+[2026-08-16 05:03:10] -> KV Cache:      40708 MiB
+[2026-08-16 05:03:10] -> Kernel Loops:  32
+[2026-08-16 05:03:10] [RESULT] GPU 0 | 806984000.0 tokens/s | 63.0C Avg / 65.0C Max | 237.1W Avg / 242.0W Max
+[2026-08-16 05:03:10] [PANTHEON] --- FINISHED TEST: LLM_DECODE ---
+
+[2026-08-16 05:03:10] [PANTHEON] --- STARTING TEST: LLM_PREFILL ---
+[2026-08-16 05:03:10] [PANTHEON] Launching llm_prefill on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:05:12] [PANTHEON] GPU 0: LLM Prefill (causal attention and projections)
+[2026-08-16 05:05:12] -> Context Store: 40708 MiB
+[2026-08-16 05:05:12] [RESULT] GPU 0 | 202173000.0 prompt-tokens/s | 65.7C Avg / 66.0C Max | 241.0W Avg / 243.5W Max
+[2026-08-16 05:05:12] [PANTHEON] --- FINISHED TEST: LLM_PREFILL ---
+
+[2026-08-16 05:05:12] [PANTHEON] --- STARTING TEST: KV_CACHE_CHURN ---
+[2026-08-16 05:05:12] [PANTHEON] Launching kv_cache_churn on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:07:13] [PANTHEON] GPU 0: KV Cache Churn (paged/ragged cache updates)
+[2026-08-16 05:07:13] -> Cache Size:    40708 MiB
+[2026-08-16 05:07:13] [RESULT] GPU 0 | 1854340000.0 cache-updates/s | 62.6C Avg / 64.0C Max | 213.9W Avg / 216.9W Max
+[2026-08-16 05:07:13] [PANTHEON] --- FINISHED TEST: KV_CACHE_CHURN ---
+
+[2026-08-16 05:07:13] [PANTHEON] --- STARTING TEST: FUSED_ATTENTION ---
+[2026-08-16 05:07:13] [PANTHEON] Launching fused_attention on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:09:15] [PANTHEON] GPU 0: Fused Attention
+[2026-08-16 05:09:15] [RESULT] GPU 0 | 404252000.0 attention-tiles/s | 65.0C Avg / 66.0C Max | 241.4W Avg / 244.4W Max
+[2026-08-16 05:09:15] [PANTHEON] --- FINISHED TEST: FUSED_ATTENTION ---
+
+[2026-08-16 05:09:15] [PANTHEON] --- STARTING TEST: ROPE_STRESS ---
+[2026-08-16 05:09:15] [PANTHEON] Launching rope_stress on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:11:16] [PANTHEON] GPU 0: RoPE Stress
+[2026-08-16 05:11:16] [RESULT] GPU 0 | 404587000.0 rotary-tokens/s | 66.0C Avg / 66.0C Max | 242.8W Avg / 244.8W Max
+[2026-08-16 05:11:16] [PANTHEON] --- FINISHED TEST: ROPE_STRESS ---
+
+[2026-08-16 05:11:16] [PANTHEON] --- STARTING TEST: QUANTIZED_GEMM ---
+[2026-08-16 05:11:16] [PANTHEON] Launching quantized_gemm on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:13:17] [PANTHEON] GPU 0: Quantized GEMM
+[2026-08-16 05:13:17] [RESULT] GPU 0 | 404628000.0 quantized-ops/s | 66.0C Avg / 66.0C Max | 243.6W Avg / 245.8W Max
+[2026-08-16 05:13:17] [PANTHEON] --- FINISHED TEST: QUANTIZED_GEMM ---
+
+[2026-08-16 05:13:17] [PANTHEON] --- STARTING TEST: SERVING_MIX ---
+[2026-08-16 05:13:17] [PANTHEON] Launching serving_mix on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:15:19] [PANTHEON] GPU 0: Serving Mix
+[2026-08-16 05:15:19] [RESULT] GPU 0 | 404213000.0 requests/s | 66.0C Avg / 67.0C Max | 243.8W Avg / 245.9W Max
+[2026-08-16 05:15:19] [PANTHEON] --- FINISHED TEST: SERVING_MIX ---
+
+[2026-08-16 05:15:19] [PANTHEON] --- STARTING TEST: SPECULATIVE_DECODE ---
+[2026-08-16 05:15:19] [PANTHEON] Launching speculative_decode on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:17:20] [PANTHEON] GPU 0: Speculative Decode
+[2026-08-16 05:17:20] [RESULT] GPU 0 | 404588000.0 verified-tokens/s | 66.0C Avg / 66.0C Max | 242.4W Avg / 244.4W Max
+[2026-08-16 05:17:20] [PANTHEON] --- FINISHED TEST: SPECULATIVE_DECODE ---
+
+[2026-08-16 05:17:20] [PANTHEON] --- STARTING TEST: MOE_ROUTER ---
+[2026-08-16 05:17:20] [PANTHEON] Launching moe_router on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:19:22] [PANTHEON] GPU 0: MoE Router
+[2026-08-16 05:19:22] [RESULT] GPU 0 | 404549000.0 routed-tokens/s | 66.1C Avg / 67.0C Max | 244.3W Avg / 246.2W Max
+[2026-08-16 05:19:22] [PANTHEON] --- FINISHED TEST: MOE_ROUTER ---
+
+[2026-08-16 05:19:22] [PANTHEON] --- STARTING TEST: TRANSFORMER_TRAIN_STEP ---
+[2026-08-16 05:19:22] [PANTHEON] Launching transformer_train_step on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:21:23] [PANTHEON] GPU 0: Transformer Train Step
+[2026-08-16 05:21:23] [RESULT] GPU 0 | 403939000.0 train-steps/s | 66.0C Avg / 66.0C Max | 242.2W Avg / 244.2W Max
+[2026-08-16 05:21:23] [PANTHEON] --- FINISHED TEST: TRANSFORMER_TRAIN_STEP ---
+
+[2026-08-16 05:21:23] [PANTHEON] --- STARTING TEST: ALLOCATION_FRAGMENTATION ---
+[2026-08-16 05:21:23] [PANTHEON] Launching allocation_fragmentation on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:23:24] [PANTHEON] GPU 0: Allocation Fragmentation
+[2026-08-16 05:23:24] [RESULT] GPU 0 | 404735000.0 allocation-events/s | 66.2C Avg / 67.0C Max | 243.4W Avg / 246.8W Max
+[2026-08-16 05:23:24] [PANTHEON] --- FINISHED TEST: ALLOCATION_FRAGMENTATION ---
+
+[2026-08-16 05:23:24] [PANTHEON] --- STARTING TEST: GRAPH_REPLAY ---
+[2026-08-16 05:23:24] [PANTHEON] Launching graph_replay on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:25:26] [PANTHEON] GPU 0: Graph Replay
+[2026-08-16 05:25:26] [RESULT] GPU 0 | 404502000.0 graph-steps/s | 66.7C Avg / 67.0C Max | 244.7W Avg / 247.2W Max
+[2026-08-16 05:25:26] [PANTHEON] --- FINISHED TEST: GRAPH_REPLAY ---
+
+[2026-08-16 05:25:26] [PANTHEON] --- STARTING TEST: RAG_EMBEDDING ---
+[2026-08-16 05:25:26] [PANTHEON] Launching rag_embedding on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:27:28] [PANTHEON] GPU 0: RAG Embedding
+[2026-08-16 05:27:28] [RESULT] GPU 0 | 404329000.0 embedding-vectors/s | 66.9C Avg / 67.0C Max | 244.4W Avg / 247.4W Max
+[2026-08-16 05:27:28] [PANTHEON] --- FINISHED TEST: RAG_EMBEDDING ---
+
+[2026-08-16 05:27:28] [PANTHEON] --- STARTING TEST: VISION_ENCODER ---
+[2026-08-16 05:27:28] [PANTHEON] Launching vision_encoder on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:29:29] [PANTHEON] GPU 0: Vision Encoder
+[2026-08-16 05:29:29] [RESULT] GPU 0 | 404529000.0 image-tiles/s | 65.9C Avg / 66.0C Max | 242.4W Avg / 245.3W Max
+[2026-08-16 05:29:29] [PANTHEON] --- FINISHED TEST: VISION_ENCODER ---
+
+[2026-08-16 05:29:29] [PANTHEON] --- STARTING TEST: RT_VIRUS ---
+[2026-08-16 05:29:29] [PANTHEON] Launching rt_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:31:31] [PANTHEON] GPU 0: Running RT VIRUS (OptiX BVH Builder)...
+[2026-08-16 05:31:31] -> Duration (s):  120
+[2026-08-16 05:31:31] -> Block Size:    256
+[2026-08-16 05:31:31] -> Grid Size:     1344 (Auto-calculated)
+[2026-08-16 05:31:31] -> Kernel Loops:  10 (BVH Builds per Sync)
+[2026-08-16 05:31:31] -> Warmup Iters:  5
+[2026-08-16 05:31:31] -> Sync Mode:     2
+[2026-08-16 05:31:31] -> Init Pattern:  1 (Geometry Scale/Spread)
+[2026-08-16 05:31:31] [PANTHEON] Generating expected OptiX BVH baseline (Golden Pass)...
+[2026-08-16 05:31:31] [PANTHEON] Running 5 warmup BVH builds...
+[2026-08-16 05:31:31] [PANTHEON] Starting active telemetry phase...
+[2026-08-16 05:31:31] [PANTHEON] Running OptiX BVH Mathematical Bounds Verification...
+[2026-08-16 05:31:31] [RESULT] GPU 0 | 0.259107 GRays/s | 72.6C Avg / 74.0C Max | 289.1W Avg / 294.7W Max
+[2026-08-16 05:31:31] [PANTHEON] --- FINISHED TEST: RT_VIRUS ---
+
+[2026-08-16 05:31:31] [PANTHEON] --- STARTING TEST: MEDIA_ENC_VIRUS ---
+[2026-08-16 05:31:31] [PANTHEON] Launching media_enc_virus on GPU 0 (Alloc: 99% VRAM)...
+[2026-08-16 05:33:33] [PANTHEON] Generating expected NVENC Bitstream baseline (Golden Pass)...
+[2026-08-16 05:33:33] [RESULT] GPU 0 | 35.1985 FPS | 50.4C Avg / 66.0C Max | 98.5W Avg / 195.2W Max
+[2026-08-16 05:33:33] [PANTHEON] --- FINISHED TEST: MEDIA_ENC_VIRUS ---
+
+
+================================================================================
+FINAL SUMMARY REPORT
+================================================================================
+               Test Name  GPU ID  Dur(s)  Mem(%)         Score                Unit  AvgT  MaxT  AvgMemT  MaxMemT  AvgPwr  MaxPwr  Clk(MHz)
+        baseline_metrics       0     120      99           0.0                GB/s  39.1  40.0      0.0      0.0    88.2    90.9    1734.5
+     memory_thermal_asym       0     120      99       2.18148              TFLOPS  58.3  64.0      0.0      0.0   219.5   227.7    1740.0
+   memory_cache_fracture       0     120      99       168.848                GB/s  65.1  66.0      0.0      0.0   238.4   242.6    1740.0
+   memory_retention_bake       0     120      99       33.9576              TFLOPS  73.3  74.0      0.0      0.0   280.4   285.0    1740.0
+      memory_pc_pingpong       0     120      99       481.466                GB/s  61.5  67.0      0.0      0.0   199.7   206.1    1740.0
+      memory_bank_thrash       0     120      99       181.527                GB/s  63.1  64.0      0.0      0.0   227.1   232.6    1740.0
+     memory_tsv_thrasher       0     120      99       553.061                GB/s  59.7  62.0      0.0      0.0   187.1   191.0    1740.0
+           tlb_avalanche       0     120      99       86.2538                GB/s  61.6  63.0      0.0      0.0   218.5   221.6    1740.0
+           ras_validator       0     120      99       586.349                GB/s  65.3  66.0      0.0      0.0   236.6   239.7    1740.0
+               int_virus       0     120      99       17.1331                TOPS  74.0  75.0      0.0      0.0   294.0   298.5    1601.5
+               scheduler       0     120      99       502.282                KIPS  50.3  67.0      0.0      0.0    99.3   213.5    1740.0
+               mma_virus       0     120      99       295.695              TFLOPS  56.0  58.0      0.0      0.0   177.0   181.7    1740.0
+              fp64_virus       0     120      99      0.577432              TFLOPS  50.3  55.0      0.0      0.0   122.0   123.7    1740.0
+            memory_write       0     120      99        554.83                GB/s  62.4  67.0      0.0      0.0   243.8   251.9    1740.0
+        memory_write_agg       0     120      99       554.911                GB/s  67.5  68.0      0.0      0.0   251.8   254.2    1740.0
+             memory_read       0     120      99       585.809                GB/s  68.1  69.0      0.0      0.0   259.6   262.2    1740.0
+         memory_read_agg       0     120      99       585.793                GB/s  68.6  69.0      0.0      0.0   260.1   262.4    1740.0
+                 voltage       0     120      99         9.143              TFLOPS  63.3  67.0      0.0      0.0   193.2   205.1    1740.0
+             incinerator       0     120      99       16.5959              TFLOPS  72.7  75.0      0.0      0.0   297.7   308.0    1715.2
+               cache_lat       0     120      99           N/A                      65.0  69.0      0.0      0.0   235.9   243.0    1740.0
+              sfu_stress       0     120      99       1.77556              TFLOPS  73.9  75.0      0.0      0.0   295.2   300.4    1710.1
+          pcie_bandwidth       0     120      99       23.2653                GB/s  50.8  66.0      0.0      0.0   104.5   149.3    1740.0
+             pulse_virus       0     120      99       6.78045              TFLOPS  49.1  50.0      0.0      0.0   132.0   134.7    1740.0
+            tensor_virus       0     120      99       18.3124              TFLOPS  68.4  74.0      0.0      0.0   278.6   298.7    1740.0
+            atomic_virus       0     120      99      325826.0                MAPS  60.4  67.0      0.0      0.0   177.8   185.3    1740.0
+              omni_virus       0     120      99       11.6453              TFLOPS  66.1  69.0      0.0      0.0   254.9   267.4    1740.0
+            p2p_thrasher       0     120      99           0.0                GB/s  63.0  63.0      0.0      0.0   181.7   181.7    1740.0
+              all_reduce       0     120      99           0.0                GB/s  61.5  62.0      0.0      0.0   108.0   111.9    1740.0
+       transformer_virus       0     120      99       141.594              TFLOPS  60.5  64.0      0.0      0.0   177.3   183.0    1740.0
+              llm_decode       0     120      99   806984000.0            tokens/s  63.0  65.0      0.0      0.0   237.1   242.0    1740.0
+             llm_prefill       0     120      99   202173000.0     prompt-tokens/s  65.7  66.0      0.0      0.0   241.0   243.5    1740.0
+          kv_cache_churn       0     120      99  1854340000.0     cache-updates/s  62.6  64.0      0.0      0.0   213.9   216.9    1740.0
+         fused_attention       0     120      99   404252000.0   attention-tiles/s  65.0  66.0      0.0      0.0   241.4   244.4    1740.0
+             rope_stress       0     120      99   404587000.0     rotary-tokens/s  66.0  66.0      0.0      0.0   242.8   244.8    1740.0
+          quantized_gemm       0     120      99   404628000.0     quantized-ops/s  66.0  66.0      0.0      0.0   243.6   245.8    1740.0
+             serving_mix       0     120      99   404213000.0          requests/s  66.0  67.0      0.0      0.0   243.8   245.9    1740.0
+      speculative_decode       0     120      99   404588000.0   verified-tokens/s  66.0  66.0      0.0      0.0   242.4   244.4    1740.0
+              moe_router       0     120      99   404549000.0     routed-tokens/s  66.1  67.0      0.0      0.0   244.3   246.2    1740.0
+  transformer_train_step       0     120      99   403939000.0       train-steps/s  66.0  66.0      0.0      0.0   242.2   244.2    1740.0
+allocation_fragmentation       0     120      99   404735000.0 allocation-events/s  66.2  67.0      0.0      0.0   243.4   246.8    1740.0
+            graph_replay       0     120      99   404502000.0       graph-steps/s  66.7  67.0      0.0      0.0   244.7   247.2    1740.0
+           rag_embedding       0     120      99   404329000.0 embedding-vectors/s  66.9  67.0      0.0      0.0   244.4   247.4    1740.0
+          vision_encoder       0     120      99   404529000.0       image-tiles/s  65.9  66.0      0.0      0.0   242.4   245.3    1740.0
+                rt_virus       0     120      99      0.259107             GRays/s  72.6  74.0      0.0      0.0   289.1   294.7    1740.0
+         media_enc_virus       0     120      99       35.1985                 FPS  50.4  66.0      0.0      0.0    98.5   195.2    1740.0
+================================================================================
+[2026-08-16 05:33:33] [PANTHEON] Generating Database Snapshot...
+[2026-08-16 05:33:33] [PANTHEON] Snapshot saved to: database/pantheon_report_20260816-040549.json
