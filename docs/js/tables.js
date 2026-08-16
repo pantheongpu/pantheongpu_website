@@ -35,6 +35,42 @@ let bestRuns = [];
 let currentFilteredData = [];
 let currentSort = { key: 'version', dir: 'desc' };
 
+function getUrlSelections(parameter, availableValues) {
+    const rawValue = new URLSearchParams(window.location.search).get(parameter);
+    if (!rawValue) return null;
+
+    const available = new Set(availableValues);
+    const selected = rawValue.split(",").map(value => value.trim()).filter(value => available.has(value));
+    return selected.length > 0 ? selected : null;
+}
+
+function syncFilterUrl(selectedGPUs, selectedTests, selectedVersions, searchValue) {
+    const url = new URL(window.location.href);
+    const allGPUs = getCheckedValues("gpuMenu").length === document.querySelectorAll("#gpuMenu input.filter-item").length;
+    const allTests = getCheckedValues("testMenu").length === document.querySelectorAll("#testMenu input.filter-item").length;
+    const allVersions = getCheckedValues("versionMenu").length === document.querySelectorAll("#versionMenu input.filter-item").length;
+
+    const setParameter = (name, values, include) => {
+        if (include && values.length > 0) {
+            url.searchParams.set(name, values.join(","));
+        } else {
+            url.searchParams.delete(name);
+        }
+    };
+
+    setParameter("gpu", selectedGPUs, !allGPUs);
+    setParameter("test", selectedTests, !allTests);
+    setParameter("version", selectedVersions, !allVersions);
+    setParameter("q", [searchValue], Boolean(searchValue));
+    window.history.replaceState(null, "", url);
+}
+
+function trackBenchmarkEvent(eventName, parameters = {}) {
+    if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, parameters);
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const table = document.getElementById("benchmarkTable");
@@ -42,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const searchInput = document.getElementById("textSearch");
     if (searchInput) {
+        searchInput.value = new URLSearchParams(window.location.search).get("q") || "";
         searchInput.addEventListener("input", applyFilters);
     }
 
@@ -418,9 +455,11 @@ function populateFilters(data) {
     let versions = Array.from(versionSet);
     versions.sort((a, b) => compareVersions(b, a));
 
-    buildCheckboxMenu("gpuMenu", Array.from(gpuSet).sort());
-    buildCheckboxMenu("testMenu", Array.from(testSet).sort());
-    buildCheckboxMenu("versionMenu", versions);
+    const gpus = Array.from(gpuSet).sort();
+    const tests = Array.from(testSet).sort();
+    buildCheckboxMenu("gpuMenu", gpus, getUrlSelections("gpu", gpus));
+    buildCheckboxMenu("testMenu", tests, getUrlSelections("test", tests));
+    buildCheckboxMenu("versionMenu", versions, getUrlSelections("version", versions));
 }
 
 function applyFilters() {
@@ -431,6 +470,8 @@ function applyFilters() {
     const selectedGPUs = getCheckedValues("gpuMenu");
     const selectedTests = getCheckedValues("testMenu");
     const selectedVersions = getCheckedValues("versionMenu");
+
+    syncFilterUrl(selectedGPUs, selectedTests, selectedVersions, searchInput.value.trim());
 
     let filtered = bestRuns.filter(row => {
         const ver = row.version || "Legacy";
@@ -596,6 +637,8 @@ function exportToCSV() {
         return;
     }
 
+    trackBenchmarkEvent("benchmark_export", { result_count: currentFilteredData.length });
+
     // 1. Get the currently visible columns to build the header
     const visibleCols = COL_DEFS.filter(c => c.visible);
     const headers = visibleCols.map(c => `"${c.label}"`).join(",");
@@ -632,4 +675,23 @@ function exportToCSV() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+}
+
+async function copyBenchmarkLink() {
+    const button = document.getElementById("benchmarkShareButton");
+    const originalLabel = button ? button.textContent : "";
+
+    try {
+        await navigator.clipboard.writeText(window.location.href);
+        trackBenchmarkEvent("benchmark_share", { result_count: currentFilteredData.length });
+        if (button) button.textContent = "Link copied";
+    } catch (error) {
+        window.prompt("Copy this filtered benchmark link:", window.location.href);
+    }
+
+    if (button) {
+        window.setTimeout(() => {
+            button.textContent = originalLabel;
+        }, 1800);
+    }
 }

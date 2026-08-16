@@ -13,6 +13,7 @@ Pantheon tests GPU compute, memory, cache, interconnect, and power behavior. Run
 <div class="pantheon-hero__actions">
   <a href="release/" class="md-button md-button--primary">Download Pantheon</a>
   <a href="benchmarks/" class="md-button">View benchmarks</a>
+  <a href="community/" class="md-button">Get help or contribute</a>
 </div>
 </div>
 
@@ -55,7 +56,7 @@ Then install the compiler for your GPU platform. You only need one:
 Download and install the latest Debian package:
 
 ```bash
-VERSION=1.0.13
+VERSION=1.0.14
 wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 ```
@@ -103,7 +104,7 @@ Pantheon's installation and cache directories untouched.
     RHEL-family and other Linux distributions.
 
     ```bash
-    VERSION=1.0.13
+    VERSION=1.0.14
     wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz"
     tar -xzf "pantheongpu_${VERSION}_amd64.tar.gz"
     cd "pantheongpu_${VERSION}_amd64"

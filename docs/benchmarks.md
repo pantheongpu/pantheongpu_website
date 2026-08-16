@@ -14,6 +14,7 @@ hide:
     Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
 
 [Compare leaders by workload](benchmark-comparisons.md){ .md-button .md-button--primary }
+[Read the benchmark methodology](methodology.md){ .md-button }
 
 <div class="benchmark-controls">
   
@@ -39,6 +40,10 @@ hide:
 
   <button type="button" class="benchmark-export-button" onclick="exportToCSV()">
     &#11123; Export CSV
+  </button>
+
+  <button type="button" id="benchmarkShareButton" class="benchmark-share-button" onclick="copyBenchmarkLink()">
+    Copy filtered link
   </button>
 
   <input type="search" id="textSearch" placeholder="Search..." aria-label="Search benchmarks" autocomplete="off">
