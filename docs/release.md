@@ -8,6 +8,14 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 **Release Date:** August 15, 2026
 
 ### Release Notes
+#### What's changed
+
+- Added AI diagnostic workloads for inference, training, runtime behavior, and graph replay, including focused tests for decode, prefill, KV-cache churn, attention, quantized GEMM, routing, and serving mixes.
+- Expanded `--profile` with richer NVIDIA and AMD hardware counters, timeline traces, separate artifacts for every workload and GPU, and a portable HTML summary report.
+- Hardened workload launch configuration and verification paths across CUDA, HIP, and mock execution.
+- Added native package and portable installation workflows with matching uninstall support for Debian, Ubuntu, Fedora, RHEL-family, and similar Linux distributions.
+- Updated documentation for the expanded workload catalog, profiling output, installation, and removal.
+
 **Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.13...v1.0.14
 
 ### Downloads
