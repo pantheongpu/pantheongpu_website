@@ -1,5 +1,5 @@
 site_name: PANTHEON
-site_description: Universal GPU Stress & Diagnostics Suite
+site_description: Cross-platform CUDA and ROCm GPU stress testing, diagnostics, profiling, and performance benchmarks.
 site_url: https://pantheongpu.com
 edit_uri: ""
 
@@ -8,6 +8,7 @@ nav:
   - Performance Database:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
+    - Methodology: methodology.md
   - Community: community.md
   - Research & Reports:
     - Overview: reports.md
@@ -71,6 +72,7 @@ nav:
 
 theme:
   name: material
+  custom_dir: overrides
   logo: assets/icon.png
   favicon: assets/favicon.ico
   features:

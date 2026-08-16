@@ -15,11 +15,13 @@ Before running a stress workload, read the workload documentation and monitor te
 
 ## Submit a benchmark
 
-[Submit a benchmark result](https://github.com/saqibkh/pantheongpu_website/issues/new/choose){ .md-button }
+[Submit a benchmark result](https://github.com/saqibkh/pantheongpu_website/issues/new?template=benchmark-submission.yml){ .md-button }
 
 Attach the generated `pantheon_report_*.json` file along with the GPU, driver, OS, command, duration, and cooling/power conditions. Remove information you do not want published. Submitted results are reviewed before they are added to the dashboard.
 
 ## Report a regression
+
+[Report a hardware regression](https://github.com/saqibkh/pantheongpu_website/issues/new?template=hardware-regression.yml){ .md-button }
 
 Use the hardware-regression form for a repeatable crash, display artifact, driver reset, system/WSL hang, unexpected throttling, or performance regression. Include the last known good Pantheon version and a minimal reproduction command.
 

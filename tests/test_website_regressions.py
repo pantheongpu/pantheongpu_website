@@ -19,6 +19,18 @@ def test_benchmark_page_does_not_load_table_script_twice():
     assert "tables.js" not in benchmarks
 
 
+def test_site_includes_crawler_and_social_discovery_metadata():
+    mkdocs = read("mkdocs.yml")
+    robots = read("docs/robots.txt")
+    template = read("overrides/main.html")
+
+    assert "custom_dir: overrides" in mkdocs
+    assert "Sitemap: https://pantheongpu.com/sitemap.xml" in robots
+    assert 'property="og:title"' in template
+    assert 'name="twitter:card"' in template
+    assert '"@type": "SoftwareApplication"' in template
+
+
 def test_benchmark_script_is_scoped_to_benchmark_page():
     tables_js = read("docs/js/tables.js")
 
@@ -96,6 +108,35 @@ def test_performance_comparisons_are_nested_under_database_nav():
     assert "  - Performance Database:" in mkdocs
     assert "    - Live Benchmarks: benchmarks.md" in mkdocs
     assert "    - Comparisons: benchmark-comparisons.md" in mkdocs
+    assert "    - Methodology: methodology.md" in mkdocs
+
+
+def test_benchmarks_support_shareable_filtered_views_and_document_methodology():
+    benchmarks = read("docs/benchmarks.md")
+    tables_js = read("docs/js/tables.js")
+    methodology = read("docs/methodology.md")
+
+    assert 'id="benchmarkShareButton"' in benchmarks
+    assert "copyBenchmarkLink" in tables_js
+    assert "URLSearchParams" in tables_js
+    assert "syncFilterUrl" in tables_js
+    assert "trackBenchmarkEvent" in tables_js
+    assert '"benchmark_export"' in tables_js
+    assert '"benchmark_share"' in tables_js
+    assert "# Benchmark Methodology" in methodology
+    assert "Pantheon results are workload-specific measurements" in methodology
+    assert "--verify" in methodology
+    assert "--profile" in methodology
+
+
+def test_home_and_community_offer_direct_onboarding_and_submission_paths():
+    home = read("docs/index.md")
+    community = read("docs/community.md")
+
+    assert 'href="community/"' in home
+    assert "Get help or contribute" in home
+    assert "template=benchmark-submission.yml" in community
+    assert "template=hardware-regression.yml" in community
 
 
 def test_performance_pages_disclose_data_provenance():
@@ -228,7 +269,7 @@ def test_home_quick_start_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in index
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
     assert "sudo apt-get install -y hipcc" in index
-    assert "VERSION=1.0.13" in index
+    assert "VERSION=1.0.14" in index
     assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in index
     assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz" in index
     assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in index
@@ -376,7 +417,8 @@ def test_benchmark_sort_headers_are_keyboard_accessible():
 def test_benchmark_version_filter_defaults_to_all_versions():
     tables_js = read("docs/js/tables.js")
 
-    assert 'buildCheckboxMenu("versionMenu", versions);' in tables_js
+    assert 'buildCheckboxMenu("versionMenu", versions, getUrlSelections("version", versions));' in tables_js
+    assert "if (!rawValue) return null;" in tables_js
     assert "latestVersion" not in tables_js
     assert 'buildCheckboxMenu("versionMenu", versions, latestVersion' not in tables_js
 
@@ -617,9 +659,9 @@ def test_readme_documents_release_mirroring_secret():
     assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
     assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
     assert "Public Binary Downloads" in readme
-    assert "VERSION=1.0.13" in readme
+    assert "VERSION=1.0.14" in readme
     assert "pantheon --test baseline_metrics --duration 10" in readme
-    assert "tag like `v1.0.13`" in readme
+    assert "tag like `v1.0.14`" in readme
     assert "tag like `v1.0.8`" not in readme
     assert "`*.deb`" in readme
     assert "repository dispatch" in readme
