@@ -1,20 +1,24 @@
 site_name: PANTHEON
-site_description: Cross-platform CUDA and ROCm GPU stress testing, diagnostics, profiling, and performance benchmarks.
+site_description: GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
 site_url: https://pantheongpu.com
 edit_uri: ""
 
 nav:
   - Home: index.md
-  - Performance Database:
+  - Product:
+    - Fleet Validation: fleet-validation.md
+    - Getting Started: getting-started.md
+    - Releases & Downloads: release.md
+  - Benchmarks:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
     - Methodology: methodology.md
-  - Community: community.md
-  - Research & Reports:
+  - Research:
     - Overview: reports.md
     - "Silicon Segregation": reports/silicon-segregation.md
     - "Tracing the Tensor Lineage": reports/tensor-lineage.md
-  - Test Documentation:
+  - Documentation:
+    - Getting Started: getting-started.md
     - Overview: tests/index.md
     - Core & Compute:
       - Omni Virus: tests/omni_virus.md
@@ -67,7 +71,7 @@ nav:
       - Graph Replay: tests/graph_replay.md
       - RAG Embedding: tests/rag_embedding.md
       - Vision Encoder: tests/vision_encoder.md
-  - Releases: release.md
+  - Community: community.md
 
 
 theme:

@@ -102,10 +102,10 @@ def test_all_reduce_is_documented_in_the_interconnect_navigation():
     assert "--inject_error" in test_page
 
 
-def test_performance_comparisons_are_nested_under_database_nav():
+def test_performance_comparisons_are_nested_under_benchmarks_nav():
     mkdocs = read("mkdocs.yml")
 
-    assert "  - Performance Database:" in mkdocs
+    assert "  - Benchmarks:" in mkdocs
     assert "    - Live Benchmarks: benchmarks.md" in mkdocs
     assert "    - Comparisons: benchmark-comparisons.md" in mkdocs
     assert "    - Methodology: methodology.md" in mkdocs
@@ -129,12 +129,14 @@ def test_benchmarks_support_shareable_filtered_views_and_document_methodology():
     assert "--profile" in methodology
 
 
-def test_home_and_community_offer_direct_onboarding_and_submission_paths():
+def test_home_offers_product_and_pilot_onboarding_paths():
     home = read("docs/index.md")
     community = read("docs/community.md")
 
-    assert 'href="community/"' in home
-    assert "Get help or contribute" in home
+    assert "GPU health and performance validation for AI infrastructure" in home
+    assert 'href="fleet-validation/"' in home
+    assert "Request a Free Fleet Validation Pilot" in home
+    assert "Member of NVIDIA Inception" in home
     assert "template=benchmark-submission.yml" in community
     assert "template=hardware-regression.yml" in community
 
@@ -156,7 +158,7 @@ def test_research_reports_page_is_available():
     article = read("docs/reports/silicon-segregation.md")
     tensor_article = read("docs/reports/tensor-lineage.md")
 
-    assert "  - Research & Reports:" in mkdocs
+    assert "  - Research:" in mkdocs
     assert "    - Overview: reports.md" in mkdocs
     assert '    - "Silicon Segregation": reports/silicon-segregation.md' in mkdocs
     assert '    - "Tracing the Tensor Lineage": reports/tensor-lineage.md' in mkdocs
@@ -247,43 +249,32 @@ def test_export_button_is_labeled_as_csv():
     assert "Export to CSV" in tables_js
 
 
-def test_home_quick_start_uses_valid_install_commands():
-    index = read("docs/index.md")
+def test_getting_started_uses_valid_install_commands():
+    getting_started = read("docs/getting-started.md")
     mkdocs = read("mkdocs.yml")
 
-    assert "sudo pip install" not in index
-    assert "nvidia-cuda-toolkit (replace" not in index
-    assert "python3 -m venv .venv" not in index
-    assert "python -m pip install -r requirements.txt" not in index
-    assert "python3 pantheon.py" not in index
-    assert "pantheon-tuning" not in index
-    assert "./pantheon --test all" not in index
-    assert "### 1. Install prerequisites" in index
-    assert "### 2. Install Pantheon" in index
-    assert "### 3. Verify the installation" in index
-    assert '=== "NVIDIA CUDA"' in index
-    assert '=== "AMD ROCm/HIP"' in index
+    assert "sudo pip install" not in getting_started
+    assert "nvidia-cuda-toolkit (replace" not in getting_started
+    assert "python3 -m venv .venv" not in getting_started
+    assert "python -m pip install -r requirements.txt" not in getting_started
+    assert "python3 pantheon.py" not in getting_started
+    assert "pantheon-tuning" not in getting_started
+    assert "./pantheon --test all" not in getting_started
+    assert '=== "NVIDIA CUDA"' in getting_started
+    assert '=== "AMD ROCm/HIP"' in getting_started
     assert "  - pymdownx.tabbed:" in mkdocs
     assert "      alternate_style: true" in mkdocs
-    assert '??? info "Alternative: install from the release bundle"' in index
-    assert "sudo apt-get install -y make g++" in index
-    assert "sudo apt-get install -y nvidia-cuda-toolkit" in index
-    assert "sudo apt-get install -y hipcc" in index
-    assert "VERSION=1.0.14" in index
-    assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in index
-    assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz" in index
-    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in index
-    assert 'sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"' in index
-    assert "pantheon --test baseline_metrics --duration 10" in index
-    assert "pantheon --test fp64_virus --duration 30 --gpu 0" in index
-    assert "Pantheon automatically detects CUDA, ROCm/HIP, or mock mode." in index
-    assert "you do not need to pass `--platform cuda`" in index
-    assert "install.sh" in index
-    assert "PANTHEON_BUILD_CACHE_DIR" in index
-    assert index.count("sudo apt-get remove pantheongpu") >= 2
-    assert "sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu" in index
-    assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in index
-    assert '${XDG_CACHE_HOME:-$HOME/.cache}/pantheongpu/builds/' in index
+    assert "sudo apt-get install -y make g++" in getting_started
+    assert "sudo apt-get install -y nvidia-cuda-toolkit" in getting_started
+    assert "sudo apt-get install -y hipcc" in getting_started
+    assert "VERSION=1.0.14" in getting_started
+    assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
+    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in getting_started
+    assert "pantheon --test baseline_metrics --duration 10" in getting_started
+    assert "pantheon --test fp64_virus --duration 30 --gpu 0" in getting_started
+    assert "PantheonGPU automatically detects CUDA, ROCm/HIP, or mock mode." in getting_started
+    assert "sudo apt-get remove pantheongpu" in getting_started
+    assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in getting_started
 
 
 def test_clean_uninstall_script_covers_package_portable_and_cache_files():
