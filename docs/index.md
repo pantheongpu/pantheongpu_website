@@ -1,4 +1,6 @@
 ---
+title: PantheonGPU | GPU Health and Performance Validation
+description: GPU health testing, diagnostics, fleet validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
 hide:
   - navigation
   - toc
@@ -6,128 +8,121 @@ hide:
 
 <div class="pantheon-hero" markdown>
 
-# GPU stress testing and diagnostics
+<p class="pantheon-hero__eyebrow">PantheonGPU</p>
 
-Pantheon tests GPU compute, memory, cache, interconnect, and power behavior. Run focused workloads, capture telemetry, and keep the results for comparison.
+# GPU health and performance validation for AI infrastructure
+
+PantheonGPU actively tests compute, memory, interconnect, thermals, stability, and AI workloads to identify underperforming, unstable, or misconfigured GPUs across NVIDIA CUDA and AMD ROCm systems.
 
 <div class="pantheon-hero__actions">
   <a href="release/" class="md-button md-button--primary">Download Pantheon</a>
-  <a href="benchmarks/" class="md-button">View benchmarks</a>
-  <a href="community/" class="md-button">Get help or contribute</a>
+  <a href="fleet-validation/" class="md-button">Request a Free Fleet Validation Pilot</a>
+  <a href="benchmarks/" class="md-button">Explore Benchmarks</a>
 </div>
+
+<p class="pantheon-hero__credibility">Member of NVIDIA Inception</p>
 </div>
 
 <div class="pantheon-signal-grid" markdown>
 
-<div class="pantheon-signal"><span>45 workloads</span><small>focused stress tests</small></div>
-<div class="pantheon-signal"><span>CUDA + ROCm</span><small>NVIDIA and AMD support</small></div>
-<div class="pantheon-signal"><span>Local reports</span><small>exportable telemetry</small></div>
+<div class="pantheon-signal"><span>45+ targeted workloads</span><small>stress specific GPU subsystems</small></div>
+<div class="pantheon-signal"><span>CUDA + ROCm</span><small>NVIDIA and AMD GPU coverage</small></div>
+<div class="pantheon-signal"><span>Local, exportable reports</span><small>keep the evidence with your team</small></div>
 </div>
 
-## Quick Start
+## Know whether your GPU is actually healthy, not just online
 
-The Debian package is the simplest installation path for Ubuntu and Debian systems.
+Normal temperatures and utilization do not prove that a GPU is performing correctly. A system can look healthy in telemetry while it underperforms, becomes unstable, or exposes a configuration problem under a specific workload. PantheonGPU exercises the hardware directly, then records what happened.
 
-### 1. Install prerequisites
+<div class="pantheon-use-case-grid" markdown>
 
-Install the basic build tools:
+<div class="pantheon-use-case" markdown>
+<p class="pantheon-card__label">Acceptance</p>
 
-```bash
-sudo apt-get update
-sudo apt-get install -y make g++
-```
+### New GPU / Node Acceptance Testing
 
-Then install the compiler for your GPU platform. You only need one:
+Validate a GPU server before placing it into production. Run focused tests after installation, repair, or delivery and keep a report with the node.
+</div>
 
-=== "NVIDIA CUDA"
+<div class="pantheon-use-case" markdown>
+<p class="pantheon-card__label">Fleet operations</p>
 
-    ```bash
-    sudo apt-get install -y nvidia-cuda-toolkit
-    ```
+### Fleet Outlier Detection
 
-=== "AMD ROCm/HIP"
+Identify GPUs that behave differently from otherwise identical devices in a node or fleet, including unexpected performance, thermal, memory, and interconnect behavior.
+</div>
 
-    ```bash
-    sudo apt-get install -y hipcc
-    ```
+<div class="pantheon-use-case" markdown>
+<p class="pantheon-card__label">Change control</p>
 
-### 2. Install Pantheon
+### Performance Regression Testing
 
-Download and install the latest Debian package:
+Detect changes after driver, CUDA or ROCm, firmware, operating system, container, or software updates before they affect production work.
+</div>
+</div>
 
-```bash
-VERSION=1.0.14
-wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
-sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
-```
+## How it works
 
-To uninstall the Debian package later:
+<div class="pantheon-process-grid" markdown>
 
-```bash
-sudo apt-get remove pantheongpu
-```
+<div class="pantheon-process" markdown><span>1</span>
 
-### 3. Verify the installation
+### Run Pantheon
 
-Run a short hardware inventory test:
+Run targeted workloads on one GPU, a multi-GPU node, or multiple systems.
+</div>
 
-```bash
-pantheon --test baseline_metrics --duration 10
-```
+<div class="pantheon-process" markdown><span>2</span>
 
-Then run a targeted stress test on GPU 0:
+### Exercise the hardware
 
-```bash
-pantheon --test fp64_virus --duration 30 --gpu 0
-```
+Test compute, tensor operations, memory, cache, PCIe and interconnect, thermals, stability, and AI workloads.
+</div>
 
-!!! note
-    Pantheon automatically detects CUDA, ROCm/HIP, or mock mode. Run the `pantheon`
-    command directly; you do not need to pass `--platform cuda`.
+<div class="pantheon-process" markdown><span>3</span>
 
-### Completely remove Pantheon
+### Compare and investigate
 
-The native package command above removes Pantheon's package-managed files.
-To also remove runtime-created files and the current user's compiled workload
-cache, or to remove a portable installation on RHEL, Fedora, Rocky Linux,
-AlmaLinux, or another Linux distribution, run:
+Use local reports and benchmark baselines to identify unexpected performance or behavior.
+</div>
+</div>
 
-```bash
-curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh
-```
+## Coverage for the parts that matter
 
-This leaves CUDA, ROCm, system compilers, and benchmark reports stored outside
-Pantheon's installation and cache directories untouched.
+- 45+ targeted workloads for compute, memory, cache, interconnect, thermals, and stability
+- NVIDIA CUDA and AMD ROCm support
+- AI and LLM inference workloads, including decode, prefill, attention, cache, and serving tests
+- GPU memory and cache testing
+- PCIe and multi-GPU interconnect testing
+- Local JSON, CSV, HTML, and trace reports
+- A public performance database for comparing systems
 
-??? info "Alternative: install from the release bundle"
-    The release bundle contains the Debian package and an `install.sh` helper for
-    RHEL-family and other Linux distributions.
+## Illustrative fleet-validation result
 
-    ```bash
-    VERSION=1.0.14
-    wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.tar.gz"
-    tar -xzf "pantheongpu_${VERSION}_amd64.tar.gz"
-    cd "pantheongpu_${VERSION}_amd64"
-    sudo apt install "./packages/pantheongpu_${VERSION}_amd64.deb"
-    ```
+<div class="pantheon-example-card" markdown>
 
-    Uninstall a Debian package installation with:
+<p class="pantheon-card__label">Example only. Not a customer result.</p>
 
-    ```bash
-    sudo apt-get remove pantheongpu
-    ```
+### 8-GPU Node Validation
 
-    On RHEL-family and other Linux systems, install the portable bundle with
-    `sudo ./install.sh`. Remove that installation with:
+<div class="pantheon-example-summary"><strong>7 GPUs: PASS</strong><strong class="pantheon-example-summary__flag">1 GPU: FLAGGED</strong></div>
 
-    ```bash
-    sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu
-    ```
+**GPU 5**
 
-    Use the complete-removal command above if you also want to clear the
-    current user's compiled workload cache.
+- Memory performance below node peers
+- AI workload performance below baseline
+- PCIe normal
+- Thermals normal
 
-!!! tip "Build cache"
-    First-run workload builds are cached under
-    `${XDG_CACHE_HOME:-$HOME/.cache}/pantheongpu/builds/`.
-    Set `PANTHEON_BUILD_CACHE_DIR` to choose another writable cache directory.
+This is the kind of evidence a validation report can surface for follow-up.
+</div>
+
+<div class="pantheon-home-cta" markdown>
+
+## Validate a node before it becomes an incident
+
+PantheonGPU is looking for infrastructure operators interested in a free pilot for approximately 10 to 50 GPUs.
+
+<a href="fleet-validation/" class="md-button md-button--primary">Request a Free Pilot</a>
+<a href="getting-started/" class="md-button">Read the installation guide</a>
+</div>
