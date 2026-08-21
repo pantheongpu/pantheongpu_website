@@ -92,7 +92,7 @@ body, input, .md-nav__link, .md-typeset {
   color: #f8fbff;
   background: radial-gradient(circle at 88% 16%, rgba(65, 194, 213, .30), transparent 34%), linear-gradient(135deg, #111a35, #172753);
 }
-.pantheon-hero > * { position: relative; z-index: 1; max-width: 680px; }
+.pantheon-hero > * { position: relative; z-index: 1; max-width: 980px; }
 .pantheon-hero h1 { margin: 0 0 1rem; color: #fff; -webkit-text-fill-color: #fff; font-size: clamp(2.35rem, 5vw, 4.5rem); line-height: 1.04; }
 .pantheon-hero p { max-width: 630px; color: #d4def1; font-size: clamp(1rem, 2vw, 1.16rem); }
 .pantheon-hero__eyebrow, .page-intro__eyebrow { color: var(--pantheon-cyan); font-size: .74rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }

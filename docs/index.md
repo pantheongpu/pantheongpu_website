@@ -61,32 +61,6 @@ Detect changes after driver, CUDA or ROCm, firmware, operating system, container
 </div>
 </div>
 
-## How it works
-
-<div class="pantheon-process-grid" markdown>
-
-<div class="pantheon-process" markdown><span>1</span>
-
-### Run Pantheon
-
-Run targeted workloads on one GPU, a multi-GPU node, or multiple systems.
-</div>
-
-<div class="pantheon-process" markdown><span>2</span>
-
-### Exercise the hardware
-
-Test compute, tensor operations, memory, cache, PCIe and interconnect, thermals, stability, and AI workloads.
-</div>
-
-<div class="pantheon-process" markdown><span>3</span>
-
-### Compare and investigate
-
-Use local reports and benchmark baselines to identify unexpected performance or behavior.
-</div>
-</div>
-
 ## Coverage for the parts that matter
 
 - 45+ targeted workloads for compute, memory, cache, interconnect, thermals, and stability
