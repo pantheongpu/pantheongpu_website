@@ -41,4 +41,4 @@ Pantheon compares the available reliability data before and after every workload
 
 ## Submitting a benchmark
 
-Use the [benchmark submission form](https://github.com/saqibkh/pantheongpu_website/issues/new?template=benchmark-submission.yml) to contribute a run. Include the command, raw result report, GPU and software information, and any verification or RAS warning. Remove serial numbers and other sensitive identifiers before sharing artifacts publicly.
+Use the [benchmark submission form](https://github.com/pantheongpu/pantheongpu_website/issues/new?template=benchmark-submission.yml) to contribute a run. Include the command, raw result report, GPU and software information, and any verification or RAS warning. Remove serial numbers and other sensitive identifiers before sharing artifacts publicly.

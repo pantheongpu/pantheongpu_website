@@ -267,8 +267,8 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in getting_started
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in getting_started
     assert "sudo apt-get install -y hipcc" in getting_started
-    assert "VERSION=1.0.14" in getting_started
-    assert "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
+    assert "VERSION=1.0.15" in getting_started
+    assert "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
     assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in getting_started
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
     assert "pantheon --test fp64_virus --duration 30 --gpu 0" in getting_started
@@ -619,9 +619,10 @@ def test_report_pages_have_figures_and_wider_layout():
     assert "reportChartGradient" not in css
 
 
-def test_release_page_uses_builtin_table_of_contents():
+def test_release_page_uses_version_navigation_without_a_second_content_column():
     release = read("docs/release.md")
-    css = read("docs/css/extra.css")
+    css = read("docs/css/modern.css")
+    release_nav = read("docs/js/release-nav.js")
 
     latest = re.search(r"^## Pantheon (v[\d.]+) \(Latest\)$", release, re.MULTILINE)
 
@@ -640,7 +641,9 @@ def test_release_page_uses_builtin_table_of_contents():
     assert "ZipFile" not in release
     assert 'class="release-version-nav"' not in release
     assert ".release-page" not in css
-    assert ".release-version-nav" not in css
+    assert ".md-sidebar--primary .release-version-nav" in css
+    assert "pantheon-v1015-latest" in release_nav
+    assert '"v1.0.7", "#v107"' in release_nav
 
 
 def test_readme_documents_release_mirroring_secret():
@@ -658,7 +661,7 @@ def test_readme_documents_release_mirroring_secret():
     assert "repository dispatch" in readme
     assert "private source repository paths" in readme
     assert "public website repo" in readme
-    assert "saqibkh/pantheongpu" in readme
+    assert "pantheongpu/pantheongpu" in readme
     assert "overwrite" in readme
 
 

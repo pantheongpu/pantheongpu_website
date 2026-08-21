@@ -7,7 +7,7 @@
 
 ## GitHub Discussions
 
-[Open Pantheon Discussions](https://github.com/saqibkh/pantheongpu_website/discussions){ .md-button .md-button--primary }
+[Open Pantheon Discussions](https://github.com/pantheongpu/pantheongpu_website/discussions){ .md-button .md-button--primary }
 
 Use Discussions for installation and configuration questions, benchmark showcases, workload ideas, feature requests, and release feedback.
 
@@ -15,13 +15,13 @@ Before running a stress workload, read the workload documentation and monitor te
 
 ## Submit a benchmark
 
-[Submit a benchmark result](https://github.com/saqibkh/pantheongpu_website/issues/new?template=benchmark-submission.yml){ .md-button }
+[Submit a benchmark result](https://github.com/pantheongpu/pantheongpu_website/issues/new?template=benchmark-submission.yml){ .md-button }
 
 Attach the generated `pantheon_report_*.json` file along with the GPU, driver, OS, command, duration, and cooling/power conditions. Remove information you do not want published. Submitted results are reviewed before they are added to the dashboard.
 
 ## Report a regression
 
-[Report a hardware regression](https://github.com/saqibkh/pantheongpu_website/issues/new?template=hardware-regression.yml){ .md-button }
+[Report a hardware regression](https://github.com/pantheongpu/pantheongpu_website/issues/new?template=hardware-regression.yml){ .md-button }
 
 Use the hardware-regression form for a repeatable crash, display artifact, driver reset, system/WSL hang, unexpected throttling, or performance regression. Include the last known good Pantheon version and a minimal reproduction command.
 
@@ -30,7 +30,7 @@ Use the hardware-regression form for a repeatable crash, display artifact, drive
 Pantheon will publish a Discord invite only after two named moderators are available and the following baseline is configured:
 
 1. Read-only `#announcements` and public `#getting-started`, `#benchmark-showcase`, `#support`, and `#contributors` channels.
-2. Server rules that match the [Code of Conduct](https://github.com/saqibkh/pantheongpu_website/blob/main/CODE_OF_CONDUCT.md).
+2. Server rules that match the [Code of Conduct](https://github.com/pantheongpu/pantheongpu_website/blob/main/CODE_OF_CONDUCT.md).
 3. Discord's moderation and verification controls enabled before invitations are shared.
 4. A clear routing policy: reproducible bugs go to GitHub Issues; questions and results stay in Discussions or Discord.
 
