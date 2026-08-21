@@ -4,7 +4,30 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ---
 
-## Pantheon v1.0.14 (Latest)
+## Pantheon v1.0.15 (Latest)
+**Release Date:** August 21, 2026
+
+### Release Notes
+#### What's changed
+
+- Added reliable AMD Instinct MI450 build-target handling for both `gfx1250` and `gfx1251`, including ROCm architecture strings with feature suffixes.
+- Made the transformer stress workload portable by default on MI450 systems without requiring the optional `rocWMMA` headers.
+- Improved raw Nsight trace import handling while retaining RAS and PCIe reliability snapshots for every workload.
+- Kept binary package, checksum, GLIBC, installation, and Linux compatibility validation as required release gates.
+
+**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.14...v1.0.15
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.0.15 Debian Package](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.deb) | `.deb` | 33.6 MB |
+| [Pantheon v1.0.15 Tarball](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.tar.gz) | `.tar.gz` | 67.2 MB |
+| [Pantheon v1.0.15 ZIP Bundle](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.zip) | `.zip` | 67.2 MB |
+| [Pantheon v1.0.15 Checksums](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/SHA256SUMS) | `SHA256SUMS` | 303 B |
+
+---
+
+## Pantheon v1.0.14
 **Release Date:** August 15, 2026
 
 ### Release Notes
@@ -131,4 +154,3 @@ This update introduces critical diagnostic enhancements for memory integrity and
 | :--- | :--- | :--- |
 | [Pantheon v1.0.7 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.tar.gz) | `.tar.gz` | 131.2 MB |
 | [Pantheon v1.0.7 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.zip) | `.zip` | 131.2 MB |
-

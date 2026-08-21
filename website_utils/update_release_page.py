@@ -15,7 +15,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--releases-json", type=Path)
     parser.add_argument("--assets-dir", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--repo", default="saqibkh/pantheongpu_website")
+    parser.add_argument("--repo", default="pantheongpu/pantheongpu_website")
     return parser.parse_args()
 
 
