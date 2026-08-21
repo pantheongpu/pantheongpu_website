@@ -5,10 +5,7 @@ edit_uri: ""
 
 nav:
   - Home: index.md
-  - Product:
-    - Fleet Validation: fleet-validation.md
-    - Getting Started: getting-started.md
-    - Releases & Downloads: release.md
+  - Releases: release.md
   - Benchmarks:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
