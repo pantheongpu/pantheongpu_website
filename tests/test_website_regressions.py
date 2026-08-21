@@ -483,10 +483,10 @@ def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validate
     assert "Resolve workflow options" in workflow
     assert "github.event.client_payload.tag" in workflow
     assert "github.event.inputs.tag" in workflow
-    assert "saqibkh/pantheongpu" in workflow
-    assert "repos/saqibkh/pantheongpu/releases/latest" in workflow
-    assert "repos/saqibkh/pantheongpu/releases/tags/" in workflow
-    assert "repos/saqibkh/pantheongpu/releases/assets/" in workflow
+    assert "pantheongpu/pantheongpu" in workflow
+    assert "repos/pantheongpu/pantheongpu/releases/latest" in workflow
+    assert "repos/pantheongpu/pantheongpu/releases/tags/" in workflow
+    assert "repos/pantheongpu/pantheongpu/releases/assets/" in workflow
     assert "gh release download" not in workflow
     assert "PANTHEON_SOURCE_REPO_TOKEN" in workflow
     assert "GH_REPO: ${{ github.repository }}" in workflow
@@ -571,7 +571,7 @@ def test_release_page_generator_writes_all_releases_latest_first(tmp_path):
     page = module.build_page(
         release,
         assets_dir,
-        "saqibkh/pantheongpu_website",
+        "pantheongpu/pantheongpu_website",
         [older_release, release],
     )
 
