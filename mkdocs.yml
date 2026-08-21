@@ -2,10 +2,13 @@ site_name: PANTHEON
 site_description: GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
 site_url: https://pantheongpu.com
 edit_uri: ""
+not_in_nav: |
+  fleet-validation.md
 
 nav:
   - Home: index.md
   - Releases: release.md
+  - Getting Started: getting-started.md
   - Benchmarks:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
@@ -15,7 +18,6 @@ nav:
     - "Silicon Segregation": reports/silicon-segregation.md
     - "Tracing the Tensor Lineage": reports/tensor-lineage.md
   - Documentation:
-    - Getting Started: getting-started.md
     - Overview: tests/index.md
     - Core & Compute:
       - Omni Virus: tests/omni_virus.md
@@ -132,6 +134,7 @@ extra_javascript:
   - js/apexcharts.min.js
   - js/charts.js
   - js/tables.js
+  - js/release-nav.js
 
 extra:
   analytics:

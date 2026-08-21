@@ -7,7 +7,7 @@ JSON files.
 
 ## Community
 
-Use [GitHub Discussions](https://github.com/saqibkh/pantheongpu_website/discussions)
+Use [GitHub Discussions](https://github.com/pantheongpu/pantheongpu_website/discussions)
 for questions, result showcases, and workload ideas. Use the repository's issue
 forms for benchmark submissions and reproducible hardware regressions. See
 [Community](docs/community.md) for the reporting and Discord-launch policy.
@@ -91,13 +91,13 @@ git add docs/assets/web_data.json
 
 ## Public Binary Downloads
 
-Pantheon source code stays in the private `saqibkh/pantheongpu` repository.
+Pantheon source code stays in the private `pantheongpu/pantheongpu` repository.
 Public users should download binary artifacts from this website repository's
 GitHub Releases. The current public binary release is `v1.0.14`:
 
 ```bash
 VERSION=1.0.14
-wget "https://github.com/saqibkh/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
+wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 pantheon --test baseline_metrics --duration 10
 ```
@@ -129,16 +129,16 @@ as `pantheon.py`, `tuning.py`, `monitor.py`, `kernels/`, `tests/`,
 ## Mirror Pantheon Releases
 
 The `Mirror Pantheon Release` workflow copies binary release artifacts from the
-main `saqibkh/pantheongpu` repo into this website repo's GitHub Releases page.
+main `pantheongpu/pantheongpu` repo into this website repo's GitHub Releases page.
 It can run manually, and it also listens for the `pantheongpu_released`
 repository dispatch event emitted by the Pantheon release workflow.
 
 To run it:
 
-1. Open **Actions** in `saqibkh/pantheongpu_website`.
+1. Open **Actions** in `pantheongpu/pantheongpu_website`.
 2. Select **Mirror Pantheon Release**.
 3. Click **Run workflow**.
-4. Leave `tag` blank to mirror the latest `saqibkh/pantheongpu` release, or
+4. Leave `tag` blank to mirror the latest `pantheongpu/pantheongpu` release, or
    enter a tag like `v1.0.14`.
 5. Set `overwrite` only if the mirrored website release already exists and
    should be recreated.
@@ -162,21 +162,21 @@ Before publishing, the workflow validates that binary bundles do not contain
 private source repository paths such as `pantheon.py`, `tuning.py`, `monitor.py`,
 `kernels/`, `tests/`, `website_utils/`, or `.git/`.
 
-If `saqibkh/pantheongpu` is private, add this repository secret under
+If `pantheongpu/pantheongpu` is private, add this repository secret under
 **Settings -> Secrets and variables -> Actions**:
 
 ```text
 PANTHEON_SOURCE_REPO_TOKEN
 ```
 
-The token must belong to a GitHub account that can read `saqibkh/pantheongpu`.
+The token must belong to a GitHub account that can read `pantheongpu/pantheongpu`.
 A classic personal access token with `repo` scope is the most reliable option.
-For a fine-grained token, grant repository access to `saqibkh/pantheongpu` and
+For a fine-grained token, grant repository access to `pantheongpu/pantheongpu` and
 set **Contents** to **Read-only**.
 
 For automatic mirroring from the source repository, configure the
-`PANTHEON_WEBSITE_RELEASE_TOKEN` secret in `saqibkh/pantheongpu` with permission
-to create repository dispatch events in `saqibkh/pantheongpu_website`.
+`PANTHEON_WEBSITE_RELEASE_TOKEN` secret in `pantheongpu/pantheongpu` with permission
+to create repository dispatch events in `pantheongpu/pantheongpu_website`.
 
 ## Deployment
 

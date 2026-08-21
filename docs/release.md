@@ -15,15 +15,14 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 - Improved raw Nsight trace import handling while retaining RAS and PCIe reliability snapshots for every workload.
 - Kept binary package, checksum, GLIBC, installation, and Linux compatibility validation as required release gates.
 
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.14...v1.0.15
 
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.15 Debian Package](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.deb) | `.deb` | 33.6 MB |
-| [Pantheon v1.0.15 Tarball](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.tar.gz) | `.tar.gz` | 67.2 MB |
-| [Pantheon v1.0.15 ZIP Bundle](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.zip) | `.zip` | 67.2 MB |
-| [Pantheon v1.0.15 Checksums](https://github.com/pantheongpu/pantheongpu/releases/download/v1.0.15/SHA256SUMS) | `SHA256SUMS` | 303 B |
+| [Pantheon v1.0.15 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.deb) | `.deb` | 33.6 MB |
+| [Pantheon v1.0.15 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.tar.gz) | `.tar.gz` | 67.2 MB |
+| [Pantheon v1.0.15 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.15/pantheongpu_1.0.15_amd64.zip) | `.zip` | 67.2 MB |
+| [Pantheon v1.0.15 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.15/SHA256SUMS) | `SHA256SUMS` | 303 B |
 
 ---
 
@@ -39,15 +38,14 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 - Added native package and portable installation workflows with matching uninstall support for Debian, Ubuntu, Fedora, RHEL-family, and similar Linux distributions.
 - Updated documentation for the expanded workload catalog, profiling output, installation, and removal.
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.13...v1.0.14
 
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.14 Debian Package](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.deb) | `.deb` | 33.5 MB |
-| [Pantheon v1.0.14 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.tar.gz) | `.tar.gz` | 67.1 MB |
-| [Pantheon v1.0.14 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.zip) | `.zip` | 67.1 MB |
-| [Pantheon v1.0.14 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.14/SHA256SUMS) | `SHA256SUMS` | 303 B |
+| [Pantheon v1.0.14 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.deb) | `.deb` | 33.5 MB |
+| [Pantheon v1.0.14 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.tar.gz) | `.tar.gz` | 67.1 MB |
+| [Pantheon v1.0.14 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.14/pantheongpu_1.0.14_amd64.zip) | `.zip` | 67.1 MB |
+| [Pantheon v1.0.14 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.14/SHA256SUMS) | `SHA256SUMS` | 303 B |
 
 ---
 
@@ -56,18 +54,17 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ### Release Notes
 #### What's Changed
-* [codex] Fix source and AMD execution paths by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/9
+* [codex] Fix source and AMD execution paths by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/9
 
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.12...v1.0.13
 
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.13 Debian Package](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.deb) | `.deb` | 33.4 MB |
-| [Pantheon v1.0.13 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.tar.gz) | `.tar.gz` | 66.8 MB |
-| [Pantheon v1.0.13 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.zip) | `.zip` | 66.8 MB |
-| [Pantheon v1.0.13 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.13/SHA256SUMS) | `SHA256SUMS` | 303 B |
+| [Pantheon v1.0.13 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.deb) | `.deb` | 33.4 MB |
+| [Pantheon v1.0.13 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.tar.gz) | `.tar.gz` | 66.8 MB |
+| [Pantheon v1.0.13 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.zip) | `.zip` | 66.8 MB |
+| [Pantheon v1.0.13 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.13/SHA256SUMS) | `SHA256SUMS` | 303 B |
 
 ---
 
@@ -76,18 +73,17 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ### Release Notes
 #### What's Changed
-* [codex] Prepare Pantheon 1.0.12 release by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/8
+* [codex] Prepare Pantheon 1.0.12 release by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/8
 
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.11...v1.0.12
 
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.12 Debian Package](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.12/pantheongpu_1.0.12_amd64.deb) | `.deb` | 33.4 MB |
-| [Pantheon v1.0.12 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.12/pantheongpu_1.0.12_amd64.tar.gz) | `.tar.gz` | 66.8 MB |
-| [Pantheon v1.0.12 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.12/pantheongpu_1.0.12_amd64.zip) | `.zip` | 66.8 MB |
-| [Pantheon v1.0.12 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.12/SHA256SUMS) | `SHA256SUMS` | 303 B |
+| [Pantheon v1.0.12 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.12/pantheongpu_1.0.12_amd64.deb) | `.deb` | 33.4 MB |
+| [Pantheon v1.0.12 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.12/pantheongpu_1.0.12_amd64.tar.gz) | `.tar.gz` | 66.8 MB |
+| [Pantheon v1.0.12 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.12/pantheongpu_1.0.12_amd64.zip) | `.zip` | 66.8 MB |
+| [Pantheon v1.0.12 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.12/SHA256SUMS) | `SHA256SUMS` | 303 B |
 
 ---
 
@@ -96,20 +92,19 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ### Release Notes
 #### What's Changed
-* pantheon tuning params by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/5
-* Debian binary release by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/6
-* Debian binary release by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/7
+* pantheon tuning params by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/5
+* Debian binary release by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/6
+* Debian binary release by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/7
 
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.8...v1.0.10
 
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.10 Debian Package](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.10/pantheongpu_1.0.10_amd64.deb) | `.deb` | 87.4 MB |
-| [Pantheon v1.0.10 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.10/pantheongpu_1.0.10_amd64.tar.gz) | `.tar.gz` | 174.8 MB |
-| [Pantheon v1.0.10 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.10/pantheongpu_1.0.10_amd64.zip) | `.zip` | 174.8 MB |
-| [Pantheon v1.0.10 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.10/SHA256SUMS) | `SHA256SUMS` | 303 B |
+| [Pantheon v1.0.10 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.10/pantheongpu_1.0.10_amd64.deb) | `.deb` | 87.4 MB |
+| [Pantheon v1.0.10 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.10/pantheongpu_1.0.10_amd64.tar.gz) | `.tar.gz` | 174.8 MB |
+| [Pantheon v1.0.10 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.10/pantheongpu_1.0.10_amd64.zip) | `.zip` | 174.8 MB |
+| [Pantheon v1.0.10 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.10/SHA256SUMS) | `SHA256SUMS` | 303 B |
 
 ---
 
@@ -118,22 +113,21 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ### Release Notes
 #### What's Changed
-* INitial Commit by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/1
-* Package Nuitka release archives by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/2
-* Update VERSION by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/3
-* Automate by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/4
+* INitial Commit by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/1
+* Package Nuitka release archives by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/2
+* Update VERSION by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/3
+* Automate by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/4
 
 #### New Contributors
-* @saqibkh made their first contribution in https://github.com/saqibkh/pantheongpu/pull/1
+* @saqibkh made their first contribution in https://github.com/pantheongpu/pantheongpu/pull/1
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.7...v1.0.8
 
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.8 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.tar.gz) | `.tar.gz` | 181.1 KB |
-| [Pantheon v1.0.8 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.zip) | `.zip` | 247.6 KB |
-| [Pantheon v1.0.8 Checksums](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.8/SHA256SUMS) | `SHA256SUMS` | 173 B |
+| [Pantheon v1.0.8 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.tar.gz) | `.tar.gz` | 181.1 KB |
+| [Pantheon v1.0.8 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.8/pantheon-1.0.8.zip) | `.zip` | 247.6 KB |
+| [Pantheon v1.0.8 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.8/SHA256SUMS) | `SHA256SUMS` | 173 B |
 
 ---
 
@@ -152,5 +146,5 @@ This update introduces critical diagnostic enhancements for memory integrity and
 ### Downloads
 | File | Format | Size |
 | :--- | :--- | :--- |
-| [Pantheon v1.0.7 Tarball](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.tar.gz) | `.tar.gz` | 131.2 MB |
-| [Pantheon v1.0.7 ZIP Bundle](https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.7/pantheon-v1.0.7-linux-x86_64.zip) | `.zip` | 131.2 MB |
+| [Pantheon v1.0.7 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.7/pantheon-1.0.7.tar.gz) | `.tar.gz` | 131.2 MB |
+| [Pantheon v1.0.7 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.7/pantheon-1.0.7.zip) | `.zip` | 131.2 MB |

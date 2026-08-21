@@ -5,7 +5,7 @@ repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 export DEBIAN_FRONTEND=noninteractive
 
 curl -fsSL \
-  https://github.com/saqibkh/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.deb \
+  https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.13/pantheongpu_1.0.13_amd64.deb \
   -o /tmp/pantheongpu.deb
 apt-get install -y --no-install-recommends /tmp/pantheongpu.deb
 

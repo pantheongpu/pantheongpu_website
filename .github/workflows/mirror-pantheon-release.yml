@@ -78,7 +78,7 @@ jobs:
             echo "1. Fine-grained PAT owned by an account that can read pantheongpu/pantheongpu:"
             echo "   - Repository access: Only pantheongpu/pantheongpu"
             echo "   - Repository permissions: Contents = Read-only"
-            echo "2. Classic PAT owned by an account that can read saqibkh/pantheongpu:"
+            echo "2. Classic PAT owned by an account that can read pantheongpu/pantheongpu:"
             echo "   - Scope: repo"
             exit 1
           fi

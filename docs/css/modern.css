@@ -101,6 +101,21 @@ body, input, .md-nav__link, .md-typeset {
 .pantheon-hero__actions .md-button--primary { border-color: #fff !important; background: #fff !important; color: #18234a !important; }
 .pantheon-hero__credibility { margin: 1.1rem 0 0; color: #d4def1; font-size: .86rem; font-weight: 700; }
 
+.md-sidebar--primary .release-version-nav > .md-nav__list,
+.md-sidebar--primary .release-version-nav > .md-nav__list > .md-nav__item {
+  display: block !important;
+  height: auto !important;
+  visibility: visible !important;
+}
+.md-sidebar--primary .release-version-nav > .md-nav__list::before {
+  color: var(--md-default-fg-color);
+  content: "Releases";
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  margin: .1rem .75rem .45rem;
+}
+
 .pantheon-signal-grid, .pantheon-feature-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 1.25rem 0 3rem; }
 .pantheon-signal { padding: 1.1rem 1.2rem; border: 1px solid var(--pantheon-line); border-radius: .65rem; background: var(--pantheon-subtle); }
 .pantheon-signal span { display: block; color: var(--pantheon-ink); font-size: 1.05rem; font-weight: 760; letter-spacing: -.02em; }
