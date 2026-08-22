@@ -252,6 +252,13 @@ def test_telemetry_columns_are_available_for_new_benchmark_rows():
     assert '"Throughput Variance (%)"' in generator
 
 
+def test_comparison_charts_use_two_columns_on_desktop():
+    css = read("docs/css/extra.css")
+
+    assert "grid-template-columns: repeat(2, minmax(0, 1fr));" in css
+    assert "@media (max-width: 760px)" in css
+
+
 def test_export_button_is_labeled_as_csv():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")
