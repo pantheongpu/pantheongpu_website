@@ -267,7 +267,7 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in getting_started
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in getting_started
     assert "sudo apt-get install -y hipcc" in getting_started
-    assert "VERSION=1.0.15" in getting_started
+    assert "VERSION=1.0.16" in getting_started
     assert "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
     assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in getting_started
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
@@ -653,9 +653,9 @@ def test_readme_documents_release_mirroring_secret():
     assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
     assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
     assert "Public Binary Downloads" in readme
-    assert "VERSION=1.0.14" in readme
+    assert "VERSION=1.0.16" in readme
     assert "pantheon --test baseline_metrics --duration 10" in readme
-    assert "tag like `v1.0.14`" in readme
+    assert "tag like `v1.0.16`" in readme
     assert "tag like `v1.0.8`" not in readme
     assert "`*.deb`" in readme
     assert "repository dispatch" in readme
