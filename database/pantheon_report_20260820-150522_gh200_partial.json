@@ -23,7 +23,7 @@
     {
       "id": 0,
       "type": "NVIDIA",
-      "name": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
+    "name": "NVIDIA H200 GPU (Grace Arm64 host)",
       "memory_total": "97871 MiB",
       "driver_version": "570.148.08",
       "uuid": "benchmark-gh200-lambda-20260820"

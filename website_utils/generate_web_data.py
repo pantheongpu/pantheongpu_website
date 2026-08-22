@@ -115,6 +115,11 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
             with open(f, 'r', encoding="utf-8") as fp:
                 data = json.load(fp)
 
+                run_status = str(data.get("run_status", "complete")).lower()
+                if run_status in {"partial", "failed", "incomplete"}:
+                    print(f"[SKIPPED] {run_status} benchmark report: {f}")
+                    continue
+
                 # Store the entire GPU info dictionary by ID
                 gpu_info_map = {}
                 if data.get("gpu_static_info"):
