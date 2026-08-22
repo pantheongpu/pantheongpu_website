@@ -5,7 +5,7 @@ import pytest
 from website_utils.generate_web_data import first_present, infer_unit, is_unknown_version, main, record_key, to_float
 
 
-def write_report(db_dir, name, gpu_info, test_results, version="1.0.0"):
+def write_report(db_dir, name, gpu_info, test_results, version="1.0.0", run_status=None):
     report = {
         "pantheon_version": version,
         "timestamp": "2026-05-20 10:00:00",
@@ -13,9 +13,27 @@ def write_report(db_dir, name, gpu_info, test_results, version="1.0.0"):
         "gpu_static_info": gpu_info,
         "test_results": test_results,
     }
+    if run_status is not None:
+        report["run_status"] = run_status
     path = db_dir / name
     path.write_text(json.dumps(report), encoding="utf-8")
     return path
+
+
+def test_partial_reports_are_not_published(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(
+        db_dir,
+        "pantheon_report_partial.json",
+        [{"id": 0, "name": "Incomplete GPU", "memory_total": "98304 MiB"}],
+        [{"Test Name": "memory_write", "GPU ID": 0, "Score": 20, "Unit": "GB/s"}],
+        run_status="partial",
+    )
+
+    assert main(db_dir=db_dir, output_file=output_file) == []
 
 
 def test_unknown_uuid_uses_gpu_metadata_to_keep_cards_separate(tmp_path):
