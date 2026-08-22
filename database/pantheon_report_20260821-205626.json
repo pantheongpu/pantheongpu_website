@@ -1,0 +1,83 @@
+{
+    "pantheon_version": "1.0.16",
+    "timestamp": "2026-08-21 20:56:38",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.18.33.2-microsoft-standard-WSL2",
+        "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3187.20Mhz"
+    },
+    "ram_info": {
+        "total": "23.59GB",
+        "available": "19.48GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": "12288 MB",
+            "driver_version": "596.36",
+            "power_limit": 170.0,
+            "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+            "serial": "[N/A]"
+        },
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": "12288 MB",
+            "driver_version": "596.36",
+            "power_limit": 170.0,
+            "uuid": "GPU-31f5e719-e56e-586c-38f0-9ca3be0f7930",
+            "serial": "[N/A]"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "test_results": [
+        {
+            "Test Name": "memory_write",
+            "Version": "1.0.16",
+            "Description": "Memory Write (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 10,
+            "Mem Usage (%)": 50,
+            "Score": 329.248,
+            "Unit": "GB/s",
+            "Avg Temp (C)": 47.9,
+            "Max Temp (C)": 51.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 110.2,
+            "Max Power (W)": 126.6,
+            "Avg Clock(MHz)": 1816.4,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1972.0,
+            "Avg GPU Util (%)": 91.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 5911.7,
+            "Memory Total (MiB)": 12288.0,
+            "Energy (Wh)": 0.351,
+            "Thermal Rise (C)": 14.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 3059.44,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/mnt/c/Users/sssnk/OneDrive/Documents/pantheon/pantheongpu_runner_resilience/build/memory_write 0 10 50 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260821-205626/reliability/memory_write/gpu0/ras.json"
+        }
+    ]
+}
