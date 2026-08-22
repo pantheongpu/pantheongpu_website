@@ -16464,7 +16464,7 @@
     "toolkit": "12.4"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16492,7 +16492,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16520,7 +16520,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16548,7 +16548,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16576,7 +16576,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16604,7 +16604,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16632,7 +16632,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16660,7 +16660,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16688,7 +16688,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16716,7 +16716,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16744,7 +16744,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16772,7 +16772,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16800,7 +16800,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16828,7 +16828,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16856,7 +16856,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16884,7 +16884,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16912,7 +16912,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16940,7 +16940,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16968,7 +16968,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -16996,7 +16996,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17024,7 +17024,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17052,7 +17052,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17080,7 +17080,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17108,7 +17108,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17136,7 +17136,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17164,7 +17164,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17192,7 +17192,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17220,7 +17220,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17248,7 +17248,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17276,7 +17276,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17304,7 +17304,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17332,7 +17332,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17360,7 +17360,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17388,7 +17388,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17416,7 +17416,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17444,7 +17444,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17472,7 +17472,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17500,7 +17500,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17528,7 +17528,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17556,7 +17556,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17584,7 +17584,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17612,7 +17612,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
@@ -17640,7 +17640,7 @@
     "toolkit": "12.8"
   },
   {
-    "gpu": "NVIDIA GH200 480GB",
+    "gpu": "NVIDIA H200 480GB GPU (Grace Arm64 host)",
     "manufacturer": "Unknown",
     "uuid": "benchmark-gh200-lambda-20260820",
     "serial": "Unknown",
