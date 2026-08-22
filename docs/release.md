@@ -10,8 +10,8 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 ### Release Notes
 #### What's changed
 
-- Added reliable AMD Instinct MI450 build-target handling for both `gfx1250` and `gfx1251`, including ROCm architecture strings with feature suffixes.
-- Made the transformer stress workload portable by default on MI450 systems without requiring the optional `rocWMMA` headers.
+- Improved AMD build-target handling, including ROCm architecture strings with feature suffixes.
+- Made the transformer stress workload portable by default on supported AMD systems without requiring optional acceleration headers.
 - Improved raw Nsight trace import handling while retaining RAS and PCIe reliability snapshots for every workload.
 - Kept binary package, checksum, GLIBC, installation, and Linux compatibility validation as required release gates.
 
