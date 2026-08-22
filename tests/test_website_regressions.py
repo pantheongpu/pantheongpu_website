@@ -240,6 +240,18 @@ def test_throughput_formatting_uses_row_unit_not_hardcoded_bandwidth():
     assert '`${val} GB/s`' not in tables_js
 
 
+def test_telemetry_columns_are_available_for_new_benchmark_rows():
+    tables_js = read("docs/js/tables.js")
+    generator = read("website_utils/generate_web_data.py")
+
+    for key in ("gpu_util_avg", "memory_peak", "energy_wh", "clock_min", "clock_max", "thermal_rise", "throttle_time", "throughput_variance"):
+        assert ('"' + key + '"') in tables_js or ('key: "' + key + '"') in tables_js
+    assert '"Avg GPU Util (%)"' in generator
+    assert '"Peak Memory (MiB)"' in generator
+    assert '"Energy (Wh)"' in generator
+    assert '"Throughput Variance (%)"' in generator
+
+
 def test_export_button_is_labeled_as_csv():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")

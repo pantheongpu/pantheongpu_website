@@ -6,10 +6,14 @@ const COL_DEFS = [
     { key: "version",     label: "Ver",         visible: true },
     { key: "score",       label: "Score",       visible: false },
     { key: "throughput",  label: "Throughput",  visible: true },
+    { key: "throughput_variance", label: "Throughput Variance", visible: true },
     { key: "duration",    label: "Duration",    visible: true },
     { key: "temp_max",    label: "Peak Temp",   visible: true },
     { key: "power_max",   label: "Peak Power",  visible: true },
     { key: "clock_avg",   label: "Avg Clock",   visible: true },
+    { key: "gpu_util_avg",label: "Avg GPU Util",visible: true },
+    { key: "memory_peak", label: "Peak Memory", visible: true },
+    { key: "energy_wh",   label: "Energy",      visible: true },
     { key: "date",        label: "Date",        visible: true },
     // --- Hidden by default (Pro Metrics) ---
     { key: "efficiency",  label: "Efficiency (MB/J)", visible: false },
@@ -18,6 +22,12 @@ const COL_DEFS = [
     { key: "pcie_gen",    label: "PCIe Gen",    visible: false },
     { key: "pcie_width",  label: "PCIe Width",  visible: false },
     { key: "throttle",    label: "Limit Reason",visible: false },
+    { key: "clock_min",   label: "Min Clock",   visible: false },
+    { key: "clock_max",   label: "Max Clock",   visible: false },
+    { key: "gpu_util_max",label: "Peak GPU Util",visible: false },
+    { key: "memory_total",label: "Total Memory",visible: false },
+    { key: "thermal_rise",label: "Thermal Rise",visible: false },
+    { key: "throttle_time",label: "Throttle Time",visible: false },
     { key: "volts_core",  label: "Core (mV)",   visible: false },
     { key: "volts_soc",   label: "SoC (mV)",    visible: false },
     { key: "vram",     label: "VRAM",    visible: false },
@@ -201,6 +211,9 @@ function formatCellValue(row, key) {
     if (key === "throughput") {
         return formatMetric(val, row.unit);
     }
+    if (key === "throughput_variance") {
+        return formatMetric(val, "%");
+    }
     if (key === "duration") {
         return isMissingValue(val) ? "N/A" : `${val}s`;
     }
@@ -209,6 +222,24 @@ function formatCellValue(row, key) {
     }
     if (key.includes("power")) {
         return formatMetric(val, "W");
+    }
+    if (key.includes("gpu_util")) {
+        return formatMetric(val, "%");
+    }
+    if (key.includes("memory")) {
+        return formatMetric(val, "MiB");
+    }
+    if (key === "energy_wh") {
+        return formatMetric(val, "Wh");
+    }
+    if (key === "clock_min" || key === "clock_max") {
+        return formatMetric(val, "MHz");
+    }
+    if (key === "thermal_rise") {
+        return formatMetric(val, "°C");
+    }
+    if (key === "throttle_time") {
+        return formatMetric(val, "s");
     }
     if (key === "version") {
         return val || "Legacy";
