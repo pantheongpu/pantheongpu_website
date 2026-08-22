@@ -1,5 +1,6 @@
 (() => {
   const releases = [
+    ["v1.0.16", "#pantheon-v1016"],
     ["v1.0.15", "#pantheon-v1015-latest"],
     ["v1.0.14", "#pantheon-v1014"],
     ["v1.0.13", "#pantheon-v1013"],

@@ -93,10 +93,10 @@ git add docs/assets/web_data.json
 
 Pantheon source code stays in the private `pantheongpu/pantheongpu` repository.
 Public users should download binary artifacts from this website repository's
-GitHub Releases. The current public binary release is `v1.0.14`:
+GitHub Releases. The current public binary release is `v1.0.16`:
 
 ```bash
-VERSION=1.0.14
+VERSION=1.0.16
 wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 pantheon --test baseline_metrics --duration 10
@@ -139,7 +139,7 @@ To run it:
 2. Select **Mirror Pantheon Release**.
 3. Click **Run workflow**.
 4. Leave `tag` blank to mirror the latest `pantheongpu/pantheongpu` release, or
-   enter a tag like `v1.0.14`.
+   enter a tag like `v1.0.16`.
 5. Set `overwrite` only if the mirrored website release already exists and
    should be recreated.
 

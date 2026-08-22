@@ -37,7 +37,7 @@ Install the compiler for your platform. You only need one:
 Download and install the latest Debian package:
 
 ```bash
-VERSION=1.0.15
+VERSION=1.0.16
 wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
 sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
 ```
