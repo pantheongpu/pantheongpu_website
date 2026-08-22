@@ -2,7 +2,16 @@ import json
 
 import pytest
 
-from website_utils.generate_web_data import first_present, infer_unit, is_unknown_version, main, record_key, to_float
+from website_utils.generate_web_data import (
+    first_present,
+    infer_unit,
+    is_unknown_version,
+    main,
+    normalize_gpu_name,
+    record_key,
+    to_float,
+    unsupported_workload_reason,
+)
 
 
 def write_report(db_dir, name, gpu_info, test_results, version="1.0.0", run_status=None):
@@ -34,6 +43,85 @@ def test_partial_reports_are_not_published(tmp_path):
     )
 
     assert main(db_dir=db_dir, output_file=output_file) == []
+
+
+def test_multi_gpu_workloads_are_excluded_from_public_benchmark_data(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(
+        db_dir,
+        "pantheon_report_multi_gpu.json",
+        [{"id": 0, "name": "Single GPU", "uuid": "GPU-UUID"}],
+        [
+            {"Test Name": "all_reduce", "GPU ID": 0, "Score": 0, "Unit": "GB/s"},
+            {"Test Name": "p2p_thrasher", "GPU ID": 0, "Score": 0, "Unit": "GB/s"},
+            {"Test Name": "memory_write", "GPU ID": 0, "Score": 100, "Unit": "GB/s"},
+        ],
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert [row["test"] for row in rows] == ["memory_write"]
+
+
+def test_h100_name_variants_use_one_public_name(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    assert normalize_gpu_name("NVIDIA H100 80GB Memory3") == "NVIDIA H100 80GB HBM3"
+    assert normalize_gpu_name("NVIDIA H100 80GB HBM3") == "NVIDIA H100 80GB HBM3"
+
+    write_report(
+        db_dir,
+        "pantheon_report_h100_names.json",
+        [
+            {"id": 0, "name": "NVIDIA H100 80GB Memory3", "uuid": "GPU-MEMORY3"},
+            {"id": 1, "name": "NVIDIA H100 80GB HBM3", "uuid": "GPU-HBM3"},
+        ],
+        [
+            {"Test Name": "memory_write", "GPU ID": 0, "Score": 100, "Unit": "GB/s"},
+            {"Test Name": "memory_write", "GPU ID": 1, "Score": 110, "Unit": "GB/s"},
+        ],
+    )
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert {row["gpu"] for row in rows} == {"NVIDIA H100 80GB HBM3"}
+
+
+def test_unsupported_workloads_are_excluded_and_recorded(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    assert unsupported_workload_reason(
+        "media_enc_virus", "NVIDIA A100-SXM4-40GB"
+    ) == "NVIDIA A100 does not expose an NVENC encoder"
+
+    write_report(
+        db_dir,
+        "pantheon_report_unsupported.json",
+        [{"id": 0, "name": "NVIDIA A100-SXM4-40GB", "uuid": "GPU-A100"}],
+        [{"Test Name": "media_enc_virus", "GPU ID": 0, "Score": 0, "Unit": "FPS"}],
+        version="1.0.16",
+    )
+
+    assert main(db_dir=db_dir, output_file=output_file) == []
+    unsupported = json.loads(
+        (output_file.parent / "unsupported_workloads.json").read_text(encoding="utf-8")
+    )
+    assert unsupported == [{
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "manufacturer": "Unknown",
+        "test": "media_enc_virus",
+        "version": "1.0.16",
+        "status": "UNSUPPORTED",
+        "reason": "NVIDIA A100 does not expose an NVENC encoder",
+        "source_report": "pantheon_report_unsupported.json",
+    }]
 
 
 def test_unknown_uuid_uses_gpu_metadata_to_keep_cards_separate(tmp_path):
