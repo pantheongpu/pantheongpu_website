@@ -70,7 +70,9 @@ nav:
       - Graph Replay: tests/graph_replay.md
       - RAG Embedding: tests/rag_embedding.md
       - Vision Encoder: tests/vision_encoder.md
-  - Community: community.md
+  - Community:
+    - Community Overview: community.md
+    - Programs & Support: programs-support.md
 
 
 theme:
