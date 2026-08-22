@@ -12,6 +12,7 @@ except ImportError:
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DB_DIR = ROOT_DIR / "database"
 OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "web_data.json"
+UNSUPPORTED_OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "unsupported_workloads.json"
 
 KNOWN_TEST_UNITS = {
     "atomic_virus": "MAPS",
@@ -35,6 +36,23 @@ KNOWN_TEST_UNITS = {
     "transformer_virus": "TFLOPS",
 }
 
+# Keep multi-GPU/interconnect workloads in raw reports and documentation, but
+# do not present single-GPU-incompatible results in the public leaderboard.
+PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
+
+GPU_NAME_ALIASES = {
+    "nvidia h100 80gb memory3": "NVIDIA H100 80GB HBM3",
+}
+
+
+def unsupported_workload_reason(test_name, gpu_name):
+    """Return a capability reason for a workload, or None when applicable."""
+    test_key = normalize(test_name, "").lower()
+    gpu_key = normalize(gpu_name, "").lower()
+    if test_key == "media_enc_virus" and "a100" in gpu_key:
+        return "NVIDIA A100 does not expose an NVENC encoder"
+    return None
+
 
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -48,6 +66,13 @@ class NumpyEncoder(json.JSONEncoder):
 def normalize(value, default="Unknown"):
     value = str(value if value is not None else default).strip()
     return value or default
+
+
+def normalize_gpu_name(value, default="Unknown GPU"):
+    """Use stable public names for equivalent GPU metadata variants."""
+    name = normalize(value, default)
+    lookup = " ".join(name.split()).casefold()
+    return GPU_NAME_ALIASES.get(lookup, name)
 
 
 def record_key(row):
@@ -106,6 +131,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
     output_file = Path(output_file)
     best_runs = {}
     errors = []
+    unsupported = []
 
     # 1. PROCESS SOURCE REPORTS
     files = sorted(glob.glob(str(db_dir / "pantheon_report_*.json")))
@@ -128,12 +154,27 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
 
                 for test in data.get("test_results", []):
                     test_name = test.get("Test Name", "unknown")
+                    if normalize(test_name, "").lower() in PUBLIC_EXCLUDED_TESTS:
+                        continue
                     gid = test.get("GPU ID", 0)
                     
                     # Fetch the specific GPU's info safely
                     g_info = gpu_info_map.get(gid, {})
 
-                    gpu_name = g_info.get("name", f"Unknown GPU {gid}")
+                    gpu_name = normalize_gpu_name(g_info.get("name", f"Unknown GPU {gid}"))
+                    capability_reason = unsupported_workload_reason(test_name, gpu_name)
+                    if capability_reason:
+                        report_version = first_present(data, ["Version", "pantheon_version"], "1.0.0")
+                        unsupported.append({
+                            "gpu": gpu_name,
+                            "manufacturer": g_info.get("manufacturer", "Unknown"),
+                            "test": test_name,
+                            "version": test.get("Version", report_version),
+                            "status": "UNSUPPORTED",
+                            "reason": capability_reason,
+                            "source_report": Path(f).name,
+                        })
+                        continue
                     manufacturer = g_info.get("manufacturer", "Unknown") 
                     uuid = g_info.get("uuid", "Unknown") 
                     serial = g_info.get("serial", "Unknown")
@@ -227,6 +268,10 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
 
     with open(output_file, 'w', encoding="utf-8") as f:
         json.dump(rows, f, indent=2, cls=NumpyEncoder, allow_nan=False)
+
+    unsupported_output = output_file.with_name(UNSUPPORTED_OUTPUT_FILE.name)
+    with open(unsupported_output, 'w', encoding="utf-8") as f:
+        json.dump(unsupported, f, indent=2, cls=NumpyEncoder, allow_nan=False)
 
     print(f"[Generate] Database updated with {len(rows)} records.")
     return rows
