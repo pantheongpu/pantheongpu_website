@@ -6,7 +6,7 @@ const COL_DEFS = [
     { key: "version",     label: "Ver",         visible: true },
     { key: "score",       label: "Score",       visible: false },
     { key: "throughput",  label: "Throughput",  visible: true },
-    { key: "throughput_variance", label: "Throughput Variance", visible: true },
+    { key: "throughput_variance", label: "Throughput Variance", visible: false },
     { key: "duration",    label: "Duration",    visible: true },
     { key: "temp_max",    label: "Peak Temp",   visible: true },
     { key: "power_max",   label: "Peak Power",  visible: true },

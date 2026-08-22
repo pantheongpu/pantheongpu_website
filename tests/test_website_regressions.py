@@ -252,6 +252,12 @@ def test_telemetry_columns_are_available_for_new_benchmark_rows():
     assert '"Throughput Variance (%)"' in generator
 
 
+def test_throughput_variance_is_hidden_by_default():
+    tables_js = read("docs/js/tables.js")
+
+    assert '{ key: "throughput_variance", label: "Throughput Variance", visible: false }' in tables_js
+
+
 def test_comparison_charts_use_two_columns_on_desktop():
     css = read("docs/css/extra.css")
 
