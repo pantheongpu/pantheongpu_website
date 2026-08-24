@@ -1,0 +1,154 @@
+{
+    "pantheon_version": "1.0.16",
+    "timestamp": "2026-08-24 14:27:25",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 124,
+        "logical_cores": 124,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.72TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-cc92b973-ce90-644c-d7c3-288dbfe5ba74",
+            "serial": "1564021012675"
+        },
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-e070c791-28d0-1f0a-7e55-ce7c35a892e6",
+            "serial": "1564021013718"
+        },
+        {
+            "id": 2,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-62b6190e-6455-1ec3-fccc-007519c013c1",
+            "serial": "1564021013392"
+        },
+        {
+            "id": 3,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-f93d983d-4186-7a23-2b0a-cae3e0bd3f4e",
+            "serial": "1564021012838"
+        },
+        {
+            "id": 4,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-c702d35f-b1a2-af8a-830f-69b8ad8d7685",
+            "serial": "1564021012678"
+        },
+        {
+            "id": 5,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-00df5bc6-4f9d-621f-3bf6-37bd47783f0b",
+            "serial": "1564021013807"
+        },
+        {
+            "id": 6,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-f1d95981-090e-79a3-c189-70c94bf70024",
+            "serial": "1564021013248"
+        },
+        {
+            "id": 7,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-ea5e4dda-3142-c507-4cc1-916e15abe68c",
+            "serial": "1564021012424"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260824-142725",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-08-24 14:32:40",
+    "test_results": [
+        {
+            "Test Name": "memory_bank_thrash",
+            "Version": "1.0.16",
+            "Description": "Memory Bank Thrasher (Row Misses)",
+            "GPU ID": 5,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 386.809,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 47.3,
+            "Max Temp (C)": 49.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 202.8,
+            "Max Power (W)": 212.1,
+            "Avg Clock(MHz)": 1386.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 97.4,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 21002.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 17.514,
+            "Thermal Rise (C)": 15.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 1953.12,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheongpu/build/memory_bank_thrash 5 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260824-142725/reliability/memory_bank_thrash/gpu5/ras.json"
+        }
+    ]
+}
