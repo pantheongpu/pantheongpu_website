@@ -39,7 +39,7 @@ hide:
   </div>
 
   <button type="button" class="benchmark-export-button" onclick="exportToCSV()">
-    &#11123; Export CSV
+    Export CSV
   </button>
 
   <button type="button" id="benchmarkShareButton" class="benchmark-share-button" onclick="copyBenchmarkLink()">

@@ -107,10 +107,6 @@
         }
     ],
     "toolkit_version": "12.8",
-    "network_info": {
-        "hostname": "137-131-6-1",
-        "ip_address": "10.19.17.133"
-    },
     "run_id": "20260824-150847",
     "record_kind": "completed_workload",
     "run_status": "complete",

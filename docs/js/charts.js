@@ -1,15 +1,17 @@
 let benchmarkCharts = {};
 let lastChartData = [];
+// All comparison charts share one validated accent hue (see getChartTheme);
+// per-chart colors would decorate rather than encode anything.
 const BENCHMARK_CHARTS = [
-    { testName: "memory_read_agg", elementId: "chart-memory-read", title: "Memory Read Bandwidth", unit: "GB/s", color: "#2563eb" },
-    { testName: "memory_write_agg", elementId: "chart-memory", title: "Memory Write Bandwidth", unit: "GB/s", color: "#0f9f6e" },
-    { testName: "pcie_bandwidth", elementId: "chart-pcie", title: "PCIe Bandwidth", unit: "GB/s", color: "#7c3aed" },
-    { testName: "tensor_virus", elementId: "chart-tensor", title: "Tensor Compute Throughput", unit: "TFLOPS", color: "#db2777" },
-    { testName: "fp64_virus", elementId: "chart-fp64", title: "FP64 Compute Throughput", unit: "TFLOPS", color: "#ea580c" },
-    { testName: "int_virus", elementId: "chart-integer", title: "Integer Compute Throughput", unit: "TOPS", color: "#ca8a04" },
-    { testName: "mma_virus", elementId: "chart-mma", title: "MMA Compute Throughput", unit: "TFLOPS", color: "#16a34a" },
-    { testName: "rt_virus", elementId: "chart-rt", title: "Ray Tracing Throughput", unit: "GRays/s", color: "#4f46e5" },
-    { testName: "scheduler", elementId: "chart-scheduler", title: "Scheduler Throughput", unit: "KIPS", color: "#64748b" },
+    { testName: "memory_read_agg", elementId: "chart-memory-read", title: "Memory Read Bandwidth", unit: "GB/s" },
+    { testName: "memory_write_agg", elementId: "chart-memory", title: "Memory Write Bandwidth", unit: "GB/s" },
+    { testName: "pcie_bandwidth", elementId: "chart-pcie", title: "PCIe Bandwidth", unit: "GB/s" },
+    { testName: "tensor_virus", elementId: "chart-tensor", title: "Tensor Compute Throughput", unit: "TFLOPS" },
+    { testName: "fp64_virus", elementId: "chart-fp64", title: "FP64 Compute Throughput", unit: "TFLOPS" },
+    { testName: "int_virus", elementId: "chart-integer", title: "Integer Compute Throughput", unit: "TOPS" },
+    { testName: "mma_virus", elementId: "chart-mma", title: "MMA Compute Throughput", unit: "TFLOPS" },
+    { testName: "rt_virus", elementId: "chart-rt", title: "Ray Tracing Throughput", unit: "GRays/s" },
+    { testName: "scheduler", elementId: "chart-scheduler", title: "Scheduler Throughput", unit: "KIPS" },
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -60,20 +62,51 @@ function formatChartValue(value) {
     return value.toLocaleString(undefined, { maximumFractionDigits: 2 });
 }
 
+// ApexCharts drops a value label back to the plot origin whenever its bar is
+// shorter than the label text. Re-anchor every label just past its bar end;
+// the axis headroom from niceAxisMax guarantees the room for it.
+function alignBarValueLabels(chartContext) {
+    const root = chartContext && chartContext.el;
+    if (!root) return;
+    const bars = root.querySelectorAll(".apexcharts-bar-area");
+    const labels = root.querySelectorAll(".apexcharts-datalabels text");
+    bars.forEach((bar, index) => {
+        const label = labels[index];
+        if (!label) return;
+        const box = bar.getBBox();
+        label.setAttribute("x", box.x + box.width + 8);
+    });
+}
+
+// Round the axis ceiling up to a clean step with enough headroom that every
+// value label fits on the surface past its bar instead of flipping onto it.
+function niceAxisMax(peak) {
+    const raw = peak * 1.25;
+    const magnitude = Math.pow(10, Math.floor(Math.log10(raw)));
+    for (const step of [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10]) {
+        if (step * magnitude >= raw) return step * magnitude;
+    }
+    return 10 * magnitude;
+}
+
 function getChartTheme() {
     const scheme = document.body.getAttribute("data-md-color-scheme");
     const dark = scheme !== "default";
+    const styles = getComputedStyle(document.body);
+    const token = name => (styles.getPropertyValue(name) || "").trim();
     return {
         mode: dark ? "dark" : "light",
         foreground: dark ? "#e5e7eb" : "#111827",
         muted: dark ? "#9ca3af" : "#4b5563",
         grid: dark ? "#27272a" : "#e5e7eb",
         tooltipTheme: dark ? "dark" : "light",
+        // Contrast-validated bar hue for each scheme.
+        accent: token("--pantheon-chart-accent") || (dark ? "#6b82ea" : "#4057d6"),
     };
 }
 
 function renderChart(rawData, chartConfig) {
-    const { testName, elementId, title, unit: expectedUnit, color } = chartConfig;
+    const { testName, elementId, title, unit: expectedUnit } = chartConfig;
     const element = document.getElementById(elementId);
     if (!element) return;
     const container = element.closest(".chart-container");
@@ -123,12 +156,17 @@ function renderChart(rawData, chartConfig) {
             height: Math.max(320, categories.length * (compact ? 30 : 34) + (compact ? 84 : 96)),
             background: 'transparent',
             foreColor: theme.foreground,
-            fontFamily: 'Roboto, sans-serif',
+            fontFamily: 'Inter, Roboto, sans-serif',
             toolbar: { show: false },
             animations: {
                 enabled: true,
                 easing: 'easeinout',
                 speed: 450,
+            },
+            events: {
+                mounted: alignBarValueLabels,
+                updated: alignBarValueLabels,
+                animationEnd: alignBarValueLabels,
             },
         },
         theme: { mode: theme.mode },
@@ -149,6 +187,10 @@ function renderChart(rawData, chartConfig) {
         },
         xaxis: {
             categories: categories,
+            min: 0,
+            max: niceAxisMax(Math.max(...seriesData)),
+            tickAmount: 5,
+            forceNiceScale: false,
             labels: {
                 formatter: value => formatChartValue(Number(value)),
                 style: { colors: theme.muted },
@@ -185,13 +227,18 @@ function renderChart(rawData, chartConfig) {
                 fontSize: '12px',
             },
         },
-        colors: [color || '#2563eb'],
+        colors: [theme.accent],
         plotOptions: {
             bar: {
                 borderRadius: 5,
                 borderRadiusApplication: 'end',
                 barHeight: '68%',
                 horizontal: true,
+                // Values sit past the bar end on the chart surface, so one
+                // foreground ink stays readable for long and short bars alike.
+                // The axis headroom above guarantees room, so Apex must not
+                // "helpfully" flip labels back onto the bar fill.
+                dataLabels: { position: 'top', hideOverflowingLabels: false },
             }
         },
         grid: {
