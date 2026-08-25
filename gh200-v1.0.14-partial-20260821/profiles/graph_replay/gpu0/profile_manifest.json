@@ -1,0 +1,881 @@
+{
+  "analysis_set": "full",
+  "artifacts": {
+    "counter_files": [
+      "results/20260820-150522/profiles/graph_replay/gpu0/hardware_counters.csv"
+    ],
+    "logs": [
+      "results/20260820-150522/profiles/graph_replay/gpu0/trace.log"
+    ],
+    "trace_files": [
+      "results/20260820-150522/profiles/graph_replay/gpu0/trace.nsys-rep",
+      "results/20260820-150522/profiles/graph_replay/gpu0/trace.qdstrm"
+    ]
+  },
+  "commands": {
+    "counter": "/usr/bin/ncu --csv --set full --metrics sm__throughput.avg.pct_of_peak_sustained_elapsed,sm__inst_executed.sum,sm__warps_active.avg.pct_of_peak_sustained_active,sm__warps_active.avg.per_cycle_active,sm__ctas_active.avg.pct_of_peak_sustained_active,sm__cycles_active.avg.pct_of_peak_sustained_elapsed,sm__cycles_elapsed.avg,gpu__time_duration.sum,sm__inst_executed_pipe_fma.sum,sm__inst_executed_pipe_fp64.sum,sm__inst_executed_pipe_tensor.sum,sm__inst_executed_pipe_adu.sum,sm__inst_executed_pipe_alu.sum,sm__inst_executed_pipe_cbu.sum,sm__inst_executed_pipe_lsu.sum,sm__inst_executed_pipe_tex.sum,sm__inst_executed_pipe_uniform.sum,sm__inst_executed_pipe_xu.sum,sm__inst_executed_pipe_ipa.sum,smsp__thread_inst_executed_per_inst_executed.ratio,sm__sass_average_branch_targets_threads_uniform.pct,smsp__inst_executed_op_global_ld.sum,smsp__inst_executed_op_global_st.sum,smsp__inst_executed_op_shared_ld.sum,smsp__inst_executed_op_shared_st.sum,smsp__inst_executed_op_local_ld.sum,smsp__inst_executed_op_local_st.sum,dram__throughput.avg.pct_of_peak_sustained_elapsed,dram__bytes_read.sum,dram__bytes_write.sum,dram__bytes_read.sum.per_second,dram__bytes_write.sum.per_second,dram__bytes.sum.per_second,dram__sectors_read.sum,dram__sectors_write.sum,dram__cycles_active.avg.pct_of_peak_sustained_elapsed,lts__throughput.avg.pct_of_peak_sustained_elapsed,lts__t_sectors.avg.pct_of_peak_sustained_elapsed,lts__t_sectors_op_read.sum,lts__t_sectors_op_write.sum,lts__t_sectors_op_atom.sum,lts__t_sector_hit_rate.pct,lts__t_requests_op_read.sum,lts__t_requests_op_write.sum,lts__t_requests_op_atom.sum,l1tex__throughput.avg.pct_of_peak_sustained_elapsed,l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum,l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum,l1tex__t_sectors_pipe_lsu_mem_local_op_ld.sum,l1tex__t_sectors_pipe_lsu_mem_local_op_st.sum,l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum,l1tex__t_requests_pipe_lsu_mem_global_op_st.sum,smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct,smsp__sass_average_data_bytes_per_sector_mem_local_op_ld.pct,smsp__sass_average_data_bytes_per_sector_mem_local_op_st.pct,smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_ld.pct,smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_st.pct,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum,smsp__issue_active.avg.pct_of_peak_sustained_active,smsp__warps_eligible.avg.per_cycle_active,smsp__warps_issue_stalled_branch_resolving.avg.per_cycle_active,smsp__warps_issue_stalled_dispatch_stall.avg.per_cycle_active,smsp__warps_issue_stalled_drain.avg.per_cycle_active,smsp__warps_issue_stalled_imc_miss.avg.per_cycle_active,smsp__warps_issue_stalled_lg_throttle.avg.per_cycle_active,smsp__warps_issue_stalled_membar.avg.per_cycle_active,smsp__warps_issue_stalled_misc.avg.per_cycle_active,smsp__warps_issue_stalled_sleeping.avg.per_cycle_active,smsp__warps_issue_stalled_tex_throttle.avg.per_cycle_active,pcie__read_bytes.sum,pcie__write_bytes.sum,pcie__read_bytes.sum.per_second,pcie__write_bytes.sum.per_second /home/ubuntu/pantheongpu-gh200-profile/build/graph_replay 0 600 50 --verify",
+    "trace": "/usr/bin/nsys profile --trace=cuda,nvtx,osrt --sample=none --cpuctxsw=none --force-overwrite=true --output results/20260820-150522/profiles/graph_replay/gpu0/trace -- /home/ubuntu/pantheongpu-gh200-profile/build/graph_replay 0 600 50 --verify"
+  },
+  "generated_at": "2026-08-21T05:58:43.079277+00:00",
+  "gpu_id": 0,
+  "html_summary": "results/20260820-150522/profiles/graph_replay/gpu0/profile_summary.html",
+  "metric_validation": "validated",
+  "platform": "CUDA",
+  "profilers": {
+    "counter": {
+      "path": "/usr/bin/ncu",
+      "version": "NVIDIA (R) Nsight Compute Command Line Profiler"
+    },
+    "trace": {
+      "path": "/usr/bin/nsys",
+      "version": "NVIDIA Nsight Systems version 2024.6.2.225-246235244400v0"
+    }
+  },
+  "ras_after": {
+    "captured_at": "2026-08-21T05:58:42.985872+00:00",
+    "gpu_id": 0,
+    "platform": "CUDA",
+    "schema_version": 1,
+    "sources": {
+      "linux_pcie_aer": {
+        "detail": "AER counters are not exposed for 00000000:dd:00.0",
+        "event_status": "supported",
+        "events": [],
+        "metrics": {},
+        "status": "unsupported"
+      },
+      "vendor_ras": {
+        "detail": "",
+        "events": [],
+        "metrics": {
+          "ecc.errors.corrected.aggregate.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.aggregate.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.aggregate.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.aggregate.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.l2": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.mcu": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.other": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.parity": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.pcie": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.secded": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.sm": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.thresholdExceeded": {
+            "status": "supported",
+            "unit": "state",
+            "value": "No"
+          },
+          "ecc.errors.uncorrected.aggregate.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.sram.parity": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.sram.secded": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.mode.current": {
+            "status": "supported",
+            "unit": "state",
+            "value": "Enabled"
+          },
+          "pcie.bad_dllp": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.bad_tlp": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.correctable": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.fatal": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.l0_to_recovery": {
+            "status": "supported",
+            "unit": "count",
+            "value": 26
+          },
+          "pcie.lane": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.lcrc": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.naks_received": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.naks_sent": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.non_fatal": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.replay": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.replay_rollover": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "retired_pages.dbe": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "retired_pages.pending": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "retired_pages.sbe": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          }
+        },
+        "status": "supported"
+      }
+    }
+  },
+  "ras_before": {
+    "captured_at": "2026-08-21T05:37:14.200317+00:00",
+    "gpu_id": 0,
+    "platform": "CUDA",
+    "schema_version": 1,
+    "sources": {
+      "linux_pcie_aer": {
+        "detail": "AER counters are not exposed for 00000000:dd:00.0",
+        "event_status": "supported",
+        "events": [],
+        "metrics": {},
+        "status": "unsupported"
+      },
+      "vendor_ras": {
+        "detail": "",
+        "events": [],
+        "metrics": {
+          "ecc.errors.corrected.aggregate.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.aggregate.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.aggregate.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.aggregate.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.aggregate.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.corrected.volatile.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.corrected.volatile.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.l2": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.mcu": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.other": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.parity": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.pcie": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.secded": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.sm": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.aggregate.sram.thresholdExceeded": {
+            "status": "supported",
+            "unit": "state",
+            "value": "No"
+          },
+          "ecc.errors.uncorrected.aggregate.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.aggregate.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.cbu": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.device_memory": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.dram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.l1_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.l2_cache": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.register_file": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.sram": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.sram.parity": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.sram.secded": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.errors.uncorrected.volatile.texture_memory": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "ecc.errors.uncorrected.volatile.total": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "ecc.mode.current": {
+            "status": "supported",
+            "unit": "state",
+            "value": "Enabled"
+          },
+          "pcie.bad_dllp": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.bad_tlp": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.correctable": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.fatal": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.l0_to_recovery": {
+            "status": "supported",
+            "unit": "count",
+            "value": 26
+          },
+          "pcie.lane": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.lcrc": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.naks_received": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.naks_sent": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.non_fatal": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.replay": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "pcie.replay_rollover": {
+            "status": "supported",
+            "unit": "count",
+            "value": 0
+          },
+          "retired_pages.dbe": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "retired_pages.pending": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          },
+          "retired_pages.sbe": {
+            "status": "unsupported",
+            "unit": "count",
+            "value": null
+          }
+        },
+        "status": "supported"
+      }
+    }
+  },
+  "ras_report": "results/20260820-150522/profiles/graph_replay/gpu0/ras.json",
+  "requested_metrics": [
+    "sm__throughput.avg.pct_of_peak_sustained_elapsed",
+    "sm__inst_executed.sum",
+    "sm__warps_active.avg.pct_of_peak_sustained_active",
+    "sm__warps_active.avg.per_cycle_active",
+    "sm__ctas_active.avg.pct_of_peak_sustained_active",
+    "sm__cycles_active.avg.pct_of_peak_sustained_elapsed",
+    "sm__cycles_elapsed.avg",
+    "gpu__time_duration.sum",
+    "sm__inst_executed_pipe_fma.sum",
+    "sm__inst_executed_pipe_fp64.sum",
+    "sm__inst_executed_pipe_tensor.sum",
+    "sm__inst_executed_pipe_fp16.sum",
+    "sm__inst_executed_pipe_adu.sum",
+    "sm__inst_executed_pipe_alu.sum",
+    "sm__inst_executed_pipe_cbu.sum",
+    "sm__inst_executed_pipe_lsu.sum",
+    "sm__inst_executed_pipe_tex.sum",
+    "sm__inst_executed_pipe_uniform.sum",
+    "sm__inst_executed_pipe_xu.sum",
+    "sm__inst_executed_pipe_ipa.sum",
+    "smsp__thread_inst_executed_per_inst_executed.ratio",
+    "sm__sass_average_branch_targets_threads_uniform.pct",
+    "smsp__inst_executed_op_global_ld.sum",
+    "smsp__inst_executed_op_global_st.sum",
+    "smsp__inst_executed_op_shared_ld.sum",
+    "smsp__inst_executed_op_shared_st.sum",
+    "smsp__inst_executed_op_local_ld.sum",
+    "smsp__inst_executed_op_local_st.sum",
+    "dram__throughput.avg.pct_of_peak_sustained_elapsed",
+    "dram__bytes_read.sum",
+    "dram__bytes_write.sum",
+    "dram__bytes_read.sum.per_second",
+    "dram__bytes_write.sum.per_second",
+    "dram__bytes.sum.per_second",
+    "dram__sectors_read.sum",
+    "dram__sectors_write.sum",
+    "dram__cycles_active.avg.pct_of_peak_sustained_elapsed",
+    "lts__throughput.avg.pct_of_peak_sustained_elapsed",
+    "lts__t_sectors.avg.pct_of_peak_sustained_elapsed",
+    "lts__t_sectors_op_read.sum",
+    "lts__t_sectors_op_write.sum",
+    "lts__t_sectors_op_atom.sum",
+    "lts__t_sector_hit_rate.pct",
+    "lts__t_requests_op_read.sum",
+    "lts__t_requests_op_write.sum",
+    "lts__t_requests_op_atom.sum",
+    "l1tex__throughput.avg.pct_of_peak_sustained_elapsed",
+    "l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum",
+    "l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum",
+    "l1tex__t_sectors_pipe_lsu_mem_local_op_ld.sum",
+    "l1tex__t_sectors_pipe_lsu_mem_local_op_st.sum",
+    "l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum",
+    "l1tex__t_requests_pipe_lsu_mem_global_op_st.sum",
+    "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct",
+    "smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct",
+    "smsp__sass_average_data_bytes_per_sector_mem_local_op_ld.pct",
+    "smsp__sass_average_data_bytes_per_sector_mem_local_op_st.pct",
+    "smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_ld.pct",
+    "smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_st.pct",
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum",
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum",
+    "smsp__issue_active.avg.pct_of_peak_sustained_active",
+    "smsp__warps_eligible.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_long_scoreboard_per_warp_active.pct",
+    "smsp__warps_issue_stalled_short_scoreboard_per_warp_active.pct",
+    "smsp__warps_issue_stalled_mio_throttle_per_warp_active.pct",
+    "smsp__warps_issue_stalled_math_pipe_throttle_per_warp_active.pct",
+    "smsp__warps_issue_stalled_not_selected_per_warp_active.pct",
+    "smsp__warps_issue_stalled_no_instruction_per_warp_active.pct",
+    "smsp__warps_issue_stalled_wait_per_warp_active.pct",
+    "smsp__warps_issue_stalled_barrier_per_warp_active.pct",
+    "smsp__warps_issue_stalled_branch_resolving.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_dispatch_stall.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_drain.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_imc_miss.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_lg_throttle.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_membar.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_misc.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_sleeping.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_tex_throttle.avg.per_cycle_active",
+    "pcie__read_bytes.sum",
+    "pcie__write_bytes.sum",
+    "pcie__read_bytes.sum.per_second",
+    "pcie__write_bytes.sum.per_second",
+    "nvlink__rx_data.sum",
+    "nvlink__tx_data.sum"
+  ],
+  "schema_version": 1,
+  "skipped_metrics": [
+    "sm__inst_executed_pipe_fp16.sum",
+    "smsp__warps_issue_stalled_long_scoreboard_per_warp_active.pct",
+    "smsp__warps_issue_stalled_short_scoreboard_per_warp_active.pct",
+    "smsp__warps_issue_stalled_mio_throttle_per_warp_active.pct",
+    "smsp__warps_issue_stalled_math_pipe_throttle_per_warp_active.pct",
+    "smsp__warps_issue_stalled_not_selected_per_warp_active.pct",
+    "smsp__warps_issue_stalled_no_instruction_per_warp_active.pct",
+    "smsp__warps_issue_stalled_wait_per_warp_active.pct",
+    "smsp__warps_issue_stalled_barrier_per_warp_active.pct",
+    "nvlink__rx_data.sum",
+    "nvlink__tx_data.sum"
+  ],
+  "status": "complete",
+  "supported_metrics": [
+    "sm__throughput.avg.pct_of_peak_sustained_elapsed",
+    "sm__inst_executed.sum",
+    "sm__warps_active.avg.pct_of_peak_sustained_active",
+    "sm__warps_active.avg.per_cycle_active",
+    "sm__ctas_active.avg.pct_of_peak_sustained_active",
+    "sm__cycles_active.avg.pct_of_peak_sustained_elapsed",
+    "sm__cycles_elapsed.avg",
+    "gpu__time_duration.sum",
+    "sm__inst_executed_pipe_fma.sum",
+    "sm__inst_executed_pipe_fp64.sum",
+    "sm__inst_executed_pipe_tensor.sum",
+    "sm__inst_executed_pipe_adu.sum",
+    "sm__inst_executed_pipe_alu.sum",
+    "sm__inst_executed_pipe_cbu.sum",
+    "sm__inst_executed_pipe_lsu.sum",
+    "sm__inst_executed_pipe_tex.sum",
+    "sm__inst_executed_pipe_uniform.sum",
+    "sm__inst_executed_pipe_xu.sum",
+    "sm__inst_executed_pipe_ipa.sum",
+    "smsp__thread_inst_executed_per_inst_executed.ratio",
+    "sm__sass_average_branch_targets_threads_uniform.pct",
+    "smsp__inst_executed_op_global_ld.sum",
+    "smsp__inst_executed_op_global_st.sum",
+    "smsp__inst_executed_op_shared_ld.sum",
+    "smsp__inst_executed_op_shared_st.sum",
+    "smsp__inst_executed_op_local_ld.sum",
+    "smsp__inst_executed_op_local_st.sum",
+    "dram__throughput.avg.pct_of_peak_sustained_elapsed",
+    "dram__bytes_read.sum",
+    "dram__bytes_write.sum",
+    "dram__bytes_read.sum.per_second",
+    "dram__bytes_write.sum.per_second",
+    "dram__bytes.sum.per_second",
+    "dram__sectors_read.sum",
+    "dram__sectors_write.sum",
+    "dram__cycles_active.avg.pct_of_peak_sustained_elapsed",
+    "lts__throughput.avg.pct_of_peak_sustained_elapsed",
+    "lts__t_sectors.avg.pct_of_peak_sustained_elapsed",
+    "lts__t_sectors_op_read.sum",
+    "lts__t_sectors_op_write.sum",
+    "lts__t_sectors_op_atom.sum",
+    "lts__t_sector_hit_rate.pct",
+    "lts__t_requests_op_read.sum",
+    "lts__t_requests_op_write.sum",
+    "lts__t_requests_op_atom.sum",
+    "l1tex__throughput.avg.pct_of_peak_sustained_elapsed",
+    "l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum",
+    "l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum",
+    "l1tex__t_sectors_pipe_lsu_mem_local_op_ld.sum",
+    "l1tex__t_sectors_pipe_lsu_mem_local_op_st.sum",
+    "l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum",
+    "l1tex__t_requests_pipe_lsu_mem_global_op_st.sum",
+    "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct",
+    "smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct",
+    "smsp__sass_average_data_bytes_per_sector_mem_local_op_ld.pct",
+    "smsp__sass_average_data_bytes_per_sector_mem_local_op_st.pct",
+    "smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_ld.pct",
+    "smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_st.pct",
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum",
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum",
+    "smsp__issue_active.avg.pct_of_peak_sustained_active",
+    "smsp__warps_eligible.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_branch_resolving.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_dispatch_stall.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_drain.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_imc_miss.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_lg_throttle.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_membar.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_misc.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_sleeping.avg.per_cycle_active",
+    "smsp__warps_issue_stalled_tex_throttle.avg.per_cycle_active",
+    "pcie__read_bytes.sum",
+    "pcie__write_bytes.sum",
+    "pcie__read_bytes.sum.per_second",
+    "pcie__write_bytes.sum.per_second"
+  ],
+  "test": "graph_replay",
+  "workload_command": "/home/ubuntu/pantheongpu-gh200-profile/build/graph_replay 0 600 50 --verify"
+}
