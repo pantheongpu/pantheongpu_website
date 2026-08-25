@@ -206,10 +206,3 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
-# Local benchmark-campaign working files — never publish these
-.tmp-*
-*.ps1
-/gpu*_profile_summary.html
-/pantheongpu_runner_resilience/
-/pantheongpu_website_release_v1015/

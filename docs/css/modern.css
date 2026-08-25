@@ -8,10 +8,6 @@
   --pantheon-indigo: #4057d6;
   --pantheon-cyan: #12b8c4;
   --pantheon-shadow: 0 18px 46px rgba(25, 40, 77, 0.10);
-  /* Solid-control accent: WCAG AA with white text in both schemes. */
-  --pantheon-accent-btn: #4057d6;
-  /* Chart bar hue, validated per scheme against its chart surface. */
-  --pantheon-chart-accent: #4057d6;
 }
 
 [data-md-color-scheme="slate"] {
@@ -24,8 +20,6 @@
   --pantheon-cyan: #48d9dd;
   --pantheon-shadow: 0 20px 48px rgba(0, 0, 0, 0.26);
   --md-default-bg-color: #0b1220;
-  --pantheon-accent-btn: #4c5fd8;
-  --pantheon-chart-accent: #6b82ea;
 }
 
 body, input, .md-nav__link, .md-typeset {
@@ -43,17 +37,6 @@ body, input, .md-nav__link, .md-typeset {
 }
 
 .md-tabs__link--active, .md-tabs__link:hover { color: var(--pantheon-indigo) !important; }
-
-/* The header is forced to the page surface, so the search field must follow
-   the scheme instead of keeping Material's dark primary-color tint. */
-[data-md-color-scheme="default"] .md-search__form { background: rgba(15, 23, 42, .06); }
-[data-md-color-scheme="default"] .md-search__form:hover { background: rgba(15, 23, 42, .1); }
-[data-md-color-scheme="default"] .md-search__input { color: var(--pantheon-ink); }
-[data-md-color-scheme="default"] .md-search__input::placeholder,
-[data-md-color-scheme="default"] .md-search__icon { color: var(--pantheon-muted); }
-
-/* App-icon treatment keeps the white logo tile intentional on both schemes. */
-.md-header__button.md-logo img { border-radius: 6px; }
 
 @media (min-width: 76.25em) {
   .md-grid { max-width: 92rem; }
@@ -97,7 +80,7 @@ body, input, .md-nav__link, .md-typeset {
   letter-spacing: 0;
   padding: 0.62rem 1rem;
 }
-.md-button--primary { background: var(--pantheon-accent-btn) !important; border-color: var(--pantheon-accent-btn) !important; color: #fff !important; }
+.md-button--primary { background: var(--pantheon-indigo) !important; border-color: var(--pantheon-indigo) !important; color: #fff !important; }
 .md-button:hover { transform: translateY(-1px); box-shadow: 0 8px 18px color-mix(in srgb, var(--pantheon-indigo) 20%, transparent); }
 
 .pantheon-hero {
@@ -116,7 +99,7 @@ body, input, .md-nav__link, .md-typeset {
 .pantheon-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.8rem 0 1.1rem; }
 .pantheon-hero__actions .md-button { border-color: rgba(255,255,255,.24) !important; color: #fff !important; }
 .pantheon-hero__actions .md-button--primary { border-color: #fff !important; background: #fff !important; color: #18234a !important; }
-.pantheon-hero__credibility { margin: 1.4rem 0 0; color: #b8c6e4; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.pantheon-hero__credibility { margin: 1.1rem 0 0; color: #d4def1; font-size: .86rem; font-weight: 700; }
 
 .md-sidebar--primary .release-version-nav > .md-nav__list,
 .md-sidebar--primary .release-version-nav > .md-nav__list > .md-nav__item {
@@ -171,22 +154,8 @@ body, input, .md-nav__link, .md-typeset {
 .chart-container::before { height: 3px; opacity: .65; background: linear-gradient(90deg, var(--pantheon-indigo), var(--pantheon-cyan), transparent); }
 .benchmark-controls { padding: .9rem; border: 1px solid var(--pantheon-line); border-radius: .8rem; background: var(--pantheon-subtle); }
 .benchmark-filter-button, #textSearch { color: var(--pantheon-ink); background: var(--pantheon-surface); border-color: var(--pantheon-line); border-radius: .5rem; }
-.benchmark-export-button { border-radius: .5rem; color: #fff; background: var(--pantheon-accent-btn); }
-.benchmark-export-button:hover { filter: brightness(1.08); }
-.benchmark-share-button { border-radius: .5rem; color: var(--pantheon-ink); border-color: var(--pantheon-line); }
+.benchmark-export-button { border-radius: .5rem; color: #061b1f; background: var(--pantheon-cyan); }
 .benchmark-menu { background: var(--pantheon-surface); border-color: var(--pantheon-line); box-shadow: var(--pantheon-shadow); }
-.benchmark-menu-search {
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 8px;
-  padding: 6px 8px;
-  color: var(--pantheon-ink);
-  background: var(--pantheon-subtle);
-  border: 1px solid var(--pantheon-line);
-  border-radius: 4px;
-}
-.benchmark-cell-version { color: var(--pantheon-muted); }
-.benchmark-cell-test { font-family: "Roboto Mono", monospace; font-size: .82rem; color: var(--pantheon-ink); }
 .md-typeset table:not([class]) { box-shadow: none; border-color: var(--pantheon-line); }
 .md-typeset table:not([class]) th { color: var(--pantheon-muted); background: var(--pantheon-subtle); }
 .md-typeset :is(.admonition, details) { max-width: 48rem; border-radius: .65rem; border-color: var(--pantheon-line); box-shadow: none; }
