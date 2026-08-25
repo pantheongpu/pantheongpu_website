@@ -30,6 +30,10 @@
         }
     ],
     "toolkit_version": "12.8",
+    "network_info": {
+        "hostname": "129-213-121-2",
+        "ip_address": "10.19.87.98"
+    },
     "test_results": [
         {
             "Test Name": "baseline_metrics",
