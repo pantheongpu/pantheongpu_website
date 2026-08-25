@@ -265,6 +265,30 @@ def test_comparison_charts_use_two_columns_on_desktop():
     assert "@media (max-width: 760px)" in css
 
 
+def test_benchmark_ui_uses_the_single_accent_system():
+    charts_js = read("docs/js/charts.js")
+    tables_js = read("docs/js/tables.js")
+    modern_css = read("docs/css/modern.css")
+
+    # Charts share one validated accent hue; per-chart colors were decoration.
+    assert 'color: "#' not in charts_js
+    assert "--pantheon-chart-accent" in charts_js
+    assert "alignBarValueLabels" in charts_js
+    assert "hideOverflowingLabels: false" in charts_js
+    assert "niceAxisMax" in charts_js
+
+    # Table cells use tokened classes, not hardcoded dark-only inline colors.
+    assert "benchmark-cell-version" in tables_js
+    assert "benchmark-cell-test" in tables_js
+    assert '"#aaa"' not in tables_js
+    assert '"#1a1a1a"' not in tables_js
+    assert "compactNumber" in tables_js
+
+    # Solid controls draw from the WCAG-checked button accent in both schemes.
+    assert modern_css.count("--pantheon-accent-btn:") == 2
+    assert "background: var(--pantheon-accent-btn)" in modern_css
+
+
 def test_export_button_is_labeled_as_csv():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")
