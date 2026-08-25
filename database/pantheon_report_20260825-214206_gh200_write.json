@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.0.16",
+    "timestamp": "2026-08-25 21:47:42",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1013-nvidia-64k",
+        "version": "#14~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Aug 21 01:03:36 UTC 2",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 64,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "525.68GB",
+        "available": "494.16GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GH200 480GB",
+            "memory_total": "97871 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 900.0,
+            "uuid": "GPU-808fedbb-8324-2d64-4c59-8d6c7496d7bb",
+            "serial": "1654523007975"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "network_info": {
+        "hostname": "192-222-56-108",
+        "ip_address": "172.26.133.179"
+    },
+    "test_results": [
+        {
+            "Test Name": "memory_write",
+            "Version": "1.0.16",
+            "Description": "Memory Write (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 3740.45,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 61.8,
+            "Max Temp (C)": 63.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 636.1,
+            "Max Power (W)": 643.7,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 49831.8,
+            "Memory Total (MiB)": 97871.0,
+            "Energy (Wh)": 53.563,
+            "Thermal Rise (C)": 31.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 6021.41,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 1.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/memory_write 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260825-214206/reliability/memory_write/gpu0/ras.json"
+        }
+    ]
+}
