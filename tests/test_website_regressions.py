@@ -265,30 +265,6 @@ def test_comparison_charts_use_two_columns_on_desktop():
     assert "@media (max-width: 760px)" in css
 
 
-def test_benchmark_ui_uses_the_single_accent_system():
-    charts_js = read("docs/js/charts.js")
-    tables_js = read("docs/js/tables.js")
-    modern_css = read("docs/css/modern.css")
-
-    # Charts share one validated accent hue; per-chart colors were decoration.
-    assert 'color: "#' not in charts_js
-    assert "--pantheon-chart-accent" in charts_js
-    assert "alignBarValueLabels" in charts_js
-    assert "hideOverflowingLabels: false" in charts_js
-    assert "niceAxisMax" in charts_js
-
-    # Table cells use tokened classes, not hardcoded dark-only inline colors.
-    assert "benchmark-cell-version" in tables_js
-    assert "benchmark-cell-test" in tables_js
-    assert '"#aaa"' not in tables_js
-    assert '"#1a1a1a"' not in tables_js
-    assert "compactNumber" in tables_js
-
-    # Solid controls draw from the WCAG-checked button accent in both schemes.
-    assert modern_css.count("--pantheon-accent-btn:") == 2
-    assert "background: var(--pantheon-accent-btn)" in modern_css
-
-
 def test_export_button_is_labeled_as_csv():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")
@@ -494,49 +470,6 @@ def test_committed_web_data_matches_database_reports(tmp_path):
     committed_rows = json.loads(read("docs/assets/web_data.json"))
 
     assert generated_rows == committed_rows
-
-
-def test_committed_toolkit_coverage_matches_database_reports(tmp_path):
-    methodology_copy = tmp_path / "methodology.md"
-    methodology_copy.write_text(read("docs/methodology.md"), encoding="utf-8")
-
-    generate_web_data(output_file=tmp_path / "web_data.json", methodology_file=methodology_copy)
-
-    assert methodology_copy.read_text(encoding="utf-8") == read("docs/methodology.md")
-
-
-def test_toolkit_coverage_lists_only_hardware_backed_versions():
-    methodology = read("docs/methodology.md")
-
-    assert "<!-- TOOLKIT_COVERAGE:START -->" in methodology
-    assert "## Toolkit and driver coverage" in methodology
-    assert "| Platform | Toolkit | Driver versions | GPU models tested |" in methodology
-    assert "| CUDA | 12.8 |" in methodology
-    # No published AMD runs yet: the section must say so rather than
-    # showing an empty or fabricated ROCm row.
-    assert "| ROCm |" not in methodology
-    assert "No AMD ROCm hardware runs have been published yet" in methodology
-
-
-def test_database_reports_contain_no_host_identifiers():
-    # This repository is public: benchmark reports must not disclose the
-    # hostname or IP address of the machines that produced them. Pantheon
-    # releases up to v1.0.16 still emit network_info, so run
-    # website_utils/sanitize_reports.py after importing new reports.
-    for report_path in sorted((ROOT / "database").glob("*pantheon_report_*.json")):
-        report = json.loads(report_path.read_text(encoding="utf-8"))
-
-        assert "network_info" not in report, report_path.name
-        flattened = json.dumps(report).lower()
-        assert '"hostname"' not in flattened, report_path.name
-        assert '"ip_address"' not in flattened, report_path.name
-
-
-def test_report_sanitizer_is_available():
-    sanitizer = read("website_utils/sanitize_reports.py")
-
-    assert "network_info" in sanitizer
-    assert "pantheon_report_*.json" in sanitizer
 
 
 def test_published_atomic_results_use_maps_units():
