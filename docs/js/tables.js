@@ -202,13 +202,28 @@ function formatMetric(value, unit) {
     return unit ? `${value} ${unit}` : String(value);
 }
 
-function formatCellValue(row, key) {
+// Display-only compaction so 13361400000 reads as 13.36B in table cells.
+// CSV export keeps the raw values for downstream analysis.
+function compactNumber(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return value;
+    const abs = Math.abs(num);
+    const trim = n => String(Number(n.toFixed(2)));
+    if (abs >= 1e9) return `${trim(num / 1e9)}B`;
+    if (abs >= 1e6) return `${trim(num / 1e6)}M`;
+    if (abs >= 1e4) return num.toLocaleString("en-US", { maximumFractionDigits: 0 });
+    return trim(num);
+}
+
+function formatCellValue(row, key, display = false) {
     let val = row[key];
 
     if (key === "score") {
+        if (display && !isMissingValue(val)) val = compactNumber(val);
         return formatMetric(val, row.unit);
     }
     if (key === "throughput") {
+        if (display && !isMissingValue(val)) val = compactNumber(val);
         return formatMetric(val, row.unit);
     }
     if (key === "throughput_variance") {
@@ -319,7 +334,7 @@ function renderTable(data) {
         COL_DEFS.forEach(col => {
             if (col.visible) {
                 let td = document.createElement("td");
-                let val = formatCellValue(row, col.key);
+                let val = formatCellValue(row, col.key, true);
 
                 if (col.key === "score") {
                     td.style.fontWeight = "bold";
@@ -328,16 +343,16 @@ function renderTable(data) {
                     td.style.fontWeight = "bold";
                 }
                 else if (col.key === "test") {
-                    td.style.color = "var(--pantheon-test-color)";
+                    td.className = "benchmark-cell-test";
                 }
                 else if (col.key.includes("temp")) {
-                    td.style.color = getColorForTemp(row[col.key]);
+                    const tempColor = getColorForTemp(row[col.key]);
+                    if (tempColor) td.style.color = tempColor;
                 }
                 else if (col.key === "version") {
-                    td.style.fontSize = "0.8em";
-                    td.style.color = "#aaa";
+                    td.className = "benchmark-cell-version";
                 }
-                
+
                 td.textContent = val;
                 tr.appendChild(td);
             }
@@ -379,15 +394,8 @@ function buildCheckboxMenu(menuId, items, defaultChecked = null) {
         searchInput.type = "text";
         searchInput.placeholder = "Search...";
         searchInput.setAttribute("aria-label", `Search ${menuId.replace("Menu", "").toLowerCase()} options`);
-        searchInput.style.width = "100%";
-        searchInput.style.marginBottom = "8px";
-        searchInput.style.padding = "6px";
-        searchInput.style.boxSizing = "border-box";
-        searchInput.style.background = "#1a1a1a"; 
-        searchInput.style.color = "#fff";
-        searchInput.style.border = "1px solid #444";
-        searchInput.style.borderRadius = "4px";
-        
+        searchInput.className = "benchmark-menu-search";
+
         // The live filtering logic
         searchInput.oninput = (e) => {
             const term = e.target.value.toLowerCase();
@@ -409,7 +417,7 @@ function buildCheckboxMenu(menuId, items, defaultChecked = null) {
     let selectAllDiv = document.createElement("div");
     selectAllDiv.style.marginBottom = "8px";
     selectAllDiv.style.paddingBottom = "8px";
-    selectAllDiv.style.borderBottom = "1px solid #444";
+    selectAllDiv.style.borderBottom = "1px solid var(--pantheon-line)";
     
     let selectAllLabel = document.createElement("label");
     selectAllLabel.style.cursor = "pointer";
@@ -582,7 +590,7 @@ function initColumnMenu() {
     let selectAllDiv = document.createElement("div");
     selectAllDiv.style.marginBottom = "8px";
     selectAllDiv.style.paddingBottom = "8px";
-    selectAllDiv.style.borderBottom = "1px solid #444";
+    selectAllDiv.style.borderBottom = "1px solid var(--pantheon-line)";
     
     let selectAllLabel = document.createElement("label");
     selectAllLabel.style.cursor = "pointer";
@@ -654,11 +662,10 @@ document.addEventListener("keydown", function(event) {
 });
 
 function getColorForTemp(temp) {
-    if (!temp || temp === "N/A") return "var(--pantheon-text-default)";
-    if (temp < 60) return "var(--pantheon-temp-good)";
+    // Healthy temperatures stay in the default ink; color only flags concern.
+    if (!temp || temp === "N/A" || temp < 60) return "";
     if (temp < 80) return "var(--pantheon-temp-warn)";
-    if (temp >= 80) return "var(--pantheon-temp-crit)";
-    return "var(--pantheon-text-default)";
+    return "var(--pantheon-temp-crit)";
 }
 
 // --- 6. Export to CSV ---
