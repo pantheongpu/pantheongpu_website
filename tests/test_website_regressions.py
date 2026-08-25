@@ -472,6 +472,18 @@ def test_committed_web_data_matches_database_reports(tmp_path):
     assert generated_rows == committed_rows
 
 
+def test_database_reports_contain_no_host_identifiers():
+    # This repository is public: benchmark reports must not disclose the
+    # hostname or IP address of the machines that produced them.
+    for report_path in sorted((ROOT / "database").glob("pantheon_report_*.json")):
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+
+        assert "network_info" not in report, report_path.name
+        flattened = json.dumps(report).lower()
+        assert '"hostname"' not in flattened, report_path.name
+        assert '"ip_address"' not in flattened, report_path.name
+
+
 def test_published_atomic_results_use_maps_units():
     rows = json.loads(read("docs/assets/web_data.json"))
     atomic_units = {row["unit"] for row in rows if row.get("test") == "atomic_virus"}
