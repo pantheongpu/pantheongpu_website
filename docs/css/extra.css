@@ -18,11 +18,11 @@
   --pantheon-h1-end: #aaaaaa;
   --pantheon-th-bg: #1a1a1a;
   --pantheon-nav-bg: rgba(0,0,0,0.85);
-  --pantheon-test-color: #9aaaff;
+  --pantheon-test-color: #00f3ff; /* Neon Cyberpunk Blue */
   --pantheon-text-default: #ffffff;
-  --pantheon-temp-good: #34d399;
-  --pantheon-temp-warn: #f0b429;
-  --pantheon-temp-crit: #f87171;
+  --pantheon-temp-good: #00e676; /* Bright Green */
+  --pantheon-temp-warn: #ffeb3b; /* Bright Yellow */
+  --pantheon-temp-crit: #ff3d00; /* Neon Red */
 }
 
 /* --- LIGHT MODE OVERRIDES (Default) --- */
@@ -33,11 +33,11 @@
   --pantheon-h1-end: #555555;
   --pantheon-th-bg: #f5f5f5;
   --pantheon-nav-bg: rgba(255,255,255,0.85);
-  --pantheon-test-color: #4057d6;
+  --pantheon-test-color: #0055cc; /* Deeper, readable blue for white backgrounds */
   --pantheon-text-default: #000000;
-  --pantheon-temp-good: #1a7f4b;
-  --pantheon-temp-warn: #b45309;
-  --pantheon-temp-crit: #c62828;
+  --pantheon-temp-good: #008a00; /* Darker Forest Green */
+  --pantheon-temp-warn: #d48806; /* Darker Amber/Orange */
+  --pantheon-temp-crit: #cc0000; /* Deep Crimson */
 }
 
 /* Force header text and icons to be dark in Light Mode */
@@ -170,8 +170,8 @@ body:has(#benchmarkTable) .md-grid {
   flex: 1 1 140px;
   min-width: 140px;
   padding: 10px;
-  background: var(--pantheon-accent-btn, #4057d6);
-  color: #fff;
+  background: var(--pantheon-neon-green, #00e396);
+  color: #000;
   font-weight: bold;
   border: none;
   cursor: pointer;
@@ -309,10 +309,16 @@ body:has(.report-byline) .md-content__inner {
   font-weight: 800;
 }
 
-/* One accent hue for report bars: every rect ranks the same measure, so
-   alternating colors would decorate rather than encode anything. */
 .report-chart-svg rect {
-  fill: var(--pantheon-chart-accent, #4057d6);
+  fill: #2563eb;
+}
+
+.report-chart-svg rect:nth-of-type(2n) {
+  fill: #0f9f6e;
+}
+
+.report-chart-svg rect:nth-of-type(3n) {
+  fill: #7c3aed;
 }
 
 .benchmark-table-wrap {
@@ -352,7 +358,7 @@ body:has(.report-byline) .md-content__inner {
 }
 
 .benchmark-sort-button:focus-visible {
-  outline: 2px solid var(--pantheon-accent-btn, #4057d6);
+  outline: 2px solid var(--pantheon-neon-blue);
   outline-offset: 3px;
 }
 
