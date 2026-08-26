@@ -13,6 +13,10 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DB_DIR = ROOT_DIR / "database"
 OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "web_data.json"
 UNSUPPORTED_OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "unsupported_workloads.json"
+METHODOLOGY_FILE = ROOT_DIR / "docs" / "methodology.md"
+
+COVERAGE_START = "<!-- TOOLKIT_COVERAGE:START -->"
+COVERAGE_END = "<!-- TOOLKIT_COVERAGE:END -->"
 
 KNOWN_TEST_UNITS = {
     "atomic_virus": "MAPS",
@@ -126,7 +130,84 @@ def infer_unit(test_name, declared_unit, raw_score):
     return "Watts"
 
 
-def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
+def toolkit_platform(row):
+    """Name the toolkit platform for a benchmark row without guessing."""
+    manufacturer = normalize(row.get("manufacturer"), "").lower()
+    gpu_name = normalize(row.get("gpu"), "").lower()
+    if manufacturer == "nvidia" or gpu_name.startswith("nvidia"):
+        return "CUDA"
+    if manufacturer in {"amd", "advanced micro devices"} or gpu_name.startswith("amd"):
+        return "ROCm"
+    return "Unknown"
+
+
+def toolkit_sort_key(value):
+    parts = []
+    for part in str(value).split("."):
+        try:
+            parts.append(int(part))
+        except ValueError:
+            parts.append(0)
+    return parts
+
+
+def render_toolkit_coverage(rows):
+    """Render the hardware toolkit/driver coverage table from published rows.
+
+    The output is deterministic for a given dataset, so the committed page
+    stays byte-stable under the CI data-freshness check.
+    """
+    coverage = {}
+    for row in rows:
+        toolkit = normalize(row.get("toolkit"), "N/A")
+        if toolkit in {"N/A", "Unknown"}:
+            continue
+        key = (toolkit_platform(row), toolkit)
+        entry = coverage.setdefault(key, {"drivers": set(), "gpus": set()})
+        driver = normalize(row.get("driver"), "N/A")
+        if driver not in {"N/A", "Unknown"}:
+            entry["drivers"].add(driver)
+        entry["gpus"].add(normalize(row.get("gpu")))
+
+    lines = [
+        COVERAGE_START,
+        "## Toolkit and driver coverage",
+        "",
+        "Every published benchmark records the toolkit and driver it ran under.",
+        "This table is generated from the live dataset and lists the versions",
+        "that have real hardware results behind them.",
+        "",
+        "| Platform | Toolkit | Driver versions | GPU models tested |",
+        "| --- | --- | --- | --- |",
+    ]
+    for (platform, toolkit), entry in sorted(
+        coverage.items(), key=lambda item: (item[0][0], toolkit_sort_key(item[0][1]))
+    ):
+        drivers = ", ".join(sorted(entry["drivers"], key=toolkit_sort_key)) or "not recorded"
+        lines.append(f"| {platform} | {toolkit} | {drivers} | {len(entry['gpus'])} |")
+    if not any(platform == "ROCm" for platform, _ in coverage):
+        lines.extend([
+            "",
+            "No AMD ROCm hardware runs have been published yet; ROCm support is",
+            "currently validated through the compile matrix in the Pantheon",
+            "repository rather than through published benchmark results.",
+        ])
+    lines.append(COVERAGE_END)
+    return "\n".join(lines)
+
+
+def update_methodology_coverage(rows, methodology_file):
+    contents = Path(methodology_file).read_text(encoding="utf-8")
+    start = contents.find(COVERAGE_START)
+    end = contents.find(COVERAGE_END)
+    if start < 0 or end < start:
+        raise RuntimeError(f"{methodology_file} is missing toolkit coverage markers.")
+    end += len(COVERAGE_END)
+    updated = contents[:start] + render_toolkit_coverage(rows) + contents[end:]
+    Path(methodology_file).write_text(updated, encoding="utf-8")
+
+
+def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
     best_runs = {}
@@ -273,8 +354,12 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE):
     with open(unsupported_output, 'w', encoding="utf-8") as f:
         json.dump(unsupported, f, indent=2, cls=NumpyEncoder, allow_nan=False)
 
+    if methodology_file is not None:
+        update_methodology_coverage(rows, methodology_file)
+        print(f"[Generate] Toolkit coverage updated in {methodology_file}.")
+
     print(f"[Generate] Database updated with {len(rows)} records.")
     return rows
 
 if __name__ == "__main__":
-    main()
+    main(methodology_file=METHODOLOGY_FILE)

@@ -41,10 +41,6 @@
         }
     ],
     "toolkit_version": "12.8",
-    "network_info": {
-        "hostname": "68-209-74-242",
-        "ip_address": "172.26.135.6"
-    },
     "test_results": [
         {
             "Test Name": "llm_decode",
