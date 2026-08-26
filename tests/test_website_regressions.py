@@ -289,6 +289,35 @@ def test_benchmark_ui_uses_the_single_accent_system():
     assert "background: var(--pantheon-accent-btn)" in modern_css
 
 
+def test_release_nav_is_generated_from_the_page_not_hardcoded():
+    release_nav = read("docs/js/release-nav.js")
+
+    # A hardcoded version list goes stale on every release: it advertised
+    # v1.0.16 as current, omitted newer releases, and linked to anchors that
+    # no longer existed. The nav must derive its entries from the page.
+    assert "querySelectorAll" in release_nav
+    assert "VERSION_PATTERN" in release_nav
+    assert '"v1.0.' not in release_nav
+    assert "#pantheon-v10" not in release_nav
+
+
+def test_no_version_pinned_selectors_in_stylesheets():
+    # `html:has(#pantheon-v1013-latest)` silently stopped matching after
+    # v1.0.13, leaving the release page's sidebar rules dead.
+    for sheet in ("docs/css/modern.css", "docs/css/extra.css"):
+        css = read(sheet)
+        assert "pantheon-v10" not in css, sheet
+
+
+def test_documentation_pages_keep_the_navigation_sidebar():
+    # Only the landing page and the two full-width data pages hide the
+    # sidebar; prose documentation pages must keep it so the layout does not
+    # jump between pages.
+    for page in ("docs/methodology.md", "docs/getting-started.md",
+                 "docs/community.md", "docs/programs-support.md"):
+        assert "hide:" not in read(page).split("# ")[0], page
+
+
 def test_export_button_is_labeled_as_csv():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")
@@ -734,8 +763,11 @@ def test_release_page_uses_version_navigation_without_a_second_content_column():
     assert 'class="release-version-nav"' not in release
     assert ".release-page" not in css
     assert ".md-sidebar--primary .release-version-nav" in css
-    assert "pantheon-v1015-latest" in release_nav
-    assert '"v1.0.7", "#v107"' in release_nav
+    # The nav is generated from the page's release headings. It previously
+    # hardcoded a version list, and these assertions pinned that stale list in
+    # place, which is why the drift went unnoticed for several releases.
+    assert "release-version-nav" in release_nav
+    assert ".md-typeset h2[id]" in release_nav
 
 
 def test_readme_documents_release_mirroring_secret():

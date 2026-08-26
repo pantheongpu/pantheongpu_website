@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Benchmark Methodology
 
 Pantheon results are workload-specific measurements. Use them to compare the same test under comparable conditions, not as one universal GPU score.
