@@ -41,10 +41,6 @@
         }
     ],
     "toolkit_version": "12.8",
-    "network_info": {
-        "hostname": "68-209-74-242",
-        "ip_address": "172.26.135.6"
-    },
     "run_id": "20260825-204309",
     "record_kind": "completed_workload",
     "run_status": "complete",
