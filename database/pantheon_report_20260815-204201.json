@@ -41,10 +41,6 @@
     }
   ],
   "toolkit_version": "13.2",
-  "network_info": {
-    "hostname": "[redacted]",
-    "ip_address": "[redacted]"
-  },
   "test_results": [
     {
       "Test Name": "cache_lat",

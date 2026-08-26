@@ -27,10 +27,6 @@
         }
     ],
     "toolkit_version": "13.0",
-    "network_info": {
-        "hostname": "SaqibDesktop",
-        "ip_address": "127.0.1.1"
-    },
     "test_results": [
         {
             "Test Name": "baseline_metrics",
