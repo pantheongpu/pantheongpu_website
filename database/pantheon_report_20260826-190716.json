@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-26 19:12:51",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3095.49Mhz"
+    },
+    "ram_info": {
+        "total": "15.42GB",
+        "available": "14.37GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-4285275c-c7d1-8437-51fb-81afb5ca7d6e",
+            "serial": "1562821024705"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "test_results": [
+        {
+            "Test Name": "memory_read",
+            "Version": "1.0.18",
+            "Description": "Memory Read (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 258.959,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 55.1,
+            "Max Temp (C)": 56.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 69.0,
+            "Max Power (W)": 71.7,
+            "Avg Clock(MHz)": 1292.3,
+            "Min Clock (MHz)": 1230.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15224.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.835,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 302.9,
+            "Efficiency": 3843.1,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/memory_read 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260826-190716/reliability/memory_read/gpu0/ras.json"
+        }
+    ]
+}
