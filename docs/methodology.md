@@ -13,27 +13,6 @@ Each benchmark record identifies the Pantheon version, workload, GPU, platform, 
 
 The available metrics depend on the workload. Bandwidth tests report transferred data per second, latency tests report operation or access rates, and compute tests report their own unit. A blank metric means that workload does not expose a meaningful value in that column.
 
-<!-- TOOLKIT_COVERAGE:START -->
-## Toolkit and driver coverage
-
-Every published benchmark records the toolkit and driver it ran under.
-This table is generated from the live dataset and lists the versions
-that have real hardware results behind them.
-
-| Platform | Toolkit | Driver versions | GPU models tested |
-| --- | --- | --- | --- |
-| CUDA | 12.0 | 595.84, 595.97, 596.36 | 2 |
-| CUDA | 12.4 | 550.127.08, 565.57.01, 570.195.03, 570.211.01, 580.105.08, 580.126.09 | 6 |
-| CUDA | 12.6 | 560.94 | 1 |
-| CUDA | 12.8 | 570.148.08, 570.195.03, 580.105.08 | 5 |
-| CUDA | 13.0 | 595.71, 595.97 | 1 |
-| CUDA | 13.2 | 596.36 | 1 |
-
-No AMD ROCm hardware runs have been published yet; ROCm support is
-currently validated through the compile matrix in the Pantheon
-repository rather than through published benchmark results.
-<!-- TOOLKIT_COVERAGE:END -->
-
 ## Reproducing a result
 
 For a useful comparison, keep the workload, Pantheon version, duration, memory setting, driver, toolkit, and GPU power settings the same. Leave the GPU otherwise idle and record ambient cooling conditions when thermal behavior matters.

@@ -30,6 +30,10 @@
         }
     ],
     "toolkit_version": "12.8",
+    "network_info": {
+        "hostname": "192-222-56-108",
+        "ip_address": "172.26.133.179"
+    },
     "test_results": [
         {
             "Test Name": "tensor_virus",
