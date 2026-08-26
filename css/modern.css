@@ -66,19 +66,6 @@ body, input, .md-nav__link, .md-typeset {
     margin-left: 1.2rem !important;
     margin-right: .8rem !important;
   }
-
-  html:has(#pantheon-v1013-latest) .md-sidebar--primary {
-    display: none !important;
-  }
-
-  html:has(#pantheon-v1013-latest) .md-sidebar--secondary {
-    display: block !important;
-    order: -1;
-  }
-
-  html:has(#pantheon-v1013-latest) .md-sidebar--secondary > .md-sidebar__scrollwrap > .md-sidebar__inner > .md-nav > .md-nav__list > .md-nav__item > .md-nav {
-    display: none;
-  }
 }
 
 .md-main__inner { margin-top: 2rem; }
