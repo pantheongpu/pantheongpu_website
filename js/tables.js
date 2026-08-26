@@ -1,0 +1,735 @@
+// --- CONFIGURATION: Define all available columns ---
+const COL_DEFS = [
+    { key: "gpu",         label: "GPU Model",   visible: true },
+    { key: "manufacturer",label: "Vendor",      visible: true },
+    { key: "test",        label: "Test Name",   visible: true },
+    { key: "version",     label: "Ver",         visible: true },
+    { key: "score",       label: "Score",       visible: false },
+    { key: "throughput",  label: "Throughput",  visible: true },
+    { key: "throughput_variance", label: "Throughput Variance", visible: false },
+    { key: "duration",    label: "Duration",    visible: true },
+    { key: "temp_max",    label: "Peak Temp",   visible: true },
+    { key: "power_max",   label: "Peak Power",  visible: true },
+    { key: "clock_avg",   label: "Avg Clock",   visible: true },
+    { key: "gpu_util_avg",label: "Avg GPU Util",visible: true },
+    { key: "memory_peak", label: "Peak Memory", visible: true },
+    { key: "energy_wh",   label: "Energy",      visible: true },
+    { key: "date",        label: "Date",        visible: true },
+    // --- Hidden by default (Pro Metrics) ---
+    { key: "efficiency",  label: "Efficiency (MB/J)", visible: false },
+    { key: "temp_mem",    label: "Mem Temp",    visible: false },
+    { key: "fan_max",     label: "Fan %",       visible: false },
+    { key: "pcie_gen",    label: "PCIe Gen",    visible: false },
+    { key: "pcie_width",  label: "PCIe Width",  visible: false },
+    { key: "throttle",    label: "Limit Reason",visible: false },
+    { key: "clock_min",   label: "Min Clock",   visible: false },
+    { key: "clock_max",   label: "Max Clock",   visible: false },
+    { key: "gpu_util_max",label: "Peak GPU Util",visible: false },
+    { key: "memory_total",label: "Total Memory",visible: false },
+    { key: "thermal_rise",label: "Thermal Rise",visible: false },
+    { key: "throttle_time",label: "Throttle Time",visible: false },
+    { key: "volts_core",  label: "Core (mV)",   visible: false },
+    { key: "volts_soc",   label: "SoC (mV)",    visible: false },
+    { key: "vram",     label: "VRAM",    visible: false },
+    { key: "driver",   label: "Driver",  visible: false },
+    { key: "toolkit",  label: "Toolkit", visible: false },
+    
+    { key: "power_limit", label: "TDP (W)",     visible: true }, 
+
+    { key: "uuid",        label: "UUID",        visible: false },
+    { key: "serial",      label: "Serial",      visible: false },
+];
+
+let rawData = [];
+let bestRuns = [];
+let currentFilteredData = [];
+let currentSort = { key: 'version', dir: 'desc' };
+
+function getUrlSelections(parameter, availableValues) {
+    const rawValue = new URLSearchParams(window.location.search).get(parameter);
+    if (!rawValue) return null;
+
+    const available = new Set(availableValues);
+    const selected = rawValue.split(",").map(value => value.trim()).filter(value => available.has(value));
+    return selected.length > 0 ? selected : null;
+}
+
+function syncFilterUrl(selectedGPUs, selectedTests, selectedVersions, searchValue) {
+    const url = new URL(window.location.href);
+    const allGPUs = getCheckedValues("gpuMenu").length === document.querySelectorAll("#gpuMenu input.filter-item").length;
+    const allTests = getCheckedValues("testMenu").length === document.querySelectorAll("#testMenu input.filter-item").length;
+    const allVersions = getCheckedValues("versionMenu").length === document.querySelectorAll("#versionMenu input.filter-item").length;
+
+    const setParameter = (name, values, include) => {
+        if (include && values.length > 0) {
+            url.searchParams.set(name, values.join(","));
+        } else {
+            url.searchParams.delete(name);
+        }
+    };
+
+    setParameter("gpu", selectedGPUs, !allGPUs);
+    setParameter("test", selectedTests, !allTests);
+    setParameter("version", selectedVersions, !allVersions);
+    setParameter("q", [searchValue], Boolean(searchValue));
+    window.history.replaceState(null, "", url);
+}
+
+function trackBenchmarkEvent(eventName, parameters = {}) {
+    if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, parameters);
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const table = document.getElementById("benchmarkTable");
+    if (!table) return;
+
+    const searchInput = document.getElementById("textSearch");
+    if (searchInput) {
+        searchInput.value = new URLSearchParams(window.location.search).get("q") || "";
+        searchInput.addEventListener("input", applyFilters);
+    }
+
+    const dataUrl = getBenchmarkAssetUrl("web_data.json");
+
+    fetch(dataUrl)
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP ${response.status} loading ${dataUrl}`);
+            return response.json();
+        })
+        .then(data => {
+            rawData = data;
+            bestRuns = rawData;
+            //bestRuns = getBestRunsOnly(rawData);
+            
+            initColumnMenu();     
+            populateFilters(bestRuns);
+            applyFilters();
+        })
+        .catch(err => {
+            console.error("Error loading benchmark data:", err);
+            setBenchmarkStatus("Benchmark data could not be loaded. Please refresh the page or try again later.", true);
+        });
+});
+
+function getBenchmarkAssetUrl(fileName) {
+    const script = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes("/js/tables.js"));
+    if (script && script.src) {
+        return new URL(`../assets/${fileName}`, script.src).href;
+    }
+    return new URL(`assets/${fileName}`, document.baseURI).href;
+}
+
+function getBestRunsOnly(data) {
+    const groups = {};
+    data.forEach(row => {
+        const key = `${row.gpu}|${row.test}`;
+        if (!groups[key] || parseFloat(row.score) > parseFloat(groups[key].score)) {
+            groups[key] = row;
+        }
+    });
+    return Object.values(groups);
+}
+
+function isMissingValue(val) {
+    return val === undefined || val === null || val === "" || val === "N/A";
+}
+
+function normalizeVersion(value) {
+    if (isMissingValue(value) || value === "Legacy") return [];
+    return String(value).replace(/^v/i, "").split(".").map(part => {
+        const match = part.match(/\d+/);
+        const parsed = match ? parseInt(match[0], 10) : 0;
+        return Number.isFinite(parsed) ? parsed : 0;
+    });
+}
+
+function compareVersions(a, b) {
+    const legacyA = isMissingValue(a) || a === "Legacy";
+    const legacyB = isMissingValue(b) || b === "Legacy";
+    if (legacyA && legacyB) return 0;
+    if (legacyA) return -1;
+    if (legacyB) return 1;
+
+    const vA = normalizeVersion(a);
+    const vB = normalizeVersion(b);
+    const length = Math.max(vA.length, vB.length);
+    for (let i = 0; i < length; i++) {
+        const partA = vA[i] || 0;
+        const partB = vB[i] || 0;
+        if (partA !== partB) return partA > partB ? 1 : -1;
+    }
+    return String(a).localeCompare(String(b));
+}
+
+function compareDates(a, b) {
+    const timeA = Date.parse(a || "");
+    const timeB = Date.parse(b || "");
+    if (Number.isNaN(timeA) && Number.isNaN(timeB)) return 0;
+    if (Number.isNaN(timeA)) return -1;
+    if (Number.isNaN(timeB)) return 1;
+    return timeA - timeB;
+}
+
+function compareValues(a, b, key) {
+    if (key === "version") return compareVersions(a || "Legacy", b || "Legacy");
+    if (key === "date") return compareDates(a, b);
+
+    let valA = a;
+    let valB = b;
+
+    if (isMissingValue(valA)) valA = -999999;
+    if (isMissingValue(valB)) valB = -999999;
+
+    let numA = parseFloat(valA);
+    let numB = parseFloat(valB);
+
+    if (!isNaN(numA) && !isNaN(numB)) {
+        return numA - numB;
+    }
+
+    valA = String(valA).toLowerCase();
+    valB = String(valB).toLowerCase();
+    if (valA < valB) return -1;
+    if (valA > valB) return 1;
+    return 0;
+}
+
+function formatMetric(value, unit) {
+    if (isMissingValue(value) || value === 0 || value === "0") return "N/A";
+    return unit ? `${value} ${unit}` : String(value);
+}
+
+// Display-only compaction so 13361400000 reads as 13.36B in table cells.
+// CSV export keeps the raw values for downstream analysis.
+function compactNumber(value) {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return value;
+    const abs = Math.abs(num);
+    const trim = n => String(Number(n.toFixed(2)));
+    if (abs >= 1e9) return `${trim(num / 1e9)}B`;
+    if (abs >= 1e6) return `${trim(num / 1e6)}M`;
+    if (abs >= 1e4) return num.toLocaleString("en-US", { maximumFractionDigits: 0 });
+    return trim(num);
+}
+
+function formatCellValue(row, key, display = false) {
+    let val = row[key];
+
+    if (key === "score") {
+        if (display && !isMissingValue(val)) val = compactNumber(val);
+        return formatMetric(val, row.unit);
+    }
+    if (key === "throughput") {
+        if (display && !isMissingValue(val)) val = compactNumber(val);
+        return formatMetric(val, row.unit);
+    }
+    if (key === "throughput_variance") {
+        return formatMetric(val, "%");
+    }
+    if (key === "duration") {
+        return isMissingValue(val) ? "N/A" : `${val}s`;
+    }
+    if (key.includes("temp")) {
+        return formatMetric(val, "°C");
+    }
+    if (key.includes("power")) {
+        return formatMetric(val, "W");
+    }
+    if (key.includes("gpu_util")) {
+        return formatMetric(val, "%");
+    }
+    if (key.includes("memory")) {
+        return formatMetric(val, "MiB");
+    }
+    if (key === "energy_wh") {
+        return formatMetric(val, "Wh");
+    }
+    if (key === "clock_min" || key === "clock_max") {
+        return formatMetric(val, "MHz");
+    }
+    if (key === "thermal_rise") {
+        return formatMetric(val, "°C");
+    }
+    if (key === "throttle_time") {
+        return formatMetric(val, "s");
+    }
+    if (key === "version") {
+        return val || "Legacy";
+    }
+    if (val === undefined || val === null || val === "" || val === 0 || val === "0") {
+        return "N/A";
+    }
+    return val;
+}
+
+function setBenchmarkStatus(message, isError = false) {
+    const status = document.getElementById("benchmarkStatus");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("benchmark-status--error", isError);
+}
+
+function sortDirectionFor(key) {
+    if (currentSort.key !== key) return "none";
+    return currentSort.dir === "asc" ? "ascending" : "descending";
+}
+
+// --- 2. Dynamic Table Rendering ---
+function renderTable(data) {
+    const table = document.getElementById("benchmarkTable");
+    if (!table) return;
+
+    const thead = table.querySelector("thead");
+    const tbody = table.querySelector("tbody");
+    if (!thead || !tbody) return;
+
+    thead.innerHTML = "";
+    let headerRow = document.createElement("tr");
+    headerRow.style.cursor = "pointer";
+
+    COL_DEFS.forEach(col => {
+        if (col.visible) {
+            let th = document.createElement("th");
+            th.setAttribute("scope", "col");
+            th.setAttribute("aria-sort", sortDirectionFor(col.key));
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "benchmark-sort-button";
+            button.dataset.sortKey = col.key;
+            button.textContent = col.label;
+            button.setAttribute(
+                "aria-label",
+                `Sort by ${col.label}${currentSort.key === col.key ? `, currently ${currentSort.dir === "asc" ? "ascending" : "descending"}` : ""}`
+            );
+
+            const indicator = document.createElement("span");
+            indicator.className = "benchmark-sort-indicator";
+            indicator.setAttribute("aria-hidden", "true");
+            indicator.textContent = currentSort.key === col.key
+                ? (currentSort.dir === "asc" ? "↑" : "↓")
+                : "↕";
+
+            button.appendChild(indicator);
+            button.addEventListener("click", () => sortData(col.key));
+            th.appendChild(button);
+            headerRow.appendChild(th);
+        }
+    });
+    thead.appendChild(headerRow);
+
+    tbody.innerHTML = "";
+    if (data.length === 0) {
+        let visibleCount = COL_DEFS.filter(c => c.visible).length;
+        tbody.innerHTML = `<tr><td colspan='${visibleCount}' style='text-align:center; padding: 20px;'>No results found</td></tr>`;
+        return;
+    }
+
+    data.forEach(row => {
+        const tr = document.createElement("tr");
+        
+        COL_DEFS.forEach(col => {
+            if (col.visible) {
+                let td = document.createElement("td");
+                let val = formatCellValue(row, col.key, true);
+
+                if (col.key === "score") {
+                    td.style.fontWeight = "bold";
+                }
+                else if (col.key === "gpu") {
+                    td.style.fontWeight = "bold";
+                }
+                else if (col.key === "test") {
+                    td.className = "benchmark-cell-test";
+                }
+                else if (col.key.includes("temp")) {
+                    const tempColor = getColorForTemp(row[col.key]);
+                    if (tempColor) td.style.color = tempColor;
+                }
+                else if (col.key === "version") {
+                    td.className = "benchmark-cell-version";
+                }
+
+                td.textContent = val;
+                tr.appendChild(td);
+            }
+        });
+        tbody.appendChild(tr);
+    });
+}
+
+function sortData(key) {
+    if (currentSort.key === key) {
+        currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+        currentSort.key = key;
+        currentSort.dir = 'desc';
+    }
+    applyFilters();
+}
+
+// --- Multi-Select Menu Helpers ---
+function getCheckedValues(menuId) {
+    // We use a specific class (.filter-item) so we don't accidentally grab the "Select All" checkbox's value
+    const checkboxes = document.querySelectorAll(`#${menuId} input.filter-item:checked`);
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
+function buildCheckboxMenu(menuId, items, defaultChecked = null) {
+    const menu = document.getElementById(menuId);
+    if (!menu) return;
+
+    menu.innerHTML = "";
+
+    // Determine if "Select All" should be checked on load
+    let isAllChecked = defaultChecked === null || defaultChecked.length === items.length;
+
+    // --- ADD SEARCH BAR ---
+    // Only add a search bar if there are enough items to warrant searching
+    if (items.length > 5) {
+        let searchInput = document.createElement("input");
+        searchInput.type = "text";
+        searchInput.placeholder = "Search...";
+        searchInput.setAttribute("aria-label", `Search ${menuId.replace("Menu", "").toLowerCase()} options`);
+        searchInput.className = "benchmark-menu-search";
+
+        // The live filtering logic
+        searchInput.oninput = (e) => {
+            const term = e.target.value.toLowerCase();
+            // Select all individual item rows (skipping the Select All row)
+            const rows = menu.querySelectorAll('.menu-item-row');
+            rows.forEach(row => {
+                const labelText = row.innerText.toLowerCase();
+                if (labelText.includes(term)) {
+                    row.style.display = "block";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        };
+        menu.appendChild(searchInput);
+    }
+
+    // --- Create "Select All" Checkbox ---
+    let selectAllDiv = document.createElement("div");
+    selectAllDiv.style.marginBottom = "8px";
+    selectAllDiv.style.paddingBottom = "8px";
+    selectAllDiv.style.borderBottom = "1px solid var(--pantheon-line)";
+    
+    let selectAllLabel = document.createElement("label");
+    selectAllLabel.style.cursor = "pointer";
+    selectAllLabel.style.display = "flex";
+    selectAllLabel.style.alignItems = "center";
+    selectAllLabel.style.fontWeight = "bold";
+    
+    let selectAllCheck = document.createElement("input");
+    selectAllCheck.type = "checkbox";
+    selectAllCheck.checked = isAllChecked;
+    selectAllCheck.style.marginRight = "10px";
+
+    selectAllLabel.appendChild(selectAllCheck);
+    selectAllLabel.appendChild(document.createTextNode("Select All"));
+    selectAllDiv.appendChild(selectAllLabel);
+    menu.appendChild(selectAllDiv);
+
+    // --- Create Individual Items ---
+    let itemCheckboxes = [];
+
+    items.forEach(item => {
+        let div = document.createElement("div");
+        div.className = "menu-item-row"; // Tagged so the search bar can find it
+        div.style.marginBottom = "5px";
+        
+        let label = document.createElement("label");
+        label.style.cursor = "pointer";
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        
+        let check = document.createElement("input");
+        check.type = "checkbox";
+        check.value = item;
+        check.checked = defaultChecked === null ? true : defaultChecked.includes(item);
+        check.className = "filter-item"; 
+        check.style.marginRight = "10px";
+        
+        check.onchange = () => {
+            selectAllCheck.checked = itemCheckboxes.every(c => c.checked);
+            applyFilters();
+        };
+        
+        itemCheckboxes.push(check);
+        label.appendChild(check);
+        label.appendChild(document.createTextNode(item));
+        div.appendChild(label);
+        menu.appendChild(div);
+    });
+
+    selectAllCheck.onchange = () => {
+        let isChecked = selectAllCheck.checked;
+        itemCheckboxes.forEach(c => {
+            // Only toggle the visible ones! (So search + select all works together)
+            if (c.closest('.menu-item-row').style.display !== "none") {
+                c.checked = isChecked;
+            }
+        });
+        applyFilters();
+    };
+}
+
+function populateFilters(data) {
+    const gpuSet = new Set();
+    const testSet = new Set();
+    const versionSet = new Set();
+
+    data.forEach(row => {
+        if (row.gpu) gpuSet.add(row.gpu);
+        if (row.test) testSet.add(row.test);
+        versionSet.add(row.version || "Legacy");
+    });
+
+    // Extract and sort versions semantically, newest first.
+    let versions = Array.from(versionSet);
+    versions.sort((a, b) => compareVersions(b, a));
+
+    const gpus = Array.from(gpuSet).sort();
+    const tests = Array.from(testSet).sort();
+    buildCheckboxMenu("gpuMenu", gpus, getUrlSelections("gpu", gpus));
+    buildCheckboxMenu("testMenu", tests, getUrlSelections("test", tests));
+    buildCheckboxMenu("versionMenu", versions, getUrlSelections("version", versions));
+}
+
+function applyFilters() {
+    const searchInput = document.getElementById("textSearch");
+    if (!searchInput) return;
+
+    const searchVal = searchInput.value.toLowerCase();
+    const selectedGPUs = getCheckedValues("gpuMenu");
+    const selectedTests = getCheckedValues("testMenu");
+    const selectedVersions = getCheckedValues("versionMenu");
+
+    syncFilterUrl(selectedGPUs, selectedTests, selectedVersions, searchInput.value.trim());
+
+    let filtered = bestRuns.filter(row => {
+        const ver = row.version || "Legacy";
+        const gpuMatch = selectedGPUs.includes(row.gpu);
+        const testMatch = selectedTests.includes(row.test);
+        const versionMatch = selectedVersions.includes(ver);
+        const searchMatch = Object.values(row).join(" ").toLowerCase().includes(searchVal);
+        
+        return gpuMatch && testMatch && versionMatch && searchMatch;
+    });
+
+    filtered.sort((a, b) => {
+        if (currentSort.key !== "version") {
+            const versionCompare = compareVersions(a.version || "Legacy", b.version || "Legacy");
+            if (versionCompare !== 0) return -versionCompare;
+        }
+
+        const valueCompare = compareValues(a[currentSort.key], b[currentSort.key], currentSort.key);
+        if (valueCompare !== 0) return currentSort.dir === 'asc' ? valueCompare : -valueCompare;
+
+        const dateCompare = compareDates(a.date, b.date);
+        if (dateCompare !== 0) return -dateCompare;
+
+        return compareValues(a.gpu, b.gpu, "gpu");
+    });
+
+    currentFilteredData = filtered;
+    renderTable(filtered);
+    const totalLabel = bestRuns.length === 1 ? "result" : "results";
+    const filteredLabel = filtered.length === 1 ? "result" : "results";
+    setBenchmarkStatus(
+        filtered.length === bestRuns.length
+            ? `${bestRuns.length} ${totalLabel}`
+            : `${filtered.length} ${filteredLabel} shown out of ${bestRuns.length}`
+    );
+    if (window.renderBenchmarkCharts) {
+        window.renderBenchmarkCharts(filtered);
+    }
+}
+
+// --- Menu Toggling ---
+function toggleMenu(menuId) {
+    const menus = ["gpuMenu", "testMenu", "versionMenu", "columnMenu"];
+    menus.forEach(id => {
+        const m = document.getElementById(id);
+        if (!m) return;
+        const button = document.querySelector(`[aria-controls="${id}"]`);
+
+        if (id === menuId) {
+            const willOpen = m.style.display !== "block";
+            m.style.display = willOpen ? "block" : "none";
+            if (button) button.setAttribute("aria-expanded", String(willOpen));
+        } else {
+            m.style.display = "none";
+            if (button) button.setAttribute("aria-expanded", "false");
+        }
+    });
+}
+
+function closeBenchmarkMenus() {
+    const menus = ["gpuMenu", "testMenu", "versionMenu", "columnMenu"];
+    menus.forEach(id => {
+        const menu = document.getElementById(id);
+        const button = document.querySelector(`[aria-controls="${id}"]`);
+        if (menu) menu.style.display = "none";
+        if (button) button.setAttribute("aria-expanded", "false");
+    });
+}
+
+function initColumnMenu() {
+    const menu = document.getElementById("columnMenu");
+    if (!menu) return;
+
+    menu.innerHTML = "";
+
+    // --- Create "Select All" Checkbox ---
+    let selectAllDiv = document.createElement("div");
+    selectAllDiv.style.marginBottom = "8px";
+    selectAllDiv.style.paddingBottom = "8px";
+    selectAllDiv.style.borderBottom = "1px solid var(--pantheon-line)";
+    
+    let selectAllLabel = document.createElement("label");
+    selectAllLabel.style.cursor = "pointer";
+    selectAllLabel.style.display = "flex";
+    selectAllLabel.style.alignItems = "center";
+    selectAllLabel.style.fontWeight = "bold";
+    
+    let selectAllCheck = document.createElement("input");
+    selectAllCheck.type = "checkbox";
+    selectAllCheck.checked = COL_DEFS.every(c => c.visible);
+    selectAllCheck.style.marginRight = "10px";
+
+    selectAllLabel.appendChild(selectAllCheck);
+    selectAllLabel.appendChild(document.createTextNode("Select All"));
+    selectAllDiv.appendChild(selectAllLabel);
+    menu.appendChild(selectAllDiv);
+
+    // --- Create Individual Columns ---
+    let itemCheckboxes = [];
+
+    COL_DEFS.forEach((col, index) => {
+        let div = document.createElement("div");
+        div.style.marginBottom = "5px";
+        let label = document.createElement("label");
+        label.style.cursor = "pointer";
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        
+        let check = document.createElement("input");
+        check.type = "checkbox";
+        check.checked = col.visible;
+        check.style.marginRight = "10px";
+        
+        // When an individual column is toggled
+        check.onchange = () => {
+            COL_DEFS[index].visible = check.checked;
+            selectAllCheck.checked = itemCheckboxes.every(c => c.checked);
+            applyFilters(); 
+        };
+
+        itemCheckboxes.push(check);
+        label.appendChild(check);
+        label.appendChild(document.createTextNode(col.label));
+        div.appendChild(label);
+        menu.appendChild(div);
+    });
+
+    // When "Select All" is clicked
+    selectAllCheck.onchange = () => {
+        let isChecked = selectAllCheck.checked;
+        itemCheckboxes.forEach((c, index) => {
+            c.checked = isChecked;
+            COL_DEFS[index].visible = isChecked;
+        });
+        applyFilters();
+    };
+}
+
+document.addEventListener("click", function(event) {
+    if (!event.target.closest(".benchmark-filter")) {
+        closeBenchmarkMenus();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeBenchmarkMenus();
+    }
+});
+
+function getColorForTemp(temp) {
+    // Healthy temperatures stay in the default ink; color only flags concern.
+    if (!temp || temp === "N/A" || temp < 60) return "";
+    if (temp < 80) return "var(--pantheon-temp-warn)";
+    return "var(--pantheon-temp-crit)";
+}
+
+// --- 6. Export to CSV ---
+function exportToCSV() {
+    if (currentFilteredData.length === 0) {
+        alert("No data available to export!");
+        return;
+    }
+
+    trackBenchmarkEvent("benchmark_export", { result_count: currentFilteredData.length });
+
+    // 1. Get the currently visible columns to build the header
+    const visibleCols = COL_DEFS.filter(c => c.visible);
+    const headers = visibleCols.map(c => `"${c.label}"`).join(",");
+
+    // 2. Map the filtered data rows
+    const csvRows = currentFilteredData.map(row => {
+        return visibleCols.map(col => {
+            let val = row[col.key];
+
+            val = formatCellValue(row, col.key);
+
+            // Escape quotes by doubling them (CSV standard) and wrap in quotes
+            let strVal = String(val).replace(/"/g, '""');
+            return `"${strVal}"`;
+        }).join(",");
+    });
+
+    // 3. Combine headers and rows
+    const csvContent = [headers, ...csvRows].join("\n");
+
+    // 4. Create a Blob and trigger the download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+
+    // Create a dynamic filename with today's date
+    const dateStr = new Date().toISOString().split('T')[0];
+    link.setAttribute("href", url);
+    link.setAttribute("download", `pantheon_benchmarks_${dateStr}.csv`);
+
+    // Append, click, and cleanup
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+async function copyBenchmarkLink() {
+    const button = document.getElementById("benchmarkShareButton");
+    const originalLabel = button ? button.textContent : "";
+
+    try {
+        await navigator.clipboard.writeText(window.location.href);
+        trackBenchmarkEvent("benchmark_share", { result_count: currentFilteredData.length });
+        if (button) button.textContent = "Link copied";
+    } catch (error) {
+        window.prompt("Copy this filtered benchmark link:", window.location.href);
+    }
+
+    if (button) {
+        window.setTimeout(() => {
+            button.textContent = originalLabel;
+        }, 1800);
+    }
+}

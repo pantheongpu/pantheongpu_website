@@ -1,0 +1,11 @@
+[
+  {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.0.16",
+    "status": "UNSUPPORTED",
+    "reason": "NVIDIA A100 does not expose an NVENC encoder",
+    "source_report": "pantheon_report_20260822_a100.json"
+  }
+]
