@@ -44,6 +44,11 @@ nav:
       - Memory Cache Fracturing: tests/memory_cache_fracture.md
       - Memory Retention Bake: tests/memory_retention_bake.md
       - Memory Asymmetric Thermal: tests/memory_thermal_asym.md
+    - Memory Diagnostics:
+      - March Test: tests/march_test.md
+      - Memory Hammer: tests/memory_hammer.md
+      - GALPAT: tests/galpat.md
+      - Memory Retention: tests/memory_retention.md
     - Interconnect & Architecture:
       - P2P Thrasher: tests/p2p_thrasher.md
       - All-Reduce: tests/all_reduce.md
