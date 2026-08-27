@@ -85,6 +85,10 @@
          <lastmod>2026-08-27</lastmod>
     </url>
     <url>
+         <loc>https://pantheongpu.com/tests/galpat/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
          <loc>https://pantheongpu.com/tests/graph_replay/</loc>
          <lastmod>2026-08-27</lastmod>
     </url>
@@ -109,6 +113,10 @@
          <lastmod>2026-08-27</lastmod>
     </url>
     <url>
+         <loc>https://pantheongpu.com/tests/march_test/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
          <loc>https://pantheongpu.com/tests/media_enc_virus/</loc>
          <lastmod>2026-08-27</lastmod>
     </url>
@@ -121,6 +129,10 @@
          <lastmod>2026-08-27</lastmod>
     </url>
     <url>
+         <loc>https://pantheongpu.com/tests/memory_hammer/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
          <loc>https://pantheongpu.com/tests/memory_pc_pingpong/</loc>
          <lastmod>2026-08-27</lastmod>
     </url>
@@ -130,6 +142,10 @@
     </url>
     <url>
          <loc>https://pantheongpu.com/tests/memory_read_agg/</loc>
+         <lastmod>2026-08-27</lastmod>
+    </url>
+    <url>
+         <loc>https://pantheongpu.com/tests/memory_retention/</loc>
          <lastmod>2026-08-27</lastmod>
     </url>
     <url>
