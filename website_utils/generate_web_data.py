@@ -314,12 +314,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         "test": test_name,
                         "version": version_str,
                         "score": score_val,
-                        # A row with no measurement must not advertise a unit.
-                        # These carried stale labels -- a tensor_virus row
-                        # reading "Watts" with no value, which is visibly wrong
-                        # on a public leaderboard even though N/A sorts last and
-                        # never displaced a real result.
-                        "unit": unit if str(raw_score) != "N/A" else "N/A",
+                        "unit": unit,
                         "throughput": raw_score,
                         "throughput_variance": test.get("Throughput Variance (%)", "N/A"),
                         "duration": test.get("Duration (s)", 0),
