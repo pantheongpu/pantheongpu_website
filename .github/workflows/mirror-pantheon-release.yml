@@ -18,6 +18,12 @@ on:
 permissions:
   contents: write
 
+# Mirroring the same release twice races on the tag and its assets. Never
+# cancel one in flight: a partially mirrored release is worse than a queued one.
+concurrency:
+  group: mirror-release
+  cancel-in-progress: false
+
 defaults:
   run:
     shell: bash
