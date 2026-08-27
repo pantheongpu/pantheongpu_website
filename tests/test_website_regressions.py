@@ -899,3 +899,16 @@ def test_pseudonym_is_stable_and_one_to_one():
     assert sr.public_gpu_id(a) == sr.public_gpu_id(a), "must be stable"
     assert sr.public_gpu_id(a) != sr.public_gpu_id(b), "must not collide"
     assert sr.public_gpu_id("Unknown") == "Unknown"
+
+
+def test_unmeasured_rows_do_not_advertise_a_unit():
+    """A row with throughput N/A carried a stale unit -- a tensor_virus row
+    labelled "Watts" with no value. It never displaced a real result, since
+    N/A sorts last, but it is visibly wrong on a public leaderboard."""
+    root = Path(__file__).resolve().parent.parent
+    data = json.loads((root / "docs" / "assets" / "web_data.json").read_text())
+    bad = [
+        (r.get("test"), r.get("unit")) for r in data
+        if str(r.get("throughput")) == "N/A" and r.get("unit") not in ("N/A", None)
+    ]
+    assert bad == [], f"unmeasured rows claiming a unit: {bad[:3]}"
