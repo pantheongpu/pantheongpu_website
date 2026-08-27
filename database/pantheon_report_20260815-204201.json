@@ -25,7 +25,7 @@
       "memory_total": "12288 MB",
       "driver_version": "596.36",
       "power_limit": 170.0,
-      "uuid": "GPU-79fd8f8fabd5",
+      "uuid": "GPU-f369c84d3883",
       "serial": "[N/A]"
     },
     {
@@ -36,7 +36,7 @@
       "memory_total": "12288 MB",
       "driver_version": "596.36",
       "power_limit": 170.0,
-      "uuid": "GPU-79fd8f8fabd5",
+      "uuid": "GPU-f369c84d3883",
       "serial": "[N/A]"
     }
   ],

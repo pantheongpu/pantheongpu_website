@@ -25,7 +25,7 @@
             "memory_total": "81559 MB",
             "driver_version": "580.105.08",
             "power_limit": 700.0,
-            "uuid": "GPU-78700e27c83d",
+            "uuid": "GPU-b70b8bacccfd",
             "serial": "[REDACTED]"
         },
         {
@@ -36,7 +36,7 @@
             "memory_total": "81559 MB",
             "driver_version": "580.105.08",
             "power_limit": 700.0,
-            "uuid": "GPU-6cc8e2b74b8f",
+            "uuid": "GPU-aa50e54fd1af",
             "serial": "[REDACTED]"
         }
     ],
