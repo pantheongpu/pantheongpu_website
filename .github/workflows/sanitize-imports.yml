@@ -16,6 +16,8 @@ on:
 
 permissions:
   contents: write
+  # Needed to re-trigger CI and the site deploy on the commit this job makes.
+  actions: write
 
 concurrency:
   group: sanitize-main
@@ -68,3 +70,18 @@ jobs:
           git add -A
           git commit -m "Sanitize imported benchmark reports"
           git push
+          echo "SANITIZED=true" >> "$GITHUB_ENV"
+
+      # A commit pushed with GITHUB_TOKEN does not start any workflow, so CI and
+      # the deploy would never run against the scrubbed tree -- leaving the site
+      # stale and the branch showing the failure from the raw import. Start them
+      # explicitly. Neither commits anything, so this cannot loop.
+      - name: Re-run checks and deploy on the sanitized commit
+        if: env.SANITIZED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for wf in ci.yml deploy.yml; do
+            gh workflow run "$wf" --repo "$GITHUB_REPOSITORY" --ref main \
+              && echo "dispatched $wf" || echo "could not dispatch $wf"
+          done

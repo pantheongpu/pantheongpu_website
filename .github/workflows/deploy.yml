@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  # Sanitize Imports commits with GITHUB_TOKEN, which by design does not trigger
+  # workflows. Without a manual trigger the site would stay stale whenever a
+  # benchmark import arrived unsanitized: deploy fails on the raw commit, and
+  # the commit that fixes it cannot start a new deploy.
+  workflow_dispatch:
 
 permissions:
   contents: write
