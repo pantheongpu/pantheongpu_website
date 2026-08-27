@@ -36,8 +36,10 @@ const COL_DEFS = [
     
     { key: "power_limit", label: "TDP (W)",     visible: true }, 
 
-    { key: "uuid",        label: "UUID",        visible: false },
-    { key: "serial",      label: "Serial",      visible: false },
+    // Pseudonymous, stable per physical GPU. The raw UUID and the serial are
+    // never published: identity is only compared for equality, so a hash does
+    // the same job without handing out a hardware identifier.
+    { key: "uuid",        label: "GPU ID",      visible: false },
 ];
 
 let rawData = [];
