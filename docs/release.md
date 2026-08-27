@@ -4,7 +4,34 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ---
 
-## Pantheon v1.0.18 (Latest)
+## Pantheon v1.0.19 (Latest)
+**Release Date:** August 27, 2026
+
+### Release Notes
+#### What's Changed
+* Fault maps and a time-based memory retention workload by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/11
+* Fold the memory _agg twins into --init_pattern by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/12
+* Audit fixes: unreleased hardware, fictional metrics, broken verification, CI hardening by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/14
+* Bound launch parameters that could hang the GPU by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/16
+* Make the tree publishable: OptiX optional, NOTICE, export script by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/15
+* Stop CI running the whole matrix twice per commit by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/19
+* Kill the whole process tree, not just the launched process by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/18
+* Release v1.0.19 by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/17
+
+
+**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.18...v1.0.19
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.0.19 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/pantheongpu_1.0.19_amd64.deb) | `.deb` | 33.7 MB |
+| [Pantheon v1.0.19 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/pantheongpu_1.0.19_amd64.tar.gz) | `.tar.gz` | 67.4 MB |
+| [Pantheon v1.0.19 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/pantheongpu_1.0.19_amd64.zip) | `.zip` | 67.4 MB |
+| [Pantheon v1.0.19 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/SHA256SUMS) | `SHA256SUMS` | 303 B |
+
+---
+
+## Pantheon v1.0.18
 **Release Date:** August 26, 2026
 
 ### Release Notes
