@@ -25,8 +25,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-cc92b973-ce90-644c-d7c3-288dbfe5ba74",
-            "serial": "1564021012675"
+            "uuid": "GPU-eafbfe8d6d5a",
+            "serial": "[REDACTED]"
         },
         {
             "id": 1,
@@ -36,8 +36,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-e070c791-28d0-1f0a-7e55-ce7c35a892e6",
-            "serial": "1564021013718"
+            "uuid": "GPU-d4f539a182fa",
+            "serial": "[REDACTED]"
         },
         {
             "id": 2,
@@ -47,8 +47,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-62b6190e-6455-1ec3-fccc-007519c013c1",
-            "serial": "1564021013392"
+            "uuid": "GPU-79c9e05c6404",
+            "serial": "[REDACTED]"
         },
         {
             "id": 3,
@@ -58,8 +58,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-f93d983d-4186-7a23-2b0a-cae3e0bd3f4e",
-            "serial": "1564021012838"
+            "uuid": "GPU-1430471f69a9",
+            "serial": "[REDACTED]"
         },
         {
             "id": 4,
@@ -69,8 +69,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-c702d35f-b1a2-af8a-830f-69b8ad8d7685",
-            "serial": "1564021012678"
+            "uuid": "GPU-3b47dd5c1cd4",
+            "serial": "[REDACTED]"
         },
         {
             "id": 5,
@@ -80,8 +80,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-00df5bc6-4f9d-621f-3bf6-37bd47783f0b",
-            "serial": "1564021013807"
+            "uuid": "GPU-eacc33a72a33",
+            "serial": "[REDACTED]"
         },
         {
             "id": 6,
@@ -91,8 +91,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-f1d95981-090e-79a3-c189-70c94bf70024",
-            "serial": "1564021013248"
+            "uuid": "GPU-50ebab00b122",
+            "serial": "[REDACTED]"
         },
         {
             "id": 7,
@@ -102,8 +102,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-ea5e4dda-3142-c507-4cc1-916e15abe68c",
-            "serial": "1564021012424"
+            "uuid": "GPU-8e436d08036e",
+            "serial": "[REDACTED]"
         }
     ],
     "toolkit_version": "12.8",

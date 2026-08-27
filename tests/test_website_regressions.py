@@ -839,3 +839,63 @@ def test_host_free_name_preserves_model_and_timestamp():
     # An already-clean name must be left exactly alone.
     clean = "a100_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
     assert sr.host_free_name(clean) == clean
+
+
+def test_published_data_carries_no_raw_gpu_identifiers():
+    """This repository is public.
+
+    A GPU serial maps back to a purchaser through vendor RMA and warranty
+    records; a raw UUID is a persistent hardware identifier that fingerprints a
+    machine next to the driver, OS and timestamps already published. Identity
+    here is only ever compared for equality, so a pseudonym does the same job.
+    """
+    root = Path(__file__).resolve().parent.parent
+    data = json.loads((root / "docs" / "assets" / "web_data.json").read_text())
+
+    assert not any("serial" in row for row in data), "serial must not be published"
+
+    bad = [
+        row.get("uuid") for row in data
+        if isinstance(row.get("uuid"), str)
+        and row["uuid"] != "Unknown"
+        and not re.fullmatch(r"GPU-[0-9a-f]{12}", row["uuid"])
+    ]
+    assert bad == [], f"raw GPU UUIDs published: {bad[:3]}"
+
+
+def test_raw_reports_carry_no_gpu_identifiers():
+    root = Path(__file__).resolve().parent.parent
+    offenders = []
+    for path in (root / "database").rglob("*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for gpu in report.get("gpu_static_info") or []:
+            if not isinstance(gpu, dict):
+                continue
+            uuid = str(gpu.get("uuid", ""))
+            if uuid and uuid.lower() not in {"unknown", "n/a"} \
+                    and not re.fullmatch(r"GPU-[0-9a-f]{12}", uuid):
+                offenders.append(path.name)
+            serial = str(gpu.get("serial", ""))
+            if serial and serial.lower() not in {"unknown", "n/a", "[n/a]", "[redacted]"}:
+                offenders.append(path.name)
+    assert offenders == [], f"raw identifiers in reports: {sorted(set(offenders))[:3]}"
+
+
+def test_pseudonym_is_stable_and_one_to_one():
+    """Dedup and per-card history depend on the same GPU always hashing the
+    same way, and on two GPUs never colliding."""
+    import importlib.util
+    root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location(
+        "sr", root / "website_utils" / "sanitize_reports.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+
+    a = "GPU-58e902aa-1111-2222-3333-444444444444"
+    b = "GPU-58e902aa-1111-2222-3333-444444444445"
+    assert sr.public_gpu_id(a) == sr.public_gpu_id(a), "must be stable"
+    assert sr.public_gpu_id(a) != sr.public_gpu_id(b), "must not collide"
+    assert sr.public_gpu_id("Unknown") == "Unknown"

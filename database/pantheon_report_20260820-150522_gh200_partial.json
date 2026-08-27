@@ -26,7 +26,7 @@
       "name": "NVIDIA H200 GPU (Grace Arm64 host)",
       "memory_total": "97871 MiB",
       "driver_version": "570.148.08",
-      "uuid": "benchmark-gh200-lambda-20260820"
+      "uuid": "GPU-6f970f80dcc9"
     }
   ],
   "toolkit_version": "12.8",

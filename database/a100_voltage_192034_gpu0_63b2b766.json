@@ -25,8 +25,8 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-c3fa3093-0499-3eb3-cc38-0252fbb3456e",
-            "serial": "1322820044102"
+            "uuid": "GPU-840885f5c463",
+            "serial": "[REDACTED]"
         }
     ],
     "toolkit_version": "12.8",

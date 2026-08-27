@@ -1,3 +1,5 @@
+import os
+import hashlib
 import json
 import glob
 import math
@@ -77,6 +79,28 @@ def normalize_gpu_name(value, default="Unknown GPU"):
     name = normalize(value, default)
     lookup = " ".join(name.split()).casefold()
     return GPU_NAME_ALIASES.get(lookup, name)
+
+
+PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
+
+
+def public_gpu_id(raw):
+    """Return a stable pseudonym for a GPU UUID.
+
+    Identity here is only ever compared for equality -- dedup, grouping and
+    per-card history all work exactly the same on a hash. Publishing the raw
+    UUID buys nothing and hands out a persistent hardware identifier that, with
+    the driver, OS and timestamps alongside it, fingerprints a specific machine.
+
+    A UUID has enough entropy that this is not brute-forceable on its own; set
+    PANTHEON_ID_SALT to harden it further. Keep the salt stable, or previously
+    published pseudonyms will not match new ones.
+    """
+    text = normalize(raw)
+    if text.lower() in {"unknown", "n/a", "none", ""}:
+        return "Unknown"
+    digest = hashlib.sha256((PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()
+    return "GPU-" + digest[:12]
 
 
 def record_key(row):
@@ -285,8 +309,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     record = {
                         "gpu": gpu_name,
                         "manufacturer": manufacturer,
-                        "uuid": uuid,
-                        "serial": serial,
+                        "uuid": public_gpu_id(uuid),
                         "power_limit": power_limit,
                         "test": test_name,
                         "version": version_str,

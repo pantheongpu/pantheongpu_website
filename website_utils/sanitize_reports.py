@@ -18,6 +18,7 @@ It exits 0 whether or not anything needed fixing, so it is safe to run
 unconditionally in an import pipeline before ``generate_web_data.py``.
 """
 
+import os
 import hashlib
 import json
 import re
@@ -87,14 +88,56 @@ def rename_host_named_reports(db_dir=DB_DIR):
     return renamed
 
 
+PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
+_UNKNOWN = {"unknown", "n/a", "none", "[n/a]", ""}
+
+
+def public_gpu_id(raw):
+    """Stable pseudonym for a GPU UUID. Mirrors generate_web_data.public_gpu_id.
+
+    Identity is only ever compared for equality, so a hash preserves dedup,
+    grouping and per-card history exactly. Keep PANTHEON_ID_SALT stable, or
+    previously published pseudonyms will not match new ones.
+    """
+    text = str(raw or "").strip()
+    if text.lower() in _UNKNOWN:
+        return text or "Unknown"
+    return "GPU-" + hashlib.sha256((PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()[:12]
+
+
+def scrub_gpu_identifiers(data):
+    """Pseudonymise GPU UUIDs and drop serials in place. Returns True if changed.
+
+    The serial is dropped rather than hashed: it resolves no identity anywhere
+    in the pipeline, and it is the field a vendor can map back to a purchaser.
+    """
+    changed = False
+    for gpu in data.get("gpu_static_info") or []:
+        if not isinstance(gpu, dict):
+            continue
+        uuid = gpu.get("uuid")
+        if uuid is not None and str(uuid).strip().lower() not in _UNKNOWN:
+            pseudonym = public_gpu_id(uuid)
+            if pseudonym != uuid:
+                gpu["uuid"] = pseudonym
+                changed = True
+        if "serial" in gpu and str(gpu["serial"]).strip().lower() not in _UNKNOWN:
+            gpu["serial"] = "[REDACTED]"
+            changed = True
+    return changed
+
+
 def sanitize_report(path):
     """Remove host identifiers from one report. Returns True if changed."""
     raw = path.read_text(encoding="utf-8")
     data = json.loads(raw)
-    if "network_info" not in data:
-        return False
 
-    del data["network_info"]
+    changed = scrub_gpu_identifiers(data)
+    if "network_info" in data:
+        del data["network_info"]
+        changed = True
+    if not changed:
+        return False
     indent_match = re.search(r'\n(\s+)"', raw)
     indent = len(indent_match.group(1)) if indent_match else 4
     trailing = "\n" if raw.endswith("\n") else ""
