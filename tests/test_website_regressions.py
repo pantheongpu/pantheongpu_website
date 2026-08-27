@@ -819,7 +819,10 @@ def test_no_report_filename_carries_a_host_identifier():
             return True
         return "InternalHost" in name
     offenders = sorted(p.name for p in db.rglob("*.json") if leaks(p.name))
-    assert offenders == [], f"host identifiers in filenames: {offenders[:5]}"
+    assert offenders == [], (
+        "Report filenames still carry a host identifier. Run:\n"
+        "    python3 website_utils/sanitize_reports.py\n"
+        f"and commit the result. First offenders: {offenders[:5]}")
 
 
 def test_host_free_name_preserves_model_and_timestamp():
@@ -881,7 +884,11 @@ def test_raw_reports_carry_no_gpu_identifiers():
             serial = str(gpu.get("serial", ""))
             if serial and serial.lower() not in {"unknown", "n/a", "[n/a]", "[redacted]"}:
                 offenders.append(path.name)
-    assert offenders == [], f"raw identifiers in reports: {sorted(set(offenders))[:3]}"
+    assert offenders == [], (
+        "Imported reports still carry raw GPU identifiers. Run:\n"
+        "    python3 website_utils/sanitize_reports.py\n"
+        "    python3 website_utils/generate_web_data.py\n"
+        f"and commit the result. First offenders: {sorted(set(offenders))[:3]}")
 
 
 def test_pseudonym_is_stable_and_one_to_one():

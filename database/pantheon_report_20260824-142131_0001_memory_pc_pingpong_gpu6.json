@@ -25,7 +25,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-eafbfe8d6d5a",
+            "uuid": "GPU-88ab8c6a4bed",
             "serial": "[REDACTED]"
         },
         {
@@ -36,7 +36,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-d4f539a182fa",
+            "uuid": "GPU-bedebd461ece",
             "serial": "[REDACTED]"
         },
         {
@@ -47,7 +47,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-79c9e05c6404",
+            "uuid": "GPU-00df5b8c5000",
             "serial": "[REDACTED]"
         },
         {
@@ -58,7 +58,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-1430471f69a9",
+            "uuid": "GPU-5b7852884bce",
             "serial": "[REDACTED]"
         },
         {
@@ -69,7 +69,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-3b47dd5c1cd4",
+            "uuid": "GPU-24f75c994aa3",
             "serial": "[REDACTED]"
         },
         {
@@ -80,7 +80,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-eacc33a72a33",
+            "uuid": "GPU-b8ee81747a8d",
             "serial": "[REDACTED]"
         },
         {
@@ -91,7 +91,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-50ebab00b122",
+            "uuid": "GPU-dc4fe67ba238",
             "serial": "[REDACTED]"
         },
         {
@@ -102,7 +102,7 @@
             "memory_total": "40960 MB",
             "driver_version": "570.148.08",
             "power_limit": 400.0,
-            "uuid": "GPU-8e436d08036e",
+            "uuid": "GPU-ecf71cb55a9d",
             "serial": "[REDACTED]"
         }
     ],
