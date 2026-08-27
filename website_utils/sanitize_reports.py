@@ -90,6 +90,11 @@ def rename_host_named_reports(db_dir=DB_DIR):
 
 PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
 _UNKNOWN = {"unknown", "n/a", "none", "[n/a]", ""}
+# A value already in pseudonym form must be left alone. Hashing it again yields
+# a different id on every run, so the same physical GPU drifts to a new identity
+# each time the sanitizer runs -- and a card seen before and after an import
+# splits into two.
+_PSEUDONYM = re.compile(r"^GPU-[0-9a-f]{12}$")
 
 
 def public_gpu_id(raw):
@@ -102,6 +107,8 @@ def public_gpu_id(raw):
     text = str(raw or "").strip()
     if text.lower() in _UNKNOWN:
         return text or "Unknown"
+    if _PSEUDONYM.match(text):
+        return text
     return "GPU-" + hashlib.sha256((PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()[:12]
 
 
