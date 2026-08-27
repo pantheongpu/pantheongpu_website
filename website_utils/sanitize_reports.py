@@ -1,5 +1,11 @@
 """Strip host identifiers from benchmark reports before they are published.
 
+This covers two places a host can leak: the JSON body, and the FILENAME.
+Reports have shipped with the benchmark host's IP embedded in the name
+(``a100_129.153.20.126_pantheon_report_...``) and with a PowerShell artifact
+where ``$Host`` interpolated to its type name instead of the hostname. Scrubbing
+only the body leaves those in a public git tree.
+
 Pantheon releases up to v1.0.16 record the benchmark host's hostname and IP
 address in a ``network_info`` block. This repository is public, so that block
 must never be committed. Run this after copying new reports into ``database/``:
@@ -12,12 +18,73 @@ It exits 0 whether or not anything needed fixing, so it is safe to run
 unconditionally in an import pipeline before ``generate_web_data.py``.
 """
 
+import hashlib
 import json
 import re
 import sys
 from pathlib import Path
 
 DB_DIR = Path(__file__).resolve().parents[1] / "database"
+
+PS_HOST_ARTIFACT = "System.Management.Automation.Internal.Host.InternalHost"
+_DOTTED_IP = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
+
+
+def _is_octet(token):
+    return token.isdigit() and len(token) <= 3 and int(token) <= 255
+
+
+def host_free_name(name):
+    """Return `name` with any embedded host identifier removed.
+
+    Handles an IP written as one dotted token and as four underscore-separated
+    tokens, plus the PowerShell artifact. Non-host digits are preserved: the
+    GPU model in `a100_...` and timestamps must survive.
+    """
+    name = name.replace(PS_HOST_ARTIFACT + "_", "").replace("_" + PS_HOST_ARTIFACT, "")
+    stem, dot, ext = name.rpartition(".")
+    tokens = (stem or name).split("_")
+    out, i = [], 0
+    while i < len(tokens):
+        if _DOTTED_IP.match(tokens[i]):
+            i += 1
+            continue
+        if i + 3 < len(tokens) and all(_is_octet(t) for t in tokens[i:i + 4]):
+            i += 4
+            continue
+        out.append(tokens[i])
+        i += 1
+    cleaned = "_".join(out) + (dot + ext if dot else "")
+    cleaned = re.sub(r"^pantheon_report_(?=pantheon_report_)", "", cleaned)
+    return re.sub(r"_{2,}", "_", cleaned)
+
+
+def rename_host_named_reports(db_dir=DB_DIR):
+    """Rename reports whose filename carries a host identifier.
+
+    Every file is preserved. Two reports whose names collide once the host is
+    stripped are disambiguated by content hash, never merged or dropped -- two
+    machines can legitimately produce the same model, test and timestamp.
+    """
+    taken = {p.name for p in db_dir.glob("*.json")}
+    renamed = []
+    for path in sorted(db_dir.glob("*.json")):
+        want = host_free_name(path.name)
+        if want == path.name:
+            continue
+        taken.discard(path.name)
+        if want in taken:
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()[:8]
+            stem, dot, ext = want.rpartition(".")
+            want = f"{stem}_{digest}{dot}{ext}"
+            suffix = 2
+            while want in taken:
+                want = f"{stem}_{digest}_{suffix}{dot}{ext}"
+                suffix += 1
+        path.rename(path.with_name(want))
+        taken.add(want)
+        renamed.append((path.name, want))
+    return renamed
 
 
 def sanitize_report(path):
@@ -47,6 +114,11 @@ def main():
             print(f"[SANITIZED] removed network_info: {path.name}")
             changed += 1
     print(f"[Sanitize] {changed} report(s) rewritten.")
+
+    renamed = rename_host_named_reports()
+    for old, new in renamed:
+        print(f"[SANITIZED] host identifier in filename: {old} -> {new}")
+    print(f"[Sanitize] {len(renamed)} report(s) renamed.")
     return 0
 
 

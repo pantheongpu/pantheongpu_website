@@ -805,3 +805,37 @@ def test_no_known_mojibake_in_user_facing_sources():
         text = read(path)
         assert "Â" not in text, path
         assert "ðŸ" not in text, path
+
+
+def test_no_report_filename_carries_a_host_identifier():
+    """This repository is public. A host IP in a filename is as much a leak as
+    one in the file body, and the body scrub never looked at names."""
+    import re
+    db = Path(__file__).resolve().parent.parent / "database"
+    ip = re.compile(r"(?<!\d)\d{1,3}([._]\d{1,3}){3}(?!\d)")
+    def leaks(name):
+        m = ip.search(name)
+        if m and all(0 <= int(p) <= 255 for p in re.split(r"[._]", m.group(0))):
+            return True
+        return "InternalHost" in name
+    offenders = sorted(p.name for p in db.rglob("*.json") if leaks(p.name))
+    assert offenders == [], f"host identifiers in filenames: {offenders[:5]}"
+
+
+def test_host_free_name_preserves_model_and_timestamp():
+    import importlib.util
+    root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location(
+        "sr", root / "website_utils" / "sanitize_reports.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+
+    assert sr.host_free_name(
+        "a100_129.153.20.126_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
+    ) == "a100_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
+    assert sr.host_free_name(
+        "a100_129_153_20_126_cache_lat_191356_gpu0.json"
+    ) == "a100_cache_lat_191356_gpu0.json"
+    # An already-clean name must be left exactly alone.
+    clean = "a100_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
+    assert sr.host_free_name(clean) == clean
