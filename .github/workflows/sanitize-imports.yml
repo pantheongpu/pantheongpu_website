@@ -1,0 +1,57 @@
+name: Sanitize Imports
+
+# Benchmark reports are pushed straight into database/ by an automated pipeline
+# that does not run the sanitizer, so each import lands raw GPU UUIDs and serial
+# numbers in a public repository and turns CI red until someone scrubs them by
+# hand. This closes that loop.
+#
+# It cannot spin: the sanitizer is idempotent, so the commit this job makes
+# produces no further changes on the run it triggers, and that run exits without
+# committing.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sanitize-main
+  cancel-in-progress: false
+
+jobs:
+  sanitize:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scrub host and GPU identifiers
+        run: python3 website_utils/sanitize_reports.py
+
+      - name: Regenerate published data
+        run: python3 website_utils/generate_web_data.py
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet; then
+            echo "Nothing to sanitize."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Sanitize imported benchmark reports
+
+          Scrubs raw GPU UUIDs and serial numbers from reports pushed by the
+          benchmark pipeline, and regenerates the published dataset."
+          git push
