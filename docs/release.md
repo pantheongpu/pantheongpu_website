@@ -9,17 +9,17 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ### Release Notes
 #### What's Changed
-* Fault maps and a time-based memory retention workload by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/11
-* Fold the memory _agg twins into --init_pattern by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/12
-* Audit fixes: unreleased hardware, fictional metrics, broken verification, CI hardening by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/14
-* Bound launch parameters that could hang the GPU by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/16
-* Make the tree publishable: OptiX optional, NOTICE, export script by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/15
-* Stop CI running the whole matrix twice per commit by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/19
-* Kill the whole process tree, not just the launched process by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/18
-* Release v1.0.19 by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/17
+* Fault maps and a time-based memory retention workload by @saqibkh
+* Fold the memory _agg twins into --init_pattern by @saqibkh
+* Audit fixes: unreleased hardware, fictional metrics, broken verification, CI hardening by @saqibkh
+* Bound launch parameters that could hang the GPU by @saqibkh
+* Make the tree publishable: OptiX optional, NOTICE, export script by @saqibkh
+* Stop CI running the whole matrix twice per commit by @saqibkh
+* Kill the whole process tree, not just the launched process by @saqibkh
+* Release v1.0.19 by @saqibkh
 
 
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.18...v1.0.19
+**Full Changelog**: `v1.0.18...v1.0.19`
 
 ### Downloads
 | File | Format | Size |
@@ -36,10 +36,10 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 
 ### Release Notes
 #### What's Changed
-* Kernel verification hardening: coverage holes, uninitialized lanes, UB, and accounting fixes by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/10
+* Kernel verification hardening: coverage holes, uninitialized lanes, UB, and accounting fixes by @saqibkh
 
 
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.17...v1.0.18
+**Full Changelog**: `v1.0.17...v1.0.18`
 
 ### Downloads
 | File | Format | Size |
@@ -55,7 +55,7 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 **Release Date:** August 26, 2026
 
 ### Release Notes
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.16...v1.0.17
+**Full Changelog**: `v1.0.16...v1.0.17`
 
 ### Downloads
 | File | Format | Size |
@@ -71,7 +71,7 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 **Release Date:** August 22, 2026
 
 ### Release Notes
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.15...v1.0.16
+**Full Changelog**: `v1.0.15...v1.0.16`
 
 ### Downloads
 | File | Format | Size |

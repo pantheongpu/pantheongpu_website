@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -78,6 +79,27 @@ def asset_sort_value(name: str) -> tuple[int, str]:
     return (4, name)
 
 
+# GitHub generates release notes containing links to the pull requests that
+# went into a release. Those live in a private repository, so every one of
+# them is a 404 for a visitor to this public site. Strip the link and keep the
+# text: the description of what changed is the useful part, and a dead link
+# next to it is worse than no link.
+_PRIVATE_PR_LINK = re.compile(
+    r"\s*(?:in\s+)?https?://github\.com/pantheongpu/pantheongpu/pull/\d+\b"
+)
+_PRIVATE_COMPARE_LINK = re.compile(
+    r"https?://github\.com/pantheongpu/pantheongpu/compare/(\S+)"
+)
+
+
+def strip_private_links(line: str) -> str:
+    line = _PRIVATE_PR_LINK.sub("", line)
+    # A compare link is useful information even when unreachable, so keep the
+    # range and drop the URL.
+    line = _PRIVATE_COMPARE_LINK.sub(r"`\1`", line)
+    return line.rstrip()
+
+
 def release_notes(body: str) -> str:
     body = body.strip()
     if not body:
@@ -85,6 +107,7 @@ def release_notes(body: str) -> str:
 
     lines = []
     for line in body.splitlines():
+        line = strip_private_links(line)
         if line.startswith("#"):
             lines.append(f"##{line}")
         else:

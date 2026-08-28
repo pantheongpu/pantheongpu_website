@@ -1,6 +1,8 @@
 site_name: PANTHEON
-site_description: GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
+site_description: Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.
 site_url: https://pantheongpu.com
+repo_url: https://github.com/pantheongpu/pantheon
+repo_name: pantheongpu/pantheon
 edit_uri: ""
 not_in_nav: |
   fleet-validation.md

@@ -34,13 +34,34 @@ Install the compiler for your platform. You only need one:
     sudo apt-get install -y hipcc
     ```
 
-Download and install the latest Debian package:
+Pantheon is open source. Building from source lets you read exactly what will
+run on your hardware; the Debian package is quicker if you just want to run it.
 
-```bash
-VERSION=1.0.18
-wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
-sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
-```
+=== "Build from source"
+
+    ```bash
+    git clone https://github.com/pantheongpu/pantheon.git
+    cd pantheon
+    pip install -r requirements.txt
+    make PLATFORM=CUDA -j$(nproc)     # or PLATFORM=HIP for AMD
+    ```
+
+    There is no build-time auto-detection, so pass `PLATFORM=` explicitly. Use
+    `PLATFORM=MOCK` to build a CPU backend that needs no GPU at all, which is
+    useful for trying the tooling before committing hardware to it.
+
+    Run it from the checkout with `python3 pantheon.py` in place of the
+    `pantheon` command used below.
+
+=== "Debian package"
+
+    ```bash
+    VERSION=1.0.19
+    wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
+    sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
+    ```
+
+    Installs a `pantheon` command on your PATH.
 
 ## Run a first test
 

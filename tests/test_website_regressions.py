@@ -335,7 +335,16 @@ def test_getting_started_uses_valid_install_commands():
     assert "nvidia-cuda-toolkit (replace" not in getting_started
     assert "python3 -m venv .venv" not in getting_started
     assert "python -m pip install -r requirements.txt" not in getting_started
-    assert "python3 pantheon.py" not in getting_started
+    # Source entrypoints belong only in the build-from-source tab. Someone who
+    # installed the package must not be told to run pantheon.py. Find the
+    # package block by its own markers so this does not depend on tab order,
+    # which is a positioning choice and has already changed once.
+    import re as _re
+    package_block = _re.search(
+        r'=== "Debian package"(.*?)(?=\n=== |\n## )', getting_started, _re.S)
+    assert package_block, "the Debian package tab should exist"
+    assert "python3 pantheon.py" not in package_block.group(1)
+    assert "python3 pantheon.py" in getting_started, "the source path should exist"
     assert "pantheon-tuning" not in getting_started
     assert "./pantheon --test all" not in getting_started
     assert '=== "NVIDIA CUDA"' in getting_started
@@ -345,7 +354,7 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in getting_started
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in getting_started
     assert "sudo apt-get install -y hipcc" in getting_started
-    assert "VERSION=1.0.18" in getting_started
+    assert "VERSION=1.0.19" in getting_started
     assert "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
     assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in getting_started
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
@@ -407,11 +416,19 @@ def test_readme_pairs_install_commands_with_native_uninstall_commands():
 
 
 def test_mkdocs_points_to_pantheongpu_repository():
+    """The site links to the public source repository.
+
+    This previously asserted the absence of repo_url entirely, from when the
+    source was private and any link would have 404'd. The source is public now,
+    so the guard is that the link points at the right repository -- not at a
+    personal fork, and not at the private repository it was exported from.
+    """
     mkdocs = read("mkdocs.yml")
 
-    assert "repo_url:" not in mkdocs
-    assert "repo_name:" not in mkdocs
-    assert "saqibkh/pantheon\n" not in mkdocs
+    assert "repo_url: https://github.com/pantheongpu/pantheon\n" in mkdocs
+    assert "repo_name: pantheongpu/pantheon\n" in mkdocs
+    assert "saqibkh/pantheon" not in mkdocs
+    assert "pantheongpu/pantheongpu\n" not in mkdocs
 
 
 def test_site_declares_compact_favicon_assets():
