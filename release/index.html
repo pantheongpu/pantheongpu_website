@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.">
+        <meta name="description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
       
       
       
@@ -80,12 +80,12 @@
   <meta property="og:site_name" content="PANTHEON">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Releases">
-  <meta property="og:description" content="GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.">
+  <meta property="og:description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
   <meta property="og:url" content="https://pantheongpu.com/release/">
   <meta property="og:image" content="https://pantheongpu.com/assets/logo.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Releases">
-  <meta name="twitter:description" content="GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.">
+  <meta name="twitter:description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
   <meta name="twitter:image" content="https://pantheongpu.com/assets/logo.png">
   
 
@@ -223,6 +223,18 @@
 </div>
       
     
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pantheongpu/pantheon" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pantheongpu/pantheon
+  </div>
+</a>
+      </div>
     
   </nav>
   
@@ -406,6 +418,18 @@
     </a>
     PANTHEON
   </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pantheongpu/pantheon" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pantheongpu/pantheon
+  </div>
+</a>
+    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -3864,16 +3888,16 @@
 <h3 id="release-notes">Release Notes</h3>
 <h4 id="whats-changed">What's Changed</h4>
 <ul>
-<li>Fault maps and a time-based memory retention workload by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/11</li>
-<li>Fold the memory _agg twins into --init_pattern by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/12</li>
-<li>Audit fixes: unreleased hardware, fictional metrics, broken verification, CI hardening by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/14</li>
-<li>Bound launch parameters that could hang the GPU by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/16</li>
-<li>Make the tree publishable: OptiX optional, NOTICE, export script by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/15</li>
-<li>Stop CI running the whole matrix twice per commit by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/19</li>
-<li>Kill the whole process tree, not just the launched process by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/18</li>
-<li>Release v1.0.19 by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/17</li>
+<li>Fault maps and a time-based memory retention workload by @saqibkh</li>
+<li>Fold the memory _agg twins into --init_pattern by @saqibkh</li>
+<li>Audit fixes: unreleased hardware, fictional metrics, broken verification, CI hardening by @saqibkh</li>
+<li>Bound launch parameters that could hang the GPU by @saqibkh</li>
+<li>Make the tree publishable: OptiX optional, NOTICE, export script by @saqibkh</li>
+<li>Stop CI running the whole matrix twice per commit by @saqibkh</li>
+<li>Kill the whole process tree, not just the launched process by @saqibkh</li>
+<li>Release v1.0.19 by @saqibkh</li>
 </ul>
-<p><strong>Full Changelog</strong>: https://github.com/pantheongpu/pantheongpu/compare/v1.0.18...v1.0.19</p>
+<p><strong>Full Changelog</strong>: <code>v1.0.18...v1.0.19</code></p>
 <h3 id="downloads">Downloads</h3>
 <table>
 <thead>
@@ -3912,9 +3936,9 @@
 <h3 id="release-notes_1">Release Notes</h3>
 <h4 id="whats-changed_1">What's Changed</h4>
 <ul>
-<li>Kernel verification hardening: coverage holes, uninitialized lanes, UB, and accounting fixes by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/10</li>
+<li>Kernel verification hardening: coverage holes, uninitialized lanes, UB, and accounting fixes by @saqibkh</li>
 </ul>
-<p><strong>Full Changelog</strong>: https://github.com/pantheongpu/pantheongpu/compare/v1.0.17...v1.0.18</p>
+<p><strong>Full Changelog</strong>: <code>v1.0.17...v1.0.18</code></p>
 <h3 id="downloads_1">Downloads</h3>
 <table>
 <thead>
@@ -3951,7 +3975,7 @@
 <h2 id="pantheon-v1017">Pantheon v1.0.17</h2>
 <p><strong>Release Date:</strong> August 26, 2026</p>
 <h3 id="release-notes_2">Release Notes</h3>
-<p><strong>Full Changelog</strong>: https://github.com/pantheongpu/pantheongpu/compare/v1.0.16...v1.0.17</p>
+<p><strong>Full Changelog</strong>: <code>v1.0.16...v1.0.17</code></p>
 <h3 id="downloads_2">Downloads</h3>
 <table>
 <thead>
@@ -3988,7 +4012,7 @@
 <h2 id="pantheon-v1016">Pantheon v1.0.16</h2>
 <p><strong>Release Date:</strong> August 22, 2026</p>
 <h3 id="release-notes_3">Release Notes</h3>
-<p><strong>Full Changelog</strong>: https://github.com/pantheongpu/pantheongpu/compare/v1.0.15...v1.0.16</p>
+<p><strong>Full Changelog</strong>: <code>v1.0.15...v1.0.16</code></p>
 <h3 id="downloads_3">Downloads</h3>
 <table>
 <thead>
