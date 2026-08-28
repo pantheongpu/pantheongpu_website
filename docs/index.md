@@ -15,10 +15,10 @@ hide:
 PantheonGPU actively tests compute, memory, interconnect, thermals, stability, and AI workloads to identify underperforming, unstable, or misconfigured GPUs across NVIDIA CUDA and AMD ROCm systems.
 
 <div class="pantheon-hero__actions">
-  <a href="release/" class="md-button md-button--primary">Download Pantheon</a>
+  <a href="https://github.com/pantheongpu/pantheon" class="md-button md-button--primary">View Source on GitHub</a>
+  <a href="release/" class="md-button">Download Pantheon</a>
   <a href="fleet-validation/" class="md-button">Request a Free Fleet Validation Pilot</a>
   <a href="benchmarks/" class="md-button">Explore Benchmarks</a>
-  <a href="https://github.com/pantheongpu/pantheon" class="md-button">View Source on GitHub</a>
 </div>
 
 <p class="pantheon-hero__credibility">Member of NVIDIA Inception</p>

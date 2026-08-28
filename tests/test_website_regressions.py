@@ -336,9 +336,14 @@ def test_getting_started_uses_valid_install_commands():
     assert "python3 -m venv .venv" not in getting_started
     assert "python -m pip install -r requirements.txt" not in getting_started
     # Source entrypoints belong only in the build-from-source tab. Someone who
-    # installed the package must not be told to run pantheon.py.
-    package_section = getting_started.split('=== "Build from source"')[0]
-    assert "python3 pantheon.py" not in package_section
+    # installed the package must not be told to run pantheon.py. Find the
+    # package block by its own markers so this does not depend on tab order,
+    # which is a positioning choice and has already changed once.
+    import re as _re
+    package_block = _re.search(
+        r'=== "Debian package"(.*?)(?=\n=== |\n## )', getting_started, _re.S)
+    assert package_block, "the Debian package tab should exist"
+    assert "python3 pantheon.py" not in package_block.group(1)
     assert "python3 pantheon.py" in getting_started, "the source path should exist"
     assert "pantheon-tuning" not in getting_started
     assert "./pantheon --test all" not in getting_started
