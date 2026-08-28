@@ -125,10 +125,18 @@ function getBenchmarkAssetUrl(fileName) {
 }
 
 function getBestRunsOnly(data) {
+    // Group by version and unit as well as GPU and workload. Without them this
+    // compared numbers that are not comparable: a workload whose metric changed
+    // between releases had its "best" run picked from whichever version
+    // produced the larger figure, and a run recorded in Watts could out-rank
+    // the same workload's TFLOPS runs purely because the number was bigger.
+    // The generator already keys on version for exactly this reason.
     const groups = {};
     data.forEach(row => {
-        const key = `${row.gpu}|${row.test}`;
-        if (!groups[key] || parseFloat(row.score) > parseFloat(groups[key].score)) {
+        const key = `${row.gpu}|${row.test}|${row.version || "Legacy"}|${row.unit || ""}`;
+        const current = groups[key];
+        const score = parseFloat(row.score);
+        if (!current || (Number.isFinite(score) && score > parseFloat(current.score))) {
             groups[key] = row;
         }
     });

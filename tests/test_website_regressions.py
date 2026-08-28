@@ -923,3 +923,26 @@ def test_pseudonym_is_stable_and_one_to_one():
     assert sr.public_gpu_id(a) == sr.public_gpu_id(a), "must be stable"
     assert sr.public_gpu_id(a) != sr.public_gpu_id(b), "must not collide"
     assert sr.public_gpu_id("Unknown") == "Unknown"
+
+
+def test_best_run_grouping_does_not_cross_versions_or_units():
+    """The best-run view must not compare numbers that are not comparable.
+
+    Grouping only by GPU and workload let a workload whose metric changed
+    between releases show whichever version produced the larger figure, and let
+    a run recorded in Watts out-rank the same workload's TFLOPS runs purely
+    because the number was bigger. On the published dataset that affected 151
+    of 580 groups, 33 of which were being won by a wattage reading.
+
+    generate_web_data.py already keys on version for the same reason; this
+    keeps the client side consistent with it.
+    """
+    tables = read("docs/js/tables.js")
+    grouping = re.search(r"function getBestRunsOnly\(data\)\s*\{(.*?)\n\}", tables, re.S)
+    assert grouping, "getBestRunsOnly should exist"
+    body = grouping.group(1)
+    key_line = re.search(r"const key = `([^`]+)`", body)
+    assert key_line, "the grouping key should be a template literal"
+    key = key_line.group(1)
+    for field in ("row.gpu", "row.test", "row.version", "row.unit"):
+        assert field in key, f"the best-run key must include {field}: {key}"
