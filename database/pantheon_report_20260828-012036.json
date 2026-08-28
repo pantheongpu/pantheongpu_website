@@ -1,0 +1,62 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-28 01:20:36",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3295.17Mhz"
+    },
+    "ram_info": {
+        "total": "15.00GB",
+        "available": "14.27GB"
+    },
+    "gpu_static_info": [],
+    "toolkit_version": "6.2.4-139",
+    "test_results": [
+        {
+            "Test Name": "transformer_virus",
+            "Version": "1.0.18",
+            "Description": "Transformer Virus (FP8/FP4 Engine)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.0,
+            "Unit": "ERR",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 0,
+            "Max Temp (C)": 0,
+            "Avg Mem Temp (C)": 0,
+            "Max Mem Temp (C)": 0,
+            "Avg Power (W)": 0,
+            "Max Power (W)": 0,
+            "Avg Clock(MHz)": 0,
+            "Min Clock (MHz)": 0,
+            "Max Clock (MHz)": 0,
+            "Avg GPU Util (%)": 0,
+            "Max GPU Util (%)": 0,
+            "Peak Memory (MiB)": 0,
+            "Memory Total (MiB)": 0,
+            "Energy (Wh)": 0,
+            "Thermal Rise (C)": 0,
+            "Throttle Time (s)": 0,
+            "Efficiency": 0,
+            "PCIe Gen": 0,
+            "PCIe Width": 0,
+            "Limit Reason": "N/A",
+            "Max Fan (%)": 0,
+            "Volts Core (mV)": 0,
+            "Volts SoC (mV)": 0,
+            "Status": "FAIL",
+            "Failure Stage": "compile",
+            "Failure Reason": "Compilation did not produce transformer_virus. See /home/ubuntu/pantheon/build/build.log for compiler output.",
+            "RAS Status": "NOT RUN",
+            "RAS Error Delta": "Workload did not start"
+        }
+    ]
+}
