@@ -28,6 +28,10 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
     container:
       image: ubuntu:24.04
+    env:
+      # Resolved once here: the secrets context is not dependable inside a
+      # step-level `if`.
+      HAS_PAT: ${{ secrets.PANTHEON_SANITIZE_TOKEN != '' }}
     steps:
       - name: Bootstrap job container
         run: |
@@ -37,6 +41,14 @@ jobs:
 
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          # A push made with GITHUB_TOKEN starts no workflows and cannot pass a
+          # branch ruleset. Checking out with a personal access token makes the
+          # push act as that account, so CI runs on the sanitized commit and
+          # protection is satisfied. Falls back to GITHUB_TOKEN, which still
+          # scrubs and pushes while the branch is unprotected.
+          token: ${{ secrets.PANTHEON_SANITIZE_TOKEN || github.token }}
+          persist-credentials: true
 
       # The runner mounts the checkout with a different UID than the container
       # user, so git refuses to operate on it until the path is trusted.
@@ -82,7 +94,10 @@ jobs:
       # explicitly via the API; the gh CLI is not present in this container.
       # Neither workflow commits anything, so this cannot loop.
       - name: Re-run checks and deploy on the sanitized commit
-        if: env.SANITIZED == 'true'
+        # Only needed on the GITHUB_TOKEN fallback path. A push made with the
+        # PAT starts these workflows by itself, and dispatching as well would
+        # run everything twice.
+        if: env.SANITIZED == 'true' && env.HAS_PAT != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
