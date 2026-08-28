@@ -24,6 +24,7 @@ that have real hardware results behind them.
 | CUDA | 12.9 | 595.91.07 | 1 |
 | CUDA | 13.0 | 595.71, 595.91.07, 595.97 | 4 |
 | CUDA | 13.2 | 596.36 | 1 |
+| Unknown | 6.2.4-139 | not recorded | 1 |
 
 No AMD ROCm hardware runs have been published yet; ROCm support is
 currently validated through the compile matrix in the Pantheon
