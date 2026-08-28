@@ -1,6 +1,6 @@
 ---
-title: PantheonGPU | GPU Health and Performance Validation
-description: GPU health testing, diagnostics, fleet validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
+title: PantheonGPU | Open Source GPU Health and Performance Validation
+description: Open source GPU health testing, diagnostics, and performance validation for NVIDIA CUDA and AMD ROCm AI infrastructure. Read the source, run it yourself.
 hide:
   - navigation
   - toc
