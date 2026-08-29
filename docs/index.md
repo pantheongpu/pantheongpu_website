@@ -12,7 +12,7 @@ hide:
 
 # GPU health and performance validation for AI infrastructure
 
-PantheonGPU actively tests compute, memory, interconnect, thermals, stability, and AI workloads to identify underperforming, unstable, or misconfigured GPUs across NVIDIA CUDA and AMD ROCm systems.
+PantheonGPU actively tests compute, memory, interconnect, thermals, stability, and AI workloads to identify underperforming, unstable, or misconfigured GPUs across NVIDIA CUDA and AMD ROCm systems. It is open source, so you can read exactly what a workload does before running it on your hardware.
 
 <div class="pantheon-hero__actions">
   <a href="https://github.com/pantheongpu/pantheon" class="md-button md-button--primary">View Source on GitHub</a>
@@ -71,3 +71,4 @@ Detect changes after driver, CUDA or ROCm, firmware, operating system, container
 - PCIe and multi-GPU interconnect testing
 - Local JSON, CSV, HTML, and trace reports
 - A public performance database for comparing systems
+- Open source under Apache 2.0 — every workload is readable, buildable, and runnable from source
