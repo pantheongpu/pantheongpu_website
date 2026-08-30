@@ -9912,6 +9912,34 @@
     "card": "GPU-ad1c1c302e02"
   },
   {
+    "uuid": "GPU-bd0d7076e778",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "allocation_fragmentation",
+    "version": "1.1.0",
+    "unit": "alloc-events/s",
+    "score": 32193.8,
+    "date": "2026-08-30 22:18:34",
+    "temp_max": 30.0,
+    "power_max": 132.3,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-bd0d7076e778"
+  },
+  {
+    "uuid": "GPU-bd0d7076e778",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "transformer_train_step",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 28632400000.0,
+    "date": "2026-08-30 22:11:05",
+    "temp_max": 57.0,
+    "power_max": 681.2,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-bd0d7076e778"
+  },
+  {
     "uuid": "GPU-d4f539a182fa",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
