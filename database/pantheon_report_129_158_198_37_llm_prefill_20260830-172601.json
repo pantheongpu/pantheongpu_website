@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-30 17:31:33",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "216.26GB",
+        "available": "213.02GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-632897eb-3c98-bee4-a287-f175b9f51a21",
+            "serial": "1323221039376"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "test_results": [
+        {
+            "Test Name": "llm_prefill",
+            "Version": "1.1.0",
+            "Description": "LLM Prefill (Causal Attention and Projections)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 421698000.0,
+            "Unit": "prompt-tokens/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 46.9,
+            "Max Temp (C)": 48.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 218.0,
+            "Max Power (W)": 221.3,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 20952.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 18.245,
+            "Thermal Rise (C)": 16.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 1934394.5,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon-v1.1.0/build/llm_prefill 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260830-172601/reliability/llm_prefill/gpu0/ras.json"
+        }
+    ]
+}
