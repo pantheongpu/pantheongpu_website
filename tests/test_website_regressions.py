@@ -1110,14 +1110,17 @@ def test_no_workflow_pushes_straight_to_main():
     """
     import glob
 
+    # Pushing to a pull request's own branch is fine -- that is how the
+    # sanitizer scrubs a sweep in place. Only main is off limits.
     offenders = [
         Path(path).name
         for path in sorted(glob.glob(str(ROOT / ".github" / "workflows" / "*.yml")))
-        if "git push" in Path(path).read_text(encoding="utf-8")
+        if "HEAD:main" in Path(path).read_text(encoding="utf-8")
+        or "push origin main" in Path(path).read_text(encoding="utf-8")
     ]
 
     assert not offenders, (
-        f"these workflows push directly instead of using the "
+        f"these workflows push to main directly instead of using the "
         f"propose-to-main action: {offenders}")
 
 
@@ -1286,3 +1289,31 @@ def test_history_page_is_reachable_and_wired():
     for element in ("gpuHistoryChart", "gpuHistoryCard", "gpuHistoryTest"):
         assert element in page
         assert element in read("docs/js/gpu-history.js")
+
+
+def test_sanitizer_also_runs_on_pull_requests():
+    """A sweep arriving on a branch was bypassing the sanitizer entirely.
+
+    It only fired on pushes to main, so 55 filenames carrying two hosts' IP
+    addresses reached a pull request, and every new commit re-broke CI faster
+    than they could be scrubbed by hand.
+    """
+    workflow = read(".github/workflows/sanitize-imports.yml")
+
+    assert "pull_request:" in workflow
+    assert '- "database/**"' in workflow, "only report imports need scrubbing"
+
+    # The default checkout on a pull request is a detached merge commit, which
+    # cannot be pushed back.
+    assert "github.event.pull_request.head.ref" in workflow
+    assert 'git push origin "HEAD:refs/heads/${HEAD_REF}"' in workflow
+
+    # A fork's token is read-only, so there is nothing to push back with.
+    assert "github.event.pull_request.head.repo.full_name == github.repository" in workflow
+
+    # Without the token the push lands but the failed checks do not re-run,
+    # leaving a red pull request on a clean tree. Say so.
+    assert "the failed checks will not re-run on their own" in workflow
+
+    # main keeps going through the pull-request action, not a direct push.
+    assert "./.github/actions/propose-to-main" in workflow
