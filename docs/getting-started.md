@@ -53,15 +53,26 @@ run on your hardware; the Debian package is quicker if you just want to run it.
     Run it from the checkout with `python3 pantheon.py` in place of the
     `pantheon` command used below.
 
-=== "Debian package"
+=== "Install the package"
 
     ```bash
-    VERSION=1.0.19
-    wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
-    sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
+    VERSION=1.1.0
+    BASE="https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}"
+    wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"
+    wget "${BASE}/SHA256SUMS" && sha256sum --ignore-missing -c SHA256SUMS
+    pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"
     ```
 
-    Installs a `pantheon` command on your PATH.
+    Installs a `pantheon` command on your PATH. `pipx` keeps it in its own
+    environment, which is what recent Ubuntu and Debian releases require of
+    anything installed outside the system package manager; `pip install --user`
+    works too where that restriction does not apply.
+
+    The wheel carries the kernel sources rather than prebuilt binaries, so the
+    first run compiles the workloads for your GPU into a per-user cache. That
+    takes a minute or so once, and needs `make`, a C++ compiler, and the CUDA or
+    ROCm toolkit from the tabs above.
+
 
 ## Run a first test
 
@@ -89,7 +100,13 @@ See [Test Documentation](tests/index.md) for workload guidance, [Releases and Do
 
 ## Uninstall
 
-Remove a Debian package installation with:
+Remove a package installation with:
+
+```bash
+pipx uninstall pantheon-gpu
+```
+
+Releases up to v1.0.19 shipped as a Debian package instead. Remove one of those with:
 
 ```bash
 sudo apt-get remove pantheongpu
