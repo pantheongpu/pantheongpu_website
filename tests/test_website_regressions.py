@@ -1036,3 +1036,63 @@ def test_release_workflow_updates_and_deploys_the_release_page():
     # from the download table silently, which a build-only dry run would miss.
     assert "dry-run-release.md" in workflow
     assert "the release page would not list" in workflow
+
+
+def _published_rows():
+    return json.loads(read("docs/assets/web_data.json"))
+
+
+def test_published_data_never_reports_an_absent_sensor_as_zero():
+    """A sensor that was never read is not a reading of zero.
+
+    Pantheon recorded absent sensors as 0 until v1.1.0, and the generator
+    defaulted the same fields to 0 when the key was missing. The published
+    dataset therefore asserted measurements nobody took: 0 mV core voltage on
+    every one of 1317 rows, and 0 C memory temperature on 1234 of them.
+    """
+    from website_utils.generate_web_data import ABSENT_WHEN_ZERO
+
+    offenders = {}
+    for row in _published_rows():
+        for field in ABSENT_WHEN_ZERO:
+            value = row.get(field)
+            if str(value) in ("0", "0.0"):
+                offenders.setdefault(field, 0)
+                offenders[field] += 1
+
+    assert not offenders, f"absent sensors published as zero: {offenders}"
+
+
+def test_published_data_keeps_measured_zeros():
+    """The opposite failure: discarding a real result because it is zero.
+
+    A throttle time of 0s means the GPU never throttled, which is the good
+    outcome and the common one. It must stay a number.
+    """
+    rows = _published_rows()
+    measured_zero = [r for r in rows if str(r.get("throttle_time")) in ("0", "0.0")]
+
+    assert measured_zero, "expected runs that never throttled"
+    assert not any(r.get("throttle_time") == "N/A" for r in rows), (
+        "throttle_time must not be reported as unknown")
+
+    tables = read("docs/js/tables.js")
+    assert 'value === 0 || value === "0"' not in tables, (
+        "formatMetric must not treat every zero as a missing value")
+
+
+def test_published_data_carries_no_retired_metric_units():
+    """Ten AI workloads shared one kernel before v1.0.19.
+
+    Six compiled to byte-identical SASS, yet each published its own invented
+    unit as though it measured something distinct. The throughput numbers are
+    real; the metric names describe work that never happened.
+    """
+    from website_utils.generate_web_data import RETIRED_AI_UNITS
+
+    published = {row.get("unit") for row in _published_rows()}
+    leaked = published & RETIRED_AI_UNITS
+
+    assert not leaked, f"retired metric units on the leaderboard: {sorted(leaked)}"
+    # scheduler and atomic_virus were never part of that change.
+    assert "KIPS" in published and "MAPS" in published

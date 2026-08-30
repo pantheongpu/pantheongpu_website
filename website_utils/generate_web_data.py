@@ -46,6 +46,61 @@ KNOWN_TEST_UNITS = {
 # do not present single-GPU-incompatible results in the public leaderboard.
 PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
 
+# Ten AI workloads shared a single kernel body before v1.0.19 -- six of them
+# compiled to byte-identical SASS -- yet each published its own invented unit,
+# as though it had measured something the others had not. The numbers are real
+# throughput, but the metric names describe work that never happened, so these
+# runs stay in the raw reports and out of the public leaderboard. v1.0.19
+# replaced the lot with one honest unit, and no release since emits these
+# strings, so matching on the unit needs no version arithmetic.
+RETIRED_AI_UNITS = {
+    "attention-tiles/s",
+    "cache-updates/s",
+    "embedding-vectors/s",
+    "graph-steps/s",
+    "image-tiles/s",
+    "prompt-tokens/s",
+    "quantized-ops/s",
+    "requests/s",
+    "routed-tokens/s",
+    "tokens/s",
+    "train-steps/s",
+    "verified-tokens/s",
+}
+
+# A sensor that was never read is not a reading of zero. Pantheon recorded an
+# absent sensor as 0 until v1.1.0, and this generator defaulted the same fields
+# to 0 when the key was missing, so the published data asserted measurements
+# nobody took: 0 mV core voltage on every row, 0 C memory temperature on most.
+#
+# Only fields where zero cannot occur while a workload runs belong here.
+# throttle_time and thermal_rise are deliberately absent: "never throttled" and
+# "no measurable rise" are results, and reporting them as unknown would discard
+# a real measurement.
+ABSENT_WHEN_ZERO = {
+    "clock_max",
+    "clock_min",
+    "energy_wh",
+    "gpu_util_avg",
+    "gpu_util_max",
+    "memory_peak",
+    "power_max",
+    "temp_max",
+    "temp_mem",
+    "volts_core",
+    "volts_soc",
+}
+
+
+def sensor_reading(value):
+    """Return the reading, or "N/A" when the value encodes an absent sensor."""
+    if value is None or value == "":
+        return "N/A"
+    try:
+        return "N/A" if float(value) == 0.0 else value
+    except (TypeError, ValueError):
+        return value
+
 GPU_NAME_ALIASES = {
     "nvidia h100 80gb memory3": "NVIDIA H100 80GB HBM3",
 }
@@ -297,6 +352,10 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     else:
                         unit = infer_unit(test_name, test.get("Unit"), raw_score)
 
+                    if unit in RETIRED_AI_UNITS:
+                        print(f"[SKIPPED] retired metric {unit!r} in {f}: {test_name}")
+                        continue
+
                     report_version = first_present(data, ["Version", "pantheon_version"], "1.0.0")
                     version_str = test.get("Version", report_version)
                     if is_unknown_version(version_str) and not is_unknown_version(report_version):
@@ -343,7 +402,11 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         "driver": driver,
                         "toolkit": toolkit
                     }
-                    
+
+                    # An absent sensor must not reach the site as a reading.
+                    for field in ABSENT_WHEN_ZERO:
+                        record[field] = sensor_reading(record[field])
+
                     # TRACK BY UNIQUE SILICON AND SOFTWARE VERSION
                     key = record_key(record)
 
