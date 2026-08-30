@@ -958,6 +958,43 @@ def test_best_run_grouping_does_not_cross_versions_or_units():
         assert field in key, f"the best-run key must include {field}: {key}"
 
 
+def test_brand_marks_have_no_white_frame():
+    """The header logo shipped inside an opaque white frame.
+
+    icon.png was a 77px mark centred in a 128px canvas, the surrounding 26px
+    filled with opaque white, and favicon.png padded the same way. The site
+    header is the page surface, so on the dark scheme that frame rendered as a
+    white box around the logo.
+    """
+    from PIL import Image
+
+    for name in ("icon.png", "favicon.png"):
+        image = Image.open(ROOT / "docs" / "assets" / name).convert("RGBA")
+        width, height = image.size
+        pixels = image.load()
+
+        border = [pixels[x, y]
+                  for x in range(width) for y in (0, height - 1)]
+        border += [pixels[x, y]
+                   for y in range(height) for x in (0, width - 1)]
+
+        framed = [p for p in border if p[3] > 200 and min(p[:3]) > 235]
+        assert not framed, (
+            f"{name} has {len(framed)} opaque near-white border pixels; the "
+            "mark should reach the edge of its canvas")
+
+
+def test_social_image_has_no_empty_band():
+    """logo.png carried 131px of fully transparent rows below the artwork.
+
+    Social platforms flatten transparency, so that dead space rendered as a
+    bar across the bottom of every link preview.
+    """
+    from PIL import Image
+
+    image = Image.open(ROOT / "docs" / "assets" / "logo.png").convert("RGBA")
+    assert image.getbbox() == (0, 0, *image.size), (
+        "logo.png has fully transparent rows or columns at its edges")
 def test_release_page_lists_the_wheel():
     """The wheel is the install path a 1.1.0 reader needs.
 

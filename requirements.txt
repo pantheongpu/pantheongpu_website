@@ -1,2 +1,5 @@
 mkdocs-material>=9.5,<10
 pytest>=8,<10
+# Brand-mark regression tests inspect PNG pixels; without this the checks
+# that keep a white frame off the logo would skip rather than run.
+pillow>=10,<12
