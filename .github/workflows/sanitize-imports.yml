@@ -31,23 +31,22 @@ jobs:
     env:
       # Resolved once here: the secrets context is not dependable inside a
       # step-level `if`.
-      HAS_PAT: ${{ secrets.PANTHEON_SANITIZE_TOKEN != '' }}
+      HAS_PAT: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
     steps:
       - name: Bootstrap job container
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates curl git lsb-release tar gzip xz-utils zstd
+            ca-certificates curl gh git lsb-release tar gzip xz-utils zstd
 
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          # A push made with GITHUB_TOKEN starts no workflows and cannot pass a
-          # branch ruleset. Checking out with a personal access token makes the
-          # push act as that account, so CI runs on the sanitized commit and
-          # protection is satisfied. Falls back to GITHUB_TOKEN, which still
-          # scrubs and pushes while the branch is unprotected.
-          token: ${{ secrets.PANTHEON_SANITIZE_TOKEN || github.token }}
+          # GITHUB_TOKEN starts no workflows, so a pull request opened with it
+          # would never run the checks it has to pass. A personal access token
+          # acts as that account instead. Falls back to GITHUB_TOKEN, which can
+          # still scrub and push while main is unprotected.
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
           persist-credentials: true
 
       # The runner mounts the checkout with a different UID than the container
@@ -71,27 +70,28 @@ jobs:
       - name: Regenerate published data
         run: python3 website_utils/generate_web_data.py
 
-      - name: Commit if anything changed
-        run: |
-          if git diff --quiet; then
-            echo "Nothing to sanitize."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "Sanitize imported benchmark reports"
-          git push
-          echo "SANITIZED=true" >> "$GITHUB_ENV"
+      - name: Propose the sanitized tree
+        id: sanitize
+        uses: ./.github/actions/propose-to-main
+        with:
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+          branch-slug: sanitize
+          title: Sanitize imported benchmark reports
+          body: |
+            Raw benchmark reports landed in `database/` carrying host and GPU
+            identifiers. This scrubs them and regenerates the published data.
 
-      # A commit pushed with GITHUB_TOKEN does not start any workflow, so CI and
-      # the deploy would never run against the scrubbed tree -- leaving the site
-      # stale and the branch showing the failure from the raw import. Start them
-      # explicitly. Neither commits anything, so this cannot loop.
-      # A commit pushed with GITHUB_TOKEN does not start any workflow, so CI and
-      # the deploy would never run against the scrubbed tree -- leaving the site
-      # stale and the branch showing the failure from the raw import. Start them
-      # explicitly via the API; the gh CLI is not present in this container.
+            Opened automatically; merges once the required checks pass.
+
+      - name: Record that a change was proposed
+        if: steps.sanitize.outputs.changed == 'true'
+        run: echo "SANITIZED=true" >> "$GITHUB_ENV"
+
+      # On the fallback path the commit is pushed with GITHUB_TOKEN, which
+      # starts no workflow, so CI and the deploy would never run against the
+      # scrubbed tree -- leaving the site stale and the branch showing the
+      # failure from the raw import. Start them explicitly via the API.
       # Neither workflow commits anything, so this cannot loop.
       - name: Re-run checks and deploy on the sanitized commit
         # Only needed on the GITHUB_TOKEN fallback path. A push made with the
