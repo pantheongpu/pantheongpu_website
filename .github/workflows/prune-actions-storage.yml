@@ -30,6 +30,13 @@ concurrency:
   group: prune-actions-storage
   cancel-in-progress: false
 
+defaults:
+  run:
+    # Container jobs on the self-hosted runner default to `sh`, which has no
+    # `pipefail`. Several steps read a command's output through a pipe, so a
+    # silent failure there would be read as an empty value, not as an error.
+    shell: bash
+
 jobs:
   prune:
     runs-on: [self-hosted, Linux, X64]
