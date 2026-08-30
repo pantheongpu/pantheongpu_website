@@ -1,10 +1,38 @@
 # Releases
 
-Download stable binary builds of the Pantheon GPU toolkit. The newest release is listed first.
+Download stable releases of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 
-## Pantheon v1.0.19 (Latest)
+## Pantheon v1.1.0 (Latest)
+**Release Date:** August 30, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.1.0
+
+Install the wheel (kernels compile on first run into a per-user cache;
+expect roughly a minute the first time):
+
+```
+pip install pantheon_gpu-1.1.0-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Requires a CUDA or ROCm toolchain at first run. Use `--platform mock`
+to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.1.0 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon_gpu-1.1.0-py3-none-any.whl) | `.whl` | 328.1 KB |
+| [Pantheon v1.1.0 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon-1.1.0-source.tar.gz) | `.tar.gz` | 249.2 KB |
+| [Pantheon v1.1.0 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon_gpu-1.1.0.tar.gz) | `.tar.gz` | 236.3 KB |
+| [Pantheon v1.1.0 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon-1.1.0-source.zip) | `.zip` | 366.2 KB |
+| [Pantheon v1.1.0 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/SHA256SUMS) | `SHA256SUMS` | 389 B |
+
+---
+
+## Pantheon v1.0.19
 **Release Date:** August 27, 2026
 
 ### Release Notes
