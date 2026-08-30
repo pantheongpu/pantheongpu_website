@@ -207,13 +207,17 @@ function compareValues(a, b, key) {
     return 0;
 }
 
+// Absence is decided in the generator, which knows which sensors a run
+// actually read. Treating every zero as missing here discarded real results:
+// a throttle time of 0s means the GPU never throttled, and 1173 of 1315 rows
+// reported that outcome as though it were unknown.
 function formatMetric(value, unit) {
-    if (isMissingValue(value) || value === 0 || value === "0") return "N/A";
+    if (isMissingValue(value)) return "N/A";
     return unit ? `${value} ${unit}` : String(value);
 }
 
 // Display-only compaction so 13361400000 reads as 13.36B in table cells.
-// CSV export keeps the raw values for downstream analysis.
+// CSV export passes display=false, so it keeps full precision.
 function compactNumber(value) {
     const num = Number(value);
     if (!Number.isFinite(num)) return value;
@@ -269,7 +273,7 @@ function formatCellValue(row, key, display = false) {
     if (key === "version") {
         return val || "Legacy";
     }
-    if (val === undefined || val === null || val === "" || val === 0 || val === "0") {
+    if (isMissingValue(val)) {
         return "N/A";
     }
     return val;

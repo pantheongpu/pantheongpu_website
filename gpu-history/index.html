@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://pantheongpu.com/tests/serving_mix/">
+        <link rel="canonical" href="https://pantheongpu.com/gpu-history/">
       
       
-        <link rel="prev" href="../quantized_gemm/">
+        <link rel="prev" href="../benchmark-comparisons/">
       
       
-        <link rel="next" href="../speculative_decode/">
+        <link rel="next" href="../methodology/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/favicon.ico">
+      <link rel="icon" href="../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Serving Mix - PANTHEON</title>
+        <title>Per-card History - PANTHEON</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,11 +53,11 @@
       
     
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../css/extra.css">
     
-      <link rel="stylesheet" href="../../css/modern.css">
+      <link rel="stylesheet" href="../css/modern.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -79,12 +79,12 @@
   
   <meta property="og:site_name" content="PANTHEON">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Serving Mix">
+  <meta property="og:title" content="Per-card History">
   <meta property="og:description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
-  <meta property="og:url" content="https://pantheongpu.com/tests/serving_mix/">
+  <meta property="og:url" content="https://pantheongpu.com/gpu-history/">
   <meta property="og:image" content="https://pantheongpu.com/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Serving Mix">
+  <meta name="twitter:title" content="Per-card History">
   <meta name="twitter:description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
   <meta name="twitter:image" content="https://pantheongpu.com/assets/logo.png">
   
@@ -108,7 +108,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#serving-mix" class="md-skip">
+        <a href="#per-card-history" class="md-skip">
           Skip to content
         </a>
       
@@ -124,9 +124,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="PANTHEON" class="md-header__button md-logo" aria-label="PANTHEON" data-md-component="logo">
+    <a href=".." title="PANTHEON" class="md-header__button md-logo" aria-label="PANTHEON" data-md-component="logo">
       
-  <img src="../../assets/icon.png" alt="logo">
+  <img src="../assets/icon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -143,7 +143,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Serving Mix
+              Per-card History
             
           </span>
         </div>
@@ -250,7 +250,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -269,7 +269,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../release/" class="md-tabs__link">
+      <a href="../release/" class="md-tabs__link">
         
   
   
@@ -288,7 +288,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../getting-started/" class="md-tabs__link">
+      <a href="../getting-started/" class="md-tabs__link">
         
   
   
@@ -305,11 +305,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../benchmarks/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../benchmarks/" class="md-tabs__link">
           
   
   
@@ -329,7 +331,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reports/" class="md-tabs__link">
+        <a href="../reports/" class="md-tabs__link">
           
   
   
@@ -345,13 +347,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../tests/" class="md-tabs__link">
           
   
   
@@ -371,7 +371,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../community/" class="md-tabs__link">
+        <a href="../community/" class="md-tabs__link">
           
   
   
@@ -400,7 +400,9 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -411,9 +413,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="PANTHEON" class="md-nav__button md-logo" aria-label="PANTHEON" data-md-component="logo">
+    <a href=".." title="PANTHEON" class="md-nav__button md-logo" aria-label="PANTHEON" data-md-component="logo">
       
-  <img src="../../assets/icon.png" alt="logo">
+  <img src="../assets/icon.png" alt="logo">
 
     </a>
     PANTHEON
@@ -440,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -467,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../release/" class="md-nav__link">
+      <a href="../release/" class="md-nav__link">
         
   
   
@@ -494,7 +496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/" class="md-nav__link">
+      <a href="../getting-started/" class="md-nav__link">
         
   
   
@@ -518,26 +520,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -555,7 +562,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -573,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../benchmarks/" class="md-nav__link">
+      <a href="../benchmarks/" class="md-nav__link">
         
   
   
@@ -601,7 +608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../benchmark-comparisons/" class="md-nav__link">
+      <a href="../benchmark-comparisons/" class="md-nav__link">
         
   
   
@@ -626,10 +633,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../gpu-history/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -645,6 +661,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -657,7 +674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../methodology/" class="md-nav__link">
+      <a href="../methodology/" class="md-nav__link">
         
   
   
@@ -744,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reports/" class="md-nav__link">
+      <a href="../reports/" class="md-nav__link">
         
   
   
@@ -772,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reports/silicon-segregation/" class="md-nav__link">
+      <a href="../reports/silicon-segregation/" class="md-nav__link">
         
   
   
@@ -800,7 +817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reports/tensor-lineage/" class="md-nav__link">
+      <a href="../reports/tensor-lineage/" class="md-nav__link">
         
   
   
@@ -832,31 +849,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -874,7 +886,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -892,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../tests/" class="md-nav__link">
         
   
   
@@ -926,20 +938,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
         
           
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
             
   
   
@@ -975,7 +984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../omni_virus/" class="md-nav__link">
+      <a href="../tests/omni_virus/" class="md-nav__link">
         
   
   
@@ -1003,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../voltage/" class="md-nav__link">
+      <a href="../tests/voltage/" class="md-nav__link">
         
   
   
@@ -1031,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pulse_virus/" class="md-nav__link">
+      <a href="../tests/pulse_virus/" class="md-nav__link">
         
   
   
@@ -1059,7 +1068,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tensor_virus/" class="md-nav__link">
+      <a href="../tests/tensor_virus/" class="md-nav__link">
         
   
   
@@ -1087,7 +1096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mma_virus/" class="md-nav__link">
+      <a href="../tests/mma_virus/" class="md-nav__link">
         
   
   
@@ -1115,7 +1124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transformer_virus/" class="md-nav__link">
+      <a href="../tests/transformer_virus/" class="md-nav__link">
         
   
   
@@ -1143,7 +1152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fp64_virus/" class="md-nav__link">
+      <a href="../tests/fp64_virus/" class="md-nav__link">
         
   
   
@@ -1171,7 +1180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../int_virus/" class="md-nav__link">
+      <a href="../tests/int_virus/" class="md-nav__link">
         
   
   
@@ -1199,7 +1208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sfu_stress/" class="md-nav__link">
+      <a href="../tests/sfu_stress/" class="md-nav__link">
         
   
   
@@ -1227,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../incinerator/" class="md-nav__link">
+      <a href="../tests/incinerator/" class="md-nav__link">
         
   
   
@@ -1269,20 +1278,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
         
           
-          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
             
   
   
@@ -1318,7 +1324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rt_virus/" class="md-nav__link">
+      <a href="../tests/rt_virus/" class="md-nav__link">
         
   
   
@@ -1346,7 +1352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../media_enc_virus/" class="md-nav__link">
+      <a href="../tests/media_enc_virus/" class="md-nav__link">
         
   
   
@@ -1388,20 +1394,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
         
           
-          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
             
   
   
@@ -1437,7 +1440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../atomic_virus/" class="md-nav__link">
+      <a href="../tests/atomic_virus/" class="md-nav__link">
         
   
   
@@ -1465,7 +1468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cache_lat/" class="md-nav__link">
+      <a href="../tests/cache_lat/" class="md-nav__link">
         
   
   
@@ -1493,7 +1496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_write_agg/" class="md-nav__link">
+      <a href="../tests/memory_write_agg/" class="md-nav__link">
         
   
   
@@ -1521,7 +1524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_write/" class="md-nav__link">
+      <a href="../tests/memory_write/" class="md-nav__link">
         
   
   
@@ -1549,7 +1552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_read_agg/" class="md-nav__link">
+      <a href="../tests/memory_read_agg/" class="md-nav__link">
         
   
   
@@ -1577,7 +1580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_read/" class="md-nav__link">
+      <a href="../tests/memory_read/" class="md-nav__link">
         
   
   
@@ -1605,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_bank_thrash/" class="md-nav__link">
+      <a href="../tests/memory_bank_thrash/" class="md-nav__link">
         
   
   
@@ -1633,7 +1636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_cache_fracture/" class="md-nav__link">
+      <a href="../tests/memory_cache_fracture/" class="md-nav__link">
         
   
   
@@ -1661,7 +1664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_retention_bake/" class="md-nav__link">
+      <a href="../tests/memory_retention_bake/" class="md-nav__link">
         
   
   
@@ -1689,7 +1692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_thermal_asym/" class="md-nav__link">
+      <a href="../tests/memory_thermal_asym/" class="md-nav__link">
         
   
   
@@ -1731,20 +1734,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
         
           
-          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
             
   
   
@@ -1780,7 +1780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../march_test/" class="md-nav__link">
+      <a href="../tests/march_test/" class="md-nav__link">
         
   
   
@@ -1808,7 +1808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_hammer/" class="md-nav__link">
+      <a href="../tests/memory_hammer/" class="md-nav__link">
         
   
   
@@ -1836,7 +1836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../galpat/" class="md-nav__link">
+      <a href="../tests/galpat/" class="md-nav__link">
         
   
   
@@ -1864,7 +1864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_retention/" class="md-nav__link">
+      <a href="../tests/memory_retention/" class="md-nav__link">
         
   
   
@@ -1906,20 +1906,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
         
           
-          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
             
   
   
@@ -1955,7 +1952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../p2p_thrasher/" class="md-nav__link">
+      <a href="../tests/p2p_thrasher/" class="md-nav__link">
         
   
   
@@ -1983,7 +1980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../all_reduce/" class="md-nav__link">
+      <a href="../tests/all_reduce/" class="md-nav__link">
         
   
   
@@ -2011,7 +2008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tlb_avalanche/" class="md-nav__link">
+      <a href="../tests/tlb_avalanche/" class="md-nav__link">
         
   
   
@@ -2039,7 +2036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pcie_bandwidth/" class="md-nav__link">
+      <a href="../tests/pcie_bandwidth/" class="md-nav__link">
         
   
   
@@ -2067,7 +2064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ras_validator/" class="md-nav__link">
+      <a href="../tests/ras_validator/" class="md-nav__link">
         
   
   
@@ -2095,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_tsv_thrasher/" class="md-nav__link">
+      <a href="../tests/memory_tsv_thrasher/" class="md-nav__link">
         
   
   
@@ -2123,7 +2120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory_pc_pingpong/" class="md-nav__link">
+      <a href="../tests/memory_pc_pingpong/" class="md-nav__link">
         
   
   
@@ -2151,7 +2148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scheduler/" class="md-nav__link">
+      <a href="../tests/scheduler/" class="md-nav__link">
         
   
   
@@ -2179,7 +2176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../baseline_metrics/" class="md-nav__link">
+      <a href="../tests/baseline_metrics/" class="md-nav__link">
         
   
   
@@ -2212,31 +2209,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
             
   
   
@@ -2254,7 +2246,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2272,7 +2264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ai-workloads/" class="md-nav__link">
+      <a href="../ai-workloads/" class="md-nav__link">
         
   
   
@@ -2300,7 +2292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../llm_decode/" class="md-nav__link">
+      <a href="../tests/llm_decode/" class="md-nav__link">
         
   
   
@@ -2328,7 +2320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../llm_prefill/" class="md-nav__link">
+      <a href="../tests/llm_prefill/" class="md-nav__link">
         
   
   
@@ -2356,7 +2348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kv_cache_churn/" class="md-nav__link">
+      <a href="../tests/kv_cache_churn/" class="md-nav__link">
         
   
   
@@ -2384,7 +2376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fused_attention/" class="md-nav__link">
+      <a href="../tests/fused_attention/" class="md-nav__link">
         
   
   
@@ -2412,7 +2404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rope_stress/" class="md-nav__link">
+      <a href="../tests/rope_stress/" class="md-nav__link">
         
   
   
@@ -2440,7 +2432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quantized_gemm/" class="md-nav__link">
+      <a href="../tests/quantized_gemm/" class="md-nav__link">
         
   
   
@@ -2465,19 +2457,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../tests/serving_mix/" class="md-nav__link">
         
   
   
@@ -2493,7 +2476,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -2506,7 +2488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../speculative_decode/" class="md-nav__link">
+      <a href="../tests/speculative_decode/" class="md-nav__link">
         
   
   
@@ -2534,7 +2516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../moe_router/" class="md-nav__link">
+      <a href="../tests/moe_router/" class="md-nav__link">
         
   
   
@@ -2562,7 +2544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transformer_train_step/" class="md-nav__link">
+      <a href="../tests/transformer_train_step/" class="md-nav__link">
         
   
   
@@ -2590,7 +2572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../allocation_fragmentation/" class="md-nav__link">
+      <a href="../tests/allocation_fragmentation/" class="md-nav__link">
         
   
   
@@ -2618,7 +2600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../graph_replay/" class="md-nav__link">
+      <a href="../tests/graph_replay/" class="md-nav__link">
         
   
   
@@ -2646,7 +2628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../rag_embedding/" class="md-nav__link">
+      <a href="../tests/rag_embedding/" class="md-nav__link">
         
   
   
@@ -2674,7 +2656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vision_encoder/" class="md-nav__link">
+      <a href="../tests/vision_encoder/" class="md-nav__link">
         
   
   
@@ -2769,7 +2751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../community/" class="md-nav__link">
+      <a href="../community/" class="md-nav__link">
         
   
   
@@ -2797,7 +2779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../programs-support/" class="md-nav__link">
+      <a href="../programs-support/" class="md-nav__link">
         
   
   
@@ -2833,6 +2815,8 @@
             
             
               
+                
+              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -2857,44 +2841,44 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
 
 
 
-<h1 id="serving-mix">Serving Mix</h1>
-<p><code>serving_mix</code> creates mixed execution pressure representative of requests with
-different prompt and generation demands.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>serving_mix<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--mem<span class="w"> </span><span class="m">50</span><span class="w"> </span>--verify<span class="w"> </span>--profile
-</code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Area</th>
-<th>What it tests</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Compute</td>
-<td>Mixed projection-style work.</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>Synthetic request working-set reads.</td>
-</tr>
-<tr>
-<td>Telemetry</td>
-<td>Power, clocks, cache/DRAM behavior, and throttling.</td>
-</tr>
-<tr>
-<td>Result</td>
-<td>Synthetic requests per second.</td>
-</tr>
-</tbody>
-</table>
-<p>This is not an HTTP server or queueing benchmark. Measure TTFT, inter-token
-latency, and production concurrency using the actual serving stack separately.</p>
 
+<h1 id="per-card-history">Per-card history</h1>
+<div class="page-intro">
+  <p class="page-intro__eyebrow">One card over time</p>
+  <p>The leaderboard keeps a single row per card, workload and release: the best run wins, and every later run is dropped. That is the right view for comparing hardware, and the wrong one for watching a card age. This page plots every run of one card instead, so a part that is slowing down shows up as a slope rather than disappearing behind its own best result.</p>
+</div>
 
+<div class="admonition note">
+<p class="admonition-title">Reading these charts</p>
+<p>Cards are identified by a stable pseudonym rather than their GPU UUID. The
+pseudonym follows one physical card across releases, which is what a history
+needs; the UUID itself is never published.</p>
+<p>When a workload's metric changed between releases, each unit is drawn as its
+own series. Values in different units are not comparable, and joining them
+into one line would show a step that is a change of units rather than a
+change in the hardware.</p>
+</div>
+<div class="benchmark-controls">
+  <label for="gpuHistoryCard">Card</label>
+  <select id="gpuHistoryCard" aria-label="Select a GPU to plot"></select>
+
+  <label for="gpuHistoryTest">Workload</label>
+  <select id="gpuHistoryTest" aria-label="Select a workload to plot"></select>
+</div>
+
+<p id="gpuHistoryStatus" class="benchmark-status" role="status" aria-live="polite"></p>
+
+<div id="gpuHistoryChart"></div>
+
+<p>Runs come from the same reports as the leaderboard. A single benchmark writes
+both a per-test record and a summary repeating it, so those are collapsed to one
+point; two separate runs are only merged when they share a timestamp as well as
+a score, at which point they are the same measurement counted twice.</p>
+<p><a class="md-button" href="../benchmarks/">Back to the benchmark explorer</a></p>
 
 
 
@@ -2903,7 +2887,14 @@ latency, and production concurrency using the actual serving stack separately.</
 
 
   
+  
 
+
+
+  
+
+
+  
 
 
   <form class="md-feedback" name="feedback" hidden>
@@ -2977,10 +2968,12 @@ latency, and production concurrency using the actual serving stack separately.</
   
     
       
+        
+      
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../quantized_gemm/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quantized GEMM">
+          <a href="../benchmark-comparisons/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Comparisons">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2990,20 +2983,20 @@ latency, and production concurrency using the actual serving stack separately.</
                 Previous
               </span>
               <div class="md-ellipsis">
-                Quantized GEMM
+                Comparisons
               </div>
             </div>
           </a>
         
         
           
-          <a href="../speculative_decode/" class="md-footer__link md-footer__link--next" aria-label="Next: Speculative Decode">
+          <a href="../methodology/" class="md-footer__link md-footer__link--next" aria-label="Next: Methodology">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Speculative Decode
+                Methodology
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -3040,20 +3033,20 @@ latency, and production concurrency using the actual serving stack separately.</
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "toc.follow", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "toc.follow", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../../js/apexcharts.min.js"></script>
+        <script src="../js/apexcharts.min.js"></script>
       
-        <script src="../../js/charts.js"></script>
+        <script src="../js/charts.js"></script>
       
-        <script src="../../js/tables.js"></script>
+        <script src="../js/tables.js"></script>
       
-        <script src="../../js/gpu-history.js"></script>
+        <script src="../js/gpu-history.js"></script>
       
-        <script src="../../js/release-nav.js"></script>
+        <script src="../js/release-nav.js"></script>
       
     
   </body>
