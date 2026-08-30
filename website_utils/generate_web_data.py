@@ -1,9 +1,13 @@
 import os
-import hashlib
 import json
 import glob
 import math
 from pathlib import Path
+
+try:  # run as a script (python3 website_utils/generate_web_data.py)
+    from gpu_identity import public_gpu_id as _public_gpu_id
+except ImportError:  # imported as a package (tests, other modules)
+    from website_utils.gpu_identity import public_gpu_id as _public_gpu_id
 
 try:
     import numpy as np
@@ -15,6 +19,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DB_DIR = ROOT_DIR / "database"
 OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "web_data.json"
 UNSUPPORTED_OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "unsupported_workloads.json"
+HISTORY_OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "gpu_history.json"
 METHODOLOGY_FILE = ROOT_DIR / "docs" / "methodology.md"
 
 COVERAGE_START = "<!-- TOOLKIT_COVERAGE:START -->"
@@ -45,6 +50,115 @@ KNOWN_TEST_UNITS = {
 # Keep multi-GPU/interconnect workloads in raw reports and documentation, but
 # do not present single-GPU-incompatible results in the public leaderboard.
 PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
+
+# Ten AI workloads shared a single kernel body before v1.0.19 -- six of them
+# compiled to byte-identical SASS -- yet each published its own invented unit,
+# as though it had measured something the others had not. The numbers are real
+# throughput, but the metric names describe work that never happened, so these
+# runs stay in the raw reports and out of the public leaderboard. v1.0.19
+# replaced the lot with one honest unit, and no release since emits these
+# strings, so matching on the unit needs no version arithmetic.
+RETIRED_AI_UNITS = {
+    "attention-tiles/s",
+    "cache-updates/s",
+    "embedding-vectors/s",
+    "graph-steps/s",
+    "image-tiles/s",
+    "prompt-tokens/s",
+    "quantized-ops/s",
+    "requests/s",
+    "routed-tokens/s",
+    "tokens/s",
+    "train-steps/s",
+    "verified-tokens/s",
+}
+
+# A sensor that was never read is not a reading of zero. Pantheon recorded an
+# absent sensor as 0 until v1.1.0, and this generator defaulted the same fields
+# to 0 when the key was missing, so the published data asserted measurements
+# nobody took: 0 mV core voltage on every row, 0 C memory temperature on most.
+#
+# Only fields where zero cannot occur while a workload runs belong here.
+# throttle_time and thermal_rise are deliberately absent: "never throttled" and
+# "no measurable rise" are results, and reporting them as unknown would discard
+# a real measurement.
+ABSENT_WHEN_ZERO = {
+    "clock_max",
+    "clock_min",
+    "energy_wh",
+    "gpu_util_avg",
+    "gpu_util_max",
+    "memory_peak",
+    "power_max",
+    "temp_max",
+    "temp_mem",
+    "volts_core",
+    "volts_soc",
+}
+
+
+# Every run of a card, rather than its best. Kept deliberately narrow: this
+# file grows with every benchmark ever published, and the leaderboard already
+# carries the full detail for the run it selected.
+HISTORY_FIELDS = (
+    "uuid",
+    "gpu",
+    "test",
+    "version",
+    "unit",
+    "score",
+    "date",
+    "temp_max",
+    "power_max",
+    "clock_avg",
+    "throttle_time",
+)
+
+
+def dedupe_history(history):
+    """Collapse the several files a single run writes into one point.
+
+    Each run emits a per-test record and a summary that repeats it, stamped
+    minutes apart, so a chart drawn from the raw list plots every measurement
+    two or three times. Only the certain duplicates are removed:
+
+    * where a group mixes a per-test record with summaries repeating it, the
+      per-test records win -- that is the file the run actually wrote;
+    * otherwise entries identical down to the timestamp collapse to one.
+
+    Two genuinely separate runs that happen to score the same are left alone
+    unless they also share a timestamp, because at that point they are the
+    same measurement counted twice.
+    """
+    groups = {}
+    for run in history:
+        key = (run["card"], run.get("test"), run.get("version"),
+               str(run.get("score")), run.get("unit"))
+        groups.setdefault(key, []).append(run)
+
+    kept = []
+    for group in groups.values():
+        authoritative = [r for r in group if r.get("_kind") == "completed_workload"]
+        if authoritative and len(authoritative) < len(group):
+            group = authoritative
+
+        seen_dates = set()
+        for run in sorted(group, key=lambda r: str(r.get("date"))):
+            if run.get("date") in seen_dates:
+                continue
+            seen_dates.add(run.get("date"))
+            kept.append({k: v for k, v in run.items() if k != "_kind"})
+    return kept
+
+
+def sensor_reading(value):
+    """Return the reading, or "N/A" when the value encodes an absent sensor."""
+    if value is None or value == "":
+        return "N/A"
+    try:
+        return "N/A" if float(value) == 0.0 else value
+    except (TypeError, ValueError):
+        return value
 
 GPU_NAME_ALIASES = {
     "nvidia h100 80gb memory3": "NVIDIA H100 80GB HBM3",
@@ -81,42 +195,35 @@ def normalize_gpu_name(value, default="Unknown GPU"):
     return GPU_NAME_ALIASES.get(lookup, name)
 
 
-PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
-
-
 def public_gpu_id(raw):
-    """Return a stable pseudonym for a GPU UUID.
+    """Stable pseudonym for a GPU UUID. See website_utils.gpu_identity."""
+    return _public_gpu_id(raw)
 
-    Identity here is only ever compared for equality -- dedup, grouping and
-    per-card history all work exactly the same on a hash. Publishing the raw
-    UUID buys nothing and hands out a persistent hardware identifier that, with
-    the driver, OS and timestamps alongside it, fingerprints a specific machine.
 
-    A UUID has enough entropy that this is not brute-forceable on its own; set
-    PANTHEON_ID_SALT to harden it further. Keep the salt stable, or previously
-    published pseudonyms will not match new ones.
+def card_identity(row):
+    """Identify one physical card.
+
+    Reports without a UUID still describe a specific card, so fall back to the
+    attributes that distinguish one. Grouping those under the shared string
+    "Unknown" would merge every anonymous card into a single series, and a
+    history chart drawn from it would show other people's hardware as though
+    it were one card swinging wildly.
     """
-    text = normalize(raw)
-    if text.lower() in {"unknown", "n/a", "none", ""}:
-        return "Unknown"
-    digest = hashlib.sha256((PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()
-    return "GPU-" + digest[:12]
+    uuid = normalize(row.get("uuid"))
+    if uuid.lower() not in {"unknown", "n/a", "none"}:
+        return uuid
+    return "|".join([
+        normalize(row.get("gpu")),
+        normalize(row.get("serial")),
+        normalize(row.get("vram"), "N/A"),
+        normalize(row.get("driver"), "N/A"),
+    ])
 
 
 def record_key(row):
-    uuid = normalize(row.get("uuid"))
     test = normalize(row.get("test"), "unknown").lower()
     version = normalize(row.get("version"), "1.0.0")
-    if uuid.lower() not in {"unknown", "n/a", "none"}:
-        identity = uuid
-    else:
-        identity = "|".join([
-            normalize(row.get("gpu")),
-            normalize(row.get("serial")),
-            normalize(row.get("vram"), "N/A"),
-            normalize(row.get("driver"), "N/A"),
-        ])
-    return f"{identity}|{test}|{version}"
+    return f"{card_identity(row)}|{test}|{version}"
 
 
 def to_float(value, default=0.0):
@@ -235,6 +342,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
     best_runs = {}
+    history = []
     errors = []
     unsupported = []
 
@@ -297,6 +405,10 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     else:
                         unit = infer_unit(test_name, test.get("Unit"), raw_score)
 
+                    if unit in RETIRED_AI_UNITS:
+                        print(f"[SKIPPED] retired metric {unit!r} in {f}: {test_name}")
+                        continue
+
                     report_version = first_present(data, ["Version", "pantheon_version"], "1.0.0")
                     version_str = test.get("Version", report_version)
                     if is_unknown_version(version_str) and not is_unknown_version(report_version):
@@ -343,7 +455,25 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         "driver": driver,
                         "toolkit": toolkit
                     }
-                    
+
+                    # An absent sensor must not reach the site as a reading.
+                    for field in ABSENT_WHEN_ZERO:
+                        record[field] = sensor_reading(record[field])
+
+                    # The leaderboard keeps one row per card, workload and
+                    # release, so a card that slows down over time is invisible
+                    # there: the good early run wins and every later, worse run
+                    # is dropped. Keep every run here, with its timestamp, so a
+                    # single card can be followed across releases and dates.
+                    run = {
+                        field: record[field]
+                        for field in HISTORY_FIELDS
+                        if field in record
+                    }
+                    run["card"] = card_identity(record)
+                    run["_kind"] = data.get("record_kind")
+                    history.append(run)
+
                     # TRACK BY UNIQUE SILICON AND SOFTWARE VERSION
                     key = record_key(record)
 
@@ -372,6 +502,15 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
 
     with open(output_file, 'w', encoding="utf-8") as f:
         json.dump(rows, f, indent=2, cls=NumpyEncoder, allow_nan=False)
+
+    history = dedupe_history(history)
+    # Sorted so the committed file is byte-stable for the CI freshness check.
+    history.sort(key=lambda run: (
+        str(run.get("card")), str(run.get("test")),
+        str(run.get("date")), str(run.get("version"))))
+    history_output = output_file.with_name(HISTORY_OUTPUT_FILE.name)
+    with open(history_output, 'w', encoding="utf-8") as f:
+        json.dump(history, f, indent=2, cls=NumpyEncoder, allow_nan=False)
 
     unsupported_output = output_file.with_name(UNSUPPORTED_OUTPUT_FILE.name)
     with open(unsupported_output, 'w', encoding="utf-8") as f:

@@ -1042,6 +1042,64 @@ def test_release_workflow_updates_and_deploys_the_release_page():
     assert "the release page would not list" in workflow
 
 
+def _published_rows():
+    return json.loads(read("docs/assets/web_data.json"))
+
+
+def test_published_data_never_reports_an_absent_sensor_as_zero():
+    """A sensor that was never read is not a reading of zero.
+
+    Pantheon recorded absent sensors as 0 until v1.1.0, and the generator
+    defaulted the same fields to 0 when the key was missing. The published
+    dataset therefore asserted measurements nobody took: 0 mV core voltage on
+    every one of 1317 rows, and 0 C memory temperature on 1234 of them.
+    """
+    from website_utils.generate_web_data import ABSENT_WHEN_ZERO
+
+    offenders = {}
+    for row in _published_rows():
+        for field in ABSENT_WHEN_ZERO:
+            value = row.get(field)
+            if str(value) in ("0", "0.0"):
+                offenders.setdefault(field, 0)
+                offenders[field] += 1
+
+    assert not offenders, f"absent sensors published as zero: {offenders}"
+
+
+def test_published_data_keeps_measured_zeros():
+    """The opposite failure: discarding a real result because it is zero.
+
+    A throttle time of 0s means the GPU never throttled, which is the good
+    outcome and the common one. It must stay a number.
+    """
+    rows = _published_rows()
+    measured_zero = [r for r in rows if str(r.get("throttle_time")) in ("0", "0.0")]
+
+    assert measured_zero, "expected runs that never throttled"
+    assert not any(r.get("throttle_time") == "N/A" for r in rows), (
+        "throttle_time must not be reported as unknown")
+
+    tables = read("docs/js/tables.js")
+    assert 'value === 0 || value === "0"' not in tables, (
+        "formatMetric must not treat every zero as a missing value")
+
+
+def test_published_data_carries_no_retired_metric_units():
+    """Ten AI workloads shared one kernel before v1.0.19.
+
+    Six compiled to byte-identical SASS, yet each published its own invented
+    unit as though it measured something distinct. The throughput numbers are
+    real; the metric names describe work that never happened.
+    """
+    from website_utils.generate_web_data import RETIRED_AI_UNITS
+
+    published = {row.get("unit") for row in _published_rows()}
+    leaked = published & RETIRED_AI_UNITS
+
+    assert not leaked, f"retired metric units on the leaderboard: {sorted(leaked)}"
+    # scheduler and atomic_virus were never part of that change.
+    assert "KIPS" in published and "MAPS" in published
 def test_no_workflow_pushes_straight_to_main():
     """Automation must go through a pull request, like a person does.
 
@@ -1081,3 +1139,121 @@ def test_writers_to_main_use_the_pull_request_action():
     # everything -- otherwise the whole build would be committed.
     for name in ("release", "mirror-pantheon-release"):
         assert "paths: docs/release.md" in read(f".github/workflows/{name}.yml")
+
+
+def test_gpu_identity_is_defined_once_and_does_not_rehash():
+    """The published GPU id must match the id in the reports.
+
+    The sanitizer and the generator each carried their own copy of the
+    pseudonym function, and the copies drifted: the sanitizer learned not to
+    re-hash a value already in pseudonym form, the generator never did. Every
+    id was hashed twice on its way to the leaderboard, so a card with 152
+    reports could not be found under the id those reports carry.
+    """
+    from website_utils.gpu_identity import public_gpu_id
+    from website_utils.generate_web_data import public_gpu_id as generator_id
+    from website_utils.sanitize_reports import public_gpu_id as sanitizer_id
+
+    raw = "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc"
+    pseudonym = public_gpu_id(raw)
+
+    assert pseudonym.startswith("GPU-") and len(pseudonym) == 16
+    assert generator_id(raw) == sanitizer_id(raw) == pseudonym
+    # Applying it twice must be a no-op, or a card splits in two on re-import.
+    assert public_gpu_id(pseudonym) == pseudonym
+    assert generator_id(pseudonym) == pseudonym
+    assert sanitizer_id(pseudonym) == pseudonym
+
+    # Neither module may grow its own identity hashing again. The salt is the
+    # marker: sanitize_reports also hashes file contents for filenames, which
+    # is unrelated.
+    for module in ("generate_web_data", "sanitize_reports"):
+        source = read(f"website_utils/{module}.py")
+        assert "PUBLIC_ID_SALT" not in source, (
+            f"{module} must use website_utils.gpu_identity, not hash its own")
+
+
+def test_published_ids_match_the_reports():
+    published = {row["uuid"] for row in _published_rows()}
+
+    stored = set()
+    for path in (ROOT / "database").glob("pantheon_report_*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        info = report.get("gpu_static_info")
+        if isinstance(info, list):
+            info = info[0] if info else {}
+        identifier = str((info or {}).get("uuid", "")).strip()
+        if identifier.startswith("GPU-") and len(identifier) == 16:
+            stored.add(identifier)
+
+    assert stored, "expected pseudonymised ids in the reports"
+    missing = stored - published
+    # A card can legitimately be absent when all of its runs were excluded.
+    assert len(missing) <= 1, (
+        f"ids in database/ that appear nowhere on the site: {sorted(missing)}")
+
+
+def test_per_card_history_keeps_every_run():
+    """The leaderboard drops the runs a degradation view needs.
+
+    It keeps the best run per card, workload and release, so a card that
+    slows down is invisible there: the good early run wins and later, worse
+    runs are discarded.
+    """
+    history = json.loads(read("docs/assets/gpu_history.json"))
+    leaderboard = _published_rows()
+
+    assert history, "expected a per-card history dataset"
+    assert not any("_kind" in run for run in history), (
+        "provenance is internal to the generator and must not be published")
+
+    series = {}
+    for run in history:
+        series.setdefault((run["card"], run["test"]), []).append(run)
+    repeated = [runs for runs in series.values() if len(runs) > 1]
+    assert repeated, "history must retain more than one run per card and workload"
+
+    # Cards without a UUID must not collapse into a single shared series, or
+    # the chart shows unrelated hardware as one card swinging wildly.
+    assert "Unknown" not in {run["card"] for run in history}
+
+    published_tests = {row["test"] for row in leaderboard}
+    assert {run["test"] for run in history} <= published_tests, (
+        "history must not surface workloads the leaderboard excludes")
+
+
+def test_history_collapses_the_files_one_run_writes():
+    """A single run writes a per-test record and a summary repeating it."""
+    from website_utils.generate_web_data import dedupe_history
+
+    shared = {"card": "GPU-abc123abc123", "test": "memory_read",
+              "version": "1.1.0", "unit": "GB/s", "score": 327.29}
+    runs = [
+        dict(shared, date="2026-08-30 17:02:24", _kind="completed_workload"),
+        dict(shared, date="2026-08-30 17:07:55", _kind=None),
+    ]
+    kept = dedupe_history(runs)
+    assert len(kept) == 1
+    assert kept[0]["date"] == "2026-08-30 17:02:24", (
+        "the per-test record is when the run happened; the summary repeats it")
+
+    # Two runs that merely score alike are different measurements.
+    distinct = dedupe_history([
+        dict(shared, date="2026-08-01 10:00:00", _kind="completed_workload"),
+        dict(shared, date="2026-08-20 10:00:00", _kind="completed_workload"),
+    ])
+    assert len(distinct) == 2
+
+
+def test_history_page_is_reachable_and_wired():
+    mkdocs = read("mkdocs.yml")
+    assert "js/gpu-history.js" in mkdocs
+    assert "gpu-history.md" in mkdocs, "the page must be in the nav"
+
+    page = read("docs/gpu-history.md")
+    for element in ("gpuHistoryChart", "gpuHistoryCard", "gpuHistoryTest"):
+        assert element in page
+        assert element in read("docs/js/gpu-history.js")
