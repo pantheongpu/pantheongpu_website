@@ -11062,6 +11062,20 @@
   {
     "uuid": "GPU-e81d658f76d3",
     "gpu": "NVIDIA A10",
+    "test": "moe_router",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 1400750000.0,
+    "date": "2026-08-30 18:37:27",
+    "temp_max": 68.0,
+    "power_max": 150.3,
+    "clock_avg": 1424.1,
+    "throttle_time": 299.8,
+    "card": "GPU-e81d658f76d3"
+  },
+  {
+    "uuid": "GPU-e81d658f76d3",
+    "gpu": "NVIDIA A10",
     "test": "serving_mix",
     "version": "1.1.0",
     "unit": "ai-ops/s",
@@ -12038,6 +12052,20 @@
     "clock_avg": 1437.9,
     "throttle_time": 299.6,
     "card": "GPU-efc239ae3619"
+  },
+  {
+    "uuid": "GPU-f00d86b64163",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "moe_router",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 3310630000.0,
+    "date": "2026-08-30 18:37:28",
+    "temp_max": 59.0,
+    "power_max": 275.7,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f00d86b64163"
   },
   {
     "uuid": "GPU-f00d86b64163",
