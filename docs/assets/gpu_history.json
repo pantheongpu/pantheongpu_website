@@ -5208,6 +5208,20 @@
     "card": "GPU-844f1e8cea34"
   },
   {
+    "uuid": "GPU-844f1e8cea34",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "rope_stress",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 15619100000.0,
+    "date": "2026-08-30 18:53:02",
+    "temp_max": 51.0,
+    "power_max": 557.4,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-844f1e8cea34"
+  },
+  {
     "uuid": "GPU-84f5ed660172",
     "gpu": "NVIDIA GeForce RTX 3060",
     "test": "allocation_fragmentation",
@@ -11076,6 +11090,20 @@
   {
     "uuid": "GPU-e81d658f76d3",
     "gpu": "NVIDIA A10",
+    "test": "allocation_fragmentation",
+    "version": "1.1.0",
+    "unit": "alloc-events/s",
+    "score": 11353.4,
+    "date": "2026-08-30 18:53:02",
+    "temp_max": 45.0,
+    "power_max": 71.7,
+    "clock_avg": 1690.1,
+    "throttle_time": 0.0,
+    "card": "GPU-e81d658f76d3"
+  },
+  {
+    "uuid": "GPU-e81d658f76d3",
+    "gpu": "NVIDIA A10",
     "test": "moe_router",
     "version": "1.1.0",
     "unit": "ai-ops/s",
@@ -12080,6 +12108,20 @@
     "clock_avg": 1437.9,
     "throttle_time": 299.6,
     "card": "GPU-efc239ae3619"
+  },
+  {
+    "uuid": "GPU-f00d86b64163",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "allocation_fragmentation",
+    "version": "1.1.0",
+    "unit": "alloc-events/s",
+    "score": 8986.11,
+    "date": "2026-08-30 18:53:03",
+    "temp_max": 39.0,
+    "power_max": 96.7,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f00d86b64163"
   },
   {
     "uuid": "GPU-f00d86b64163",
