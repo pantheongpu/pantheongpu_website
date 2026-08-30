@@ -5210,6 +5210,20 @@
   {
     "uuid": "GPU-844f1e8cea34",
     "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "moe_router",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 7552310000.0,
+    "date": "2026-08-30 19:21:48",
+    "temp_max": 48.0,
+    "power_max": 506.7,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-844f1e8cea34"
+  },
+  {
+    "uuid": "GPU-844f1e8cea34",
+    "gpu": "NVIDIA H100 80GB HBM3",
     "test": "quantized_gemm",
     "version": "1.1.0",
     "unit": "ai-ops/s",
