@@ -658,9 +658,11 @@ def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validate
     assert "source-releases.json" not in workflow
     assert "website_utils/update_release_page.py" in workflow
     assert "--releases-json website-releases.json" in workflow
-    assert "git add docs/release.md" in workflow
-    assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
-    assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in workflow
+    # The release page is proposed as a pull request now, so the staging and
+    # the push live in the shared action rather than here.
+    assert "./.github/actions/propose-to-main" in workflow
+    assert "paths: docs/release.md" in workflow
+    assert "git push" not in workflow
     assert "cache: pip" not in workflow
     assert "mkdocs gh-deploy --force" in workflow
 
@@ -1025,7 +1027,9 @@ def test_release_workflow_updates_and_deploys_the_release_page():
 
     assert "website_utils/update_release_page.py" in workflow, (
         "publishing must regenerate the release page")
-    assert "git push origin HEAD:main" in workflow
+    # The page is proposed as a pull request rather than pushed, so that main
+    # can be protected; the push itself now lives in the shared action.
+    assert "./.github/actions/propose-to-main" in workflow
 
     # A push authenticated with GITHUB_TOKEN does not start another workflow,
     # so without an explicit dispatch the regenerated page never deploys.
@@ -1096,3 +1100,42 @@ def test_published_data_carries_no_retired_metric_units():
     assert not leaked, f"retired metric units on the leaderboard: {sorted(leaked)}"
     # scheduler and atomic_virus were never part of that change.
     assert "KIPS" in published and "MAPS" in published
+def test_no_workflow_pushes_straight_to_main():
+    """Automation must go through a pull request, like a person does.
+
+    main cannot be protected while workflows push to it: a ruleset rejects
+    them, and on a free organisation GitHub Actions cannot be granted a
+    bypass on a repository ruleset. Routing automation through pull requests
+    is what makes protecting the branch possible at all.
+    """
+    import glob
+
+    offenders = [
+        Path(path).name
+        for path in sorted(glob.glob(str(ROOT / ".github" / "workflows" / "*.yml")))
+        if "git push" in Path(path).read_text(encoding="utf-8")
+    ]
+
+    assert not offenders, (
+        f"these workflows push directly instead of using the "
+        f"propose-to-main action: {offenders}")
+
+
+def test_writers_to_main_use_the_pull_request_action():
+    action = read(".github/actions/propose-to-main/action.yml")
+
+    # The fallback exists so this can merge before the token is created, but
+    # it has to announce itself rather than look healthy.
+    assert "::warning::No bot token configured" in action
+
+    for name in ("sanitize-imports", "release", "mirror-pantheon-release"):
+        workflow = read(f".github/workflows/{name}.yml")
+        assert "./.github/actions/propose-to-main" in workflow, (
+            f"{name}.yml still writes to main on its own")
+        assert "PANTHEON_BOT_TOKEN" in workflow
+
+    # release and mirror build in a workspace holding the Pantheon checkout,
+    # build venvs and downloaded assets, so they stage one file rather than
+    # everything -- otherwise the whole build would be committed.
+    for name in ("release", "mirror-pantheon-release"):
+        assert "paths: docs/release.md" in read(f".github/workflows/{name}.yml")
