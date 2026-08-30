@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-30 19:48:53",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3108.67Mhz"
+    },
+    "ram_info": {
+        "total": "15.42GB",
+        "available": "14.37GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-042502628320",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "run_id": "20260830-194853",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-08-30 19:54:01",
+    "test_results": [
+        {
+            "Test Name": "march_test",
+            "Version": "1.1.0",
+            "Description": "March C- (Linear Memory Test)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 1381150000.0,
+            "Unit": "march-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 56.6,
+            "Max Temp (C)": 58.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 68.9,
+            "Max Power (W)": 73.0,
+            "Avg Clock(MHz)": 1566.7,
+            "Min Clock (MHz)": 1470.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15214.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.882,
+            "Thermal Rise (C)": 10.0,
+            "Throttle Time (s)": 217.1,
+            "Efficiency": 20045718.43,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/march_test 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260830-194853/reliability/march_test/gpu0/ras.json"
+        }
+    ]
+}

@@ -1317,3 +1317,26 @@ def test_sanitizer_also_runs_on_pull_requests():
 
     # main keeps going through the pull-request action, not a direct push.
     assert "./.github/actions/propose-to-main" in workflow
+
+
+def test_container_workflows_declare_bash():
+    """`set -euo pipefail` needs bash, and container jobs default to sh.
+
+    The self-hosted runner gives container jobs `sh`, which has no pipefail,
+    so such a step exits 2 before running any of its own logic. That silently
+    disabled the nightly storage prune for two nights and killed the first
+    release dry run at its first step.
+    """
+    import glob
+    import re
+
+    offenders = []
+    for path in sorted(glob.glob(str(ROOT / ".github" / "workflows" / "*.yml"))):
+        body = Path(path).read_text(encoding="utf-8")
+        if "image:" not in body or "pipefail" not in body:
+            continue
+        if not re.search(r"(?m)^\s*shell: bash\s*$", body):
+            offenders.append(Path(path).name)
+
+    assert not offenders, (
+        f"container workflows using pipefail without declaring bash: {offenders}")
