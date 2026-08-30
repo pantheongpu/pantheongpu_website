@@ -52,7 +52,9 @@ body, input, .md-nav__link, .md-typeset {
 [data-md-color-scheme="default"] .md-search__input::placeholder,
 [data-md-color-scheme="default"] .md-search__icon { color: var(--pantheon-muted); }
 
-/* App-icon treatment keeps the white logo tile intentional on both schemes. */
+/* The mark is a dark tile that used to ship inside an opaque white frame,
+   which read as a white box against the header on the dark scheme. The asset
+   is now cropped to the tile, so the rounding applies to the mark itself. */
 .md-header__button.md-logo img { border-radius: 6px; }
 
 @media (min-width: 76.25em) {
