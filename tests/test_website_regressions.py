@@ -341,8 +341,8 @@ def test_getting_started_uses_valid_install_commands():
     # which is a positioning choice and has already changed once.
     import re as _re
     package_block = _re.search(
-        r'=== "Debian package"(.*?)(?=\n=== |\n## )', getting_started, _re.S)
-    assert package_block, "the Debian package tab should exist"
+        r'=== "Install the package"(.*?)(?=\n=== |\n## )', getting_started, _re.S)
+    assert package_block, "the package-install tab should exist"
     assert "python3 pantheon.py" not in package_block.group(1)
     assert "python3 pantheon.py" in getting_started, "the source path should exist"
     assert "pantheon-tuning" not in getting_started
@@ -354,12 +354,17 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in getting_started
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in getting_started
     assert "sudo apt-get install -y hipcc" in getting_started
-    assert "VERSION=1.0.19" in getting_started
-    assert "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
-    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in getting_started
+    # The documented download must name a version that actually has a wheel
+    # attached, or the install page hands the reader a 404.
+    assert "VERSION=1.1.0" in getting_started
+    assert 'wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
+    assert 'pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
+    assert "pantheongpu_${VERSION}_amd64.deb" not in getting_started, (
+        "releases from 1.1.0 on ship no .deb")
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
     assert "pantheon --test fp64_virus --duration 30 --gpu 0" in getting_started
     assert "PantheonGPU automatically detects CUDA, ROCm/HIP, or mock mode." in getting_started
+    assert "pipx uninstall pantheon-gpu" in getting_started
     assert "sudo apt-get remove pantheongpu" in getting_started
     assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in getting_started
 
@@ -768,13 +773,18 @@ def test_release_page_uses_version_navigation_without_a_second_content_column():
     latest_tag = latest.group(1)
     latest_version = latest_tag.removeprefix("v")
     assert release.count("(Latest)") == 1
-    assert f"Pantheon {latest_tag} Debian Package" in release
-    assert f"pantheongpu_{latest_version}_amd64.tar.gz" in release
+    # Assert the latest release offers downloads, not that it offers one
+    # particular packaging format: 1.1.0 replaced the Debian package with a
+    # wheel, and pinning the old shape here only dated the test.
+    latest_section = release.split(f"## Pantheon {latest_tag}", 1)[1].split("\n---", 1)[0]
+    assert f"releases/download/{latest_tag}/" in latest_section
+    assert f"Pantheon {latest_tag} Checksums" in latest_section
+    assert latest_version in latest_section
     assert "## Pantheon v1.0.8" in release
     assert "## Pantheon v1.0.8 (Latest)" not in release
     assert "v1.0.9" not in release
     assert "## Pantheon v1.0.7" in release
-    assert "Download stable binary builds" in release
+    assert "Download stable releases" in release
     assert "TarFile" not in release
     assert "ZipFile" not in release
     assert 'class="release-version-nav"' not in release
@@ -985,3 +995,19 @@ def test_social_image_has_no_empty_band():
     image = Image.open(ROOT / "docs" / "assets" / "logo.png").convert("RGBA")
     assert image.getbbox() == (0, 0, *image.size), (
         "logo.png has fully transparent rows or columns at its edges")
+def test_release_page_lists_the_wheel():
+    """The wheel is the install path a 1.1.0 reader needs.
+
+    The generator filtered assets through an allowlist of .deb/.tar.gz/.zip,
+    so the wheel was dropped from the download table without any error --
+    the release page simply did not offer the artifact the release exists to
+    deliver.
+    """
+    release_page = read("docs/release.md")
+    assert "pantheon_gpu-1.1.0-py3-none-any.whl" in release_page
+    assert "`.whl`" in release_page
+    # Two different .tar.gz files ship in the same release; identical labels
+    # would leave a reader choosing between two rows claiming to be the same.
+    assert "Pantheon v1.1.0 Source Tarball" in release_page
+    assert "Pantheon v1.1.0 Source Distribution" in release_page
+    assert release_page.count("Pantheon v1.1.0 Tarball") == 0
