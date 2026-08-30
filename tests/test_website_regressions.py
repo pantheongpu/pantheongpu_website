@@ -1190,10 +1190,39 @@ def test_published_ids_match_the_reports():
             stored.add(identifier)
 
     assert stored, "expected pseudonymised ids in the reports"
-    missing = stored - published
-    # A card can legitimately be absent when all of its runs were excluded.
-    assert len(missing) <= 1, (
-        f"ids in database/ that appear nowhere on the site: {sorted(missing)}")
+
+    # A card is legitimately absent when every one of its runs was excluded --
+    # an incomplete run, a multi-GPU workload, or a retired metric. Anything
+    # else means the id does not join, which is the bug this guards.
+    from website_utils.generate_web_data import (
+        PUBLIC_EXCLUDED_TESTS, RETIRED_AI_UNITS)
+
+    publishable = set()
+    for path in (ROOT / "database").glob("*pantheon_report_*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if report.get("run_status") not in (None, "complete"):
+            continue
+        info = report.get("gpu_static_info")
+        if isinstance(info, list):
+            info = info[0] if info else {}
+        identifier = str((info or {}).get("uuid", "")).strip()
+        results = report.get("test_results", [])
+        if isinstance(results, dict):
+            results = list(results.values())
+        for result in results:
+            if not isinstance(result, dict):
+                continue
+            name = str(result.get("Test Name", "")).lower()
+            if name and name not in PUBLIC_EXCLUDED_TESTS \
+                    and str(result.get("Unit")) not in RETIRED_AI_UNITS:
+                publishable.add(identifier)
+
+    unexplained = (stored & publishable) - published
+    assert not unexplained, (
+        f"cards with publishable runs missing from the site: {sorted(unexplained)}")
 
 
 def test_per_card_history_keeps_every_run():
