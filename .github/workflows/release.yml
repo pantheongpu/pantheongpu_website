@@ -24,6 +24,9 @@ on:
 
 permissions:
   contents: write
+  # The release page commit is pushed with GITHUB_TOKEN, which by design does
+  # not start another workflow, so the site deploy has to be asked for.
+  actions: write
 
 concurrency:
   # Two releases at once would race on the same tag and asset names. Never
@@ -168,8 +171,127 @@ jobs:
             dist/pantheon-${{ env.VERSION }}-source.zip
             dist/SHA256SUMS
 
+      - name: Update the release page
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # The published release is the source of truth for docs/release.md.
+          # Without this step the page keeps describing the previous release
+          # while the newest one sits on the releases tab, unlisted.
+          python3 - <<'PY'
+          import json, os, urllib.request
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          headers = {
+              "Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+
+          releases, page = [], 1
+          while True:
+              url = f"https://api.github.com/repos/{repo}/releases?per_page=100&page={page}"
+              request = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(request) as response:
+                  batch = json.load(response)
+              if not batch:
+                  break
+              releases.extend(batch)
+              page += 1
+
+          releases.sort(
+              key=lambda item: item.get("published_at") or item.get("created_at") or "",
+              reverse=True)
+
+          tag = os.environ["TAG"]
+          current = next((item for item in releases if item.get("tag_name") == tag), None)
+          if current is None:
+              raise SystemExit(f"published release {tag} is missing from the API listing")
+
+          with open("current-release.json", "w") as handle:
+              json.dump(current, handle)
+          with open("all-releases.json", "w") as handle:
+              json.dump(releases, handle)
+          PY
+
+          python3 website_utils/update_release_page.py \
+            --release-json current-release.json \
+            --releases-json all-releases.json \
+            --assets-dir dist \
+            --output docs/release.md \
+            --repo "$GITHUB_REPOSITORY"
+          rm -f current-release.json all-releases.json
+
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          if git diff --quiet -- docs/release.md; then
+            echo "docs/release.md is already current for ${TAG}."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/release.md
+          git commit -m "Update release page for ${TAG}"
+          # main can move while a release builds, and the Lockdown ruleset
+          # refuses non-fast-forward pushes, so rebase rather than force.
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+          echo "RELEASE_PAGE_UPDATED=1" >> "$GITHUB_ENV"
+
+      - name: Deploy the updated release page
+        if: ${{ !inputs.dry_run && env.RELEASE_PAGE_UPDATED == '1' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # The commit above was authenticated with GITHUB_TOKEN, so it will not
+          # trigger Publish Website on its own. Request the deploy explicitly,
+          # or the new release page stays in main and never reaches the site.
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/dispatches" \
+            -d '{"ref":"main"}'
+          echo "Requested a site deploy for ${TAG}."
+
       - name: Dry run summary
         if: ${{ inputs.dry_run }}
         run: |
+          set -euo pipefail
           echo "Dry run: built and verified ${VERSION}, published nothing."
           ls -la dist
+
+          # Render the page against the artifacts just built. The generator
+          # once dropped the wheel from the download table without erroring,
+          # so a dry run that never renders the page would not have caught it.
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          tag = os.environ["TAG"]
+          assets = [{"name": path.name, "size": path.stat().st_size}
+                    for path in sorted(Path("dist").iterdir()) if path.is_file()]
+          release = {"tag_name": tag, "name": f"Pantheon {tag}",
+                     "published_at": "", "body": "", "assets": assets}
+          with open("dry-run-release.json", "w") as handle:
+              json.dump(release, handle)
+          PY
+
+          python3 website_utils/update_release_page.py \
+            --release-json dry-run-release.json \
+            --assets-dir dist \
+            --output dry-run-release.md \
+            --repo "$GITHUB_REPOSITORY"
+
+          wheel="pantheon_gpu-${VERSION}-py3-none-any.whl"
+          if ! grep -q "${wheel}" dry-run-release.md; then
+            echo "::error::the release page would not list ${wheel}"
+            exit 1
+          fi
+          echo "The release page would list:"
+          grep -oE '\[Pantheon [^]]+\]' dry-run-release.md
+          rm -f dry-run-release.json dry-run-release.md
