@@ -32,6 +32,13 @@ concurrency:
   group: sanitize-${{ github.event.pull_request.number || 'main' }}
   cancel-in-progress: false
 
+defaults:
+  run:
+    # Container jobs on the self-hosted runner default to `sh`, which has no
+    # `pipefail`, so a step opening with `set -euo pipefail` dies before it
+    # runs a line of its own.
+    shell: bash
+
 jobs:
   sanitize:
     # A pull request from a fork gets a read-only token, so there is nothing to
