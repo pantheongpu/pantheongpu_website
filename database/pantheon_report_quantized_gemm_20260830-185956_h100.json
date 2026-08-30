@@ -1,6 +1,6 @@
 {
     "pantheon_version": "1.1.0",
-    "timestamp": "2026-08-30 18:58:34",
+    "timestamp": "2026-08-30 19:05:28",
     "os_info": {
         "system": "Linux",
         "release": "6.8.0-60-generic",
@@ -14,7 +14,7 @@
     },
     "ram_info": {
         "total": "221.18GB",
-        "available": "217.24GB"
+        "available": "217.28GB"
     },
     "gpu_static_info": [
         {
@@ -32,42 +32,42 @@
     "toolkit_version": "12.8",
     "test_results": [
         {
-            "Test Name": "rope_stress",
+            "Test Name": "quantized_gemm",
             "Version": "1.1.0",
-            "Description": "RoPE Stress (Synthetic Rotary-Math Proxy)",
+            "Description": "Quantized GEMM (Synthetic Projection Proxy)",
             "GPU ID": 0,
             "Duration (s)": 300,
             "Mem Usage (%)": 50,
-            "Score": 15619100000.0,
+            "Score": 7883670000.0,
             "Unit": "ai-ops/s",
             "Throughput Variance (%)": "N/A",
-            "Avg Temp (C)": 50.5,
-            "Max Temp (C)": 51.0,
+            "Avg Temp (C)": 48.5,
+            "Max Temp (C)": 49.0,
             "Avg Mem Temp (C)": "N/A",
             "Max Mem Temp (C)": "N/A",
-            "Avg Power (W)": 553.7,
-            "Max Power (W)": 557.4,
+            "Avg Power (W)": 520.9,
+            "Max Power (W)": 524.1,
             "Avg Clock(MHz)": 1974.6,
             "Min Clock (MHz)": 345.0,
             "Max Clock (MHz)": 1980.0,
-            "Avg GPU Util (%)": 98.7,
+            "Avg GPU Util (%)": 99.7,
             "Max GPU Util (%)": 100.0,
             "Peak Memory (MiB)": 41282.0,
             "Memory Total (MiB)": 81559.0,
-            "Energy (Wh)": 46.317,
-            "Thermal Rise (C)": 19.0,
+            "Energy (Wh)": 43.577,
+            "Thermal Rise (C)": 17.0,
             "Throttle Time (s)": 0.0,
-            "Efficiency": 28208596.71,
+            "Efficiency": 15134709.16,
             "PCIe Gen": 5.0,
             "PCIe Width": 16.0,
             "Limit Reason": "None",
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheon-v1.1.0/build/rope_stress 0 300 50 --verify",
+            "Command Lines": "/home/ubuntu/pantheon-v1.1.0/build/quantized_gemm 0 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
-            "RAS Report": "results/20260830-185302/reliability/rope_stress/gpu0/ras.json"
+            "RAS Report": "results/20260830-185956/reliability/quantized_gemm/gpu0/ras.json"
         }
     ]
 }
