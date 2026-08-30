@@ -1,0 +1,112 @@
+name: Sanitize Imports
+
+# Benchmark reports are pushed straight into database/ by an automated pipeline
+# that does not run the sanitizer, so each import lands raw GPU UUIDs and serial
+# numbers in a public repository and turns CI red until someone scrubs them by
+# hand. This closes that loop.
+#
+# It cannot spin: the sanitizer is idempotent, so the commit this job makes
+# produces no further changes on the run it triggers, and that run exits without
+# committing.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  # Needed to re-trigger CI and the site deploy on the commit this job makes.
+  actions: write
+
+concurrency:
+  group: sanitize-main
+  cancel-in-progress: false
+
+jobs:
+  sanitize:
+    runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
+    env:
+      # Resolved once here: the secrets context is not dependable inside a
+      # step-level `if`.
+      HAS_PAT: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+    steps:
+      - name: Bootstrap job container
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl gh git lsb-release tar gzip xz-utils zstd
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # GITHUB_TOKEN starts no workflows, so a pull request opened with it
+          # would never run the checks it has to pass. A personal access token
+          # acts as that account instead. Falls back to GITHUB_TOKEN, which can
+          # still scrub and push while main is unprotected.
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          persist-credentials: true
+
+      # The runner mounts the checkout with a different UID than the container
+      # user, so git refuses to operate on it until the path is trusted.
+      - name: Trust checkout repository
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Scrub host and GPU identifiers
+        run: python3 website_utils/sanitize_reports.py
+
+      - name: Regenerate published data
+        run: python3 website_utils/generate_web_data.py
+
+      - name: Propose the sanitized tree
+        id: sanitize
+        uses: ./.github/actions/propose-to-main
+        with:
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+          branch-slug: sanitize
+          title: Sanitize imported benchmark reports
+          body: |
+            Raw benchmark reports landed in `database/` carrying host and GPU
+            identifiers. This scrubs them and regenerates the published data.
+
+            Opened automatically; merges once the required checks pass.
+
+      - name: Record that a change was proposed
+        if: steps.sanitize.outputs.changed == 'true'
+        run: echo "SANITIZED=true" >> "$GITHUB_ENV"
+
+      # On the fallback path the commit is pushed with GITHUB_TOKEN, which
+      # starts no workflow, so CI and the deploy would never run against the
+      # scrubbed tree -- leaving the site stale and the branch showing the
+      # failure from the raw import. Start them explicitly via the API.
+      # Neither workflow commits anything, so this cannot loop.
+      - name: Re-run checks and deploy on the sanitized commit
+        # Only needed on the GITHUB_TOKEN fallback path. A push made with the
+        # PAT starts these workflows by itself, and dispatching as well would
+        # run everything twice.
+        if: env.SANITIZED == 'true' && env.HAS_PAT != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for wf in ci.yml deploy.yml; do
+            code="$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/${wf}/dispatches" \
+              -d '{"ref":"main"}')"
+            echo "dispatch ${wf}: HTTP ${code}"
+          done

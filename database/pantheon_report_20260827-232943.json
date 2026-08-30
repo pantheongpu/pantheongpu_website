@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-27 23:35:16",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:19:42 UTC 2026",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 4,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "7.58GB",
+        "available": "6.91GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA T4G",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-a0b6211843cf",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "12.9",
+    "test_results": [
+        {
+            "Test Name": "media_enc_virus",
+            "Version": "1.0.18",
+            "Description": "Media Enc Virus (Fixed-Function Encoder)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 33.8725,
+            "Unit": "FPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 76.4,
+            "Max Temp (C)": 77.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 43.9,
+            "Max Power (W)": 46.1,
+            "Avg Clock(MHz)": 1590.0,
+            "Min Clock (MHz)": 1590.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 1.0,
+            "Max GPU Util (%)": 1.0,
+            "Peak Memory (MiB)": 721.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 3.677,
+            "Thermal Rise (C)": 2.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.77,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/media_enc_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260827-232943/reliability/media_enc_virus/gpu0/ras.json"
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+name: Prune Actions Storage
+
+# Artifacts and run logs accumulate until the account's Actions storage quota
+# is exhausted, at which point every workflow fails at its upload step with
+# "Failed to CreateArtifact: Artifact storage quota has been hit" -- a failure
+# that has nothing to do with the change being tested. This keeps that from
+# recurring by deleting anything older than the retention window each night.
+#
+# Published release assets are attached to the Release, not stored as Actions
+# artifacts, so nothing here touches a downloadable release.
+
+on:
+  schedule:
+    # Nightly, offset from the tool repository's prune so the two do not
+    # contend for the same runner.
+    - cron: "07 5 * * *"
+  workflow_dispatch:
+    inputs:
+      max_age_days:
+        description: "Delete artifacts and run logs older than this many days"
+        required: false
+        default: "1"
+        type: string
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: prune-actions-storage
+  cancel-in-progress: false
+
+defaults:
+  run:
+    # Container jobs on the self-hosted runner default to `sh`, which has no
+    # `pipefail`. Several steps read a command's output through a pipe, so a
+    # silent failure there would be read as an empty value, not as an error.
+    shell: bash
+
+jobs:
+  prune:
+    runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
+    steps:
+      - name: Bootstrap job container
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl jq
+
+      - name: Prune artifacts and run logs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MAX_AGE_DAYS: ${{ inputs.max_age_days || '1' }}
+          THIS_RUN: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          api() { curl -sS -H "Authorization: Bearer ${GH_TOKEN}" \
+                       -H "Accept: application/vnd.github+json" \
+                       -H "X-GitHub-Api-Version: 2022-11-28" "$@"; }
+          base="https://api.github.com/repos/${GITHUB_REPOSITORY}"
+          cutoff="$(date -u -d "${MAX_AGE_DAYS} days ago" +%s)"
+          echo "Deleting artifacts and logs created before $(date -u -d @"${cutoff}" --iso-8601=seconds)"
+
+          # --- artifacts ---
+          freed=0; gone=0
+          for page in 1 2 3 4 5; do
+            body="$(api "${base}/actions/artifacts?per_page=100&page=${page}")"
+            rows="$(echo "${body}" | jq -r '.artifacts[] | "\(.id) \(.created_at) \(.size_in_bytes)"')"
+            [ -z "${rows}" ] && break
+            while read -r id created size; do
+              [ -z "${id:-}" ] && continue
+              age="$(date -u -d "${created}" +%s)"
+              if [ "${age}" -lt "${cutoff}" ]; then
+                if api -X DELETE -o /dev/null -w '%{http_code}' \
+                     "${base}/actions/artifacts/${id}" | grep -q '^20'; then
+                  gone=$((gone + 1)); freed=$((freed + size))
+                fi
+              fi
+            done <<< "${rows}"
+          done
+          echo "Artifacts deleted: ${gone} (~$((freed / 1024 / 1024)) MiB)"
+
+          # --- run logs ---
+          # Logs are deleted, not the runs: pass/fail history stays visible.
+          logs=0
+          for page in 1 2 3 4 5 6 7 8 9 10; do
+            body="$(api "${base}/actions/runs?per_page=100&page=${page}")"
+            rows="$(echo "${body}" | jq -r '.workflow_runs[] | select(.status=="completed") | "\(.id) \(.created_at)"')"
+            [ -z "${rows}" ] && break
+            while read -r id created; do
+              [ -z "${id:-}" ] && continue
+              [ "${id}" = "${THIS_RUN}" ] && continue
+              age="$(date -u -d "${created}" +%s)"
+              if [ "${age}" -lt "${cutoff}" ]; then
+                if api -X DELETE -o /dev/null -w '%{http_code}' \
+                     "${base}/actions/runs/${id}/logs" | grep -q '^20'; then
+                  logs=$((logs + 1))
+                fi
+              fi
+            done <<< "${rows}"
+          done
+          echo "Run logs deleted: ${logs}"

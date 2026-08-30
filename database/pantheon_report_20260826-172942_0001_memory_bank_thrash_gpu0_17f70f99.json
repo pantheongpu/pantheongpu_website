@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-26 17:29:42",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "216.26GB",
+        "available": "212.00GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-80GB",
+            "memory_total": "81920 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-8e4ed29e94f4",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260826-172942",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-08-26 17:34:45",
+    "test_results": [
+        {
+            "Test Name": "memory_bank_thrash",
+            "Version": "1.0.18",
+            "Description": "Memory Bank Thrasher (Row Misses)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 492.927,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 53.1,
+            "Max Temp (C)": 55.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 260.8,
+            "Max Power (W)": 268.0,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 41607.1,
+            "Memory Total (MiB)": 81920.0,
+            "Energy (Wh)": 21.924,
+            "Thermal Rise (C)": 17.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 1935.42,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.0.18/cuda-80/memory_bank_thrash 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260826-172942/reliability/memory_bank_thrash/gpu0/ras.json"
+        }
+    ]
+}

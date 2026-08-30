@@ -1,6 +1,8 @@
 site_name: PANTHEON
-site_description: GPU health testing, diagnostics, validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
+site_description: Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.
 site_url: https://pantheongpu.com
+repo_url: https://github.com/pantheongpu/pantheon
+repo_name: pantheongpu/pantheon
 edit_uri: ""
 not_in_nav: |
   fleet-validation.md
@@ -12,6 +14,7 @@ nav:
   - Benchmarks:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
+    - Per-card History: gpu-history.md
     - Methodology: methodology.md
   - Research:
     - Overview: reports.md
@@ -44,6 +47,11 @@ nav:
       - Memory Cache Fracturing: tests/memory_cache_fracture.md
       - Memory Retention Bake: tests/memory_retention_bake.md
       - Memory Asymmetric Thermal: tests/memory_thermal_asym.md
+    - Memory Diagnostics:
+      - March Test: tests/march_test.md
+      - Memory Hammer: tests/memory_hammer.md
+      - GALPAT: tests/galpat.md
+      - Memory Retention: tests/memory_retention.md
     - Interconnect & Architecture:
       - P2P Thrasher: tests/p2p_thrasher.md
       - All-Reduce: tests/all_reduce.md
@@ -136,6 +144,7 @@ extra_javascript:
   - js/apexcharts.min.js
   - js/charts.js
   - js/tables.js
+  - js/gpu-history.js
   - js/release-nav.js
 
 extra:

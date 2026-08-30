@@ -36,8 +36,10 @@ const COL_DEFS = [
     
     { key: "power_limit", label: "TDP (W)",     visible: true }, 
 
-    { key: "uuid",        label: "UUID",        visible: false },
-    { key: "serial",      label: "Serial",      visible: false },
+    // Pseudonymous, stable per physical GPU. The raw UUID and the serial are
+    // never published: identity is only compared for equality, so a hash does
+    // the same job without handing out a hardware identifier.
+    { key: "uuid",        label: "GPU ID",      visible: false },
 ];
 
 let rawData = [];
@@ -123,10 +125,18 @@ function getBenchmarkAssetUrl(fileName) {
 }
 
 function getBestRunsOnly(data) {
+    // Group by version and unit as well as GPU and workload. Without them this
+    // compared numbers that are not comparable: a workload whose metric changed
+    // between releases had its "best" run picked from whichever version
+    // produced the larger figure, and a run recorded in Watts could out-rank
+    // the same workload's TFLOPS runs purely because the number was bigger.
+    // The generator already keys on version for exactly this reason.
     const groups = {};
     data.forEach(row => {
-        const key = `${row.gpu}|${row.test}`;
-        if (!groups[key] || parseFloat(row.score) > parseFloat(groups[key].score)) {
+        const key = `${row.gpu}|${row.test}|${row.version || "Legacy"}|${row.unit || ""}`;
+        const current = groups[key];
+        const score = parseFloat(row.score);
+        if (!current || (Number.isFinite(score) && score > parseFloat(current.score))) {
             groups[key] = row;
         }
     });
@@ -197,13 +207,17 @@ function compareValues(a, b, key) {
     return 0;
 }
 
+// Absence is decided in the generator, which knows which sensors a run
+// actually read. Treating every zero as missing here discarded real results:
+// a throttle time of 0s means the GPU never throttled, and 1173 of 1315 rows
+// reported that outcome as though it were unknown.
 function formatMetric(value, unit) {
-    if (isMissingValue(value) || value === 0 || value === "0") return "N/A";
+    if (isMissingValue(value)) return "N/A";
     return unit ? `${value} ${unit}` : String(value);
 }
 
 // Display-only compaction so 13361400000 reads as 13.36B in table cells.
-// CSV export keeps the raw values for downstream analysis.
+// CSV export passes display=false, so it keeps full precision.
 function compactNumber(value) {
     const num = Number(value);
     if (!Number.isFinite(num)) return value;
@@ -259,7 +273,7 @@ function formatCellValue(row, key, display = false) {
     if (key === "version") {
         return val || "Legacy";
     }
-    if (val === undefined || val === null || val === "" || val === 0 || val === "0") {
+    if (isMissingValue(val)) {
         return "N/A";
     }
     return val;

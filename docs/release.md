@@ -1,18 +1,73 @@
 # Releases
 
-Download stable binary builds of the Pantheon GPU toolkit. The newest release is listed first.
+Download stable releases of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 
-## Pantheon v1.0.18 (Latest)
+## Pantheon v1.1.0 (Latest)
+**Release Date:** August 30, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.1.0
+
+Install the wheel (kernels compile on first run into a per-user cache;
+expect roughly a minute the first time):
+
+```
+pip install pantheon_gpu-1.1.0-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Requires a CUDA or ROCm toolchain at first run. Use `--platform mock`
+to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.1.0 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon_gpu-1.1.0-py3-none-any.whl) | `.whl` | 328.1 KB |
+| [Pantheon v1.1.0 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon-1.1.0-source.tar.gz) | `.tar.gz` | 249.2 KB |
+| [Pantheon v1.1.0 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon_gpu-1.1.0.tar.gz) | `.tar.gz` | 236.3 KB |
+| [Pantheon v1.1.0 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/pantheon-1.1.0-source.zip) | `.zip` | 366.2 KB |
+| [Pantheon v1.1.0 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.1.0/SHA256SUMS) | `SHA256SUMS` | 389 B |
+
+---
+
+## Pantheon v1.0.19
+**Release Date:** August 27, 2026
+
+### Release Notes
+#### What's Changed
+* Fault maps and a time-based memory retention workload by @saqibkh
+* Fold the memory _agg twins into --init_pattern by @saqibkh
+* Audit fixes: unreleased hardware, fictional metrics, broken verification, CI hardening by @saqibkh
+* Bound launch parameters that could hang the GPU by @saqibkh
+* Make the tree publishable: OptiX optional, NOTICE, export script by @saqibkh
+* Stop CI running the whole matrix twice per commit by @saqibkh
+* Kill the whole process tree, not just the launched process by @saqibkh
+* Release v1.0.19 by @saqibkh
+
+
+**Full Changelog**: `v1.0.18...v1.0.19`
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.0.19 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/pantheongpu_1.0.19_amd64.deb) | `.deb` | 33.7 MB |
+| [Pantheon v1.0.19 Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/pantheongpu_1.0.19_amd64.tar.gz) | `.tar.gz` | 67.4 MB |
+| [Pantheon v1.0.19 ZIP Bundle](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/pantheongpu_1.0.19_amd64.zip) | `.zip` | 67.4 MB |
+| [Pantheon v1.0.19 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.0.19/SHA256SUMS) | `SHA256SUMS` | 303 B |
+
+---
+
+## Pantheon v1.0.18
 **Release Date:** August 26, 2026
 
 ### Release Notes
 #### What's Changed
-* Kernel verification hardening: coverage holes, uninitialized lanes, UB, and accounting fixes by @saqibkh in https://github.com/pantheongpu/pantheongpu/pull/10
+* Kernel verification hardening: coverage holes, uninitialized lanes, UB, and accounting fixes by @saqibkh
 
 
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.17...v1.0.18
+**Full Changelog**: `v1.0.17...v1.0.18`
 
 ### Downloads
 | File | Format | Size |
@@ -28,7 +83,7 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 **Release Date:** August 26, 2026
 
 ### Release Notes
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.16...v1.0.17
+**Full Changelog**: `v1.0.16...v1.0.17`
 
 ### Downloads
 | File | Format | Size |
@@ -44,7 +99,7 @@ Download stable binary builds of the Pantheon GPU toolkit. The newest release is
 **Release Date:** August 22, 2026
 
 ### Release Notes
-**Full Changelog**: https://github.com/pantheongpu/pantheongpu/compare/v1.0.15...v1.0.16
+**Full Changelog**: `v1.0.15...v1.0.16`
 
 ### Downloads
 | File | Format | Size |

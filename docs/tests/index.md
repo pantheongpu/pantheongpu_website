@@ -161,6 +161,44 @@ and AI execution paths. Choose a test for its target subsystem and failure mode.
 
 ---
 
+## Memory Diagnostics
+
+Structured cell-level diagnostics from memory-test literature. Where the
+bandwidth workloads ask *how fast does this move data*, these ask *which cell is
+bad, and why*. They compose as a funnel: sweep memory with the linear tests,
+record failing addresses with `--fault_map`, then aim the quadratic GALPAT at
+what they implicate.
+
+<div class="grid cards" markdown>
+
+- [:material-format-list-numbered: **March Test**](march_test.md)
+
+    ---
+
+    Runs a March C- sequence in both address directions with per-thread private chunks, finding stuck-at, transition, and coupling faults that order-independent tests cannot see.
+
+- [:material-hammer: **Memory Hammer**](memory_hammer.md)
+
+    ---
+
+    Reads aggressor pairs bracketing an untouched victim, looking for cells disturbed by activity on their neighbours rather than by anything written to them.
+
+- [:material-grid: **GALPAT**](galpat.md)
+
+    ---
+
+    Gallops one flipped cell against every other cell in a bounded region, exposing address-decoder faults. Quadratic coverage, so aimed at a region another test implicated.
+
+- [:material-timer-sand: **Memory Retention**](memory_retention.md)
+
+    ---
+
+    Writes a payload, leaves it untouched for a chosen interval, then verifies it, finding cells that lose charge with time rather than with heat.
+
+</div>
+
+---
+
 ## Interconnect & Architecture
 
 <div class="grid cards" markdown>

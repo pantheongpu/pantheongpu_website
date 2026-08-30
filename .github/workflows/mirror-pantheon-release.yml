@@ -18,6 +18,12 @@ on:
 permissions:
   contents: write
 
+# Mirroring the same release twice races on the tag and its assets. Never
+# cancel one in flight: a partially mirrored release is worse than a queued one.
+concurrency:
+  group: mirror-release
+  cancel-in-progress: false
+
 defaults:
   run:
     shell: bash
@@ -273,22 +279,20 @@ jobs:
             --output docs/release.md \
             --repo "${GITHUB_REPOSITORY}"
 
-      - name: Commit release page update
-        env:
-          RELEASE_TAG: ${{ steps.source.outputs.tag }}
-        run: |
-          set -euo pipefail
+      - name: Propose the release page update
+        uses: ./.github/actions/propose-to-main
+        with:
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+          branch-slug: mirror-release-page
+          title: Update release page for ${{ steps.source.outputs.tag }}
+          body: |
+            Generated while mirroring ${{ steps.source.outputs.tag }}.
 
-          if git diff --quiet -- docs/release.md; then
-            echo "docs/release.md is already current for ${RELEASE_TAG}."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/release.md
-          git commit -m "Update release page for ${RELEASE_TAG}"
-          git push origin HEAD:"${GITHUB_REF_NAME}"
+            Opened automatically; merges once the required checks pass.
+          # The workspace also holds the downloaded release assets, so staging
+          # everything would commit the mirrored binaries.
+          paths: docs/release.md
 
       - name: Setup Python
         uses: actions/setup-python@v5

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -45,6 +46,8 @@ def format_size(size: int) -> str:
 
 
 def asset_format(name: str) -> str:
+    if name.endswith(".whl"):
+        return ".whl"
     if name.endswith(".deb"):
         return ".deb"
     if name.endswith(".tar.gz"):
@@ -55,10 +58,21 @@ def asset_format(name: str) -> str:
 
 
 def asset_label(tag: str, name: str) -> str:
+    if name.endswith(".whl"):
+        return f"Pantheon {tag} Python Wheel"
     if name.endswith(".deb"):
         return f"Pantheon {tag} Debian Package"
+    # A release carries both the project's own source archive and the Python
+    # sdist, and both are .tar.gz. Labelling them identically leaves a reader
+    # picking between two rows that claim to be the same thing.
+    if name.endswith("-source.tar.gz"):
+        return f"Pantheon {tag} Source Tarball"
+    if name.startswith("pantheon_gpu-") and name.endswith(".tar.gz"):
+        return f"Pantheon {tag} Source Distribution"
     if name.endswith(".tar.gz"):
         return f"Pantheon {tag} Tarball"
+    if name.endswith("-source.zip"):
+        return f"Pantheon {tag} Source ZIP"
     if name.endswith(".zip"):
         return f"Pantheon {tag} ZIP Bundle"
     if name == "SHA256SUMS":
@@ -67,6 +81,8 @@ def asset_label(tag: str, name: str) -> str:
 
 
 def asset_sort_value(name: str) -> tuple[int, str]:
+    if name.endswith(".whl"):
+        return (0, name)
     if name.endswith(".deb"):
         return (0, name)
     if name.endswith(".tar.gz"):
@@ -78,6 +94,27 @@ def asset_sort_value(name: str) -> tuple[int, str]:
     return (4, name)
 
 
+# GitHub generates release notes containing links to the pull requests that
+# went into a release. Those live in a private repository, so every one of
+# them is a 404 for a visitor to this public site. Strip the link and keep the
+# text: the description of what changed is the useful part, and a dead link
+# next to it is worse than no link.
+_PRIVATE_PR_LINK = re.compile(
+    r"\s*(?:in\s+)?https?://github\.com/pantheongpu/pantheongpu/pull/\d+\b"
+)
+_PRIVATE_COMPARE_LINK = re.compile(
+    r"https?://github\.com/pantheongpu/pantheongpu/compare/(\S+)"
+)
+
+
+def strip_private_links(line: str) -> str:
+    line = _PRIVATE_PR_LINK.sub("", line)
+    # A compare link is useful information even when unreachable, so keep the
+    # range and drop the URL.
+    line = _PRIVATE_COMPARE_LINK.sub(r"`\1`", line)
+    return line.rstrip()
+
+
 def release_notes(body: str) -> str:
     body = body.strip()
     if not body:
@@ -85,6 +122,7 @@ def release_notes(body: str) -> str:
 
     lines = []
     for line in body.splitlines():
+        line = strip_private_links(line)
         if line.startswith("#"):
             lines.append(f"##{line}")
         else:
@@ -106,7 +144,8 @@ def build_release_section(release: dict, assets_dir: Path, repo: str, latest: bo
     for asset in release.get("assets", []):
         asset_name = asset.get("name", "")
         if not (
-            asset_name.endswith(".deb")
+            asset_name.endswith(".whl")
+            or asset_name.endswith(".deb")
             or asset_name.endswith(".tar.gz")
             or asset_name.endswith(".zip")
             or asset_name == "SHA256SUMS"
@@ -158,7 +197,7 @@ def build_page(release: dict, assets_dir: Path, repo: str, releases: list[dict] 
 
     return f"""# Releases
 
-Download stable binary builds of the Pantheon GPU toolkit. The newest release is listed first.
+Download stable releases of the Pantheon GPU toolkit. The newest release is listed first.
 
 ---
 

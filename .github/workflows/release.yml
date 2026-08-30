@@ -1,0 +1,305 @@
+name: Release
+
+# Builds and publishes a Pantheon release. The source lives in
+# pantheongpu/pantheon, which only carries a VERSION bump; this repository is
+# the release host, so the packaging and publishing happen here.
+#
+# Triggered by hand rather than by a VERSION change upstream: automating that
+# would mean adding a workflow and a cross-repository token to the source
+# repository, which is meant to stay source-only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Ref in pantheongpu/pantheon to release (tag, branch, or SHA)"
+        required: true
+        default: "main"
+        type: string
+      dry_run:
+        description: "Build and verify, but publish nothing"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  # The release page commit is pushed with GITHUB_TOKEN, which by design does
+  # not start another workflow, so the site deploy has to be asked for.
+  actions: write
+
+concurrency:
+  # Two releases at once would race on the same tag and asset names. Never
+  # cancel one in flight: a half-published release is worse than a queued one.
+  group: release
+  cancel-in-progress: false
+
+defaults:
+  run:
+    # Container jobs on the self-hosted runner default to `sh`, which has no
+    # `pipefail`. Several steps read a command's output through a pipe, so a
+    # silent failure there would be read as an empty value, not as an error.
+    shell: bash
+
+jobs:
+  release:
+    runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
+    env:
+      # Resolved once here: the secrets context is not dependable inside a
+      # step-level `if`.
+      HAS_BOT_TOKEN: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+    steps:
+      - name: Bootstrap job environment
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl gh git make g++ zip python3 python3-venv python3-pip
+
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Check out Pantheon source
+        uses: actions/checkout@v4
+        with:
+          repository: pantheongpu/pantheon
+          ref: ${{ inputs.ref }}
+          path: pantheon-src
+
+      - name: Determine version
+        run: |
+          set -euo pipefail
+          git config --global --add safe.directory "$GITHUB_WORKSPACE/pantheon-src"
+          version="$(tr -d '[:space:]' < pantheon-src/VERSION)"
+          if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9]+)*$'; then
+            echo "::error::VERSION does not look like a release: ${version}"
+            exit 1
+          fi
+          # A tag that disagrees with VERSION means one of them is wrong, and
+          # publishing either way produces a release nobody can reason about.
+          requested="${{ inputs.ref }}"
+          if printf '%s' "$requested" | grep -Eq '^v[0-9]'; then
+            if [ "v${version}" != "$requested" ]; then
+              echo "::error::ref ${requested} does not match VERSION ${version}"
+              exit 1
+            fi
+          fi
+          echo "VERSION=${version}" >> "$GITHUB_ENV"
+          echo "TAG=v${version}" >> "$GITHUB_ENV"
+          echo "Releasing ${version} from ${requested}"
+
+      - name: Build wheel and sdist
+        run: |
+          set -euo pipefail
+          python3 -m venv .buildenv
+          .buildenv/bin/pip install --quiet --upgrade pip build
+          .buildenv/bin/python packaging/wheel/build_wheel.py pantheon-src \
+            --outdir dist --workdir build/wheel
+
+      - name: Build source archives
+        run: |
+          set -euo pipefail
+          # GitHub attaches "Source code" archives of the *hosting* repository
+          # to a release, which here would be the website. Ship Pantheon's own.
+          mkdir -p dist
+          git -C pantheon-src archive --format=tar.gz \
+            --prefix="pantheon-${VERSION}/" -o "../dist/pantheon-${VERSION}-source.tar.gz" HEAD
+          git -C pantheon-src archive --format=zip \
+            --prefix="pantheon-${VERSION}/" -o "../dist/pantheon-${VERSION}-source.zip" HEAD
+
+      - name: Verify the wheel installs and runs
+        run: |
+          set -euo pipefail
+          # A wheel that does not install is worse than no wheel: it fails in the
+          # user's hands rather than here. Install it the way a user would, into
+          # a clean environment, and make it do real work.
+          python3 -m venv .verifyenv
+          .verifyenv/bin/pip install --quiet "dist/pantheon_gpu-${VERSION}-py3-none-any.whl"
+
+          reported="$(.verifyenv/bin/pantheon --version | awk '{print $NF}')"
+          if [ "$reported" != "$VERSION" ]; then
+            echo "::error::installed wheel reports ${reported}, expected ${VERSION}"
+            exit 1
+          fi
+
+          # site-packages must never be written to: the runner has to compile
+          # kernels into a per-user cache, or the wheel breaks for anyone
+          # installing system-wide.
+          pkg="$(.verifyenv/bin/python -c 'import pantheon_gpu,os;print(os.path.dirname(pantheon_gpu.__file__))')"
+          chmod -R a-w "$pkg"
+
+          workdir="$(mktemp -d)"
+          cd "$workdir"
+          XDG_CACHE_HOME="${workdir}/cache" \
+            "${GITHUB_WORKSPACE}/.verifyenv/bin/pantheon" \
+            --platform mock --test baseline_metrics --duration 5 --mem 5
+          cd "$GITHUB_WORKSPACE"
+          chmod -R u+w "$pkg"
+
+          built="$(find "${workdir}/cache" -type f -perm -u+x | wc -l)"
+          echo "Compiled ${built} kernels into the user cache"
+          if [ "$built" -lt 40 ]; then
+            echo "::error::expected at least 40 kernels in the cache, found ${built}"
+            exit 1
+          fi
+
+      - name: Checksums
+        run: |
+          set -euo pipefail
+          cd dist && sha256sum ./* > SHA256SUMS && cat SHA256SUMS
+
+      - name: Publish release
+        if: ${{ !inputs.dry_run }}
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: Pantheon ${{ env.TAG }}
+          body: |
+            Source: https://github.com/pantheongpu/pantheon/tree/${{ env.TAG }}
+
+            Install the wheel (kernels compile on first run into a per-user cache;
+            expect roughly a minute the first time):
+
+            ```
+            pip install pantheon_gpu-${{ env.VERSION }}-py3-none-any.whl
+            pantheon --test baseline_metrics --duration 10
+            ```
+
+            Requires a CUDA or ROCm toolchain at first run. Use `--platform mock`
+            to exercise the tooling with no GPU.
+          files: |
+            dist/pantheon_gpu-${{ env.VERSION }}-py3-none-any.whl
+            dist/pantheon_gpu-${{ env.VERSION }}.tar.gz
+            dist/pantheon-${{ env.VERSION }}-source.tar.gz
+            dist/pantheon-${{ env.VERSION }}-source.zip
+            dist/SHA256SUMS
+
+      - name: Update the release page
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # The published release is the source of truth for docs/release.md.
+          # Without this step the page keeps describing the previous release
+          # while the newest one sits on the releases tab, unlisted.
+          python3 - <<'PY'
+          import json, os, urllib.request
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          headers = {
+              "Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+
+          releases, page = [], 1
+          while True:
+              url = f"https://api.github.com/repos/{repo}/releases?per_page=100&page={page}"
+              request = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(request) as response:
+                  batch = json.load(response)
+              if not batch:
+                  break
+              releases.extend(batch)
+              page += 1
+
+          releases.sort(
+              key=lambda item: item.get("published_at") or item.get("created_at") or "",
+              reverse=True)
+
+          tag = os.environ["TAG"]
+          current = next((item for item in releases if item.get("tag_name") == tag), None)
+          if current is None:
+              raise SystemExit(f"published release {tag} is missing from the API listing")
+
+          with open("current-release.json", "w") as handle:
+              json.dump(current, handle)
+          with open("all-releases.json", "w") as handle:
+              json.dump(releases, handle)
+          PY
+
+          python3 website_utils/update_release_page.py \
+            --release-json current-release.json \
+            --releases-json all-releases.json \
+            --assets-dir dist \
+            --output docs/release.md \
+            --repo "$GITHUB_REPOSITORY"
+          rm -f current-release.json all-releases.json
+
+      - name: Propose the release page
+        id: release_page
+        if: ${{ !inputs.dry_run }}
+        uses: ./.github/actions/propose-to-main
+        with:
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+          branch-slug: release-page
+          title: Update release page for ${{ env.TAG }}
+          body: |
+            Generated from the published ${{ env.TAG }} release.
+
+            Opened automatically; merges once the required checks pass.
+          # The workspace also holds the Pantheon checkout, the build venvs and
+          # dist/, so staging everything would commit the whole release build.
+          paths: docs/release.md
+
+      - name: Deploy the updated release page
+        if: >-
+          ${{ !inputs.dry_run
+              && steps.release_page.outputs.changed == 'true'
+              && env.HAS_BOT_TOKEN != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Only on the fallback path: that commit was pushed with GITHUB_TOKEN,
+          # which starts no workflow, so the new page would sit in main and
+          # never reach the site. When the page arrives by pull request instead,
+          # merging it starts the deploy on its own.
+          curl -fsS -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/dispatches" \
+            -d '{"ref":"main"}'
+          echo "Requested a site deploy for ${TAG}."
+
+      - name: Dry run summary
+        if: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          echo "Dry run: built and verified ${VERSION}, published nothing."
+          ls -la dist
+
+          # Render the page against the artifacts just built. The generator
+          # once dropped the wheel from the download table without erroring,
+          # so a dry run that never renders the page would not have caught it.
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          tag = os.environ["TAG"]
+          assets = [{"name": path.name, "size": path.stat().st_size}
+                    for path in sorted(Path("dist").iterdir()) if path.is_file()]
+          release = {"tag_name": tag, "name": f"Pantheon {tag}",
+                     "published_at": "", "body": "", "assets": assets}
+          with open("dry-run-release.json", "w") as handle:
+              json.dump(release, handle)
+          PY
+
+          python3 website_utils/update_release_page.py \
+            --release-json dry-run-release.json \
+            --assets-dir dist \
+            --output dry-run-release.md \
+            --repo "$GITHUB_REPOSITORY"
+
+          wheel="pantheon_gpu-${VERSION}-py3-none-any.whl"
+          if ! grep -q "${wheel}" dry-run-release.md; then
+            echo "::error::the release page would not list ${wheel}"
+            exit 1
+          fi
+          echo "The release page would list:"
+          grep -oE '\[Pantheon [^]]+\]' dry-run-release.md
+          rm -f dry-run-release.json dry-run-release.md

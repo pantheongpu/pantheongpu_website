@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-26 17:08:27",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "216.26GB",
+        "available": "212.81GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-d9851dfc7925",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260826-170827",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-08-26 17:13:28",
+    "test_results": [
+        {
+            "Test Name": "memory_cache_fracture",
+            "Version": "1.0.18",
+            "Description": "Memory Cache Fracturing (Queue Overload)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 347.373,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 50.4,
+            "Max Temp (C)": 52.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 213.4,
+            "Max Power (W)": 218.2,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 21002.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 17.822,
+            "Thermal Rise (C)": 20.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 1666.87,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.0.18/cuda-80/memory_cache_fracture 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260826-170827/reliability/memory_cache_fracture/gpu0/ras.json"
+        }
+    ]
+}

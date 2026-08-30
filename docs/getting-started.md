@@ -34,13 +34,45 @@ Install the compiler for your platform. You only need one:
     sudo apt-get install -y hipcc
     ```
 
-Download and install the latest Debian package:
+Pantheon is open source. Building from source lets you read exactly what will
+run on your hardware; the Debian package is quicker if you just want to run it.
 
-```bash
-VERSION=1.0.18
-wget "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb"
-sudo apt install "./pantheongpu_${VERSION}_amd64.deb"
-```
+=== "Build from source"
+
+    ```bash
+    git clone https://github.com/pantheongpu/pantheon.git
+    cd pantheon
+    pip install -r requirements.txt
+    make PLATFORM=CUDA -j$(nproc)     # or PLATFORM=HIP for AMD
+    ```
+
+    There is no build-time auto-detection, so pass `PLATFORM=` explicitly. Use
+    `PLATFORM=MOCK` to build a CPU backend that needs no GPU at all, which is
+    useful for trying the tooling before committing hardware to it.
+
+    Run it from the checkout with `python3 pantheon.py` in place of the
+    `pantheon` command used below.
+
+=== "Install the package"
+
+    ```bash
+    VERSION=1.1.0
+    BASE="https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}"
+    wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"
+    wget "${BASE}/SHA256SUMS" && sha256sum --ignore-missing -c SHA256SUMS
+    pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"
+    ```
+
+    Installs a `pantheon` command on your PATH. `pipx` keeps it in its own
+    environment, which is what recent Ubuntu and Debian releases require of
+    anything installed outside the system package manager; `pip install --user`
+    works too where that restriction does not apply.
+
+    The wheel carries the kernel sources rather than prebuilt binaries, so the
+    first run compiles the workloads for your GPU into a per-user cache. That
+    takes a minute or so once, and needs `make`, a C++ compiler, and the CUDA or
+    ROCm toolkit from the tabs above.
+
 
 ## Run a first test
 
@@ -68,7 +100,13 @@ See [Test Documentation](tests/index.md) for workload guidance, [Releases and Do
 
 ## Uninstall
 
-Remove a Debian package installation with:
+Remove a package installation with:
+
+```bash
+pipx uninstall pantheon-gpu
+```
+
+Releases up to v1.0.19 shipped as a Debian package instead. Remove one of those with:
 
 ```bash
 sudo apt-get remove pantheongpu

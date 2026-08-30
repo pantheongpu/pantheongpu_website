@@ -1,6 +1,6 @@
 ---
-title: PantheonGPU | GPU Health and Performance Validation
-description: GPU health testing, diagnostics, fleet validation, and performance regression testing for NVIDIA CUDA and AMD ROCm AI infrastructure.
+title: PantheonGPU | Open Source GPU Health and Performance Validation
+description: Open source GPU health testing, diagnostics, and performance validation for NVIDIA CUDA and AMD ROCm AI infrastructure. Read the source, run it yourself.
 hide:
   - navigation
   - toc
@@ -12,10 +12,11 @@ hide:
 
 # GPU health and performance validation for AI infrastructure
 
-PantheonGPU actively tests compute, memory, interconnect, thermals, stability, and AI workloads to identify underperforming, unstable, or misconfigured GPUs across NVIDIA CUDA and AMD ROCm systems.
+PantheonGPU actively tests compute, memory, interconnect, thermals, stability, and AI workloads to identify underperforming, unstable, or misconfigured GPUs across NVIDIA CUDA and AMD ROCm systems. It is open source, so you can read exactly what a workload does before running it on your hardware.
 
 <div class="pantheon-hero__actions">
-  <a href="release/" class="md-button md-button--primary">Download Pantheon</a>
+  <a href="https://github.com/pantheongpu/pantheon" class="md-button md-button--primary">View Source on GitHub</a>
+  <a href="release/" class="md-button">Download Pantheon</a>
   <a href="fleet-validation/" class="md-button">Request a Free Fleet Validation Pilot</a>
   <a href="benchmarks/" class="md-button">Explore Benchmarks</a>
 </div>
@@ -70,3 +71,4 @@ Detect changes after driver, CUDA or ROCm, firmware, operating system, container
 - PCIe and multi-GPU interconnect testing
 - Local JSON, CSV, HTML, and trace reports
 - A public performance database for comparing systems
+- Open source under Apache 2.0 — every workload is readable, buildable, and runnable from source

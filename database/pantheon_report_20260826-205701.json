@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-26 21:02:33",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3094.35Mhz"
+    },
+    "ram_info": {
+        "total": "15.42GB",
+        "available": "14.38GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-efc239ae3619",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "test_results": [
+        {
+            "Test Name": "moe_router",
+            "Version": "1.0.18",
+            "Description": "MoE Router (Synthetic Top-K Routing Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 119363000.0,
+            "Unit": "routed-tokens/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 53.6,
+            "Max Temp (C)": 55.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 69.4,
+            "Max Power (W)": 71.1,
+            "Avg Clock(MHz)": 1396.4,
+            "Min Clock (MHz)": 1365.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15214.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.803,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 299.6,
+            "Efficiency": 1719927.95,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/moe_router 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260826-205701/reliability/moe_router/gpu0/ras.json"
+        }
+    ]
+}

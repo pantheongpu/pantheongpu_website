@@ -25,8 +25,8 @@
             "memory_total": "81559 MB",
             "driver_version": "580.105.08",
             "power_limit": 700.0,
-            "uuid": "GPU-5a429ac6-a691-e099-bc04-9c92d83962db",
-            "serial": "1650224068920"
+            "uuid": "GPU-0e96b88e953c",
+            "serial": "[REDACTED]"
         },
         {
             "id": 1,
@@ -36,8 +36,8 @@
             "memory_total": "81559 MB",
             "driver_version": "580.105.08",
             "power_limit": 700.0,
-            "uuid": "GPU-f21e0c29-1a7d-093e-81df-92d823444896",
-            "serial": "1650524045431"
+            "uuid": "GPU-51606b20d319",
+            "serial": "[REDACTED]"
         }
     ],
     "toolkit_version": "12.8",

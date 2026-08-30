@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.0.18",
+    "timestamp": "2026-08-27 13:24:54",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3230.40Mhz"
+    },
+    "ram_info": {
+        "total": "15.42GB",
+        "available": "14.23GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A10G",
+            "memory_total": "23028 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 300.0,
+            "uuid": "GPU-e1d7f534abb2",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "test_results": [
+        {
+            "Test Name": "omni_virus",
+            "Version": "1.0.18",
+            "Description": "Omni Virus (Mem + FP16 + FP32 Async)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 19.6646,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 58.6,
+            "Max Temp (C)": 60.0,
+            "Avg Mem Temp (C)": 0.0,
+            "Max Mem Temp (C)": 0.0,
+            "Avg Power (W)": 247.8,
+            "Max Power (W)": 253.4,
+            "Avg Clock(MHz)": 1710.0,
+            "Min Clock (MHz)": 1710.0,
+            "Max Clock (MHz)": 1710.0,
+            "Avg GPU Util (%)": 99.2,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 22838.6,
+            "Memory Total (MiB)": 23028.0,
+            "Energy (Wh)": 20.747,
+            "Thermal Rise (C)": 23.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 79.36,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/omni_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260827-131922/reliability/omni_virus/gpu0/ras.json"
+        }
+    ]
+}

@@ -335,7 +335,16 @@ def test_getting_started_uses_valid_install_commands():
     assert "nvidia-cuda-toolkit (replace" not in getting_started
     assert "python3 -m venv .venv" not in getting_started
     assert "python -m pip install -r requirements.txt" not in getting_started
-    assert "python3 pantheon.py" not in getting_started
+    # Source entrypoints belong only in the build-from-source tab. Someone who
+    # installed the package must not be told to run pantheon.py. Find the
+    # package block by its own markers so this does not depend on tab order,
+    # which is a positioning choice and has already changed once.
+    import re as _re
+    package_block = _re.search(
+        r'=== "Install the package"(.*?)(?=\n=== |\n## )', getting_started, _re.S)
+    assert package_block, "the package-install tab should exist"
+    assert "python3 pantheon.py" not in package_block.group(1)
+    assert "python3 pantheon.py" in getting_started, "the source path should exist"
     assert "pantheon-tuning" not in getting_started
     assert "./pantheon --test all" not in getting_started
     assert '=== "NVIDIA CUDA"' in getting_started
@@ -345,12 +354,17 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y make g++" in getting_started
     assert "sudo apt-get install -y nvidia-cuda-toolkit" in getting_started
     assert "sudo apt-get install -y hipcc" in getting_started
-    assert "VERSION=1.0.18" in getting_started
-    assert "https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}/pantheongpu_${VERSION}_amd64.deb" in getting_started
-    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in getting_started
+    # The documented download must name a version that actually has a wheel
+    # attached, or the install page hands the reader a 404.
+    assert "VERSION=1.1.0" in getting_started
+    assert 'wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
+    assert 'pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
+    assert "pantheongpu_${VERSION}_amd64.deb" not in getting_started, (
+        "releases from 1.1.0 on ship no .deb")
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
     assert "pantheon --test fp64_virus --duration 30 --gpu 0" in getting_started
     assert "PantheonGPU automatically detects CUDA, ROCm/HIP, or mock mode." in getting_started
+    assert "pipx uninstall pantheon-gpu" in getting_started
     assert "sudo apt-get remove pantheongpu" in getting_started
     assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in getting_started
 
@@ -407,11 +421,19 @@ def test_readme_pairs_install_commands_with_native_uninstall_commands():
 
 
 def test_mkdocs_points_to_pantheongpu_repository():
+    """The site links to the public source repository.
+
+    This previously asserted the absence of repo_url entirely, from when the
+    source was private and any link would have 404'd. The source is public now,
+    so the guard is that the link points at the right repository -- not at a
+    personal fork, and not at the private repository it was exported from.
+    """
     mkdocs = read("mkdocs.yml")
 
-    assert "repo_url:" not in mkdocs
-    assert "repo_name:" not in mkdocs
-    assert "saqibkh/pantheon\n" not in mkdocs
+    assert "repo_url: https://github.com/pantheongpu/pantheon\n" in mkdocs
+    assert "repo_name: pantheongpu/pantheon\n" in mkdocs
+    assert "saqibkh/pantheon" not in mkdocs
+    assert "pantheongpu/pantheongpu\n" not in mkdocs
 
 
 def test_site_declares_compact_favicon_assets():
@@ -636,9 +658,11 @@ def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validate
     assert "source-releases.json" not in workflow
     assert "website_utils/update_release_page.py" in workflow
     assert "--releases-json website-releases.json" in workflow
-    assert "git add docs/release.md" in workflow
-    assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
-    assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in workflow
+    # The release page is proposed as a pull request now, so the staging and
+    # the push live in the shared action rather than here.
+    assert "./.github/actions/propose-to-main" in workflow
+    assert "paths: docs/release.md" in workflow
+    assert "git push" not in workflow
     assert "cache: pip" not in workflow
     assert "mkdocs gh-deploy --force" in workflow
 
@@ -751,13 +775,18 @@ def test_release_page_uses_version_navigation_without_a_second_content_column():
     latest_tag = latest.group(1)
     latest_version = latest_tag.removeprefix("v")
     assert release.count("(Latest)") == 1
-    assert f"Pantheon {latest_tag} Debian Package" in release
-    assert f"pantheongpu_{latest_version}_amd64.tar.gz" in release
+    # Assert the latest release offers downloads, not that it offers one
+    # particular packaging format: 1.1.0 replaced the Debian package with a
+    # wheel, and pinning the old shape here only dated the test.
+    latest_section = release.split(f"## Pantheon {latest_tag}", 1)[1].split("\n---", 1)[0]
+    assert f"releases/download/{latest_tag}/" in latest_section
+    assert f"Pantheon {latest_tag} Checksums" in latest_section
+    assert latest_version in latest_section
     assert "## Pantheon v1.0.8" in release
     assert "## Pantheon v1.0.8 (Latest)" not in release
     assert "v1.0.9" not in release
     assert "## Pantheon v1.0.7" in release
-    assert "Download stable binary builds" in release
+    assert "Download stable releases" in release
     assert "TarFile" not in release
     assert "ZipFile" not in release
     assert 'class="release-version-nav"' not in release
@@ -805,3 +834,455 @@ def test_no_known_mojibake_in_user_facing_sources():
         text = read(path)
         assert "Â" not in text, path
         assert "ðŸ" not in text, path
+
+
+def test_no_report_filename_carries_a_host_identifier():
+    """This repository is public. A host IP in a filename is as much a leak as
+    one in the file body, and the body scrub never looked at names."""
+    import re
+    db = Path(__file__).resolve().parent.parent / "database"
+    ip = re.compile(r"(?<!\d)\d{1,3}([._]\d{1,3}){3}(?!\d)")
+    def leaks(name):
+        m = ip.search(name)
+        if m and all(0 <= int(p) <= 255 for p in re.split(r"[._]", m.group(0))):
+            return True
+        return "InternalHost" in name
+    offenders = sorted(p.name for p in db.rglob("*.json") if leaks(p.name))
+    assert offenders == [], (
+        "Report filenames still carry a host identifier. Run:\n"
+        "    python3 website_utils/sanitize_reports.py\n"
+        f"and commit the result. First offenders: {offenders[:5]}")
+
+
+def test_host_free_name_preserves_model_and_timestamp():
+    import importlib.util
+    root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location(
+        "sr", root / "website_utils" / "sanitize_reports.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+
+    assert sr.host_free_name(
+        "a100_129.153.20.126_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
+    ) == "a100_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
+    assert sr.host_free_name(
+        "a100_129_153_20_126_cache_lat_191356_gpu0.json"
+    ) == "a100_cache_lat_191356_gpu0.json"
+    # An already-clean name must be left exactly alone.
+    clean = "a100_pantheon_report_20260826-164123_0001_memory_read_gpu0.json"
+    assert sr.host_free_name(clean) == clean
+
+
+def test_published_data_carries_no_raw_gpu_identifiers():
+    """This repository is public.
+
+    A GPU serial maps back to a purchaser through vendor RMA and warranty
+    records; a raw UUID is a persistent hardware identifier that fingerprints a
+    machine next to the driver, OS and timestamps already published. Identity
+    here is only ever compared for equality, so a pseudonym does the same job.
+    """
+    root = Path(__file__).resolve().parent.parent
+    data = json.loads((root / "docs" / "assets" / "web_data.json").read_text())
+
+    assert not any("serial" in row for row in data), "serial must not be published"
+
+    bad = [
+        row.get("uuid") for row in data
+        if isinstance(row.get("uuid"), str)
+        and row["uuid"] != "Unknown"
+        and not re.fullmatch(r"GPU-[0-9a-f]{12}", row["uuid"])
+    ]
+    assert bad == [], f"raw GPU UUIDs published: {bad[:3]}"
+
+
+def test_raw_reports_carry_no_gpu_identifiers():
+    root = Path(__file__).resolve().parent.parent
+    offenders = []
+    for path in (root / "database").rglob("*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for gpu in report.get("gpu_static_info") or []:
+            if not isinstance(gpu, dict):
+                continue
+            uuid = str(gpu.get("uuid", ""))
+            if uuid and uuid.lower() not in {"unknown", "n/a"} \
+                    and not re.fullmatch(r"GPU-[0-9a-f]{12}", uuid):
+                offenders.append(path.name)
+            serial = str(gpu.get("serial", ""))
+            if serial and serial.lower() not in {"unknown", "n/a", "[n/a]", "[redacted]"}:
+                offenders.append(path.name)
+    assert offenders == [], (
+        "Imported reports still carry raw GPU identifiers. Run:\n"
+        "    python3 website_utils/sanitize_reports.py\n"
+        "    python3 website_utils/generate_web_data.py\n"
+        f"and commit the result. First offenders: {sorted(set(offenders))[:3]}")
+
+
+def test_pseudonym_is_stable_and_one_to_one():
+    """Dedup and per-card history depend on the same GPU always hashing the
+    same way, and on two GPUs never colliding."""
+    import importlib.util
+    root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location(
+        "sr", root / "website_utils" / "sanitize_reports.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+
+    a = "GPU-58e902aa-1111-2222-3333-444444444444"
+    b = "GPU-58e902aa-1111-2222-3333-444444444445"
+    assert sr.public_gpu_id(a) == sr.public_gpu_id(a), "must be stable"
+    assert sr.public_gpu_id(a) != sr.public_gpu_id(b), "must not collide"
+    assert sr.public_gpu_id("Unknown") == "Unknown"
+
+
+def test_best_run_grouping_does_not_cross_versions_or_units():
+    """The best-run view must not compare numbers that are not comparable.
+
+    Grouping only by GPU and workload let a workload whose metric changed
+    between releases show whichever version produced the larger figure, and let
+    a run recorded in Watts out-rank the same workload's TFLOPS runs purely
+    because the number was bigger. On the published dataset that affected 151
+    of 580 groups, 33 of which were being won by a wattage reading.
+
+    generate_web_data.py already keys on version for the same reason; this
+    keeps the client side consistent with it.
+    """
+    tables = read("docs/js/tables.js")
+    grouping = re.search(r"function getBestRunsOnly\(data\)\s*\{(.*?)\n\}", tables, re.S)
+    assert grouping, "getBestRunsOnly should exist"
+    body = grouping.group(1)
+    key_line = re.search(r"const key = `([^`]+)`", body)
+    assert key_line, "the grouping key should be a template literal"
+    key = key_line.group(1)
+    for field in ("row.gpu", "row.test", "row.version", "row.unit"):
+        assert field in key, f"the best-run key must include {field}: {key}"
+
+
+def test_brand_marks_have_no_white_frame():
+    """The header logo shipped inside an opaque white frame.
+
+    icon.png was a 77px mark centred in a 128px canvas, the surrounding 26px
+    filled with opaque white, and favicon.png padded the same way. The site
+    header is the page surface, so on the dark scheme that frame rendered as a
+    white box around the logo.
+    """
+    from PIL import Image
+
+    for name in ("icon.png", "favicon.png"):
+        image = Image.open(ROOT / "docs" / "assets" / name).convert("RGBA")
+        width, height = image.size
+        pixels = image.load()
+
+        border = [pixels[x, y]
+                  for x in range(width) for y in (0, height - 1)]
+        border += [pixels[x, y]
+                   for y in range(height) for x in (0, width - 1)]
+
+        framed = [p for p in border if p[3] > 200 and min(p[:3]) > 235]
+        assert not framed, (
+            f"{name} has {len(framed)} opaque near-white border pixels; the "
+            "mark should reach the edge of its canvas")
+
+
+def test_social_image_has_no_empty_band():
+    """logo.png carried 131px of fully transparent rows below the artwork.
+
+    Social platforms flatten transparency, so that dead space rendered as a
+    bar across the bottom of every link preview.
+    """
+    from PIL import Image
+
+    image = Image.open(ROOT / "docs" / "assets" / "logo.png").convert("RGBA")
+    assert image.getbbox() == (0, 0, *image.size), (
+        "logo.png has fully transparent rows or columns at its edges")
+def test_release_page_lists_the_wheel():
+    """The wheel is the install path a 1.1.0 reader needs.
+
+    The generator filtered assets through an allowlist of .deb/.tar.gz/.zip,
+    so the wheel was dropped from the download table without any error --
+    the release page simply did not offer the artifact the release exists to
+    deliver.
+    """
+    release_page = read("docs/release.md")
+    assert "pantheon_gpu-1.1.0-py3-none-any.whl" in release_page
+    assert "`.whl`" in release_page
+    # Two different .tar.gz files ship in the same release; identical labels
+    # would leave a reader choosing between two rows claiming to be the same.
+    assert "Pantheon v1.1.0 Source Tarball" in release_page
+    assert "Pantheon v1.1.0 Source Distribution" in release_page
+    assert release_page.count("Pantheon v1.1.0 Tarball") == 0
+
+
+def test_release_workflow_updates_and_deploys_the_release_page():
+    """Publishing a release has to leave docs/release.md describing it.
+
+    The Release workflow published 1.1.0 without touching the page, so the
+    newest release sat on the releases tab while the site kept describing the
+    previous one. The page was only correct because it was regenerated by
+    hand afterwards.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    assert "website_utils/update_release_page.py" in workflow, (
+        "publishing must regenerate the release page")
+    # The page is proposed as a pull request rather than pushed, so that main
+    # can be protected; the push itself now lives in the shared action.
+    assert "./.github/actions/propose-to-main" in workflow
+
+    # A push authenticated with GITHUB_TOKEN does not start another workflow,
+    # so without an explicit dispatch the regenerated page never deploys.
+    assert "actions/workflows/deploy.yml/dispatches" in workflow
+    assert "actions: write" in workflow
+
+    # The dry run renders the page too. The generator once dropped the wheel
+    # from the download table silently, which a build-only dry run would miss.
+    assert "dry-run-release.md" in workflow
+    assert "the release page would not list" in workflow
+
+
+def _published_rows():
+    return json.loads(read("docs/assets/web_data.json"))
+
+
+def test_published_data_never_reports_an_absent_sensor_as_zero():
+    """A sensor that was never read is not a reading of zero.
+
+    Pantheon recorded absent sensors as 0 until v1.1.0, and the generator
+    defaulted the same fields to 0 when the key was missing. The published
+    dataset therefore asserted measurements nobody took: 0 mV core voltage on
+    every one of 1317 rows, and 0 C memory temperature on 1234 of them.
+    """
+    from website_utils.generate_web_data import ABSENT_WHEN_ZERO
+
+    offenders = {}
+    for row in _published_rows():
+        for field in ABSENT_WHEN_ZERO:
+            value = row.get(field)
+            if str(value) in ("0", "0.0"):
+                offenders.setdefault(field, 0)
+                offenders[field] += 1
+
+    assert not offenders, f"absent sensors published as zero: {offenders}"
+
+
+def test_published_data_keeps_measured_zeros():
+    """The opposite failure: discarding a real result because it is zero.
+
+    A throttle time of 0s means the GPU never throttled, which is the good
+    outcome and the common one. It must stay a number.
+    """
+    rows = _published_rows()
+    measured_zero = [r for r in rows if str(r.get("throttle_time")) in ("0", "0.0")]
+
+    assert measured_zero, "expected runs that never throttled"
+    assert not any(r.get("throttle_time") == "N/A" for r in rows), (
+        "throttle_time must not be reported as unknown")
+
+    tables = read("docs/js/tables.js")
+    assert 'value === 0 || value === "0"' not in tables, (
+        "formatMetric must not treat every zero as a missing value")
+
+
+def test_published_data_carries_no_retired_metric_units():
+    """Ten AI workloads shared one kernel before v1.0.19.
+
+    Six compiled to byte-identical SASS, yet each published its own invented
+    unit as though it measured something distinct. The throughput numbers are
+    real; the metric names describe work that never happened.
+    """
+    from website_utils.generate_web_data import RETIRED_AI_UNITS
+
+    published = {row.get("unit") for row in _published_rows()}
+    leaked = published & RETIRED_AI_UNITS
+
+    assert not leaked, f"retired metric units on the leaderboard: {sorted(leaked)}"
+    # scheduler and atomic_virus were never part of that change.
+    assert "KIPS" in published and "MAPS" in published
+def test_no_workflow_pushes_straight_to_main():
+    """Automation must go through a pull request, like a person does.
+
+    main cannot be protected while workflows push to it: a ruleset rejects
+    them, and on a free organisation GitHub Actions cannot be granted a
+    bypass on a repository ruleset. Routing automation through pull requests
+    is what makes protecting the branch possible at all.
+    """
+    import glob
+
+    offenders = [
+        Path(path).name
+        for path in sorted(glob.glob(str(ROOT / ".github" / "workflows" / "*.yml")))
+        if "git push" in Path(path).read_text(encoding="utf-8")
+    ]
+
+    assert not offenders, (
+        f"these workflows push directly instead of using the "
+        f"propose-to-main action: {offenders}")
+
+
+def test_writers_to_main_use_the_pull_request_action():
+    action = read(".github/actions/propose-to-main/action.yml")
+
+    # The fallback exists so this can merge before the token is created, but
+    # it has to announce itself rather than look healthy.
+    assert "::warning::No bot token configured" in action
+
+    for name in ("sanitize-imports", "release", "mirror-pantheon-release"):
+        workflow = read(f".github/workflows/{name}.yml")
+        assert "./.github/actions/propose-to-main" in workflow, (
+            f"{name}.yml still writes to main on its own")
+        assert "PANTHEON_BOT_TOKEN" in workflow
+
+    # release and mirror build in a workspace holding the Pantheon checkout,
+    # build venvs and downloaded assets, so they stage one file rather than
+    # everything -- otherwise the whole build would be committed.
+    for name in ("release", "mirror-pantheon-release"):
+        assert "paths: docs/release.md" in read(f".github/workflows/{name}.yml")
+
+
+def test_gpu_identity_is_defined_once_and_does_not_rehash():
+    """The published GPU id must match the id in the reports.
+
+    The sanitizer and the generator each carried their own copy of the
+    pseudonym function, and the copies drifted: the sanitizer learned not to
+    re-hash a value already in pseudonym form, the generator never did. Every
+    id was hashed twice on its way to the leaderboard, so a card with 152
+    reports could not be found under the id those reports carry.
+    """
+    from website_utils.gpu_identity import public_gpu_id
+    from website_utils.generate_web_data import public_gpu_id as generator_id
+    from website_utils.sanitize_reports import public_gpu_id as sanitizer_id
+
+    raw = "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc"
+    pseudonym = public_gpu_id(raw)
+
+    assert pseudonym.startswith("GPU-") and len(pseudonym) == 16
+    assert generator_id(raw) == sanitizer_id(raw) == pseudonym
+    # Applying it twice must be a no-op, or a card splits in two on re-import.
+    assert public_gpu_id(pseudonym) == pseudonym
+    assert generator_id(pseudonym) == pseudonym
+    assert sanitizer_id(pseudonym) == pseudonym
+
+    # Neither module may grow its own identity hashing again. The salt is the
+    # marker: sanitize_reports also hashes file contents for filenames, which
+    # is unrelated.
+    for module in ("generate_web_data", "sanitize_reports"):
+        source = read(f"website_utils/{module}.py")
+        assert "PUBLIC_ID_SALT" not in source, (
+            f"{module} must use website_utils.gpu_identity, not hash its own")
+
+
+def test_published_ids_match_the_reports():
+    published = {row["uuid"] for row in _published_rows()}
+
+    stored = set()
+    for path in (ROOT / "database").glob("pantheon_report_*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        info = report.get("gpu_static_info")
+        if isinstance(info, list):
+            info = info[0] if info else {}
+        identifier = str((info or {}).get("uuid", "")).strip()
+        if identifier.startswith("GPU-") and len(identifier) == 16:
+            stored.add(identifier)
+
+    assert stored, "expected pseudonymised ids in the reports"
+
+    # A card is legitimately absent when every one of its runs was excluded --
+    # an incomplete run, a multi-GPU workload, or a retired metric. Anything
+    # else means the id does not join, which is the bug this guards.
+    from website_utils.generate_web_data import (
+        PUBLIC_EXCLUDED_TESTS, RETIRED_AI_UNITS)
+
+    publishable = set()
+    for path in (ROOT / "database").glob("*pantheon_report_*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if report.get("run_status") not in (None, "complete"):
+            continue
+        info = report.get("gpu_static_info")
+        if isinstance(info, list):
+            info = info[0] if info else {}
+        identifier = str((info or {}).get("uuid", "")).strip()
+        results = report.get("test_results", [])
+        if isinstance(results, dict):
+            results = list(results.values())
+        for result in results:
+            if not isinstance(result, dict):
+                continue
+            name = str(result.get("Test Name", "")).lower()
+            if name and name not in PUBLIC_EXCLUDED_TESTS \
+                    and str(result.get("Unit")) not in RETIRED_AI_UNITS:
+                publishable.add(identifier)
+
+    unexplained = (stored & publishable) - published
+    assert not unexplained, (
+        f"cards with publishable runs missing from the site: {sorted(unexplained)}")
+
+
+def test_per_card_history_keeps_every_run():
+    """The leaderboard drops the runs a degradation view needs.
+
+    It keeps the best run per card, workload and release, so a card that
+    slows down is invisible there: the good early run wins and later, worse
+    runs are discarded.
+    """
+    history = json.loads(read("docs/assets/gpu_history.json"))
+    leaderboard = _published_rows()
+
+    assert history, "expected a per-card history dataset"
+    assert not any("_kind" in run for run in history), (
+        "provenance is internal to the generator and must not be published")
+
+    series = {}
+    for run in history:
+        series.setdefault((run["card"], run["test"]), []).append(run)
+    repeated = [runs for runs in series.values() if len(runs) > 1]
+    assert repeated, "history must retain more than one run per card and workload"
+
+    # Cards without a UUID must not collapse into a single shared series, or
+    # the chart shows unrelated hardware as one card swinging wildly.
+    assert "Unknown" not in {run["card"] for run in history}
+
+    published_tests = {row["test"] for row in leaderboard}
+    assert {run["test"] for run in history} <= published_tests, (
+        "history must not surface workloads the leaderboard excludes")
+
+
+def test_history_collapses_the_files_one_run_writes():
+    """A single run writes a per-test record and a summary repeating it."""
+    from website_utils.generate_web_data import dedupe_history
+
+    shared = {"card": "GPU-abc123abc123", "test": "memory_read",
+              "version": "1.1.0", "unit": "GB/s", "score": 327.29}
+    runs = [
+        dict(shared, date="2026-08-30 17:02:24", _kind="completed_workload"),
+        dict(shared, date="2026-08-30 17:07:55", _kind=None),
+    ]
+    kept = dedupe_history(runs)
+    assert len(kept) == 1
+    assert kept[0]["date"] == "2026-08-30 17:02:24", (
+        "the per-test record is when the run happened; the summary repeats it")
+
+    # Two runs that merely score alike are different measurements.
+    distinct = dedupe_history([
+        dict(shared, date="2026-08-01 10:00:00", _kind="completed_workload"),
+        dict(shared, date="2026-08-20 10:00:00", _kind="completed_workload"),
+    ])
+    assert len(distinct) == 2
+
+
+def test_history_page_is_reachable_and_wired():
+    mkdocs = read("mkdocs.yml")
+    assert "js/gpu-history.js" in mkdocs
+    assert "gpu-history.md" in mkdocs, "the page must be in the nav"
+
+    page = read("docs/gpu-history.md")
+    for element in ("gpuHistoryChart", "gpuHistoryCard", "gpuHistoryTest"):
+        assert element in page
+        assert element in read("docs/js/gpu-history.js")
