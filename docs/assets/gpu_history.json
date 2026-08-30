@@ -5194,6 +5194,20 @@
     "card": "GPU-840885f5c463"
   },
   {
+    "uuid": "GPU-844f1e8cea34",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "fused_attention",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 15366400000.0,
+    "date": "2026-08-30 18:46:06",
+    "temp_max": 50.0,
+    "power_max": 526.1,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-844f1e8cea34"
+  },
+  {
     "uuid": "GPU-84f5ed660172",
     "gpu": "NVIDIA GeForce RTX 3060",
     "test": "allocation_fragmentation",
@@ -11102,6 +11116,20 @@
     "card": "GPU-e81d658f76d3"
   },
   {
+    "uuid": "GPU-e81d658f76d3",
+    "gpu": "NVIDIA A10",
+    "test": "transformer_train_step",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 5636330000.0,
+    "date": "2026-08-30 18:46:06",
+    "temp_max": 68.0,
+    "power_max": 150.2,
+    "clock_avg": 1132.3,
+    "throttle_time": 300.3,
+    "card": "GPU-e81d658f76d3"
+  },
+  {
     "uuid": "GPU-eacc33a72a33",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
@@ -12091,6 +12119,20 @@
     "date": "2026-08-30 18:30:25",
     "temp_max": 57.0,
     "power_max": 259.2,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f00d86b64163"
+  },
+  {
+    "uuid": "GPU-f00d86b64163",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "transformer_train_step",
+    "version": "1.1.0",
+    "unit": "ai-ops/s",
+    "score": 12360900000.0,
+    "date": "2026-08-30 18:46:07",
+    "temp_max": 74.0,
+    "power_max": 397.0,
     "clock_avg": 1406.0,
     "throttle_time": 0.0,
     "card": "GPU-f00d86b64163"
