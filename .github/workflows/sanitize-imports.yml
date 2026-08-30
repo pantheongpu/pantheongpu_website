@@ -5,6 +5,11 @@ name: Sanitize Imports
 # numbers in a public repository and turns CI red until someone scrubs them by
 # hand. This closes that loop.
 #
+# It runs on pull requests as well as on main. Sweeps that arrive on a branch
+# were bypassing this entirely: 55 filenames carrying two hosts' IP addresses
+# reached a pull request that way, and each new commit re-broke CI faster than
+# they could be scrubbed by hand.
+#
 # It cannot spin: the sanitizer is idempotent, so the commit this job makes
 # produces no further changes on the run it triggers, and that run exits without
 # committing.
@@ -12,6 +17,9 @@ name: Sanitize Imports
 on:
   push:
     branches: [main]
+  pull_request:
+    paths:
+      - "database/**"
   workflow_dispatch:
 
 permissions:
@@ -20,11 +28,18 @@ permissions:
   actions: write
 
 concurrency:
-  group: sanitize-main
+  # A pull request scrubs its own branch, so it must not queue behind main.
+  group: sanitize-${{ github.event.pull_request.number || 'main' }}
   cancel-in-progress: false
 
 jobs:
   sanitize:
+    # A pull request from a fork gets a read-only token, so there is nothing to
+    # push back with. CI still rejects the raw identifiers, which is the part
+    # that matters; the contributor scrubs and pushes themselves.
+    if: >-
+      github.event_name != 'pull_request'
+      || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Linux, X64]
     container:
       image: ubuntu:24.04
@@ -48,6 +63,9 @@ jobs:
           # still scrub and push while main is unprotected.
           token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
           persist-credentials: true
+          # On a pull request the default checkout is the merge commit, which is
+          # detached and cannot be pushed back. Take the branch itself.
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       # The runner mounts the checkout with a different UID than the container
       # user, so git refuses to operate on it until the path is trusted.
@@ -70,8 +88,37 @@ jobs:
       - name: Regenerate published data
         run: python3 website_utils/generate_web_data.py
 
+      - name: Push the sanitized tree to the pull request
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to sanitize on ${HEAD_REF}."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sanitize imported benchmark reports"
+          git push origin "HEAD:refs/heads/${HEAD_REF}"
+
+          if [ "${HAS_PAT}" != "true" ]; then
+            # A push made with GITHUB_TOKEN starts no workflow, so the checks
+            # that just failed on the raw import will not run again by
+            # themselves and the pull request stays red on a tree that is now
+            # clean.
+            echo "::warning::Scrubbed ${HEAD_REF}, but no bot token is set, so" \
+                 "the failed checks will not re-run on their own. Set" \
+                 "PANTHEON_BOT_TOKEN, or re-run them by hand."
+          fi
+
       - name: Propose the sanitized tree
         id: sanitize
+        if: github.event_name != 'pull_request'
         uses: ./.github/actions/propose-to-main
         with:
           token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
