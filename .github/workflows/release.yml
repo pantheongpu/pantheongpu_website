@@ -46,16 +46,12 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
     container:
       image: ubuntu:24.04
-    env:
-      # Resolved once here: the secrets context is not dependable inside a
-      # step-level `if`.
-      HAS_BOT_TOKEN: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
     steps:
       - name: Bootstrap job environment
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates curl gh git make g++ zip python3 python3-venv python3-pip
+            ca-certificates curl git make g++ zip python3 python3-venv python3-pip
 
       - name: Check out this repository
         uses: actions/checkout@v4
@@ -228,36 +224,32 @@ jobs:
             --repo "$GITHUB_REPOSITORY"
           rm -f current-release.json all-releases.json
 
-      - name: Propose the release page
-        id: release_page
-        if: ${{ !inputs.dry_run }}
-        uses: ./.github/actions/propose-to-main
-        with:
-          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
-          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
-          branch-slug: release-page
-          title: Update release page for ${{ env.TAG }}
-          body: |
-            Generated from the published ${{ env.TAG }} release.
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          if git diff --quiet -- docs/release.md; then
+            echo "docs/release.md is already current for ${TAG}."
+            exit 0
+          fi
 
-            Opened automatically; merges once the required checks pass.
-          # The workspace also holds the Pantheon checkout, the build venvs and
-          # dist/, so staging everything would commit the whole release build.
-          paths: docs/release.md
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/release.md
+          git commit -m "Update release page for ${TAG}"
+          # main can move while a release builds, and the Lockdown ruleset
+          # refuses non-fast-forward pushes, so rebase rather than force.
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+          echo "RELEASE_PAGE_UPDATED=1" >> "$GITHUB_ENV"
 
       - name: Deploy the updated release page
-        if: >-
-          ${{ !inputs.dry_run
-              && steps.release_page.outputs.changed == 'true'
-              && env.HAS_BOT_TOKEN != 'true' }}
+        if: ${{ !inputs.dry_run && env.RELEASE_PAGE_UPDATED == '1' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          # Only on the fallback path: that commit was pushed with GITHUB_TOKEN,
-          # which starts no workflow, so the new page would sit in main and
-          # never reach the site. When the page arrives by pull request instead,
-          # merging it starts the deploy on its own.
+          # The commit above was authenticated with GITHUB_TOKEN, so it will not
+          # trigger Publish Website on its own. Request the deploy explicitly,
+          # or the new release page stays in main and never reaches the site.
           curl -fsS -X POST \
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
