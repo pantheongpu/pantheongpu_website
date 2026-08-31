@@ -2996,6 +2996,18 @@
 <h1 id="rt-virus">RT Virus</h1>
 <h2 id="overview">Overview</h2>
 <p>The <code>rt_virus</code> is designed to overwhelm the dedicated Ray Tracing intersection engines. It hammers the RT cores with billions of non-coherent ray-triangle tests to force continuous Bounding Volume Hierarchy (BVH) traversal.</p>
+<div class="admonition note">
+<p class="admonition-title">Requires the NVIDIA OptiX SDK (or HIP-RT on AMD)</p>
+<p>NVIDIA's OptiX headers are proprietary and cannot be redistributed, so
+official Pantheon builds skip <code>rt_virus</code> by default and report <code>SKIP</code>.
+To run it on NVIDIA hardware, download the free
+<a href="https://developer.nvidia.com/designworks/optix/download">OptiX SDK</a> and
+point <code>OPTIX_PATH</code> at its <code>include</code> directory — the build cache picks the
+change up and rebuilds automatically:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">OPTIX_PATH</span><span class="o">=</span>/opt/NVIDIA-OptiX-SDK-8.0.0/include<span class="w"> </span>pantheon<span class="w"> </span>--test<span class="w"> </span>rt_virus<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span>
+</code></pre></div>
+<p>On AMD hardware, build with <code>ENABLE_HIPRT=1</code> instead.</p>
+</div>
 <h2 id="execution-mechanics">Execution Mechanics</h2>
 <p>The kernel generates a massively complex, randomized BVH in VRAM and floods the RT cores.</p>
 <ul>
