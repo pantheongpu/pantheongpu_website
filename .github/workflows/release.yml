@@ -371,6 +371,26 @@ jobs:
           grep -oE '\[Pantheon [^]]+\]' dry-run-release.md
           rm -f dry-run-release.json dry-run-release.md
 
+          # Index the package too, into a throwaway root. The publishing step
+          # is skipped on a dry run, so without this the first time the apt
+          # indexing ran would be during a real release.
+          aptroot="$(mktemp -d)"
+          python3 packaging/apt/build_repo.py \
+            "dist/pantheon-gpu_${VERSION}_all.deb" --repo-root "$aptroot"
+
+          index="${aptroot}/dists/stable/main/binary-amd64/Packages"
+          if ! grep -q "^Package: pantheon-gpu$" "$index"; then
+            echo "::error::the apt index would not list pantheon-gpu"
+            exit 1
+          fi
+          if ! grep -q "^Version: ${VERSION}$" "$index"; then
+            echo "::error::the apt index would not list version ${VERSION}"
+            exit 1
+          fi
+          echo "The apt repository would offer:"
+          grep -E '^(Package|Version|Filename):' "$index" | sed 's/^/  /'
+          rm -rf "$aptroot"
+
   # A separate job on purpose: the release job runs inside a container, and the
   # PyPI publishing action is a Docker action, which is not dependable there.
   publish-pypi:

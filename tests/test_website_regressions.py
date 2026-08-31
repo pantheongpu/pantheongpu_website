@@ -1456,6 +1456,12 @@ def test_release_ships_and_documents_the_debian_package():
     assert 'signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc' in getting_started
     assert "sudo apt install pantheon-gpu" in getting_started
 
+    # The publishing step is skipped on a dry run, so the dry run indexes the
+    # package itself. Otherwise the first apt indexing would be a real release.
+    summary = workflow.split("Dry run summary", 1)[1]
+    assert "packaging/apt/build_repo.py" in summary
+    assert "the apt index would not list pantheon-gpu" in summary
+
 
 def test_aur_package_builds_from_the_sdist():
     """The source repository is not a Python package.
