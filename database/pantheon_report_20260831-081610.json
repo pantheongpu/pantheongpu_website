@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-31 08:21:42",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2593.97Mhz"
+    },
+    "ram_info": {
+        "total": "222.16GB",
+        "available": "219.19GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A10",
+            "memory_total": "23028 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 150.0,
+            "uuid": "GPU-99b1c30f-921d-1384-4b41-4ccd367afb45",
+            "serial": "1651822013655"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "test_results": [
+        {
+            "Test Name": "allocation_fragmentation",
+            "Version": "1.1.0",
+            "Description": "Allocation Fragmentation (Synthetic Runtime Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 10706.4,
+            "Unit": "alloc-events/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 53.8,
+            "Max Temp (C)": 57.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 76.4,
+            "Max Power (W)": 78.6,
+            "Avg Clock(MHz)": 1690.1,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1695.0,
+            "Avg GPU Util (%)": 71.3,
+            "Max GPU Util (%)": 73.0,
+            "Peak Memory (MiB)": 2101.6,
+            "Memory Total (MiB)": 23028.0,
+            "Energy (Wh)": 6.392,
+            "Thermal Rise (C)": 4.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 140.14,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/allocation_fragmentation 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260831-081610/reliability/allocation_fragmentation/gpu0/ras.json"
+        }
+    ]
+}
