@@ -33,7 +33,7 @@ minute, once) and need a CUDA or ROCm toolchain; use
 | [Pantheon v1.2.0 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon-gpu_1.2.0_all.deb) | `.deb` | 163.9 KB |
 | [Pantheon v1.2.0 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon_gpu-1.2.0-py3-none-any.whl) | `.whl` | 328.6 KB |
 | [Pantheon v1.2.0 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon-1.2.0-source.tar.gz) | `.tar.gz` | 249.6 KB |
-| [Pantheon v1.2.0 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon_gpu-1.2.0.tar.gz) | `.tar.gz` | 237.4 KB |
+| [Pantheon v1.2.0 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon_gpu-1.2.0.tar.gz) | `.tar.gz` | 237.3 KB |
 | [Pantheon v1.2.0 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon-1.2.0-source.zip) | `.zip` | 366.6 KB |
 | [Pantheon v1.2.0 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/SHA256SUMS) | `SHA256SUMS` | 484 B |
 
