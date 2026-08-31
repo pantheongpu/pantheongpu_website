@@ -1516,6 +1516,15 @@ def test_release_publishes_container_images():
     assert 'ENTRYPOINT ["pantheon"]' in dockerfile
     assert "--no-install-recommends" in dockerfile
 
+    # The AMD image is a separate per-vendor variant, never a combined one:
+    # each toolchain is a vendor-maintained base image, and a combined image
+    # ships ~30GB of which any one user can use half.
+    rocm = read("packaging/docker/Dockerfile.rocm")
+    assert "FROM rocm/" in rocm
+    assert 'ENTRYPOINT ["pantheon"]' in rocm
+    assert "-rocm6.4" in job
+    assert "latest-rocm" in job
+
 
 def test_release_notes_list_what_changed():
     """Every release must say what changed.

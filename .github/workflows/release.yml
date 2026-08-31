@@ -502,17 +502,36 @@ jobs:
           docker run --rm --entrypoint pantheon "${IMAGE}:${VERSION}-cuda12.8" \
             --platform mock --test baseline_metrics --duration 5 --mem 5
 
+      - name: Build and smoke-test the ROCm image
+        run: |
+          set -euo pipefail
+          # Per-vendor images rather than one combined: each toolchain is a
+          # vendor-maintained base image, a combined one would weigh ~30GB of
+          # which every user can use half, and the run flags already force the
+          # user to know their vendor.
+          docker build -f packaging/docker/Dockerfile.rocm \
+            --build-arg "PANTHEON_WHEEL=pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            -t "${IMAGE}:${VERSION}-rocm6.4" packaging/docker
+          docker run --rm "${IMAGE}:${VERSION}-rocm6.4" --version
+          docker run --rm --entrypoint pantheon "${IMAGE}:${VERSION}-rocm6.4" \
+            --platform mock --test baseline_metrics --duration 5 --mem 5
+
       - name: Push the image tags
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          # The unsuffixed tags mean CUDA, much the larger install base;
+          # latest-rocm is the AMD counterpart of latest.
           docker tag "${IMAGE}:${VERSION}-cuda12.8" "${IMAGE}:${VERSION}"
           docker tag "${IMAGE}:${VERSION}-cuda12.8" "${IMAGE}:latest"
+          docker tag "${IMAGE}:${VERSION}-rocm6.4" "${IMAGE}:latest-rocm"
           docker push "${IMAGE}:${VERSION}-cuda12.8"
           docker push "${IMAGE}:${VERSION}"
           docker push "${IMAGE}:latest"
+          docker push "${IMAGE}:${VERSION}-rocm6.4"
+          docker push "${IMAGE}:latest-rocm"
           docker logout ghcr.io
 
   publish-copr:
