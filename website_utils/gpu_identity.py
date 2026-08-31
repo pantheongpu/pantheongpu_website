@@ -1,47 +1,31 @@
 """One definition of a GPU's public identity.
 
-The sanitizer and the data generator both need to turn a GPU UUID into the
-pseudonym published on the site. They each carried their own copy, and the
-copies drifted: the sanitizer learned not to re-hash a value already in
-pseudonym form, the generator never did. So every id was hashed twice on its
-way to the leaderboard, and the id shown on the site matched nothing in
-database/ -- a card with 152 reports could not be found under the id those
-reports carried.
+The sanitizer and the data generator both need to agree on the id a card is
+published under. They each carried their own copy of this function once, and
+the copies drifted: every id was hashed twice on its way to the leaderboard,
+and the id shown on the site matched nothing in database/.
 
-Identity is only ever compared for equality, so a hash preserves dedup,
-grouping and per-card history exactly. Publishing the raw UUID buys nothing
-and hands out a persistent hardware identifier that, next to the driver, OS
-and run timestamps, fingerprints a specific machine.
+The owner decided (2026-08-31) that the public identity IS the report's UUID,
+verbatim. A GPU UUID identifies a card, not a host, it is load-bearing for
+dedup, grouping and per-card history, and publishing it means the id on the
+site can always be found in the report it came from. Reports imported while
+this function hashed ids only have the pseudonym left -- those cards keep
+their ``GPU-<12 hex>`` form, which is just another stable opaque string.
+
+Keep this the single definition: any module that grows its own copy will
+drift, and that is the bug this file exists to prevent.
 """
-
-import hashlib
-import os
-import re
-
-# A UUID has enough entropy that an unsalted hash is not brute-forceable, but
-# anyone already holding one can confirm whether that card is in the dataset.
-# Set PANTHEON_ID_SALT to close that off, and keep it stable: changing it
-# renames every card and breaks continuity with everything already published.
-PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
 
 UNKNOWN_IDS = {"unknown", "n/a", "none", "[n/a]", ""}
 
-# A value already in pseudonym form must be left alone. Hashing it again gives
-# the same physical GPU a different identity, so a card seen before and after
-# an import splits in two.
-PSEUDONYM = re.compile(r"^GPU-[0-9a-f]{12}$")
-
 
 def public_gpu_id(raw, unknown="Unknown"):
-    """Return a stable pseudonym for a GPU UUID.
+    """Return the id a GPU is published under: its UUID, unchanged.
 
-    Passing a pseudonym back in returns it unchanged, so this is safe to apply
-    more than once to the same value.
+    Applying this more than once is a no-op by construction, and unknown
+    markers normalise to a single spelling so anonymous cards group sanely.
     """
     text = str(raw if raw is not None else "").strip()
     if text.lower() in UNKNOWN_IDS:
         return text or unknown
-    if PSEUDONYM.match(text):
-        return text
-    return "GPU-" + hashlib.sha256(
-        (PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()[:12]
+    return text
