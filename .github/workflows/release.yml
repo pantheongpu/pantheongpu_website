@@ -21,12 +21,23 @@ on:
         required: false
         default: false
         type: boolean
+      publish_pypi:
+        description: >-
+          Also upload the wheel and sdist to PyPI. Needs a trusted publisher
+          configured on PyPI for this repository and workflow first; leave off
+          until it is, or the upload fails after the release has been made.
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
   # The release page commit is pushed with GITHUB_TOKEN, which by design does
   # not start another workflow, so the site deploy has to be asked for.
   actions: write
+  # PyPI trusted publishing exchanges this token for an upload credential, so
+  # there is no long-lived API token to hold.
+  id-token: write
 
 concurrency:
   # Two releases at once would race on the same tag and asset names. Never
@@ -228,6 +239,25 @@ jobs:
             --repo "$GITHUB_REPOSITORY"
           rm -f current-release.json all-releases.json
 
+      - name: Stage the PyPI artifacts
+        if: ${{ !inputs.dry_run && inputs.publish_pypi }}
+        run: |
+          set -euo pipefail
+          # dist/ also holds Pantheon's own source archives and SHA256SUMS,
+          # which PyPI rejects. Upload only the two files that belong there.
+          mkdir -p pypi-dist
+          cp "dist/pantheon_gpu-${VERSION}-py3-none-any.whl" \
+             "dist/pantheon_gpu-${VERSION}.tar.gz" pypi-dist/
+          ls -la pypi-dist
+
+      - name: Keep the PyPI artifacts for the upload job
+        if: ${{ !inputs.dry_run && inputs.publish_pypi }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pypi-dist
+          path: pypi-dist/
+          retention-days: 1
+
       - name: Propose the release page
         id: release_page
         if: ${{ !inputs.dry_run }}
@@ -303,3 +333,25 @@ jobs:
           echo "The release page would list:"
           grep -oE '\[Pantheon [^]]+\]' dry-run-release.md
           rm -f dry-run-release.json dry-run-release.md
+
+  # A separate job on purpose: the release job runs inside a container, and the
+  # PyPI publishing action is a Docker action, which is not dependable there.
+  publish-pypi:
+    needs: release
+    if: ${{ !inputs.dry_run && inputs.publish_pypi }}
+    runs-on: [self-hosted, Linux, X64]
+    permissions:
+      # Trusted publishing swaps this for a short-lived upload credential, so
+      # no PyPI API token has to be stored in this repository.
+      id-token: write
+    steps:
+      - name: Fetch the built distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: pypi-dist
+          path: pypi-dist
+
+      - name: Upload to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: pypi-dist

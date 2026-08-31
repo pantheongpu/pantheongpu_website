@@ -403,8 +403,17 @@ def test_all_workflow_jobs_use_self_hosted_linux_runners():
             line == "runs-on: [self-hosted, Linux, X64]"
             for line in runs_on_lines
         ), f"{workflow_path.name} contains a non-self-hosted runner"
-        assert workflow.count("container:") == len(runs_on_lines)
-        assert workflow.count("image: ubuntu:24.04") == len(runs_on_lines)
+        # Jobs run in a pinned container so the self-hosted runner's own
+        # packages cannot drift into a build -- except where a job must run
+        # outside one, as the PyPI upload does, because its publishing action
+        # is a Docker action and that is not dependable inside a container.
+        containers = workflow.count("container:")
+        assert containers == workflow.count("image: ubuntu:24.04")
+        assert containers <= len(runs_on_lines)
+        if containers < len(runs_on_lines):
+            assert "pypa/gh-action-pypi-publish" in workflow, (
+                f"{workflow_path.name} has a job outside a container without "
+                "a reason recorded here")
         assert "ubuntu-latest" not in workflow
         assert "windows-latest" not in workflow
         assert "macos-latest" not in workflow
@@ -1340,3 +1349,57 @@ def test_container_workflows_declare_bash():
 
     assert not offenders, (
         f"container workflows using pipefail without declaring bash: {offenders}")
+
+
+def test_wheel_does_not_require_a_spreadsheet_writer():
+    """openpyxl reaches one call, which already tolerates its absence.
+
+    pantheon.py wraps df.to_excel in try/except and warns, so a machine that
+    only reads the CSV and JSON written beside it should not be made to
+    install a spreadsheet writer.
+    """
+    builder = read("packaging/wheel/build_wheel.py")
+
+    dependencies = builder.split("dependencies = [", 1)[1].split("]", 1)[0]
+    assert "openpyxl" not in dependencies, "openpyxl belongs in an extra"
+    assert '"pandas"' in dependencies, (
+        "pandas is imported at module scope and used throughout; it is not "
+        "optional without a refactor")
+
+    assert "[project.optional-dependencies]" in builder
+    assert 'reports = ["openpyxl"]' in builder
+
+
+def test_wheel_offers_the_project_named_command():
+    """"pantheon" is a taken name in Debian and Ubuntu.
+
+    elementary OS ships a desktop environment called Pantheon, so those
+    archives already carry a family of pantheon-* packages. Offering
+    pantheon-gpu as well lets a distribution install only that one.
+    """
+    builder = read("packaging/wheel/build_wheel.py")
+    scripts = builder.split("[project.scripts]", 1)[1].split("[tool.setuptools]", 1)[0]
+
+    assert "pantheon = " in scripts
+    assert "pantheon-gpu = " in scripts
+
+
+def test_pypi_upload_is_opt_in_and_runs_outside_the_container():
+    """The publishing action is a Docker action.
+
+    The release job runs inside a container, where that is not dependable, so
+    the upload is a separate job. It is also off by default: without a trusted
+    publisher configured on PyPI the upload fails *after* the GitHub release
+    has already been made.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    assert "publish_pypi:" in workflow
+    assert "default: false" in workflow
+    assert "id-token: write" in workflow
+
+    publish = workflow.split("publish-pypi:", 1)[1]
+    assert "needs: release" in publish
+    assert "container:" not in publish, (
+        "a Docker action cannot be relied on inside a container job")
+    assert "pypa/gh-action-pypi-publish" in publish
