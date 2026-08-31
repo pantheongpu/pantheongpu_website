@@ -22,12 +22,6 @@ import os
 import hashlib
 import json
 import re
-
-try:  # run as a script (python3 website_utils/sanitize_reports.py)
-    from gpu_identity import public_gpu_id as _public_gpu_id, UNKNOWN_IDS as _UNKNOWN
-except ImportError:  # imported as a package (tests, other modules)
-    from website_utils.gpu_identity import (
-        public_gpu_id as _public_gpu_id, UNKNOWN_IDS as _UNKNOWN)
 import sys
 from pathlib import Path
 
@@ -94,9 +88,28 @@ def rename_host_named_reports(db_dir=DB_DIR):
     return renamed
 
 
+PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
+_UNKNOWN = {"unknown", "n/a", "none", "[n/a]", ""}
+# A value already in pseudonym form must be left alone. Hashing it again yields
+# a different id on every run, so the same physical GPU drifts to a new identity
+# each time the sanitizer runs -- and a card seen before and after an import
+# splits into two.
+_PSEUDONYM = re.compile(r"^GPU-[0-9a-f]{12}$")
+
+
 def public_gpu_id(raw):
-    """Stable pseudonym for a GPU UUID. See website_utils.gpu_identity."""
-    return _public_gpu_id(raw)
+    """Stable pseudonym for a GPU UUID. Mirrors generate_web_data.public_gpu_id.
+
+    Identity is only ever compared for equality, so a hash preserves dedup,
+    grouping and per-card history exactly. Keep PANTHEON_ID_SALT stable, or
+    previously published pseudonyms will not match new ones.
+    """
+    text = str(raw or "").strip()
+    if text.lower() in _UNKNOWN:
+        return text or "Unknown"
+    if _PSEUDONYM.match(text):
+        return text
+    return "GPU-" + hashlib.sha256((PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()[:12]
 
 
 def scrub_gpu_identifiers(data):

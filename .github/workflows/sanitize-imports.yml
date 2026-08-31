@@ -5,11 +5,6 @@ name: Sanitize Imports
 # numbers in a public repository and turns CI red until someone scrubs them by
 # hand. This closes that loop.
 #
-# It runs on pull requests as well as on main. Sweeps that arrive on a branch
-# were bypassing this entirely: 55 filenames carrying two hosts' IP addresses
-# reached a pull request that way, and each new commit re-broke CI faster than
-# they could be scrubbed by hand.
-#
 # It cannot spin: the sanitizer is idempotent, so the commit this job makes
 # produces no further changes on the run it triggers, and that run exits without
 # committing.
@@ -17,9 +12,6 @@ name: Sanitize Imports
 on:
   push:
     branches: [main]
-  pull_request:
-    paths:
-      - "database/**"
   workflow_dispatch:
 
 permissions:
@@ -28,51 +20,35 @@ permissions:
   actions: write
 
 concurrency:
-  # A pull request scrubs its own branch, so it must not queue behind main.
-  group: sanitize-${{ github.event.pull_request.number || 'main' }}
+  group: sanitize-main
   cancel-in-progress: false
-
-defaults:
-  run:
-    # Container jobs on the self-hosted runner default to `sh`, which has no
-    # `pipefail`, so a step opening with `set -euo pipefail` dies before it
-    # runs a line of its own.
-    shell: bash
 
 jobs:
   sanitize:
-    # A pull request from a fork gets a read-only token, so there is nothing to
-    # push back with. CI still rejects the raw identifiers, which is the part
-    # that matters; the contributor scrubs and pushes themselves.
-    if: >-
-      github.event_name != 'pull_request'
-      || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Linux, X64]
     container:
       image: ubuntu:24.04
     env:
       # Resolved once here: the secrets context is not dependable inside a
       # step-level `if`.
-      HAS_PAT: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+      HAS_PAT: ${{ secrets.PANTHEON_SANITIZE_TOKEN != '' }}
     steps:
       - name: Bootstrap job container
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates curl gh git lsb-release tar gzip xz-utils zstd
+            ca-certificates curl git lsb-release tar gzip xz-utils zstd
 
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          # GITHUB_TOKEN starts no workflows, so a pull request opened with it
-          # would never run the checks it has to pass. A personal access token
-          # acts as that account instead. Falls back to GITHUB_TOKEN, which can
-          # still scrub and push while main is unprotected.
-          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          # A push made with GITHUB_TOKEN starts no workflows and cannot pass a
+          # branch ruleset. Checking out with a personal access token makes the
+          # push act as that account, so CI runs on the sanitized commit and
+          # protection is satisfied. Falls back to GITHUB_TOKEN, which still
+          # scrubs and pushes while the branch is unprotected.
+          token: ${{ secrets.PANTHEON_SANITIZE_TOKEN || github.token }}
           persist-credentials: true
-          # On a pull request the default checkout is the merge commit, which is
-          # detached and cannot be pushed back. Take the branch itself.
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       # The runner mounts the checkout with a different UID than the container
       # user, so git refuses to operate on it until the path is trusted.
@@ -95,57 +71,27 @@ jobs:
       - name: Regenerate published data
         run: python3 website_utils/generate_web_data.py
 
-      - name: Push the sanitized tree to the pull request
-        if: github.event_name == 'pull_request'
-        env:
-          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      - name: Commit if anything changed
         run: |
-          set -euo pipefail
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Nothing to sanitize on ${HEAD_REF}."
+          if git diff --quiet; then
+            echo "Nothing to sanitize."
             exit 0
           fi
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
           git commit -m "Sanitize imported benchmark reports"
-          git push origin "HEAD:refs/heads/${HEAD_REF}"
+          git push
+          echo "SANITIZED=true" >> "$GITHUB_ENV"
 
-          if [ "${HAS_PAT}" != "true" ]; then
-            # A push made with GITHUB_TOKEN starts no workflow, so the checks
-            # that just failed on the raw import will not run again by
-            # themselves and the pull request stays red on a tree that is now
-            # clean.
-            echo "::warning::Scrubbed ${HEAD_REF}, but no bot token is set, so" \
-                 "the failed checks will not re-run on their own. Set" \
-                 "PANTHEON_BOT_TOKEN, or re-run them by hand."
-          fi
-
-      - name: Propose the sanitized tree
-        id: sanitize
-        if: github.event_name != 'pull_request'
-        uses: ./.github/actions/propose-to-main
-        with:
-          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
-          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
-          branch-slug: sanitize
-          title: Sanitize imported benchmark reports
-          body: |
-            Raw benchmark reports landed in `database/` carrying host and GPU
-            identifiers. This scrubs them and regenerates the published data.
-
-            Opened automatically; merges once the required checks pass.
-
-      - name: Record that a change was proposed
-        if: steps.sanitize.outputs.changed == 'true'
-        run: echo "SANITIZED=true" >> "$GITHUB_ENV"
-
-      # On the fallback path the commit is pushed with GITHUB_TOKEN, which
-      # starts no workflow, so CI and the deploy would never run against the
-      # scrubbed tree -- leaving the site stale and the branch showing the
-      # failure from the raw import. Start them explicitly via the API.
+      # A commit pushed with GITHUB_TOKEN does not start any workflow, so CI and
+      # the deploy would never run against the scrubbed tree -- leaving the site
+      # stale and the branch showing the failure from the raw import. Start them
+      # explicitly. Neither commits anything, so this cannot loop.
+      # A commit pushed with GITHUB_TOKEN does not start any workflow, so CI and
+      # the deploy would never run against the scrubbed tree -- leaving the site
+      # stale and the branch showing the failure from the raw import. Start them
+      # explicitly via the API; the gh CLI is not present in this container.
       # Neither workflow commits anything, so this cannot loop.
       - name: Re-run checks and deploy on the sanitized commit
         # Only needed on the GITHUB_TOKEN fallback path. A push made with the
