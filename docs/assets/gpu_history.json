@@ -1834,6 +1834,20 @@
     "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
   },
   {
+    "uuid": "GPU-23373075-4d82-6ed2-1410-bf2821205879",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "tlb_avalanche",
+    "version": "1.1.0",
+    "unit": "GB/s",
+    "score": 139.527,
+    "date": "2026-08-31 20:42:35",
+    "temp_max": 57.0,
+    "power_max": 438.7,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
+  },
+  {
     "uuid": "GPU-3a87b0a238bb",
     "gpu": "NVIDIA L4",
     "test": "allocation_fragmentation",
