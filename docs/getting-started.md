@@ -35,7 +35,26 @@ Install the compiler for your platform. You only need one:
     ```
 
 Pantheon is open source. Building from source lets you read exactly what will
-run on your hardware; the Debian package is quicker if you just want to run it.
+run on your hardware; the PyPI or Debian package is quicker if you just want
+to run it.
+
+=== "PyPI"
+
+    ```bash
+    pipx install pantheon-gpu
+    ```
+
+    Installs a `pantheon` command on your PATH. `pipx` keeps it in its own
+    environment, which is what recent Ubuntu and Debian releases require of
+    anything installed outside the system package manager; `pip install --user
+    pantheon-gpu` works too where that restriction does not apply. Add the
+    `reports` extra (`pipx install "pantheon-gpu[reports]"`) for spreadsheet
+    export.
+
+    The wheel carries the kernel sources rather than prebuilt binaries, so the
+    first run compiles the workloads for your GPU into a per-user cache. That
+    takes a minute or so once, and needs `make`, a C++ compiler, and the CUDA
+    or ROCm toolkit from the tabs above.
 
 === "Build from source"
 
@@ -74,7 +93,7 @@ run on your hardware; the Debian package is quicker if you just want to run it.
 === "Install the package"
 
     ```bash
-    VERSION=1.1.0
+    VERSION=1.2.0
     BASE="https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}"
     wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"
     wget "${BASE}/SHA256SUMS" && sha256sum --ignore-missing -c SHA256SUMS
