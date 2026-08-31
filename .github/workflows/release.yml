@@ -23,11 +23,11 @@ on:
         type: boolean
       publish_pypi:
         description: >-
-          Also upload the wheel and sdist to PyPI. Needs a trusted publisher
-          configured on PyPI for this repository and workflow first; leave off
-          until it is, or the upload fails after the release has been made.
+          Upload the wheel and sdist to PyPI (on by default since v1.2.0,
+          when the trusted publisher for this repository and workflow was
+          configured). Untick for a GitHub-and-apt-only release.
         required: false
-        default: false
+        default: true
         type: boolean
 
 permissions:
@@ -423,3 +423,8 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: pypi-dist
+          # PyPI versions are immutable, so a re-run of a release that already
+          # uploaded would otherwise fail here after every other step
+          # succeeded. Skipping the duplicate keeps re-runs idempotent, the
+          # same way the release and apt steps already are.
+          skip-existing: true

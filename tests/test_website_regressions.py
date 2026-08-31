@@ -1387,18 +1387,22 @@ def test_wheel_offers_the_project_named_command():
     assert "pantheon-gpu = " in scripts
 
 
-def test_pypi_upload_is_opt_in_and_runs_outside_the_container():
+def test_pypi_upload_is_on_by_default_and_runs_outside_the_container():
     """The publishing action is a Docker action.
 
     The release job runs inside a container, where that is not dependable, so
-    the upload is a separate job. It is also off by default: without a trusted
-    publisher configured on PyPI the upload fails *after* the GitHub release
-    has already been made.
+    the upload is a separate job. Since v1.2.0 a trusted publisher is
+    configured on PyPI, so the upload rides along with every release by
+    default; the input stays so a GitHub-and-apt-only release is still one
+    untick away. PyPI versions are immutable, which is why the upload must
+    skip duplicates: a release re-run would otherwise fail on the last step
+    after everything else succeeded.
     """
     workflow = read(".github/workflows/release.yml")
 
     assert "publish_pypi:" in workflow
-    assert "default: false" in workflow
+    pypi_input = workflow.split("publish_pypi:", 1)[1].split("type: boolean", 1)[0]
+    assert "default: true" in pypi_input
     assert "id-token: write" in workflow
 
     publish = workflow.split("publish-pypi:", 1)[1]
@@ -1406,6 +1410,7 @@ def test_pypi_upload_is_opt_in_and_runs_outside_the_container():
     assert "container:" not in publish, (
         "a Docker action cannot be relied on inside a container job")
     assert "pypa/gh-action-pypi-publish" in publish
+    assert "skip-existing: true" in publish
 
 
 def test_debian_package_declares_honest_dependencies():
