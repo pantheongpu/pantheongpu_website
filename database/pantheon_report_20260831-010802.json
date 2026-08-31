@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-31 01:13:34",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3264.57Mhz"
+    },
+    "ram_info": {
+        "total": "15.01GB",
+        "available": "13.79GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA L4",
+            "memory_total": "23034 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 72.0,
+            "uuid": "GPU-3a87b0a238bb",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "test_results": [
+        {
+            "Test Name": "kv_cache_churn",
+            "Version": "1.1.0",
+            "Description": "KV Cache Churn (Paged/Ragged Cache Updates)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 936451000.0,
+            "Unit": "cache-updates/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 73.0,
+            "Max Temp (C)": 75.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 72.0,
+            "Max Power (W)": 72.4,
+            "Avg Clock(MHz)": 1818.5,
+            "Min Clock (MHz)": 1770.0,
+            "Max Clock (MHz)": 2040.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 22812.9,
+            "Memory Total (MiB)": 23034.0,
+            "Energy (Wh)": 6.019,
+            "Thermal Rise (C)": 11.0,
+            "Throttle Time (s)": 300.6,
+            "Efficiency": 13006263.89,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/kv_cache_churn 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260831-010802/reliability/kv_cache_churn/gpu0/ras.json"
+        }
+    ]
+}
