@@ -1,0 +1,154 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-31 04:04:33",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 22:29:18 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 124,
+        "logical_cores": 124,
+        "freq": "2900.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.72TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-fc63d44e1d62",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-302d9db4a4d3",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 2,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-2a2600cd84ce",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 3,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-89122acc0006",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 4,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-4c968dd4e751",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 5,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-47c7349f904d",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 6,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-53cd5e3a9470",
+            "serial": "[REDACTED]"
+        },
+        {
+            "id": 7,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-ffa2dc5de621",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260831-040433",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-08-31 04:09:45",
+    "test_results": [
+        {
+            "Test Name": "llm_decode",
+            "Version": "1.1.0",
+            "Description": "LLM Decode (KV-Cache Gather and Projection)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 1666690000.0,
+            "Unit": "tokens/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 40.9,
+            "Max Temp (C)": 42.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 214.5,
+            "Max Power (W)": 220.4,
+            "Avg Clock(MHz)": 1390.3,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 98.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 20955.6,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 18.252,
+            "Thermal Rise (C)": 15.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 7770116.55,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon-v1.1.0/build/llm_decode 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260831-040433/reliability/llm_decode/gpu0/ras.json"
+        }
+    ]
+}
