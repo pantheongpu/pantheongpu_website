@@ -21,7 +21,7 @@ PantheonGPU actively tests compute, memory, interconnect, thermals, stability, a
   <a href="benchmarks/" class="md-button">Explore Benchmarks</a>
 </div>
 
-<p class="pantheon-hero__credibility">Member of NVIDIA Inception · v1.2.0 now on <a href="getting-started/">PyPI and apt</a></p>
+<p class="pantheon-hero__credibility">Member of NVIDIA Inception · v1.2.0 now on <a href="getting-started/">PyPI, apt, COPR and Docker</a></p>
 </div>
 
 <div class="pantheon-signal-grid" markdown>

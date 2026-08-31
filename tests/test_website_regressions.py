@@ -359,6 +359,10 @@ def test_getting_started_uses_valid_install_commands():
     assert "VERSION=1.2.0" in getting_started
     assert 'wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
     assert 'pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
+    # The container and COPR channels are documented against the names they
+    # actually publish under; a rename on either side must update this page.
+    assert "ghcr.io/pantheongpu/pantheon:latest" in getting_started
+    assert "dnf copr enable saqibkhanpantheongpu/pantheon-gpu" in getting_started
     assert "pantheongpu_${VERSION}_amd64.deb" not in getting_started, (
         "releases from 1.1.0 on ship no .deb")
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
