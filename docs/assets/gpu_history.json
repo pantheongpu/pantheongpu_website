@@ -14280,6 +14280,20 @@
     "card": "GPU-bdfda277-4187-355f-f08a-73aa67d524c6"
   },
   {
+    "uuid": "GPU-bdfda277-4187-355f-f08a-73aa67d524c6",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "voltage",
+    "version": "1.1.0",
+    "unit": "TFLOPS",
+    "score": 20.0155,
+    "date": "2026-08-31 21:39:17",
+    "temp_max": 39.0,
+    "power_max": 292.1,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-bdfda277-4187-355f-f08a-73aa67d524c6"
+  },
+  {
     "uuid": "GPU-c31be171-f80a-cb30-ff53-9164c70cefe7",
     "gpu": "NVIDIA A10G",
     "test": "memory_thermal_asym",
