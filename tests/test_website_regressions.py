@@ -871,56 +871,45 @@ def test_host_free_name_preserves_model_and_timestamp():
     assert sr.host_free_name(clean) == clean
 
 
-def test_published_data_carries_no_raw_gpu_identifiers():
-    """This repository is public.
+def test_published_uuids_match_the_reports():
+    """The id shown on the site must be findable in database/.
 
-    A GPU serial maps back to a purchaser through vendor RMA and warranty
-    records; a raw UUID is a persistent hardware identifier that fingerprints a
-    machine next to the driver, OS and timestamps already published. Identity
-    here is only ever compared for equality, so a pseudonym does the same job.
+    GPU UUIDs are published verbatim by the owner's decision (2026-08-31):
+    they identify a card, not a host, and hashing them left the site showing
+    ids that matched nothing in the reports. Every published uuid must appear
+    exactly as some report's uuid. Reports imported while the pipeline hashed
+    ids only have the pseudonym left, so those match on the pseudonym itself.
     """
     root = Path(__file__).resolve().parent.parent
     data = json.loads((root / "docs" / "assets" / "web_data.json").read_text())
 
-    assert not any("serial" in row for row in data), "serial must not be published"
-
-    bad = [
-        row.get("uuid") for row in data
-        if isinstance(row.get("uuid"), str)
-        and row["uuid"] != "Unknown"
-        and not re.fullmatch(r"GPU-[0-9a-f]{12}", row["uuid"])
-    ]
-    assert bad == [], f"raw GPU UUIDs published: {bad[:3]}"
-
-
-def test_raw_reports_carry_no_gpu_identifiers():
-    root = Path(__file__).resolve().parent.parent
-    offenders = []
+    report_uuids = set()
     for path in (root / "database").rglob("*.json"):
         try:
             report = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
         for gpu in report.get("gpu_static_info") or []:
-            if not isinstance(gpu, dict):
-                continue
-            uuid = str(gpu.get("uuid", ""))
-            if uuid and uuid.lower() not in {"unknown", "n/a"} \
-                    and not re.fullmatch(r"GPU-[0-9a-f]{12}", uuid):
-                offenders.append(path.name)
-            serial = str(gpu.get("serial", ""))
-            if serial and serial.lower() not in {"unknown", "n/a", "[n/a]", "[redacted]"}:
-                offenders.append(path.name)
-    assert offenders == [], (
-        "Imported reports still carry raw GPU identifiers. Run:\n"
-        "    python3 website_utils/sanitize_reports.py\n"
-        "    python3 website_utils/generate_web_data.py\n"
-        f"and commit the result. First offenders: {sorted(set(offenders))[:3]}")
+            if isinstance(gpu, dict) and gpu.get("uuid"):
+                report_uuids.add(str(gpu["uuid"]).strip())
+
+    orphans = sorted({
+        row["uuid"] for row in data
+        if isinstance(row.get("uuid"), str)
+        and row["uuid"] != "Unknown"
+        and row["uuid"] not in report_uuids
+    })
+    assert orphans == [], f"published uuids not found in any report: {orphans[:3]}"
 
 
-def test_pseudonym_is_stable_and_one_to_one():
-    """Dedup and per-card history depend on the same GPU always hashing the
-    same way, and on two GPUs never colliding."""
+def test_sanitizer_preserves_gpu_identity(tmp_path):
+    """Only host identifiers are scrubbed; GPU uuid and serial pass verbatim.
+
+    The uuid keys per-card identity and history across the dashboards, and the
+    owner decided (2026-08-31) that uuid and serial are published as recorded.
+    A sanitizer change that hashes, redacts or renames either would silently
+    split a card's history on the next import, so pin the contract here.
+    """
     import importlib.util
     root = Path(__file__).resolve().parent.parent
     spec = importlib.util.spec_from_file_location(
@@ -928,11 +917,24 @@ def test_pseudonym_is_stable_and_one_to_one():
     sr = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(sr)
 
-    a = "GPU-58e902aa-1111-2222-3333-444444444444"
-    b = "GPU-58e902aa-1111-2222-3333-444444444445"
-    assert sr.public_gpu_id(a) == sr.public_gpu_id(a), "must be stable"
-    assert sr.public_gpu_id(a) != sr.public_gpu_id(b), "must not collide"
-    assert sr.public_gpu_id("Unknown") == "Unknown"
+    report = tmp_path / "pantheon_report_20260831-000000.json"
+    report.write_text(json.dumps({
+        "pantheon_version": "1.1.0",
+        "network_info": {"hostname": "bench-host", "ip_address": "10.0.0.5"},
+        "gpu_static_info": [{
+            "name": "Example GPU",
+            "uuid": "GPU-58e902aa-1111-2222-3333-444444444444",
+            "serial": "1650123456789",
+        }],
+        "test_results": [],
+    }, indent=4) + "\n")
+
+    assert sr.sanitize_report(report) is True
+    data = json.loads(report.read_text())
+    assert "network_info" not in data, "host identifiers must still be scrubbed"
+    gpu = data["gpu_static_info"][0]
+    assert gpu["uuid"] == "GPU-58e902aa-1111-2222-3333-444444444444"
+    assert gpu["serial"] == "1650123456789"
 
 
 def test_best_run_grouping_does_not_cross_versions_or_units():

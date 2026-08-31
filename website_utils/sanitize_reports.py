@@ -8,7 +8,14 @@ only the body leaves those in a public git tree.
 
 Pantheon releases up to v1.0.16 record the benchmark host's hostname and IP
 address in a ``network_info`` block. This repository is public, so that block
-must never be committed. Run this after copying new reports into ``database/``:
+must never be committed.
+
+GPU identifiers -- the UUID and serial in ``gpu_static_info`` -- are NOT
+scrubbed: the owner decided (2026-08-31) to publish them verbatim. They are
+load-bearing for per-card identity, dedup and history on the dashboards, and
+they identify a card, not a host. Only host identifiers are removed.
+
+Run this after copying new reports into ``database/``:
 
     python3 website_utils/sanitize_reports.py
 
@@ -18,7 +25,6 @@ It exits 0 whether or not anything needed fixing, so it is safe to run
 unconditionally in an import pipeline before ``generate_web_data.py``.
 """
 
-import os
 import hashlib
 import json
 import re
@@ -88,58 +94,15 @@ def rename_host_named_reports(db_dir=DB_DIR):
     return renamed
 
 
-PUBLIC_ID_SALT = os.environ.get("PANTHEON_ID_SALT", "")
-_UNKNOWN = {"unknown", "n/a", "none", "[n/a]", ""}
-# A value already in pseudonym form must be left alone. Hashing it again yields
-# a different id on every run, so the same physical GPU drifts to a new identity
-# each time the sanitizer runs -- and a card seen before and after an import
-# splits into two.
-_PSEUDONYM = re.compile(r"^GPU-[0-9a-f]{12}$")
-
-
-def public_gpu_id(raw):
-    """Stable pseudonym for a GPU UUID. Mirrors generate_web_data.public_gpu_id.
-
-    Identity is only ever compared for equality, so a hash preserves dedup,
-    grouping and per-card history exactly. Keep PANTHEON_ID_SALT stable, or
-    previously published pseudonyms will not match new ones.
-    """
-    text = str(raw or "").strip()
-    if text.lower() in _UNKNOWN:
-        return text or "Unknown"
-    if _PSEUDONYM.match(text):
-        return text
-    return "GPU-" + hashlib.sha256((PUBLIC_ID_SALT + text).encode("utf-8")).hexdigest()[:12]
-
-
-def scrub_gpu_identifiers(data):
-    """Pseudonymise GPU UUIDs and drop serials in place. Returns True if changed.
-
-    The serial is dropped rather than hashed: it resolves no identity anywhere
-    in the pipeline, and it is the field a vendor can map back to a purchaser.
-    """
-    changed = False
-    for gpu in data.get("gpu_static_info") or []:
-        if not isinstance(gpu, dict):
-            continue
-        uuid = gpu.get("uuid")
-        if uuid is not None and str(uuid).strip().lower() not in _UNKNOWN:
-            pseudonym = public_gpu_id(uuid)
-            if pseudonym != uuid:
-                gpu["uuid"] = pseudonym
-                changed = True
-        if "serial" in gpu and str(gpu["serial"]).strip().lower() not in _UNKNOWN:
-            gpu["serial"] = "[REDACTED]"
-            changed = True
-    return changed
-
-
 def sanitize_report(path):
-    """Remove host identifiers from one report. Returns True if changed."""
+    """Remove host identifiers from one report. Returns True if changed.
+
+    GPU UUIDs and serials are left exactly as the report recorded them.
+    """
     raw = path.read_text(encoding="utf-8")
     data = json.loads(raw)
 
-    changed = scrub_gpu_identifiers(data)
+    changed = False
     if "network_info" in data:
         del data["network_info"]
         changed = True
