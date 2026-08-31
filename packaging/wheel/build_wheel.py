@@ -105,10 +105,16 @@ def write_pyproject(work: Path, version: str) -> None:
         dependencies = [
             "psutil",
             "pandas",
-            "openpyxl",
             "numpy",
             "nvidia-ml-py",
         ]
+
+        # openpyxl is only reachable through one call, df.to_excel, which is
+        # already wrapped in try/except and warns when it fails. Requiring it of
+        # every install pulls a spreadsheet writer onto machines that only ever
+        # read the CSV and JSON written beside it.
+        [project.optional-dependencies]
+        reports = ["openpyxl"]
 
         [project.urls]
         Homepage = "https://pantheongpu.com"
@@ -116,6 +122,12 @@ def write_pyproject(work: Path, version: str) -> None:
 
         [project.scripts]
         pantheon = "{PACKAGE}._entry:main"
+        # Distributions namespace by project, and "pantheon" is taken: elementary
+        # OS ships a desktop environment by that name, so Debian and Ubuntu carry
+        # a family of pantheon-* packages already. Offering the project-named
+        # command as well lets a distribution install only that one without
+        # anybody's muscle memory breaking.
+        pantheon-gpu = "{PACKAGE}._entry:main"
 
         [tool.setuptools]
         packages = ["{PACKAGE}"]

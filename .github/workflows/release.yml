@@ -21,12 +21,23 @@ on:
         required: false
         default: false
         type: boolean
+      publish_pypi:
+        description: >-
+          Also upload the wheel and sdist to PyPI. Needs a trusted publisher
+          configured on PyPI for this repository and workflow first; leave off
+          until it is, or the upload fails after the release has been made.
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
   # The release page commit is pushed with GITHUB_TOKEN, which by design does
   # not start another workflow, so the site deploy has to be asked for.
   actions: write
+  # PyPI trusted publishing exchanges this token for an upload credential, so
+  # there is no long-lived API token to hold.
+  id-token: write
 
 concurrency:
   # Two releases at once would race on the same tag and asset names. Never
@@ -46,12 +57,16 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
     container:
       image: ubuntu:24.04
+    env:
+      # Resolved once here: the secrets context is not dependable inside a
+      # step-level `if`.
+      HAS_BOT_TOKEN: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
     steps:
       - name: Bootstrap job environment
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates curl git make g++ zip python3 python3-venv python3-pip
+            ca-certificates curl dpkg-dev gh git gnupg make g++ zip python3 python3-venv python3-pip
 
       - name: Check out this repository
         uses: actions/checkout@v4
@@ -92,6 +107,16 @@ jobs:
           .buildenv/bin/pip install --quiet --upgrade pip build
           .buildenv/bin/python packaging/wheel/build_wheel.py pantheon-src \
             --outdir dist --workdir build/wheel
+
+      - name: Build the Debian package
+        run: |
+          set -euo pipefail
+          # Built on every run, dry ones included: a package that fails to
+          # build should stop the release, not be discovered afterwards.
+          python3 packaging/deb/build_deb.py \
+            "dist/pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            --outdir dist --workdir build/deb
+          dpkg-deb --info "dist/pantheon-gpu_${VERSION}_all.deb" | head -20
 
       - name: Build source archives
         run: |
@@ -169,6 +194,7 @@ jobs:
             dist/pantheon_gpu-${{ env.VERSION }}.tar.gz
             dist/pantheon-${{ env.VERSION }}-source.tar.gz
             dist/pantheon-${{ env.VERSION }}-source.zip
+            dist/pantheon-gpu_${{ env.VERSION }}_all.deb
             dist/SHA256SUMS
 
       - name: Update the release page
@@ -224,32 +250,81 @@ jobs:
             --repo "$GITHUB_REPOSITORY"
           rm -f current-release.json all-releases.json
 
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          if git diff --quiet -- docs/release.md; then
-            echo "docs/release.md is already current for ${TAG}."
-            exit 0
+      - name: Stage the PyPI artifacts
+        if: ${{ !inputs.dry_run && inputs.publish_pypi }}
+        run: |
+          set -euo pipefail
+          # dist/ also holds Pantheon's own source archives and SHA256SUMS,
+          # which PyPI rejects. Upload only the two files that belong there.
+          mkdir -p pypi-dist
+          cp "dist/pantheon_gpu-${VERSION}-py3-none-any.whl" \
+             "dist/pantheon_gpu-${VERSION}.tar.gz" pypi-dist/
+          ls -la pypi-dist
+
+      - name: Keep the PyPI artifacts for the upload job
+        if: ${{ !inputs.dry_run && inputs.publish_pypi }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pypi-dist
+          path: pypi-dist/
+          retention-days: 1
+
+      - name: Update the apt repository
+        if: ${{ !inputs.dry_run }}
+        env:
+          APT_SIGNING_KEY: ${{ secrets.PANTHEON_APT_SIGNING_KEY }}
+        run: |
+          set -euo pipefail
+          # apt refuses an unsigned repository unless the user opts in with
+          # [trusted=yes], so sign when a key is configured and say plainly
+          # when there is none rather than publishing something that looks
+          # finished and is not.
+          key=""
+          if [ -n "${APT_SIGNING_KEY:-}" ]; then
+            export GNUPGHOME="$(mktemp -d)"
+            chmod 700 "$GNUPGHOME"
+            printf '%s' "$APT_SIGNING_KEY" | gpg --batch --quiet --import
+            key="$(gpg --list-secret-keys --with-colons \
+                   | awk -F: '/^fpr/{print $10; exit}')"
+          else
+            echo "::warning::No PANTHEON_APT_SIGNING_KEY, so the apt repository" \
+                 "is unsigned and apt will refuse it without [trusted=yes]."
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/release.md
-          git commit -m "Update release page for ${TAG}"
-          # main can move while a release builds, and the Lockdown ruleset
-          # refuses non-fast-forward pushes, so rebase rather than force.
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
-          echo "RELEASE_PAGE_UPDATED=1" >> "$GITHUB_ENV"
+          python3 packaging/apt/build_repo.py \
+            "dist/pantheon-gpu_${VERSION}_all.deb" \
+            --repo-root docs/apt ${key:+--sign-key "$key"}
+
+      - name: Propose the release page
+        id: release_page
+        if: ${{ !inputs.dry_run }}
+        uses: ./.github/actions/propose-to-main
+        with:
+          token: ${{ secrets.PANTHEON_BOT_TOKEN || github.token }}
+          pull-request: ${{ secrets.PANTHEON_BOT_TOKEN != '' }}
+          branch-slug: release-page
+          title: Update release page for ${{ env.TAG }}
+          body: |
+            Generated from the published ${{ env.TAG }} release.
+
+            Opened automatically; merges once the required checks pass.
+          # The workspace also holds the Pantheon checkout, the build venvs and
+          # dist/, so staging everything would commit the whole release build.
+          paths: docs/release.md docs/apt
 
       - name: Deploy the updated release page
-        if: ${{ !inputs.dry_run && env.RELEASE_PAGE_UPDATED == '1' }}
+        if: >-
+          ${{ !inputs.dry_run
+              && steps.release_page.outputs.changed == 'true'
+              && env.HAS_BOT_TOKEN != 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          # The commit above was authenticated with GITHUB_TOKEN, so it will not
-          # trigger Publish Website on its own. Request the deploy explicitly,
-          # or the new release page stays in main and never reaches the site.
+          # Only on the fallback path: that commit was pushed with GITHUB_TOKEN,
+          # which starts no workflow, so the new page would sit in main and
+          # never reach the site. When the page arrives by pull request instead,
+          # merging it starts the deploy on its own.
           curl -fsS -X POST \
             -H "Authorization: Bearer ${GH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
@@ -295,3 +370,45 @@ jobs:
           echo "The release page would list:"
           grep -oE '\[Pantheon [^]]+\]' dry-run-release.md
           rm -f dry-run-release.json dry-run-release.md
+
+          # Index the package too, into a throwaway root. The publishing step
+          # is skipped on a dry run, so without this the first time the apt
+          # indexing ran would be during a real release.
+          aptroot="$(mktemp -d)"
+          python3 packaging/apt/build_repo.py \
+            "dist/pantheon-gpu_${VERSION}_all.deb" --repo-root "$aptroot"
+
+          index="${aptroot}/dists/stable/main/binary-amd64/Packages"
+          if ! grep -q "^Package: pantheon-gpu$" "$index"; then
+            echo "::error::the apt index would not list pantheon-gpu"
+            exit 1
+          fi
+          if ! grep -q "^Version: ${VERSION}$" "$index"; then
+            echo "::error::the apt index would not list version ${VERSION}"
+            exit 1
+          fi
+          echo "The apt repository would offer:"
+          grep -E '^(Package|Version|Filename):' "$index" | sed 's/^/  /'
+          rm -rf "$aptroot"
+
+  # A separate job on purpose: the release job runs inside a container, and the
+  # PyPI publishing action is a Docker action, which is not dependable there.
+  publish-pypi:
+    needs: release
+    if: ${{ !inputs.dry_run && inputs.publish_pypi }}
+    runs-on: [self-hosted, Linux, X64]
+    permissions:
+      # Trusted publishing swaps this for a short-lived upload credential, so
+      # no PyPI API token has to be stored in this repository.
+      id-token: write
+    steps:
+      - name: Fetch the built distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: pypi-dist
+          path: pypi-dist
+
+      - name: Upload to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: pypi-dist

@@ -403,8 +403,17 @@ def test_all_workflow_jobs_use_self_hosted_linux_runners():
             line == "runs-on: [self-hosted, Linux, X64]"
             for line in runs_on_lines
         ), f"{workflow_path.name} contains a non-self-hosted runner"
-        assert workflow.count("container:") == len(runs_on_lines)
-        assert workflow.count("image: ubuntu:24.04") == len(runs_on_lines)
+        # Jobs run in a pinned container so the self-hosted runner's own
+        # packages cannot drift into a build -- except where a job must run
+        # outside one, as the PyPI upload does, because its publishing action
+        # is a Docker action and that is not dependable inside a container.
+        containers = workflow.count("container:")
+        assert containers == workflow.count("image: ubuntu:24.04")
+        assert containers <= len(runs_on_lines)
+        if containers < len(runs_on_lines):
+            assert "pypa/gh-action-pypi-publish" in workflow, (
+                f"{workflow_path.name} has a job outside a container without "
+                "a reason recorded here")
         assert "ubuntu-latest" not in workflow
         assert "windows-latest" not in workflow
         assert "macos-latest" not in workflow
@@ -658,9 +667,11 @@ def test_mirror_release_workflow_accepts_manual_and_dispatch_events_and_validate
     assert "source-releases.json" not in workflow
     assert "website_utils/update_release_page.py" in workflow
     assert "--releases-json website-releases.json" in workflow
-    assert "git add docs/release.md" in workflow
-    assert 'git push origin HEAD:"${GITHUB_REF_NAME}"' in workflow
-    assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in workflow
+    # The release page is proposed as a pull request now, so the staging and
+    # the push live in the shared action rather than here.
+    assert "./.github/actions/propose-to-main" in workflow
+    assert "paths: docs/release.md" in workflow
+    assert "git push" not in workflow
     assert "cache: pip" not in workflow
     assert "mkdocs gh-deploy --force" in workflow
 
@@ -1027,7 +1038,9 @@ def test_release_workflow_updates_and_deploys_the_release_page():
 
     assert "website_utils/update_release_page.py" in workflow, (
         "publishing must regenerate the release page")
-    assert "git push origin HEAD:main" in workflow
+    # The page is proposed as a pull request rather than pushed, so that main
+    # can be protected; the push itself now lives in the shared action.
+    assert "./.github/actions/propose-to-main" in workflow
 
     # A push authenticated with GITHUB_TOKEN does not start another workflow,
     # so without an explicit dispatch the regenerated page never deploys.
@@ -1098,3 +1111,369 @@ def test_published_data_carries_no_retired_metric_units():
     assert not leaked, f"retired metric units on the leaderboard: {sorted(leaked)}"
     # scheduler and atomic_virus were never part of that change.
     assert "KIPS" in published and "MAPS" in published
+def test_no_workflow_pushes_straight_to_main():
+    """Automation must go through a pull request, like a person does.
+
+    main cannot be protected while workflows push to it: a ruleset rejects
+    them, and on a free organisation GitHub Actions cannot be granted a
+    bypass on a repository ruleset. Routing automation through pull requests
+    is what makes protecting the branch possible at all.
+    """
+    import glob
+
+    # Pushing to a pull request's own branch is fine -- that is how the
+    # sanitizer scrubs a sweep in place. Only main is off limits.
+    offenders = [
+        Path(path).name
+        for path in sorted(glob.glob(str(ROOT / ".github" / "workflows" / "*.yml")))
+        if "HEAD:main" in Path(path).read_text(encoding="utf-8")
+        or "push origin main" in Path(path).read_text(encoding="utf-8")
+    ]
+
+    assert not offenders, (
+        f"these workflows push to main directly instead of using the "
+        f"propose-to-main action: {offenders}")
+
+
+def test_writers_to_main_use_the_pull_request_action():
+    action = read(".github/actions/propose-to-main/action.yml")
+
+    # The fallback exists so this can merge before the token is created, but
+    # it has to announce itself rather than look healthy.
+    assert "::warning::No bot token configured" in action
+
+    for name in ("sanitize-imports", "release", "mirror-pantheon-release"):
+        workflow = read(f".github/workflows/{name}.yml")
+        assert "./.github/actions/propose-to-main" in workflow, (
+            f"{name}.yml still writes to main on its own")
+        assert "PANTHEON_BOT_TOKEN" in workflow
+
+    # release and mirror build in a workspace holding the Pantheon checkout,
+    # build venvs and downloaded assets, so they stage one file rather than
+    # everything -- otherwise the whole build would be committed.
+    for name in ("release", "mirror-pantheon-release"):
+        assert "paths: docs/release.md" in read(f".github/workflows/{name}.yml")
+
+
+def test_gpu_identity_is_defined_once_and_does_not_rehash():
+    """The published GPU id must match the id in the reports.
+
+    The sanitizer and the generator each carried their own copy of the
+    identity function once, and the copies drifted: every id was hashed twice
+    on its way to the leaderboard, so a card with 152 reports could not be
+    found under the id those reports carry. The identity is now the UUID
+    verbatim (owner decision, 2026-08-31), and it must stay defined once in
+    website_utils.gpu_identity so it cannot drift again.
+    """
+    from website_utils.gpu_identity import public_gpu_id
+    from website_utils.generate_web_data import public_gpu_id as generator_id
+    from website_utils.sanitize_reports import public_gpu_id as sanitizer_id
+
+    raw = "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc"
+
+    assert public_gpu_id(raw) == raw, "the published id is the uuid, verbatim"
+    assert generator_id(raw) == sanitizer_id(raw) == raw
+    # Applying it twice must be a no-op, or a card splits in two on re-import.
+    assert public_gpu_id(public_gpu_id(raw)) == raw
+    # Legacy pseudonyms from the era the pipeline hashed ids pass unchanged.
+    legacy = "GPU-3b7b76365f4d"
+    assert public_gpu_id(legacy) == legacy
+
+    # Neither module may grow its own identity hashing again. The salt was the
+    # marker of a private hashing copy: sanitize_reports also hashes file
+    # contents for filenames, which is unrelated.
+    for module in ("generate_web_data", "sanitize_reports"):
+        source = read(f"website_utils/{module}.py")
+        assert "PUBLIC_ID_SALT" not in source, (
+            f"{module} must use website_utils.gpu_identity, not hash its own")
+
+
+def test_published_ids_match_the_reports():
+    published = {row["uuid"] for row in _published_rows()}
+
+    stored = set()
+    for path in (ROOT / "database").glob("pantheon_report_*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        info = report.get("gpu_static_info")
+        if isinstance(info, list):
+            info = info[0] if info else {}
+        identifier = str((info or {}).get("uuid", "")).strip()
+        if identifier.startswith("GPU-") and len(identifier) == 16:
+            stored.add(identifier)
+
+    assert stored, "expected pseudonymised ids in the reports"
+
+    # A card is legitimately absent when every one of its runs was excluded --
+    # an incomplete run, a multi-GPU workload, or a retired metric. Anything
+    # else means the id does not join, which is the bug this guards.
+    from website_utils.generate_web_data import (
+        PUBLIC_EXCLUDED_TESTS, RETIRED_AI_UNITS)
+
+    publishable = set()
+    for path in (ROOT / "database").glob("*pantheon_report_*.json"):
+        try:
+            report = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if report.get("run_status") not in (None, "complete"):
+            continue
+        info = report.get("gpu_static_info")
+        if isinstance(info, list):
+            info = info[0] if info else {}
+        identifier = str((info or {}).get("uuid", "")).strip()
+        results = report.get("test_results", [])
+        if isinstance(results, dict):
+            results = list(results.values())
+        for result in results:
+            if not isinstance(result, dict):
+                continue
+            name = str(result.get("Test Name", "")).lower()
+            if name and name not in PUBLIC_EXCLUDED_TESTS \
+                    and str(result.get("Unit")) not in RETIRED_AI_UNITS:
+                publishable.add(identifier)
+
+    unexplained = (stored & publishable) - published
+    assert not unexplained, (
+        f"cards with publishable runs missing from the site: {sorted(unexplained)}")
+
+
+def test_per_card_history_keeps_every_run():
+    """The leaderboard drops the runs a degradation view needs.
+
+    It keeps the best run per card, workload and release, so a card that
+    slows down is invisible there: the good early run wins and later, worse
+    runs are discarded.
+    """
+    history = json.loads(read("docs/assets/gpu_history.json"))
+    leaderboard = _published_rows()
+
+    assert history, "expected a per-card history dataset"
+    assert not any("_kind" in run for run in history), (
+        "provenance is internal to the generator and must not be published")
+
+    series = {}
+    for run in history:
+        series.setdefault((run["card"], run["test"]), []).append(run)
+    repeated = [runs for runs in series.values() if len(runs) > 1]
+    assert repeated, "history must retain more than one run per card and workload"
+
+    # Cards without a UUID must not collapse into a single shared series, or
+    # the chart shows unrelated hardware as one card swinging wildly.
+    assert "Unknown" not in {run["card"] for run in history}
+
+    published_tests = {row["test"] for row in leaderboard}
+    assert {run["test"] for run in history} <= published_tests, (
+        "history must not surface workloads the leaderboard excludes")
+
+
+def test_history_collapses_the_files_one_run_writes():
+    """A single run writes a per-test record and a summary repeating it."""
+    from website_utils.generate_web_data import dedupe_history
+
+    shared = {"card": "GPU-abc123abc123", "test": "memory_read",
+              "version": "1.1.0", "unit": "GB/s", "score": 327.29}
+    runs = [
+        dict(shared, date="2026-08-30 17:02:24", _kind="completed_workload"),
+        dict(shared, date="2026-08-30 17:07:55", _kind=None),
+    ]
+    kept = dedupe_history(runs)
+    assert len(kept) == 1
+    assert kept[0]["date"] == "2026-08-30 17:02:24", (
+        "the per-test record is when the run happened; the summary repeats it")
+
+    # Two runs that merely score alike are different measurements.
+    distinct = dedupe_history([
+        dict(shared, date="2026-08-01 10:00:00", _kind="completed_workload"),
+        dict(shared, date="2026-08-20 10:00:00", _kind="completed_workload"),
+    ])
+    assert len(distinct) == 2
+
+
+def test_history_page_is_reachable_and_wired():
+    mkdocs = read("mkdocs.yml")
+    assert "js/gpu-history.js" in mkdocs
+    assert "gpu-history.md" in mkdocs, "the page must be in the nav"
+
+    page = read("docs/gpu-history.md")
+    for element in ("gpuHistoryChart", "gpuHistoryCard", "gpuHistoryTest"):
+        assert element in page
+        assert element in read("docs/js/gpu-history.js")
+
+
+def test_sanitizer_also_runs_on_pull_requests():
+    """A sweep arriving on a branch was bypassing the sanitizer entirely.
+
+    It only fired on pushes to main, so 55 filenames carrying two hosts' IP
+    addresses reached a pull request, and every new commit re-broke CI faster
+    than they could be scrubbed by hand.
+    """
+    workflow = read(".github/workflows/sanitize-imports.yml")
+
+    assert "pull_request:" in workflow
+    assert '- "database/**"' in workflow, "only report imports need scrubbing"
+
+    # The default checkout on a pull request is a detached merge commit, which
+    # cannot be pushed back.
+    assert "github.event.pull_request.head.ref" in workflow
+    assert 'git push origin "HEAD:refs/heads/${HEAD_REF}"' in workflow
+
+    # A fork's token is read-only, so there is nothing to push back with.
+    assert "github.event.pull_request.head.repo.full_name == github.repository" in workflow
+
+    # Without the token the push lands but the failed checks do not re-run,
+    # leaving a red pull request on a clean tree. Say so.
+    assert "the failed checks will not re-run on their own" in workflow
+
+    # main keeps going through the pull-request action, not a direct push.
+    assert "./.github/actions/propose-to-main" in workflow
+
+
+def test_container_workflows_declare_bash():
+    """`set -euo pipefail` needs bash, and container jobs default to sh.
+
+    The self-hosted runner gives container jobs `sh`, which has no pipefail,
+    so such a step exits 2 before running any of its own logic. That silently
+    disabled the nightly storage prune for two nights and killed the first
+    release dry run at its first step.
+    """
+    import glob
+    import re
+
+    offenders = []
+    for path in sorted(glob.glob(str(ROOT / ".github" / "workflows" / "*.yml"))):
+        body = Path(path).read_text(encoding="utf-8")
+        if "image:" not in body or "pipefail" not in body:
+            continue
+        if not re.search(r"(?m)^\s*shell: bash\s*$", body):
+            offenders.append(Path(path).name)
+
+    assert not offenders, (
+        f"container workflows using pipefail without declaring bash: {offenders}")
+
+
+def test_wheel_does_not_require_a_spreadsheet_writer():
+    """openpyxl reaches one call, which already tolerates its absence.
+
+    pantheon.py wraps df.to_excel in try/except and warns, so a machine that
+    only reads the CSV and JSON written beside it should not be made to
+    install a spreadsheet writer.
+    """
+    builder = read("packaging/wheel/build_wheel.py")
+
+    dependencies = builder.split("dependencies = [", 1)[1].split("]", 1)[0]
+    assert "openpyxl" not in dependencies, "openpyxl belongs in an extra"
+    assert '"pandas"' in dependencies, (
+        "pandas is imported at module scope and used throughout; it is not "
+        "optional without a refactor")
+
+    assert "[project.optional-dependencies]" in builder
+    assert 'reports = ["openpyxl"]' in builder
+
+
+def test_wheel_offers_the_project_named_command():
+    """"pantheon" is a taken name in Debian and Ubuntu.
+
+    elementary OS ships a desktop environment called Pantheon, so those
+    archives already carry a family of pantheon-* packages. Offering
+    pantheon-gpu as well lets a distribution install only that one.
+    """
+    builder = read("packaging/wheel/build_wheel.py")
+    scripts = builder.split("[project.scripts]", 1)[1].split("[tool.setuptools]", 1)[0]
+
+    assert "pantheon = " in scripts
+    assert "pantheon-gpu = " in scripts
+
+
+def test_pypi_upload_is_opt_in_and_runs_outside_the_container():
+    """The publishing action is a Docker action.
+
+    The release job runs inside a container, where that is not dependable, so
+    the upload is a separate job. It is also off by default: without a trusted
+    publisher configured on PyPI the upload fails *after* the GitHub release
+    has already been made.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    assert "publish_pypi:" in workflow
+    assert "default: false" in workflow
+    assert "id-token: write" in workflow
+
+    publish = workflow.split("publish-pypi:", 1)[1]
+    assert "needs: release" in publish
+    assert "container:" not in publish, (
+        "a Docker action cannot be relied on inside a container job")
+    assert "pypa/gh-action-pypi-publish" in publish
+
+
+def test_debian_package_declares_honest_dependencies():
+    """pandas and numpy are imported at module scope; pynvml and psutil are not.
+
+    pantheon.py imports pynvml and psutil inside try/except and degrades when
+    they are absent, so making them hard dependencies would force them onto
+    installs that do not need them.
+    """
+    builder = read("packaging/deb/build_deb.py")
+
+    depends = builder.split("Depends:", 1)[1].split("\n", 1)[0]
+    assert "python3-numpy" in depends and "python3-pandas" in depends
+    assert "g++" in depends and "make" in depends, (
+        "the workloads compile on first run")
+    assert "pynvml" not in depends and "psutil" not in depends
+
+    recommends = builder.split("Recommends:", 1)[1].split("\n", 1)[0]
+    assert "python3-pynvml" in recommends and "python3-psutil" in recommends
+    assert "python3-openpyxl" in recommends
+
+    # CUDA is not in Debian main, so the package cannot be in main either.
+    assert "Section: contrib/utils" in builder
+
+
+def test_apt_repository_is_signed_when_a_key_exists():
+    """apt refuses an unsigned repository unless the user opts in."""
+    builder = read("packaging/apt/build_repo.py")
+    workflow = read(".github/workflows/release.yml")
+
+    assert "InRelease" in builder and "Release.gpg" in builder
+    assert "pantheon-archive-keyring.asc" in builder
+    # A missing key must be loud, not silently produce something unusable.
+    assert "unsigned" in builder
+    assert "PANTHEON_APT_SIGNING_KEY" in workflow
+    assert "the apt repository" in workflow
+
+    # The repository is committed with the release page, so it reaches the site.
+    assert "paths: docs/release.md docs/apt" in workflow
+
+
+def test_release_ships_and_documents_the_debian_package():
+    workflow = read(".github/workflows/release.yml")
+    assert "packaging/deb/build_deb.py" in workflow
+    assert "dist/pantheon-gpu_${{ env.VERSION }}_all.deb" in workflow
+    # Built on dry runs too, so a broken package stops the release.
+    build_step = workflow.split("Build the Debian package", 1)[1].split("- name:", 1)[0]
+    assert "inputs.dry_run" not in build_step
+
+    getting_started = read("docs/getting-started.md")
+    assert 'signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc' in getting_started
+    assert "sudo apt install pantheon-gpu" in getting_started
+
+    # The publishing step is skipped on a dry run, so the dry run indexes the
+    # package itself. Otherwise the first apt indexing would be a real release.
+    summary = workflow.split("Dry run summary", 1)[1]
+    assert "packaging/apt/build_repo.py" in summary
+    assert "the apt index would not list pantheon-gpu" in summary
+
+
+def test_aur_package_builds_from_the_sdist():
+    """The source repository is not a Python package.
+
+    It carries no pyproject.toml -- the packaging metadata is generated at
+    release time -- so a PKGBUILD pointed at a git tag cannot build it.
+    """
+    pkgbuild = read("packaging/aur/PKGBUILD")
+    assert "pantheon_gpu-${pkgver}.tar.gz" in pkgbuild
+    assert "archive/refs/tags" not in pkgbuild, "a git tag has no build system"
+    assert "python-pandas" in pkgbuild and "python-numpy" in pkgbuild
+    assert "python-pynvml" in pkgbuild.split("optdepends", 1)[1]

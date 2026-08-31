@@ -25,9 +25,15 @@ It exits 0 whether or not anything needed fixing, so it is safe to run
 unconditionally in an import pipeline before ``generate_web_data.py``.
 """
 
+import os
 import hashlib
 import json
 import re
+
+try:  # run as a script (python3 website_utils/sanitize_reports.py)
+    from gpu_identity import public_gpu_id as _public_gpu_id
+except ImportError:  # imported as a package (tests, other modules)
+    from website_utils.gpu_identity import public_gpu_id as _public_gpu_id
 import sys
 from pathlib import Path
 
@@ -92,6 +98,11 @@ def rename_host_named_reports(db_dir=DB_DIR):
         taken.add(want)
         renamed.append((path.name, want))
     return renamed
+
+
+def public_gpu_id(raw):
+    """The published GPU id: the UUID, verbatim. See website_utils.gpu_identity."""
+    return _public_gpu_id(raw)
 
 
 def sanitize_report(path):
