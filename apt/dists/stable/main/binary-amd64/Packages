@@ -7,10 +7,10 @@ Depends: python3 (>= 3.9), python3-numpy, python3-pandas, g++, make
 Recommends: python3-pynvml, python3-psutil, python3-openpyxl
 Suggests: nvidia-cuda-toolkit
 Filename: pool/main/p/pantheon-gpu/pantheon-gpu_1.2.0_all.deb
-Size: 167824
-MD5sum: 231b41ec9576fd23965007af7b24ea11
-SHA1: 98994b842261a0bfcc2b9a34db6a8b6c11013b10
-SHA256: 8e5f3caf0e8bba4815b054ecd6e449f5ef28df4f7f0b5d3c9e00bee497cfa8be
+Size: 167842
+MD5sum: a818dbfd09be1820b1802d5485b7f0ef
+SHA1: 08fae05f4455696ccf498c2f603fc17fc21cdcfa
+SHA256: a28760c60f346d67a9da9244dda86953bf73b62e975a74a8918077bb2fb4f1c0
 Section: contrib/utils
 Priority: optional
 Homepage: https://pantheongpu.com
