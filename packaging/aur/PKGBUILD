@@ -1,0 +1,54 @@
+# Maintainer: Pantheon <noreply@pantheongpu.com>
+#
+# Submitting this needs an AUR account and an SSH key registered with it, so
+# it is kept here ready rather than published from CI. To submit:
+#
+#   git clone ssh://aur@aur.archlinux.org/pantheon-gpu.git
+#   cp PKGBUILD pantheon-gpu/ && cd pantheon-gpu
+#   makepkg --printsrcinfo > .SRCINFO
+#   git add PKGBUILD .SRCINFO && git commit && git push
+#
+# Update sha256sums on each release with `updpkgsums`.
+
+pkgname=pantheon-gpu
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm"
+arch=('any')
+url="https://pantheongpu.com"
+license=('Apache-2.0')
+# python-pandas and python-numpy are imported at module scope. pynvml and
+# psutil are imported inside try/except and the tool degrades without them,
+# so they are optional. gcc and make are needed because the workloads ship as
+# source and compile on first run.
+depends=('python' 'python-pandas' 'python-numpy' 'gcc' 'make')
+optdepends=(
+  'python-pynvml: GPU telemetry (temperature, power, clocks)'
+  'python-psutil: host CPU and memory sampling'
+  'python-openpyxl: write summary.xlsx alongside summary.csv'
+  'cuda: run workloads against NVIDIA hardware'
+  'rocm-hip-sdk: run workloads against AMD hardware'
+)
+makedepends=('python-build' 'python-installer' 'python-wheel')
+# Built from the published sdist rather than a git tag: the source repository
+# carries no pyproject.toml, because the packaging metadata is generated at
+# release time by packaging/wheel/build_wheel.py in the website repository.
+# The sdist is a proper Python source distribution; the git tag is not.
+source=("https://github.com/pantheongpu/pantheongpu_website/releases/download/v${pkgver}/pantheon_gpu-${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "pantheon_gpu-${pkgver}"
+  python -m build --wheel --no-isolation
+}
+
+package() {
+  cd "pantheon_gpu-${pkgver}"
+  python -m installer --destdir="${pkgdir}" dist/*.whl
+  local licenses="${pkgdir}/usr/share/licenses/${pkgname}"
+  for file in LICENSE NOTICE; do
+    if [ -f "pantheon_gpu/${file}" ]; then
+      install -Dm644 "pantheon_gpu/${file}" "${licenses}/${file}"
+    fi
+  done
+}

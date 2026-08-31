@@ -66,7 +66,7 @@ jobs:
         run: |
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            ca-certificates curl gh git make g++ zip python3 python3-venv python3-pip
+            ca-certificates curl dpkg-dev gh git gnupg make g++ zip python3 python3-venv python3-pip
 
       - name: Check out this repository
         uses: actions/checkout@v4
@@ -107,6 +107,16 @@ jobs:
           .buildenv/bin/pip install --quiet --upgrade pip build
           .buildenv/bin/python packaging/wheel/build_wheel.py pantheon-src \
             --outdir dist --workdir build/wheel
+
+      - name: Build the Debian package
+        run: |
+          set -euo pipefail
+          # Built on every run, dry ones included: a package that fails to
+          # build should stop the release, not be discovered afterwards.
+          python3 packaging/deb/build_deb.py \
+            "dist/pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            --outdir dist --workdir build/deb
+          dpkg-deb --info "dist/pantheon-gpu_${VERSION}_all.deb" | head -20
 
       - name: Build source archives
         run: |
@@ -184,6 +194,7 @@ jobs:
             dist/pantheon_gpu-${{ env.VERSION }}.tar.gz
             dist/pantheon-${{ env.VERSION }}-source.tar.gz
             dist/pantheon-${{ env.VERSION }}-source.zip
+            dist/pantheon-gpu_${{ env.VERSION }}_all.deb
             dist/SHA256SUMS
 
       - name: Update the release page
@@ -258,6 +269,32 @@ jobs:
           path: pypi-dist/
           retention-days: 1
 
+      - name: Update the apt repository
+        if: ${{ !inputs.dry_run }}
+        env:
+          APT_SIGNING_KEY: ${{ secrets.PANTHEON_APT_SIGNING_KEY }}
+        run: |
+          set -euo pipefail
+          # apt refuses an unsigned repository unless the user opts in with
+          # [trusted=yes], so sign when a key is configured and say plainly
+          # when there is none rather than publishing something that looks
+          # finished and is not.
+          key=""
+          if [ -n "${APT_SIGNING_KEY:-}" ]; then
+            export GNUPGHOME="$(mktemp -d)"
+            chmod 700 "$GNUPGHOME"
+            printf '%s' "$APT_SIGNING_KEY" | gpg --batch --quiet --import
+            key="$(gpg --list-secret-keys --with-colons \
+                   | awk -F: '/^fpr/{print $10; exit}')"
+          else
+            echo "::warning::No PANTHEON_APT_SIGNING_KEY, so the apt repository" \
+                 "is unsigned and apt will refuse it without [trusted=yes]."
+          fi
+
+          python3 packaging/apt/build_repo.py \
+            "dist/pantheon-gpu_${VERSION}_all.deb" \
+            --repo-root docs/apt ${key:+--sign-key "$key"}
+
       - name: Propose the release page
         id: release_page
         if: ${{ !inputs.dry_run }}
@@ -273,7 +310,7 @@ jobs:
             Opened automatically; merges once the required checks pass.
           # The workspace also holds the Pantheon checkout, the build venvs and
           # dist/, so staging everything would commit the whole release build.
-          paths: docs/release.md
+          paths: docs/release.md docs/apt
 
       - name: Deploy the updated release page
         if: >-

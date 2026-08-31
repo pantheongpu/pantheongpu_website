@@ -53,6 +53,24 @@ run on your hardware; the Debian package is quicker if you just want to run it.
     Run it from the checkout with `python3 pantheon.py` in place of the
     `pantheon` command used below.
 
+=== "APT (Debian, Ubuntu)"
+
+    ```bash
+    curl -fsSL https://pantheongpu.com/apt/pantheon-archive-keyring.asc \
+      | sudo tee /usr/share/keyrings/pantheon-archive-keyring.asc > /dev/null
+    echo "deb [signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc] https://pantheongpu.com/apt stable main" \
+      | sudo tee /etc/apt/sources.list.d/pantheon.list
+    sudo apt update && sudo apt install pantheon-gpu
+    ```
+
+    Installs both `pantheon` and `pantheon-gpu`; they are the same program.
+    Telemetry and spreadsheet export come from `Recommends` and `Suggests`, so
+    apt pulls them by default and they can be left out on a minimal install.
+
+    The workloads compile on first run, which is why the package depends on
+    `g++` and `make`. Add the CUDA or ROCm toolkit separately for real
+    hardware.
+
 === "Install the package"
 
     ```bash

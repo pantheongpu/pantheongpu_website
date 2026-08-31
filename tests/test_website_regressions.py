@@ -1403,3 +1403,68 @@ def test_pypi_upload_is_opt_in_and_runs_outside_the_container():
     assert "container:" not in publish, (
         "a Docker action cannot be relied on inside a container job")
     assert "pypa/gh-action-pypi-publish" in publish
+
+
+def test_debian_package_declares_honest_dependencies():
+    """pandas and numpy are imported at module scope; pynvml and psutil are not.
+
+    pantheon.py imports pynvml and psutil inside try/except and degrades when
+    they are absent, so making them hard dependencies would force them onto
+    installs that do not need them.
+    """
+    builder = read("packaging/deb/build_deb.py")
+
+    depends = builder.split("Depends:", 1)[1].split("\n", 1)[0]
+    assert "python3-numpy" in depends and "python3-pandas" in depends
+    assert "g++" in depends and "make" in depends, (
+        "the workloads compile on first run")
+    assert "pynvml" not in depends and "psutil" not in depends
+
+    recommends = builder.split("Recommends:", 1)[1].split("\n", 1)[0]
+    assert "python3-pynvml" in recommends and "python3-psutil" in recommends
+    assert "python3-openpyxl" in recommends
+
+    # CUDA is not in Debian main, so the package cannot be in main either.
+    assert "Section: contrib/utils" in builder
+
+
+def test_apt_repository_is_signed_when_a_key_exists():
+    """apt refuses an unsigned repository unless the user opts in."""
+    builder = read("packaging/apt/build_repo.py")
+    workflow = read(".github/workflows/release.yml")
+
+    assert "InRelease" in builder and "Release.gpg" in builder
+    assert "pantheon-archive-keyring.asc" in builder
+    # A missing key must be loud, not silently produce something unusable.
+    assert "unsigned" in builder
+    assert "PANTHEON_APT_SIGNING_KEY" in workflow
+    assert "the apt repository" in workflow
+
+    # The repository is committed with the release page, so it reaches the site.
+    assert "paths: docs/release.md docs/apt" in workflow
+
+
+def test_release_ships_and_documents_the_debian_package():
+    workflow = read(".github/workflows/release.yml")
+    assert "packaging/deb/build_deb.py" in workflow
+    assert "dist/pantheon-gpu_${{ env.VERSION }}_all.deb" in workflow
+    # Built on dry runs too, so a broken package stops the release.
+    build_step = workflow.split("Build the Debian package", 1)[1].split("- name:", 1)[0]
+    assert "inputs.dry_run" not in build_step
+
+    getting_started = read("docs/getting-started.md")
+    assert 'signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc' in getting_started
+    assert "sudo apt install pantheon-gpu" in getting_started
+
+
+def test_aur_package_builds_from_the_sdist():
+    """The source repository is not a Python package.
+
+    It carries no pyproject.toml -- the packaging metadata is generated at
+    release time -- so a PKGBUILD pointed at a git tag cannot build it.
+    """
+    pkgbuild = read("packaging/aur/PKGBUILD")
+    assert "pantheon_gpu-${pkgver}.tar.gz" in pkgbuild
+    assert "archive/refs/tags" not in pkgbuild, "a git tag has no build system"
+    assert "python-pandas" in pkgbuild and "python-numpy" in pkgbuild
+    assert "python-pynvml" in pkgbuild.split("optdepends", 1)[1]
