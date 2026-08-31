@@ -402,6 +402,17 @@ jobs:
       # no PyPI API token has to be stored in this repository.
       id-token: write
     steps:
+      - name: Reclaim workspace files left root-owned by container jobs
+        run: |
+          set -euo pipefail
+          # Container jobs share this workspace path and run as root, so their
+          # leftovers (.github/.tmp among them) are unwritable to this job,
+          # which must run outside a container -- and the publish action needs
+          # to create its temp directory exactly there. Hand the files back
+          # through docker, which is the only root this job can borrow.
+          docker run --rm -v "${GITHUB_WORKSPACE}:/workspace" ubuntu:24.04 \
+            chown -R "$(id -u):$(id -g)" /workspace
+
       - name: Fetch the built distributions
         uses: actions/download-artifact@v4
         with:
