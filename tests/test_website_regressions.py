@@ -1482,3 +1482,30 @@ def test_aur_package_builds_from_the_sdist():
     assert "archive/refs/tags" not in pkgbuild, "a git tag has no build system"
     assert "python-pandas" in pkgbuild and "python-numpy" in pkgbuild
     assert "python-pynvml" in pkgbuild.split("optdepends", 1)[1]
+
+
+def test_release_publishes_container_images():
+    """The image exists so a user never installs a toolkit.
+
+    It must be built from the published wheel -- the bytes users download,
+    not a build artifact -- smoke-tested before any push, and pushed under
+    the version tag as well as latest. The job drives the host's docker
+    daemon, so it cannot run in a container, and it checks out on the shared
+    self-hosted workspace, so it reclaims root-owned leftovers first.
+    """
+    workflow = read(".github/workflows/release.yml")
+    dockerfile = read("packaging/docker/Dockerfile.cuda")
+
+    assert "publish-containers:" in workflow
+    job = workflow.split("publish-containers:", 1)[1]
+    assert "packages: write" in job
+    assert "releases/download" in job, "build from the published wheel"
+    assert "--platform mock --test baseline_metrics" in job
+    assert job.index("docker run --rm") < job.index("docker push"), (
+        "the image must be smoke-tested before anything is pushed")
+    assert "chown -R" in job
+    assert "ghcr.io/pantheongpu/pantheon" in workflow
+
+    assert "FROM nvidia/cuda:" in dockerfile
+    assert 'ENTRYPOINT ["pantheon"]' in dockerfile
+    assert "--no-install-recommends" in dockerfile
