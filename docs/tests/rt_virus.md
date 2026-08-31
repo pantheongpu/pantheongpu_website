@@ -3,6 +3,20 @@
 ## Overview
 The `rt_virus` is designed to overwhelm the dedicated Ray Tracing intersection engines. It hammers the RT cores with billions of non-coherent ray-triangle tests to force continuous Bounding Volume Hierarchy (BVH) traversal.
 
+!!! note "Requires the NVIDIA OptiX SDK (or HIP-RT on AMD)"
+    NVIDIA's OptiX headers are proprietary and cannot be redistributed, so
+    official Pantheon builds skip `rt_virus` by default and report `SKIP`.
+    To run it on NVIDIA hardware, download the free
+    [OptiX SDK](https://developer.nvidia.com/designworks/optix/download) and
+    point `OPTIX_PATH` at its `include` directory — the build cache picks the
+    change up and rebuilds automatically:
+
+    ```bash
+    OPTIX_PATH=/opt/NVIDIA-OptiX-SDK-8.0.0/include pantheon --test rt_virus --duration 60
+    ```
+
+    On AMD hardware, build with `ENABLE_HIPRT=1` instead.
+
 ## Execution Mechanics
 The kernel generates a massively complex, randomized BVH in VRAM and floods the RT cores.
 
