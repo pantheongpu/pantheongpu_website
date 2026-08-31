@@ -72,6 +72,15 @@ to run it.
     Tags: `latest`, a version (`1.2.0`), or a version pinned to its toolchain
     (`1.2.0-cuda12.8`).
 
+    On AMD hardware use the ROCm variant, which carries the ROCm 6.4
+    toolchain instead and needs the device nodes rather than `--gpus`:
+
+    ```bash
+    docker run --rm --device=/dev/kfd --device=/dev/dri --group-add video \
+      -v "$PWD:/reports" \
+      ghcr.io/pantheongpu/pantheon:latest-rocm --test tensor_virus --duration 60
+    ```
+
 === "Fedora / RHEL (COPR)"
 
     ```bash

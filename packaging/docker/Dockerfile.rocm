@@ -1,0 +1,40 @@
+# Pantheon with the ROCm/HIP toolchain preinstalled.
+#
+# The AMD counterpart of Dockerfile.cuda: the wheel compiles its kernels on
+# first run, which needs hipcc and the ROCm SDK; carrying them in the image is
+# the whole point. A user runs
+#
+#   docker run --rm --device=/dev/kfd --device=/dev/dri --group-add video \
+#     -v "$PWD:/reports" \
+#     ghcr.io/pantheongpu/pantheon:latest-rocm --test tensor_virus --duration 60
+#
+# and never installs ROCm on the host beyond the amdgpu kernel driver.
+# ROCm 6.4 matches the oldest toolchain in the weekly compile matrix, keeping
+# the driver requirements broad; kernels are compiled for the GPU actually
+# present at first run (--offload-arch=native), so no arch list is baked in.
+#
+# Reports are written to the working directory, so mount one at /reports.
+# Mount /root/.cache as well to keep the compiled-kernel cache across
+# containers and skip the one-minute rebuild.
+FROM rocm/dev-ubuntu-24.04:6.4
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        python3 python3-pip make g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+ARG PANTHEON_WHEEL=pantheon_gpu-1.2.0-py3-none-any.whl
+COPY ${PANTHEON_WHEEL} /tmp/${PANTHEON_WHEEL}
+
+# Ubuntu 24.04's python is externally managed (PEP 668); the image exists to
+# run exactly this one tool, so installing into the system environment is the
+# intended use, not a hazard worth a venv.
+RUN python3 -m pip install --break-system-packages --no-cache-dir \
+        "/tmp/${PANTHEON_WHEEL}[reports]" \
+    && rm "/tmp/${PANTHEON_WHEEL}" \
+    && pantheon --version \
+    && hipcc --version >/dev/null
+
+WORKDIR /reports
+ENTRYPOINT ["pantheon"]
+CMD ["--help"]
