@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-31 03:19:36",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3250.23Mhz"
+    },
+    "ram_info": {
+        "total": "30.90GB",
+        "available": "29.22GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA L40S",
+            "memory_total": "46068 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 350.0,
+            "uuid": "GPU-45cc97b0e0f4",
+            "serial": "[REDACTED]"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "test_results": [
+        {
+            "Test Name": "tensor_virus",
+            "Version": "1.1.0",
+            "Description": "Tensor Virus (FP16 Matrix Power)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 36.6947,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 59.8,
+            "Max Temp (C)": 64.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 241.5,
+            "Max Power (W)": 250.0,
+            "Avg Clock(MHz)": 2040.0,
+            "Min Clock (MHz)": 2040.0,
+            "Max Clock (MHz)": 2040.0,
+            "Avg GPU Util (%)": 92.5,
+            "Max GPU Util (%)": 96.0,
+            "Peak Memory (MiB)": 1090.7,
+            "Memory Total (MiB)": 46068.0,
+            "Energy (Wh)": 20.109,
+            "Thermal Rise (C)": 30.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 151.94,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/tensor_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260831-031406/reliability/tensor_virus/gpu0/ras.json"
+        }
+    ]
+}
