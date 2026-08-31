@@ -1,0 +1,73 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-31 10:40:45",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3169.34Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.48GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-b4beb10a-a369-14cd-af00-96c55cc3cf99",
+            "serial": "1794525074333"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "test_results": [
+        {
+            "Test Name": "moe_router",
+            "Version": "1.1.0",
+            "Description": "MoE Router (Synthetic Top-K Routing Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 3806100000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 48.2,
+            "Max Temp (C)": 49.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 293.4,
+            "Max Power (W)": 310.9,
+            "Avg Clock(MHz)": 2410.4,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2422.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 96925.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 24.545,
+            "Thermal Rise (C)": 16.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 12972392.64,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/pantheon/build/moe_router 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260831-103513/reliability/moe_router/gpu0/ras.json"
+        }
+    ]
+}
