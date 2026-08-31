@@ -1567,6 +1567,13 @@ def test_release_submits_the_copr_build():
     assert "PANTHEON_COPR_CONFIG" in job
     assert "::warning::No PANTHEON_COPR_CONFIG" in job
     assert "packaging/rpm/pantheon-gpu.spec" in job
+    # Read the spec itself, not just its mention in the workflow: a blanket
+    # *.spec gitignore pattern once kept the file out of the commit while
+    # every workflow reference to it looked healthy. CI only sees tracked
+    # files, so this line is what turns that mistake into a red build.
+    spec = read("packaging/rpm/pantheon-gpu.spec")
+    assert spec.startswith("Name:           pantheon-gpu")
+    assert "%pyproject_wheel" in spec
     assert 'sed -E -i "s/^(Version: *).*' in job
     assert "releases/download" in job, "build from the published sdist"
     assert "copr-cli build --nowait pantheon-gpu" in job
