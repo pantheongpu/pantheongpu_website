@@ -10,16 +10,22 @@ Download stable releases of the Pantheon GPU toolkit. The newest release is list
 ### Release Notes
 Source: https://github.com/pantheongpu/pantheon/tree/v1.2.0
 
-Install the wheel (kernels compile on first run into a per-user cache;
-expect roughly a minute the first time):
+**Changes since v1.1.0:**
+
+- Make bring-your-own-OptiX usable: cache key, docs, and a skip message that says what to do (#3)
+
+Install from PyPI (`pipx install pantheon-gpu`), the apt or
+COPR repositories, the container image
+(`ghcr.io/pantheongpu/pantheon:1.2.0`), or the wheel below:
 
 ```
 pip install pantheon_gpu-1.2.0-py3-none-any.whl
 pantheon --test baseline_metrics --duration 10
 ```
 
-Requires a CUDA or ROCm toolchain at first run. Use `--platform mock`
-to exercise the tooling with no GPU.
+Kernels compile on first run into a per-user cache (roughly a
+minute, once) and need a CUDA or ROCm toolchain; use
+`--platform mock` to exercise the tooling with no GPU.
 
 ### Downloads
 | File | Format | Size |
