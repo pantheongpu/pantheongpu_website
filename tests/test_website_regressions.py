@@ -1409,7 +1409,9 @@ def test_pypi_upload_is_on_by_default_and_runs_outside_the_container():
     assert "default: true" in pypi_input
     assert "id-token: write" in workflow
 
-    publish = workflow.split("publish-pypi:", 1)[1]
+    # Bounded to this job: the jobs that follow it may legitimately use
+    # containers of their own.
+    publish = workflow.split("publish-pypi:", 1)[1].split("\n  publish-", 1)[0]
     assert "needs: release" in publish
     assert "container:" not in publish, (
         "a Docker action cannot be relied on inside a container job")
@@ -1538,3 +1540,24 @@ def test_release_notes_list_what_changed():
 
     publish = workflow.split("Publish release", 1)[1].split("- name:", 1)[0]
     assert "body_path: release-body.md" in publish
+
+
+def test_release_submits_the_copr_build():
+    """COPR was the one channel a release left behind.
+
+    Every other channel updates from the single release dispatch; this job
+    closes the gap. It must be skipped loudly rather than fail the release
+    when the secret is missing, must rewrite the spec's version to the
+    release being published, and must build the SRPM from the released
+    sdist -- the bytes users download.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    assert "publish-copr:" in workflow
+    job = workflow.split("publish-copr:", 1)[1]
+    assert "PANTHEON_COPR_CONFIG" in job
+    assert "::warning::No PANTHEON_COPR_CONFIG" in job
+    assert "packaging/rpm/pantheon-gpu.spec" in job
+    assert 'sed -E -i "s/^(Version: *).*' in job
+    assert "releases/download" in job, "build from the published sdist"
+    assert "copr-cli build --nowait pantheon-gpu" in job

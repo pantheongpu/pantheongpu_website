@@ -514,3 +514,56 @@ jobs:
           docker push "${IMAGE}:${VERSION}"
           docker push "${IMAGE}:latest"
           docker logout ghcr.io
+
+  publish-copr:
+    needs: release
+    if: ${{ !inputs.dry_run }}
+    runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
+    env:
+      VERSION: ${{ needs.release.outputs.version }}
+      # Resolved once here: the secrets context is not dependable inside a
+      # step-level `if`.
+      HAS_COPR: ${{ secrets.PANTHEON_COPR_CONFIG != '' }}
+    steps:
+      - name: Bootstrap job environment
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl git rpm python3-venv
+
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Submit the build to COPR
+        run: |
+          set -euo pipefail
+          if [ "${HAS_COPR}" != "true" ]; then
+            # Say plainly that the channel was skipped rather than fail a
+            # release that succeeded everywhere else.
+            echo "::warning::No PANTHEON_COPR_CONFIG secret, so the COPR" \
+                 "channel was not updated for ${VERSION}."
+            exit 0
+          fi
+          mkdir -p ~/.config
+          printf '%s' "${COPR_CONFIG}" > ~/.config/copr
+
+          mkdir -p build/copr/SOURCES build/copr/SPECS
+          cp packaging/rpm/pantheon-gpu.spec build/copr/SPECS/
+          # The spec in the tree names the version it was last validated
+          # against; the release being published is authoritative here.
+          sed -E -i "s/^(Version: *).*/\1${VERSION}/" build/copr/SPECS/pantheon-gpu.spec
+          curl -fsSL -o "build/copr/SOURCES/pantheon_gpu-${VERSION}.tar.gz" \
+            "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/pantheon_gpu-${VERSION}.tar.gz"
+          rpmbuild -bs --define "_topdir $(pwd)/build/copr" \
+            build/copr/SPECS/pantheon-gpu.spec
+
+          python3 -m venv .coprenv
+          .coprenv/bin/pip install --quiet copr-cli
+          # --nowait: COPR builds take minutes per chroot and run on Fedora's
+          # infrastructure; the release does not need to sit here for them.
+          .coprenv/bin/copr-cli build --nowait pantheon-gpu \
+            "build/copr/SRPMS/pantheon-gpu-${VERSION}-1.src.rpm"
+        env:
+          COPR_CONFIG: ${{ secrets.PANTHEON_COPR_CONFIG }}
