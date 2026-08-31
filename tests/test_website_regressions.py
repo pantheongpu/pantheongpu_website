@@ -356,7 +356,7 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y hipcc" in getting_started
     # The documented download must name a version that actually has a wheel
     # attached, or the install page hands the reader a 404.
-    assert "VERSION=1.1.0" in getting_started
+    assert "VERSION=1.2.0" in getting_started
     assert 'wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
     assert 'pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
     assert "pantheongpu_${VERSION}_amd64.deb" not in getting_started, (
