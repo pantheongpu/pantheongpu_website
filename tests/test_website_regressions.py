@@ -1513,3 +1513,28 @@ def test_release_publishes_container_images():
     assert "FROM nvidia/cuda:" in dockerfile
     assert 'ENTRYPOINT ["pantheon"]' in dockerfile
     assert "--no-install-recommends" in dockerfile
+
+
+def test_release_notes_list_what_changed():
+    """Every release must say what changed.
+
+    The notes are generated from the source repository's log since the
+    previous tag -- the commit subjects there are written to carry exactly
+    this weight -- so nobody has to remember a hand-kept changelog. A shallow
+    checkout cannot see the previous tag and would silently produce empty
+    notes, and a step gated on dry_run would let a broken changelog reach a
+    real release unrehearsed.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    checkout = workflow.split("Check out Pantheon source", 1)[1].split("- name:", 1)[0]
+    assert "fetch-depth: 0" in checkout
+
+    notes = workflow.split("Write the release notes", 1)[1].split("- name:", 1)[0]
+    assert "Changes since" in notes
+    assert "--sort=-v:refname" in notes
+    assert "grep -v '^- Release '" in notes, "the version-bump commit is noise"
+    assert "inputs.dry_run" not in notes
+
+    publish = workflow.split("Publish release", 1)[1].split("- name:", 1)[0]
+    assert "body_path: release-body.md" in publish
