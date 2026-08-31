@@ -1752,6 +1752,20 @@
   {
     "uuid": "GPU-23373075-4d82-6ed2-1410-bf2821205879",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "memory_cache_fracture",
+    "version": "1.1.0",
+    "unit": "GB/s",
+    "score": 610.004,
+    "date": "2026-08-31 20:13:57",
+    "temp_max": 56.0,
+    "power_max": 426.6,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
+  },
+  {
+    "uuid": "GPU-23373075-4d82-6ed2-1410-bf2821205879",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "memory_thermal_asym",
     "version": "1.1.0",
     "unit": "TFLOPS",
