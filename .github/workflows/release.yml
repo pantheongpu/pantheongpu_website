@@ -55,6 +55,8 @@ defaults:
 jobs:
   release:
     runs-on: [self-hosted, Linux, X64]
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     container:
       image: ubuntu:24.04
     env:
@@ -79,6 +81,7 @@ jobs:
           path: pantheon-src
 
       - name: Determine version
+        id: version
         run: |
           set -euo pipefail
           git config --global --add safe.directory "$GITHUB_WORKSPACE/pantheon-src"
@@ -98,6 +101,7 @@ jobs:
           fi
           echo "VERSION=${version}" >> "$GITHUB_ENV"
           echo "TAG=v${version}" >> "$GITHUB_ENV"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
           echo "Releasing ${version} from ${requested}"
 
       - name: Build wheel and sdist
@@ -428,3 +432,61 @@ jobs:
           # succeeded. Skipping the duplicate keeps re-runs idempotent, the
           # same way the release and apt steps already are.
           skip-existing: true
+
+  # Runs outside a container for the same reason publish-pypi does: it drives
+  # the host's docker daemon, which a container job cannot reach.
+  publish-containers:
+    needs: release
+    if: ${{ !inputs.dry_run }}
+    runs-on: [self-hosted, Linux, X64]
+    permissions:
+      contents: read
+      packages: write
+    env:
+      VERSION: ${{ needs.release.outputs.version }}
+      IMAGE: ghcr.io/pantheongpu/pantheon
+    steps:
+      - name: Reclaim workspace files left root-owned by container jobs
+        run: |
+          set -euo pipefail
+          # Same shared-workspace hazard as publish-pypi, but this job also
+          # checks out, and checkout cannot clean files owned by root.
+          docker run --rm -v "${GITHUB_WORKSPACE}:/workspace" ubuntu:24.04 \
+            chown -R "$(id -u):$(id -g)" /workspace
+
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Fetch the released wheel
+        run: |
+          set -euo pipefail
+          # From the published release rather than a build artifact: the image
+          # must be built from the bytes users download, and this also keeps
+          # the job re-runnable after the artifact's short retention expires.
+          curl -fsSL -o "packaging/docker/pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/pantheon_gpu-${VERSION}-py3-none-any.whl"
+
+      - name: Build and smoke-test the CUDA image
+        run: |
+          set -euo pipefail
+          docker build -f packaging/docker/Dockerfile.cuda \
+            --build-arg "PANTHEON_WHEEL=pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            -t "${IMAGE}:${VERSION}-cuda12.8" packaging/docker
+          docker run --rm "${IMAGE}:${VERSION}-cuda12.8" --version
+          # No GPU on the runner, so the smoke test runs the mock backend; it
+          # still proves the toolchain in the image compiles the kernels.
+          docker run --rm --entrypoint pantheon "${IMAGE}:${VERSION}-cuda12.8" \
+            --platform mock --test baseline_metrics --duration 5 --mem 5
+
+      - name: Push the image tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker tag "${IMAGE}:${VERSION}-cuda12.8" "${IMAGE}:${VERSION}"
+          docker tag "${IMAGE}:${VERSION}-cuda12.8" "${IMAGE}:latest"
+          docker push "${IMAGE}:${VERSION}-cuda12.8"
+          docker push "${IMAGE}:${VERSION}"
+          docker push "${IMAGE}:latest"
+          docker logout ghcr.io
