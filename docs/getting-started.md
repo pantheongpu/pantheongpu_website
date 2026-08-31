@@ -56,6 +56,35 @@ to run it.
     takes a minute or so once, and needs `make`, a C++ compiler, and the CUDA
     or ROCm toolkit from the tabs above.
 
+=== "Docker"
+
+    ```bash
+    docker run --rm --gpus all -v "$PWD:/reports" \
+      ghcr.io/pantheongpu/pantheon:latest --test tensor_virus --duration 60
+    ```
+
+    The image carries the CUDA 12.8 toolchain, so nothing is installed on the
+    host beyond the NVIDIA driver and the NVIDIA Container Toolkit. Kernels
+    still compile for the GPU actually present on first run; mount
+    `/root/.cache` as well to keep the compiled cache across containers.
+    Reports land in the directory mounted at `/reports`.
+
+    Tags: `latest`, a version (`1.2.0`), or a version pinned to its toolchain
+    (`1.2.0-cuda12.8`).
+
+=== "Fedora / RHEL (COPR)"
+
+    ```bash
+    sudo dnf install 'dnf-command(copr)'
+    sudo dnf copr enable saqibkhanpantheongpu/pantheon-gpu
+    sudo dnf install pantheon-gpu
+    ```
+
+    Built for Fedora 43/44 and EPEL 10 (RHEL, Rocky and Alma 10). EPEL 9 is
+    not built: its Python stack cannot satisfy the build's setuptools floor —
+    use pipx or the Docker image there. Add the CUDA or ROCm toolkit
+    separately for real hardware.
+
 === "Build from source"
 
     ```bash
