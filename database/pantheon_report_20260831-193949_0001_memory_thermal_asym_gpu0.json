@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.1.0",
+    "timestamp": "2026-08-31 19:39:49",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3069.46Mhz"
+    },
+    "ram_info": {
+        "total": "30.98GB",
+        "available": "29.73GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A10G",
+            "memory_total": "23028 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 300.0,
+            "uuid": "GPU-c31be171-f80a-cb30-ff53-9164c70cefe7",
+            "serial": "1320822000652"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260831-193949",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-08-31 19:44:52",
+    "test_results": [
+        {
+            "Test Name": "memory_thermal_asym",
+            "Version": "1.1.0",
+            "Description": "Memory Asymmetric Thermal (Stack Isolator)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 1.8579,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 53.3,
+            "Max Temp (C)": 58.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 170.8,
+            "Max Power (W)": 176.5,
+            "Avg Clock(MHz)": 1710.0,
+            "Min Clock (MHz)": 1710.0,
+            "Max Clock (MHz)": 1710.0,
+            "Avg GPU Util (%)": 97.3,
+            "Max GPU Util (%)": 98.0,
+            "Peak Memory (MiB)": 17110.6,
+            "Memory Total (MiB)": 23028.0,
+            "Energy (Wh)": 14.332,
+            "Thermal Rise (C)": 20.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 10.88,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.1.0/cuda-86/memory_thermal_asym 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260831-193949/reliability/memory_thermal_asym/gpu0/ras.json"
+        }
+    ]
+}
