@@ -1,6 +1,5 @@
 import os
 import json
-import glob
 import math
 from pathlib import Path
 
@@ -347,12 +346,23 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     unsupported = []
 
     # 1. PROCESS SOURCE REPORTS
-    files = sorted(glob.glob(str(db_dir / "pantheon_report_*.json")))
+    # Every JSON under database/, wherever it sits and whatever its name:
+    # report filenames have drifted (model prefixes like a100_..., host-scrub
+    # renames, per-card subdirectories), and a naming-convention glob left 538
+    # valid reports silently invisible to the leaderboard. A report is
+    # recognised by its shape, not its name; JSON files that are not reports
+    # (profiler artifacts and the like) are skipped and counted out loud.
+    files = sorted(str(p) for p in db_dir.rglob("*.json"))
+    not_reports = 0
 
     for f in files:
         try:
             with open(f, 'r', encoding="utf-8") as fp:
                 data = json.load(fp)
+
+                if not isinstance(data, dict) or "test_results" not in data:
+                    not_reports += 1
+                    continue
 
                 run_status = str(data.get("run_status", "complete")).lower()
                 if run_status in {"partial", "failed", "incomplete"}:
@@ -491,6 +501,9 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
 
         except Exception as e:
             errors.append(f"{f}: {e}")
+
+    if not_reports:
+        print(f"[Generate] Skipped {not_reports} JSON file(s) that are not reports.")
 
     if errors:
         details = "\n".join(errors)

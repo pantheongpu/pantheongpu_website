@@ -439,3 +439,34 @@ def test_infer_unit_preserves_declared_unit_and_falls_back_to_power():
     assert infer_unit("atomic_virus", None, 123) == "MAPS"
     assert infer_unit("unknown_test", None, 123) == "Watts"
     assert infer_unit("tensor_virus", "", "N/A") == "Watts"
+
+
+def test_reports_are_discovered_by_shape_not_name(tmp_path):
+    """Discovery must not depend on a naming convention.
+
+    Report filenames have drifted -- model prefixes (a100_...), host-scrub
+    renames that lost the pantheon_report stem entirely, per-card
+    subdirectories -- and a strict prefix glob once left 538 valid reports
+    silently invisible to the leaderboard. A report is recognised by its
+    shape; JSON in the tree that is not a report must be skipped, not fatal.
+    """
+    db_dir = tmp_path / "database"
+    subdir = db_dir / "gh200_runs"
+    subdir.mkdir(parents=True)
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    gpu = [{"id": 0, "name": "Some GPU", "uuid": "GPU-11112222333344445555",
+            "memory_total": "98304 MiB"}]
+    write_report(db_dir, "a100_pantheon_report_20260826.json", gpu,
+                 [{"Test Name": "memory_write", "GPU ID": 0, "Score": 10, "Unit": "GB/s"}])
+    write_report(db_dir, "a100_cache_lat_191356_gpu0.json", gpu,
+                 [{"Test Name": "cache_lat", "GPU ID": 0, "Score": 20, "Unit": "GB/s"}])
+    write_report(subdir, "pantheon_report_20260826.json", gpu,
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 30, "Unit": "GB/s"}])
+    (db_dir / "profiler_artifact.json").write_text('["not", "a", "report"]',
+                                                   encoding="utf-8")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+    assert {row["test"] for row in rows} == {"memory_write", "cache_lat", "memory_read"}
+    written = json.loads(output_file.read_text(encoding="utf-8"))
+    assert {row["test"] for row in written} == {"memory_write", "cache_lat", "memory_read"}
