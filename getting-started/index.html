@@ -2993,7 +2993,7 @@
 </div>
 <p>Pantheon is open source. Building from source lets you read exactly what will
 run on your hardware; the Debian package is quicker if you just want to run it.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Build from source</label><label for="__tabbed_2_2">Install the package</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Build from source</label><label for="__tabbed_2_2">APT (Debian, Ubuntu)</label><label for="__tabbed_2_3">Install the package</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/pantheongpu/pantheon.git
@@ -3008,11 +3008,25 @@ useful for trying the tooling before committing hardware to it.</p>
 <code>pantheon</code> command used below.</p>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">1</span>.1.0
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">BASE</span><span class="o">=</span><span class="s2">&quot;https://github.com/pantheongpu/pantheongpu_website/releases/download/v</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>wget<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASE</span><span class="si">}</span><span class="s2">/pantheon_gpu-</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">-py3-none-any.whl&quot;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>wget<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASE</span><span class="si">}</span><span class="s2">/SHA256SUMS&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sha256sum<span class="w"> </span>--ignore-missing<span class="w"> </span>-c<span class="w"> </span>SHA256SUMS
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>pipx<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;./pantheon_gpu-</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">-py3-none-any.whl&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pantheongpu.com/apt/pantheon-archive-keyring.asc<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/pantheon-archive-keyring.asc<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc] https://pantheongpu.com/apt stable main&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/pantheon.list
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pantheon-gpu
+</code></pre></div>
+<p>Installs both <code>pantheon</code> and <code>pantheon-gpu</code>; they are the same program.
+Telemetry and spreadsheet export come from <code>Recommends</code> and <code>Suggests</code>, so
+apt pulls them by default and they can be left out on a minimal install.</p>
+<p>The workloads compile on first run, which is why the package depends on
+<code>g++</code> and <code>make</code>. Add the CUDA or ROCm toolkit separately for real
+hardware.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">1</span>.1.0
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">BASE</span><span class="o">=</span><span class="s2">&quot;https://github.com/pantheongpu/pantheongpu_website/releases/download/v</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>wget<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASE</span><span class="si">}</span><span class="s2">/pantheon_gpu-</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">-py3-none-any.whl&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>wget<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASE</span><span class="si">}</span><span class="s2">/SHA256SUMS&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sha256sum<span class="w"> </span>--ignore-missing<span class="w"> </span>-c<span class="w"> </span>SHA256SUMS
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>pipx<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;./pantheon_gpu-</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">-py3-none-any.whl&quot;</span>
 </code></pre></div>
 <p>Installs a <code>pantheon</code> command on your PATH. <code>pipx</code> keeps it in its own
 environment, which is what recent Ubuntu and Debian releases require of
@@ -3027,25 +3041,25 @@ ROCm toolkit from the tabs above.</p>
 </div>
 <h2 id="run-a-first-test">Run a first test</h2>
 <p>Run a short inventory test:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>baseline_metrics<span class="w"> </span>--duration<span class="w"> </span><span class="m">10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>baseline_metrics<span class="w"> </span>--duration<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
 <p>Then run a targeted stress test on GPU 0:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>fp64_virus<span class="w"> </span>--duration<span class="w"> </span><span class="m">30</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>fp64_virus<span class="w"> </span>--duration<span class="w"> </span><span class="m">30</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span>
 </code></pre></div>
 <h2 id="profiling-and-reports">Profiling and reports</h2>
 <p>Use <code>--verify</code> to validate workload output. Use <code>--profile</code> to collect performance counters, traces, and a per-workload HTML summary:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
 </code></pre></div>
 <p>See <a href="../tests/">Test Documentation</a> for workload guidance, <a href="../release/">Releases and Downloads</a> for other installation methods, and <a href="../reports/">Reports</a> for output details.</p>
 <h2 id="uninstall">Uninstall</h2>
 <p>Remove a package installation with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pipx<span class="w"> </span>uninstall<span class="w"> </span>pantheon-gpu
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pipx<span class="w"> </span>uninstall<span class="w"> </span>pantheon-gpu
 </code></pre></div>
 <p>Releases up to v1.0.19 shipped as a Debian package instead. Remove one of those with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheongpu
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheongpu
 </code></pre></div>
 <p>To also remove PantheonGPU runtime-created files and the current user's compiled workload cache, or to remove a portable installation on RHEL-family systems:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pantheongpu.com/uninstall.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pantheongpu.com/uninstall.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>sh
 </code></pre></div>
 <p>This leaves CUDA, ROCm, system compilers, and benchmark reports outside PantheonGPU's installation and cache directories untouched.</p>
 
