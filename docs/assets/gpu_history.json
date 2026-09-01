@@ -2410,6 +2410,20 @@
   {
     "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
     "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "allocation_fragmentation",
+    "version": "1.2.0",
+    "unit": "alloc-events/s",
+    "score": 25987.4,
+    "date": "2026-09-01 07:29:07",
+    "temp_max": 63.0,
+    "power_max": 155.6,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
+  },
+  {
+    "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
+    "gpu": "NVIDIA H100 80GB HBM3",
     "test": "atomic_virus",
     "version": "1.2.0",
     "unit": "MAPS",
