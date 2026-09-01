@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-01 06:55:35",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:26:14 UTC 2026",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "15.30GB",
+        "available": "14.51GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA T4G",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-c95a293c-e7d0-00ea-02f2-8efdf62c2b16",
+            "serial": "1322821013705"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260901-065535",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-01 07:00:39",
+    "test_results": [
+        {
+            "Test Name": "fp64_virus",
+            "Version": "1.2.0",
+            "Description": "FP64 Chokehold (Double Precision)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 0.251352,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 78.1,
+            "Max Temp (C)": 80.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 63.9,
+            "Max Power (W)": 65.2,
+            "Avg Clock(MHz)": 1590.0,
+            "Min Clock (MHz)": 1590.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 564.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.375,
+            "Thermal Rise (C)": 6.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 3.93,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-75/fp64_virus 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260901-065535/reliability/fp64_virus/gpu0/ras.json"
+        }
+    ]
+}
