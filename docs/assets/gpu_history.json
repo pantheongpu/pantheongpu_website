@@ -2408,6 +2408,20 @@
     "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
   },
   {
+    "uuid": "GPU-2d8860e4-5812-f948-bb8b-8ceb1e523399",
+    "gpu": "Tesla T4",
+    "test": "rt_virus",
+    "version": "1.2.0",
+    "unit": "GRays/s",
+    "score": 0.0925575,
+    "date": "2026-09-01 03:55:20",
+    "temp_max": 56.0,
+    "power_max": 71.8,
+    "clock_avg": 1068.3,
+    "throttle_time": 300.0,
+    "card": "GPU-2d8860e4-5812-f948-bb8b-8ceb1e523399"
+  },
+  {
     "uuid": "GPU-34d8f16f-7feb-65b8-ced8-f9dda4de81e8",
     "gpu": "NVIDIA A10G",
     "test": "memory_cache_fracture",
@@ -13916,6 +13930,20 @@
     "card": "GPU-92649006a7c9"
   },
   {
+    "uuid": "GPU-957bd9e1-5dc0-61d0-3edf-1e5fe57482a3",
+    "gpu": "NVIDIA A10G",
+    "test": "rt_virus",
+    "version": "1.2.0",
+    "unit": "GRays/s",
+    "score": 0.261299,
+    "date": "2026-09-01 04:03:35",
+    "temp_max": 72.0,
+    "power_max": 265.6,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-957bd9e1-5dc0-61d0-3edf-1e5fe57482a3"
+  },
+  {
     "uuid": "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc",
     "gpu": "Tesla T4",
     "test": "baseline_metrics",
@@ -19878,6 +19906,20 @@
     "clock_avg": 1437.9,
     "throttle_time": 299.6,
     "card": "GPU-efc239ae3619"
+  },
+  {
+    "uuid": "GPU-efdcfbf5-267f-bcf6-b7a1-97ab8b55301c",
+    "gpu": "NVIDIA T4G",
+    "test": "rt_virus",
+    "version": "1.2.0",
+    "unit": "GRays/s",
+    "score": 0.0829306,
+    "date": "2026-09-01 04:13:27",
+    "temp_max": 82.0,
+    "power_max": 68.6,
+    "clock_avg": 939.5,
+    "throttle_time": 299.9,
+    "card": "GPU-efdcfbf5-267f-bcf6-b7a1-97ab8b55301c"
   },
   {
     "uuid": "Unknown",
