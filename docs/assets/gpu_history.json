@@ -14658,6 +14658,20 @@
     "card": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f"
   },
   {
+    "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "voltage",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 12.9331,
+    "date": "2026-09-01 05:36:03",
+    "temp_max": 46.0,
+    "power_max": 194.6,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f"
+  },
+  {
     "uuid": "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc",
     "gpu": "Tesla T4",
     "test": "baseline_metrics",
