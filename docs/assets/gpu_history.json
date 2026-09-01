@@ -20384,6 +20384,20 @@
     "card": "GPU-c95a293c-e7d0-00ea-02f2-8efdf62c2b16"
   },
   {
+    "uuid": "GPU-c95a293c-e7d0-00ea-02f2-8efdf62c2b16",
+    "gpu": "NVIDIA T4G",
+    "test": "memory_retention",
+    "version": "1.2.0",
+    "unit": "retained-MiB",
+    "score": 7403.0,
+    "date": "2026-09-01 06:05:11",
+    "temp_max": 78.0,
+    "power_max": 46.2,
+    "clock_avg": 1590.0,
+    "throttle_time": 0.0,
+    "card": "GPU-c95a293c-e7d0-00ea-02f2-8efdf62c2b16"
+  },
+  {
     "uuid": "GPU-d4f539a182fa",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
