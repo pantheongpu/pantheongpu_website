@@ -15178,6 +15178,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "fused_attention",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 2888420000.0,
+    "date": "2026-09-01 06:48:56",
+    "temp_max": 74.0,
+    "power_max": 150.0,
+    "clock_avg": 1319.0,
+    "throttle_time": 300.3,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "incinerator",
     "version": "1.2.0",
     "unit": "TFLOPS",
