@@ -12406,6 +12406,20 @@
   {
     "uuid": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00",
     "gpu": "NVIDIA H100 PCIe",
+    "test": "memory_write",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 1937.87,
+    "date": "2026-09-01 05:19:57",
+    "temp_max": 73.0,
+    "power_max": 349.7,
+    "clock_avg": 1662.3,
+    "throttle_time": 290.8,
+    "card": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00"
+  },
+  {
+    "uuid": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00",
+    "gpu": "NVIDIA H100 PCIe",
     "test": "mma_virus",
     "version": "1.2.0",
     "unit": "TFLOPS",
