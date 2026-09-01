@@ -15626,6 +15626,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "galpat",
+    "version": "1.2.0",
+    "unit": "gallop-reads/s",
+    "score": 6838090000.0,
+    "date": "2026-09-01 07:51:49",
+    "temp_max": 70.0,
+    "power_max": 135.3,
+    "clock_avg": 1690.1,
+    "throttle_time": 1.0,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "incinerator",
     "version": "1.2.0",
     "unit": "TFLOPS",
