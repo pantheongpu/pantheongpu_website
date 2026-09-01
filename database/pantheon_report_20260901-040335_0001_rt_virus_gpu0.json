@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-01 04:03:35",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1063-aws",
+        "version": "#66~22.04.1-Ubuntu SMP Fri Aug  7 17:45:18 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 2,
+        "logical_cores": 4,
+        "freq": "3307.05Mhz"
+    },
+    "ram_info": {
+        "total": "15.42GB",
+        "available": "14.25GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A10G",
+            "memory_total": "23028 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 300.0,
+            "uuid": "GPU-957bd9e1-5dc0-61d0-3edf-1e5fe57482a3",
+            "serial": "1324621116776"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "run_id": "20260901-040335",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-01 04:08:44",
+    "test_results": [
+        {
+            "Test Name": "rt_virus",
+            "Version": "1.2.0",
+            "Description": "RT Virus (Ray Tracing BVH Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.261299,
+            "Unit": "GRays/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 67.6,
+            "Max Temp (C)": 72.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 253.2,
+            "Max Power (W)": 265.6,
+            "Avg Clock(MHz)": 1710.0,
+            "Min Clock (MHz)": 1710.0,
+            "Max Clock (MHz)": 1710.0,
+            "Avg GPU Util (%)": 96.8,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 868.6,
+            "Memory Total (MiB)": 23028.0,
+            "Energy (Wh)": 21.691,
+            "Thermal Rise (C)": 32.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.0,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-86/rt_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260901-040335/reliability/rt_virus/gpu0/ras.json"
+        }
+    ]
+}
