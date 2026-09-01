@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-01 06:04:19",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "216.26GB",
+        "available": "212.92GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
+            "serial": "1563521023757"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260901-060419",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-01 06:09:21",
+    "test_results": [
+        {
+            "Test Name": "pulse_virus",
+            "Version": "1.2.0",
+            "Description": "Transient Pulse (VRM Attack 10Hz)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 8.9746,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 34.4,
+            "Max Temp (C)": 36.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 105.8,
+            "Max Power (W)": 148.7,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 46.7,
+            "Max GPU Util (%)": 50.0,
+            "Peak Memory (MiB)": 992.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 8.84,
+            "Thermal Rise (C)": 8.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 84.83,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-80/pulse_virus 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260901-060419/reliability/pulse_virus/gpu0/ras.json"
+        }
+    ]
+}
