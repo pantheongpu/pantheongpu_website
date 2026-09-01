@@ -1750,6 +1750,20 @@
     "card": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f"
   },
   {
+    "uuid": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "memory_hammer",
+    "version": "1.2.0",
+    "unit": "aggressor-reads/s",
+    "score": 570974000000.0,
+    "date": "2026-09-01 08:48:04",
+    "temp_max": 75.0,
+    "power_max": 693.0,
+    "clock_avg": 1879.5,
+    "throttle_time": 303.1,
+    "card": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f"
+  },
+  {
     "uuid": "GPU-1430471f69a9",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
