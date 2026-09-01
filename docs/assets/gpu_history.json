@@ -23576,6 +23576,20 @@
     "card": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea"
   },
   {
+    "uuid": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea",
+    "gpu": "NVIDIA L40S",
+    "test": "tlb_avalanche",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 31.501,
+    "date": "2026-09-01 15:16:58",
+    "temp_max": 65.0,
+    "power_max": 188.7,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea"
+  },
+  {
     "uuid": "GPU-efc239ae3619",
     "gpu": "Tesla T4",
     "test": "allocation_fragmentation",
