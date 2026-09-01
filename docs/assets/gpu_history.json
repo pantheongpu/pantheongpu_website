@@ -14198,6 +14198,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "memory_bank_thrash",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 183.197,
+    "date": "2026-09-01 04:27:22",
+    "temp_max": 74.0,
+    "power_max": 155.3,
+    "clock_avg": 1443.2,
+    "throttle_time": 304.0,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "memory_cache_fracture",
     "version": "1.2.0",
     "unit": "GB/s",
