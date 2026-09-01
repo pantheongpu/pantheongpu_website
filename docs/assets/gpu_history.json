@@ -1920,6 +1920,20 @@
   {
     "uuid": "GPU-23373075-4d82-6ed2-1410-bf2821205879",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "memory_hammer",
+    "version": "1.1.0",
+    "unit": "aggressor-reads/s",
+    "score": 586344000000.0,
+    "date": "2026-09-01 00:07:58",
+    "temp_max": 69.0,
+    "power_max": 699.9,
+    "clock_avg": 1889.9,
+    "throttle_time": 303.1,
+    "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
+  },
+  {
+    "uuid": "GPU-23373075-4d82-6ed2-1410-bf2821205879",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "memory_pc_pingpong",
     "version": "1.1.0",
     "unit": "GB/s",
