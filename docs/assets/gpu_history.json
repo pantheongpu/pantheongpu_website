@@ -364,6 +364,20 @@
     "card": "GPU-03e1e56b-535e-b9af-7e04-f66a83baf2f6"
   },
   {
+    "uuid": "GPU-03e1e56b-535e-b9af-7e04-f66a83baf2f6",
+    "gpu": "NVIDIA A10G",
+    "test": "pcie_bandwidth",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 22.6759,
+    "date": "2026-09-01 20:56:11",
+    "temp_max": 53.0,
+    "power_max": 77.8,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-03e1e56b-535e-b9af-7e04-f66a83baf2f6"
+  },
+  {
     "uuid": "GPU-042502628320",
     "gpu": "Tesla T4",
     "test": "allocation_fragmentation",
