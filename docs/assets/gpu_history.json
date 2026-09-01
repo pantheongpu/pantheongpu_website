@@ -2494,6 +2494,20 @@
   {
     "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
     "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "memory_read",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 1964.29,
+    "date": "2026-09-01 05:24:46",
+    "temp_max": 95.0,
+    "power_max": 610.7,
+    "clock_avg": 311.9,
+    "throttle_time": 195.5,
+    "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
+  },
+  {
+    "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
+    "gpu": "NVIDIA H100 80GB HBM3",
     "test": "memory_retention",
     "version": "1.2.0",
     "unit": "retained-MiB",
