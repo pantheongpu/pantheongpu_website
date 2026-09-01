@@ -15402,6 +15402,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "allocation_fragmentation",
+    "version": "1.2.0",
+    "unit": "alloc-events/s",
+    "score": 10502.1,
+    "date": "2026-09-01 07:28:33",
+    "temp_max": 54.0,
+    "power_max": 73.0,
+    "clock_avg": 1690.1,
+    "throttle_time": 1.0,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "atomic_virus",
     "version": "1.2.0",
     "unit": "MAPS",
