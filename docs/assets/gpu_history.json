@@ -2030,6 +2030,20 @@
     "card": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f"
   },
   {
+    "uuid": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "serving_mix",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 2238020000.0,
+    "date": "2026-09-01 07:51:09",
+    "temp_max": 65.0,
+    "power_max": 539.0,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f"
+  },
+  {
     "uuid": "GPU-1430471f69a9",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
