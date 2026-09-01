@@ -12938,6 +12938,20 @@
   {
     "uuid": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00",
     "gpu": "NVIDIA H100 PCIe",
+    "test": "rag_embedding",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 274365000.0,
+    "date": "2026-09-01 07:47:32",
+    "temp_max": 68.0,
+    "power_max": 282.8,
+    "clock_avg": 1750.3,
+    "throttle_time": 0.0,
+    "card": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00"
+  },
+  {
+    "uuid": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00",
+    "gpu": "NVIDIA H100 PCIe",
     "test": "ras_validator",
     "version": "1.2.0",
     "unit": "GB/s",
