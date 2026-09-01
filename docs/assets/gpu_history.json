@@ -12572,6 +12572,20 @@
     "card": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00"
   },
   {
+    "uuid": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "voltage",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 9.73832,
+    "date": "2026-09-01 05:42:43",
+    "temp_max": 56.0,
+    "power_max": 167.1,
+    "clock_avg": 1750.3,
+    "throttle_time": 0.0,
+    "card": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00"
+  },
+  {
     "uuid": "GPU-8ac1c1f250ce",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "allocation_fragmentation",
