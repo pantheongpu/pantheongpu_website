@@ -2324,6 +2324,20 @@
     "card": "GPU-34d8f16f-7feb-65b8-ced8-f9dda4de81e8"
   },
   {
+    "uuid": "GPU-34d8f16f-7feb-65b8-ced8-f9dda4de81e8",
+    "gpu": "NVIDIA A10G",
+    "test": "memory_tsv_thrasher",
+    "version": "1.1.0",
+    "unit": "GB/s",
+    "score": 472.08,
+    "date": "2026-08-31 20:19:51",
+    "temp_max": 40.0,
+    "power_max": 135.9,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-34d8f16f-7feb-65b8-ced8-f9dda4de81e8"
+  },
+  {
     "uuid": "GPU-3a87b0a238bb",
     "gpu": "NVIDIA L4",
     "test": "allocation_fragmentation",
