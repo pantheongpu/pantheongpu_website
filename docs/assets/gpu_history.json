@@ -8022,6 +8022,20 @@
     "card": "GPU-58ef8808-6c20-2a78-e235-8143e3ddb36a"
   },
   {
+    "uuid": "GPU-58ef8808-6c20-2a78-e235-8143e3ddb36a",
+    "gpu": "NVIDIA L4",
+    "test": "memory_cache_fracture",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 77.3147,
+    "date": "2026-09-01 10:21:21",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1785.0,
+    "throttle_time": 301.3,
+    "card": "GPU-58ef8808-6c20-2a78-e235-8143e3ddb36a"
+  },
+  {
     "uuid": "GPU-598da65b621b",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "allocation_fragmentation",
