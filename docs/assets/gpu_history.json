@@ -14282,6 +14282,20 @@
   {
     "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
     "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "fp64_virus",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 9.60558,
+    "date": "2026-09-01 05:07:42",
+    "temp_max": 52.0,
+    "power_max": 245.2,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f"
+  },
+  {
+    "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
+    "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "int_virus",
     "version": "1.2.0",
     "unit": "TOPS",
