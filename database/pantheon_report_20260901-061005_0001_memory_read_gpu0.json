@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-01 06:10:05",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1013-nvidia-64k",
+        "version": "#14~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Aug 21 01:03:36 UTC 2",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 64,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "525.68GB",
+        "available": "492.83GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GH200 480GB",
+            "memory_total": "97871 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 900.0,
+            "uuid": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f",
+            "serial": "1654523008334"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260901-061005",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-01 06:15:12",
+    "test_results": [
+        {
+            "Test Name": "memory_read",
+            "Version": "1.2.0",
+            "Description": "Memory Read (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 3709.31,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 68.0,
+            "Max Temp (C)": 72.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 650.9,
+            "Max Power (W)": 665.7,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 49837.8,
+            "Memory Total (MiB)": 97871.0,
+            "Energy (Wh)": 54.876,
+            "Thermal Rise (C)": 26.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 5835.51,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 1.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/memory_read 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260901-061005/reliability/memory_read/gpu0/ras.json"
+        }
+    ]
+}
