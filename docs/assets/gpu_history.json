@@ -13972,6 +13972,20 @@
     "card": "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc"
   },
   {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
+    "test": "baseline_metrics",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-01 03:53:25",
+    "temp_max": 42.0,
+    "power_max": 57.2,
+    "clock_avg": 1690.1,
+    "throttle_time": 0.0,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
     "uuid": "GPU-9fd34e87a591",
     "gpu": "NVIDIA A10",
     "test": "allocation_fragmentation",
