@@ -13930,18 +13930,18 @@
     "card": "GPU-92649006a7c9"
   },
   {
-    "uuid": "GPU-957bd9e1-5dc0-61d0-3edf-1e5fe57482a3",
-    "gpu": "NVIDIA A10G",
-    "test": "rt_virus",
+    "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "baseline_metrics",
     "version": "1.2.0",
-    "unit": "GRays/s",
-    "score": 0.261299,
-    "date": "2026-09-01 04:03:35",
-    "temp_max": 72.0,
-    "power_max": 265.6,
-    "clock_avg": 1710.0,
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-01 03:54:14",
+    "temp_max": 28.0,
+    "power_max": 49.9,
+    "clock_avg": 1092.1,
     "throttle_time": 0.0,
-    "card": "GPU-957bd9e1-5dc0-61d0-3edf-1e5fe57482a3"
+    "card": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f"
   },
   {
     "uuid": "GPU-9da9ed85-1507-6d1d-da6f-f630d9ab14dc",
