@@ -4,7 +4,42 @@ Download stable releases of the Pantheon GPU toolkit. The newest release is list
 
 ---
 
-## Pantheon v1.1.0 (Latest)
+## Pantheon v1.2.0 (Latest)
+**Release Date:** August 31, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.2.0
+
+**Changes since v1.1.0:**
+
+- Make bring-your-own-OptiX usable: cache key, docs, and a skip message that says what to do (#3)
+
+Install from PyPI (`pipx install pantheon-gpu`), the apt or
+COPR repositories, the container image
+(`ghcr.io/pantheongpu/pantheon:1.2.0`), or the wheel below:
+
+```
+pip install pantheon_gpu-1.2.0-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Kernels compile on first run into a per-user cache (roughly a
+minute, once) and need a CUDA or ROCm toolchain; use
+`--platform mock` to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.2.0 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon-gpu_1.2.0_all.deb) | `.deb` | 163.9 KB |
+| [Pantheon v1.2.0 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon_gpu-1.2.0-py3-none-any.whl) | `.whl` | 328.6 KB |
+| [Pantheon v1.2.0 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon-1.2.0-source.tar.gz) | `.tar.gz` | 249.6 KB |
+| [Pantheon v1.2.0 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon_gpu-1.2.0.tar.gz) | `.tar.gz` | 237.3 KB |
+| [Pantheon v1.2.0 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/pantheon-1.2.0-source.zip) | `.zip` | 366.6 KB |
+| [Pantheon v1.2.0 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.0/SHA256SUMS) | `SHA256SUMS` | 484 B |
+
+---
+
+## Pantheon v1.1.0
 **Release Date:** August 30, 2026
 
 ### Release Notes

@@ -23,11 +23,11 @@ on:
         type: boolean
       publish_pypi:
         description: >-
-          Also upload the wheel and sdist to PyPI. Needs a trusted publisher
-          configured on PyPI for this repository and workflow first; leave off
-          until it is, or the upload fails after the release has been made.
+          Upload the wheel and sdist to PyPI (on by default since v1.2.0,
+          when the trusted publisher for this repository and workflow was
+          configured). Untick for a GitHub-and-apt-only release.
         required: false
-        default: false
+        default: true
         type: boolean
 
 permissions:
@@ -55,6 +55,8 @@ defaults:
 jobs:
   release:
     runs-on: [self-hosted, Linux, X64]
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     container:
       image: ubuntu:24.04
     env:
@@ -77,8 +79,12 @@ jobs:
           repository: pantheongpu/pantheon
           ref: ${{ inputs.ref }}
           path: pantheon-src
+          # Full history and tags: the release notes list what changed since
+          # the previous tag, which a shallow checkout cannot compute.
+          fetch-depth: 0
 
       - name: Determine version
+        id: version
         run: |
           set -euo pipefail
           git config --global --add safe.directory "$GITHUB_WORKSPACE/pantheon-src"
@@ -98,6 +104,7 @@ jobs:
           fi
           echo "VERSION=${version}" >> "$GITHUB_ENV"
           echo "TAG=v${version}" >> "$GITHUB_ENV"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
           echo "Releasing ${version} from ${requested}"
 
       - name: Build wheel and sdist
@@ -170,25 +177,46 @@ jobs:
           set -euo pipefail
           cd dist && sha256sum ./* > SHA256SUMS && cat SHA256SUMS
 
+      - name: Write the release notes
+        run: |
+          set -euo pipefail
+          # What changed, from the source log since the previous tag: the
+          # commit subjects in that repository are written to carry exactly
+          # this weight, so the notes stay honest without a hand-kept file.
+          prev="$(git -C pantheon-src tag --list 'v*' --sort=-v:refname \
+                  | grep -vx "${TAG}" | head -1 || true)"
+          {
+            echo "Source: https://github.com/pantheongpu/pantheon/tree/${TAG}"
+            echo
+            if [ -n "$prev" ]; then
+              echo "**Changes since ${prev}:**"
+              echo
+              git -C pantheon-src log --format='- %s' "${prev}..HEAD" \
+                | grep -v '^- Release ' || true
+              echo
+            fi
+            echo "Install from PyPI (\`pipx install pantheon-gpu\`), the apt or"
+            echo "COPR repositories, the container image"
+            echo "(\`ghcr.io/pantheongpu/pantheon:${VERSION}\`), or the wheel below:"
+            echo
+            echo '```'
+            echo "pip install pantheon_gpu-${VERSION}-py3-none-any.whl"
+            echo "pantheon --test baseline_metrics --duration 10"
+            echo '```'
+            echo
+            echo "Kernels compile on first run into a per-user cache (roughly a"
+            echo "minute, once) and need a CUDA or ROCm toolchain; use"
+            echo '`--platform mock` to exercise the tooling with no GPU.'
+          } > release-body.md
+          cat release-body.md
+
       - name: Publish release
         if: ${{ !inputs.dry_run }}
         uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
         with:
           tag_name: ${{ env.TAG }}
           name: Pantheon ${{ env.TAG }}
-          body: |
-            Source: https://github.com/pantheongpu/pantheon/tree/${{ env.TAG }}
-
-            Install the wheel (kernels compile on first run into a per-user cache;
-            expect roughly a minute the first time):
-
-            ```
-            pip install pantheon_gpu-${{ env.VERSION }}-py3-none-any.whl
-            pantheon --test baseline_metrics --duration 10
-            ```
-
-            Requires a CUDA or ROCm toolchain at first run. Use `--platform mock`
-            to exercise the tooling with no GPU.
+          body_path: release-body.md
           files: |
             dist/pantheon_gpu-${{ env.VERSION }}-py3-none-any.whl
             dist/pantheon_gpu-${{ env.VERSION }}.tar.gz
@@ -402,6 +430,17 @@ jobs:
       # no PyPI API token has to be stored in this repository.
       id-token: write
     steps:
+      - name: Reclaim workspace files left root-owned by container jobs
+        run: |
+          set -euo pipefail
+          # Container jobs share this workspace path and run as root, so their
+          # leftovers (.github/.tmp among them) are unwritable to this job,
+          # which must run outside a container -- and the publish action needs
+          # to create its temp directory exactly there. Hand the files back
+          # through docker, which is the only root this job can borrow.
+          docker run --rm -v "${GITHUB_WORKSPACE}:/workspace" ubuntu:24.04 \
+            chown -R "$(id -u):$(id -g)" /workspace
+
       - name: Fetch the built distributions
         uses: actions/download-artifact@v4
         with:
@@ -412,3 +451,138 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: pypi-dist
+          # PyPI versions are immutable, so a re-run of a release that already
+          # uploaded would otherwise fail here after every other step
+          # succeeded. Skipping the duplicate keeps re-runs idempotent, the
+          # same way the release and apt steps already are.
+          skip-existing: true
+
+  # Runs outside a container for the same reason publish-pypi does: it drives
+  # the host's docker daemon, which a container job cannot reach.
+  publish-containers:
+    needs: release
+    if: ${{ !inputs.dry_run }}
+    runs-on: [self-hosted, Linux, X64]
+    permissions:
+      contents: read
+      packages: write
+    env:
+      VERSION: ${{ needs.release.outputs.version }}
+      IMAGE: ghcr.io/pantheongpu/pantheon
+    steps:
+      - name: Reclaim workspace files left root-owned by container jobs
+        run: |
+          set -euo pipefail
+          # Same shared-workspace hazard as publish-pypi, but this job also
+          # checks out, and checkout cannot clean files owned by root.
+          docker run --rm -v "${GITHUB_WORKSPACE}:/workspace" ubuntu:24.04 \
+            chown -R "$(id -u):$(id -g)" /workspace
+
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Fetch the released wheel
+        run: |
+          set -euo pipefail
+          # From the published release rather than a build artifact: the image
+          # must be built from the bytes users download, and this also keeps
+          # the job re-runnable after the artifact's short retention expires.
+          curl -fsSL -o "packaging/docker/pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/pantheon_gpu-${VERSION}-py3-none-any.whl"
+
+      - name: Build and smoke-test the CUDA image
+        run: |
+          set -euo pipefail
+          docker build -f packaging/docker/Dockerfile.cuda \
+            --build-arg "PANTHEON_WHEEL=pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            -t "${IMAGE}:${VERSION}-cuda12.8" packaging/docker
+          docker run --rm "${IMAGE}:${VERSION}-cuda12.8" --version
+          # No GPU on the runner, so the smoke test runs the mock backend; it
+          # still proves the toolchain in the image compiles the kernels.
+          docker run --rm --entrypoint pantheon "${IMAGE}:${VERSION}-cuda12.8" \
+            --platform mock --test baseline_metrics --duration 5 --mem 5
+
+      - name: Build and smoke-test the ROCm image
+        run: |
+          set -euo pipefail
+          # Per-vendor images rather than one combined: each toolchain is a
+          # vendor-maintained base image, a combined one would weigh ~30GB of
+          # which every user can use half, and the run flags already force the
+          # user to know their vendor.
+          docker build -f packaging/docker/Dockerfile.rocm \
+            --build-arg "PANTHEON_WHEEL=pantheon_gpu-${VERSION}-py3-none-any.whl" \
+            -t "${IMAGE}:${VERSION}-rocm6.4" packaging/docker
+          docker run --rm "${IMAGE}:${VERSION}-rocm6.4" --version
+          docker run --rm --entrypoint pantheon "${IMAGE}:${VERSION}-rocm6.4" \
+            --platform mock --test baseline_metrics --duration 5 --mem 5
+
+      - name: Push the image tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          # The unsuffixed tags mean CUDA, much the larger install base;
+          # latest-rocm is the AMD counterpart of latest.
+          docker tag "${IMAGE}:${VERSION}-cuda12.8" "${IMAGE}:${VERSION}"
+          docker tag "${IMAGE}:${VERSION}-cuda12.8" "${IMAGE}:latest"
+          docker tag "${IMAGE}:${VERSION}-rocm6.4" "${IMAGE}:latest-rocm"
+          docker push "${IMAGE}:${VERSION}-cuda12.8"
+          docker push "${IMAGE}:${VERSION}"
+          docker push "${IMAGE}:latest"
+          docker push "${IMAGE}:${VERSION}-rocm6.4"
+          docker push "${IMAGE}:latest-rocm"
+          docker logout ghcr.io
+
+  publish-copr:
+    needs: release
+    if: ${{ !inputs.dry_run }}
+    runs-on: [self-hosted, Linux, X64]
+    container:
+      image: ubuntu:24.04
+    env:
+      VERSION: ${{ needs.release.outputs.version }}
+      # Resolved once here: the secrets context is not dependable inside a
+      # step-level `if`.
+      HAS_COPR: ${{ secrets.PANTHEON_COPR_CONFIG != '' }}
+    steps:
+      - name: Bootstrap job environment
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates curl git rpm python3-venv
+
+      - name: Check out this repository
+        uses: actions/checkout@v4
+
+      - name: Submit the build to COPR
+        run: |
+          set -euo pipefail
+          if [ "${HAS_COPR}" != "true" ]; then
+            # Say plainly that the channel was skipped rather than fail a
+            # release that succeeded everywhere else.
+            echo "::warning::No PANTHEON_COPR_CONFIG secret, so the COPR" \
+                 "channel was not updated for ${VERSION}."
+            exit 0
+          fi
+          mkdir -p ~/.config
+          printf '%s' "${COPR_CONFIG}" > ~/.config/copr
+
+          mkdir -p build/copr/SOURCES build/copr/SPECS
+          cp packaging/rpm/pantheon-gpu.spec build/copr/SPECS/
+          # The spec in the tree names the version it was last validated
+          # against; the release being published is authoritative here.
+          sed -E -i "s/^(Version: *).*/\1${VERSION}/" build/copr/SPECS/pantheon-gpu.spec
+          curl -fsSL -o "build/copr/SOURCES/pantheon_gpu-${VERSION}.tar.gz" \
+            "https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/pantheon_gpu-${VERSION}.tar.gz"
+          rpmbuild -bs --define "_topdir $(pwd)/build/copr" \
+            build/copr/SPECS/pantheon-gpu.spec
+
+          python3 -m venv .coprenv
+          .coprenv/bin/pip install --quiet copr-cli
+          # --nowait: COPR builds take minutes per chroot and run on Fedora's
+          # infrastructure; the release does not need to sit here for them.
+          .coprenv/bin/copr-cli build --nowait pantheon-gpu \
+            "build/copr/SRPMS/pantheon-gpu-${VERSION}-1.src.rpm"
+        env:
+          COPR_CONFIG: ${{ secrets.PANTHEON_COPR_CONFIG }}

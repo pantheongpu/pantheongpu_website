@@ -35,7 +35,64 @@ Install the compiler for your platform. You only need one:
     ```
 
 Pantheon is open source. Building from source lets you read exactly what will
-run on your hardware; the Debian package is quicker if you just want to run it.
+run on your hardware; the PyPI or Debian package is quicker if you just want
+to run it.
+
+=== "PyPI"
+
+    ```bash
+    pipx install pantheon-gpu
+    ```
+
+    Installs a `pantheon` command on your PATH. `pipx` keeps it in its own
+    environment, which is what recent Ubuntu and Debian releases require of
+    anything installed outside the system package manager; `pip install --user
+    pantheon-gpu` works too where that restriction does not apply. Add the
+    `reports` extra (`pipx install "pantheon-gpu[reports]"`) for spreadsheet
+    export.
+
+    The wheel carries the kernel sources rather than prebuilt binaries, so the
+    first run compiles the workloads for your GPU into a per-user cache. That
+    takes a minute or so once, and needs `make`, a C++ compiler, and the CUDA
+    or ROCm toolkit from the tabs above.
+
+=== "Docker"
+
+    ```bash
+    docker run --rm --gpus all -v "$PWD:/reports" \
+      ghcr.io/pantheongpu/pantheon:latest --test tensor_virus --duration 60
+    ```
+
+    The image carries the CUDA 12.8 toolchain, so nothing is installed on the
+    host beyond the NVIDIA driver and the NVIDIA Container Toolkit. Kernels
+    still compile for the GPU actually present on first run; mount
+    `/root/.cache` as well to keep the compiled cache across containers.
+    Reports land in the directory mounted at `/reports`.
+
+    Tags: `latest`, a version (`1.2.0`), or a version pinned to its toolchain
+    (`1.2.0-cuda12.8`).
+
+    On AMD hardware use the ROCm variant, which carries the ROCm 6.4
+    toolchain instead and needs the device nodes rather than `--gpus`:
+
+    ```bash
+    docker run --rm --device=/dev/kfd --device=/dev/dri --group-add video \
+      -v "$PWD:/reports" \
+      ghcr.io/pantheongpu/pantheon:latest-rocm --test tensor_virus --duration 60
+    ```
+
+=== "Fedora / RHEL (COPR)"
+
+    ```bash
+    sudo dnf install 'dnf-command(copr)'
+    sudo dnf copr enable saqibkhanpantheongpu/pantheon-gpu
+    sudo dnf install pantheon-gpu
+    ```
+
+    Built for Fedora 43/44 and EPEL 10 (RHEL, Rocky and Alma 10). EPEL 9 is
+    not built: its Python stack cannot satisfy the build's setuptools floor —
+    use pipx or the Docker image there. Add the CUDA or ROCm toolkit
+    separately for real hardware.
 
 === "Build from source"
 
@@ -74,7 +131,7 @@ run on your hardware; the Debian package is quicker if you just want to run it.
 === "Install the package"
 
     ```bash
-    VERSION=1.1.0
+    VERSION=1.2.0
     BASE="https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}"
     wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"
     wget "${BASE}/SHA256SUMS" && sha256sum --ignore-missing -c SHA256SUMS

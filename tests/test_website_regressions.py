@@ -356,9 +356,13 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y hipcc" in getting_started
     # The documented download must name a version that actually has a wheel
     # attached, or the install page hands the reader a 404.
-    assert "VERSION=1.1.0" in getting_started
+    assert "VERSION=1.2.0" in getting_started
     assert 'wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
     assert 'pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
+    # The container and COPR channels are documented against the names they
+    # actually publish under; a rename on either side must update this page.
+    assert "ghcr.io/pantheongpu/pantheon:latest" in getting_started
+    assert "dnf copr enable saqibkhanpantheongpu/pantheon-gpu" in getting_started
     assert "pantheongpu_${VERSION}_amd64.deb" not in getting_started, (
         "releases from 1.1.0 on ship no .deb")
     assert "pantheon --test baseline_metrics --duration 10" in getting_started
@@ -1387,25 +1391,32 @@ def test_wheel_offers_the_project_named_command():
     assert "pantheon-gpu = " in scripts
 
 
-def test_pypi_upload_is_opt_in_and_runs_outside_the_container():
+def test_pypi_upload_is_on_by_default_and_runs_outside_the_container():
     """The publishing action is a Docker action.
 
     The release job runs inside a container, where that is not dependable, so
-    the upload is a separate job. It is also off by default: without a trusted
-    publisher configured on PyPI the upload fails *after* the GitHub release
-    has already been made.
+    the upload is a separate job. Since v1.2.0 a trusted publisher is
+    configured on PyPI, so the upload rides along with every release by
+    default; the input stays so a GitHub-and-apt-only release is still one
+    untick away. PyPI versions are immutable, which is why the upload must
+    skip duplicates: a release re-run would otherwise fail on the last step
+    after everything else succeeded.
     """
     workflow = read(".github/workflows/release.yml")
 
     assert "publish_pypi:" in workflow
-    assert "default: false" in workflow
+    pypi_input = workflow.split("publish_pypi:", 1)[1].split("type: boolean", 1)[0]
+    assert "default: true" in pypi_input
     assert "id-token: write" in workflow
 
-    publish = workflow.split("publish-pypi:", 1)[1]
+    # Bounded to this job: the jobs that follow it may legitimately use
+    # containers of their own.
+    publish = workflow.split("publish-pypi:", 1)[1].split("\n  publish-", 1)[0]
     assert "needs: release" in publish
     assert "container:" not in publish, (
         "a Docker action cannot be relied on inside a container job")
     assert "pypa/gh-action-pypi-publish" in publish
+    assert "skip-existing: true" in publish
 
 
 def test_debian_package_declares_honest_dependencies():
@@ -1477,3 +1488,92 @@ def test_aur_package_builds_from_the_sdist():
     assert "archive/refs/tags" not in pkgbuild, "a git tag has no build system"
     assert "python-pandas" in pkgbuild and "python-numpy" in pkgbuild
     assert "python-pynvml" in pkgbuild.split("optdepends", 1)[1]
+
+
+def test_release_publishes_container_images():
+    """The image exists so a user never installs a toolkit.
+
+    It must be built from the published wheel -- the bytes users download,
+    not a build artifact -- smoke-tested before any push, and pushed under
+    the version tag as well as latest. The job drives the host's docker
+    daemon, so it cannot run in a container, and it checks out on the shared
+    self-hosted workspace, so it reclaims root-owned leftovers first.
+    """
+    workflow = read(".github/workflows/release.yml")
+    dockerfile = read("packaging/docker/Dockerfile.cuda")
+
+    assert "publish-containers:" in workflow
+    job = workflow.split("publish-containers:", 1)[1]
+    assert "packages: write" in job
+    assert "releases/download" in job, "build from the published wheel"
+    assert "--platform mock --test baseline_metrics" in job
+    assert job.index("docker run --rm") < job.index("docker push"), (
+        "the image must be smoke-tested before anything is pushed")
+    assert "chown -R" in job
+    assert "ghcr.io/pantheongpu/pantheon" in workflow
+
+    assert "FROM nvidia/cuda:" in dockerfile
+    assert 'ENTRYPOINT ["pantheon"]' in dockerfile
+    assert "--no-install-recommends" in dockerfile
+
+    # The AMD image is a separate per-vendor variant, never a combined one:
+    # each toolchain is a vendor-maintained base image, and a combined image
+    # ships ~30GB of which any one user can use half.
+    rocm = read("packaging/docker/Dockerfile.rocm")
+    assert "FROM rocm/" in rocm
+    assert 'ENTRYPOINT ["pantheon"]' in rocm
+    assert "-rocm6.4" in job
+    assert "latest-rocm" in job
+
+
+def test_release_notes_list_what_changed():
+    """Every release must say what changed.
+
+    The notes are generated from the source repository's log since the
+    previous tag -- the commit subjects there are written to carry exactly
+    this weight -- so nobody has to remember a hand-kept changelog. A shallow
+    checkout cannot see the previous tag and would silently produce empty
+    notes, and a step gated on dry_run would let a broken changelog reach a
+    real release unrehearsed.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    checkout = workflow.split("Check out Pantheon source", 1)[1].split("- name:", 1)[0]
+    assert "fetch-depth: 0" in checkout
+
+    notes = workflow.split("Write the release notes", 1)[1].split("- name:", 1)[0]
+    assert "Changes since" in notes
+    assert "--sort=-v:refname" in notes
+    assert "grep -v '^- Release '" in notes, "the version-bump commit is noise"
+    assert "inputs.dry_run" not in notes
+
+    publish = workflow.split("Publish release", 1)[1].split("- name:", 1)[0]
+    assert "body_path: release-body.md" in publish
+
+
+def test_release_submits_the_copr_build():
+    """COPR was the one channel a release left behind.
+
+    Every other channel updates from the single release dispatch; this job
+    closes the gap. It must be skipped loudly rather than fail the release
+    when the secret is missing, must rewrite the spec's version to the
+    release being published, and must build the SRPM from the released
+    sdist -- the bytes users download.
+    """
+    workflow = read(".github/workflows/release.yml")
+
+    assert "publish-copr:" in workflow
+    job = workflow.split("publish-copr:", 1)[1]
+    assert "PANTHEON_COPR_CONFIG" in job
+    assert "::warning::No PANTHEON_COPR_CONFIG" in job
+    assert "packaging/rpm/pantheon-gpu.spec" in job
+    # Read the spec itself, not just its mention in the workflow: a blanket
+    # *.spec gitignore pattern once kept the file out of the commit while
+    # every workflow reference to it looked healthy. CI only sees tracked
+    # files, so this line is what turns that mistake into a red build.
+    spec = read("packaging/rpm/pantheon-gpu.spec")
+    assert spec.startswith("Name:           pantheon-gpu")
+    assert "%pyproject_wheel" in spec
+    assert 'sed -E -i "s/^(Version: *).*' in job
+    assert "releases/download" in job, "build from the published sdist"
+    assert "copr-cli build --nowait pantheon-gpu" in job

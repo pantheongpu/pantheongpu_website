@@ -11,7 +11,7 @@
 # Update sha256sums on each release with `updpkgsums`.
 
 pkgname=pantheon-gpu
-pkgver=1.1.0
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm"
 arch=('any')
@@ -29,13 +29,13 @@ optdepends=(
   'cuda: run workloads against NVIDIA hardware'
   'rocm-hip-sdk: run workloads against AMD hardware'
 )
-makedepends=('python-build' 'python-installer' 'python-wheel')
+makedepends=('python-build' 'python-installer' 'python-wheel' 'python-setuptools')
 # Built from the published sdist rather than a git tag: the source repository
 # carries no pyproject.toml, because the packaging metadata is generated at
 # release time by packaging/wheel/build_wheel.py in the website repository.
 # The sdist is a proper Python source distribution; the git tag is not.
 source=("https://github.com/pantheongpu/pantheongpu_website/releases/download/v${pkgver}/pantheon_gpu-${pkgver}.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('d9493d88db0a20cfccbb8de3f11afa2c8b7e38ab83d1b3378b8b1d303cb5fbc0')
 
 build() {
   cd "pantheon_gpu-${pkgver}"

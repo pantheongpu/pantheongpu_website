@@ -1,0 +1,25 @@
+Package: pantheon-gpu
+Version: 1.2.0
+Architecture: all
+Maintainer: Pantheon <noreply@pantheongpu.com>
+Installed-Size: 1016
+Depends: python3 (>= 3.9), python3-numpy, python3-pandas, g++, make
+Recommends: python3-pynvml, python3-psutil, python3-openpyxl
+Suggests: nvidia-cuda-toolkit
+Filename: pool/main/p/pantheon-gpu/pantheon-gpu_1.2.0_all.deb
+Size: 167848
+MD5sum: 78047fb89804366cf70f50fed976dbd8
+SHA1: 81c7b779403230aa427322db017870af3f19963c
+SHA256: a385ddc662c81c7fa7c3ef400fa1faa5115291dab49095fc14fdad4c85e877c2
+Section: contrib/utils
+Priority: optional
+Homepage: https://pantheongpu.com
+Description: GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm
+ Pantheon runs targeted stress and diagnostic workloads against a GPU and
+ reports throughput, thermals, power, clocks and error state.
+ .
+ The workloads ship as source and are compiled for the installed toolkit on
+ first run, into a per-user cache. A CUDA or ROCm toolchain is therefore
+ needed to run anything against real hardware; --platform mock exercises the
+ tooling on a machine with no GPU at all.
+
