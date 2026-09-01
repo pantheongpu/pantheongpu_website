@@ -2520,6 +2520,20 @@
     "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
   },
   {
+    "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "tlb_avalanche",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 99.8612,
+    "date": "2026-09-01 04:39:41",
+    "temp_max": 87.0,
+    "power_max": 452.3,
+    "clock_avg": 1211.3,
+    "throttle_time": 0.0,
+    "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
+  },
+  {
     "uuid": "GPU-34d8f16f-7feb-65b8-ced8-f9dda4de81e8",
     "gpu": "NVIDIA A10G",
     "test": "memory_cache_fracture",
