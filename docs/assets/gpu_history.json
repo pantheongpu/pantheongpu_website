@@ -14086,6 +14086,20 @@
   {
     "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
     "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "memory_bank_thrash",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 383.031,
+    "date": "2026-09-01 04:28:08",
+    "temp_max": 42.0,
+    "power_max": 200.8,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f"
+  },
+  {
+    "uuid": "GPU-96711b09-4bbd-2592-5e1a-481f21df6e0f",
+    "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "memory_cache_fracture",
     "version": "1.2.0",
     "unit": "GB/s",
