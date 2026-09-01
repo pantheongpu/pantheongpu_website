@@ -14170,6 +14170,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "memory_pc_pingpong",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 471.941,
+    "date": "2026-09-01 04:21:43",
+    "temp_max": 75.0,
+    "power_max": 150.6,
+    "clock_avg": 1669.6,
+    "throttle_time": 190.7,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "memory_retention",
     "version": "1.2.0",
     "unit": "retained-MiB",
