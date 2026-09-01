@@ -23886,6 +23886,20 @@
   {
     "uuid": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea",
     "gpu": "NVIDIA L40S",
+    "test": "media_enc_virus",
+    "version": "1.2.0",
+    "unit": "FPS",
+    "score": 39.5046,
+    "date": "2026-09-01 18:26:58",
+    "temp_max": 52.0,
+    "power_max": 74.4,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea"
+  },
+  {
+    "uuid": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea",
+    "gpu": "NVIDIA L40S",
     "test": "memory_bank_thrash",
     "version": "1.2.0",
     "unit": "GB/s",
