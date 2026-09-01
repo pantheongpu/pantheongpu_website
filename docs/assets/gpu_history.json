@@ -2408,18 +2408,18 @@
     "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
   },
   {
-    "uuid": "GPU-2d8860e4-5812-f948-bb8b-8ceb1e523399",
-    "gpu": "Tesla T4",
-    "test": "rt_virus",
+    "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "baseline_metrics",
     "version": "1.2.0",
-    "unit": "GRays/s",
-    "score": 0.0925575,
-    "date": "2026-09-01 03:55:20",
-    "temp_max": 56.0,
-    "power_max": 71.8,
-    "clock_avg": 1068.3,
-    "throttle_time": 300.0,
-    "card": "GPU-2d8860e4-5812-f948-bb8b-8ceb1e523399"
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-01 03:54:39",
+    "temp_max": 68.0,
+    "power_max": 149.4,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
   },
   {
     "uuid": "GPU-34d8f16f-7feb-65b8-ced8-f9dda4de81e8",
