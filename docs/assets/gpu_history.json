@@ -15808,6 +15808,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "rag_embedding",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 91820600.0,
+    "date": "2026-09-01 07:39:51",
+    "temp_max": 74.0,
+    "power_max": 150.2,
+    "clock_avg": 1333.8,
+    "throttle_time": 301.2,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "ras_validator",
     "version": "1.2.0",
     "unit": "GB/s",
