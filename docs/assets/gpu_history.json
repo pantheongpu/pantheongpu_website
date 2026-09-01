@@ -14086,6 +14086,20 @@
   {
     "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
     "gpu": "NVIDIA A10",
+    "test": "memory_retention_bake",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 23.4975,
+    "date": "2026-09-01 04:10:26",
+    "temp_max": 70.0,
+    "power_max": 128.8,
+    "clock_avg": 1397.0,
+    "throttle_time": 300.6,
+    "card": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105"
+  },
+  {
+    "uuid": "GPU-9f22f0b2-b790-687f-69c7-c1c253c68105",
+    "gpu": "NVIDIA A10",
     "test": "memory_thermal_asym",
     "version": "1.2.0",
     "unit": "TFLOPS",
