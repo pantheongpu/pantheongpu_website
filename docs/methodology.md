@@ -23,7 +23,7 @@ that have real hardware results behind them.
 | CUDA | 12.8 | 570.148.08, 570.195.03, 580.105.08 | 7 |
 | CUDA | 12.9 | 595.91.07 | 1 |
 | CUDA | 13.0 | 595.71, 595.91.07, 595.97 | 7 |
-| CUDA | 13.2 | 595.91.07, 596.36 | 7 |
+| CUDA | 13.2 | 595.91.07, 596.36 | 8 |
 | CUDA | 13.3 | 595.91.07 | 1 |
 
 No AMD ROCm hardware runs have been published yet; ROCm support is
