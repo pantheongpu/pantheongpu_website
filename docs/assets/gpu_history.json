@@ -9982,6 +9982,20 @@
     "card": "GPU-5a606146-96ee-9713-c577-0beaf84d5781"
   },
   {
+    "uuid": "GPU-5a606146-96ee-9713-c577-0beaf84d5781",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "transformer_train_step",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 8991100000.0,
+    "date": "2026-09-02 02:39:48",
+    "temp_max": 79.0,
+    "power_max": 165.1,
+    "clock_avg": 2007.4,
+    "throttle_time": 299.5,
+    "card": "GPU-5a606146-96ee-9713-c577-0beaf84d5781"
+  },
+  {
     "uuid": "GPU-5d2c3584c0ef",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
