@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-02 05:19:22",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3179.77Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.47GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-64c4c340-68b7-81ef-b4ab-8c1e1eefa40b",
+            "serial": "1794225626538"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260902-051922",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-02 05:24:24",
+    "test_results": [
+        {
+            "Test Name": "incinerator",
+            "Version": "1.2.0",
+            "Description": "Incinerator (LDS Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 97.2357,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 62.2,
+            "Max Temp (C)": 64.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 390.9,
+            "Max Power (W)": 398.5,
+            "Avg Clock(MHz)": 2410.2,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2422.0,
+            "Avg GPU Util (%)": 95.9,
+            "Max GPU Util (%)": 97.0,
+            "Peak Memory (MiB)": 1267.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 32.64,
+            "Thermal Rise (C)": 30.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 248.75,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-120/compute_virus_agg 0 300 50 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260902-051922/reliability/incinerator/gpu0/ras.json"
+        }
+    ]
+}
