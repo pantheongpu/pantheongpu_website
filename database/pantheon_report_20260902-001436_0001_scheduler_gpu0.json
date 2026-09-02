@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-02 00:14:36",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3750.97Mhz"
+    },
+    "ram_info": {
+        "total": "30.08GB",
+        "available": "28.54GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-5a606146-96ee-9713-c577-0beaf84d5781",
+            "serial": "1790326075251"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260902-001436",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-02 00:19:37",
+    "test_results": [
+        {
+            "Test Name": "scheduler",
+            "Version": "1.2.0",
+            "Description": "Scheduler Virus (Context Switch / KIPS)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 392.436,
+            "Unit": "KIPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 46.6,
+            "Max Temp (C)": 53.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 49.2,
+            "Max Power (W)": 51.4,
+            "Avg Clock(MHz)": 2399.6,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2407.0,
+            "Avg GPU Util (%)": 80.2,
+            "Max GPU Util (%)": 81.0,
+            "Peak Memory (MiB)": 824.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 4.108,
+            "Thermal Rise (C)": 2.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 7.98,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-120/scheduler_virus 0 300 50 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260902-001436/reliability/scheduler/gpu0/ras.json"
+        }
+    ]
+}
