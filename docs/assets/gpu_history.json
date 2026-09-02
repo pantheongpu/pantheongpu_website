@@ -16772,6 +16772,20 @@
     "card": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309"
   },
   {
+    "uuid": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309",
+    "gpu": "Tesla T4",
+    "test": "memory_cache_fracture",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 53.6715,
+    "date": "2026-09-02 08:07:27",
+    "temp_max": 51.0,
+    "power_max": 71.0,
+    "clock_avg": 1462.2,
+    "throttle_time": 300.2,
+    "card": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309"
+  },
+  {
     "uuid": "GPU-8e436d08036e",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
