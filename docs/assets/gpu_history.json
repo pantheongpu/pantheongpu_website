@@ -16940,6 +16940,20 @@
     "card": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309"
   },
   {
+    "uuid": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309",
+    "gpu": "Tesla T4",
+    "test": "moe_router",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 481626000.0,
+    "date": "2026-09-02 11:17:49",
+    "temp_max": 50.0,
+    "power_max": 70.6,
+    "clock_avg": 1227.1,
+    "throttle_time": 299.8,
+    "card": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309"
+  },
+  {
     "uuid": "GPU-8e436d08036e",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
