@@ -11018,6 +11018,20 @@
     "card": "GPU-64c4c340-68b7-81ef-b4ab-8c1e1eefa40b"
   },
   {
+    "uuid": "GPU-64c4c340-68b7-81ef-b4ab-8c1e1eefa40b",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "voltage",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 44.9643,
+    "date": "2026-09-02 05:13:48",
+    "temp_max": 45.0,
+    "power_max": 191.9,
+    "clock_avg": 2412.1,
+    "throttle_time": 0.0,
+    "card": "GPU-64c4c340-68b7-81ef-b4ab-8c1e1eefa40b"
+  },
+  {
     "uuid": "GPU-6c65626cc38a",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "fp64_virus",
