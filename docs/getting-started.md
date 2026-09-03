@@ -59,7 +59,7 @@ to run it.
 === "Docker"
 
     ```bash
-    docker run --rm --gpus all -v "$PWD:/reports" \
+    docker run --rm -t --gpus all -v "$PWD:/reports" \
       ghcr.io/pantheongpu/pantheon:latest --test tensor_virus --duration 60
     ```
 
@@ -76,10 +76,30 @@ to run it.
     toolchain instead and needs the device nodes rather than `--gpus`:
 
     ```bash
-    docker run --rm --device=/dev/kfd --device=/dev/dri --group-add video \
+    docker run --rm -t --device=/dev/kfd --device=/dev/dri --group-add video \
       -v "$PWD:/reports" \
       ghcr.io/pantheongpu/pantheon:latest-rocm --test tensor_virus --duration 60
     ```
+
+    !!! note "If `--gpus all` is refused"
+        `failed to discover GPU vendor from CDI: no known GPU vendor found`
+        (newer Docker) and `could not select device driver "" with
+        capabilities: [[gpu]]` (older Docker) both mean the same thing: the
+        host has no NVIDIA Container Toolkit registered, so Docker cannot
+        hand a GPU to any container. If `nvidia-smi` works on the host, fix
+        it with:
+
+        ```bash
+        sudo apt-get install -y nvidia-container-toolkit
+        sudo nvidia-ctk runtime configure --runtime=docker
+        sudo systemctl restart docker
+        ```
+
+        If the package is not found, add NVIDIA's repository first: see
+        the [NVIDIA Container Toolkit install guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+        A stray `ERROR: init ... result=9` line at container start is
+        harmless noise from the base image's GPU hooks on hosts without
+        passthrough; Pantheon's own output follows it.
 
 === "Fedora / RHEL (COPR)"
 

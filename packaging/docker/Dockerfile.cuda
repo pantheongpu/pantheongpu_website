@@ -33,5 +33,10 @@ RUN python3 -m pip install --break-system-packages --no-cache-dir \
     && pantheon --version
 
 WORKDIR /reports
+# Live output whether or not the user allocated a TTY: without this, python
+# block-buffers to the docker pipe and the first run looks hung for the
+# minute its kernels compile.
+ENV PYTHONUNBUFFERED=1
+
 ENTRYPOINT ["pantheon"]
 CMD ["--help"]
