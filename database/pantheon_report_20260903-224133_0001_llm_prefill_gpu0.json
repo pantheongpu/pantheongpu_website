@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-03 22:41:33",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3903.16Mhz"
+    },
+    "ram_info": {
+        "total": "30.08GB",
+        "available": "28.50GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7",
+            "serial": "1790926038167"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260903-224133",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-03 22:46:35",
+    "test_results": [
+        {
+            "Test Name": "llm_prefill",
+            "Version": "1.2.0",
+            "Description": "LLM Prefill (Causal Attention and Projections)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 297505000.0,
+            "Unit": "prompt-tokens/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 68.4,
+            "Max Temp (C)": 72.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 140.0,
+            "Max Power (W)": 142.6,
+            "Avg Clock(MHz)": 2399.6,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2407.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16692.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 11.703,
+            "Thermal Rise (C)": 23.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 2125035.71,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-120/llm_prefill 0 300 50 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260903-224133/reliability/llm_prefill/gpu0/ras.json"
+        }
+    ]
+}
