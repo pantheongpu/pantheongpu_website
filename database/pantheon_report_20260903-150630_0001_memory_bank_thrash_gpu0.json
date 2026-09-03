@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-03 15:06:30",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1013-nvidia-64k",
+        "version": "#14~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Aug 21 01:03:36 UTC 2",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 64,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "525.68GB",
+        "available": "494.13GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GH200 480GB",
+            "memory_total": "97871 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 900.0,
+            "uuid": "GPU-5514326b-afcd-178f-4b8a-362ea8ba213e",
+            "serial": "1650524077261"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260903-150630",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-03 15:11:37",
+    "test_results": [
+        {
+            "Test Name": "memory_bank_thrash",
+            "Version": "1.2.0",
+            "Description": "Memory Bank Thrasher (Row Misses)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 871.741,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 52.0,
+            "Max Temp (C)": 53.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 416.8,
+            "Max Power (W)": 420.5,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 49835.1,
+            "Memory Total (MiB)": 97871.0,
+            "Energy (Wh)": 35.149,
+            "Thermal Rise (C)": 17.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 2141.71,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 1.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/memory_bank_thrash 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260903-150630/reliability/memory_bank_thrash/gpu0/ras.json"
+        }
+    ]
+}
