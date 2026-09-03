@@ -409,13 +409,19 @@ def test_all_workflow_jobs_use_self_hosted_linux_runners():
         ), f"{workflow_path.name} contains a non-self-hosted runner"
         # Jobs run in a pinned container so the self-hosted runner's own
         # packages cannot drift into a build -- except where a job must run
-        # outside one, as the PyPI upload does, because its publishing action
-        # is a Docker action and that is not dependable inside a container.
+        # outside one. Two reasons are accepted, and each must be recorded in
+        # the workflow itself: the PyPI upload (its publishing action is a
+        # Docker action, not dependable inside a container), and jobs that
+        # drive the host docker daemon to build or create the pristine
+        # environments they work in.
         containers = workflow.count("container:")
         assert containers == workflow.count("image: ubuntu:24.04")
         assert containers <= len(runs_on_lines)
         if containers < len(runs_on_lines):
-            assert "pypa/gh-action-pypi-publish" in workflow, (
+            assert (
+                "pypa/gh-action-pypi-publish" in workflow
+                or "docker daemon" in workflow
+            ), (
                 f"{workflow_path.name} has a job outside a container without "
                 "a reason recorded here")
         assert "ubuntu-latest" not in workflow
@@ -1577,3 +1583,28 @@ def test_release_submits_the_copr_build():
     assert 'sed -E -i "s/^(Version: *).*' in job
     assert "releases/download" in job, "build from the published sdist"
     assert "copr-cli build --nowait pantheon-gpu" in job
+
+
+def test_channel_smoke_exercises_every_install_channel():
+    """Every channel the docs point users at is reinstalled on a schedule.
+
+    PyPI, the signed apt repository, COPR, and the GHCR image each get a
+    pristine-environment install that must serve the latest released version
+    and complete a mock run. The apt check must trust the repository through
+    the published keyring alone: a signature bypass here would keep the check
+    green while real users are refused.
+    """
+    workflow = read(".github/workflows/channel-smoke.yml")
+
+    assert "schedule:" in workflow and "workflow_dispatch:" in workflow
+    assert "releases/latest" in workflow, "the version anchor is the release"
+
+    assert 'pip install -q "pantheon-gpu==${VERSION}"' in workflow
+    assert "pantheon-archive-keyring.asc" in workflow
+    assert "signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc" in workflow
+    assert "trusted=yes" not in workflow, "the apt check must verify signatures"
+    assert "dnf copr enable -y saqibkhanpantheongpu/pantheon-gpu" in workflow
+    assert "ghcr.io/pantheongpu/pantheon:${VERSION}" in workflow
+    assert "latest-rocm" in workflow
+    assert workflow.count("--platform mock --test baseline_metrics") >= 4, (
+        "every channel's install must actually run, not just resolve")

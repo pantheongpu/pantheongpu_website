@@ -1,0 +1,109 @@
+name: Channel Smoke
+
+# Installs Pantheon from every public channel a user can actually reach --
+# PyPI, the signed apt repository, Fedora COPR, and the GHCR image -- inside
+# pristine environments, and proves each one serves the latest released
+# version and runs. The channels were verified by hand when they launched;
+# this keeps them verified after every deploy, key change, or registry
+# hiccup, so we find breakage before the people we point at these channels
+# do. Each channel is its own step so a failure names the broken channel.
+
+on:
+  schedule:
+    - cron: "37 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: channel-smoke
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  channels:
+    # Runs outside a pinned image: every check drives the host docker daemon
+    # to create the pristine environment it tests in.
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 30
+    steps:
+      - name: Determine the released version
+        run: |
+          set -euo pipefail
+          tag="$(curl -fsS "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/latest" \
+                 | grep -o '"tag_name": *"[^"]*"' | head -1 | sed 's/.*"v\{0,1\}\([^"]*\)"$/\1/')"
+          if [ -z "$tag" ]; then
+            echo "::error::could not read the latest release tag"
+            exit 1
+          fi
+          echo "VERSION=${tag}" >> "$GITHUB_ENV"
+          echo "Latest release: ${tag}"
+
+      - name: PyPI
+        run: |
+          set -euo pipefail
+          docker run --rm -e VERSION python:3.12-slim bash -ec '
+            apt-get update -qq >/dev/null 2>&1
+            apt-get install -y -qq g++ make >/dev/null 2>&1
+            pip install -q "pantheon-gpu==${VERSION}"
+            got="$(pantheon --version | awk "{print \$NF}")"
+            [ "$got" = "$VERSION" ] || { echo "PyPI serves ${got}, release is ${VERSION}"; exit 1; }
+            cd /tmp && pantheon --platform mock --test baseline_metrics --duration 5 --mem 5 >/dev/null
+            echo "PyPI OK ${got}"'
+
+      - name: apt (signature verified)
+        run: |
+          set -euo pipefail
+          # No signature bypass here, ever: the point of this check is that a
+          # fresh machine trusts the repository through the published keyring.
+          docker run --rm -e VERSION ubuntu:24.04 bash -ec '
+            apt-get update -qq >/dev/null 2>&1
+            apt-get install -y -qq curl ca-certificates >/dev/null 2>&1
+            curl -fsSL https://pantheongpu.com/apt/pantheon-archive-keyring.asc \
+              -o /usr/share/keyrings/pantheon-archive-keyring.asc
+            echo "deb [signed-by=/usr/share/keyrings/pantheon-archive-keyring.asc] https://pantheongpu.com/apt stable main" \
+              > /etc/apt/sources.list.d/pantheon.list
+            apt-get update -qq >/dev/null
+            DEBIAN_FRONTEND=noninteractive apt-get install -y -qq pantheon-gpu >/dev/null
+            got="$(pantheon --version | awk "{print \$NF}")"
+            [ "$got" = "$VERSION" ] || { echo "apt serves ${got}, release is ${VERSION}"; exit 1; }
+            cd /tmp && pantheon --platform mock --test baseline_metrics --duration 5 --mem 5 >/dev/null
+            echo "apt OK ${got}"'
+
+      - name: COPR
+        run: |
+          set -euo pipefail
+          docker run --rm -e VERSION fedora:latest bash -ec '
+            dnf install -y -q "dnf-command(copr)" gcc-c++ make >/dev/null 2>&1
+            dnf copr enable -y saqibkhanpantheongpu/pantheon-gpu >/dev/null 2>&1
+            dnf install -y -q pantheon-gpu >/dev/null 2>&1
+            got="$(pantheon --version | awk "{print \$NF}")"
+            [ "$got" = "$VERSION" ] || { echo "COPR serves ${got}, release is ${VERSION}"; exit 1; }
+            cd /tmp && pantheon --platform mock --test baseline_metrics --duration 5 --mem 5 >/dev/null
+            echo "COPR OK ${got}"'
+
+      - name: GHCR image
+        run: |
+          set -euo pipefail
+          # Anonymous, the way a user pulls it. The versioned CUDA tag is
+          # pulled and run; the ROCm tags are checked by manifest so a broken
+          # or private tag fails without a multi-gigabyte download.
+          docker logout ghcr.io >/dev/null 2>&1 || true
+          docker pull -q "ghcr.io/pantheongpu/pantheon:${VERSION}"
+          got="$(docker run --rm "ghcr.io/pantheongpu/pantheon:${VERSION}" --version | awk '{print $NF}')"
+          [ "$got" = "$VERSION" ] || { echo "image reports ${got}, tag is ${VERSION}"; exit 1; }
+          latest="$(docker run --rm ghcr.io/pantheongpu/pantheon:latest --version | awk '{print $NF}')"
+          [ "$latest" = "$VERSION" ] || { echo "latest reports ${latest}, release is ${VERSION}"; exit 1; }
+          docker run --rm --entrypoint pantheon "ghcr.io/pantheongpu/pantheon:${VERSION}" \
+            --platform mock --test baseline_metrics --duration 5 --mem 5 >/dev/null
+          docker manifest inspect "ghcr.io/pantheongpu/pantheon:${VERSION}-rocm6.4" >/dev/null
+          docker manifest inspect "ghcr.io/pantheongpu/pantheon:latest-rocm" >/dev/null
+          echo "GHCR OK ${got} (CUDA run, ROCm manifests present)"
+
+      - name: Tidy dangling images
+        if: ${{ always() }}
+        run: docker image prune -f >/dev/null 2>&1 || true
