@@ -1608,3 +1608,24 @@ def test_channel_smoke_exercises_every_install_channel():
     assert "latest-rocm" in workflow
     assert workflow.count("--platform mock --test baseline_metrics") >= 4, (
         "every channel's install must actually run, not just resolve")
+
+
+def test_docker_first_run_papercuts_stay_fixed():
+    """The first fifteen minutes of a Docker user, pinned.
+
+    Without PYTHONUNBUFFERED the container block-buffers to the docker pipe
+    and the first run looks hung for the minute its kernels compile; without
+    -t in the documented commands the same thing happens interactively. And
+    the two errors a host without the NVIDIA Container Toolkit produces must
+    appear verbatim on the install page, so the person who searches the
+    error lands on the fix.
+    """
+    for name in ("Dockerfile.cuda", "Dockerfile.rocm"):
+        assert "PYTHONUNBUFFERED=1" in read(f"packaging/docker/{name}"), name
+
+    getting_started = read("docs/getting-started.md")
+    assert "docker run --rm -t --gpus all" in getting_started
+    assert "docker run --rm -t --device=/dev/kfd" in getting_started
+    assert "failed to discover GPU vendor from CDI" in getting_started
+    assert 'could not select device driver "" with' in getting_started
+    assert "nvidia-ctk runtime configure --runtime=docker" in getting_started
