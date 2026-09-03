@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-03 17:44:13",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "216.26GB",
+        "available": "212.85GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-baeffccd-d369-f6f4-64a5-f4d9e55a48ef",
+            "serial": "1323320011003"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260903-174413",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-03 17:49:14",
+    "test_results": [
+        {
+            "Test Name": "ras_validator",
+            "Version": "1.2.0",
+            "Description": "RAS Validator (ECC Scrub Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 1478.41,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 48.6,
+            "Max Temp (C)": 50.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 209.5,
+            "Max Power (W)": 222.0,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 20956.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 17.51,
+            "Thermal Rise (C)": 15.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 7226.21,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-80/ras_validator 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260903-174413/reliability/ras_validator/gpu0/ras.json"
+        }
+    ]
+}
