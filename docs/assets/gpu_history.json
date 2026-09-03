@@ -20622,6 +20622,62 @@
     "card": "GPU-8bbfe9cf-8e5e-68ea-1e5e-526c762a4309"
   },
   {
+    "uuid": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "cache_lat",
+    "version": "1.2.0",
+    "unit": "dependent-loads/s",
+    "score": 9491360000.0,
+    "date": "2026-09-03 19:36:57",
+    "temp_max": 69.0,
+    "power_max": 134.8,
+    "clock_avg": 2399.6,
+    "throttle_time": 0.0,
+    "card": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7"
+  },
+  {
+    "uuid": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "cache_lat",
+    "version": "1.2.0",
+    "unit": "dependent-loads/s",
+    "score": 9486950000.0,
+    "date": "2026-09-03 20:32:54",
+    "temp_max": 69.0,
+    "power_max": 134.4,
+    "clock_avg": 2399.6,
+    "throttle_time": 0.0,
+    "card": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7"
+  },
+  {
+    "uuid": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "cache_lat",
+    "version": "1.2.0",
+    "unit": "dependent-loads/s",
+    "score": 9494760000.0,
+    "date": "2026-09-03 21:28:50",
+    "temp_max": 68.0,
+    "power_max": 134.3,
+    "clock_avg": 2399.6,
+    "throttle_time": 0.0,
+    "card": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7"
+  },
+  {
+    "uuid": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "cache_lat",
+    "version": "1.2.0",
+    "unit": "dependent-loads/s",
+    "score": 9490200000.0,
+    "date": "2026-09-03 22:24:46",
+    "temp_max": 68.0,
+    "power_max": 134.1,
+    "clock_avg": 2399.6,
+    "throttle_time": 0.0,
+    "card": "GPU-8c020534-54fa-bce6-22ef-b5f9e12202e7"
+  },
+  {
     "uuid": "GPU-8e436d08036e",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
@@ -24680,6 +24736,20 @@
     "clock_avg": 1290.4,
     "throttle_time": 299.7,
     "card": "GPU-a0b6211843cf"
+  },
+  {
+    "uuid": "GPU-a4247a4c-a87b-06cf-e87a-64a31b566b93",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "cache_lat",
+    "version": "1.2.0",
+    "unit": "dependent-loads/s",
+    "score": 9495550000.0,
+    "date": "2026-09-03 23:19:14",
+    "temp_max": 65.0,
+    "power_max": 132.0,
+    "clock_avg": 2399.6,
+    "throttle_time": 0.0,
+    "card": "GPU-a4247a4c-a87b-06cf-e87a-64a31b566b93"
   },
   {
     "uuid": "GPU-a70d5492c3d6",
