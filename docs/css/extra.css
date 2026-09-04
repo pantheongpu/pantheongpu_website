@@ -141,6 +141,15 @@ body:has(#benchmarkTable) .md-grid {
   flex-wrap: wrap;
 }
 
+/* A <select> is as wide as its longest option unless told otherwise. The card
+   picker's options carry a GPU name, its UUID and a run count, so on a phone
+   the element ran to 675px and dragged the whole page sideways. */
+.benchmark-controls select {
+  flex: 1 1 220px;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .benchmark-filter {
   position: relative;
   display: inline-block;

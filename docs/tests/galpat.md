@@ -26,8 +26,9 @@ The region is **clamped** into the allocation rather than rejected, so a region
 running past the end of memory shrinks instead of failing the run.
 
 The intended use is as a **second stage**. Sweep memory with the linear tests
-(`march_test`, `memory_hammer`), record failing addresses with `--fault_map`,
-then aim `galpat` at the implicated region for the expensive exhaustive check.
+(`march_test`, `memory_hammer`), record failing addresses with the workload
+binaries' `--fault_map` option, then aim `galpat` at the implicated region for
+the expensive exhaustive check.
 
 ## Target Subsystems
 * **Primary Target:** Address-decoder faults and cell-to-cell coupling within a region.
@@ -50,11 +51,19 @@ then aim `galpat` at the implicated region for the expensive exhaustive check.
 pantheon --test galpat --duration 60 --gpu 0 --mem 50
 ```
 
-Aimed at a region another test has already implicated:
+Aimed at a region another test has already implicated. These are options of
+the workload binary, so run it directly:
 
 ```bash
+# From a source checkout:
 ./build/galpat 0 60 50 --verify --region_offset 4194304 --region_size 65536 \
   --fault_map galpat_region.csv
+
+# From a pip, apt or COPR install the binaries are compiled on first run into
+# ~/.cache/pantheongpu/builds/<version>/<platform>-<target>/ (for example
+# 1.2.0/cuda-86). Run the one for your card from there:
+"$(ls -d ~/.cache/pantheongpu/builds/*/*/ | tail -n 1)galpat" 0 60 50 --verify \
+  --region_offset 4194304 --region_size 65536 --fault_map galpat_region.csv
 ```
 
 ## Result

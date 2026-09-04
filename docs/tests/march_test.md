@@ -57,10 +57,18 @@ addresses to appear.
 pantheon --test march_test --duration 60 --gpu 0 --mem 50
 ```
 
-Record every failing address rather than the capped console sample:
+Record every failing address rather than the capped console sample.
+`--fault_map` is an option of the workload binary, not of the `pantheon`
+command, so run the binary directly:
 
 ```bash
+# From a source checkout, where make puts the binaries in ./build:
 ./build/march_test 0 60 50 --verify --fault_map march_faults.csv
+
+# From a pip, apt or COPR install the binaries are compiled on first run into
+# ~/.cache/pantheongpu/builds/<version>/<platform>-<target>/ (for example
+# 1.2.0/cuda-86). Run the one for your card from there:
+"$(ls -d ~/.cache/pantheongpu/builds/*/*/ | tail -n 1)march_test" 0 60 50 --verify --fault_map march_faults.csv
 ```
 
 ## Result

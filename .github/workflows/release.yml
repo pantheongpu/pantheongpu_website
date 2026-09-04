@@ -225,6 +225,61 @@ jobs:
             dist/pantheon-gpu_${{ env.VERSION }}_all.deb
             dist/SHA256SUMS
 
+      - name: Mirror the release to the source repository
+        if: ${{ !inputs.dry_run }}
+        env:
+          SOURCE_REPO_TOKEN: ${{ secrets.PANTHEON_SOURCE_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+          # The site's header shows pantheongpu/pantheon's latest release and
+          # every page asks the GitHub API for it. That repository carries the
+          # tag but, without this step, no release: the badge stays empty and
+          # every visit logs a 404. The artifacts stay on this repository's
+          # release; the mirror only points at them.
+          if [ -z "${SOURCE_REPO_TOKEN}" ]; then
+            echo "::warning::PANTHEON_SOURCE_REPO_TOKEN is not set, so pantheongpu/pantheon gets no release for ${TAG}. Add a token with Contents: write on that repository, or create the release by hand."
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json, os, urllib.error, urllib.request
+
+          tag = os.environ["TAG"]
+          api = "https://api.github.com/repos/pantheongpu/pantheon/releases"
+          headers = {
+              "Authorization": f"Bearer {os.environ['SOURCE_REPO_TOKEN']}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+
+          def call(url, payload=None):
+              data = json.dumps(payload).encode() if payload is not None else None
+              request = urllib.request.Request(url, data=data, headers=headers)
+              with urllib.request.urlopen(request) as response:
+                  return json.load(response)
+
+          try:
+              call(f"{api}/tags/{tag}")
+              print(f"pantheongpu/pantheon already has a release for {tag}")
+              raise SystemExit(0)
+          except urllib.error.HTTPError as error:
+              if error.code != 404:
+                  raise
+
+          body = (
+              f"Pantheon {tag}. Wheels, the Debian package, source archives and "
+              "checksums are published on the website repository's release:\n"
+              f"https://github.com/pantheongpu/pantheongpu_website/releases/tag/{tag}\n\n"
+              "Install instructions: https://pantheongpu.com/getting-started/\n"
+          )
+          created = call(api, {
+              "tag_name": tag,
+              "name": f"Pantheon {tag}",
+              "body": body,
+              "make_latest": "true",
+          })
+          print(f"created {created['html_url']}")
+          PY
+
       - name: Update the release page
         if: ${{ !inputs.dry_run }}
         env:

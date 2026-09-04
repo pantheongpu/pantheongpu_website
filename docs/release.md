@@ -150,7 +150,7 @@ to exercise the tooling with no GPU.
 **Release Date:** August 15, 2026
 
 ### Release Notes
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.13...v1.0.14
+**Full Changelog**: `v1.0.13...v1.0.14`
 
 ### Downloads
 | File | Format | Size |
@@ -167,10 +167,10 @@ to exercise the tooling with no GPU.
 
 ### Release Notes
 #### What's Changed
-* [codex] Fix source and AMD execution paths by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/9
+* [codex] Fix source and AMD execution paths by @saqibkh
 
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.12...v1.0.13
+**Full Changelog**: `v1.0.12...v1.0.13`
 
 ### Downloads
 | File | Format | Size |
@@ -187,10 +187,10 @@ to exercise the tooling with no GPU.
 
 ### Release Notes
 #### What's Changed
-* [codex] Prepare Pantheon 1.0.12 release by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/8
+* [codex] Prepare Pantheon 1.0.12 release by @saqibkh
 
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.11...v1.0.12
+**Full Changelog**: `v1.0.11...v1.0.12`
 
 ### Downloads
 | File | Format | Size |
@@ -207,12 +207,12 @@ to exercise the tooling with no GPU.
 
 ### Release Notes
 #### What's Changed
-* pantheon tuning params by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/5
-* Debian binary release by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/6
-* Debian binary release by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/7
+* pantheon tuning params by @saqibkh
+* Debian binary release by @saqibkh
+* Debian binary release by @saqibkh
 
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.8...v1.0.10
+**Full Changelog**: `v1.0.8...v1.0.10`
 
 ### Downloads
 | File | Format | Size |
@@ -229,15 +229,15 @@ to exercise the tooling with no GPU.
 
 ### Release Notes
 #### What's Changed
-* INitial Commit by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/1
-* Package Nuitka release archives by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/2
-* Update VERSION by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/3
-* Automate by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/4
+* INitial Commit by @saqibkh
+* Package Nuitka release archives by @saqibkh
+* Update VERSION by @saqibkh
+* Automate by @saqibkh
 
 #### New Contributors
-* @saqibkh made their first contribution in https://github.com/saqibkh/pantheongpu/pull/1
+* @saqibkh made their first contribution
 
-**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.7...v1.0.8
+**Full Changelog**: `v1.0.7...v1.0.8`
 
 ### Downloads
 | File | Format | Size |
