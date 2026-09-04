@@ -36,9 +36,9 @@ const COL_DEFS = [
     
     { key: "power_limit", label: "TDP (W)",     visible: true }, 
 
-    // Pseudonymous, stable per physical GPU. The raw UUID and the serial are
-    // never published: identity is only compared for equality, so a hash does
-    // the same job without handing out a hardware identifier.
+    // The GPU UUID the driver reported, published verbatim (decided
+    // 2026-08-31): it identifies the card, not a host, and it is what per-card
+    // history and dedup join on. Host identifiers are stripped upstream.
     { key: "uuid",        label: "GPU ID",      visible: false },
 ];
 

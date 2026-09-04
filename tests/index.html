@@ -3171,8 +3171,9 @@ and AI execution paths. Choose a test for its target subsystem and failure mode.
 <p>Structured cell-level diagnostics from memory-test literature. Where the
 bandwidth workloads ask <em>how fast does this move data</em>, these ask <em>which cell is
 bad, and why</em>. They compose as a funnel: sweep memory with the linear tests,
-record failing addresses with <code>--fault_map</code>, then aim the quadratic GALPAT at
-what they implicate.</p>
+record failing addresses with the workload binaries' <code>--fault_map</code> option (an
+option of the binary, not of the <code>pantheon</code> command; the march test page shows
+how to run one directly), then aim the quadratic GALPAT at what they implicate.</p>
 <div class="grid cards">
 <ul>
 <li>
