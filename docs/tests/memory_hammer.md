@@ -65,12 +65,16 @@ mapping, which is not public for most parts — so the stride is a knob to
 pantheon --test memory_hammer --duration 60 --gpu 0 --mem 50
 ```
 
-Sweeping the stride, recording every hit:
+Sweeping the stride, recording every hit. These are options of the workload
+binary, so run it directly:
 
 ```bash
+# From a source checkout (./build); a pip, apt or COPR install compiles into
+# ~/.cache/pantheongpu/builds/<version>/<platform>-<target>/ instead:
+BIN=./build/memory_hammer
+# BIN="$(ls -d ~/.cache/pantheongpu/builds/*/*/ | tail -n 1)memory_hammer"
 for s in 8192 16384 32768 65536; do
-  ./build/memory_hammer 0 60 50 --verify --hammer_stride $s \
-    --fault_map hammer_$s.csv
+  "$BIN" 0 60 50 --verify --hammer_stride $s --fault_map hammer_$s.csv
 done
 ```
 

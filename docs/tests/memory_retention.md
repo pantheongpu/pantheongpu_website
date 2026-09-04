@@ -50,11 +50,19 @@ than a fixed value.
 pantheon --test memory_retention --duration 60 --gpu 0 --mem 50
 ```
 
-Sweeping the interval and recording every failing address:
+Sweeping the interval and recording every failing address. These are options
+of the workload binary, so run it directly:
 
 ```bash
+# From a source checkout:
 ./build/memory_retention 0 300 50 --verify --retention_delay 300 \
   --fault_map retention_300s.csv
+
+# From a pip, apt or COPR install the binaries are compiled on first run into
+# ~/.cache/pantheongpu/builds/<version>/<platform>-<target>/ (for example
+# 1.2.0/cuda-86). Run the one for your card from there:
+"$(ls -d ~/.cache/pantheongpu/builds/*/*/ | tail -n 1)memory_retention" 0 300 50 --verify \
+  --retention_delay 300 --fault_map retention_300s.csv
 ```
 
 ## Result

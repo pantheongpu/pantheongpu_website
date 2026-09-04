@@ -53,10 +53,16 @@ PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
 # Ten AI workloads shared a single kernel body before v1.0.19 -- six of them
 # compiled to byte-identical SASS -- yet each published its own invented unit,
 # as though it had measured something the others had not. The numbers are real
-# throughput, but the metric names describe work that never happened, so these
-# runs stay in the raw reports and out of the public leaderboard. v1.0.19
-# replaced the lot with one honest unit, and no release since emits these
-# strings, so matching on the unit needs no version arithmetic.
+# throughput, but the metric names describe work that never happened, so those
+# runs stay in the raw reports and out of the public leaderboard.
+#
+# The unit alone does not identify such a run. v1.0.19 gave the shared kernel
+# one honest unit, but the workloads that were later rewritten as real,
+# distinct kernels (llm_prefill, llm_decode, kv_cache_churn, graph_replay)
+# report tokens/s and friends again, legitimately. Matching on the unit
+# without the version silently discarded every v1.1.0 and v1.2.0 run of
+# those four tests, so a retired metric is a retired unit AND a version
+# before the fix. See is_retired_metric().
 RETIRED_AI_UNITS = {
     "attention-tiles/s",
     "cache-updates/s",
@@ -71,6 +77,9 @@ RETIRED_AI_UNITS = {
     "train-steps/s",
     "verified-tokens/s",
 }
+
+# First release whose AI workloads report what they measure.
+RETIRED_AI_UNITS_FIXED_IN = (1, 0, 19)
 
 # A sensor that was never read is not a reading of zero. Pantheon recorded an
 # absent sensor as 0 until v1.1.0, and this generator defaulted the same fields
@@ -247,6 +256,27 @@ def is_unknown_version(value):
     return normalize(value, "").lower() in {"", "unknown", "vunknown", "n/a", "none"}
 
 
+def version_tuple(value):
+    """Numeric tuple for a Pantheon version string: "v1.2.0" -> (1, 2, 0)."""
+    text = normalize(value, "").strip().lower().lstrip("v")
+    parts = []
+    for part in text.split("."):
+        try:
+            parts.append(int(part))
+        except ValueError:
+            parts.append(0)
+    return tuple(parts)
+
+
+def is_retired_metric(unit, version):
+    """True when a unit names work that the run's release never did.
+
+    Only the shared pre-v1.0.19 kernel is retired; the same unit strings on a
+    later release come from the rewritten workloads and are real.
+    """
+    return unit in RETIRED_AI_UNITS and version_tuple(version) < RETIRED_AI_UNITS_FIXED_IN
+
+
 def infer_unit(test_name, declared_unit, raw_score):
     declared_unit = normalize(declared_unit, "")
     if declared_unit:
@@ -415,16 +445,16 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     else:
                         unit = infer_unit(test_name, test.get("Unit"), raw_score)
 
-                    if unit in RETIRED_AI_UNITS:
-                        print(f"[SKIPPED] retired metric {unit!r} in {f}: {test_name}")
-                        continue
-
                     report_version = first_present(data, ["Version", "pantheon_version"], "1.0.0")
                     version_str = test.get("Version", report_version)
                     if is_unknown_version(version_str) and not is_unknown_version(report_version):
                         version_str = report_version
                     if is_unknown_version(version_str):
                         print(f"[SKIPPED] Unknown Pantheon version in {f}: {test_name}")
+                        continue
+
+                    if is_retired_metric(unit, version_str):
+                        print(f"[SKIPPED] retired metric {unit!r} on {version_str} in {f}: {test_name}")
                         continue
 
                     # --- CAPTURE ALL FIELDS ---

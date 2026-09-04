@@ -11,9 +11,12 @@ hide:
 </div>
 
 !!! note "Reading these charts"
-    Cards are identified by a stable pseudonym rather than their GPU UUID. The
-    pseudonym follows one physical card across releases, which is what a history
-    needs; the UUID itself is never published.
+    Cards are identified by the GPU UUID the driver reports, published as-is.
+    A UUID names one physical card, not the machine it sat in, and it follows
+    the card across releases and owners, which is what a history needs. Host
+    details (hostnames, network information) are removed before a report is
+    published. Cards from early reports that carried no UUID are grouped by
+    model, memory size and driver instead and labelled as having no GPU ID.
 
     When a workload's metric changed between releases, each unit is drawn as its
     own series. Values in different units are not comparable, and joining them

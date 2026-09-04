@@ -99,11 +99,16 @@ def asset_sort_value(name: str) -> tuple[int, str]:
 # them is a 404 for a visitor to this public site. Strip the link and keep the
 # text: the description of what changed is the useful part, and a dead link
 # next to it is worse than no link.
+#
+# The private repository has carried two names: saqibkh/pantheongpu for the
+# v1.0.x releases and pantheongpu/pantheongpu after the move to the
+# organisation. Notes pasted from either era must be cleaned the same way.
+_PRIVATE_REPOS = r"(?:pantheongpu|saqibkh)/pantheongpu"
 _PRIVATE_PR_LINK = re.compile(
-    r"\s*(?:in\s+)?https?://github\.com/pantheongpu/pantheongpu/pull/\d+\b"
+    r"\s*(?:in\s+)?https?://github\.com/" + _PRIVATE_REPOS + r"/pull/\d+\b"
 )
 _PRIVATE_COMPARE_LINK = re.compile(
-    r"https?://github\.com/pantheongpu/pantheongpu/compare/(\S+)"
+    r"https?://github\.com/" + _PRIVATE_REPOS + r"/compare/(\S+)"
 )
 
 

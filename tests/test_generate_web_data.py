@@ -5,6 +5,7 @@ import pytest
 from website_utils.generate_web_data import (
     first_present,
     infer_unit,
+    is_retired_metric,
     is_unknown_version,
     main,
     normalize_gpu_name,
@@ -470,3 +471,36 @@ def test_reports_are_discovered_by_shape_not_name(tmp_path):
     assert {row["test"] for row in rows} == {"memory_write", "cache_lat", "memory_read"}
     written = json.loads(output_file.read_text(encoding="utf-8"))
     assert {row["test"] for row in written} == {"memory_write", "cache_lat", "memory_read"}
+
+
+def test_retired_ai_units_are_skipped_only_before_the_fix_release(tmp_path):
+    """The shared pre-v1.0.19 AI kernel is retired; the rewritten workloads are not.
+
+    llm_prefill, llm_decode, kv_cache_churn and graph_replay became real,
+    distinct kernels after v1.0.19 and legitimately report the same unit
+    strings the retired kernel invented. Filtering on the unit alone threw
+    away every one of their v1.1.0 and v1.2.0 runs.
+    """
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    result = {"Test Name": "llm_prefill", "GPU ID": 0, "Score": 4321.0, "Unit": "prompt-tokens/s"}
+
+    write_report(db_dir, "pantheon_report_old.json",
+                 [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-OLD"}], [dict(result)], version="1.0.18")
+    write_report(db_dir, "pantheon_report_new.json",
+                 [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-NEW"}], [dict(result)], version="1.2.0")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert [row["uuid"] for row in rows] == ["GPU-NEW"]
+    assert rows[0]["unit"] == "prompt-tokens/s"
+    assert rows[0]["score"] == 4321.0
+
+
+def test_is_retired_metric_needs_both_the_unit_and_an_old_release():
+    assert is_retired_metric("tokens/s", "1.0.18")
+    assert is_retired_metric("tokens/s", "v1.0.18")
+    assert not is_retired_metric("tokens/s", "1.0.19")
+    assert not is_retired_metric("prompt-tokens/s", "1.2.0")
+    assert not is_retired_metric("MAPS", "1.0.0")

@@ -1113,14 +1113,21 @@ def test_published_data_carries_no_retired_metric_units():
     unit as though it measured something distinct. The throughput numbers are
     real; the metric names describe work that never happened.
     """
-    from website_utils.generate_web_data import RETIRED_AI_UNITS
+    from website_utils.generate_web_data import is_retired_metric
 
-    published = {row.get("unit") for row in _published_rows()}
-    leaked = published & RETIRED_AI_UNITS
+    rows = _published_rows()
+    leaked = sorted({
+        (row.get("test"), row.get("version"), row.get("unit"))
+        for row in rows if is_retired_metric(row.get("unit"), row.get("version"))
+    })
+    assert not leaked, f"retired metric units on the leaderboard: {leaked}"
 
-    assert not leaked, f"retired metric units on the leaderboard: {sorted(leaked)}"
+    published = {row.get("unit") for row in rows}
     # scheduler and atomic_virus were never part of that change.
     assert "KIPS" in published and "MAPS" in published
+    # The rewritten AI workloads report these units for real from v1.1.0 on;
+    # a filter that keys on the unit alone erases them from the site.
+    assert {"prompt-tokens/s", "tokens/s", "cache-updates/s", "graph-steps/s"} <= published
 def test_no_workflow_pushes_straight_to_main():
     """Automation must go through a pull request, like a person does.
 
@@ -1220,7 +1227,7 @@ def test_published_ids_match_the_reports():
     # an incomplete run, a multi-GPU workload, or a retired metric. Anything
     # else means the id does not join, which is the bug this guards.
     from website_utils.generate_web_data import (
-        PUBLIC_EXCLUDED_TESTS, RETIRED_AI_UNITS)
+        PUBLIC_EXCLUDED_TESTS, is_retired_metric)
 
     publishable = set()
     for path in (ROOT / "database").glob("*pantheon_report_*.json"):
@@ -1241,8 +1248,9 @@ def test_published_ids_match_the_reports():
             if not isinstance(result, dict):
                 continue
             name = str(result.get("Test Name", "")).lower()
+            version = result.get("Version") or report.get("Version") or report.get("pantheon_version")
             if name and name not in PUBLIC_EXCLUDED_TESTS \
-                    and str(result.get("Unit")) not in RETIRED_AI_UNITS:
+                    and not is_retired_metric(str(result.get("Unit")), version):
                 publishable.add(identifier)
 
     unexplained = (stored & publishable) - published
@@ -1655,3 +1663,70 @@ def test_funding_manifest_is_published_and_points_at_the_source_repo():
     assert len(manifest["entity"]["description"]) <= 2000
     assert len(project["description"]) <= 2000
     assert len(project["tags"]) <= 10
+
+
+def test_identity_text_matches_the_raw_uuid_policy():
+    """The site publishes the driver-reported GPU UUID as-is (2026-08-31).
+
+    The history page and the column comment kept describing the earlier
+    hashed pseudonym and promised the UUID is "never published", which was
+    false for 659 rows. A privacy statement the data contradicts is worse
+    than none."""
+    for path in ("docs/gpu-history.md", "docs/js/tables.js", "docs/js/gpu-history.js",
+                 "docs/benchmarks.md", "docs/community.md", "docs/methodology.md"):
+        assert "never published" not in read(path).lower(), path
+    assert "published as-is" in read("docs/gpu-history.md")
+
+
+def test_release_page_carries_no_links_into_private_repositories():
+    """Pasted release notes link to pull requests in the private repository.
+
+    It has had two names; both are 404s for a visitor, and the v1.0.x notes
+    still carried the older one after the script learned about the newer."""
+    from website_utils.update_release_page import strip_private_links
+
+    assert not re.search(r"github\.com/(?:saqibkh|pantheongpu)/pantheongpu/", read("docs/release.md"))
+    assert strip_private_links(
+        "* Fix paths by @saqibkh in https://github.com/saqibkh/pantheongpu/pull/9"
+    ) == "* Fix paths by @saqibkh"
+    assert strip_private_links(
+        "**Full Changelog**: https://github.com/saqibkh/pantheongpu/compare/v1.0.7...v1.0.8"
+    ) == "**Full Changelog**: `v1.0.7...v1.0.8`"
+    assert strip_private_links(
+        "* Thing by @x in https://github.com/pantheongpu/pantheongpu/pull/12"
+    ) == "* Thing by @x"
+
+
+def test_fault_map_examples_work_from_a_packaged_install():
+    """--fault_map belongs to the workload binaries, not the pantheon command.
+
+    The pages showed ./build/<test>, a path that exists only in a source
+    checkout; pip, apt and COPR installs compile into the build cache."""
+    for page in ("docs/tests/march_test.md", "docs/tests/galpat.md",
+                 "docs/tests/memory_hammer.md", "docs/tests/memory_retention.md"):
+        text = read(page)
+        assert "--fault_map" in text, page
+        assert ".cache/pantheongpu/builds" in text, page
+        assert "./build/" in text, page
+    for page in ("docs/tests/index.md", "docs/tests/galpat.md"):
+        assert re.search(r"workload\s+binaries", read(page)), page
+
+
+def test_history_card_picker_cannot_widen_the_page():
+    """A <select> is as wide as its longest option; the card labels carry a
+    UUID, so on a phone the history page scrolled sideways to 710px."""
+    css = read("docs/css/extra.css")
+    assert ".benchmark-controls select {" in css
+    block = css.split(".benchmark-controls select {", 1)[1].split("}", 1)[0]
+    assert "max-width: 100%" in block and "min-width: 0" in block
+
+
+def test_release_mirrors_the_tag_to_the_source_repository():
+    """Every page asks the GitHub API for pantheongpu/pantheon's latest release.
+
+    The source repository carries the tag but had no release, so the header
+    badge was empty and every visit logged a 404."""
+    workflow = read(".github/workflows/release.yml")
+    assert "repos/pantheongpu/pantheon/releases" in workflow
+    assert "PANTHEON_SOURCE_REPO_TOKEN" in workflow
+    assert "Mirror the release to the source repository" in workflow
