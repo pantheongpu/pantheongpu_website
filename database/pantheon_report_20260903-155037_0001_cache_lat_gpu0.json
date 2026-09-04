@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-03 15:50:37",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "2825.95Mhz"
+    },
+    "ram_info": {
+        "total": "30.16GB",
+        "available": "28.78GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA L4",
+            "memory_total": "23034 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 72.0,
+            "uuid": "GPU-6a8e4ee6-cbd8-d4c5-20f8-fe2a3c436867",
+            "serial": "1791225050594"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260903-155037",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-03 15:55:38",
+    "test_results": [
+        {
+            "Test Name": "cache_lat",
+            "Version": "1.2.0",
+            "Description": "Cache Latency",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 3224070000.0,
+            "Unit": "dependent-loads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 77.0,
+            "Max Temp (C)": 79.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 71.9,
+            "Max Power (W)": 72.3,
+            "Avg Clock(MHz)": 1633.1,
+            "Min Clock (MHz)": 1590.0,
+            "Max Clock (MHz)": 2040.0,
+            "Avg GPU Util (%)": 99.1,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 8878.9,
+            "Memory Total (MiB)": 23034.0,
+            "Energy (Wh)": 6.007,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 300.5,
+            "Efficiency": 44841029.21,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-89/cache_latency 0 300 50 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260903-155037/reliability/cache_lat/gpu0/ras.json"
+        }
+    ]
+}

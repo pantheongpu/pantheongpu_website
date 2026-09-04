@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-04 00:19:03",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2593.96Mhz"
+    },
+    "ram_info": {
+        "total": "222.16GB",
+        "available": "219.08GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A10",
+            "memory_total": "23028 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 150.0,
+            "uuid": "GPU-2b2a06e9-ef76-44dc-a222-a38688c4fabe",
+            "serial": "1323122007422"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260904-001903",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-04 00:24:04",
+    "test_results": [
+        {
+            "Test Name": "incinerator",
+            "Version": "1.2.0",
+            "Description": "Incinerator (LDS Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 11.8814,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 71.1,
+            "Max Temp (C)": 75.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 136.3,
+            "Max Power (W)": 138.8,
+            "Avg Clock(MHz)": 1364.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1395.0,
+            "Avg GPU Util (%)": 96.7,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 691.6,
+            "Memory Total (MiB)": 23028.0,
+            "Energy (Wh)": 11.363,
+            "Thermal Rise (C)": 25.0,
+            "Throttle Time (s)": 299.6,
+            "Efficiency": 87.17,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-86/compute_virus_agg 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260904-001903/reliability/incinerator/gpu0/ras.json"
+        }
+    ]
+}
