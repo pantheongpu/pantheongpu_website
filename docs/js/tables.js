@@ -232,11 +232,19 @@ function compactNumber(value) {
 function formatCellValue(row, key, display = false) {
     let val = row[key];
 
-    if (key === "score") {
-        if (display && !isMissingValue(val)) val = compactNumber(val);
-        return formatMetric(val, row.unit);
+    if (key === "uuid") {
+        // Reports before v1.0.8 carried no UUID. Say so rather than print
+        // "Unknown" as though it were an identifier shared by every such card.
+        return isMissingValue(val) || val === "Unknown" ? "no GPU ID" : val;
     }
-    if (key === "throughput") {
+    if (key === "score" || key === "throughput") {
+        if (row.unit === "Watts") {
+            // No throughput was recorded for this run, so the generator kept
+            // peak power to keep the run visible. Watts in a throughput column
+            // read as a result; label what they are.
+            if (isMissingValue(val)) return "N/A";
+            return `${display ? compactNumber(val) : val} W (power only, no throughput)`;
+        }
         if (display && !isMissingValue(val)) val = compactNumber(val);
         return formatMetric(val, row.unit);
     }

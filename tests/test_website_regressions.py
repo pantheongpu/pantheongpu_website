@@ -77,10 +77,16 @@ def test_charts_use_a_vendored_versioned_dependency():
     mkdocs = read("mkdocs.yml")
     apexcharts = ROOT / "docs/js/apexcharts.min.js"
 
-    assert "- js/apexcharts.min.js" in mkdocs
+    # Vendored, but no longer on every page: 245 KB of charting library was
+    # shipped to 62 pages that draw no chart. The two chart scripts load it
+    # themselves, from the same directory, only when a chart element exists.
+    assert "- js/apexcharts.min.js" not in mkdocs
     assert "cdn.jsdelivr.net/npm/apexcharts" not in mkdocs
     assert apexcharts.exists()
     assert apexcharts.stat().st_size > 500_000
+    for script in ("docs/js/charts.js", "docs/js/gpu-history.js"):
+        assert 'new URL("apexcharts.min.js"' in read(script), script
+        assert "function ensureApexCharts" in read(script), script
 
 
 def test_test_documentation_index_places_ai_category_last():
@@ -1227,7 +1233,7 @@ def test_published_ids_match_the_reports():
     # an incomplete run, a multi-GPU workload, or a retired metric. Anything
     # else means the id does not join, which is the bug this guards.
     from website_utils.generate_web_data import (
-        PUBLIC_EXCLUDED_TESTS, is_retired_metric)
+        PUBLIC_EXCLUDED_TESTS, is_retired_metric, is_unmeasured, to_float)
 
     publishable = set()
     for path in (ROOT / "database").glob("*pantheon_report_*.json"):
@@ -1249,8 +1255,10 @@ def test_published_ids_match_the_reports():
                 continue
             name = str(result.get("Test Name", "")).lower()
             version = result.get("Version") or report.get("Version") or report.get("pantheon_version")
+            unit = str(result.get("Unit"))
             if name and name not in PUBLIC_EXCLUDED_TESTS \
-                    and not is_retired_metric(str(result.get("Unit")), version):
+                    and not is_retired_metric(unit, version) \
+                    and not is_unmeasured(name, to_float(result.get("Score"), default=None), unit):
                 publishable.add(identifier)
 
     unexplained = (stored & publishable) - published
@@ -1730,3 +1738,81 @@ def test_release_mirrors_the_tag_to_the_source_repository():
     assert "repos/pantheongpu/pantheon/releases" in workflow
     assert "PANTHEON_SOURCE_REPO_TOKEN" in workflow
     assert "Mirror the release to the source repository" in workflow
+
+
+def test_published_rows_carry_no_unmeasured_zero_scores():
+    """A throughput of exactly zero is a workload that never ran, not a score."""
+    from website_utils.generate_web_data import is_unmeasured
+
+    zeros = [(row["gpu"], row["test"], row["version"]) for row in _published_rows()
+             if is_unmeasured(row["test"], row["score"], row["unit"])]
+    assert not zeros, zeros[:10]
+
+    unsupported = json.loads(read("docs/assets/unsupported_workloads.json"))
+    statuses = {entry["status"] for entry in unsupported}
+    assert "NO_MEASUREMENT" in statuses
+    assert all(entry["reason"] for entry in unsupported)
+
+
+def test_published_vendor_is_never_unknown_for_a_named_card():
+    unknown = sorted({row["gpu"] for row in _published_rows()
+                      if str(row["manufacturer"]).lower() == "unknown"
+                      and any(h in row["gpu"].lower() for h in ("nvidia", "geforce", "tesla", "amd", "radeon"))})
+    assert not unknown, unknown
+
+
+def test_explorer_labels_power_fallback_and_anonymous_cards():
+    tables = read("docs/js/tables.js")
+    assert "power only, no throughput" in tables
+    assert '"no GPU ID"' in tables
+
+
+def test_history_chart_is_transparent_in_dark_mode():
+    history = read("docs/js/gpu-history.js")
+    block = history.split("chart = new ApexCharts(target, {", 1)[1].split("theme:", 1)[0]
+    assert 'background: "transparent"' in block
+
+
+def test_site_metadata_is_tidy():
+    mkdocs = read("mkdocs.yml")
+    assert "copyright:" in mkdocs
+    assert (ROOT / "docs/favicon.ico").exists(), "browsers request /favicon.ico unprompted"
+    for page in ("docs/getting-started.md", "docs/fleet-validation.md", "docs/programs-support.md"):
+        assert "| PantheonGPU" not in read(page).split("---", 2)[1], page
+    assert "title: Test Documentation" in read("docs/tests/index.md")
+    assert "title: Research and Reports" in read("docs/reports.md")
+
+
+def test_docs_prose_uses_no_em_dashes():
+    offenders = []
+    for path in sorted((ROOT / "docs").glob("**/*.md")):
+        if path.name == "release.md":
+            continue  # generated from GitHub release notes
+        for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if "\u2014" in line:
+                offenders.append(f"{path.relative_to(ROOT)}:{number}")
+    assert not offenders, offenders
+
+
+def test_uninstall_covers_every_current_channel():
+    page = read("docs/getting-started.md")
+    script = read("docs/uninstall.sh")
+    assert "sudo apt-get remove pantheon-gpu" in page
+    assert "sudo dnf remove pantheon-gpu" in page
+    assert "docker rmi ghcr.io/pantheongpu/pantheon" in page
+    assert "Releases up to v1.0.19" in page
+    assert "apt-get purge -y pantheon-gpu" in script
+    assert "rpm -q pantheon-gpu" in script
+    assert "/etc/apt/sources.list.d/pantheon.list" in script
+
+
+def test_kernel_descriptions_match_the_kernels():
+    memory_read = read("docs/tests/memory_read.md")
+    assert "volatile" not in memory_read
+    assert "128-bit" in memory_read and "16" in memory_read
+    assert "does not yet execute" not in read("docs/ai-workloads.md")
+    index = read("docs/tests/index.md")
+    diagnostics = index.split("## Memory Diagnostics", 1)[1].split("## ", 1)[0]
+    assert "ras_validator.md" in diagnostics
+    assert "## Baseline" in index
+    assert "Verification of workload output is on by default" in read("docs/getting-started.md")

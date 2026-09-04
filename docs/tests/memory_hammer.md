@@ -14,10 +14,10 @@ hammering a single address would sit on an open row buffer and disturb nothing.
 
 `--hammer_stride` defaults to 32768 elements (512 KiB). The stride that places
 two aggressors in the same bank on different rows depends on the DRAM address
-mapping, which is not public for most parts — so the stride is a knob to
+mapping, which is not public for most parts, so the stride is a knob to
 **sweep**, not a value that is correct out of the box.
 
-!!! warning "The cache problem — read this before trusting a result"
+!!! warning "The cache problem: read this before trusting a result"
     A hammer only disturbs a victim if its reads actually reach DRAM. GPU caches
     will answer a tight loop over two addresses forever, and a cached read
     disturbs nothing. Choosing a cache-bypassing load instruction is **not
@@ -35,7 +35,7 @@ mapping, which is not public for most parts — so the stride is a knob to
     If that line reads `FITS IN L2 - reads will be cache hits`, the run is not
     hammering anything. Raise `--hammer_pairs`. On a 12 GB Ampere card one pair
     per thread sustains ~5.7e10 reads/s (cache speed) while eight pairs drop to
-    ~2.2e10 reads/s — the card's DRAM bandwidth.
+    ~2.2e10 reads/s, the card's DRAM bandwidth.
 
 ## Target Subsystems
 * **Primary Target:** DRAM row-to-row disturbance between physically adjacent cells.
@@ -55,7 +55,7 @@ mapping, which is not public for most parts — so the stride is a knob to
 !!! note "Honest limits"
     Without the physical address mapping, Pantheon cannot prove a read opened a
     given row or that two addresses share a bank. The metric is named
-    `aggressor-reads/s` — what is actually measured — rather than
+    `aggressor-reads/s`, what is actually measured, rather than
     "activations/s", which would imply a DRAM-level guarantee this test cannot
     make. A `PASS` means no disturbance was observed **at this stride**, not that
     the part is immune.
@@ -80,5 +80,5 @@ done
 
 ## Result
 `Throughput` reports `aggressor-reads/s`, and startup reports the aggressor
-footprint against L2. Read the two together — a high read rate with a footprint
+footprint against L2. Read the two together: a high read rate with a footprint
 that fits in L2 means the cache absorbed the run.

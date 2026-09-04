@@ -71,4 +71,4 @@ Detect changes after driver, CUDA or ROCm, firmware, operating system, container
 - PCIe and multi-GPU interconnect testing
 - Local JSON, CSV, HTML, and trace reports
 - A public performance database for comparing systems
-- Open source under Apache 2.0 — every workload is readable, buildable, and runnable from source
+- Open source under Apache 2.0: every workload is readable, buildable, and runnable from source

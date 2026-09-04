@@ -4,8 +4,10 @@ import pytest
 
 from website_utils.generate_web_data import (
     first_present,
+    infer_manufacturer,
     infer_unit,
     is_retired_metric,
+    is_unmeasured,
     is_unknown_version,
     main,
     normalize_gpu_name,
@@ -504,3 +506,57 @@ def test_is_retired_metric_needs_both_the_unit_and_an_old_release():
     assert not is_retired_metric("tokens/s", "1.0.19")
     assert not is_retired_metric("prompt-tokens/s", "1.2.0")
     assert not is_retired_metric("MAPS", "1.0.0")
+
+
+def test_zero_throughput_runs_are_recorded_as_unmeasured_not_published(tmp_path):
+    """0 GRays/s is not a slow card, it is a workload that never ran.
+
+    rt_virus without an OptiX SDK and media_enc_virus without an encoder
+    report a score of exactly zero; the explorer showed them as "0 GRays/s"
+    and "0 FPS" under real cards. baseline_metrics is idle by design."""
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(db_dir, "pantheon_report_zero.json",
+                 [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-ZERO"}],
+                 [{"Test Name": "rt_virus", "GPU ID": 0, "Score": 0.0, "Unit": "GRays/s", "Max Power (W)": 92.9},
+                  {"Test Name": "baseline_metrics", "GPU ID": 0, "Score": 0.0, "Unit": "GB/s"},
+                  {"Test Name": "memory_read", "GPU ID": 0, "Score": 1500.0, "Unit": "GB/s"}],
+                 version="1.2.0")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert sorted(row["test"] for row in rows) == ["baseline_metrics", "memory_read"]
+    unsupported = json.loads((output_file.parent / "unsupported_workloads.json").read_text())
+    assert [(u["test"], u["status"]) for u in unsupported] == [("rt_virus", "NO_MEASUREMENT")]
+    assert "OptiX" in unsupported[0]["reason"]
+    assert is_unmeasured("rt_virus", 0.0, "GRays/s")
+    assert not is_unmeasured("baseline_metrics", 0.0, "GB/s")
+    assert not is_unmeasured("pulse_virus", 0.0, "Watts")
+    assert not is_unmeasured("rt_virus", 12.5, "GRays/s")
+
+
+def test_unknown_vendor_is_inferred_from_the_product_name(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(db_dir, "pantheon_report_t4.json",
+                 [{"id": 0, "name": "Tesla T4", "uuid": "Unknown", "manufacturer": "Unknown"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 300.0, "Unit": "GB/s"}])
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows[0]["manufacturer"] == "NVIDIA"
+    assert infer_manufacturer("Unknown", "AMD Instinct MI300X") == "AMD"
+    assert infer_manufacturer("Unknown", "NVIDIA GeForce RTX 3060") == "NVIDIA"
+    assert infer_manufacturer("Advanced Micro Devices", "Radeon RX 7900") == "Advanced Micro Devices"
+    assert infer_manufacturer("Unknown", "Mystery Accelerator") == "Unknown"
+
+
+def test_pre_fix_units_of_the_two_late_rewrites_are_retired_too():
+    assert is_retired_metric("allocation-events/s", "1.0.18")
+    assert is_retired_metric("rotary-tokens/s", "1.0.18")
+    assert not is_retired_metric("alloc-events/s", "1.0.18")
+    assert not is_retired_metric("ai-ops/s", "1.2.0")

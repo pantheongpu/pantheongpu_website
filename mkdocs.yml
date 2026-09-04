@@ -1,6 +1,7 @@
 site_name: PANTHEON
 site_description: Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.
 site_url: https://pantheongpu.com
+copyright: "&copy; PantheonGPU. Pantheon is released under the Apache-2.0 license."
 repo_url: https://github.com/pantheongpu/pantheon
 repo_name: pantheongpu/pantheon
 edit_uri: ""
@@ -141,7 +142,6 @@ extra_css:
   - css/modern.css
 
 extra_javascript:
-  - js/apexcharts.min.js
   - js/charts.js
   - js/tables.js
   - js/gpu-history.js

@@ -13,6 +13,13 @@ hide:
 !!! note "Data provenance"
     Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
 
+!!! note "Runs that could not run"
+    A workload that reported zero throughput never executed its measured path
+    (ray tracing without an OptiX SDK, video encode without an encoder). Those
+    runs are listed with the reason in
+    [unsupported_workloads.json](assets/unsupported_workloads.json) instead of
+    appearing here as a zero.
+
 [Compare leaders by workload](benchmark-comparisons.md){ .md-button .md-button--primary }
 [Read the benchmark methodology](methodology.md){ .md-button }
 

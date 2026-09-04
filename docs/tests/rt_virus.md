@@ -8,7 +8,7 @@ The `rt_virus` is designed to overwhelm the dedicated Ray Tracing intersection e
     official Pantheon builds skip `rt_virus` by default and report `SKIP`.
     To run it on NVIDIA hardware, download the free
     [OptiX SDK](https://developer.nvidia.com/designworks/optix/download) and
-    point `OPTIX_PATH` at its `include` directory — the build cache picks the
+    point `OPTIX_PATH` at its `include` directory; the build cache picks the
     change up and rebuilds automatically:
 
     ```bash

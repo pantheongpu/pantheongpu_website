@@ -1,5 +1,5 @@
 ---
-title: Getting Started | PantheonGPU
+title: Getting Started
 description: Install PantheonGPU and run your first GPU health, diagnostics, and performance validation workloads.
 ---
 
@@ -11,7 +11,7 @@ description: Install PantheonGPU and run your first GPU health, diagnostics, and
 PantheonGPU automatically detects CUDA, ROCm/HIP, or mock mode. Run the `pantheon` command directly after installation.
 </div>
 
-## Install on Ubuntu or Debian
+## Install
 
 Install the basic build tools:
 
@@ -110,7 +110,7 @@ to run it.
     ```
 
     Built for Fedora 43/44 and EPEL 10 (RHEL, Rocky and Alma 10). EPEL 9 is
-    not built: its Python stack cannot satisfy the build's setuptools floor —
+    not built: its Python stack cannot satisfy the build's setuptools floor, so
     use pipx or the Docker image there. Add the CUDA or ROCm toolkit
     separately for real hardware.
 
@@ -141,8 +141,9 @@ to run it.
     ```
 
     Installs both `pantheon` and `pantheon-gpu`; they are the same program.
-    Telemetry and spreadsheet export come from `Recommends` and `Suggests`, so
-    apt pulls them by default and they can be left out on a minimal install.
+    Telemetry and spreadsheet export come from `Recommends`, so apt pulls them
+    by default and they can be left out on a minimal install; the CUDA toolkit
+    is only a `Suggests`.
 
     The workloads compile on first run, which is why the package depends on
     `g++` and `make`. Add the CUDA or ROCm toolkit separately for real
@@ -185,7 +186,7 @@ pantheon --test fp64_virus --duration 30 --gpu 0
 
 ## Profiling and reports
 
-Use `--verify` to validate workload output. Use `--profile` to collect performance counters, traces, and a per-workload HTML summary:
+Verification of workload output is on by default; pass `--skip_verify` to turn it off. Use `--profile` to collect performance counters, traces, and a per-workload HTML summary:
 
 ```bash
 pantheon --test llm_decode --duration 60 --gpu 0 --verify --profile
@@ -195,19 +196,29 @@ See [Test Documentation](tests/index.md) for workload guidance, [Releases and Do
 
 ## Uninstall
 
-Remove a package installation with:
+Remove the package the way it was installed:
 
 ```bash
-pipx uninstall pantheon-gpu
+pipx uninstall pantheon-gpu                    # PyPI or a downloaded wheel
+sudo apt-get remove pantheon-gpu               # apt repository
+sudo dnf remove pantheon-gpu                   # Fedora COPR
+docker rmi ghcr.io/pantheongpu/pantheon:latest # container image
 ```
 
-Releases up to v1.0.19 shipped as a Debian package instead. Remove one of those with:
+To drop the apt source as well, remove `/etc/apt/sources.list.d/pantheon.list`
+and `/usr/share/keyrings/pantheon-archive-keyring.asc`; on Fedora,
+`sudo dnf copr disable saqibkhanpantheongpu/pantheon-gpu`.
+
+Releases up to v1.0.19 shipped as a Debian package named `pantheongpu`. Remove
+one of those with:
 
 ```bash
 sudo apt-get remove pantheongpu
 ```
 
-To also remove PantheonGPU runtime-created files and the current user's compiled workload cache, or to remove a portable installation on RHEL-family systems:
+The workloads compile into `~/.cache/pantheongpu` on first run and stay there
+after the package is gone. To remove that cache, the apt source, any runtime
+files under `/opt/pantheongpu`, and whichever package is installed, in one go:
 
 ```bash
 curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh
