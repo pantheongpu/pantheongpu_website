@@ -1629,3 +1629,29 @@ def test_docker_first_run_papercuts_stay_fixed():
     assert "failed to discover GPU vendor from CDI" in getting_started
     assert 'could not select device driver "" with' in getting_started
     assert "nvidia-ctk runtime configure --runtime=docker" in getting_started
+
+
+def test_funding_manifest_is_published_and_points_at_the_source_repo():
+    """docs/funding.json is the fundingjson.org manifest that funding
+    directories (FLOSS/fund first) read. MkDocs copies it verbatim to
+    https://pantheongpu.com/funding.json. The source repo verifies ownership
+    through its .well-known pointer, so the two URLs must stay in sync."""
+    manifest = json.loads(read("docs/funding.json"))
+    assert manifest["version"].startswith("v1")
+    assert manifest["entity"]["name"] == "PantheonGPU"
+    assert manifest["entity"]["email"].endswith("@pantheongpu.com")
+    assert manifest["entity"]["webpageUrl"]["url"] == "https://pantheongpu.com"
+    (project,) = manifest["projects"]
+    assert project["licenses"] == ["spdx:Apache-2.0"]
+    assert project["repositoryUrl"]["url"] == "https://github.com/pantheongpu/pantheon"
+    assert project["repositoryUrl"]["wellKnown"] == (
+        "https://github.com/pantheongpu/pantheon/blob/main/.well-known/funding-manifest-urls"
+    )
+    channels = {channel["guid"] for channel in manifest["funding"]["channels"]}
+    for plan in manifest["funding"]["plans"]:
+        assert plan["status"] in {"active", "inactive"}
+        assert set(plan["channels"]) <= channels
+        assert len(plan.get("description", "")) <= 500
+    assert len(manifest["entity"]["description"]) <= 2000
+    assert len(project["description"]) <= 2000
+    assert len(project["tags"]) <= 10

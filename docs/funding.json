@@ -1,0 +1,90 @@
+{
+  "version": "v1.0.0",
+  "entity": {
+    "type": "organisation",
+    "role": "owner",
+    "name": "PantheonGPU",
+    "email": "saqibkhan@pantheongpu.com",
+    "description": "PantheonGPU is a small US company that builds and maintains Pantheon, an open source (Apache-2.0) GPU health and diagnostics suite, and publishes a public database of GPU test results at pantheongpu.com. The suite is written and maintained by its founder, Saqib Khan, who spent more than ten years in firmware testing and processor simulation at IBM and in accelerator validation at AMD before starting the project. The company sells validation services around the suite. The suite itself, its methodology and its results database are free and open.",
+    "webpageUrl": {
+      "url": "https://pantheongpu.com"
+    }
+  },
+  "projects": [
+    {
+      "guid": "pantheon",
+      "name": "Pantheon",
+      "description": "Pantheon runs about fifty targeted workloads against NVIDIA and AMD GPUs to find out whether a card is healthy: memory diagnostics adapted from the DRAM testing literature (march tests, disturb patterns, retention bakes), power viruses aimed at individual subsystems, interconnect tests and AI shaped compute, with ECC and RAS counters recorded around every run. The kernels ship as source and compile on first run, so anyone can read exactly what will touch their hardware. GPUs fail quietly. A card can pass the vendor's tools while corrupting data or losing throughput, and the people renting GPUs by the hour, buying them used or running small clusters have no independent way to check. Pantheon is that check. It is packaged on PyPI, a signed apt repository, Fedora COPR and container images for CUDA and ROCm; a daily CI job reinstalls from every channel; and results from cloud and community systems feed a public, comparable database. Funding pays for the unglamorous work that keeps a hardware testing tool trustworthy: maintaining the release channels and CI, running the results database and its privacy rules, renting hardware across GPU generations so releases are validated on real cards, and answering the people who find bugs.",
+      "webpageUrl": {
+        "url": "https://pantheongpu.com"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/pantheongpu/pantheon",
+        "wellKnown": "https://github.com/pantheongpu/pantheon/blob/main/.well-known/funding-manifest-urls"
+      },
+      "licenses": [
+        "spdx:Apache-2.0"
+      ],
+      "tags": [
+        "gpu",
+        "hardware-testing",
+        "diagnostics",
+        "reliability",
+        "memory-testing",
+        "hpc",
+        "cuda",
+        "rocm",
+        "benchmarking"
+      ]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "bank-transfer",
+        "type": "bank",
+        "address": "Provided on request to saqibkhan@pantheongpu.com",
+        "description": "US bank account of PantheonGPU (ACH or international wire)."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "maintainer-time",
+        "status": "active",
+        "name": "Maintainer time",
+        "description": "One to two days a week of maintainer time for a year: releases across PyPI, apt, COPR and container images, the daily channel CI, the public results database, issue triage and reviewing community-contributed results.",
+        "amount": 40000,
+        "currency": "USD",
+        "frequency": "yearly",
+        "channels": [
+          "bank-transfer"
+        ]
+      },
+      {
+        "guid": "hardware-rental",
+        "status": "active",
+        "name": "GPU hardware for release validation",
+        "description": "Short-term rental of NVIDIA and AMD cards across several generations so every release is validated on real hardware and the public database keeps gaining cards. Roughly a thousand dollars a month at current cloud prices.",
+        "amount": 12000,
+        "currency": "USD",
+        "frequency": "yearly",
+        "channels": [
+          "bank-transfer"
+        ]
+      },
+      {
+        "guid": "any-amount",
+        "status": "active",
+        "name": "Any amount",
+        "description": "One-time contributions of any size go to the same two things: maintainer time and hardware for validation.",
+        "amount": 0,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "bank-transfer"
+        ]
+      }
+    ],
+    "history": []
+  }
+}
