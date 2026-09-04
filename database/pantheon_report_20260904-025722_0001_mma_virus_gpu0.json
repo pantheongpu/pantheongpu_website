@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-04 02:57:22",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 19:07:52 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 13,
+        "logical_cores": 26,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "221.18GB",
+        "available": "217.11GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 700.0,
+            "uuid": "GPU-2959ab2e-dd26-3ef8-1318-a8f59ae8d235",
+            "serial": "1654023039637"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260904-025722",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-04 03:02:24",
+    "test_results": [
+        {
+            "Test Name": "mma_virus",
+            "Version": "1.2.0",
+            "Description": "MMA Virus (Physical Matrix/Tensor Cores)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 1151.02,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 50.3,
+            "Max Temp (C)": 52.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 445.5,
+            "Max Power (W)": 451.3,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 96.9,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 1072.7,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 37.193,
+            "Thermal Rise (C)": 24.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 2583.66,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/mma_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260904-025722/reliability/mma_virus/gpu0/ras.json"
+        }
+    ]
+}
