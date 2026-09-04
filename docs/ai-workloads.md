@@ -27,7 +27,7 @@ pantheon --test inference --duration 60 --gpu 0 --mem 50 --verify --profile
 | Workload | Command | Focus |
 | --- | --- | --- |
 | `transformer_train_step` | `pantheon --test training --duration 60 --gpu 0 --mem 50 --verify --profile` | Transformer forward/backward and optimizer-style proxy. |
-| `allocation_fragmentation` | `pantheon --test allocation_fragmentation --duration 60 --gpu 0 --mem 25 --verify --profile` | Runtime allocation-pressure proxy. It does not yet execute real allocation/free fragmentation cycles. |
+| `allocation_fragmentation` | `pantheon --test allocation_fragmentation --duration 60 --gpu 0 --mem 25 --verify --profile` | Allocates and frees device memory in a pattern that fragments the heap and measures how the allocator copes; an allocation refused while well under budget is the signal. The GPU itself stays almost idle by design. |
 | `graph_replay` | `pantheon --test graph_replay --duration 60 --gpu 0 --mem 25 --verify --profile` | Actual CUDA Graph or HIP Graph capture, instantiation, and replay test. |
 | `rag_embedding` | `pantheon --test ai_auxiliary --duration 60 --gpu 0 --mem 50 --verify --profile` | RAG embedding projection proxy. |
 | `vision_encoder` | `pantheon --test ai_auxiliary --duration 60 --gpu 0 --mem 50 --verify --profile` | Vision-encoder projection proxy. |

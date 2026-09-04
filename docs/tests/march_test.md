@@ -8,7 +8,7 @@ part of the test.
 
 That ordering is what makes it different. Bandwidth tests find cells that cannot
 hold a value. A march finds cells whose value depends on what happened to a
-neighbouring cell just before — coupling faults that are invisible to any test
+neighbouring cell just before, coupling faults that are invisible to any test
 touching memory in parallel or in arbitrary order.
 
 ## Execution Mechanics
@@ -17,7 +17,7 @@ March C- is six elements, run in both address directions. `w0` writes zeros,
 
 | # | Element | Catches |
 | :--- | :--- | :--- |
-| 0 | `⇑ (w0)` | — (initialisation) |
+| 0 | `⇑ (w0)` | n/a (initialisation) |
 | 1 | `⇑ (r0, w1)` | Stuck-at-1, transition faults |
 | 2 | `⇑ (r1, w0)` | Stuck-at-0, transition faults |
 | 3 | `⇓ (r0, w1)` | Coupling faults, descending |
@@ -35,7 +35,7 @@ count so no chunk falls below 4096 elements, since coupling faults need a run of
 addresses to appear.
 
 ## Target Subsystems
-* **Primary Target:** DRAM cell integrity — stuck-at, transition, and coupling faults.
+* **Primary Target:** DRAM cell integrity: stuck-at, transition, and coupling faults.
 * **Secondary:** Address ordering behaviour within a contiguous region.
 
 ## Failure Symptoms
@@ -72,6 +72,6 @@ command, so run the binary directly:
 ```
 
 ## Result
-`Throughput` reports `march-ops/s` — read and write operations across all march
+`Throughput` reports `march-ops/s`, read and write operations across all march
 elements. It is a progress metric, not a bandwidth figure: the ordered access
 pattern is deliberately not the fastest way to move data.

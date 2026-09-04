@@ -1,5 +1,5 @@
 ---
-title: Fleet Validation | PantheonGPU
+title: Fleet Validation
 description: GPU fleet validation and performance outlier detection for cloud providers, AI infrastructure teams, data centers, and system integrators.
 ---
 

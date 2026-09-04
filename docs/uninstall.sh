@@ -22,6 +22,28 @@ if [ "${package_installed}" = true ]; then
     fi
 fi
 
+# Releases from 1.1.0 on install as pantheon-gpu, from the apt repository or
+# the COPR. Remove whichever is present, and the apt source that fed it.
+if command -v dpkg-query >/dev/null 2>&1 &&
+    dpkg-query -W -f='${db:Status-Status}\n' pantheon-gpu 2>/dev/null |
+        grep -qx 'installed'; then
+    if command -v apt-get >/dev/null 2>&1; then
+        DEBIAN_FRONTEND=noninteractive apt-get purge -y pantheon-gpu ||
+            dpkg --purge pantheon-gpu
+    else
+        dpkg --purge pantheon-gpu
+    fi
+fi
+rm -f /etc/apt/sources.list.d/pantheon.list \
+    /usr/share/keyrings/pantheon-archive-keyring.asc
+if command -v rpm >/dev/null 2>&1 && rpm -q pantheon-gpu >/dev/null 2>&1; then
+    if command -v dnf >/dev/null 2>&1; then
+        dnf remove -y pantheon-gpu
+    else
+        rpm -e pantheon-gpu
+    fi
+fi
+
 # The portable installer creates this launcher. Only remove it when it points
 # at Pantheon's default installation so an unrelated command is never deleted.
 if [ -f /usr/local/bin/pantheon ] &&

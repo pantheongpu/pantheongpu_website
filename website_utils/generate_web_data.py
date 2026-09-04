@@ -64,6 +64,11 @@ PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
 # those four tests, so a retired metric is a retired unit AND a version
 # before the fix. See is_retired_metric().
 RETIRED_AI_UNITS = {
+    # allocation_fragmentation ran the shared FMA loop too, under a name that
+    # promised allocator behaviour; the rewrite reports alloc-events/s from a
+    # kernel that really allocates. rope_stress still builds on the shared
+    # template, which reports ai-ops/s since the fix.
+    "allocation-events/s",
     "attention-tiles/s",
     "cache-updates/s",
     "embedding-vectors/s",
@@ -72,6 +77,7 @@ RETIRED_AI_UNITS = {
     "prompt-tokens/s",
     "quantized-ops/s",
     "requests/s",
+    "rotary-tokens/s",
     "routed-tokens/s",
     "tokens/s",
     "train-steps/s",
@@ -277,6 +283,58 @@ def is_retired_metric(unit, version):
     return unit in RETIRED_AI_UNITS and version_tuple(version) < RETIRED_AI_UNITS_FIXED_IN
 
 
+UNKNOWN_VENDORS = {"", "unknown", "n/a", "none"}
+NVIDIA_NAME_HINTS = ("nvidia", "geforce", "tesla", "quadro")
+AMD_NAME_HINTS = ("amd", "radeon", "instinct")
+
+
+def infer_manufacturer(declared, gpu_name):
+    """Vendor for a card whose report left the field blank.
+
+    Reports from v1.0.0 to v1.0.7 recorded "Unknown" for every card, and the
+    leaderboard showed a vendor column full of it. The product name says
+    which vendor made the card; a declared vendor is always kept.
+    """
+    declared_text = normalize(declared)
+    if declared_text.lower() not in UNKNOWN_VENDORS:
+        return declared_text
+    name = normalize(gpu_name, "").lower()
+    if any(hint in name for hint in NVIDIA_NAME_HINTS):
+        return "NVIDIA"
+    if any(hint in name for hint in AMD_NAME_HINTS):
+        return "AMD"
+    return declared_text
+
+
+def is_unmeasured(test_name, score_val, unit):
+    """True when a run reported a throughput of exactly zero.
+
+    A card cannot ray-trace at 0 GRays/s or encode at 0 FPS; zero means the
+    measured path never ran (no OptiX SDK, no encoder, a failed kernel).
+    Publishing it as a score puts a fake worst result under a real card.
+    baseline_metrics is idle by design and Watts rows carry a real reading.
+    """
+    if normalize(test_name, "").lower() == "baseline_metrics":
+        return False
+    if unit == "Watts" or score_val is None:
+        return False
+    try:
+        return float(score_val) == 0.0
+    except (TypeError, ValueError):
+        return False
+
+
+def unmeasured_reason(test_name, unit):
+    key = normalize(test_name, "").lower()
+    if key == "rt_virus":
+        hint = "ray tracing needs the OptiX SDK (OPTIX_PATH) on NVIDIA or HIP-RT on AMD"
+    elif key == "media_enc_virus":
+        hint = "no video encoder was available to the workload"
+    else:
+        hint = "the measured path did not run on this host"
+    return f"reported 0 {unit}: {hint}, so there is no measurement to publish"
+
+
 def infer_unit(test_name, declared_unit, raw_score):
     declared_unit = normalize(declared_unit, "")
     if declared_unit:
@@ -428,7 +486,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                             "source_report": Path(f).name,
                         })
                         continue
-                    manufacturer = g_info.get("manufacturer", "Unknown") 
+                    manufacturer = infer_manufacturer(g_info.get("manufacturer", "Unknown"), gpu_name)
                     uuid = g_info.get("uuid", "Unknown") 
                     serial = g_info.get("serial", "Unknown")
                     power_limit = g_info.get("power_limit", "N/A")
@@ -455,6 +513,19 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
 
                     if is_retired_metric(unit, version_str):
                         print(f"[SKIPPED] retired metric {unit!r} on {version_str} in {f}: {test_name}")
+                        continue
+
+                    if is_unmeasured(test_name, score_val, unit):
+                        print(f"[SKIPPED] no measurement (0 {unit}) in {f}: {test_name}")
+                        unsupported.append({
+                            "gpu": gpu_name,
+                            "manufacturer": manufacturer,
+                            "test": test_name,
+                            "version": version_str,
+                            "status": "NO_MEASUREMENT",
+                            "reason": unmeasured_reason(test_name, unit),
+                            "source_report": Path(f).name,
+                        })
                         continue
 
                     # --- CAPTURE ALL FIELDS ---

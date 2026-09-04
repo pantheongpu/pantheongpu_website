@@ -4,10 +4,14 @@
 The `memory_read` test establishes the baseline sequential read bandwidth of the GPU's memory subsystem. 
 
 ## Execution Mechanics
-This kernel uses volatile reads decomposed into 32-bit chunks. 
+Each thread issues 128-bit (`uint4`) loads in a coalesced grid-stride loop,
+unrolled 16 deep, and XORs every value into a register accumulator so the
+compiler cannot drop the loads.
 
-* It utilizes a standard 4x unroll per thread.
-* **Architecture Fix:** Attempting to execute single 128-bit vector loads on unaligned buffers can cause segmentation faults on specific AMD RDNA hardware. This kernel decomposes the fetch into smaller, safer chunks to ensure cross-platform stability.
+* The accumulator is written back only when it equals a sentinel it practically
+  never matches, which keeps the sink at zero cost.
+* The buffer comes from the runtime allocator, so the vector loads are aligned
+  on both vendors; no decomposition into smaller chunks is needed.
 
 ## Target Subsystems
 * **Primary Target:** Sequential VRAM Read Bandwidth.

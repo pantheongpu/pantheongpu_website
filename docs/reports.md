@@ -1,3 +1,7 @@
+---
+title: Research and Reports
+---
+
 # Research & Reports
 
 <div class="page-intro">

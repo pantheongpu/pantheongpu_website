@@ -43,7 +43,7 @@ the expensive exhaustive check.
 
 !!! note "Coverage boundary"
     A `PASS` covers only the region that was tested. Startup prints the exact
-    `Region: [offset, end)` — read it before concluding anything about the rest
+    `Region: [offset, end)`; read it before concluding anything about the rest
     of memory.
 
 ## Usage

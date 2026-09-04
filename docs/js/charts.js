@@ -26,10 +26,29 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(data => {
-            renderBenchmarkCharts(data);
+            ensureApexCharts("charts.js", () => renderBenchmarkCharts(data));
         })
         .catch(err => console.error("Error loading benchmark data:", err));
 });
+
+// ApexCharts is 245 KB. Load it here, next to this script, only on the pages
+// that draw a chart, instead of shipping it to every page from mkdocs.yml.
+function ensureApexCharts(ownScript, callback) {
+    if (window.ApexCharts) { callback(); return; }
+    const self = Array.from(document.scripts).find(s => s.src && s.src.includes(`/js/${ownScript}`));
+    const src = self ? new URL("apexcharts.min.js", self.src).href
+                     : new URL("js/apexcharts.min.js", document.baseURI).href;
+    let tag = document.querySelector("script[data-apexcharts]");
+    if (!tag) {
+        tag = document.createElement("script");
+        tag.src = src;
+        tag.async = true;
+        tag.dataset.apexcharts = "1";
+        document.head.appendChild(tag);
+    }
+    tag.addEventListener("load", () => callback(), { once: true });
+    tag.addEventListener("error", () => console.error(`Failed to load ${src}`), { once: true });
+}
 
 function getChartAssetUrl(fileName) {
     const script = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes("/js/charts.js"));

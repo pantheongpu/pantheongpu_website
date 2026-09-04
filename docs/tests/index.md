@@ -1,3 +1,7 @@
+---
+title: Test Documentation
+---
+
 # Test Documentation Hub
 
 Pantheon includes focused GPU diagnostics for compute, memory, interconnect,
@@ -196,6 +200,12 @@ how to run one directly), then aim the quadratic GALPAT at what they implicate.
 
     Writes a payload, leaves it untouched for a chosen interval, then verifies it, finding cells that lose charge with time rather than with heat.
 
+- [:material-shield-check: **RAS Validator**](ras_validator.md)
+
+    ---
+
+    Continuously reads a pristine pattern to detect uncorrectable errors and observe active ECC-scrub behavior.
+
 </div>
 
 ---
@@ -228,12 +238,6 @@ how to run one directly), then aim the quadratic GALPAT at what they implicate.
 
     Floods the bus with asynchronous host-to-device and device-to-host DMA transfers.
 
-- [:material-shield-check: **RAS Validator**](ras_validator.md)
-
-    ---
-
-    Continuously reads a pristine pattern to detect uncorrectable errors and observe active ECC-scrub behavior.
-
 - [:material-current-ac: **Memory TSV Thrasher**](memory_tsv_thrasher.md)
 
     ---
@@ -251,6 +255,16 @@ how to run one directly), then aim the quadratic GALPAT at what they implicate.
     ---
 
     Launches micro-kernels across many streams to pressure dispatcher multiplexing and scheduling behavior.
+
+</div>
+
+---
+
+## Baseline
+
+The reference point the other workloads are read against.
+
+<div class="grid cards" markdown>
 
 - [:material-sleep: **Baseline Metrics**](baseline_metrics.md)
 

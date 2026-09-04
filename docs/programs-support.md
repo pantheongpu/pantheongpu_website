@@ -1,5 +1,5 @@
 ---
-title: Programs & Support | PantheonGPU
+title: Programs & Support
 description: Programs and cloud credits that support PantheonGPU compatibility testing, benchmark coverage, and GPU infrastructure validation.
 ---
 
