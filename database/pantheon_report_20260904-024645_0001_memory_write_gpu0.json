@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-04 02:46:45",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "2936.08Mhz"
+    },
+    "ram_info": {
+        "total": "30.98GB",
+        "available": "29.75GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-a0be1f87-1128-a233-aaa8-184a6c7d736d",
+            "serial": "1560521011615"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260904-024645",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-04 02:51:50",
+    "test_results": [
+        {
+            "Test Name": "memory_write",
+            "Version": "1.2.0",
+            "Description": "Memory Write (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 219.921,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 56.1,
+            "Max Temp (C)": 57.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 69.4,
+            "Max Power (W)": 71.1,
+            "Avg Clock(MHz)": 1419.4,
+            "Min Clock (MHz)": 1395.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15222.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.879,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 303.4,
+            "Efficiency": 3244.94,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-75/memory_write 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260904-024645/reliability/memory_write/gpu0/ras.json"
+        }
+    ]
+}
