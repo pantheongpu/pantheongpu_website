@@ -3050,10 +3050,10 @@ them. Alternating between the two is what forces a row to close and reopen;
 hammering a single address would sit on an open row buffer and disturb nothing.</p>
 <p><code>--hammer_stride</code> defaults to 32768 elements (512 KiB). The stride that places
 two aggressors in the same bank on different rows depends on the DRAM address
-mapping, which is not public for most parts — so the stride is a knob to
+mapping, which is not public for most parts, so the stride is a knob to
 <strong>sweep</strong>, not a value that is correct out of the box.</p>
 <div class="admonition warning">
-<p class="admonition-title">The cache problem — read this before trusting a result</p>
+<p class="admonition-title">The cache problem: read this before trusting a result</p>
 <p>A hammer only disturbs a victim if its reads actually reach DRAM. GPU caches
 will answer a tight loop over two addresses forever, and a cached read
 disturbs nothing. Choosing a cache-bypassing load instruction is <strong>not
@@ -3067,7 +3067,7 @@ L2. Startup prints the comparison:</p>
 <p>If that line reads <code>FITS IN L2 - reads will be cache hits</code>, the run is not
 hammering anything. Raise <code>--hammer_pairs</code>. On a 12 GB Ampere card one pair
 per thread sustains ~5.7e10 reads/s (cache speed) while eight pairs drop to
-~2.2e10 reads/s — the card's DRAM bandwidth.</p>
+~2.2e10 reads/s, the card's DRAM bandwidth.</p>
 </div>
 <h2 id="target-subsystems">Target Subsystems</h2>
 <ul>
@@ -3092,7 +3092,7 @@ per thread sustains ~5.7e10 reads/s (cache speed) while eight pairs drop to
 <p class="admonition-title">Honest limits</p>
 <p>Without the physical address mapping, Pantheon cannot prove a read opened a
 given row or that two addresses share a bank. The metric is named
-<code>aggressor-reads/s</code> — what is actually measured — rather than
+<code>aggressor-reads/s</code>, what is actually measured, rather than
 "activations/s", which would imply a DRAM-level guarantee this test cannot
 make. A <code>PASS</code> means no disturbance was observed <strong>at this stride</strong>, not that
 the part is immune.</p>
@@ -3112,7 +3112,7 @@ binary, so run it directly:</p>
 </code></pre></div>
 <h2 id="result">Result</h2>
 <p><code>Throughput</code> reports <code>aggressor-reads/s</code>, and startup reports the aggressor
-footprint against L2. Read the two together — a high read rate with a footprint
+footprint against L2. Read the two together: a high read rate with a footprint
 that fits in L2 means the cache absorbed the run.</p>
 
 
@@ -3240,6 +3240,10 @@ that fits in L2 means the cache absorbed the run.</p>
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      &copy; PantheonGPU. Pantheon is released under the Apache-2.0 license.
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -3265,8 +3269,6 @@ that fits in L2 means the cache absorbed the run.</p>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../js/apexcharts.min.js"></script>
       
         <script src="../../js/charts.js"></script>
       

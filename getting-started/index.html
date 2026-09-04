@@ -27,7 +27,7 @@
     
     
       
-        <title>Getting Started | PantheonGPU - PANTHEON</title>
+        <title>Getting Started - PANTHEON</title>
       
     
     
@@ -143,7 +143,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting Started | PantheonGPU
+              Getting Started
             
           </span>
         </div>
@@ -554,10 +554,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-on-ubuntu-or-debian" class="md-nav__link">
+  <a href="#install" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install on Ubuntu or Debian
+        Install
       
     </span>
   </a>
@@ -2908,10 +2908,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-on-ubuntu-or-debian" class="md-nav__link">
+  <a href="#install" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Install on Ubuntu or Debian
+        Install
       
     </span>
   </a>
@@ -2973,7 +2973,7 @@
 <h1 id="install-pantheongpu-and-run-a-first-validation">Install PantheonGPU and run a first validation</h1>
 <p>PantheonGPU automatically detects CUDA, ROCm/HIP, or mock mode. Run the <code>pantheon</code> command directly after installation.</p>
 </div>
-<h2 id="install-on-ubuntu-or-debian">Install on Ubuntu or Debian</h2>
+<h2 id="install">Install</h2>
 <p>Install the basic build tools:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>make<span class="w"> </span>g++
@@ -3052,7 +3052,7 @@ passthrough; Pantheon's own output follows it.</p>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>pantheon-gpu
 </code></pre></div>
 <p>Built for Fedora 43/44 and EPEL 10 (RHEL, Rocky and Alma 10). EPEL 9 is
-not built: its Python stack cannot satisfy the build's setuptools floor —
+not built: its Python stack cannot satisfy the build's setuptools floor, so
 use pipx or the Docker image there. Add the CUDA or ROCm toolkit
 separately for real hardware.</p>
 </div>
@@ -3076,8 +3076,9 @@ useful for trying the tooling before committing hardware to it.</p>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pantheon-gpu
 </code></pre></div>
 <p>Installs both <code>pantheon</code> and <code>pantheon-gpu</code>; they are the same program.
-Telemetry and spreadsheet export come from <code>Recommends</code> and <code>Suggests</code>, so
-apt pulls them by default and they can be left out on a minimal install.</p>
+Telemetry and spreadsheet export come from <code>Recommends</code>, so apt pulls them
+by default and they can be left out on a minimal install; the CUDA toolkit
+is only a <code>Suggests</code>.</p>
 <p>The workloads compile on first run, which is why the package depends on
 <code>g++</code> and <code>make</code>. Add the CUDA or ROCm toolkit separately for real
 hardware.</p>
@@ -3108,18 +3109,27 @@ ROCm toolkit from the tabs above.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>fp64_virus<span class="w"> </span>--duration<span class="w"> </span><span class="m">30</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span>
 </code></pre></div>
 <h2 id="profiling-and-reports">Profiling and reports</h2>
-<p>Use <code>--verify</code> to validate workload output. Use <code>--profile</code> to collect performance counters, traces, and a per-workload HTML summary:</p>
+<p>Verification of workload output is on by default; pass <code>--skip_verify</code> to turn it off. Use <code>--profile</code> to collect performance counters, traces, and a per-workload HTML summary:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
 </code></pre></div>
 <p>See <a href="../tests/">Test Documentation</a> for workload guidance, <a href="../release/">Releases and Downloads</a> for other installation methods, and <a href="../reports/">Reports</a> for output details.</p>
 <h2 id="uninstall">Uninstall</h2>
-<p>Remove a package installation with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pipx<span class="w"> </span>uninstall<span class="w"> </span>pantheon-gpu
+<p>Remove the package the way it was installed:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pipx<span class="w"> </span>uninstall<span class="w"> </span>pantheon-gpu<span class="w">                    </span><span class="c1"># PyPI or a downloaded wheel</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheon-gpu<span class="w">               </span><span class="c1"># apt repository</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>pantheon-gpu<span class="w">                   </span><span class="c1"># Fedora COPR</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>docker<span class="w"> </span>rmi<span class="w"> </span>ghcr.io/pantheongpu/pantheon:latest<span class="w"> </span><span class="c1"># container image</span>
 </code></pre></div>
-<p>Releases up to v1.0.19 shipped as a Debian package instead. Remove one of those with:</p>
+<p>To drop the apt source as well, remove <code>/etc/apt/sources.list.d/pantheon.list</code>
+and <code>/usr/share/keyrings/pantheon-archive-keyring.asc</code>; on Fedora,
+<code>sudo dnf copr disable saqibkhanpantheongpu/pantheon-gpu</code>.</p>
+<p>Releases up to v1.0.19 shipped as a Debian package named <code>pantheongpu</code>. Remove
+one of those with:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheongpu
 </code></pre></div>
-<p>To also remove PantheonGPU runtime-created files and the current user's compiled workload cache, or to remove a portable installation on RHEL-family systems:</p>
+<p>The workloads compile into <code>~/.cache/pantheongpu</code> on first run and stay there
+after the package is gone. To remove that cache, the apt source, any runtime
+files under <code>/opt/pantheongpu</code>, and whichever package is installed, in one go:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pantheongpu.com/uninstall.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>sh
 </code></pre></div>
 <p>This leaves CUDA, ROCm, system compilers, and benchmark reports outside PantheonGPU's installation and cache directories untouched.</p>
@@ -3252,6 +3262,10 @@ ROCm toolkit from the tabs above.</p>
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      &copy; PantheonGPU. Pantheon is released under the Apache-2.0 license.
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -3277,8 +3291,6 @@ ROCm toolkit from the tabs above.</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../js/apexcharts.min.js"></script>
       
         <script src="../js/charts.js"></script>
       

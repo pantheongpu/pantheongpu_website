@@ -2997,10 +2997,14 @@
 <h2 id="overview">Overview</h2>
 <p>The <code>memory_read</code> test establishes the baseline sequential read bandwidth of the GPU's memory subsystem. </p>
 <h2 id="execution-mechanics">Execution Mechanics</h2>
-<p>This kernel uses volatile reads decomposed into 32-bit chunks. </p>
+<p>Each thread issues 128-bit (<code>uint4</code>) loads in a coalesced grid-stride loop,
+unrolled 16 deep, and XORs every value into a register accumulator so the
+compiler cannot drop the loads.</p>
 <ul>
-<li>It utilizes a standard 4x unroll per thread.</li>
-<li><strong>Architecture Fix:</strong> Attempting to execute single 128-bit vector loads on unaligned buffers can cause segmentation faults on specific AMD RDNA hardware. This kernel decomposes the fetch into smaller, safer chunks to ensure cross-platform stability.</li>
+<li>The accumulator is written back only when it equals a sentinel it practically
+  never matches, which keeps the sink at zero cost.</li>
+<li>The buffer comes from the runtime allocator, so the vector loads are aligned
+  on both vendors; no decomposition into smaller chunks is needed.</li>
 </ul>
 <h2 id="target-subsystems">Target Subsystems</h2>
 <ul>
@@ -3139,6 +3143,10 @@
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      &copy; PantheonGPU. Pantheon is released under the Apache-2.0 license.
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -3164,8 +3172,6 @@
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../js/apexcharts.min.js"></script>
       
         <script src="../../js/charts.js"></script>
       

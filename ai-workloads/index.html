@@ -3020,7 +3020,7 @@ performance.</p>
 <tr>
 <td><code>allocation_fragmentation</code></td>
 <td><code>pantheon --test allocation_fragmentation --duration 60 --gpu 0 --mem 25 --verify --profile</code></td>
-<td>Runtime allocation-pressure proxy. It does not yet execute real allocation/free fragmentation cycles.</td>
+<td>Allocates and frees device memory in a pattern that fragments the heap and measures how the allocator copes; an allocation refused while well under budget is the signal. The GPU itself stays almost idle by design.</td>
 </tr>
 <tr>
 <td><code>graph_replay</code></td>
@@ -3173,6 +3173,10 @@ accuracy with the actual serving framework and model separately.</p>
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      &copy; PantheonGPU. Pantheon is released under the Apache-2.0 license.
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -3198,8 +3202,6 @@ accuracy with the actual serving framework and model separately.</p>
     
     
       <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../js/apexcharts.min.js"></script>
       
         <script src="../js/charts.js"></script>
       

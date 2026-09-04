@@ -3045,7 +3045,7 @@ read-then-write sequence to every cell, so the <em>order</em> of operations is i
 part of the test.</p>
 <p>That ordering is what makes it different. Bandwidth tests find cells that cannot
 hold a value. A march finds cells whose value depends on what happened to a
-neighbouring cell just before — coupling faults that are invisible to any test
+neighbouring cell just before, coupling faults that are invisible to any test
 touching memory in parallel or in arbitrary order.</p>
 <h2 id="execution-mechanics">Execution Mechanics</h2>
 <p>March C- is six elements, run in both address directions. <code>w0</code> writes zeros,
@@ -3062,7 +3062,7 @@ touching memory in parallel or in arbitrary order.</p>
 <tr>
 <td style="text-align: left;">0</td>
 <td style="text-align: left;"><code>⇑ (w0)</code></td>
-<td style="text-align: left;">— (initialisation)</td>
+<td style="text-align: left;">n/a (initialisation)</td>
 </tr>
 <tr>
 <td style="text-align: left;">1</td>
@@ -3101,7 +3101,7 @@ count so no chunk falls below 4096 elements, since coupling faults need a run of
 addresses to appear.</p>
 <h2 id="target-subsystems">Target Subsystems</h2>
 <ul>
-<li><strong>Primary Target:</strong> DRAM cell integrity — stuck-at, transition, and coupling faults.</li>
+<li><strong>Primary Target:</strong> DRAM cell integrity: stuck-at, transition, and coupling faults.</li>
 <li><strong>Secondary:</strong> Address ordering behaviour within a contiguous region.</li>
 </ul>
 <h2 id="failure-symptoms">Failure Symptoms</h2>
@@ -3137,7 +3137,7 @@ command, so run the binary directly:</p>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="s2">&quot;</span><span class="k">$(</span>ls<span class="w"> </span>-d<span class="w"> </span>~/.cache/pantheongpu/builds/*/*/<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span><span class="s2">march_test&quot;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="m">50</span><span class="w"> </span>--verify<span class="w"> </span>--fault_map<span class="w"> </span>march_faults.csv
 </code></pre></div>
 <h2 id="result">Result</h2>
-<p><code>Throughput</code> reports <code>march-ops/s</code> — read and write operations across all march
+<p><code>Throughput</code> reports <code>march-ops/s</code>, read and write operations across all march
 elements. It is a progress metric, not a bandwidth figure: the ordered access
 pattern is deliberately not the fastest way to move data.</p>
 
@@ -3266,6 +3266,10 @@ pattern is deliberately not the fastest way to move data.</p>
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      &copy; PantheonGPU. Pantheon is released under the Apache-2.0 license.
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -3291,8 +3295,6 @@ pattern is deliberately not the fastest way to move data.</p>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
-      
-        <script src="../../js/apexcharts.min.js"></script>
       
         <script src="../../js/charts.js"></script>
       
