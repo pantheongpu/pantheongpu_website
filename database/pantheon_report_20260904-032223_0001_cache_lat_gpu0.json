@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-04 03:22:23",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 26,
+        "logical_cores": 26,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "221.18GB",
+        "available": "217.24GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 PCIe",
+            "memory_total": "81559 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 350.0,
+            "uuid": "GPU-9214ae6b-cd8f-a0a8-e38b-22edb5410126",
+            "serial": "1654422005883"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260904-032223",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-04 03:27:25",
+    "test_results": [
+        {
+            "Test Name": "cache_lat",
+            "Version": "1.2.0",
+            "Description": "Cache Latency",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 10289000000.0,
+            "Unit": "dependent-loads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 72.1,
+            "Max Temp (C)": 74.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 207.1,
+            "Max Power (W)": 233.5,
+            "Avg Clock(MHz)": 1750.3,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1755.0,
+            "Avg GPU Util (%)": 59.2,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 66520.0,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 17.321,
+            "Thermal Rise (C)": 2.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 49681313.38,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/cache_latency 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260904-032223/reliability/cache_lat/gpu0/ras.json"
+        }
+    ]
+}
