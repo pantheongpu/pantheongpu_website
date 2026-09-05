@@ -39046,6 +39046,20 @@
     "card": "GPU-a70d5492c3d6"
   },
   {
+    "uuid": "GPU-ab88c84e-9106-e588-4b34-ad867ff4c5d9",
+    "gpu": "NVIDIA A10G",
+    "test": "allocation_fragmentation",
+    "version": "1.2.0",
+    "unit": "alloc-events/s",
+    "score": 8744.51,
+    "date": "2026-09-05 15:24:19",
+    "temp_max": 39.0,
+    "power_max": 77.4,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-ab88c84e-9106-e588-4b34-ad867ff4c5d9"
+  },
+  {
     "uuid": "GPU-ad1c1c302e02",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "fp64_virus",
