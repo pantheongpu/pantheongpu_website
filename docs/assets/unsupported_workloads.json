@@ -785,6 +785,15 @@
   {
     "gpu": "NVIDIA H100 80GB HBM3",
     "manufacturer": "NVIDIA",
+    "test": "rag_embedding",
+    "version": "1.2.0",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_20260905-065331_0001_rag_embedding_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
     "test": "media_enc_virus",
     "version": "1.2.0",
     "status": "NO_MEASUREMENT",
