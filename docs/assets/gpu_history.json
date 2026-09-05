@@ -31276,6 +31276,20 @@
     "card": "GPU-9358c433-0402-6f40-762a-b209a53b923b"
   },
   {
+    "uuid": "GPU-9358c433-0402-6f40-762a-b209a53b923b",
+    "gpu": "NVIDIA L4",
+    "test": "fused_attention",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 1595750000.0,
+    "date": "2026-09-05 09:08:51",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1390.0,
+    "throttle_time": 300.5,
+    "card": "GPU-9358c433-0402-6f40-762a-b209a53b923b"
+  },
+  {
     "uuid": "GPU-945a0587-739b-4bfa-4c23-4af9777e7cfc",
     "gpu": "NVIDIA T4G",
     "test": "cache_lat",
