@@ -11018,6 +11018,20 @@
     "card": "GPU-37733e96-2e44-79e2-b10c-a4bdc32f42eb"
   },
   {
+    "uuid": "GPU-37733e96-2e44-79e2-b10c-a4bdc32f42eb",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "media_enc_virus",
+    "version": "1.2.0",
+    "unit": "FPS",
+    "score": 42.0818,
+    "date": "2026-09-05 14:52:05",
+    "temp_max": 37.0,
+    "power_max": 90.7,
+    "clock_avg": 2282.6,
+    "throttle_time": 0.0,
+    "card": "GPU-37733e96-2e44-79e2-b10c-a4bdc32f42eb"
+  },
+  {
     "uuid": "GPU-3a87b0a238bb",
     "gpu": "NVIDIA L4",
     "test": "allocation_fragmentation",
