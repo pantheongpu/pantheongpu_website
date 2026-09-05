@@ -45206,6 +45206,20 @@
     "card": "GPU-e2a5d14d1d1f"
   },
   {
+    "uuid": "GPU-e8e04680-b726-2fbf-d8d5-458030a017c0",
+    "gpu": "NVIDIA A10",
+    "test": "scheduler",
+    "version": "1.2.0",
+    "unit": "KIPS",
+    "score": 467.479,
+    "date": "2026-09-05 10:46:44",
+    "temp_max": 46.0,
+    "power_max": 69.1,
+    "clock_avg": 1690.1,
+    "throttle_time": 0.0,
+    "card": "GPU-e8e04680-b726-2fbf-d8d5-458030a017c0"
+  },
+  {
     "uuid": "GPU-eacc33a72a33",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
