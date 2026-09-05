@@ -1,0 +1,78 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-05 06:54:35",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 19:07:52 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 13,
+        "logical_cores": 26,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "221.18GB",
+        "available": "218.34GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 700.0,
+            "uuid": "GPU-eb3c7a80-4bde-50d3-f5d8-4e6ccfe5ac2b",
+            "serial": "1654823008863"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260905-065435",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-05 06:55:06",
+    "test_results": [
+        {
+            "Test Name": "vision_encoder",
+            "Version": "1.2.0",
+            "Description": "Vision Encoder (Synthetic Projection Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.0,
+            "Unit": "ERR",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 29.0,
+            "Max Temp (C)": 29.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 72.4,
+            "Max Power (W)": 72.6,
+            "Avg Clock(MHz)": 867.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 885.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 479.9,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 0.605,
+            "Thermal Rise (C)": 0.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.0,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Idle",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Status": "FAIL",
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/vision_encoder 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260905-065435/reliability/vision_encoder/gpu0/ras.json"
+        }
+    ]
+}

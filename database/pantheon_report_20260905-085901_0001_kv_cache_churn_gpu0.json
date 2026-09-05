@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-05 08:59:01",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:26:14 UTC 2026",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "15.30GB",
+        "available": "14.57GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA T4G",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-14846272-6198-885d-c6fd-db37855ca48d",
+            "serial": "1322821014531"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260905-085901",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-05 09:04:03",
+    "test_results": [
+        {
+            "Test Name": "kv_cache_churn",
+            "Version": "1.2.0",
+            "Description": "KV Cache Churn (Paged/Ragged Cache Updates)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 575291000.0,
+            "Unit": "cache-updates/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 78.1,
+            "Max Temp (C)": 80.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 67.5,
+            "Max Power (W)": 68.1,
+            "Avg Clock(MHz)": 1257.9,
+            "Min Clock (MHz)": 1215.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15214.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.642,
+            "Thermal Rise (C)": 5.0,
+            "Throttle Time (s)": 299.7,
+            "Efficiency": 8522829.63,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-75/kv_cache_churn 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260905-085901/reliability/kv_cache_churn/gpu0/ras.json"
+        }
+    ]
+}
