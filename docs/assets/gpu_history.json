@@ -42028,6 +42028,20 @@
     "card": "GPU-eafbfe8d6d5a"
   },
   {
+    "uuid": "GPU-eb3c7a80-4bde-50d3-f5d8-4e6ccfe5ac2b",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "baseline_metrics",
+    "version": "1.2.0",
+    "unit": "ERR",
+    "score": 0.0,
+    "date": "2026-09-05 06:10:41",
+    "temp_max": 29.0,
+    "power_max": 72.7,
+    "clock_avg": 865.6,
+    "throttle_time": 0.0,
+    "card": "GPU-eb3c7a80-4bde-50d3-f5d8-4e6ccfe5ac2b"
+  },
+  {
     "uuid": "GPU-eb8104dc-0e74-b92d-1662-7e5d2b603227",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "allocation_fragmentation",
