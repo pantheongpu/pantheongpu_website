@@ -6846,6 +6846,20 @@
     "card": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60"
   },
   {
+    "uuid": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60",
+    "gpu": "NVIDIA A10G",
+    "test": "memory_pc_pingpong",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 452.157,
+    "date": "2026-09-05 11:05:05",
+    "temp_max": 51.0,
+    "power_max": 150.0,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60"
+  },
+  {
     "uuid": "GPU-1d2c3125-076e-0afb-e066-eb673d26e564",
     "gpu": "NVIDIA L40S",
     "test": "cache_lat",
