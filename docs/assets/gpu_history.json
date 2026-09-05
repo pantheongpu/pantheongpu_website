@@ -8092,6 +8092,20 @@
     "card": "GPU-2a685a57-5096-71e3-4cde-6e97fceec4e4"
   },
   {
+    "uuid": "GPU-2a685a57-5096-71e3-4cde-6e97fceec4e4",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "fp64_virus",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 16.6976,
+    "date": "2026-09-05 07:28:34",
+    "temp_max": 74.0,
+    "power_max": 349.4,
+    "clock_avg": 1747.3,
+    "throttle_time": 58.1,
+    "card": "GPU-2a685a57-5096-71e3-4cde-6e97fceec4e4"
+  },
+  {
     "uuid": "GPU-2b2a06e9-ef76-44dc-a222-a38688c4fabe",
     "gpu": "NVIDIA A10",
     "test": "cache_lat",
