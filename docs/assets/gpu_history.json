@@ -33572,6 +33572,20 @@
     "card": "GPU-9358c433-0402-6f40-762a-b209a53b923b"
   },
   {
+    "uuid": "GPU-9358c433-0402-6f40-762a-b209a53b923b",
+    "gpu": "NVIDIA L4",
+    "test": "omni_virus",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 16.8431,
+    "date": "2026-09-05 08:40:57",
+    "temp_max": 84.0,
+    "power_max": 73.6,
+    "clock_avg": 1616.0,
+    "throttle_time": 300.2,
+    "card": "GPU-9358c433-0402-6f40-762a-b209a53b923b"
+  },
+  {
     "uuid": "GPU-945a0587-739b-4bfa-4c23-4af9777e7cfc",
     "gpu": "NVIDIA T4G",
     "test": "cache_lat",
