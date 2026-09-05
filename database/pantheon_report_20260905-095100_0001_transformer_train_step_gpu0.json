@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-05 09:51:00",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1013-nvidia-64k",
+        "version": "#14~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Aug 21 01:03:36 UTC 2",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 64,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "525.68GB",
+        "available": "491.52GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GH200 480GB",
+            "memory_total": "97871 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 900.0,
+            "uuid": "GPU-7195970b-9f9c-17be-0d85-c54f10c667ce",
+            "serial": "1650824017420"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260905-095100",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-05 09:56:08",
+    "test_results": [
+        {
+            "Test Name": "transformer_train_step",
+            "Version": "1.2.0",
+            "Description": "Transformer Train Step (Forward/Backward Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 32300500000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 59.7,
+            "Max Temp (C)": 61.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 679.0,
+            "Max Power (W)": 691.6,
+            "Avg Clock(MHz)": 1922.9,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 96.0,
+            "Max GPU Util (%)": 97.0,
+            "Peak Memory (MiB)": 96913.1,
+            "Memory Total (MiB)": 97871.0,
+            "Energy (Wh)": 57.067,
+            "Thermal Rise (C)": 27.0,
+            "Throttle Time (s)": 306.6,
+            "Efficiency": 47570692.19,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 1.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/transformer_train_step 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260905-095100/reliability/transformer_train_step/gpu0/ras.json"
+        }
+    ]
+}
