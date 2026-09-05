@@ -666,6 +666,15 @@
     "source_report": "pantheon_report_20260905-100811_0001_media_enc_virus_gpu0.json"
   },
   {
+    "gpu": "NVIDIA H100 PCIe",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.0",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_20260905-101143_0001_media_enc_virus_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA A100-SXM4-40GB",
     "manufacturer": "NVIDIA",
     "test": "media_enc_virus",
