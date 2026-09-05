@@ -22512,6 +22512,20 @@
     "card": "GPU-7195970b-9f9c-17be-0d85-c54f10c667ce"
   },
   {
+    "uuid": "GPU-7195970b-9f9c-17be-0d85-c54f10c667ce",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "march_test",
+    "version": "1.2.0",
+    "unit": "march-ops/s",
+    "score": 29484500000.0,
+    "date": "2026-09-05 10:25:40",
+    "temp_max": 44.0,
+    "power_max": 275.5,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-7195970b-9f9c-17be-0d85-c54f10c667ce"
+  },
+  {
     "uuid": "GPU-78bcae068ca5",
     "gpu": "NVIDIA L4",
     "test": "atomic_virus",
