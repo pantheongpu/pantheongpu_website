@@ -7000,6 +7000,20 @@
     "card": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60"
   },
   {
+    "uuid": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60",
+    "gpu": "NVIDIA A10G",
+    "test": "omni_virus",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 19.6614,
+    "date": "2026-09-05 13:02:46",
+    "temp_max": 62.0,
+    "power_max": 237.6,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60"
+  },
+  {
     "uuid": "GPU-1d2c3125-076e-0afb-e066-eb673d26e564",
     "gpu": "NVIDIA L40S",
     "test": "cache_lat",
