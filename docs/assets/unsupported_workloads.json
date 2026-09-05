@@ -578,6 +578,15 @@
   {
     "gpu": "NVIDIA H100 80GB HBM3",
     "manufacturer": "NVIDIA",
+    "test": "llm_decode",
+    "version": "1.2.0",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_20260905-064042_0001_llm_decode_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
     "test": "kv_cache_churn",
     "version": "1.2.0",
     "status": "NO_MEASUREMENT",
