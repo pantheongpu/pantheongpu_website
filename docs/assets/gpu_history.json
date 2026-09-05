@@ -19250,6 +19250,20 @@
     "card": "GPU-5a9d30ce-2f82-39cb-e07f-6dd350e31b9d"
   },
   {
+    "uuid": "GPU-5a9d30ce-2f82-39cb-e07f-6dd350e31b9d",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "llm_decode",
+    "version": "1.2.0",
+    "unit": "tokens/s",
+    "score": 1672570000.0,
+    "date": "2026-09-05 08:55:26",
+    "temp_max": 50.0,
+    "power_max": 220.0,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-5a9d30ce-2f82-39cb-e07f-6dd350e31b9d"
+  },
+  {
     "uuid": "GPU-5d2c3584c0ef",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
