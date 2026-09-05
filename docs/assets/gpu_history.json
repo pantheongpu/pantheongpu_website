@@ -11340,6 +11340,20 @@
     "card": "GPU-3b9647ac-48c2-31c0-d8ad-838f0264a411"
   },
   {
+    "uuid": "GPU-3b9647ac-48c2-31c0-d8ad-838f0264a411",
+    "gpu": "Tesla T4",
+    "test": "memory_write",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 219.514,
+    "date": "2026-09-05 07:31:38",
+    "temp_max": 54.0,
+    "power_max": 70.7,
+    "clock_avg": 1384.7,
+    "throttle_time": 303.5,
+    "card": "GPU-3b9647ac-48c2-31c0-d8ad-838f0264a411"
+  },
+  {
     "uuid": "GPU-3c2f73e6d06e",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "atomic_virus",
