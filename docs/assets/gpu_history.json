@@ -5852,6 +5852,20 @@
     "card": "GPU-14846272-6198-885d-c6fd-db37855ca48d"
   },
   {
+    "uuid": "GPU-14846272-6198-885d-c6fd-db37855ca48d",
+    "gpu": "NVIDIA T4G",
+    "test": "transformer_train_step",
+    "version": "1.2.0",
+    "unit": "ai-ops/s",
+    "score": 1295610000.0,
+    "date": "2026-09-05 09:38:07",
+    "temp_max": 79.0,
+    "power_max": 67.4,
+    "clock_avg": 966.9,
+    "throttle_time": 299.5,
+    "card": "GPU-14846272-6198-885d-c6fd-db37855ca48d"
+  },
+  {
     "uuid": "GPU-1c4f0631-faee-f215-3280-cd5d3fef1897",
     "gpu": "NVIDIA H100 PCIe",
     "test": "cache_lat",
