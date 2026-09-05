@@ -28798,6 +28798,20 @@
     "card": "GPU-8c87c6a9-1441-5398-d1f8-80178744f098"
   },
   {
+    "uuid": "GPU-8c87c6a9-1441-5398-d1f8-80178744f098",
+    "gpu": "NVIDIA A10",
+    "test": "baseline_metrics",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-05 06:13:15",
+    "temp_max": 42.0,
+    "power_max": 58.2,
+    "clock_avg": 1690.1,
+    "throttle_time": 0.0,
+    "card": "GPU-8c87c6a9-1441-5398-d1f8-80178744f098"
+  },
+  {
     "uuid": "GPU-8e436d08036e",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
