@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-05 09:18:28",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 30,
+        "logical_cores": 30,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "216.26GB",
+        "available": "212.89GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-5a9d30ce-2f82-39cb-e07f-6dd350e31b9d",
+            "serial": "1325021055815"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260905-091828",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-05 09:23:30",
+    "test_results": [
+        {
+            "Test Name": "rope_stress",
+            "Version": "1.2.0",
+            "Description": "RoPE Stress (Synthetic Rotary-Math Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 6567840000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 55.9,
+            "Max Temp (C)": 58.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 263.2,
+            "Max Power (W)": 268.3,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 40562.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 22.031,
+            "Thermal Rise (C)": 22.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 24953799.39,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-80/rope_stress 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260905-091828/reliability/rope_stress/gpu0/ras.json"
+        }
+    ]
+}
