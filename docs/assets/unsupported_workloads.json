@@ -675,6 +675,15 @@
     "source_report": "pantheon_report_20260905-065747_0001_march_test_gpu0.json"
   },
   {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
+    "test": "memory_hammer",
+    "version": "1.2.0",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_20260905-065851_0001_memory_hammer_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA A10",
     "manufacturer": "NVIDIA",
     "test": "media_enc_virus",
