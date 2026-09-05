@@ -39844,6 +39844,20 @@
     "card": "GPU-dfe1c418-65c0-2f6a-3637-d70de841eed8"
   },
   {
+    "uuid": "GPU-dfee5309-de57-4d08-6e5a-0df09717fba5",
+    "gpu": "NVIDIA L40S",
+    "test": "allocation_fragmentation",
+    "version": "1.2.0",
+    "unit": "alloc-events/s",
+    "score": 9931.95,
+    "date": "2026-09-05 09:47:31",
+    "temp_max": 67.0,
+    "power_max": 95.0,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-dfee5309-de57-4d08-6e5a-0df09717fba5"
+  },
+  {
     "uuid": "GPU-e1d7f534abb2",
     "gpu": "NVIDIA A10G",
     "test": "atomic_virus",
