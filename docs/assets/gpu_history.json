@@ -8666,6 +8666,20 @@
     "card": "GPU-2a685a57-5096-71e3-4cde-6e97fceec4e4"
   },
   {
+    "uuid": "GPU-2a685a57-5096-71e3-4cde-6e97fceec4e4",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "memory_write",
+    "version": "1.2.0",
+    "unit": "GB/s",
+    "score": 1928.57,
+    "date": "2026-09-05 07:34:11",
+    "temp_max": 71.0,
+    "power_max": 350.0,
+    "clock_avg": 1676.7,
+    "throttle_time": 273.6,
+    "card": "GPU-2a685a57-5096-71e3-4cde-6e97fceec4e4"
+  },
+  {
     "uuid": "GPU-2b2a06e9-ef76-44dc-a222-a38688c4fabe",
     "gpu": "NVIDIA A10",
     "test": "cache_lat",
