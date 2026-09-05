@@ -24668,6 +24668,20 @@
     "card": "GPU-6e45d551-e09b-2e2f-dda6-8e4a404bc1a1"
   },
   {
+    "uuid": "GPU-6e45d551-e09b-2e2f-dda6-8e4a404bc1a1",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "march_test",
+    "version": "1.2.0",
+    "unit": "march-ops/s",
+    "score": 16959600000.0,
+    "date": "2026-09-05 15:03:14",
+    "temp_max": 68.0,
+    "power_max": 138.9,
+    "clock_avg": 2399.6,
+    "throttle_time": 0.0,
+    "card": "GPU-6e45d551-e09b-2e2f-dda6-8e4a404bc1a1"
+  },
+  {
     "uuid": "GPU-7195970b-9f9c-17be-0d85-c54f10c667ce",
     "gpu": "NVIDIA GH200 480GB",
     "test": "allocation_fragmentation",
