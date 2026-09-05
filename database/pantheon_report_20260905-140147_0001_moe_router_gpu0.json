@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-05 14:01:47",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3751.87Mhz"
+    },
+    "ram_info": {
+        "total": "30.08GB",
+        "available": "28.55GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-6e45d551-e09b-2e2f-dda6-8e4a404bc1a1",
+            "serial": "1790326067150"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260905-140147",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-05 14:06:49",
+    "test_results": [
+        {
+            "Test Name": "moe_router",
+            "Version": "1.2.0",
+            "Description": "MoE Router (Synthetic Top-K Routing Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 2365810000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 74.1,
+            "Max Temp (C)": 78.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 160.9,
+            "Max Power (W)": 164.9,
+            "Avg Clock(MHz)": 2399.6,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2407.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 32308.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 13.441,
+            "Thermal Rise (C)": 28.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 14703604.72,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-120/moe_router 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260905-140147/reliability/moe_router/gpu0/ras.json"
+        }
+    ]
+}
