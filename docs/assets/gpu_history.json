@@ -11508,6 +11508,20 @@
     "card": "GPU-3b9647ac-48c2-31c0-d8ad-838f0264a411"
   },
   {
+    "uuid": "GPU-3b9647ac-48c2-31c0-d8ad-838f0264a411",
+    "gpu": "Tesla T4",
+    "test": "omni_virus",
+    "version": "1.2.0",
+    "unit": "TFLOPS",
+    "score": 7.16174,
+    "date": "2026-09-05 08:38:57",
+    "temp_max": 54.0,
+    "power_max": 71.4,
+    "clock_avg": 1207.8,
+    "throttle_time": 299.6,
+    "card": "GPU-3b9647ac-48c2-31c0-d8ad-838f0264a411"
+  },
+  {
     "uuid": "GPU-3c2f73e6d06e",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "atomic_virus",
