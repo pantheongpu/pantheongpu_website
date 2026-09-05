@@ -12964,6 +12964,20 @@
     "card": "GPU-3ce425b2d374"
   },
   {
+    "uuid": "GPU-3f3f7349-0a8a-fed8-0ffd-3e294c422a72",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "allocation_fragmentation",
+    "version": "1.2.0",
+    "unit": "alloc-events/s",
+    "score": 32850.2,
+    "date": "2026-09-05 15:21:31",
+    "temp_max": 41.0,
+    "power_max": 130.5,
+    "clock_avg": 2334.3,
+    "throttle_time": 0.0,
+    "card": "GPU-3f3f7349-0a8a-fed8-0ffd-3e294c422a72"
+  },
+  {
     "uuid": "GPU-45cc97b0e0f4",
     "gpu": "NVIDIA L40S",
     "test": "allocation_fragmentation",
