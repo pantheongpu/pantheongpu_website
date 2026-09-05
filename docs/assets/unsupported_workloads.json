@@ -664,5 +664,14 @@
     "status": "UNSUPPORTED",
     "reason": "NVIDIA A100 does not expose an NVENC encoder",
     "source_report": "pantheon_report_20260905-101607_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA GH200 480GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.0",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_20260905-101923_0001_media_enc_virus_gpu0.json"
   }
 ]
