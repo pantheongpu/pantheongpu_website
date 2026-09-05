@@ -6678,6 +6678,20 @@
     "card": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60"
   },
   {
+    "uuid": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60",
+    "gpu": "NVIDIA A10G",
+    "test": "galpat",
+    "version": "1.2.0",
+    "unit": "gallop-reads/s",
+    "score": 6921820000.0,
+    "date": "2026-09-05 14:57:41",
+    "temp_max": 50.0,
+    "power_max": 130.3,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-1d082892-7231-957f-aeb8-5e15973a1b60"
+  },
+  {
     "uuid": "GPU-1d2c3125-076e-0afb-e066-eb673d26e564",
     "gpu": "NVIDIA L40S",
     "test": "cache_lat",
