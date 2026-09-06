@@ -3022,6 +3022,14 @@
 <h2 id="what-a-result-records">What a result records</h2>
 <p>Each benchmark record identifies the Pantheon version, workload, GPU, platform, runtime, and measurement units. When the collector can provide them, records also include driver and toolkit versions, memory allocation, peak temperature and power, average clock, and PCIe state.</p>
 <p>The available metrics depend on the workload. Bandwidth tests report transferred data per second, latency tests report operation or access rates, and compute tests report their own unit. A blank metric means that workload does not expose a meaningful value in that column.</p>
+<p>From Pantheon 1.2.1 each card also records its memory type (GDDR6, GDDR7, HBM3
+and so on) and memory vendor (Samsung, SK hynix, Micron), shown in the explorer
+as Mem Type and Mem Vendor. On NVIDIA the values come from the driver's own
+memory information table; on AMD from <code>rocm-smi</code>. They are the vendor the
+board's VBIOS was configured for, one value per card, not a survey of the
+chips: a repaired card fitted with another vendor's memory still reports the
+original. Read them as the declared vendor; the memory diagnostics measure what
+the chips actually do. Older reports publish N/A.</p>
 <!-- TOOLKIT_COVERAGE:START -->
 <h2 id="toolkit-and-driver-coverage">Toolkit and driver coverage</h2>
 <p>Every published benchmark records the toolkit and driver it ran under.
