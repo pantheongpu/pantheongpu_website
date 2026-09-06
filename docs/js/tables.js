@@ -31,6 +31,10 @@ const COL_DEFS = [
     { key: "volts_core",  label: "Core (mV)",   visible: false },
     { key: "volts_soc",   label: "SoC (mV)",    visible: false },
     { key: "vram",     label: "VRAM",    visible: false },
+    // The vendor the board's VBIOS memory table was configured for, as the
+    // driver reports it: one value per card, not a survey of the chips.
+    { key: "memory_vendor", label: "Mem Vendor", visible: true },
+    { key: "memory_type",   label: "Mem Type",   visible: false },
     { key: "driver",   label: "Driver",  visible: false },
     { key: "toolkit",  label: "Toolkit", visible: false },
     

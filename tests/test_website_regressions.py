@@ -1816,3 +1816,21 @@ def test_kernel_descriptions_match_the_kernels():
     assert "ras_validator.md" in diagnostics
     assert "## Baseline" in index
     assert "Verification of workload output is on by default" in read("docs/getting-started.md")
+
+
+def test_declared_memory_vendor_flows_from_report_to_explorer():
+    """pantheon >= 1.2.1 records memory_type and memory_vendor per GPU, the
+    vendor the board's VBIOS memory table declares. Older reports lack the keys
+    and must publish N/A rather than a guess."""
+    rows = _published_rows()
+    assert all("memory_vendor" in row and "memory_type" in row for row in rows)
+    assert all(row["memory_vendor"] and row["memory_type"] for row in rows)
+    tables = read("docs/js/tables.js")
+    assert 'key: "memory_vendor"' in tables and 'key: "memory_type"' in tables
+
+
+def test_every_explorer_column_exists_in_the_published_rows():
+    keys = set(re.findall(r'key:\s*"([a-z_]+)"', read("docs/js/tables.js").split("];", 1)[0]))
+    row_keys = set(_published_rows()[0])
+    missing = sorted(keys - row_keys)
+    assert not missing, f"explorer columns with no data field: {missing}"

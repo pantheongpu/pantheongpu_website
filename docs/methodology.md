@@ -8,6 +8,15 @@ Each benchmark record identifies the Pantheon version, workload, GPU, platform, 
 
 The available metrics depend on the workload. Bandwidth tests report transferred data per second, latency tests report operation or access rates, and compute tests report their own unit. A blank metric means that workload does not expose a meaningful value in that column.
 
+From Pantheon 1.2.1 each card also records its memory type (GDDR6, GDDR7, HBM3
+and so on) and memory vendor (Samsung, SK hynix, Micron), shown in the explorer
+as Mem Type and Mem Vendor. On NVIDIA the values come from the driver's own
+memory information table; on AMD from `rocm-smi`. They are the vendor the
+board's VBIOS was configured for, one value per card, not a survey of the
+chips: a repaired card fitted with another vendor's memory still reports the
+original. Read them as the declared vendor; the memory diagnostics measure what
+the chips actually do. Older reports publish N/A.
+
 <!-- TOOLKIT_COVERAGE:START -->
 ## Toolkit and driver coverage
 

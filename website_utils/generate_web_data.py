@@ -492,6 +492,12 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     power_limit = g_info.get("power_limit", "N/A")
                     vram = g_info.get("memory_total", "N/A")
                     driver = g_info.get("driver_version", "N/A")
+                    # Declared by the board's VBIOS memory table (one value per
+                    # card), reported by pantheon >= 1.2.1; older reports have
+                    # neither key. See the source repo README, "Memory type and
+                    # vendor", for why "declared" is the honest word.
+                    memory_type = normalize(g_info.get("memory_type"), "N/A")
+                    memory_vendor = normalize(g_info.get("memory_vendor"), "N/A")
                     toolkit = data.get("toolkit_version", "N/A")
 
                     # Score Normalization
@@ -563,6 +569,8 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         "volts_core": test.get("Volts Core (mV)", 0),
                         "volts_soc": test.get("Volts SoC (mV)", 0),
                         "vram": vram,
+                        "memory_type": memory_type,
+                        "memory_vendor": memory_vendor,
                         "driver": driver,
                         "toolkit": toolkit
                     }

@@ -560,3 +560,23 @@ def test_pre_fix_units_of_the_two_late_rewrites_are_retired_too():
     assert is_retired_metric("rotary-tokens/s", "1.0.18")
     assert not is_retired_metric("alloc-events/s", "1.0.18")
     assert not is_retired_metric("ai-ops/s", "1.2.0")
+
+
+def test_declared_memory_fields_are_published_and_default_to_na(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    write_report(db_dir, "pantheon_report_new.json",
+                 [{"id": 0, "name": "NVIDIA L4", "uuid": "GPU-NEW", "memory_type": "GDDR6",
+                   "memory_vendor": "SK hynix", "memory_vendor_source": "nvidia-rm"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 250.0, "Unit": "GB/s"}], version="1.2.1")
+    write_report(db_dir, "pantheon_report_old.json",
+                 [{"id": 0, "name": "NVIDIA L4", "uuid": "GPU-OLD"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 250.0, "Unit": "GB/s"}], version="1.2.0")
+
+    rows = {row["uuid"]: row for row in main(db_dir=db_dir, output_file=output_file)}
+
+    assert rows["GPU-NEW"]["memory_type"] == "GDDR6"
+    assert rows["GPU-NEW"]["memory_vendor"] == "SK hynix"
+    assert rows["GPU-OLD"]["memory_type"] == "N/A"
+    assert rows["GPU-OLD"]["memory_vendor"] == "N/A"
