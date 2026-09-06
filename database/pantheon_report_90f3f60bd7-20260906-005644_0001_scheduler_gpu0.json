@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-06 00:56:44",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "2725.33Mhz"
+    },
+    "ram_info": {
+        "total": "30.98GB",
+        "available": "29.74GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-9d89ee3e-f6a8-3a7f-c29b-ffc9dff12c50",
+            "serial": "1654522001414"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260906-005644",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-06 01:01:46",
+    "test_results": [
+        {
+            "Test Name": "scheduler",
+            "Version": "1.2.0",
+            "Description": "Scheduler Virus (Context Switch / KIPS)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 371.086,
+            "Unit": "KIPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 41.2,
+            "Max Temp (C)": 43.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 39.3,
+            "Max Power (W)": 39.7,
+            "Avg Clock(MHz)": 1590.0,
+            "Min Clock (MHz)": 1590.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 95.7,
+            "Max GPU Util (%)": 97.0,
+            "Peak Memory (MiB)": 574.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 3.282,
+            "Thermal Rise (C)": 1.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 9.44,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-75/scheduler_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260906-005644/reliability/scheduler/gpu0/ras.json"
+        }
+    ]
+}
