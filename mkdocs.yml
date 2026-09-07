@@ -17,6 +17,7 @@ nav:
     - Comparisons: benchmark-comparisons.md
     - Per-card History: gpu-history.md
     - Methodology: methodology.md
+    - AWS Neuron (Early Access): aws-neuron.md
   - Research:
     - Overview: reports.md
     - "Silicon Segregation": reports/silicon-segregation.md

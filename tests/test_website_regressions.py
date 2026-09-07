@@ -498,6 +498,20 @@ def test_benchmark_table_has_mobile_scroll_wrapper():
     assert "overflow-x: auto" in css
 
 
+def test_benchmark_explorer_keeps_its_sidebar_without_shrinking_the_table():
+    # The explorer used to hide the navigation sidebar to give the table the
+    # full page width, which also hid the section's page list on the one page
+    # in the section most visitors land on first. The sidebar is back, so the
+    # table has to reclaim that column below the list instead -- otherwise the
+    # widest table on the site loses 12.1rem for its whole scroll.
+    benchmarks = read("docs/benchmarks.md")
+    css = read("docs/css/extra.css")
+
+    assert "hide:" not in benchmarks.split("# ")[0]
+    assert "body:has(#benchmarkTable) .md-sidebar--primary" in css
+    assert "margin-left: -12.1rem" in css
+
+
 def test_filter_controls_expose_menu_state():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")
