@@ -6,17 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
+        <meta name="description" content="Early validation results for AWS Trainium and Inferentia2 from Pantheon Neuron, a separate diagnostics suite for AWS's custom ML accelerators.">
       
       
       
-        <link rel="canonical" href="https://pantheongpu.com/gpu-history/">
+        <link rel="canonical" href="https://pantheongpu.com/aws-neuron/">
       
       
-        <link rel="prev" href="../benchmark-comparisons/">
+        <link rel="prev" href="../methodology/">
       
       
-        <link rel="next" href="../methodology/">
+        <link rel="next" href="../reports/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Per-card History - PANTHEON</title>
+        <title>AWS Neuron: Early Access - PANTHEON</title>
       
     
     
@@ -79,13 +79,13 @@
   
   <meta property="og:site_name" content="PANTHEON">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Per-card History">
-  <meta property="og:description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
-  <meta property="og:url" content="https://pantheongpu.com/gpu-history/">
+  <meta property="og:title" content="AWS Neuron (Early Access)">
+  <meta property="og:description" content="Early validation results for AWS Trainium and Inferentia2 from Pantheon Neuron, a separate diagnostics suite for AWS's custom ML accelerators.">
+  <meta property="og:url" content="https://pantheongpu.com/aws-neuron/">
   <meta property="og:image" content="https://pantheongpu.com/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Per-card History">
-  <meta name="twitter:description" content="Open source GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm. Find failing memory cells, unstable clocks, and underperforming accelerators.">
+  <meta name="twitter:title" content="AWS Neuron (Early Access)">
+  <meta name="twitter:description" content="Early validation results for AWS Trainium and Inferentia2 from Pantheon Neuron, a separate diagnostics suite for AWS's custom ML accelerators.">
   <meta name="twitter:image" content="https://pantheongpu.com/assets/logo.png">
   
 
@@ -108,7 +108,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#per-card-history" class="md-skip">
+        <a href="#aws-neuron-accelerators" class="md-skip">
           Skip to content
         </a>
       
@@ -143,7 +143,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Per-card History
+              AWS Neuron: Early Access
             
           </span>
         </div>
@@ -400,9 +400,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -633,19 +631,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../gpu-history/" class="md-nav__link">
         
   
   
@@ -661,7 +650,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -699,10 +687,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../aws-neuron/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS Neuron (Early Access)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -718,6 +733,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#validation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kernel-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kernel status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-actually-been-measured" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's actually been measured
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#follow-the-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow the build
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2843,8 +2922,6 @@
             
             
               
-                
-              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -2856,6 +2933,58 @@
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#validation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kernel-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kernel status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-actually-been-measured" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's actually been measured
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#follow-the-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Follow the build
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2869,47 +2998,114 @@
               <article class="md-content__inner md-typeset">
                 
                   
-  
 
 
 
-
-<h1 id="per-card-history">Per-card history</h1>
 <div class="page-intro">
-  <p class="page-intro__eyebrow">One card over time</p>
-  <p>The leaderboard keeps a single row per card, workload and release: the best run wins, and every later run is dropped. That is the right view for comparing hardware, and the wrong one for watching a card age. This page plots every run of one card instead, so a part that is slowing down shows up as a slope rather than disappearing behind its own best result.</p>
+<p class="page-intro__eyebrow">Early access &middot; AWS Trainium &amp; Inferentia2</p>
+<h1 id="aws-neuron-accelerators">AWS Neuron accelerators</h1>
+<p>Pantheon diagnoses NVIDIA CUDA and AMD ROCm GPUs. AWS Trainium and Inferentia2 are not GPUs, they're a separate class of accelerator with their own toolchain, so we built a separate suite for them: <a href="https://github.com/pantheongpu/pantheonneuron">Pantheon Neuron</a>.</p>
 </div>
-
+<div class="admonition warning">
+<p class="admonition-title">This is a status report, not a leaderboard</p>
+<p>Pantheon Neuron is at v0.1.0. Of 25 planned workloads, 2 have a working kernel, and only one of those is verified end-to-end on hardware. Everything below comes from a single device of each type, not repeated runs across a fleet the way the <a href="../benchmarks/">GPU benchmark database</a> is. Read it as where the suite stands today, not a comparison.</p>
+</div>
+<h2 id="validation-status">Validation status</h2>
+<table>
+<thead>
+<tr>
+<th>Chip</th>
+<th>Device</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inferentia2 (<code>inf2</code>)</td>
+<td>NeuronCore-v2, 2 cores/device</td>
+<td><strong>Verified</strong>, inf2.xlarge, 2026-08-26</td>
+</tr>
+<tr>
+<td>Trainium1 (<code>trn1</code>)</td>
+<td>NeuronCore-v2, 2 cores/device</td>
+<td><strong>Verified</strong>, trn1.2xlarge, 2026-08-27</td>
+</tr>
+<tr>
+<td>Trainium1n (<code>trn1n</code>)</td>
+<td>NeuronCore-v2, 2 cores/device</td>
+<td>Assumed, same silicon as trn1 with more network; not run</td>
+</tr>
+<tr>
+<td>Trainium2 (<code>trn2</code>)</td>
+<td>NeuronCore-v3, 8 cores/device</td>
+<td>Assumed, least confident; not run</td>
+</tr>
+</tbody>
+</table>
+<p>Device generation does not track product naming: Trainium1 reports NeuronDevice v2 and Inferentia2 reports v3, but both run NeuronCore v2. The counter sets also differ between chips, so a kernel can't assume a counter that exists on one exists on the other.</p>
+<h2 id="kernel-status">Kernel status</h2>
+<table>
+<thead>
+<tr>
+<th>Workload</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>baseline_metrics</code></td>
+<td>Telemetry only, no load</td>
+</tr>
+<tr>
+<td><code>memory_read</code></td>
+<td><strong>Verified on trn1.2xlarge</strong></td>
+</tr>
+<tr>
+<td><code>memory_write</code></td>
+<td>Written, primitives verified, this arrangement untested on hardware</td>
+</tr>
+<tr>
+<td>Remaining 23 workloads</td>
+<td>No kernel yet</td>
+</tr>
+</tbody>
+</table>
+<h2 id="whats-actually-been-measured">What's actually been measured</h2>
+<p>Two numbers below came from a real kernel doing real work, not a diagnostic probe:</p>
+<table>
+<thead>
+<tr>
+<th>Measurement</th>
+<th>Value</th>
+<th>Chip</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sustained HBM read bandwidth</td>
+<td>264.15 GB/s</td>
+<td>Trainium1 (trn1.2xlarge)</td>
+<td><code>memory_read</code> NKI kernel, 1024 MiB bf16 buffer, 20 passes, device barrier inside the timed region</td>
+</tr>
+<tr>
+<td>Training throughput</td>
+<td>23.25 train-steps/s</td>
+<td>Trainium1 (trn1.2xlarge)</td>
+<td>2-layer 1024&times;1024 MLP, batch 16, SGD, 50 steps; confirms the training capability path works</td>
+</tr>
+</tbody>
+</table>
+<p>Both are single runs on a single device, not medians over repeated samples. Read them as "this works, and roughly what it does," not as a Score to set against another chip.</p>
 <div class="admonition note">
-<p class="admonition-title">Reading these charts</p>
-<p>Cards are identified by the GPU UUID the driver reports, published as-is.
-A UUID names one physical card, not the machine it sat in, and it follows
-the card across releases and owners, which is what a history needs. Host
-details (hostnames, network information) are removed before a report is
-published. Cards from early reports that carried no UUID are grouped by
-model, memory size and driver instead and labelled as having no GPU ID.</p>
-<p>When a workload's metric changed between releases, each unit is drawn as its
-own series. Values in different units are not comparable, and joining them
-into one line would show a step that is a change of units rather than a
-change in the hardware.</p>
+<p class="admonition-title">What we're deliberately not showing</p>
+<p>An early bring-up pass also ran on inf2.xlarge and read counters like <code>effective_flops</code> and <code>mfu_estimated_percent</code> from <code>neuron-monitor</code>. We're not publishing those numbers here: the load behind them was an untuned matmul running at roughly 0.005% of the chip's compute capability, and Pantheon Neuron's own data file <a href="https://github.com/pantheongpu/pantheonneuron/blob/main/data/baselines.json">flags them explicitly</a> as proof the counters are readable, not a measurement of Inferentia2's throughput. A number your own source says not to compare isn't a benchmark, so it stays out until a real kernel runs on inf2 the way <code>memory_read</code> did on trn1.</p>
 </div>
-<div class="benchmark-controls">
-  <label for="gpuHistoryCard">Card</label>
-  <select id="gpuHistoryCard" aria-label="Select a GPU to plot"></select>
-
-  <label for="gpuHistoryTest">Workload</label>
-  <select id="gpuHistoryTest" aria-label="Select a workload to plot"></select>
-</div>
-
-<p id="gpuHistoryStatus" class="benchmark-status" role="status" aria-live="polite"></p>
-
-<div id="gpuHistoryChart"></div>
-
-<p>Runs come from the same reports as the leaderboard. A single benchmark writes
-both a per-test record and a summary repeating it, so those are collapsed to one
-point; two separate runs are only merged when they share a timestamp as well as
-a score, at which point they are the same measurement counted twice.</p>
-<p><a class="md-button" href="../benchmarks/">Back to the benchmark explorer</a></p>
+<h2 id="follow-the-build">Follow the build</h2>
+<p>Pantheon Neuron is developed in the open. Full methodology, kernel source, and raw probe data are in the repository.</p>
+<p><a class="md-button md-button--primary" href="https://github.com/pantheongpu/pantheonneuron">View Pantheon Neuron on GitHub</a>
+<a class="md-button" href="../benchmarks/">GPU benchmark database</a></p>
+<p>This page grows into a full leaderboard as more workloads get verified kernels. Until then, it's an honest snapshot of where the suite stands.</p>
 
 
 
@@ -2924,8 +3120,6 @@ a score, at which point they are the same measurement counted twice.</p>
 
   
 
-
-  
 
 
   <form class="md-feedback" name="feedback" hidden>
@@ -2999,12 +3193,10 @@ a score, at which point they are the same measurement counted twice.</p>
   
     
       
-        
-      
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../benchmark-comparisons/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Comparisons">
+          <a href="../methodology/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Methodology">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3014,20 +3206,20 @@ a score, at which point they are the same measurement counted twice.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Comparisons
+                Methodology
               </div>
             </div>
           </a>
         
         
           
-          <a href="../methodology/" class="md-footer__link md-footer__link--next" aria-label="Next: Methodology">
+          <a href="../reports/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Methodology
+                Overview
               </div>
             </div>
             <div class="md-footer__button md-icon">

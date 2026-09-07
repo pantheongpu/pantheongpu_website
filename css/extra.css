@@ -331,6 +331,34 @@ body:has(.report-byline) .md-content__inner {
   -webkit-overflow-scrolling: touch;
 }
 
+/* The explorer keeps its navigation sidebar so the section's page list stays
+   where every other page puts it. The sidebar is a flex item, though, so its
+   12.1rem column is reserved for the whole page height even though the list is
+   only a few entries tall -- which would squeeze the widest table on the site
+   for its entire scroll. Unstick the sidebar so the list scrolls away with the
+   page, then let the table and its controls reclaim that column, which by then
+   is empty space beneath the list. Desktop only: below this breakpoint the
+   sidebar is a slide-in drawer that reserves no column at all. */
+@media screen and (min-width: 76.25em) {
+  body:has(#benchmarkTable) .md-sidebar--primary {
+    position: static;
+  }
+
+  body:has(#benchmarkTable) .benchmark-controls,
+  body:has(#benchmarkTable) .benchmark-status,
+  body:has(#benchmarkTable) .benchmark-table-wrap {
+    margin-left: -12.1rem;
+  }
+
+  /* The wrapper sets an explicit width, so the negative margin above would
+     slide it left rather than widen it, leaving its right edge short by the
+     same 12.1rem. Let the width resolve from the margins instead. */
+  body:has(#benchmarkTable) .benchmark-table-wrap {
+    width: auto;
+    max-width: none;
+  }
+}
+
 .benchmark-status {
   min-height: 1.4em;
   margin: -8px 0 10px;
