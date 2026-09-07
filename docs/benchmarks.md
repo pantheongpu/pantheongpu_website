@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Benchmark Explorer
 
 <div class="page-intro">

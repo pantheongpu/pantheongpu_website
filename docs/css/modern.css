@@ -98,14 +98,22 @@ body, input, .md-nav__link, .md-typeset {
   color: #f8fbff;
   background: radial-gradient(circle at 88% 16%, rgba(65, 194, 213, .30), transparent 34%), linear-gradient(135deg, #111a35, #172753);
 }
-.pantheon-hero > * { position: relative; z-index: 1; max-width: 980px; }
+.pantheon-hero > * { position: relative; z-index: 1; max-width: 1200px; }
 .pantheon-hero h1 { margin: 0 0 1rem; color: #fff; -webkit-text-fill-color: #fff; font-size: clamp(2.35rem, 5vw, 4.5rem); line-height: 1.04; }
-.pantheon-hero p { max-width: 630px; color: #d4def1; font-size: clamp(1rem, 2vw, 1.16rem); }
+/* Body copy stays narrower than the headline on purpose: past roughly 80
+   characters a line gets hard to track back from. This is wider than it was,
+   not unbounded, so the hero fills more of a wide screen without the prose
+   running the full 1200px the headline can use. */
+.pantheon-hero p { max-width: 760px; color: #d4def1; font-size: clamp(1rem, 2vw, 1.16rem); }
 .pantheon-hero__eyebrow, .page-intro__eyebrow { color: var(--pantheon-cyan); font-size: .74rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .pantheon-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.8rem 0 1.1rem; }
 .pantheon-hero__actions .md-button { border-color: rgba(255,255,255,.24) !important; color: #fff !important; }
 .pantheon-hero__actions .md-button--primary { border-color: #fff !important; background: #fff !important; color: #18234a !important; }
 .pantheon-hero__credibility { margin: 1.4rem 0 0; color: #b8c6e4; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+/* The hero caps its paragraphs at 630px to keep the body copy readable, which
+   would wrap this two-line credit onto a third line mid-phrase. It is a short
+   uppercase credit, not body copy, so let it use the hero's own width. */
+.pantheon-hero .pantheon-hero__credibility { max-width: none; }
 
 .md-sidebar--primary .release-version-nav > .md-nav__list,
 .md-sidebar--primary .release-version-nav > .md-nav__list > .md-nav__item {
