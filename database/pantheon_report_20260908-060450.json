@@ -1,0 +1,84 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-08 06:10:23",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.18.33.2-microsoft-standard-WSL2",
+        "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3187.20Mhz"
+    },
+    "ram_info": {
+        "total": "23.59GB",
+        "available": "17.82GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": "12288 MB",
+            "driver_version": "596.36",
+            "power_limit": 170.0,
+            "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+            "serial": "[N/A]"
+        },
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": "12288 MB",
+            "driver_version": "596.36",
+            "power_limit": 170.0,
+            "uuid": "GPU-31f5e719-e56e-586c-38f0-9ca3be0f7930",
+            "serial": "[N/A]"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "test_results": [
+        {
+            "Test Name": "memory_write",
+            "Version": "1.2.0",
+            "Description": "Memory Write (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 327.385,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 69.4,
+            "Max Temp (C)": 73.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 137.1,
+            "Max Power (W)": 139.6,
+            "Avg Clock(MHz)": 1938.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 5911.7,
+            "Memory Total (MiB)": 12288.0,
+            "Energy (Wh)": 11.519,
+            "Thermal Rise (C)": 27.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 2445.24,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 79.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.0/cuda-86/memory_write 0 300 50 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260908-060450/reliability/memory_write/gpu0/ras.json"
+        }
+    ]
+}

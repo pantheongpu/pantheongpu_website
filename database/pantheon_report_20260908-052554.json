@@ -1,0 +1,84 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-08 05:31:27",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.18.33.2-microsoft-standard-WSL2",
+        "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3187.20Mhz"
+    },
+    "ram_info": {
+        "total": "23.59GB",
+        "available": "17.49GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": "12288 MB",
+            "driver_version": "596.36",
+            "power_limit": 170.0,
+            "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+            "serial": "[N/A]"
+        },
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3060",
+            "memory_total": "12288 MB",
+            "driver_version": "596.36",
+            "power_limit": 170.0,
+            "uuid": "GPU-31f5e719-e56e-586c-38f0-9ca3be0f7930",
+            "serial": "[N/A]"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "test_results": [
+        {
+            "Test Name": "memory_tsv_thrasher",
+            "Version": "1.2.0",
+            "Description": "Memory TSV Thrasher (PHY Toggle-Rate Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 50,
+            "Score": 316.976,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 62.3,
+            "Max Temp (C)": 64.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 97.1,
+            "Max Power (W)": 98.1,
+            "Avg Clock(MHz)": 1953.6,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 5911.7,
+            "Memory Total (MiB)": 12288.0,
+            "Energy (Wh)": 8.152,
+            "Thermal Rise (C)": 12.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 3342.77,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 70.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.0/cuda-86/memory_tsv_thrasher 0 300 50 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260908-052554/reliability/memory_tsv_thrasher/gpu0/ras.json"
+        }
+    ]
+}
