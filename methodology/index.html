@@ -3050,14 +3050,18 @@
 <h2 id="what-a-result-records">What a result records</h2>
 <p>Each benchmark record identifies the Pantheon version, workload, GPU, platform, runtime, and measurement units. When the collector can provide them, records also include driver and toolkit versions, memory allocation, peak temperature and power, average clock, and PCIe state.</p>
 <p>The available metrics depend on the workload. Bandwidth tests report transferred data per second, latency tests report operation or access rates, and compute tests report their own unit. A blank metric means that workload does not expose a meaningful value in that column.</p>
-<p>From Pantheon 1.2.1 each card also records its memory type (GDDR6, GDDR7, HBM3
-and so on) and memory vendor (Samsung, SK hynix, Micron), shown in the explorer
-as Mem Type and Mem Vendor. On NVIDIA the values come from the driver's own
-memory information table; on AMD from <code>rocm-smi</code>. They are the vendor the
-board's VBIOS was configured for, one value per card, not a survey of the
-chips: a repaired card fitted with another vendor's memory still reports the
-original. Read them as the declared vendor; the memory diagnostics measure what
-the chips actually do. Older reports publish N/A.</p>
+<p>The explorer carries <strong>Mem Type</strong> and <strong>Mem Vendor</strong> columns, and every
+published record reads N/A in both. That is accurate rather than missing: no
+released version of Pantheon collects them, so nothing has ever been
+measured to put there. The columns are reserved for a planned release that
+would read memory type (GDDR6, GDDR7, HBM3 and so on) and vendor (Samsung,
+SK hynix, Micron) from the driver's own memory information table on NVIDIA
+and from <code>rocm-smi</code> on AMD.</p>
+<p>When it ships, read those values as the vendor the board's VBIOS was
+configured for -- one value per card, not a survey of the chips. A repaired
+card fitted with another vendor's memory would still report the original, so
+the declared vendor is what the column means; the memory diagnostics are
+what measure the chips themselves.</p>
 <!-- TOOLKIT_COVERAGE:START -->
 <h2 id="toolkit-and-driver-coverage">Toolkit and driver coverage</h2>
 <p>Every published benchmark records the toolkit and driver it ran under.
