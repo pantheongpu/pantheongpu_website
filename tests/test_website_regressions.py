@@ -1848,3 +1848,74 @@ def test_every_explorer_column_exists_in_the_published_rows():
     row_keys = set(_published_rows()[0])
     missing = sorted(keys - row_keys)
     assert not missing, f"explorer columns with no data field: {missing}"
+
+
+def _database_gpu_names():
+    """Every raw GPU name in database/, with the run statuses it appears under."""
+    import collections
+    seen = collections.defaultdict(set)
+    for path in (ROOT / "database").rglob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if not isinstance(data, dict) or not data.get("test_results"):
+            continue
+        status = str(data.get("run_status", "complete")).lower()
+        for card in (data.get("gpu_static_info") or []):
+            if isinstance(card, dict) and card.get("name"):
+                seen[card["name"]].add(status)
+    return seen
+
+
+def _published_gpu_names():
+    rows = []
+
+    def walk(node):
+        if isinstance(node, dict):
+            if "gpu" in node and "test" in node:
+                rows.append(node)
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(json.loads(read("docs/assets/web_data.json")))
+    return {row["gpu"] for row in rows}
+
+
+def test_every_gpu_in_the_database_is_accounted_for():
+    """A card's data may be excluded, but never without a reason that holds.
+
+    The pipeline drops records in two legitimate ways and neither is visible
+    from the published assets: a `run_status` of partial/failed/incomplete is
+    skipped outright, and `GPU_NAME_ALIASES` folds a card's reported name into
+    a public one. Both are correct, and both make a raw database name absent
+    from `web_data.json` without anything being wrong.
+
+    That invisibility costs real time. Reading the two files side by side, a
+    GH200 partial run and an aliased H100 both look exactly like a flagship
+    card whose measurements were silently lost. This asserts the accounting
+    instead: every reported name is published, aliased to something published,
+    or appears only in runs the generator is documented to skip.
+
+    It fails when a card's data genuinely stops reaching the site.
+    """
+    from website_utils.generate_web_data import normalize_gpu_name
+
+    published = _published_gpu_names()
+    skipped_statuses = {"partial", "failed", "incomplete"}
+    unaccounted = {}
+    for name, statuses in _database_gpu_names().items():
+        if name in published or normalize_gpu_name(name) in published:
+            continue
+        if statuses and statuses <= skipped_statuses:
+            continue                      # only ever seen in runs we skip
+        unaccounted[name] = sorted(statuses)
+
+    assert not unaccounted, (
+        "GPU(s) present in database/ reach neither web_data.json nor a "
+        "documented exclusion (alias, or partial/failed/incomplete run): "
+        f"{unaccounted}"
+    )
