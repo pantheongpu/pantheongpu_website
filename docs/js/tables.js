@@ -694,7 +694,118 @@ function getColorForTemp(temp) {
     return "var(--pantheon-temp-crit)";
 }
 
-// --- 6. Export to CSV ---
+// --- 6. Export ---
+
+// Units that belong to a whole column, so the cell can hold a number and the
+// unit can live in the header. A spreadsheet that stores "72 °C" cannot
+// average a temperature column; one that stores 72 can.
+//
+// score and throughput are deliberately absent: their unit varies per row
+// (GB/s, TFLOPS, ns), so they get a Unit column beside them instead.
+// memory_vendor and memory_type are absent because they are names, not
+// quantities, despite matching the same "memory" prefix elsewhere.
+const XLSX_COLUMN_UNITS = {
+    throughput_variance: "%", duration: "s", throttle_time: "s",
+    temp_max: "\u00b0C", temp_mem: "\u00b0C", thermal_rise: "\u00b0C",
+    power_max: "W", energy_wh: "Wh",
+    clock_avg: "MHz", clock_min: "MHz", clock_max: "MHz",
+    gpu_util_avg: "%", gpu_util_max: "%",
+    memory_peak: "MiB", memory_total: "MiB", vram: "MiB",
+    // These four are numbers whose label already names the unit, so they
+    // map to "" -- a suffix would render "Fan % (%)" and "Core (mV) (mV)".
+    fan_max: "", volts_core: "", volts_soc: "", power_limit: "",
+};
+
+// Both exports read this, so the CSV and the workbook cannot drift apart in
+// which rows or columns they carry.
+function exportColumns() {
+    return COL_DEFS.filter(c => c.visible);
+}
+
+function exportFilename(extension) {
+    const dateStr = new Date().toISOString().split("T")[0];
+    return `pantheon_benchmarks_${dateStr}.${extension}`;
+}
+
+function downloadBlob(blob, filename) {
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", filename);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+// One benchmark row, typed for a spreadsheet rather than formatted for a
+// cell. Numbers stay numbers; a value the run never measured becomes a blank
+// rather than the text "N/A", which would turn its column into text and
+// break every formula in it.
+function xlsxRow(row, columns) {
+    const cells = [];
+    columns.forEach(col => {
+        const raw = row[col.key];
+        if (col.key === "score" || col.key === "throughput") {
+            const num = Number(raw);
+            // A run that recorded no throughput leaves this blank; the Unit
+            // column beside it still says why. "N/A" here would make the
+            // whole column text for the sake of 50 rows out of 3,363.
+            cells.push(isMissingValue(raw) ? ""
+                : (Number.isFinite(num) ? num : formatCellValue(row, col.key)));
+            cells.push(row.unit === "Watts"
+                ? "Watts (power only, no throughput)"
+                : (row.unit || ""));
+            return;
+        }
+        if (col.key in XLSX_COLUMN_UNITS) {
+            const num = Number(raw);
+            cells.push(isMissingValue(raw) || !Number.isFinite(num) ? "" : num);
+            return;
+        }
+        const formatted = formatCellValue(row, col.key);
+        cells.push(formatted === "N/A" ? "" : formatted);
+    });
+    return cells;
+}
+
+function xlsxHeader(columns) {
+    const headers = [];
+    columns.forEach(col => {
+        const unit = XLSX_COLUMN_UNITS[col.key];
+        headers.push(unit ? `${col.label} (${unit})` : col.label);
+
+        if (col.key === "score" || col.key === "throughput") headers.push("Unit");
+    });
+    return headers;
+}
+
+async function exportToXLSX() {
+    if (currentFilteredData.length === 0) {
+        alert("No data available to export!");
+        return;
+    }
+    if (!window.PantheonXLSX) {
+        alert("The spreadsheet writer did not load. The CSV export still works.");
+        return;
+    }
+
+    trackBenchmarkEvent("benchmark_export_xlsx",
+                        { result_count: currentFilteredData.length });
+
+    const columns = exportColumns();
+    const sheets = [{
+        name: "Benchmarks",
+        rows: [xlsxHeader(columns),
+               ...currentFilteredData.map(row => xlsxRow(row, columns))],
+    }];
+
+    const blob = await window.PantheonXLSX.buildWorkbook(sheets);
+    downloadBlob(blob, exportFilename("xlsx"));
+}
+
+// --- Export to CSV ---
 function exportToCSV() {
     if (currentFilteredData.length === 0) {
         alert("No data available to export!");
@@ -703,42 +814,20 @@ function exportToCSV() {
 
     trackBenchmarkEvent("benchmark_export", { result_count: currentFilteredData.length });
 
-    // 1. Get the currently visible columns to build the header
-    const visibleCols = COL_DEFS.filter(c => c.visible);
+    const visibleCols = exportColumns();
     const headers = visibleCols.map(c => `"${c.label}"`).join(",");
 
-    // 2. Map the filtered data rows
-    const csvRows = currentFilteredData.map(row => {
-        return visibleCols.map(col => {
-            let val = row[col.key];
-
-            val = formatCellValue(row, col.key);
-
+    const csvRows = currentFilteredData.map(row =>
+        visibleCols.map(col => {
             // Escape quotes by doubling them (CSV standard) and wrap in quotes
-            let strVal = String(val).replace(/"/g, '""');
-            return `"${strVal}"`;
-        }).join(",");
-    });
+            const val = String(formatCellValue(row, col.key)).replace(/"/g, '""');
+            return `"${val}"`;
+        }).join(",")
+    );
 
-    // 3. Combine headers and rows
     const csvContent = [headers, ...csvRows].join("\n");
-
-    // 4. Create a Blob and trigger the download
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement("a");
-    const url = URL.createObjectURL(blob);
-
-    // Create a dynamic filename with today's date
-    const dateStr = new Date().toISOString().split('T')[0];
-    link.setAttribute("href", url);
-    link.setAttribute("download", `pantheon_benchmarks_${dateStr}.csv`);
-
-    // Append, click, and cleanup
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    downloadBlob(new Blob([csvContent], { type: "text/csv;charset=utf-8;" }),
+                 exportFilename("csv"));
 }
 
 async function copyBenchmarkLink() {
