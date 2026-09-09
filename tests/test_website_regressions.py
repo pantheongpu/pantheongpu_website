@@ -1998,3 +1998,17 @@ def test_every_measured_workload_is_accounted_for():
         "measured (card, workload) result(s) reach neither published asset and "
         f"match no documented exclusion: {unaccounted}"
     )
+
+
+def test_memory_names_are_not_labelled_as_sizes():
+    """memory_vendor and memory_type are names, not quantities.
+
+    formatCellValue matched on `key.includes("memory")`, which caught all
+    four memory_* fields and appended "MiB" to every one. It never showed
+    because each published run predates v1.2.1 and left the vendor and type
+    null; the release that fills them would have rendered "Samsung MiB".
+    """
+    tables_js = read("docs/js/tables.js")
+
+    assert 'key === "memory_peak" || key === "memory_total"' in tables_js
+    assert 'key.includes("memory")' not in tables_js

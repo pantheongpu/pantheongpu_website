@@ -267,7 +267,12 @@ function formatCellValue(row, key, display = false) {
     if (key.includes("gpu_util")) {
         return formatMetric(val, "%");
     }
-    if (key.includes("memory")) {
+    // Sizes only. memory_vendor and memory_type match the same prefix but
+    // are names, not quantities: v1.2.1 fills them with "Samsung" and
+    // "GDDR6", which this would render as "Samsung MiB". Invisible until
+    // now only because every published run predates that release and left
+    // both fields null.
+    if (key === "memory_peak" || key === "memory_total") {
         return formatMetric(val, "MiB");
     }
     if (key === "energy_wh") {
