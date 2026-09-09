@@ -4,7 +4,48 @@ Download stable releases of the Pantheon GPU toolkit. The newest release is list
 
 ---
 
-## Pantheon v1.2.0 (Latest)
+## Pantheon v1.2.1 (Latest)
+**Release Date:** September 9, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.2.1
+
+**Changes since v1.2.0:**
+
+- Report a missing openpyxl as an optional extra, not a failed write (#13)
+- Attribute profile counters to the kernel that owned the run (#12)
+- Point the banner and final summary at GitHub Discussions (#9)
+- Bump version to 1.2.1 (#8)
+- Report the declared memory type and vendor of each GPU (#7)
+- List every suite in the --test help text (#6)
+- Add funding metadata: .well-known manifest pointer and FUNDING.yml (#5)
+
+Install from PyPI (`pipx install pantheon-gpu`), the apt or
+COPR repositories, the container image
+(`ghcr.io/pantheongpu/pantheon:1.2.1`), or the wheel below:
+
+```
+pip install pantheon_gpu-1.2.1-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Kernels compile on first run into a per-user cache (roughly a
+minute, once) and need a CUDA or ROCm toolchain; use
+`--platform mock` to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.2.1 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.1/pantheon-gpu_1.2.1_all.deb) | `.deb` | 168.2 KB |
+| [Pantheon v1.2.1 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.1/pantheon_gpu-1.2.1-py3-none-any.whl) | `.whl` | 334.2 KB |
+| [Pantheon v1.2.1 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.1/pantheon-1.2.1-source.tar.gz) | `.tar.gz` | 258.2 KB |
+| [Pantheon v1.2.1 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.1/pantheon_gpu-1.2.1.tar.gz) | `.tar.gz` | 243.5 KB |
+| [Pantheon v1.2.1 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.1/pantheon-1.2.1-source.zip) | `.zip` | 375.8 KB |
+| [Pantheon v1.2.1 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.1/SHA256SUMS) | `SHA256SUMS` | 484 B |
+
+---
+
+## Pantheon v1.2.0
 **Release Date:** August 31, 2026
 
 ### Release Notes
