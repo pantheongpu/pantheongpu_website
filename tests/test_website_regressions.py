@@ -1848,3 +1848,153 @@ def test_every_explorer_column_exists_in_the_published_rows():
     row_keys = set(_published_rows()[0])
     missing = sorted(keys - row_keys)
     assert not missing, f"explorer columns with no data field: {missing}"
+
+
+def _database_gpu_names():
+    """Every raw GPU name in database/, with the run statuses it appears under."""
+    import collections
+    seen = collections.defaultdict(set)
+    for path in (ROOT / "database").rglob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if not isinstance(data, dict) or not data.get("test_results"):
+            continue
+        status = str(data.get("run_status", "complete")).lower()
+        for card in (data.get("gpu_static_info") or []):
+            if isinstance(card, dict) and card.get("name"):
+                seen[card["name"]].add(status)
+    return seen
+
+
+def _asset_rows(asset):
+    """Every {gpu, test, ...} record in a published asset, at any nesting.
+
+    Distinct from `_published_rows`, which returns web_data.json whole; this
+    one walks a named asset for the records inside it.
+    """
+    rows = []
+
+    def walk(node):
+        if isinstance(node, dict):
+            if "gpu" in node and "test" in node:
+                rows.append(node)
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                walk(value)
+
+    walk(json.loads(read(f"docs/assets/{asset}")))
+    return rows
+
+
+def _published_gpu_names():
+    return {row["gpu"] for row in _asset_rows("web_data.json")}
+
+
+def test_every_gpu_in_the_database_is_accounted_for():
+    """A card's data may be excluded, but never without a reason that holds.
+
+    The pipeline drops records in two legitimate ways and neither is visible
+    from the published assets: a `run_status` of partial/failed/incomplete is
+    skipped outright, and `GPU_NAME_ALIASES` folds a card's reported name into
+    a public one. Both are correct, and both make a raw database name absent
+    from `web_data.json` without anything being wrong.
+
+    That invisibility costs real time. Reading the two files side by side, a
+    GH200 partial run and an aliased H100 both look exactly like a flagship
+    card whose measurements were silently lost. This asserts the accounting
+    instead: every reported name is published, aliased to something published,
+    or appears only in runs the generator is documented to skip.
+
+    It fails when a card's data genuinely stops reaching the site.
+    """
+    from website_utils.generate_web_data import normalize_gpu_name
+
+    published = _published_gpu_names()
+    skipped_statuses = {"partial", "failed", "incomplete"}
+    unaccounted = {}
+    for name, statuses in _database_gpu_names().items():
+        if name in published or normalize_gpu_name(name) in published:
+            continue
+        if statuses and statuses <= skipped_statuses:
+            continue                      # only ever seen in runs we skip
+        unaccounted[name] = sorted(statuses)
+
+    assert not unaccounted, (
+        "GPU(s) present in database/ reach neither web_data.json nor a "
+        "documented exclusion (alias, or partial/failed/incomplete run): "
+        f"{unaccounted}"
+    )
+
+
+def test_every_measured_workload_is_accounted_for():
+    """A (card, workload) result reaches the site, or is excluded for a reason.
+
+    Five mechanisms legitimately keep a result out of `web_data.json`, and none
+    of them leaves a trace in the published assets:
+
+    * `run_status` partial/failed/incomplete -- the whole report is skipped
+    * `GPU_NAME_ALIASES` -- the card is published under a different name
+    * `PUBLIC_EXCLUDED_TESTS` -- all_reduce and p2p_thrasher are never published
+    * `is_retired_metric` -- a unit naming work the run's release never did
+    * `is_unmeasured` -- a throughput of exactly zero goes to the unsupported
+      list rather than under a real card as a fake worst result
+
+    Each is correct in isolation and together they make the published data
+    impossible to reconcile against `database/` by reading it. Establishing
+    that 28 apparently-missing pairs were all deliberate took walking the
+    generator: 14 were the excluded collectives, and 14 were A40 results whose
+    AI units are retired below v1.0.19 -- visible in the data only as a dozen
+    different unit names all reporting the same ~404M score from the shared
+    pre-v1.0.19 kernel.
+
+    This asserts the sum rather than any one rule, so it keeps holding when a
+    rule changes and fails when a result stops being covered by any of them.
+    """
+    from website_utils.generate_web_data import (
+        PUBLIC_EXCLUDED_TESTS, is_retired_metric, is_unmeasured,
+        normalize, normalize_gpu_name,
+    )
+
+    published = {(row["gpu"], row["test"]) for row in _asset_rows("web_data.json")}
+    unsupported = {(row.get("gpu"), row.get("test"))
+                   for row in _asset_rows("unsupported_workloads.json")}
+
+    unaccounted = {}
+    for path in (ROOT / "database").rglob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        if not isinstance(data, dict) or not data.get("test_results"):
+            continue
+        if str(data.get("run_status", "complete")).lower() in {
+                "partial", "failed", "incomplete"}:
+            continue
+        cards = {c.get("id"): c.get("name")
+                 for c in (data.get("gpu_static_info") or []) if isinstance(c, dict)}
+        for row in data["test_results"]:
+            if not isinstance(row, dict):
+                continue
+            gpu = normalize_gpu_name(cards.get(row.get("GPU ID"), ""))
+            test = row.get("Test Name")
+            if not test or gpu == "Unknown GPU":
+                continue
+            if (gpu, test) in published or (gpu, test) in unsupported:
+                continue
+            if normalize(test, "").lower() in PUBLIC_EXCLUDED_TESTS:
+                continue
+            unit, version = row.get("Unit"), row.get("Version")
+            if is_retired_metric(unit, version):
+                continue
+            if is_unmeasured(test, row.get("Score"), unit):
+                continue
+            unaccounted.setdefault((gpu, test), (unit, version))
+
+    assert not unaccounted, (
+        "measured (card, workload) result(s) reach neither published asset and "
+        f"match no documented exclusion: {unaccounted}"
+    )
