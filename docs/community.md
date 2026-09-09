@@ -7,9 +7,9 @@
 
 ## GitHub Discussions
 
-[Open Pantheon Discussions](https://github.com/pantheongpu/pantheongpu_website/discussions){ .md-button .md-button--primary }
+[Open Pantheon Discussions](https://github.com/pantheongpu/pantheon/discussions){ .md-button .md-button--primary }
 
-Use Discussions for installation and configuration questions, benchmark showcases, workload ideas, feature requests, and release feedback.
+Discussions live on the source repository, the one `pip install pantheon-gpu` and the README point at. Use them for installation and configuration questions, benchmark showcases, workload ideas, feature requests, and release feedback. Two threads are pinned: post your report and card, and what Pantheon should test next.
 
 Before running a stress workload, read the workload documentation and monitor temperatures, power, and stability. Do not run hardware beyond conditions you are authorized and equipped to test.
 
