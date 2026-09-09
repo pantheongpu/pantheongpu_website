@@ -44,6 +44,10 @@
     Export CSV
   </button>
 
+  <button type="button" class="benchmark-export-button" onclick="exportToXLSX()">
+    Export XLSX
+  </button>
+
   <button type="button" id="benchmarkShareButton" class="benchmark-share-button" onclick="copyBenchmarkLink()">
     Copy filtered link
   </button>
