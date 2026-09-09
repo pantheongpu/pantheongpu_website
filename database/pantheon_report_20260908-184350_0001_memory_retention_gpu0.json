@@ -1,0 +1,77 @@
+{
+    "pantheon_version": "1.2.0",
+    "timestamp": "2026-09-08 18:43:50",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-139-generic",
+        "version": "#139-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 03:52:05 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 12,
+        "logical_cores": 24,
+        "freq": "2457.85Mhz"
+    },
+    "ram_info": {
+        "total": "31.26GB",
+        "available": "11.73GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 3080 Ti",
+            "memory_total": "12288 MB",
+            "driver_version": "595.84",
+            "power_limit": 350.0,
+            "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+            "serial": "1654121001422"
+        }
+    ],
+    "toolkit_version": "12.0",
+    "run_id": "20260908-184350",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-08 18:48:52",
+    "test_results": [
+        {
+            "Test Name": "memory_retention",
+            "Version": "1.2.0",
+            "Description": "Memory Retention (Charge Leak Over Time)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 11536.0,
+            "Unit": "retained-MiB",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 42.6,
+            "Max Temp (C)": 59.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 25.2,
+            "Max Power (W)": 108.2,
+            "Avg Clock(MHz)": 293.2,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1665.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 12203.0,
+            "Memory Total (MiB)": 12288.0,
+            "Energy (Wh)": 2.109,
+            "Thermal Rise (C)": 2.0,
+            "Throttle Time (s)": 1.0,
+            "Efficiency": 457.78,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Idle",
+            "Max Fan (%)": 45.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.0/cuda-86/memory_retention 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +4",
+            "RAS Report": "results/20260908-184350/reliability/memory_retention/gpu0/ras.json"
+        }
+    ]
+}
