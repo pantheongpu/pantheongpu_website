@@ -57,6 +57,12 @@ pantheon --test memory_write --duration 120 --mem 50 --verify
 
 Use `--profile` when you also need the per-workload counter and trace reports. Normal runs still capture before-and-after reliability snapshots, including available RAS and PCIe error information.
 
+A profiled run collects roughly 160 hardware counters per workload. Each value is the median across the launches of the kernel that owned the profiled runtime, not an average over the whole run, and every counter block records which kernel it describes along with that kernel's launch count and share of runtime. Read a counter as a property of that kernel.
+
+Counters are kept in the published reports rather than in the explorer table: there are too many to show as columns, and carrying them in the table's data file would multiply its size several times over for a figure almost nobody filters on.
+
+Profiling is expensive and does not change what a score means. Measured at `--duration 300`, a profiled workload takes about 3.6 times as long as an unprofiled one, and profiled scores agree with unprofiled scores to within a fraction of a percent on every workload tested except `tensor_virus`, which runs about 1% slower under the profiler.
+
 ## Verification and reliability
 
 `--verify` checks workload-specific output where verification is implemented. A successful verification result means the test completed its defined correctness check. It does not certify the GPU for every possible workload or operating condition.
