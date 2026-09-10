@@ -3138,8 +3138,15 @@ ROCm toolkit from the tabs above.</p>
 </code></pre></div>
 <h2 id="profiling-and-reports">Profiling and reports</h2>
 <p>Verification of workload output is on by default; pass <code>--skip_verify</code> to turn it off. Use <code>--profile</code> to collect performance counters, traces, and a per-workload HTML summary:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
 </code></pre></div>
+<p>Three things commonly stop a profiled run before it starts:</p>
+<ul>
+<li><strong>It needs root.</strong> NVIDIA drivers ship with profiling restricted to administrators, so an ordinary user sees <code>ERR_NVGPUCTRPERM</code> and almost no counters.</li>
+<li><strong>Both tools must be installed.</strong> On NVIDIA that is <code>ncu</code> and <code>nsys</code>; Pantheon refuses the run rather than producing half a profile. On AMD it is <code>rocprofv3</code>.</li>
+<li><strong>Nsight Compute must match the driver.</strong> A build newer than the driver installs cleanly and then fails every capture with <code>stub libcuda.so</code>. Install the package matching the CUDA version <code>nvidia-smi</code> reports, such as <code>cuda-nsight-compute-12-8</code>.</li>
+</ul>
+<p>Profiling also needs host memory comparable to the GPU memory in use, because the profiler stages device memory in host RAM while replaying kernels. On a machine whose RAM is close to its VRAM, run without <code>--profile</code> rather than lowering <code>--mem</code>.</p>
 <p>See <a href="../tests/">Test Documentation</a> for workload guidance, <a href="../release/">Releases and Downloads</a> for other installation methods, and <a href="../reports/">Reports</a> for output details.</p>
 <h2 id="uninstall">Uninstall</h2>
 <p>Remove the package the way it was installed:</p>
