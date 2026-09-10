@@ -51256,6 +51256,20 @@
   {
     "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 8584310000.0,
+    "date": "2026-09-10 22:47:40",
+    "temp_max": 52.0,
+    "power_max": 552.9,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-97c9affa-1884-6035-b555-9b4658017f86"
+  },
+  {
+    "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "pcie_bandwidth",
     "version": "1.2.2",
     "unit": "GB/s",
