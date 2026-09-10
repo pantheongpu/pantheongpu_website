@@ -14044,6 +14044,20 @@
   {
     "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
     "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 622406000.0,
+    "date": "2026-09-10 13:18:45",
+    "temp_max": 87.0,
+    "power_max": 535.8,
+    "clock_avg": 919.2,
+    "throttle_time": 0.0,
+    "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
+  },
+  {
+    "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
+    "gpu": "NVIDIA H100 80GB HBM3",
     "test": "march_test",
     "version": "1.2.0",
     "unit": "march-ops/s",
@@ -17236,6 +17250,20 @@
   {
     "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
     "gpu": "NVIDIA A10G",
+    "test": "memory_hammer",
+    "version": "1.2.2",
+    "unit": "aggressor-reads/s",
+    "score": 39543500000.0,
+    "date": "2026-09-10 13:20:31",
+    "temp_max": 57.0,
+    "power_max": 197.1,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
+  },
+  {
+    "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
+    "gpu": "NVIDIA A10G",
     "test": "memory_pc_pingpong",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -20353,6 +20381,20 @@
     "power_max": 150.3,
     "clock_avg": 1338.1,
     "throttle_time": 302.0,
+    "card": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d"
+  },
+  {
+    "uuid": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d",
+    "gpu": "NVIDIA A10",
+    "test": "omni_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 16.2033,
+    "date": "2026-09-10 13:15:03",
+    "temp_max": 70.0,
+    "power_max": 150.6,
+    "clock_avg": 1265.0,
+    "throttle_time": 299.9,
     "card": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d"
   },
   {
@@ -29691,6 +29733,20 @@
     "power_max": 41.0,
     "clock_avg": 2407.0,
     "throttle_time": 0.0,
+    "card": "GPU-5f5620e1-af51-7358-1c1c-7eaea0ef09e1"
+  },
+  {
+    "uuid": "GPU-5f5620e1-af51-7358-1c1c-7eaea0ef09e1",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 2.99962,
+    "date": "2026-09-10 13:23:49",
+    "temp_max": 80.0,
+    "power_max": 165.7,
+    "clock_avg": 2264.2,
+    "throttle_time": 250.3,
     "card": "GPU-5f5620e1-af51-7358-1c1c-7eaea0ef09e1"
   },
   {
@@ -56086,6 +56142,20 @@
   {
     "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
     "gpu": "NVIDIA L40S",
+    "test": "vision_encoder",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 218911000.0,
+    "date": "2026-09-10 13:13:02",
+    "temp_max": 70.0,
+    "power_max": 211.7,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a"
+  },
+  {
+    "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
+    "gpu": "NVIDIA L40S",
     "test": "voltage",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -56557,6 +56627,20 @@
     "power_max": 350.0,
     "clock_avg": 1716.6,
     "throttle_time": 281.6,
+    "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
+  },
+  {
+    "uuid": "GPU-b5073c46-9c15-c880-2526-06948edaffe6",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "fused_attention",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 8434810000.0,
+    "date": "2026-09-10 13:14:38",
+    "temp_max": 69.0,
+    "power_max": 313.1,
+    "clock_avg": 1755.0,
+    "throttle_time": 0.0,
     "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
   },
   {
@@ -75056,6 +75140,20 @@
   {
     "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.7356,
+    "date": "2026-09-10 13:23:54",
+    "temp_max": 42.0,
+    "power_max": 171.6,
+    "clock_avg": 2324.9,
+    "throttle_time": 0.0,
+    "card": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377"
+  },
+  {
+    "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "memory_bank_thrash",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -75134,6 +75232,34 @@
     "temp_max": 45.0,
     "power_max": 271.4,
     "clock_avg": 2399.2,
+    "throttle_time": 0.0,
+    "card": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377"
+  },
+  {
+    "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1445.2,
+    "date": "2026-09-10 13:29:31",
+    "temp_max": 51.0,
+    "power_max": 352.9,
+    "clock_avg": 2402.6,
+    "throttle_time": 0.0,
+    "card": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377"
+  },
+  {
+    "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1445.57,
+    "date": "2026-09-10 13:35:07",
+    "temp_max": 51.0,
+    "power_max": 351.9,
+    "clock_avg": 2404.9,
     "throttle_time": 0.0,
     "card": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377"
   },
