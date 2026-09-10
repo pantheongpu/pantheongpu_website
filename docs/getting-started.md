@@ -189,8 +189,16 @@ pantheon --test fp64_virus --duration 30 --gpu 0
 Verification of workload output is on by default; pass `--skip_verify` to turn it off. Use `--profile` to collect performance counters, traces, and a per-workload HTML summary:
 
 ```bash
-pantheon --test llm_decode --duration 60 --gpu 0 --verify --profile
+sudo pantheon --test llm_decode --duration 60 --gpu 0 --verify --profile
 ```
+
+Three things commonly stop a profiled run before it starts:
+
+- **It needs root.** NVIDIA drivers ship with profiling restricted to administrators, so an ordinary user sees `ERR_NVGPUCTRPERM` and almost no counters.
+- **Both tools must be installed.** On NVIDIA that is `ncu` and `nsys`; Pantheon refuses the run rather than producing half a profile. On AMD it is `rocprofv3`.
+- **Nsight Compute must match the driver.** A build newer than the driver installs cleanly and then fails every capture with `stub libcuda.so`. Install the package matching the CUDA version `nvidia-smi` reports, such as `cuda-nsight-compute-12-8`.
+
+Profiling also needs host memory comparable to the GPU memory in use, because the profiler stages device memory in host RAM while replaying kernels. On a machine whose RAM is close to its VRAM, run without `--profile` rather than lowering `--mem`.
 
 See [Test Documentation](tests/index.md) for workload guidance, [Releases and Downloads](release.md) for other installation methods, and [Reports](reports.md) for output details.
 
