@@ -8836,6 +8836,20 @@
   {
     "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
     "gpu": "Tesla T4",
+    "test": "serving_mix",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 111912000.0,
+    "date": "2026-09-10 08:07:55",
+    "temp_max": 51.0,
+    "power_max": 70.7,
+    "clock_avg": 1354.7,
+    "throttle_time": 300.2,
+    "card": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922"
+  },
+  {
+    "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
+    "gpu": "Tesla T4",
     "test": "sfu_stress",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -13946,6 +13960,20 @@
   {
     "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
     "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1863.59,
+    "date": "2026-09-10 08:13:29",
+    "temp_max": 95.0,
+    "power_max": 614.0,
+    "clock_avg": 249.2,
+    "throttle_time": 231.5,
+    "card": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6"
+  },
+  {
+    "uuid": "GPU-2f37fa75-5d68-c6a8-5ff9-c609ba0e84a6",
+    "gpu": "NVIDIA H100 80GB HBM3",
     "test": "memory_read_agg",
     "version": "1.2.0",
     "unit": "GB/s",
@@ -16741,6 +16769,20 @@
     "power_max": 301.7,
     "clock_avg": 1630.2,
     "throttle_time": 300.3,
+    "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
+  },
+  {
+    "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
+    "gpu": "NVIDIA A10G",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "unit": "cache-updates/s",
+    "score": 1682090000.0,
+    "date": "2026-09-10 08:02:17",
+    "temp_max": 51.0,
+    "power_max": 169.5,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
     "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
   },
   {
@@ -28128,6 +28170,20 @@
   {
     "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
     "gpu": "NVIDIA T4G",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 363064000.0,
+    "date": "2026-09-10 08:31:33",
+    "temp_max": 79.0,
+    "power_max": 68.4,
+    "clock_avg": 1064.9,
+    "throttle_time": 300.3,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
     "test": "omni_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -28226,6 +28282,20 @@
   {
     "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
     "gpu": "NVIDIA T4G",
+    "test": "serving_mix",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 92566600.0,
+    "date": "2026-09-10 08:20:23",
+    "temp_max": 78.0,
+    "power_max": 68.1,
+    "clock_avg": 1112.4,
+    "throttle_time": 300.2,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
     "test": "sfu_stress",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -28235,6 +28305,20 @@
     "power_max": 70.0,
     "clock_avg": 1214.8,
     "throttle_time": 299.6,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
+    "test": "speculative_decode",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 570436000.0,
+    "date": "2026-09-10 08:25:58",
+    "temp_max": 78.0,
+    "power_max": 68.4,
+    "clock_avg": 1108.2,
+    "throttle_time": 300.3,
     "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
   },
   {
@@ -54849,6 +54933,20 @@
     "power_max": 226.9,
     "clock_avg": 1750.4,
     "throttle_time": 0.0,
+    "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
+  },
+  {
+    "uuid": "GPU-b5073c46-9c15-c880-2526-06948edaffe6",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1973.77,
+    "date": "2026-09-10 08:04:27",
+    "temp_max": 70.0,
+    "power_max": 349.7,
+    "clock_avg": 1646.2,
+    "throttle_time": 263.8,
     "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
   },
   {
