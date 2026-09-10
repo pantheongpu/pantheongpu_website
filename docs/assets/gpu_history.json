@@ -8780,6 +8780,20 @@
   {
     "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
     "gpu": "Tesla T4",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 455227000.0,
+    "date": "2026-09-10 07:47:56",
+    "temp_max": 50.0,
+    "power_max": 71.2,
+    "clock_avg": 1334.9,
+    "throttle_time": 300.3,
+    "card": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922"
+  },
+  {
+    "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
+    "gpu": "Tesla T4",
     "test": "ras_validator",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -16725,6 +16739,20 @@
     "date": "2026-09-10 07:21:44",
     "temp_max": 54.0,
     "power_max": 189.2,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
+  },
+  {
+    "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
+    "gpu": "NVIDIA A10G",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 181916000.0,
+    "date": "2026-09-10 07:42:00",
+    "temp_max": 54.0,
+    "power_max": 189.1,
     "clock_avg": 1710.0,
     "throttle_time": 0.0,
     "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
@@ -27862,6 +27890,20 @@
   {
     "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
     "gpu": "NVIDIA T4G",
+    "test": "fused_attention",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 731800000.0,
+    "date": "2026-09-10 08:03:38",
+    "temp_max": 78.0,
+    "power_max": 68.4,
+    "clock_avg": 1075.2,
+    "throttle_time": 300.3,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
     "test": "incinerator",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -27890,6 +27932,20 @@
   {
     "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
     "gpu": "NVIDIA T4G",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "unit": "cache-updates/s",
+    "score": 573575000.0,
+    "date": "2026-09-10 07:58:03",
+    "temp_max": 78.0,
+    "power_max": 68.5,
+    "clock_avg": 1173.9,
+    "throttle_time": 299.6,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
     "test": "llm_decode",
     "version": "1.2.2",
     "unit": "tokens/s",
@@ -27898,6 +27954,20 @@
     "temp_max": 79.0,
     "power_max": 68.7,
     "clock_avg": 1143.6,
+    "throttle_time": 300.3,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 48566800.0,
+    "date": "2026-09-10 07:52:28",
+    "temp_max": 78.0,
+    "power_max": 68.2,
+    "clock_avg": 1137.6,
     "throttle_time": 300.3,
     "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
   },
@@ -53916,6 +53986,20 @@
   {
     "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
     "gpu": "NVIDIA L40S",
+    "test": "llm_decode",
+    "version": "1.2.2",
+    "unit": "tokens/s",
+    "score": 873087000.0,
+    "date": "2026-09-10 07:34:26",
+    "temp_max": 68.0,
+    "power_max": 208.1,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a"
+  },
+  {
+    "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
+    "gpu": "NVIDIA L40S",
     "test": "memory_bank_thrash",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -54779,6 +54863,20 @@
     "power_max": 351.0,
     "clock_avg": 1603.5,
     "throttle_time": 288.7,
+    "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
+  },
+  {
+    "uuid": "GPU-b5073c46-9c15-c880-2526-06948edaffe6",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1940.42,
+    "date": "2026-09-10 07:42:18",
+    "temp_max": 73.0,
+    "power_max": 351.1,
+    "clock_avg": 1602.3,
+    "throttle_time": 290.7,
     "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
   },
   {
