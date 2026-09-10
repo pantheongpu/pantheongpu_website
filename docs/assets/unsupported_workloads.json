@@ -1078,5 +1078,14 @@
     "status": "NO_MEASUREMENT",
     "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
     "source_report": "pantheon_report_20260905-101923_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-135611_0001_memory_write_gpu0.json"
   }
 ]
