@@ -8528,6 +8528,20 @@
   {
     "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
     "gpu": "Tesla T4",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 57886200.0,
+    "date": "2026-09-10 06:25:51",
+    "temp_max": 50.0,
+    "power_max": 70.9,
+    "clock_avg": 1362.4,
+    "throttle_time": 299.5,
+    "card": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922"
+  },
+  {
+    "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
+    "gpu": "Tesla T4",
     "test": "memory_bank_thrash",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -19516,6 +19530,20 @@
     "card": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d"
   },
   {
+    "uuid": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d",
+    "gpu": "NVIDIA A10",
+    "test": "ras_validator",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 500.496,
+    "date": "2026-09-10 06:23:22",
+    "temp_max": 72.0,
+    "power_max": 150.7,
+    "clock_avg": 1446.7,
+    "throttle_time": 302.0,
+    "card": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d"
+  },
+  {
     "uuid": "GPU-50969c8b-4aa5-2b9e-8078-80ea0b6cfa51",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "cache_lat",
@@ -27703,6 +27731,34 @@
     "power_max": 69.5,
     "clock_avg": 1429.1,
     "throttle_time": 300.5,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 257.537,
+    "date": "2026-09-10 06:39:42",
+    "temp_max": 78.0,
+    "power_max": 68.3,
+    "clock_avg": 618.8,
+    "throttle_time": 303.0,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 257.346,
+    "date": "2026-09-10 06:45:21",
+    "temp_max": 78.0,
+    "power_max": 68.3,
+    "clock_avg": 623.1,
+    "throttle_time": 303.2,
     "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
   },
   {
@@ -58376,6 +58432,20 @@
     "temp_max": 56.0,
     "power_max": 260.2,
     "clock_avg": 1410.0,
+    "throttle_time": 0.0,
+    "card": "GPU-c0b70a70-5cb8-75a0-7c4e-b6195ff4cd68"
+  },
+  {
+    "uuid": "GPU-c0b70a70-5cb8-75a0-7c4e-b6195ff4cd68",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "scheduler",
+    "version": "1.2.2",
+    "unit": "KIPS",
+    "score": 343.963,
+    "date": "2026-09-10 05:38:58",
+    "temp_max": 38.0,
+    "power_max": 96.8,
+    "clock_avg": 1406.0,
     "throttle_time": 0.0,
     "card": "GPU-c0b70a70-5cb8-75a0-7c4e-b6195ff4cd68"
   },
