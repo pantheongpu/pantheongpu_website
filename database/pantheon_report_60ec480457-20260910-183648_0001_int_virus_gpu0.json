@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-10 18:36:48",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3755.11Mhz"
+    },
+    "ram_info": {
+        "total": "30.08GB",
+        "available": "28.51GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-676ab2dd-4da6-746b-5ab1-b8fd80bb9f0e",
+            "serial": "1790226123487",
+            "memory_type": "GDDR7",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260910-183648",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-10 18:41:49",
+    "test_results": [
+        {
+            "Test Name": "int_virus",
+            "Version": "1.2.2",
+            "Description": "Integer Virus (INT32/Logic Pipeline)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 16.751,
+            "Unit": "TOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 83.8,
+            "Max Temp (C)": 87.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 164.3,
+            "Max Power (W)": 165.8,
+            "Avg Clock(MHz)": 2070.8,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2175.0,
+            "Avg GPU Util (%)": 99.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 790.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 13.716,
+            "Thermal Rise (C)": 37.0,
+            "Throttle Time (s)": 300.1,
+            "Efficiency": 0.1,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-120/int_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260910-183648/reliability/int_virus/gpu0/ras.json"
+        }
+    ]
+}
