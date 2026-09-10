@@ -252,6 +252,114 @@
     "source_report": "h100_pantheon_report_20260826-023202_0001_media_enc_virus_gpu1.json"
   },
   {
+    "gpu": "NVIDIA T4G",
+    "manufacturer": "NVIDIA",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_0f55c95af1-20260909-202617_0001_memory_thermal_asym_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA T4G",
+    "manufacturer": "NVIDIA",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_0f55c95af1-20260909-202752_0001_memory_cache_fracture_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-022838_0001_memory_cache_fracture_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023009_0001_memory_retention_bake_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_retention",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023127_0001_memory_retention_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_pc_pingpong",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023246_0001_memory_pc_pingpong_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_bank_thrash",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023403_0001_memory_bank_thrash_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_tsv_thrasher",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023522_0001_memory_tsv_thrasher_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023642_0001_tlb_avalanche_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "ras_validator",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-023801_0001_ras_validator_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-042642_0001_mma_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_14396ca2d4-20260910-043407_0001_fp64_virus_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "manufacturer": "NVIDIA",
     "test": "memory_retention_bake",
