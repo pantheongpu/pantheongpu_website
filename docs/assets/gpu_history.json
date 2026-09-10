@@ -8794,6 +8794,20 @@
   {
     "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
     "gpu": "Tesla T4",
+    "test": "transformer_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 60.6329,
+    "date": "2026-09-10 05:50:17",
+    "temp_max": 53.0,
+    "power_max": 71.2,
+    "clock_avg": 1504.9,
+    "throttle_time": 299.2,
+    "card": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922"
+  },
+  {
+    "uuid": "GPU-1995d8a6-ecfa-62f2-a97e-319cfc077922",
+    "gpu": "Tesla T4",
     "test": "voltage",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -16767,6 +16781,20 @@
     "date": "2026-09-10 05:25:08",
     "temp_max": 36.0,
     "power_max": 73.2,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
+  },
+  {
+    "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
+    "gpu": "NVIDIA A10G",
+    "test": "pulse_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 6.43465,
+    "date": "2026-09-10 05:41:14",
+    "temp_max": 42.0,
+    "power_max": 105.5,
     "clock_avg": 1710.0,
     "throttle_time": 0.0,
     "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
@@ -27647,6 +27675,34 @@
     "power_max": 69.6,
     "clock_avg": 1481.4,
     "throttle_time": 303.3,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
+    "test": "ras_validator",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 266.192,
+    "date": "2026-09-10 06:00:20",
+    "temp_max": 78.0,
+    "power_max": 68.2,
+    "clock_avg": 1022.2,
+    "throttle_time": 302.9,
+    "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
+  },
+  {
+    "uuid": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff",
+    "gpu": "NVIDIA T4G",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 6.81245,
+    "date": "2026-09-10 05:54:45",
+    "temp_max": 78.0,
+    "power_max": 68.6,
+    "clock_avg": 1270.2,
+    "throttle_time": 300.4,
     "card": "GPU-5eac4c28-3332-e339-85d0-80393591d1ff"
   },
   {
@@ -53531,6 +53587,20 @@
     "date": "2026-09-10 05:27:35",
     "temp_max": 46.0,
     "power_max": 81.3,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a"
+  },
+  {
+    "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
+    "gpu": "NVIDIA L40S",
+    "test": "pulse_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 12.0292,
+    "date": "2026-09-10 05:43:39",
+    "temp_max": 60.0,
+    "power_max": 121.0,
     "clock_avg": 2040.0,
     "throttle_time": 0.0,
     "card": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a"
