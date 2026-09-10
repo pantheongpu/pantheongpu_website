@@ -51354,6 +51354,20 @@
   {
     "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "transformer_train_step",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 31812400000.0,
+    "date": "2026-09-10 23:06:53",
+    "temp_max": 58.0,
+    "power_max": 692.4,
+    "clock_avg": 1885.5,
+    "throttle_time": 305.5,
+    "card": "GPU-97c9affa-1884-6035-b555-9b4658017f86"
+  },
+  {
+    "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "transformer_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
