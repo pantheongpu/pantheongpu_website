@@ -17026,6 +17026,20 @@
   {
     "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
     "gpu": "NVIDIA A10G",
+    "test": "graph_replay",
+    "version": "1.2.2",
+    "unit": "graph-steps/s",
+    "score": 364041000.0,
+    "date": "2026-09-10 11:22:18",
+    "temp_max": 55.0,
+    "power_max": 191.1,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948"
+  },
+  {
+    "uuid": "GPU-3b9cb016-38c4-0d98-f51e-f04f8aeab948",
+    "gpu": "NVIDIA A10G",
     "test": "incinerator",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -20003,6 +20017,20 @@
     "power_max": 60.7,
     "clock_avg": 1695.0,
     "throttle_time": 0.0,
+    "card": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d"
+  },
+  {
+    "uuid": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d",
+    "gpu": "NVIDIA A10",
+    "test": "cache_lat",
+    "version": "1.2.2",
+    "unit": "dependent-loads/s",
+    "score": 5782430000.0,
+    "date": "2026-09-10 11:35:17",
+    "temp_max": 71.0,
+    "power_max": 150.3,
+    "clock_avg": 1428.4,
+    "throttle_time": 300.2,
     "card": "GPU-4f66ba0c-d52b-8950-e50c-1a669a9e2a7d"
   },
   {
@@ -25958,6 +25986,34 @@
   {
     "uuid": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0",
     "gpu": "NVIDIA L4",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 806800000.0,
+    "date": "2026-09-10 11:44:14",
+    "temp_max": 78.0,
+    "power_max": 72.2,
+    "clock_avg": 1503.8,
+    "throttle_time": 300.4,
+    "card": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0"
+  },
+  {
+    "uuid": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0",
+    "gpu": "NVIDIA L4",
+    "test": "rope_stress",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1608970000.0,
+    "date": "2026-09-10 11:38:39",
+    "temp_max": 78.0,
+    "power_max": 72.2,
+    "clock_avg": 1449.6,
+    "throttle_time": 300.5,
+    "card": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0"
+  },
+  {
+    "uuid": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0",
+    "gpu": "NVIDIA L4",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
@@ -25967,6 +26023,20 @@
     "power_max": 35.4,
     "clock_avg": 2040.0,
     "throttle_time": 0.0,
+    "card": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0"
+  },
+  {
+    "uuid": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0",
+    "gpu": "NVIDIA L4",
+    "test": "serving_mix",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 197672000.0,
+    "date": "2026-09-10 11:49:49",
+    "temp_max": 78.0,
+    "power_max": 72.3,
+    "clock_avg": 1586.6,
+    "throttle_time": 300.5,
     "card": "GPU-591cb038-0787-bba8-5d4a-27f48cbabdb0"
   },
   {
@@ -49630,6 +49700,20 @@
     "card": "GPU-97c9affa-1884-6035-b555-9b4658017f86"
   },
   {
+    "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 20.0591,
+    "date": "2026-09-10 11:28:58",
+    "temp_max": 46.0,
+    "power_max": 293.9,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-97c9affa-1884-6035-b555-9b4658017f86"
+  },
+  {
     "uuid": "GPU-9d89ee3e-f6a8-3a7f-c29b-ffc9dff12c50",
     "gpu": "Tesla T4",
     "test": "allocation_fragmentation",
@@ -55484,6 +55568,20 @@
   {
     "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
     "gpu": "NVIDIA L40S",
+    "test": "transformer_train_step",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 6800150000.0,
+    "date": "2026-09-10 11:30:22",
+    "temp_max": 80.0,
+    "power_max": 257.1,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a"
+  },
+  {
+    "uuid": "GPU-af576a64-16be-7a7f-8188-829671a0eb2a",
+    "gpu": "NVIDIA L40S",
     "test": "transformer_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -56164,6 +56262,20 @@
     "temp_max": 61.0,
     "power_max": 286.3,
     "clock_avg": 1750.3,
+    "throttle_time": 0.0,
+    "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
+  },
+  {
+    "uuid": "GPU-b5073c46-9c15-c880-2526-06948edaffe6",
+    "gpu": "NVIDIA H100 PCIe",
+    "test": "omni_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 38.0587,
+    "date": "2026-09-10 11:10:36",
+    "temp_max": 69.0,
+    "power_max": 282.6,
+    "clock_avg": 1750.4,
     "throttle_time": 0.0,
     "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
   },
