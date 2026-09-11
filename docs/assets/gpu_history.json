@@ -51424,6 +51424,20 @@
   {
     "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "vision_encoder",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1168240000.0,
+    "date": "2026-09-11 00:35:04",
+    "temp_max": 51.0,
+    "power_max": 543.4,
+    "clock_avg": 1980.0,
+    "throttle_time": 0.0,
+    "card": "GPU-97c9affa-1884-6035-b555-9b4658017f86"
+  },
+  {
+    "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "voltage",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -76436,6 +76450,20 @@
     "temp_max": 35.0,
     "power_max": 87.6,
     "clock_avg": 2354.1,
+    "throttle_time": 0.0,
+    "card": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88"
+  },
+  {
+    "uuid": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 5.86044,
+    "date": "2026-09-11 00:45:09",
+    "temp_max": 53.0,
+    "power_max": 344.2,
+    "clock_avg": 2412.7,
     "throttle_time": 0.0,
     "card": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88"
   },
