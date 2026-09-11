@@ -7534,6 +7534,20 @@
   {
     "uuid": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 1166470000.0,
+    "date": "2026-09-11 04:41:07",
+    "temp_max": 67.0,
+    "power_max": 553.4,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04"
+  },
+  {
+    "uuid": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "memory_retention_bake",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -7541,6 +7555,20 @@
     "date": "2026-09-11 04:12:48",
     "temp_max": 59.0,
     "power_max": 362.4,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04"
+  },
+  {
+    "uuid": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "omni_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 50.4655,
+    "date": "2026-09-11 04:35:25",
+    "temp_max": 66.0,
+    "power_max": 441.2,
     "clock_avg": 1974.6,
     "throttle_time": 0.0,
     "card": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04"
