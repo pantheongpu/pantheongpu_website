@@ -7518,6 +7518,20 @@
     "card": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f"
   },
   {
+    "uuid": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04",
+    "gpu": "NVIDIA GH200 480GB",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 61.0983,
+    "date": "2026-09-11 04:12:48",
+    "temp_max": 59.0,
+    "power_max": 362.4,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04"
+  },
+  {
     "uuid": "GPU-1430471f69a9",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
@@ -19278,6 +19292,20 @@
     "card": "GPU-45cc97b0e0f4"
   },
   {
+    "uuid": "GPU-46dd3a81-8dd0-5ca1-b4e1-5a041f2679ab",
+    "gpu": "NVIDIA A10",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 23.6486,
+    "date": "2026-09-11 04:12:10",
+    "temp_max": 66.0,
+    "power_max": 127.7,
+    "clock_avg": 1411.1,
+    "throttle_time": 300.6,
+    "card": "GPU-46dd3a81-8dd0-5ca1-b4e1-5a041f2679ab"
+  },
+  {
     "uuid": "GPU-4b906db59fd0",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "atomic_virus",
@@ -22272,6 +22300,20 @@
     "clock_avg": 1974.5,
     "throttle_time": 0.0,
     "card": "GPU-51606b20d319"
+  },
+  {
+    "uuid": "GPU-51d4371d-dd68-e7b1-cceb-10cf6162d77a",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1177.36,
+    "date": "2026-09-11 04:14:49",
+    "temp_max": 42.0,
+    "power_max": 439.1,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-51d4371d-dd68-e7b1-cceb-10cf6162d77a"
   },
   {
     "uuid": "GPU-528c70c1d572",
@@ -58478,6 +58520,20 @@
     "card": "GPU-b5073c46-9c15-c880-2526-06948edaffe6"
   },
   {
+    "uuid": "GPU-b87b2500-0a02-b7c4-4673-82025dfd0289",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "sfu_stress",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.56876,
+    "date": "2026-09-11 04:14:26",
+    "temp_max": 62.0,
+    "power_max": 252.9,
+    "clock_avg": 1402.1,
+    "throttle_time": 0.0,
+    "card": "GPU-b87b2500-0a02-b7c4-4673-82025dfd0289"
+  },
+  {
     "uuid": "GPU-baeffccd-d369-f6f4-64a5-f4d9e55a48ef",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
@@ -76478,6 +76534,20 @@
     "temp_max": 35.0,
     "power_max": 87.6,
     "clock_avg": 2354.1,
+    "throttle_time": 0.0,
+    "card": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88"
+  },
+  {
+    "uuid": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 44.8925,
+    "date": "2026-09-11 04:02:50",
+    "temp_max": 72.0,
+    "power_max": 512.5,
+    "clock_avg": 2414.6,
     "throttle_time": 0.0,
     "card": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88"
   },
