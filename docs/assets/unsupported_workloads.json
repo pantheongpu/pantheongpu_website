@@ -1098,6 +1098,24 @@
     "source_report": "pantheon_report_20260905-101923_0001_media_enc_virus_gpu0.json"
   },
   {
+    "gpu": "NVIDIA H100 PCIe",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_3aa198be3b-20260911-043426_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA A10",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_7c19fdb0de-20260911-042856_0001_media_enc_virus_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA GH200 480GB",
     "manufacturer": "NVIDIA",
     "test": "media_enc_virus",
@@ -1242,6 +1260,15 @@
     "source_report": "pantheon_report_d5bd937ab8-20260910-170252_0001_transformer_train_step_gpu0.json"
   },
   {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "UNSUPPORTED",
+    "reason": "NVIDIA A100 does not expose an NVENC encoder",
+    "source_report": "pantheon_report_e1f5b96569-20260911-042004_0001_media_enc_virus_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA A10",
     "manufacturer": "NVIDIA",
     "test": "media_enc_virus",
@@ -1258,5 +1285,14 @@
     "status": "NO_MEASUREMENT",
     "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
     "source_report": "pantheon_report_f3880f692d-20260910-192227_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_fcaf34b822-20260911-043130_0001_media_enc_virus_gpu0.json"
   }
 ]
