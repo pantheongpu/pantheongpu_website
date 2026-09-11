@@ -50990,6 +50990,20 @@
   {
     "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
     "gpu": "NVIDIA GH200 480GB",
+    "test": "allocation_fragmentation",
+    "version": "1.2.2",
+    "unit": "alloc-events/s",
+    "score": 1478.37,
+    "date": "2026-09-10 23:26:34",
+    "temp_max": 36.0,
+    "power_max": 127.6,
+    "clock_avg": 1974.6,
+    "throttle_time": 0.0,
+    "card": "GPU-97c9affa-1884-6035-b555-9b4658017f86"
+  },
+  {
+    "uuid": "GPU-97c9affa-1884-6035-b555-9b4658017f86",
+    "gpu": "NVIDIA GH200 480GB",
     "test": "atomic_virus",
     "version": "1.2.2",
     "unit": "MAPS",
