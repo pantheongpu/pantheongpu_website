@@ -32802,6 +32802,34 @@
     "card": "GPU-6a8e4ee6-cbd8-d4c5-20f8-fe2a3c436867"
   },
   {
+    "uuid": "GPU-6c61e793-1275-3db7-a55e-b4d856b80151",
+    "gpu": "NVIDIA T4G",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 53.701,
+    "date": "2026-09-11 07:53:11",
+    "temp_max": 78.0,
+    "power_max": 68.5,
+    "clock_avg": 1141.8,
+    "throttle_time": 300.7,
+    "card": "GPU-6c61e793-1275-3db7-a55e-b4d856b80151"
+  },
+  {
+    "uuid": "GPU-6c61e793-1275-3db7-a55e-b4d856b80151",
+    "gpu": "NVIDIA T4G",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.861971,
+    "date": "2026-09-11 07:47:36",
+    "temp_max": 80.0,
+    "power_max": 69.1,
+    "clock_avg": 1188.8,
+    "throttle_time": 300.7,
+    "card": "GPU-6c61e793-1275-3db7-a55e-b4d856b80151"
+  },
+  {
     "uuid": "GPU-6c65626cc38a",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "fp64_virus",
@@ -76772,6 +76800,20 @@
     "temp_max": 44.0,
     "power_max": 188.6,
     "clock_avg": 2349.1,
+    "throttle_time": 0.0,
+    "card": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88"
+  },
+  {
+    "uuid": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "incinerator",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 96.9819,
+    "date": "2026-09-11 07:37:15",
+    "temp_max": 65.0,
+    "power_max": 422.5,
+    "clock_avg": 2413.6,
     "throttle_time": 0.0,
     "card": "GPU-ee3a0c7d-3c68-9b98-6586-92480bd9dd88"
   },
