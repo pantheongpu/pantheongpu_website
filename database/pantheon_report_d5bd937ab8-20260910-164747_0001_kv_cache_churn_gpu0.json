@@ -1,0 +1,86 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-10 16:47:47",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.17.0-1020-aws",
+        "version": "#20~24.04.1-Ubuntu SMP Mon Jul 13 20:40:21 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3599.56Mhz"
+    },
+    "ram_info": {
+        "total": "30.08GB",
+        "available": "28.59GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-5f5620e1-af51-7358-1c1c-7eaea0ef09e1",
+            "serial": "1790226071400",
+            "memory_type": "GDDR7",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260910-164747",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-10 16:51:10",
+    "test_results": [
+        {
+            "Test Name": "kv_cache_churn",
+            "Version": "1.2.2",
+            "Description": "KV Cache Churn (Paged/Ragged Cache Updates)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.0,
+            "Unit": "ERR",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 43.0,
+            "Max Temp (C)": 49.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 45.6,
+            "Max Power (W)": 93.8,
+            "Avg Clock(MHz)": 2139.0,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2407.0,
+            "Avg GPU Util (%)": 2.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 32500.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 2.563,
+            "Thermal Rise (C)": 10.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.0,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Status": "FAIL",
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-120/kv_cache_churn 0 300 99 --verify",
+            "Profiler Command Lines": "/usr/local/cuda/bin/ncu --csv --set full --metrics sm__throughput.avg.pct_of_peak_sustained_elapsed,sm__inst_executed.sum,sm__warps_active.avg.pct_of_peak_sustained_active,sm__warps_active.avg.per_cycle_active,sm__ctas_active.avg.pct_of_peak_sustained_active,sm__cycles_active.avg.pct_of_peak_sustained_elapsed,sm__cycles_elapsed.avg,gpu__time_duration.sum,sm__inst_executed_pipe_fma.sum,sm__inst_executed_pipe_fp64.sum,sm__inst_executed_pipe_tensor.sum,sm__inst_executed_pipe_adu.sum,sm__inst_executed_pipe_alu.sum,sm__inst_executed_pipe_cbu.sum,sm__inst_executed_pipe_lsu.sum,sm__inst_executed_pipe_tex.sum,sm__inst_executed_pipe_uniform.sum,sm__inst_executed_pipe_xu.sum,sm__inst_executed_pipe_ipa.sum,smsp__thread_inst_executed_per_inst_executed.ratio,sm__sass_average_branch_targets_threads_uniform.pct,smsp__inst_executed_op_global_ld.sum,smsp__inst_executed_op_global_st.sum,smsp__inst_executed_op_shared_ld.sum,smsp__inst_executed_op_shared_st.sum,smsp__inst_executed_op_local_ld.sum,smsp__inst_executed_op_local_st.sum,dram__throughput.avg.pct_of_peak_sustained_elapsed,dram__bytes.sum.per_second,dram__cycles_active.avg.pct_of_peak_sustained_elapsed,lts__throughput.avg.pct_of_peak_sustained_elapsed,lts__t_sectors.avg.pct_of_peak_sustained_elapsed,lts__t_sectors_op_read.sum,lts__t_sectors_op_write.sum,lts__t_sectors_op_atom.sum,lts__t_sector_hit_rate.pct,lts__t_requests_op_read.sum,lts__t_requests_op_write.sum,lts__t_requests_op_atom.sum,l1tex__throughput.avg.pct_of_peak_sustained_elapsed,l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum,l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum,l1tex__t_sectors_pipe_lsu_mem_local_op_ld.sum,l1tex__t_sectors_pipe_lsu_mem_local_op_st.sum,l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum,l1tex__t_requests_pipe_lsu_mem_global_op_st.sum,smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct,smsp__sass_average_data_bytes_per_sector_mem_local_op_ld.pct,smsp__sass_average_data_bytes_per_sector_mem_local_op_st.pct,smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_ld.pct,smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_st.pct,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum,smsp__issue_active.avg.pct_of_peak_sustained_active,smsp__warps_eligible.avg.per_cycle_active,smsp__warps_issue_stalled_branch_resolving.avg.per_cycle_active,smsp__warps_issue_stalled_dispatch_stall.avg.per_cycle_active,smsp__warps_issue_stalled_drain.avg.per_cycle_active,smsp__warps_issue_stalled_lg_throttle.avg.per_cycle_active,smsp__warps_issue_stalled_membar.avg.per_cycle_active,smsp__warps_issue_stalled_misc.avg.per_cycle_active,smsp__warps_issue_stalled_sleeping.avg.per_cycle_active,smsp__warps_issue_stalled_tex_throttle.avg.per_cycle_active,pcie__read_bytes.sum,pcie__write_bytes.sum,pcie__read_bytes.sum.per_second,pcie__write_bytes.sum.per_second /home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-120/kv_cache_churn 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +3",
+            "RAS Report": "results/20260910-164747/profiles/kv_cache_churn/gpu0/ras.json",
+            "Profile Artifact Directory": "results/20260910-164747/profiles/kv_cache_churn/gpu0",
+            "Profile Manifest": "results/20260910-164747/profiles/kv_cache_churn/gpu0/profile_manifest.json",
+            "Profiler Trace Files": "",
+            "Profile HTML Summary": "results/20260910-164747/profiles/kv_cache_churn/gpu0/profile_summary.html"
+        }
+    ]
+}

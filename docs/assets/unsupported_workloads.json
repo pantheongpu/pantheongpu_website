@@ -270,6 +270,15 @@
     "source_report": "pantheon_report_0f55c95af1-20260909-202752_0001_memory_cache_fracture_gpu0.json"
   },
   {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "UNSUPPORTED",
+    "reason": "NVIDIA A100 does not expose an NVENC encoder",
+    "source_report": "pantheon_report_0fab67bde7-20260910-204212_0001_media_enc_virus_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "manufacturer": "NVIDIA",
     "test": "memory_cache_fracture",
@@ -358,6 +367,15 @@
     "status": "NO_MEASUREMENT",
     "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
     "source_report": "pantheon_report_14396ca2d4-20260910-043407_0001_fp64_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 PCIe",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_154faa544a-20260910-200119_0001_media_enc_virus_gpu0.json"
   },
   {
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
@@ -1080,6 +1098,42 @@
     "source_report": "pantheon_report_20260905-101923_0001_media_enc_virus_gpu0.json"
   },
   {
+    "gpu": "NVIDIA H100 PCIe",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_3aa198be3b-20260911-043426_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA A10",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_7c19fdb0de-20260911-042856_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA GH200 480GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_c47e9e16cd-20260911-005433_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA GH200 480GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_d465397d04-20260911-050356_0001_media_enc_virus_gpu0.json"
+  },
+  {
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "manufacturer": "NVIDIA",
     "test": "memory_write",
@@ -1087,5 +1141,167 @@
     "status": "NO_MEASUREMENT",
     "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
     "source_report": "pantheon_report_d5bd937ab8-20260910-135611_0001_memory_write_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-135726_0001_memory_write_agg_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-135840_0001_memory_read_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-140232_0001_memory_read_agg_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "omni_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-161837_0001_omni_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "llm_decode",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-163738_0001_llm_decode_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-164458_0001_llm_prefill_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-164747_0001_kv_cache_churn_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "fused_attention",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-165145_0001_fused_attention_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "rope_stress",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-165257_0001_rope_stress_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-165408_0001_quantized_gemm_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "serving_mix",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-165614_0001_serving_mix_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "speculative_decode",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-170029_0001_speculative_decode_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-170140_0001_moe_router_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "manufacturer": "NVIDIA",
+    "test": "transformer_train_step",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_d5bd937ab8-20260910-170252_0001_transformer_train_step_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "UNSUPPORTED",
+    "reason": "NVIDIA A100 does not expose an NVENC encoder",
+    "source_report": "pantheon_report_e1f5b96569-20260911-042004_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA A10",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_e519326e28-20260910-183145_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_f3880f692d-20260910-192227_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
+    "source_report": "pantheon_report_fcaf34b822-20260911-043130_0001_media_enc_virus_gpu0.json"
   }
 ]
