@@ -5180,6 +5180,20 @@
     "card": "GPU-07aabff5-c9d2-94a8-9110-1588b8c77f51"
   },
   {
+    "uuid": "GPU-0a40cb7e-84b8-1b3b-8e04-54c19020cbfc",
+    "gpu": "NVIDIA GeForce RTX 4070",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-12 20:11:28",
+    "temp_max": 46.0,
+    "power_max": 28.0,
+    "clock_avg": 347.0,
+    "throttle_time": 0.0,
+    "card": "GPU-0a40cb7e-84b8-1b3b-8e04-54c19020cbfc"
+  },
+  {
     "uuid": "GPU-0ad178ad-620b-dc97-f7be-d0b8c5436215",
     "gpu": "NVIDIA A10",
     "test": "cache_lat",
@@ -7540,6 +7554,20 @@
     "score": 258.689,
     "date": "2026-09-12 20:03:00",
     "temp_max": 58.0,
+    "power_max": "N/A",
+    "clock_avg": 1990.1,
+    "throttle_time": 0.0,
+    "card": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60"
+  },
+  {
+    "uuid": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60",
+    "gpu": "NVIDIA GeForce RTX 4060",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 246.989,
+    "date": "2026-09-12 20:08:35",
+    "temp_max": 61.0,
     "power_max": "N/A",
     "clock_avg": 1990.1,
     "throttle_time": 0.0,
@@ -32210,6 +32238,20 @@
     "temp_max": 61.0,
     "power_max": 154.7,
     "clock_avg": 2863.2,
+    "throttle_time": 0.0,
+    "card": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984"
+  },
+  {
+    "uuid": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 637.325,
+    "date": "2026-09-12 20:09:29",
+    "temp_max": 61.0,
+    "power_max": 154.3,
+    "clock_avg": 2863.1,
     "throttle_time": 0.0,
     "card": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984"
   },
@@ -77599,6 +77641,20 @@
     "power_max": 26.7,
     "clock_avg": 346.0,
     "throttle_time": 0.0,
+    "card": "GPU-ecb5c456-73b0-a60d-f0ec-508005e5b928"
+  },
+  {
+    "uuid": "GPU-ecb5c456-73b0-a60d-f0ec-508005e5b928",
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 477.83,
+    "date": "2026-09-12 20:07:46",
+    "temp_max": 73.0,
+    "power_max": 130.2,
+    "clock_avg": 2532.2,
+    "throttle_time": 301.6,
     "card": "GPU-ecb5c456-73b0-a60d-f0ec-508005e5b928"
   },
   {
