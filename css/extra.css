@@ -462,3 +462,57 @@ body:has(.report-byline) .md-content__inner {
     grid-template-columns: 1fr;
   }
 }
+
+/* Benchmark table pagination.
+   The table renders one page at a time: 4,000+ results x 16 columns is
+   ~64,000 DOM nodes, and building them in one pass stalls the page. */
+.benchmark-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.75rem 0 1.5rem;
+  font-size: 0.75rem;
+}
+.benchmark-pager__count {
+  margin-right: auto;
+  color: var(--md-default-fg-color--light);
+}
+.benchmark-pager button {
+  min-width: 2rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  background: transparent;
+  color: var(--md-default-fg-color);
+  font: inherit;
+  cursor: pointer;
+}
+.benchmark-pager button:hover:not(:disabled):not([aria-current]) {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+.benchmark-pager button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+/* The current page is stated, not merely coloured, so it survives a
+   high-contrast or forced-colours mode. */
+.benchmark-pager button[aria-current="page"] {
+  border-color: var(--md-accent-fg-color);
+  background: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+  font-weight: 700;
+  cursor: default;
+}
+.benchmark-pager__gap { color: var(--md-default-fg-color--light); }
+.benchmark-pager__size { color: var(--md-default-fg-color--light); }
+.benchmark-pager__size select {
+  margin-left: 0.25rem;
+  padding: 0.15rem 0.25rem;
+  font: inherit;
+  color: var(--md-default-fg-color);
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+}
