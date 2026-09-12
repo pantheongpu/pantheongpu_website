@@ -49,6 +49,17 @@ const COL_DEFS = [
 let rawData = [];
 let bestRuns = [];
 let currentFilteredData = [];
+
+// The table used to build every filtered row at once. At 4,000+ results and
+// 16 visible columns that is ~64,000 DOM nodes in one synchronous pass, and
+// the page visibly stalls. Only a page's worth is rendered now.
+//
+// Note this does NOT reduce the download: web_data.json is fetched and
+// parsed whole either way. It fixes the render, which is the part that
+// blocks the browser.
+const PAGE_SIZES = [50, 100, 250, "All"];
+let pageSize = 100;
+let currentPage = 1;
 let currentSort = { key: 'version', dir: 'desc' };
 
 function getUrlSelections(parameter, availableValues) {
@@ -359,7 +370,16 @@ function renderTable(data) {
         return;
     }
 
-    data.forEach(row => {
+    const total = data.length;
+    const pages = pageSize === "All" ? 1 : Math.max(1, Math.ceil(total / pageSize));
+    if (currentPage > pages) currentPage = pages;
+    const from = pageSize === "All" ? 0 : (currentPage - 1) * pageSize;
+    const to = pageSize === "All" ? total : Math.min(from + pageSize, total);
+
+    // One fragment, one insertion: appending each row to a live tbody forces
+    // the browser to reflow per row.
+    const frag = document.createDocumentFragment();
+    data.slice(from, to).forEach(row => {
         const tr = document.createElement("tr");
         
         COL_DEFS.forEach(col => {
@@ -388,9 +408,106 @@ function renderTable(data) {
                 tr.appendChild(td);
             }
         });
-        tbody.appendChild(tr);
+        frag.appendChild(tr);
     });
+    tbody.appendChild(frag);
+    renderPager(total, from, to, pages);
 }
+
+// Page controls, built once below the table and updated in place.
+//
+// Kept out of benchmarks.md so the markup does not have to know about
+// pagination; the page only supplies the table.
+function renderPager(total, from, to, pages) {
+    const wrap = document.querySelector(".benchmark-table-wrap");
+    if (!wrap) return;
+    let bar = document.getElementById("benchmarkPager");
+    if (!bar) {
+        bar = document.createElement("div");
+        bar.id = "benchmarkPager";
+        bar.className = "benchmark-pager";
+        wrap.insertAdjacentElement("afterend", bar);
+    }
+    if (total === 0) { bar.innerHTML = ""; return; }
+
+    const button = (label, page, disabled, current) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = label;
+        b.disabled = !!disabled;
+        if (current) b.setAttribute("aria-current", "page");
+        if (!disabled && !current) {
+            b.addEventListener("click", () => {
+                currentPage = page;
+                renderTable(currentFilteredData);
+                // Back to the top of the table, not the top of the document:
+                // jumping to the page header loses the reader's place.
+                document.getElementById("benchmarkTable")
+                    ?.scrollIntoView({ block: "start", behavior: "smooth" });
+            });
+        }
+        return b;
+    };
+
+    bar.innerHTML = "";
+    const count = document.createElement("span");
+    count.className = "benchmark-pager__count";
+    count.textContent = pageSize === "All"
+        ? `all ${total.toLocaleString()} results`
+        : `${(from + 1).toLocaleString()}\u2013${to.toLocaleString()} of ${total.toLocaleString()}`;
+    bar.appendChild(count);
+
+    if (pageSize !== "All" && pages > 1) {
+        bar.appendChild(button("\u2039 Prev", currentPage - 1, currentPage === 1));
+        // A window around the current page: 200 numbered buttons is its own
+        // rendering problem.
+        const span = 2;
+        let start = Math.max(1, currentPage - span);
+        let end = Math.min(pages, currentPage + span);
+        if (start > 1) {
+            bar.appendChild(button("1", 1, false, currentPage === 1));
+            if (start > 2) {
+                const gap = document.createElement("span");
+                gap.className = "benchmark-pager__gap";
+                gap.textContent = "\u2026";
+                bar.appendChild(gap);
+            }
+        }
+        for (let i = start; i <= end; i++) {
+            bar.appendChild(button(String(i), i, false, i === currentPage));
+        }
+        if (end < pages) {
+            if (end < pages - 1) {
+                const gap = document.createElement("span");
+                gap.className = "benchmark-pager__gap";
+                gap.textContent = "\u2026";
+                bar.appendChild(gap);
+            }
+            bar.appendChild(button(String(pages), pages, false, currentPage === pages));
+        }
+        bar.appendChild(button("Next \u203a", currentPage + 1, currentPage === pages));
+    }
+
+    const label = document.createElement("label");
+    label.className = "benchmark-pager__size";
+    label.textContent = "per page ";
+    const select = document.createElement("select");
+    PAGE_SIZES.forEach(size => {
+        const option = document.createElement("option");
+        option.value = String(size);
+        option.textContent = String(size);
+        option.selected = String(size) === String(pageSize);
+        select.appendChild(option);
+    });
+    select.addEventListener("change", () => {
+        pageSize = select.value === "All" ? "All" : Number(select.value);
+        currentPage = 1;
+        renderTable(currentFilteredData);
+    });
+    label.appendChild(select);
+    bar.appendChild(label);
+}
+
 
 function sortData(key) {
     if (currentSort.key === key) {
@@ -569,6 +686,9 @@ function applyFilters() {
     });
 
     currentFilteredData = filtered;
+    // A filter or sort change invalidates the position: page 7 of the old
+    // result set means nothing in the new one.
+    currentPage = 1;
     renderTable(filtered);
     const totalLabel = bestRuns.length === 1 ? "result" : "results";
     const filteredLabel = filtered.length === 1 ? "result" : "results";
