@@ -7518,6 +7518,34 @@
     "card": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f"
   },
   {
+    "uuid": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60",
+    "gpu": "NVIDIA GeForce RTX 4060",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-12 19:57:27",
+    "temp_max": 41.0,
+    "power_max": "N/A",
+    "clock_avg": 598.8,
+    "throttle_time": 0.0,
+    "card": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60"
+  },
+  {
+    "uuid": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60",
+    "gpu": "NVIDIA GeForce RTX 4060",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 258.689,
+    "date": "2026-09-12 20:03:00",
+    "temp_max": 58.0,
+    "power_max": "N/A",
+    "clock_avg": 1990.1,
+    "throttle_time": 0.0,
+    "card": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60"
+  },
+  {
     "uuid": "GPU-119ed8aa-2b94-19b4-50c5-82eeb797fe04",
     "gpu": "NVIDIA GH200 480GB",
     "test": "int_virus",
@@ -19924,6 +19952,20 @@
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 101.837,
+    "date": "2026-09-12 19:48:27",
+    "temp_max": 67.0,
+    "power_max": 384.4,
+    "clock_avg": 2414.6,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "memory_thermal_asym",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -32154,6 +32196,34 @@
     "temp_max": 44.0,
     "power_max": 37.4,
     "clock_avg": 314.9,
+    "throttle_time": 0.0,
+    "card": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984"
+  },
+  {
+    "uuid": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 637.334,
+    "date": "2026-09-12 19:58:22",
+    "temp_max": 61.0,
+    "power_max": 154.7,
+    "clock_avg": 2863.2,
+    "throttle_time": 0.0,
+    "card": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984"
+  },
+  {
+    "uuid": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 627.627,
+    "date": "2026-09-12 20:03:56",
+    "temp_max": 63.0,
+    "power_max": 177.3,
+    "clock_avg": 2834.9,
     "throttle_time": 0.0,
     "card": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984"
   },
@@ -77516,6 +77586,20 @@
     "clock_avg": 1317.7,
     "throttle_time": 301.4,
     "card": "GPU-ebac065d-974a-c2f7-205a-bb03b1eccc9f"
+  },
+  {
+    "uuid": "GPU-ecb5c456-73b0-a60d-f0ec-508005e5b928",
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-12 20:02:10",
+    "temp_max": 47.0,
+    "power_max": 26.7,
+    "clock_avg": 346.0,
+    "throttle_time": 0.0,
+    "card": "GPU-ecb5c456-73b0-a60d-f0ec-508005e5b928"
   },
   {
     "uuid": "GPU-ee1f5b19-7f38-93ba-7613-764b2e982dea",
