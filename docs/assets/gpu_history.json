@@ -51942,6 +51942,20 @@
   {
     "uuid": "GPU-9ad06d50-db69-0cfb-2dd8-522b247e38de",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "media_enc_virus",
+    "version": "1.2.2",
+    "unit": "FPS",
+    "score": 43.0051,
+    "date": "2026-09-12 17:29:53",
+    "temp_max": 42.0,
+    "power_max": 129.0,
+    "clock_avg": 2317.2,
+    "throttle_time": 0.0,
+    "card": "GPU-9ad06d50-db69-0cfb-2dd8-522b247e38de"
+  },
+  {
+    "uuid": "GPU-9ad06d50-db69-0cfb-2dd8-522b247e38de",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "memory_bank_thrash",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -68792,6 +68806,20 @@
     "temp_max": 49.0,
     "power_max": 281.7,
     "clock_avg": 2412.7,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "vision_encoder",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 478325000.0,
+    "date": "2026-09-12 17:15:39",
+    "temp_max": 48.0,
+    "power_max": 365.8,
+    "clock_avg": 2412.2,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
