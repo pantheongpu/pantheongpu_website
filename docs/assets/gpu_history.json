@@ -52024,6 +52024,20 @@
     "card": "GPU-9ad06d50-db69-0cfb-2dd8-522b247e38de"
   },
   {
+    "uuid": "GPU-9ad06d50-db69-0cfb-2dd8-522b247e38de",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 45.1572,
+    "date": "2026-09-12 08:57:58",
+    "temp_max": 46.0,
+    "power_max": 215.8,
+    "clock_avg": 2414.1,
+    "throttle_time": 0.0,
+    "card": "GPU-9ad06d50-db69-0cfb-2dd8-522b247e38de"
+  },
+  {
     "uuid": "GPU-9d89ee3e-f6a8-3a7f-c29b-ffc9dff12c50",
     "gpu": "Tesla T4",
     "test": "allocation_fragmentation",
@@ -68148,6 +68162,20 @@
     "temp_max": 45.0,
     "power_max": 291.6,
     "clock_avg": 2406.3,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 43.9873,
+    "date": "2026-09-12 09:00:33",
+    "temp_max": 45.0,
+    "power_max": 213.0,
+    "clock_avg": 2385.3,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
