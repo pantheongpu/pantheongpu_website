@@ -19910,6 +19910,20 @@
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 423.791,
+    "date": "2026-09-12 19:25:28",
+    "temp_max": 54.0,
+    "power_max": 293.4,
+    "clock_avg": 2412.6,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "memory_thermal_asym",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -32128,6 +32142,20 @@
     "clock_avg": 2399.6,
     "throttle_time": 0.0,
     "card": "GPU-676ab2dd-4da6-746b-5ab1-b8fd80bb9f0e"
+  },
+  {
+    "uuid": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-12 19:52:50",
+    "temp_max": 44.0,
+    "power_max": 37.4,
+    "clock_avg": 314.9,
+    "throttle_time": 0.0,
+    "card": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984"
   },
   {
     "uuid": "GPU-6a8e4ee6-cbd8-d4c5-20f8-fe2a3c436867",
@@ -68568,6 +68596,20 @@
     "temp_max": 47.0,
     "power_max": 312.7,
     "clock_avg": 2407.0,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 423.828,
+    "date": "2026-09-12 19:32:45",
+    "temp_max": 49.0,
+    "power_max": 307.5,
+    "clock_avg": 2410.4,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
