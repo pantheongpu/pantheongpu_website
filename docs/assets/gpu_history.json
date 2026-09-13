@@ -27988,6 +27988,20 @@
   {
     "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
     "gpu": "NVIDIA GeForce RTX 3060",
+    "test": "memory_retention",
+    "version": "1.2.2",
+    "unit": "retained-MiB",
+    "score": 11132.0,
+    "date": "2026-09-13 02:38:20",
+    "temp_max": 58.0,
+    "power_max": 51.0,
+    "clock_avg": 250.8,
+    "throttle_time": 0.0,
+    "card": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60"
+  },
+  {
+    "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+    "gpu": "NVIDIA GeForce RTX 3060",
     "test": "memory_retention_bake",
     "version": "1.2.0",
     "unit": "TFLOPS",
@@ -83956,6 +83970,20 @@
     "clock_avg": 939.5,
     "throttle_time": 299.9,
     "card": "GPU-efdcfbf5-267f-bcf6-b7a1-97ab8b55301c"
+  },
+  {
+    "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 278757.0,
+    "date": "2026-09-13 07:38:07",
+    "temp_max": 60.0,
+    "power_max": 116.1,
+    "clock_avg": 2826.3,
+    "throttle_time": 1.0,
+    "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
   },
   {
     "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
