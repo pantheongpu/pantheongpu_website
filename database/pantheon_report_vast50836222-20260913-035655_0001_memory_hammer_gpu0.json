@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 03:56:55",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-139-generic",
+        "version": "#139-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 03:52:05 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 12,
+        "logical_cores": 24,
+        "freq": "1511.95Mhz"
+    },
+    "ram_info": {
+        "total": "31.05GB",
+        "available": "29.06GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4080",
+            "memory_total": "16376 MB",
+            "driver_version": "595.84",
+            "power_limit": 320.0,
+            "uuid": "GPU-a15c9495-9720-8544-a576-1590537cc2a8",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6X",
+            "memory_vendor": "Micron",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-035655",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 04:01:57",
+    "test_results": [
+        {
+            "Test Name": "memory_hammer",
+            "Version": "1.2.2",
+            "Description": "Memory Hammer (Row Disturb)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 195389000000.0,
+            "Unit": "aggressor-reads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 65.9,
+            "Max Temp (C)": 68.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 229.6,
+            "Max Power (W)": 234.0,
+            "Avg Clock(MHz)": 2739.3,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2775.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16245.8,
+            "Memory Total (MiB)": 16376.0,
+            "Energy (Wh)": 19.183,
+            "Thermal Rise (C)": 25.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 850997386.76,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 44.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/memory_hammer 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260913-035655/reliability/memory_hammer/gpu0/ras.json"
+        }
+    ]
+}
