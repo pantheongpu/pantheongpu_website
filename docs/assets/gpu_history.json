@@ -5714,6 +5714,20 @@
   {
     "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 4358220000.0,
+    "date": "2026-09-13 05:41:20",
+    "temp_max": 56.0,
+    "power_max": 337.3,
+    "clock_avg": 2893.9,
+    "throttle_time": 0.0,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
@@ -7598,6 +7612,20 @@
     "temp_max": 50.0,
     "power_max": 118.7,
     "clock_avg": 2676.8,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "scheduler",
+    "version": "1.2.2",
+    "unit": "KIPS",
+    "score": 759.282,
+    "date": "2026-09-13 05:41:50",
+    "temp_max": 57.0,
+    "power_max": 74.2,
+    "clock_avg": 2672.7,
     "throttle_time": 0.0,
     "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
   },
@@ -41492,6 +41520,20 @@
     "temp_max": 33.0,
     "power_max": 105.9,
     "clock_avg": 2602.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.680469,
+    "date": "2026-09-13 05:41:28",
+    "temp_max": 31.0,
+    "power_max": 62.4,
+    "clock_avg": 2602.1,
     "throttle_time": 0.0,
     "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
   },
