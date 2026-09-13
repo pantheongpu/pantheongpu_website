@@ -20750,6 +20750,20 @@
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.79574,
+    "date": "2026-09-13 00:52:22",
+    "temp_max": 46.0,
+    "power_max": 185.3,
+    "clock_avg": 2402.6,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "int_virus",
     "version": "1.2.2",
     "unit": "TOPS",
@@ -63982,6 +63996,20 @@
   {
     "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
     "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.804559,
+    "date": "2026-09-13 01:01:55",
+    "temp_max": 55.0,
+    "power_max": 102.6,
+    "clock_avg": 2903.1,
+    "throttle_time": 0.0,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
     "test": "int_virus",
     "version": "1.2.2",
     "unit": "TOPS",
@@ -64061,6 +64089,34 @@
     "power_max": 115.9,
     "clock_avg": 2901.1,
     "throttle_time": 0.0,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "sfu_stress",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 2.45259,
+    "date": "2026-09-13 01:07:29",
+    "temp_max": 66.0,
+    "power_max": 248.4,
+    "clock_avg": 2829.6,
+    "throttle_time": 297.2,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 32.2971,
+    "date": "2026-09-13 00:56:23",
+    "temp_max": 64.0,
+    "power_max": 232.6,
+    "clock_avg": 2832.1,
+    "throttle_time": 35.0,
     "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
   },
   {
@@ -70066,6 +70122,20 @@
     "temp_max": 43.0,
     "power_max": 219.5,
     "clock_avg": 2347.6,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.79872,
+    "date": "2026-09-13 00:52:10",
+    "temp_max": 45.0,
+    "power_max": 191.4,
+    "clock_avg": 2407.1,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
