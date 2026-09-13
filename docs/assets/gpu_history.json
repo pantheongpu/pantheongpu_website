@@ -5600,6 +5600,20 @@
     "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
   },
   {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1147.51,
+    "date": "2026-09-13 04:40:15",
+    "temp_max": 50.0,
+    "power_max": 245.1,
+    "clock_avg": 1156.0,
+    "throttle_time": 301.6,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
     "uuid": "GPU-0ad178ad-620b-dc97-f7be-d0b8c5436215",
     "gpu": "NVIDIA A10",
     "test": "cache_lat",
