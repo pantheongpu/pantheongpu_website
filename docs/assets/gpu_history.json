@@ -22066,6 +22066,20 @@
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "serving_mix",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 928715000.0,
+    "date": "2026-09-13 08:05:43",
+    "temp_max": 53.0,
+    "power_max": 289.0,
+    "clock_avg": 2412.8,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "sfu_stress",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -28178,6 +28192,20 @@
     "temp_max": 58.0,
     "power_max": 74.6,
     "clock_avg": 1960.4,
+    "throttle_time": 0.0,
+    "card": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60"
+  },
+  {
+    "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+    "gpu": "NVIDIA GeForce RTX 3060",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 55.9851,
+    "date": "2026-09-13 03:22:54",
+    "temp_max": 60.0,
+    "power_max": 78.0,
+    "clock_avg": 1961.4,
     "throttle_time": 0.0,
     "card": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60"
   },
