@@ -47936,6 +47936,20 @@
     "card": "GPU-882e1d2d-127c-23aa-38ec-2c2e8e09dc3b"
   },
   {
+    "uuid": "GPU-882e1d2d-127c-23aa-38ec-2c2e8e09dc3b",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_tsv_thrasher",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1447.68,
+    "date": "2026-09-13 15:05:40",
+    "temp_max": 53.0,
+    "power_max": 275.9,
+    "clock_avg": 2414.4,
+    "throttle_time": 0.0,
+    "card": "GPU-882e1d2d-127c-23aa-38ec-2c2e8e09dc3b"
+  },
+  {
     "uuid": "GPU-89c77fef-157a-6992-2068-4bf1cea23e00",
     "gpu": "NVIDIA H100 PCIe",
     "test": "allocation_fragmentation",
