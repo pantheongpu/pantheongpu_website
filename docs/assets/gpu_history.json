@@ -71416,6 +71416,20 @@
   {
     "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
     "gpu": "NVIDIA GeForce RTX 5060",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 149272.0,
+    "date": "2026-09-13 08:01:19",
+    "temp_max": 59.0,
+    "power_max": 65.4,
+    "clock_avg": 2751.5,
+    "throttle_time": 0.0,
+    "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
+  },
+  {
+    "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
+    "gpu": "NVIDIA GeForce RTX 5060",
     "test": "baseline_metrics",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -73146,6 +73160,20 @@
     "temp_max": 47.0,
     "power_max": 375.1,
     "clock_avg": 2413.0,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 3811700000.0,
+    "date": "2026-09-13 07:45:52",
+    "temp_max": 49.0,
+    "power_max": 355.5,
+    "clock_avg": 2414.0,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
