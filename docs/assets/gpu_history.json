@@ -7504,6 +7504,20 @@
     "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
   },
   {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 216.406,
+    "date": "2026-09-13 05:14:08",
+    "temp_max": 50.0,
+    "power_max": 118.7,
+    "clock_avg": 2676.8,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
     "uuid": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f",
     "gpu": "NVIDIA GH200 480GB",
     "test": "allocation_fragmentation",
@@ -41379,6 +41393,20 @@
     "date": "2026-09-13 05:02:37",
     "temp_max": 37.0,
     "power_max": 155.6,
+    "clock_avg": 2602.1,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 556.653,
+    "date": "2026-09-13 05:13:44",
+    "temp_max": 38.0,
+    "power_max": 156.3,
     "clock_avg": 2602.1,
     "throttle_time": 0.0,
     "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
