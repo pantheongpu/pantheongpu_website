@@ -28184,6 +28184,20 @@
   {
     "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
     "gpu": "NVIDIA GeForce RTX 3060",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 324.584,
+    "date": "2026-09-13 03:34:02",
+    "temp_max": 74.0,
+    "power_max": 142.5,
+    "clock_avg": 1936.9,
+    "throttle_time": 0.0,
+    "card": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60"
+  },
+  {
+    "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+    "gpu": "NVIDIA GeForce RTX 3060",
     "test": "memory_write_agg",
     "version": "1.2.0",
     "unit": "GB/s",
