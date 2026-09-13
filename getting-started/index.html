@@ -576,6 +576,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#read-the-verdict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read the verdict
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#profiling-and-reports" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2958,6 +2969,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#read-the-verdict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read the verdict
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#profiling-and-reports" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3136,9 +3158,25 @@ ROCm toolkit from the tabs above.</p>
 <p>Then run a targeted stress test on GPU 0:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pantheon<span class="w"> </span>--test<span class="w"> </span>fp64_virus<span class="w"> </span>--duration<span class="w"> </span><span class="m">30</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span>
 </code></pre></div>
+<h2 id="read-the-verdict">Read the verdict</h2>
+<p>Every run ends with one word per GPU and the evidence behind it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>VERDICT GPU 0, NVIDIA GeForce RTX 3080 Ti: HEALTHY
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  memory_read                    868.4 GB/s        75th percentile of 4 cards (median 868.0)
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  tensor_virus                    20.3 TFLOPS      50th percentile of 4 cards (median 20.2)
+</code></pre></div>
+<p>HEALTHY, WATCH, FAULT or INCOMPLETE, then the reasons. The percentiles place
+each throughput against the per-card medians of every other card of the same
+model in the <a href="../benchmarks/">public database</a>. That distribution ships inside
+every package as <code>baselines.json</code>, generated from the same reports as this
+site, and is published at
+<a href="../assets/baselines.json">pantheongpu.com/assets/baselines.json</a> for source
+checkouts (<code>--baselines URL</code> or <code>PANTHEON_BASELINES</code>). Models with fewer than
+three cards in the database get a verdict without a percentile.</p>
+<p><code>pantheon --test quick</code> is the ten-minute version: idle baseline, memory read,
+a march test, a retention check and one power-limited compute load.</p>
 <h2 id="profiling-and-reports">Profiling and reports</h2>
 <p>Verification of workload output is on by default; pass <code>--skip_verify</code> to turn it off. Use <code>--profile</code> to collect performance counters, traces, and a per-workload HTML summary:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo<span class="w"> </span>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo<span class="w"> </span>pantheon<span class="w"> </span>--test<span class="w"> </span>llm_decode<span class="w"> </span>--duration<span class="w"> </span><span class="m">60</span><span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--verify<span class="w"> </span>--profile
 </code></pre></div>
 <p>Three things commonly stop a profiled run before it starts:</p>
 <ul>
@@ -3150,22 +3188,22 @@ ROCm toolkit from the tabs above.</p>
 <p>See <a href="../tests/">Test Documentation</a> for workload guidance, <a href="../release/">Releases and Downloads</a> for other installation methods, and <a href="../reports/">Reports</a> for output details.</p>
 <h2 id="uninstall">Uninstall</h2>
 <p>Remove the package the way it was installed:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pipx<span class="w"> </span>uninstall<span class="w"> </span>pantheon-gpu<span class="w">                    </span><span class="c1"># PyPI or a downloaded wheel</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheon-gpu<span class="w">               </span><span class="c1"># apt repository</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>pantheon-gpu<span class="w">                   </span><span class="c1"># Fedora COPR</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>docker<span class="w"> </span>rmi<span class="w"> </span>ghcr.io/pantheongpu/pantheon:latest<span class="w"> </span><span class="c1"># container image</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pipx<span class="w"> </span>uninstall<span class="w"> </span>pantheon-gpu<span class="w">                    </span><span class="c1"># PyPI or a downloaded wheel</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheon-gpu<span class="w">               </span><span class="c1"># apt repository</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>sudo<span class="w"> </span>dnf<span class="w"> </span>remove<span class="w"> </span>pantheon-gpu<span class="w">                   </span><span class="c1"># Fedora COPR</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>docker<span class="w"> </span>rmi<span class="w"> </span>ghcr.io/pantheongpu/pantheon:latest<span class="w"> </span><span class="c1"># container image</span>
 </code></pre></div>
 <p>To drop the apt source as well, remove <code>/etc/apt/sources.list.d/pantheon.list</code>
 and <code>/usr/share/keyrings/pantheon-archive-keyring.asc</code>; on Fedora,
 <code>sudo dnf copr disable saqibkhanpantheongpu/pantheon-gpu</code>.</p>
 <p>Releases up to v1.0.19 shipped as a Debian package named <code>pantheongpu</code>. Remove
 one of those with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheongpu
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span>pantheongpu
 </code></pre></div>
 <p>The workloads compile into <code>~/.cache/pantheongpu</code> on first run and stay there
 after the package is gone. To remove that cache, the apt source, any runtime
 files under <code>/opt/pantheongpu</code>, and whichever package is installed, in one go:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pantheongpu.com/uninstall.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://pantheongpu.com/uninstall.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>sh
 </code></pre></div>
 <p>This leaves CUDA, ROCm, system compilers, and benchmark reports outside PantheonGPU's installation and cache directories untouched.</p>
 
