@@ -5544,6 +5544,20 @@
     "card": "GPU-0a40cb7e-84b8-1b3b-8e04-54c19020cbfc"
   },
   {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-13 04:18:01",
+    "temp_max": 32.0,
+    "power_max": 54.2,
+    "clock_avg": 360.4,
+    "throttle_time": 0.0,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
     "uuid": "GPU-0ad178ad-620b-dc97-f7be-d0b8c5436215",
     "gpu": "NVIDIA A10",
     "test": "cache_lat",
@@ -21346,6 +21360,20 @@
     "temp_max": 39.0,
     "power_max": 118.1,
     "clock_avg": 2306.3,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "pulse_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 15.6512,
+    "date": "2026-09-13 04:06:04",
+    "temp_max": 42.0,
+    "power_max": 121.4,
+    "clock_avg": 2302.9,
     "throttle_time": 0.0,
     "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
   },
@@ -71634,6 +71662,20 @@
     "temp_max": 42.0,
     "power_max": 165.6,
     "clock_avg": 2359.2,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "pulse_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 15.7476,
+    "date": "2026-09-13 04:06:51",
+    "temp_max": 45.0,
+    "power_max": 169.7,
+    "clock_avg": 2365.1,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
