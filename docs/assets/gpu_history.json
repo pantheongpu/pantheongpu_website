@@ -75040,6 +75040,20 @@
     "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
   },
   {
+    "uuid": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 845.57,
+    "date": "2026-09-13 04:58:48",
+    "temp_max": 62.0,
+    "power_max": 259.6,
+    "clock_avg": 2646.9,
+    "throttle_time": 0.0,
+    "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
+  },
+  {
     "uuid": "GPU-d9851dfc7925",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
