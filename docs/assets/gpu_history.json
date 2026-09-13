@@ -71344,6 +71344,20 @@
     "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
   },
   {
+    "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 403.348,
+    "date": "2026-09-13 07:22:25",
+    "temp_max": 66.0,
+    "power_max": 114.6,
+    "clock_avg": 2736.8,
+    "throttle_time": 0.0,
+    "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
+  },
+  {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "allocation_fragmentation",
