@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-12 21:32:52",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-31-generic",
+        "version": "#31-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 04:26:38 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 6,
+        "logical_cores": 12,
+        "freq": "2866.08Mhz"
+    },
+    "ram_info": {
+        "total": "30.23GB",
+        "available": "27.99GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4060 Ti",
+            "memory_total": "16380 MB",
+            "driver_version": "595.84",
+            "power_limit": 165.0,
+            "uuid": "GPU-2e426ad4-6988-a64c-5610-3f14fa144bc8",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260912-213252",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-12 21:37:53",
+    "test_results": [
+        {
+            "Test Name": "llm_prefill",
+            "Version": "1.2.2",
+            "Description": "LLM Prefill (Causal Attention and Projections)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 74273600.0,
+            "Unit": "prompt-tokens/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 54.8,
+            "Max Temp (C)": 63.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 80.8,
+            "Max Power (W)": 85.3,
+            "Avg Clock(MHz)": 2725.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2760.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16225.4,
+            "Memory Total (MiB)": 16380.0,
+            "Energy (Wh)": 6.747,
+            "Thermal Rise (C)": 23.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 919227.72,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 4.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 32.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/llm_prefill 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +48804 || vendor_ras.pcie.replay +2",
+            "RAS Report": "results/20260912-213252/reliability/llm_prefill/gpu0/ras.json"
+        }
+    ]
+}

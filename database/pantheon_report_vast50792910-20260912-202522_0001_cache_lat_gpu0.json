@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-12 20:25:22",
+    "os_info": {
+        "system": "Linux",
+        "release": "5.15.0-187-generic",
+        "version": "#197-Ubuntu SMP Fri Jul 17 19:17:01 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 32,
+        "logical_cores": 64,
+        "freq": "1890.05Mhz"
+    },
+    "ram_info": {
+        "total": "125.66GB",
+        "available": "119.10GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4060",
+            "memory_total": "8188 MB",
+            "driver_version": "580.173.02",
+            "power_limit": 115.0,
+            "uuid": "GPU-11397ec7-000b-1e5e-28d8-eace2894aa60",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260912-202522",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-12 20:30:24",
+    "test_results": [
+        {
+            "Test Name": "cache_lat",
+            "Version": "1.2.2",
+            "Description": "Cache Latency",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 2418290000.0,
+            "Unit": "dependent-loads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 51.4,
+            "Max Temp (C)": 52.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": "N/A",
+            "Max Power (W)": "N/A",
+            "Avg Clock(MHz)": 1990.1,
+            "Min Clock (MHz)": 510.0,
+            "Max Clock (MHz)": 1995.0,
+            "Avg GPU Util (%)": 98.4,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 4591.8,
+            "Memory Total (MiB)": 8188.0,
+            "Energy (Wh)": 0,
+            "Thermal Rise (C)": 7.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 31.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/cache_latency 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260912-202522/reliability/cache_lat/gpu0/ras.json"
+        }
+    ]
+}
