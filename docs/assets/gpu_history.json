@@ -27820,6 +27820,20 @@
   {
     "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
     "gpu": "NVIDIA GeForce RTX 3060",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 6.90933,
+    "date": "2026-09-13 03:11:48",
+    "temp_max": 79.0,
+    "power_max": 170.1,
+    "clock_avg": 1856.9,
+    "throttle_time": 299.6,
+    "card": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60"
+  },
+  {
+    "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+    "gpu": "NVIDIA GeForce RTX 3060",
     "test": "kv_cache_churn",
     "version": "1.2.0",
     "unit": "cache-updates/s",
