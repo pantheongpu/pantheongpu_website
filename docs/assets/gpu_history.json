@@ -41820,6 +41820,20 @@
   {
     "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
     "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "memory_hammer",
+    "version": "1.2.2",
+    "unit": "aggressor-reads/s",
+    "score": 148933000000.0,
+    "date": "2026-09-13 06:31:22",
+    "temp_max": 41.0,
+    "power_max": 162.2,
+    "clock_avg": 2602.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -72124,6 +72138,20 @@
     "temp_max": 46.0,
     "power_max": 352.4,
     "clock_avg": 2411.9,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 477595000.0,
+    "date": "2026-09-13 06:18:04",
+    "temp_max": 48.0,
+    "power_max": 352.5,
+    "clock_avg": 2413.7,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
