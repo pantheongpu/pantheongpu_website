@@ -41736,6 +41736,20 @@
   {
     "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
     "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "scheduler",
+    "version": "1.2.2",
+    "unit": "KIPS",
+    "score": 251.466,
+    "date": "2026-09-13 05:58:07",
+    "temp_max": 27.0,
+    "power_max": 40.2,
+    "clock_avg": 2602.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
     "test": "sfu_stress",
     "version": "1.2.2",
     "unit": "TFLOPS",
