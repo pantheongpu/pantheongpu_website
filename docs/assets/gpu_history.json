@@ -71514,6 +71514,20 @@
   {
     "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
     "gpu": "NVIDIA GeForce RTX 5060",
+    "test": "llm_decode",
+    "version": "1.2.2",
+    "unit": "tokens/s",
+    "score": 488769000.0,
+    "date": "2026-09-13 08:12:25",
+    "temp_max": 61.0,
+    "power_max": 83.8,
+    "clock_avg": 2756.5,
+    "throttle_time": 0.0,
+    "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
+  },
+  {
+    "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
+    "gpu": "NVIDIA GeForce RTX 5060",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
