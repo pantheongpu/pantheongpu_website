@@ -7336,6 +7336,20 @@
     "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
   },
   {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 701.865,
+    "date": "2026-09-13 04:40:51",
+    "temp_max": 59.0,
+    "power_max": 212.9,
+    "clock_avg": 2661.9,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
     "uuid": "GPU-10f194f5-cbb5-0436-e30f-a82fd27b1c9f",
     "gpu": "NVIDIA GH200 480GB",
     "test": "allocation_fragmentation",
