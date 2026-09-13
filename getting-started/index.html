@@ -3047,8 +3047,8 @@ host beyond the NVIDIA driver and the NVIDIA Container Toolkit. Kernels
 still compile for the GPU actually present on first run; mount
 <code>/root/.cache</code> as well to keep the compiled cache across containers.
 Reports land in the directory mounted at <code>/reports</code>.</p>
-<p>Tags: <code>latest</code>, a version (<code>1.2.0</code>), or a version pinned to its toolchain
-(<code>1.2.0-cuda12.8</code>).</p>
+<p>Tags: <code>latest</code>, a version (<code>1.2.2</code>), or a version pinned to its toolchain
+(<code>1.2.2-cuda12.8</code>).</p>
 <p>On AMD hardware use the ROCm variant, which carries the ROCm 6.4
 toolchain instead and needs the device nodes rather than <code>--gpus</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-t<span class="w"> </span>--device<span class="o">=</span>/dev/kfd<span class="w"> </span>--device<span class="o">=</span>/dev/dri<span class="w"> </span>--group-add<span class="w"> </span>video<span class="w"> </span><span class="se">\</span>
@@ -3112,7 +3112,7 @@ is only a <code>Suggests</code>.</p>
 hardware.</p>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">1</span>.2.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">VERSION</span><span class="o">=</span><span class="m">1</span>.2.2
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">BASE</span><span class="o">=</span><span class="s2">&quot;https://github.com/pantheongpu/pantheongpu_website/releases/download/v</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>wget<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASE</span><span class="si">}</span><span class="s2">/pantheon_gpu-</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">-py3-none-any.whl&quot;</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>wget<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASE</span><span class="si">}</span><span class="s2">/SHA256SUMS&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sha256sum<span class="w"> </span>--ignore-missing<span class="w"> </span>-c<span class="w"> </span>SHA256SUMS
