@@ -41510,6 +41510,20 @@
     "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
   },
   {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 175.211,
+    "date": "2026-09-13 05:30:23",
+    "temp_max": 33.0,
+    "power_max": 76.1,
+    "clock_avg": 2602.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
     "uuid": "GPU-7fe270e9060c",
     "gpu": "NVIDIA A10",
     "test": "allocation_fragmentation",
