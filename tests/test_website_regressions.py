@@ -2035,27 +2035,3 @@ def test_every_version_literal_matches_the_latest_release():
                  "packaging/docker/Dockerfile.rocm"):
         assert path in workflow, f"{path} is rewritten but not staged for the release-page PR"
 
-
-def test_committed_baselines_match_database_reports(tmp_path):
-    """baselines.json is the fourth generated asset: the per-model
-    distributions Pantheon ships in every package for its end-of-run
-    percentiles. It must be regenerated with the others."""
-    generate_web_data(output_file=tmp_path / "web_data.json")
-    generated = json.loads((tmp_path / "baselines.json").read_text(encoding="utf-8"))
-    committed = json.loads(read("docs/assets/baselines.json"))
-    assert generated == committed
-    assert committed["schema"] == 1
-    assert len(committed["models"]) >= 10
-    h100 = committed["models"]["NVIDIA H100 80GB HBM3"]["tests"]["memory_read"]
-    assert h100["unit"] == "GB/s" and h100["cards"] >= 3
-    assert h100["values"] == sorted(h100["values"])
-
-
-def test_release_ships_the_baselines_inside_the_wheel():
-    workflow = read(".github/workflows/release.yml")
-    assert "--baselines docs/assets/baselines.json" in workflow
-    builder = read("packaging/wheel/build_wheel.py")
-    assert 'BASELINES_NAME = "baselines.json"' in builder
-    assert '"{BASELINES_NAME}"' in builder          # in package-data, so the sdist and rpm carry it too
-    assert "--baselines" in builder
-

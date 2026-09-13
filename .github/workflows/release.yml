@@ -113,8 +113,7 @@ jobs:
           python3 -m venv .buildenv
           .buildenv/bin/pip install --quiet --upgrade pip build
           .buildenv/bin/python packaging/wheel/build_wheel.py pantheon-src \
-            --outdir dist --workdir build/wheel \
-            --baselines docs/assets/baselines.json
+            --outdir dist --workdir build/wheel
 
       - name: Build the Debian package
         run: |

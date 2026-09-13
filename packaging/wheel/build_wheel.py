@@ -18,7 +18,6 @@ the console entry point rather than by patching the runner.
 """
 
 import argparse
-import json
 import re
 import shutil
 import subprocess
@@ -42,10 +41,7 @@ def read_version(source: Path) -> str:
     return version
 
 
-BASELINES_NAME = "baselines.json"
-
-
-def stage(source: Path, work: Path, baselines: Path | None = None) -> Path:
+def stage(source: Path, work: Path) -> Path:
     pkg = work / PACKAGE
     pkg.mkdir(parents=True)
 
@@ -55,14 +51,6 @@ def stage(source: Path, work: Path, baselines: Path | None = None) -> Path:
         shutil.copy2(source / name, pkg / name)
     for name in DATA_DIRS:
         shutil.copytree(source / name, pkg / name)
-    if baselines is not None:
-        # The per-model distributions behind the end-of-run percentiles. The
-        # runner reads BASELINES_FILE beside its own module, so it lands in
-        # the package rather than as a data file somewhere on the system.
-        data = json.loads(Path(baselines).read_text(encoding="utf-8"))
-        if not isinstance(data.get("models"), dict):
-            raise SystemExit(f"{baselines} is not a baselines file (no 'models' mapping)")
-        shutil.copy2(baselines, pkg / BASELINES_NAME)
 
     # The runner imports its telemetry module assuming both sit at the top
     # level. Inside a package that has to be relative.
@@ -146,7 +134,7 @@ def write_pyproject(work: Path, version: str) -> None:
         include-package-data = true
 
         [tool.setuptools.package-data]
-        "{PACKAGE}" = ["Makefile", "VERSION", "{BASELINES_NAME}", "kernels/**/*"]
+        "{PACKAGE}" = ["Makefile", "VERSION", "kernels/**/*"]
         '''), encoding="utf-8")
 
 
@@ -155,9 +143,6 @@ def main() -> int:
     ap.add_argument("source", type=Path, help="Pantheon source checkout")
     ap.add_argument("--outdir", type=Path, default=Path("dist"))
     ap.add_argument("--workdir", type=Path, default=Path("build/wheel"))
-    ap.add_argument("--baselines", type=Path, default=None,
-                    help="per-model baselines JSON to ship inside the package "
-                         "(the site generates docs/assets/baselines.json)")
     args = ap.parse_args()
 
     source = args.source.resolve()
@@ -171,9 +156,7 @@ def main() -> int:
         shutil.rmtree(work)
     work.mkdir(parents=True)
 
-    if args.baselines is not None and not args.baselines.exists():
-        raise SystemExit(f"no such baselines file: {args.baselines}")
-    stage(source, work, args.baselines)
+    stage(source, work)
     write_pyproject(work, version)
     shutil.copy2(source / "README.md", work / "README.md")
     for extra in ("LICENSE", "NOTICE"):
