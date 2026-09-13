@@ -71346,6 +71346,20 @@
   {
     "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
     "gpu": "NVIDIA GeForce RTX 5060",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 6.38117,
+    "date": "2026-09-13 07:33:32",
+    "temp_max": 71.0,
+    "power_max": 105.8,
+    "clock_avg": 2707.1,
+    "throttle_time": 0.0,
+    "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
+  },
+  {
+    "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
+    "gpu": "NVIDIA GeForce RTX 5060",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -71747,6 +71761,20 @@
     "power_max": 302.5,
     "clock_avg": 1798.5,
     "throttle_time": 300.3,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 33.2349,
+    "date": "2026-09-13 07:33:15",
+    "temp_max": 77.0,
+    "power_max": 303.4,
+    "clock_avg": 1800.2,
+    "throttle_time": 299.4,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
