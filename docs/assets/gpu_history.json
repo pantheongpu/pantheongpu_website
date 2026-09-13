@@ -75208,6 +75208,20 @@
     "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
   },
   {
+    "uuid": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 345.178,
+    "date": "2026-09-13 05:15:30",
+    "temp_max": 53.0,
+    "power_max": 161.5,
+    "clock_avg": 2647.1,
+    "throttle_time": 0.0,
+    "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
+  },
+  {
     "uuid": "GPU-d9851dfc7925",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
