@@ -41188,6 +41188,20 @@
     "card": "GPU-7f153f7a-c9ea-fd89-a4c5-954dffadbc13"
   },
   {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-13 04:51:31",
+    "temp_max": 23.0,
+    "power_max": 36.3,
+    "clock_avg": 347.7,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
     "uuid": "GPU-7fe270e9060c",
     "gpu": "NVIDIA A10",
     "test": "allocation_fragmentation",
