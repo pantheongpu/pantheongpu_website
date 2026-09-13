@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 02:23:13",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-136-generic",
+        "version": "#136~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul  3 16:29:11 UTC ",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 128,
+        "freq": "1646.79Mhz"
+    },
+    "ram_info": {
+        "total": "188.53GB",
+        "available": "162.20GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4080 SUPER",
+            "memory_total": "16376 MB",
+            "driver_version": "580.173.02",
+            "power_limit": 320.0,
+            "uuid": "GPU-00a36c36-3e57-3d1b-02f7-691bd77666dd",
+            "serial": "[N/A]",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: RM alloc of class 0x80 failed with status 0x1b"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-022313",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 02:28:15",
+    "test_results": [
+        {
+            "Test Name": "baseline_metrics",
+            "Version": "1.2.2",
+            "Description": "Baseline Idle Metrics (No Load)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.0,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 52.7,
+            "Max Temp (C)": 56.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 16.5,
+            "Max Power (W)": 51.6,
+            "Avg Clock(MHz)": 350.4,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2550.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 689.4,
+            "Memory Total (MiB)": 16376.0,
+            "Energy (Wh)": 1.379,
+            "Thermal Rise (C)": 4.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.0,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Idle",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/idle 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +3",
+            "RAS Report": "results/20260913-022313/reliability/baseline_metrics/gpu0/ras.json"
+        }
+    ]
+}
