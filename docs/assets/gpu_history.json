@@ -71780,6 +71780,20 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_retention",
+    "version": "1.2.2",
+    "unit": "retained-MiB",
+    "score": 11536.0,
+    "date": "2026-09-13 07:38:47",
+    "temp_max": 59.0,
+    "power_max": 109.9,
+    "clock_avg": 292.5,
+    "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "memory_retention_bake",
     "version": "1.2.0",
     "unit": "TFLOPS",
