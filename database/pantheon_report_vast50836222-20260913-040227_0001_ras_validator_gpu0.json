@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 04:02:27",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-139-generic",
+        "version": "#139-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 03:52:05 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 12,
+        "logical_cores": 24,
+        "freq": "1541.30Mhz"
+    },
+    "ram_info": {
+        "total": "31.05GB",
+        "available": "29.08GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4080",
+            "memory_total": "16376 MB",
+            "driver_version": "595.84",
+            "power_limit": 320.0,
+            "uuid": "GPU-a15c9495-9720-8544-a576-1590537cc2a8",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6X",
+            "memory_vendor": "Micron",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-040227",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 04:07:30",
+    "test_results": [
+        {
+            "Test Name": "ras_validator",
+            "Version": "1.2.2",
+            "Description": "RAS Validator (ECC Scrub Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 672.365,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 60.5,
+            "Max Temp (C)": 63.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 163.6,
+            "Max Power (W)": 166.2,
+            "Avg Clock(MHz)": 2751.5,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2760.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16221.8,
+            "Memory Total (MiB)": 16376.0,
+            "Energy (Wh)": 13.706,
+            "Thermal Rise (C)": 14.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 4208.45,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 33.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/ras_validator 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260913-040227/reliability/ras_validator/gpu0/ras.json"
+        }
+    ]
+}
