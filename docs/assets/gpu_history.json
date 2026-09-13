@@ -63924,6 +63924,48 @@
     "card": "GPU-bb203304-7dc0-7821-647d-962c112d30eb"
   },
   {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-13 00:12:00",
+    "temp_max": 33.0,
+    "power_max": 49.2,
+    "clock_avg": 404.3,
+    "throttle_time": 0.0,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 849.894,
+    "date": "2026-09-13 00:17:32",
+    "temp_max": 49.0,
+    "power_max": 188.8,
+    "clock_avg": 2909.5,
+    "throttle_time": 0.0,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 804.912,
+    "date": "2026-09-13 00:23:06",
+    "temp_max": 52.0,
+    "power_max": 202.3,
+    "clock_avg": 2809.5,
+    "throttle_time": 300.6,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
     "uuid": "GPU-bd0d7076e778",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "allocation_fragmentation",
