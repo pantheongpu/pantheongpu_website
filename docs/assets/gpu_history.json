@@ -7576,6 +7576,20 @@
   {
     "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
     "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "sfu_stress",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 2.60181,
+    "date": "2026-09-13 05:30:46",
+    "temp_max": 77.0,
+    "power_max": 299.9,
+    "clock_avg": 2647.2,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "test": "tensor_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
