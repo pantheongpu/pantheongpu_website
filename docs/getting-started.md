@@ -184,6 +184,28 @@ Then run a targeted stress test on GPU 0:
 pantheon --test fp64_virus --duration 30 --gpu 0
 ```
 
+## Read the verdict
+
+Every run ends with one word per GPU and the evidence behind it:
+
+```
+VERDICT GPU 0, NVIDIA GeForce RTX 3080 Ti: HEALTHY
+  memory_read                    868.4 GB/s        75th percentile of 4 cards (median 868.0)
+  tensor_virus                    20.3 TFLOPS      50th percentile of 4 cards (median 20.2)
+```
+
+HEALTHY, WATCH, FAULT or INCOMPLETE, then the reasons. The percentiles place
+each throughput against the per-card medians of every other card of the same
+model in the [public database](benchmarks.md). That distribution ships inside
+every package as `baselines.json`, generated from the same reports as this
+site, and is published at
+[pantheongpu.com/assets/baselines.json](assets/baselines.json) for source
+checkouts (`--baselines URL` or `PANTHEON_BASELINES`). Models with fewer than
+three cards in the database get a verdict without a percentile.
+
+`pantheon --test quick` is the ten-minute version: idle baseline, memory read,
+a march test, a retention check and one power-limited compute load.
+
 ## Profiling and reports
 
 Verification of workload output is on by default; pass `--skip_verify` to turn it off. Use `--profile` to collect performance counters, traces, and a per-workload HTML summary:
