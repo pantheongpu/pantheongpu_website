@@ -83722,6 +83722,20 @@
   {
     "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
     "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 478.678,
+    "date": "2026-09-13 06:53:44",
+    "temp_max": 62.0,
+    "power_max": 155.9,
+    "clock_avg": 2826.3,
+    "throttle_time": 1.0,
+    "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
+  },
+  {
+    "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
     "test": "memory_write",
     "version": "1.2.2",
     "unit": "GB/s",
