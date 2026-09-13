@@ -1303,5 +1303,41 @@
     "status": "NO_MEASUREMENT",
     "reason": "reported 0 FPS: no video encoder was available to the workload, so there is no measurement to publish",
     "source_report": "pantheon_report_fcaf34b822-20260911-043130_0001_media_enc_virus_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "manufacturer": "NVIDIA",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_vast50836223-20260913-025636_0001_int_virus_gpu0.json"
+  },
+  {
+    "gpu": "Unknown GPU 0",
+    "manufacturer": "Unknown",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_vast50836223-20260913-025903_0001_mma_virus_gpu0.json"
+  },
+  {
+    "gpu": "Unknown GPU 0",
+    "manufacturer": "Unknown",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_vast50836223-20260913-025936_0001_tensor_virus_gpu0.json"
+  },
+  {
+    "gpu": "Unknown GPU 0",
+    "manufacturer": "Unknown",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "status": "NO_MEASUREMENT",
+    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "source_report": "pantheon_report_vast50836223-20260913-030009_0001_fp64_virus_gpu0.json"
   }
 ]
