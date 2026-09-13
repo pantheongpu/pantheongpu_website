@@ -5574,6 +5574,20 @@
   {
     "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 37.4769,
+    "date": "2026-09-13 04:51:24",
+    "temp_max": 78.0,
+    "power_max": 521.7,
+    "clock_avg": 2804.5,
+    "throttle_time": 300.3,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -7360,6 +7374,20 @@
     "temp_max": 59.0,
     "power_max": 212.9,
     "clock_avg": 2661.9,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 701.898,
+    "date": "2026-09-13 04:51:57",
+    "temp_max": 59.0,
+    "power_max": 213.1,
+    "clock_avg": 2663.2,
     "throttle_time": 0.0,
     "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
   },
@@ -21222,6 +21250,20 @@
     "clock_avg": 1710.0,
     "throttle_time": 0.0,
     "card": "GPU-4d40390c-32fb-43c7-939e-f5fb87f94197"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 655766.0,
+    "date": "2026-09-13 04:41:08",
+    "temp_max": 50.0,
+    "power_max": 220.7,
+    "clock_avg": 2411.8,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
   },
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
