@@ -5630,6 +5630,20 @@
   {
     "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 545962000.0,
+    "date": "2026-09-13 05:35:47",
+    "temp_max": 53.0,
+    "power_max": 303.6,
+    "clock_avg": 2899.3,
+    "throttle_time": 0.0,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -7446,6 +7460,20 @@
     "clock_avg": 1974.5,
     "throttle_time": 0.0,
     "card": "GPU-0e96b88e953c"
+  },
+  {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 334244.0,
+    "date": "2026-09-13 05:36:18",
+    "temp_max": 50.0,
+    "power_max": 133.2,
+    "clock_avg": 2676.8,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
   },
   {
     "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
