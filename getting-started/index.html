@@ -3160,18 +3160,17 @@ ROCm toolkit from the tabs above.</p>
 </code></pre></div>
 <h2 id="read-the-verdict">Read the verdict</h2>
 <p>Every run ends with one word per GPU and the evidence behind it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>VERDICT GPU 0, NVIDIA GeForce RTX 3080 Ti: HEALTHY
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  memory_read                    868.4 GB/s        75th percentile of 4 cards (median 868.0)
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  tensor_virus                    20.3 TFLOPS      50th percentile of 4 cards (median 20.2)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>VERDICT GPU 0, NVIDIA H100 80GB HBM3: WATCH  (thermally throttled on 2; correctable errors on 8)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  ! thermal: memory_read thermally throttled, GPU at 95 C, memory_read_agg thermally throttled, GPU at 94 C
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  ! correctable errors on 8 workload(s): pcie.bad_tlp +9, pcie.lcrc +6
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  note: PCIe link recovery events on 8 workload(s): link power-state cycling, not a fault
 </code></pre></div>
-<p>HEALTHY, WATCH, FAULT or INCOMPLETE, then the reasons. The percentiles place
-each throughput against the per-card medians of every other card of the same
-model in the <a href="../benchmarks/">public database</a>. That distribution ships inside
-every package as <code>baselines.json</code>, generated from the same reports as this
-site, and is published at
-<a href="../assets/baselines.json">pantheongpu.com/assets/baselines.json</a> for source
-checkouts (<code>--baselines URL</code> or <code>PANTHEON_BASELINES</code>). Models with fewer than
-three cards in the database get a verdict without a percentile.</p>
+<p>HEALTHY means every workload completed, no error counter that matters moved,
+and nothing ran hot. WATCH names what deserves a second look: a thermal
+limit, a GPU at 90 C or memory at 95 C, correctable ECC or PCIe errors, or a
+workload that did not complete. FAULT means a memory diagnostic failed or an
+uncorrectable error was counted. The verdict is written into the report as
+well.</p>
 <p><code>pantheon --test quick</code> is the ten-minute version: idle baseline, memory read,
 a march test, a retention check and one power-limited compute load.</p>
 <h2 id="profiling-and-reports">Profiling and reports</h2>
