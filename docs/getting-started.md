@@ -189,19 +189,18 @@ pantheon --test fp64_virus --duration 30 --gpu 0
 Every run ends with one word per GPU and the evidence behind it:
 
 ```
-VERDICT GPU 0, NVIDIA GeForce RTX 3080 Ti: HEALTHY
-  memory_read                    868.4 GB/s        75th percentile of 4 cards (median 868.0)
-  tensor_virus                    20.3 TFLOPS      50th percentile of 4 cards (median 20.2)
+VERDICT GPU 0, NVIDIA H100 80GB HBM3: WATCH  (thermally throttled on 2; correctable errors on 8)
+  ! thermal: memory_read thermally throttled, GPU at 95 C, memory_read_agg thermally throttled, GPU at 94 C
+  ! correctable errors on 8 workload(s): pcie.bad_tlp +9, pcie.lcrc +6
+  note: PCIe link recovery events on 8 workload(s): link power-state cycling, not a fault
 ```
 
-HEALTHY, WATCH, FAULT or INCOMPLETE, then the reasons. The percentiles place
-each throughput against the per-card medians of every other card of the same
-model in the [public database](benchmarks.md). That distribution ships inside
-every package as `baselines.json`, generated from the same reports as this
-site, and is published at
-[pantheongpu.com/assets/baselines.json](assets/baselines.json) for source
-checkouts (`--baselines URL` or `PANTHEON_BASELINES`). Models with fewer than
-three cards in the database get a verdict without a percentile.
+HEALTHY means every workload completed, no error counter that matters moved,
+and nothing ran hot. WATCH names what deserves a second look: a thermal
+limit, a GPU at 90 C or memory at 95 C, correctable ECC or PCIe errors, or a
+workload that did not complete. FAULT means a memory diagnostic failed or an
+uncorrectable error was counted. The verdict is written into the report as
+well.
 
 `pantheon --test quick` is the ten-minute version: idle baseline, memory read,
 a march test, a retention check and one power-limited compute load.

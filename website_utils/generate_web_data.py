@@ -5,10 +5,8 @@ from pathlib import Path
 
 try:  # run as a script (python3 website_utils/generate_web_data.py)
     from gpu_identity import public_gpu_id as _public_gpu_id
-    from generate_baselines import write_baselines, OUTPUT_FILE as BASELINES_OUTPUT_FILE
 except ImportError:  # imported as a package (tests, other modules)
     from website_utils.gpu_identity import public_gpu_id as _public_gpu_id
-    from website_utils.generate_baselines import write_baselines, OUTPUT_FILE as BASELINES_OUTPUT_FILE
 
 try:
     import numpy as np
@@ -432,7 +430,6 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     output_file = Path(output_file)
     best_runs = {}
     history = []
-    baseline_runs = []
     errors = []
     unsupported = []
 
@@ -595,14 +592,6 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     run["card"] = card_identity(record)
                     run["_kind"] = data.get("record_kind")
                     history.append(run)
-                    # The verdict's percentiles: every run, with the duration
-                    # the history file does not carry, so short runs can be
-                    # kept out of the distributions.
-                    baseline_runs.append({
-                        "card": run["card"], "gpu": gpu_name, "test": test_name,
-                        "version": version_str, "unit": unit, "score": score_val,
-                        "duration": record["duration"], "date": record["date"],
-                    })
 
                     # TRACK BY UNIQUE SILICON AND SOFTWARE VERSION
                     key = record_key(record)
@@ -648,9 +637,6 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     unsupported_output = output_file.with_name(UNSUPPORTED_OUTPUT_FILE.name)
     with open(unsupported_output, 'w', encoding="utf-8") as f:
         json.dump(unsupported, f, indent=2, cls=NumpyEncoder, allow_nan=False)
-
-    baselines = write_baselines(baseline_runs, output_file.with_name(BASELINES_OUTPUT_FILE.name))
-    print(f"[Generate] Baselines for {len(baselines['models'])} models written.")
 
     if methodology_file is not None:
         update_methodology_coverage(rows, methodology_file)
