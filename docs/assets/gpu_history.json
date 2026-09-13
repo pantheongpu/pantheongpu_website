@@ -27890,6 +27890,20 @@
   {
     "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
     "gpu": "NVIDIA GeForce RTX 3060",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 105.575,
+    "date": "2026-09-13 02:27:13",
+    "temp_max": 72.0,
+    "power_max": 129.4,
+    "clock_avg": 1937.2,
+    "throttle_time": 0.0,
+    "card": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60"
+  },
+  {
+    "uuid": "GPU-58e9026f-e228-b9ef-2050-e4dd64f3dd60",
+    "gpu": "NVIDIA GeForce RTX 3060",
     "test": "memory_hammer",
     "version": "1.2.0",
     "unit": "aggressor-reads/s",
@@ -71607,6 +71621,20 @@
     "power_max": 315.4,
     "clock_avg": 1896.3,
     "throttle_time": 300.6,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 208.018,
+    "date": "2026-09-13 07:27:42",
+    "temp_max": 78.0,
+    "power_max": 314.8,
+    "clock_avg": 1897.1,
+    "throttle_time": 300.7,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
