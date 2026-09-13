@@ -72130,6 +72130,20 @@
   {
     "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "unit": "cache-updates/s",
+    "score": 3274220000.0,
+    "date": "2026-09-13 06:38:40",
+    "temp_max": 46.0,
+    "power_max": 313.5,
+    "clock_avg": 2413.5,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "llm_decode",
     "version": "1.2.2",
     "unit": "tokens/s",
