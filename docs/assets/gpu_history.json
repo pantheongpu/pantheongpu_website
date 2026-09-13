@@ -7394,6 +7394,20 @@
   {
     "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
     "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "cache_lat",
+    "version": "1.2.2",
+    "unit": "dependent-loads/s",
+    "score": 5232830000.0,
+    "date": "2026-09-13 05:03:03",
+    "temp_max": 49.0,
+    "power_max": 142.6,
+    "clock_avg": 2676.8,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -41295,6 +41309,20 @@
     "date": "2026-09-13 04:57:04",
     "temp_max": 37.0,
     "power_max": 161.8,
+    "clock_avg": 2602.1,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 556.85,
+    "date": "2026-09-13 05:02:37",
+    "temp_max": 37.0,
+    "power_max": 155.6,
     "clock_avg": 2602.1,
     "throttle_time": 0.0,
     "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
