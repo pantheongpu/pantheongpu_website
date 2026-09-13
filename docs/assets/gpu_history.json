@@ -71318,6 +71318,20 @@
   {
     "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
     "gpu": "NVIDIA GeForce RTX 5060",
+    "test": "cache_lat",
+    "version": "1.2.2",
+    "unit": "dependent-loads/s",
+    "score": 3863950000.0,
+    "date": "2026-09-13 07:28:00",
+    "temp_max": 60.0,
+    "power_max": 78.1,
+    "clock_avg": 2758.1,
+    "throttle_time": 0.0,
+    "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
+  },
+  {
+    "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
+    "gpu": "NVIDIA GeForce RTX 5060",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -83913,6 +83927,20 @@
     "power_max": 113.1,
     "clock_avg": 2826.4,
     "throttle_time": 0.0,
+    "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
+  },
+  {
+    "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.670784,
+    "date": "2026-09-13 07:27:01",
+    "temp_max": 55.0,
+    "power_max": 79.7,
+    "clock_avg": 2826.4,
+    "throttle_time": 1.0,
     "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
   },
   {
