@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 03:29:14",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-139-generic",
+        "version": "#139-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 03:52:05 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 12,
+        "logical_cores": 24,
+        "freq": "1308.95Mhz"
+    },
+    "ram_info": {
+        "total": "31.05GB",
+        "available": "29.10GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4080",
+            "memory_total": "16376 MB",
+            "driver_version": "595.84",
+            "power_limit": 320.0,
+            "uuid": "GPU-a15c9495-9720-8544-a576-1590537cc2a8",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6X",
+            "memory_vendor": "Micron",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-032914",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 03:34:16",
+    "test_results": [
+        {
+            "Test Name": "llm_decode",
+            "Version": "1.2.2",
+            "Description": "LLM Decode (KV-Cache Gather and Projection)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 637052000.0,
+            "Unit": "tokens/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 53.3,
+            "Max Temp (C)": 58.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 135.6,
+            "Max Power (W)": 136.8,
+            "Avg Clock(MHz)": 2758.1,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2775.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16221.8,
+            "Memory Total (MiB)": 16376.0,
+            "Energy (Wh)": 11.347,
+            "Thermal Rise (C)": 18.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 4698023.6,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 32.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/llm_decode 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260913-032914/reliability/llm_decode/gpu0/ras.json"
+        }
+    ]
+}

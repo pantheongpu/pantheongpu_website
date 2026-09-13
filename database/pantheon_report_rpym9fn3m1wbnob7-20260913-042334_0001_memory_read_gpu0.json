@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 04:23:34",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-124-generic",
+        "version": "#124-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 13:00:45 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 96,
+        "logical_cores": 192,
+        "freq": "1632.66Mhz"
+    },
+    "ram_info": {
+        "total": "440.34GB",
+        "available": "397.28GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 5090",
+            "memory_total": "32607 MB",
+            "driver_version": "580.159.04",
+            "power_limit": 520.0,
+            "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+            "serial": "0",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: RM alloc of class 0x80 failed with status 0x1b"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-042334",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 04:28:37",
+    "test_results": [
+        {
+            "Test Name": "memory_read",
+            "Version": "1.2.2",
+            "Description": "Memory Read (Standard)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 1684.53,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 51.7,
+            "Max Temp (C)": 58.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 355.8,
+            "Max Power (W)": 366.5,
+            "Avg Clock(MHz)": 2791.3,
+            "Min Clock (MHz)": 225.0,
+            "Max Clock (MHz)": 2812.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 32349.1,
+            "Memory Total (MiB)": 32607.0,
+            "Energy (Wh)": 29.825,
+            "Thermal Rise (C)": 27.0,
+            "Throttle Time (s)": 301.3,
+            "Efficiency": 4848.11,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 31.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-120/memory_read 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
+            "RAS Report": "results/20260913-042334/reliability/memory_read/gpu0/ras.json"
+        }
+    ]
+}

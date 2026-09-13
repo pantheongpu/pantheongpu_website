@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 05:35:55",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.14.0-37-generic",
+        "version": "#37-Ubuntu SMP PREEMPT_DYNAMIC Fri Nov 14 22:10:32 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "1792.04Mhz"
+    },
+    "ram_info": {
+        "total": "251.72GB",
+        "available": "201.41GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4070 Ti SUPER",
+            "memory_total": "16376 MB",
+            "driver_version": "610.57.04",
+            "power_limit": 240.0,
+            "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6X",
+            "memory_vendor": "Micron",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-053555",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 05:40:57",
+    "test_results": [
+        {
+            "Test Name": "tensor_virus",
+            "Version": "1.2.2",
+            "Description": "Tensor Virus (FP16 Matrix Power)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 21.7972,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 45.3,
+            "Max Temp (C)": 47.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 176.3,
+            "Max Power (W)": 182.1,
+            "Avg Clock(MHz)": 2602.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2610.0,
+            "Avg GPU Util (%)": 92.3,
+            "Max GPU Util (%)": 96.0,
+            "Peak Memory (MiB)": 424.4,
+            "Memory Total (MiB)": 16376.0,
+            "Energy (Wh)": 14.729,
+            "Thermal Rise (C)": 23.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 123.64,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 72.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/tensor_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260913-053555/reliability/tensor_virus/gpu0/ras.json"
+        }
+    ]
+}
