@@ -5770,6 +5770,20 @@
   {
     "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "ras_validator",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1692.4,
+    "date": "2026-09-13 06:03:32",
+    "temp_max": 54.0,
+    "power_max": 315.9,
+    "clock_avg": 2896.7,
+    "throttle_time": 0.0,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
