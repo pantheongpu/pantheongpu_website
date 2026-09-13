@@ -75756,6 +75756,20 @@
   {
     "uuid": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b",
     "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "memory_hammer",
+    "version": "1.2.2",
+    "unit": "aggressor-reads/s",
+    "score": 254205000000.0,
+    "date": "2026-09-13 06:16:39",
+    "temp_max": 68.0,
+    "power_max": 287.5,
+    "clock_avg": 2638.8,
+    "throttle_time": 0.0,
+    "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
+  },
+  {
+    "uuid": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b",
+    "gpu": "NVIDIA GeForce RTX 4090",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
