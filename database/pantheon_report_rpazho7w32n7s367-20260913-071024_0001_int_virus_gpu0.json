@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 07:10:24",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-85-generic",
+        "version": "#85-Ubuntu SMP PREEMPT_DYNAMIC Thu Sep 18 15:26:59 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "freq": "2860.39Mhz"
+    },
+    "ram_info": {
+        "total": "62.71GB",
+        "available": "58.76GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 4070 Ti",
+            "memory_total": "12282 MB",
+            "driver_version": "580.95.05",
+            "power_limit": 285.0,
+            "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
+            "serial": "[N/A]",
+            "memory_type": "GDDR6X",
+            "memory_vendor": "Micron",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-071024",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 07:15:26",
+    "test_results": [
+        {
+            "Test Name": "int_virus",
+            "Version": "1.2.2",
+            "Description": "Integer Virus (INT32/Logic Pipeline)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 20.3171,
+            "Unit": "TOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 80.2,
+            "Max Temp (C)": 83.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 282.5,
+            "Max Power (W)": 285.1,
+            "Avg Clock(MHz)": 2709.5,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 2775.0,
+            "Avg GPU Util (%)": 93.3,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 634.8,
+            "Memory Total (MiB)": 12282.0,
+            "Energy (Wh)": 23.603,
+            "Thermal Rise (C)": 38.0,
+            "Throttle Time (s)": 301.3,
+            "Efficiency": 0.07,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 100.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-89/int_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260913-071024/reliability/int_virus/gpu0/ras.json"
+        }
+    ]
+}
