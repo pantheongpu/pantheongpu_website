@@ -7632,6 +7632,20 @@
   {
     "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
     "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "test": "march_test",
+    "version": "1.2.2",
+    "unit": "march-ops/s",
+    "score": 13044500000.0,
+    "date": "2026-09-13 06:03:59",
+    "temp_max": 51.0,
+    "power_max": 151.2,
+    "clock_avg": 2676.8,
+    "throttle_time": 0.0,
+    "card": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c"
+  },
+  {
+    "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
