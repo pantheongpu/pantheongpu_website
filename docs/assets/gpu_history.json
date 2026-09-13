@@ -12460,6 +12460,20 @@
     "card": "GPU-23373075-4d82-6ed2-1410-bf2821205879"
   },
   {
+    "uuid": "GPU-24a9ac39-2e0b-2cdf-f8c0-a97ae0cc5164",
+    "gpu": "NVIDIA GeForce RTX 5080",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-13 02:23:52",
+    "temp_max": 39.0,
+    "power_max": 34.1,
+    "clock_avg": 320.6,
+    "throttle_time": 0.0,
+    "card": "GPU-24a9ac39-2e0b-2cdf-f8c0-a97ae0cc5164"
+  },
+  {
     "uuid": "GPU-2959ab2e-dd26-3ef8-1318-a8f59ae8d235",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "cache_lat",
@@ -58434,6 +58448,34 @@
     "clock_avg": 2392.7,
     "throttle_time": 0.0,
     "card": "GPU-a0e1b690-fa53-7bcc-ea3d-ad7143294e77"
+  },
+  {
+    "uuid": "GPU-a15c9495-9720-8544-a576-1590537cc2a8",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-13 02:17:09",
+    "temp_max": 47.0,
+    "power_max": 44.5,
+    "clock_avg": 342.8,
+    "throttle_time": 0.0,
+    "card": "GPU-a15c9495-9720-8544-a576-1590537cc2a8"
+  },
+  {
+    "uuid": "GPU-a15c9495-9720-8544-a576-1590537cc2a8",
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 672.42,
+    "date": "2026-09-13 02:22:42",
+    "temp_max": 64.0,
+    "power_max": 196.8,
+    "clock_avg": 2743.4,
+    "throttle_time": 0.0,
+    "card": "GPU-a15c9495-9720-8544-a576-1590537cc2a8"
   },
   {
     "uuid": "GPU-a4247a4c-a87b-06cf-e87a-64a31b566b93",
