@@ -1,0 +1,66 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-13 03:05:39",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-136-generic",
+        "version": "#136~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul  3 16:29:11 UTC ",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 128,
+        "freq": "1756.27Mhz"
+    },
+    "ram_info": {
+        "total": "188.53GB",
+        "available": "178.90GB"
+    },
+    "gpu_static_info": [],
+    "toolkit_version": "12.8",
+    "run_id": "20260913-030539",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-13 03:05:42",
+    "test_results": [
+        {
+            "Test Name": "ras_validator",
+            "Version": "1.2.2",
+            "Description": "RAS Validator (ECC Scrub Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.0,
+            "Unit": "ERR",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": "N/A",
+            "Max Temp (C)": "N/A",
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": "N/A",
+            "Max Power (W)": "N/A",
+            "Avg Clock(MHz)": "N/A",
+            "Min Clock (MHz)": "N/A",
+            "Max Clock (MHz)": "N/A",
+            "Avg GPU Util (%)": "N/A",
+            "Max GPU Util (%)": "N/A",
+            "Peak Memory (MiB)": "N/A",
+            "Memory Total (MiB)": "N/A",
+            "Energy (Wh)": 0,
+            "Thermal Rise (C)": 0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0,
+            "PCIe Gen": "N/A",
+            "PCIe Width": "N/A",
+            "Limit Reason": "N/A",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Status": "FAIL",
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-86/ras_validator 0 300 99 --verify",
+            "RAS Status": "UNAVAILABLE",
+            "RAS Error Delta": "RAS/AER telemetry is not exposed by this system",
+            "RAS Report": "results/20260913-030539/reliability/ras_validator/gpu0/ras.json"
+        }
+    ]
+}
