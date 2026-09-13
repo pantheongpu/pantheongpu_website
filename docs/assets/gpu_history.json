@@ -41778,6 +41778,20 @@
   {
     "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
     "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+    "test": "march_test",
+    "version": "1.2.2",
+    "unit": "march-ops/s",
+    "score": 12567400000.0,
+    "date": "2026-09-13 06:20:17",
+    "temp_max": 35.0,
+    "power_max": 115.9,
+    "clock_avg": 2602.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225"
+  },
+  {
+    "uuid": "GPU-7f4aaf29-5a5c-eeef-73e1-19c786131225",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -75862,6 +75876,20 @@
     "temp_max": 54.0,
     "power_max": 212.9,
     "clock_avg": 2650.7,
+    "throttle_time": 0.0,
+    "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
+  },
+  {
+    "uuid": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "ras_validator",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 981.262,
+    "date": "2026-09-13 06:22:12",
+    "temp_max": 55.0,
+    "power_max": 226.0,
+    "clock_avg": 2647.2,
     "throttle_time": 0.0,
     "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
   },
