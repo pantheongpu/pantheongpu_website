@@ -44,6 +44,7 @@ def test_values_are_thinned_evenly_but_keep_the_extremes():
     assert entry["cards"] == 200
     assert len(entry["values"]) == gb.MAX_VALUES
     assert entry["values"][0] == 1000 and entry["values"][-1] == 1199
+    assert gb.MAX_VALUES == 32
     assert entry["values"] == sorted(entry["values"])
 
 
@@ -69,3 +70,14 @@ def test_mixed_units_for_one_workload_take_the_majority_unit():
     history = [run("A", unit="GB/s"), run("B", unit="GB/s"), run("C", unit="MB/s", score=1.0)]
     entry = gb.build_baselines(history)["models"]["NVIDIA H100 PCIe"]["tests"]["memory_read"]
     assert entry["unit"] == "GB/s" and entry["cards"] == 3
+
+
+def test_values_carry_four_significant_figures_and_the_file_is_compact(tmp_path):
+    history = [run("A", score=3045.4567), run("B", test="llm_decode", unit="tokens/s", score=3776380123.0)]
+    data = gb.write_baselines(history, tmp_path / "b.json")
+    tests = data["models"]["NVIDIA H100 PCIe"]["tests"]
+    assert tests["memory_read"]["values"] == [3045.0]
+    assert tests["llm_decode"]["values"] == [3776000000.0]
+    text = (tmp_path / "b.json").read_text()
+    assert "\n" not in text.strip() and ": " not in text      # one line, no padding
+

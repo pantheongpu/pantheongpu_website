@@ -36,7 +36,10 @@ SCHEMA = 1
 MIN_VERSION = (1, 1, 0)
 MIN_DURATION_S = 60
 MIN_CARDS = 1          # the consumer decides how many make a distribution
-MAX_VALUES = 64        # per (model, workload); thinned evenly beyond this
+MAX_VALUES = 32        # per (model, workload); thinned evenly beyond this.
+                       # 32 points resolve a percentile to about 3%, finer than
+                       # the 15% the verdict acts on, and bound the file at
+                       # roughly a quarter megabyte before compression.
 EXCLUDED_UNITS = {"ERR", "Watts", "", None}
 
 
@@ -112,7 +115,9 @@ def build_baselines(history: list[dict]) -> dict:
         entry["tests"][test] = {
             "unit": unit,
             "cards": len(medians),
-            "values": [round(v, 4) for v in thin(medians)],
+            # Four significant figures: a bandwidth to the tenth of a GB/s,
+            # a token rate to four digits. The verdict compares at 15%.
+            "values": [float(f"{v:.4g}") for v in thin(medians)],
         }
     for model, entry in models.items():
         entry["cards"] = len(model_cards[model])
@@ -131,7 +136,9 @@ def write_baselines(history: list[dict], path: Path = OUTPUT_FILE) -> dict:
     data = build_baselines(history)
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    # Compact on purpose: this file ships inside every package. Sorted keys
+    # keep it byte-stable for the drift check.
+    path.write_text(json.dumps(data, separators=(",", ":"), sort_keys=True) + "\n", encoding="utf-8")
     return data
 
 
