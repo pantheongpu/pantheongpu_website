@@ -83664,6 +83664,20 @@
     "card": "GPU-efdcfbf5-267f-bcf6-b7a1-97ab8b55301c"
   },
   {
+    "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-13 06:37:05",
+    "temp_max": 46.0,
+    "power_max": 28.9,
+    "clock_avg": 354.4,
+    "throttle_time": 274.3,
+    "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
+  },
+  {
     "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "allocation_fragmentation",
