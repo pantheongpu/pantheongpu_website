@@ -21,7 +21,7 @@ RUN apt-get update \
         python3 python3-pip make g++ \
     && rm -rf /var/lib/apt/lists/*
 
-ARG PANTHEON_WHEEL=pantheon_gpu-1.2.0-py3-none-any.whl
+ARG PANTHEON_WHEEL=pantheon_gpu-1.2.2-py3-none-any.whl
 COPY ${PANTHEON_WHEEL} /tmp/${PANTHEON_WHEEL}
 
 # Ubuntu 24.04's python is externally managed (PEP 668); the image exists to

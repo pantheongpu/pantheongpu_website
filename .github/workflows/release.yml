@@ -332,6 +332,9 @@ jobs:
             --output docs/release.md \
             --repo "$GITHUB_REPOSITORY"
           rm -f current-release.json all-releases.json
+          # The hero line, the install examples and the packaging defaults all
+          # quote a version; nothing else rewrites them, so do it here.
+          python3 website_utils/sync_version_strings.py --version "$VERSION"
 
       - name: Stage the PyPI artifacts
         if: ${{ !inputs.dry_run && inputs.publish_pypi }}
@@ -393,7 +396,7 @@ jobs:
             Opened automatically; merges once the required checks pass.
           # The workspace also holds the Pantheon checkout, the build venvs and
           # dist/, so staging everything would commit the whole release build.
-          paths: docs/release.md docs/apt
+          paths: docs/release.md docs/apt docs/index.md docs/getting-started.md packaging/rpm/pantheon-gpu.spec packaging/docker/Dockerfile.cuda packaging/docker/Dockerfile.rocm
 
       - name: Deploy the updated release page
         if: >-

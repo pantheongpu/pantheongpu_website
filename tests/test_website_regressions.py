@@ -7,6 +7,8 @@ from website_utils.generate_web_data import main as generate_web_data
 
 
 ROOT = Path(__file__).resolve().parents[1]
+import sys  # noqa: E402
+sys.path.insert(0, str(ROOT / "website_utils"))
 
 
 def read(path):
@@ -362,7 +364,10 @@ def test_getting_started_uses_valid_install_commands():
     assert "sudo apt-get install -y hipcc" in getting_started
     # The documented download must name a version that actually has a wheel
     # attached, or the install page hands the reader a 404.
-    assert "VERSION=1.2.0" in getting_started
+    # The example pins whatever the release page calls Latest; a literal here
+    # is how the page sat at 1.2.0 for two releases.
+    import sync_version_strings as svs
+    assert f"VERSION={svs.latest_release_version(ROOT)}" in getting_started
     assert 'wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
     assert 'pipx install "./pantheon_gpu-${VERSION}-py3-none-any.whl"' in getting_started
     # The container and COPR channels are documented against the names they
@@ -2012,3 +2017,21 @@ def test_memory_names_are_not_labelled_as_sizes():
 
     assert 'key === "memory_peak" || key === "memory_total"' in tables_js
     assert 'key.includes("memory")' not in tables_js
+
+
+def test_every_version_literal_matches_the_latest_release():
+    """The homepage said "v1.2.0 now on PyPI, apt, COPR and Docker" two
+    releases after 1.2.0, while every channel served 1.2.2. The release page
+    is generated, so it is the reference; everything that quotes a version
+    must agree with it, and the release workflow rewrites them together."""
+    import sync_version_strings as svs
+
+    latest = svs.latest_release_version(ROOT)
+    assert svs.drift(latest, ROOT) == {}
+    workflow = read(".github/workflows/release.yml")
+    assert 'sync_version_strings.py --version "$VERSION"' in workflow
+    for path in ("docs/index.md", "docs/getting-started.md",
+                 "packaging/rpm/pantheon-gpu.spec", "packaging/docker/Dockerfile.cuda",
+                 "packaging/docker/Dockerfile.rocm"):
+        assert path in workflow, f"{path} is rewritten but not staged for the release-page PR"
+
