@@ -20890,6 +20890,20 @@
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1446.93,
+    "date": "2026-09-13 01:33:27",
+    "temp_max": 58.0,
+    "power_max": 353.3,
+    "clock_avg": 2414.6,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "mma_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -64038,6 +64052,20 @@
   {
     "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
     "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "galpat",
+    "version": "1.2.2",
+    "unit": "gallop-reads/s",
+    "score": 11982100000.0,
+    "date": "2026-09-13 01:46:15",
+    "temp_max": 52.0,
+    "power_max": 87.0,
+    "clock_avg": 2906.6,
+    "throttle_time": 0.0,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
     "test": "int_virus",
     "version": "1.2.2",
     "unit": "TOPS",
@@ -64089,6 +64117,20 @@
     "power_max": 142.3,
     "clock_avg": 2906.7,
     "throttle_time": 0.0,
+    "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
+  },
+  {
+    "uuid": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "test": "memory_hammer",
+    "version": "1.2.2",
+    "unit": "aggressor-reads/s",
+    "score": 184734000000.0,
+    "date": "2026-09-13 01:51:47",
+    "temp_max": 59.0,
+    "power_max": 201.2,
+    "clock_avg": 2893.3,
+    "throttle_time": 1.0,
     "card": "GPU-bc7fdf9e-3ae1-a344-116f-412403818ac2"
   },
   {
@@ -70668,6 +70710,20 @@
     "temp_max": 52.0,
     "power_max": 383.6,
     "clock_avg": 2413.8,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1446.59,
+    "date": "2026-09-13 01:33:15",
+    "temp_max": 53.0,
+    "power_max": 358.6,
+    "clock_avg": 2414.3,
     "throttle_time": 0.0,
     "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
   },
