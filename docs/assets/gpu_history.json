@@ -5656,6 +5656,20 @@
     "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
   },
   {
+    "uuid": "GPU-0a7986d0-596c-928a-2f38-c960765176db",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 75.1093,
+    "date": "2026-09-13 05:02:29",
+    "temp_max": 77.0,
+    "power_max": 526.5,
+    "clock_avg": 2804.7,
+    "throttle_time": 300.3,
+    "card": "GPU-0a7986d0-596c-928a-2f38-c960765176db"
+  },
+  {
     "uuid": "GPU-0ad178ad-620b-dc97-f7be-d0b8c5436215",
     "gpu": "NVIDIA A10",
     "test": "cache_lat",
