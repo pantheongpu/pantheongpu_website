@@ -71470,6 +71470,20 @@
     "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
   },
   {
+    "uuid": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed",
+    "gpu": "NVIDIA GeForce RTX 5060",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 11.0916,
+    "date": "2026-09-13 07:44:38",
+    "temp_max": 68.0,
+    "power_max": 95.8,
+    "clock_avg": 2736.5,
+    "throttle_time": 0.0,
+    "card": "GPU-cb33d4db-793d-df03-b816-2d507e6183ed"
+  },
+  {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "allocation_fragmentation",
