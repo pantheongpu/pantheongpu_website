@@ -22010,6 +22010,20 @@
   {
     "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 3811710000.0,
+    "date": "2026-09-13 07:43:18",
+    "temp_max": 53.0,
+    "power_max": 301.9,
+    "clock_avg": 2412.9,
+    "throttle_time": 0.0,
+    "card": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004"
+  },
+  {
+    "uuid": "GPU-4eb72f42-4620-35b3-abb9-daa9ff7b7004",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "ras_validator",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -84303,6 +84317,20 @@
     "date": "2026-09-13 07:15:56",
     "temp_max": 60.0,
     "power_max": 99.0,
+    "clock_avg": 2826.3,
+    "throttle_time": 1.0,
+    "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
+  },
+  {
+    "uuid": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 986761000.0,
+    "date": "2026-09-13 08:00:18",
+    "temp_max": 59.0,
+    "power_max": 126.4,
     "clock_avg": 2826.3,
     "throttle_time": 1.0,
     "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
