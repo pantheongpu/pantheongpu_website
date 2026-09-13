@@ -69,8 +69,8 @@ to run it.
     `/root/.cache` as well to keep the compiled cache across containers.
     Reports land in the directory mounted at `/reports`.
 
-    Tags: `latest`, a version (`1.2.0`), or a version pinned to its toolchain
-    (`1.2.0-cuda12.8`).
+    Tags: `latest`, a version (`1.2.2`), or a version pinned to its toolchain
+    (`1.2.2-cuda12.8`).
 
     On AMD hardware use the ROCm variant, which carries the ROCm 6.4
     toolchain instead and needs the device nodes rather than `--gpus`:
@@ -152,7 +152,7 @@ to run it.
 === "Install the package"
 
     ```bash
-    VERSION=1.2.0
+    VERSION=1.2.2
     BASE="https://github.com/pantheongpu/pantheongpu_website/releases/download/v${VERSION}"
     wget "${BASE}/pantheon_gpu-${VERSION}-py3-none-any.whl"
     wget "${BASE}/SHA256SUMS" && sha256sum --ignore-missing -c SHA256SUMS
