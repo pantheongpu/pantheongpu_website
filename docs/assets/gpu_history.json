@@ -71178,6 +71178,20 @@
   {
     "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 633542.0,
+    "date": "2026-09-13 04:42:13",
+    "temp_max": 46.0,
+    "power_max": 257.9,
+    "clock_avg": 2411.0,
+    "throttle_time": 0.0,
+    "card": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a"
+  },
+  {
+    "uuid": "GPU-d321ef7c-bf34-c820-5a9a-3299574cec6a",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "baseline_metrics",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -74952,6 +74966,20 @@
     "temp_max": 62.0,
     "power_max": 270.7,
     "clock_avg": 2650.1,
+    "throttle_time": 0.0,
+    "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
+  },
+  {
+    "uuid": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 981.539,
+    "date": "2026-09-13 04:53:13",
+    "temp_max": 62.0,
+    "power_max": 270.9,
+    "clock_avg": 2647.0,
     "throttle_time": 0.0,
     "card": "GPU-d8ece4e7-6942-8ae9-0212-eef97368cc8b"
   },
