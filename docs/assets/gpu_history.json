@@ -86956,6 +86956,20 @@
   {
     "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
     "gpu": "NVIDIA GeForce RTX 3090",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 892.416,
+    "date": "2026-09-14 18:12:01",
+    "temp_max": 69.0,
+    "power_max": 330.9,
+    "clock_avg": 1747.4,
+    "throttle_time": 301.4,
+    "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
+  },
+  {
+    "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
+    "gpu": "NVIDIA GeForce RTX 3090",
     "test": "memory_write",
     "version": "1.2.2",
     "unit": "GB/s",
