@@ -87124,6 +87124,20 @@
   {
     "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
     "gpu": "NVIDIA GeForce RTX 3090",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.622164,
+    "date": "2026-09-14 18:45:27",
+    "temp_max": 61.0,
+    "power_max": 198.0,
+    "clock_avg": 1915.1,
+    "throttle_time": 1.0,
+    "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
+  },
+  {
+    "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
+    "gpu": "NVIDIA GeForce RTX 3090",
     "test": "int_virus",
     "version": "1.2.2",
     "unit": "TOPS",
