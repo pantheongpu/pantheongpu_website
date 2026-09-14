@@ -33768,6 +33768,20 @@
     "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
   },
   {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 245.788,
+    "date": "2026-09-14 18:33:55",
+    "temp_max": 52.0,
+    "power_max": 213.9,
+    "clock_avg": 1890.0,
+    "throttle_time": 299.4,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
     "uuid": "GPU-641ba32dcd70",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "atomic_virus",
