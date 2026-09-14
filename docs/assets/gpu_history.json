@@ -48442,6 +48442,20 @@
   {
     "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
     "gpu": "NVIDIA GeForce RTX 5080",
+    "test": "llm_decode",
+    "version": "1.2.2",
+    "unit": "tokens/s",
+    "score": 1111950000.0,
+    "date": "2026-09-14 22:59:33",
+    "temp_max": 59.0,
+    "power_max": 161.6,
+    "clock_avg": 2871.1,
+    "throttle_time": 0.0,
+    "card": "GPU-869a1314-aebc-b858-da83-369d88aa0b97"
+  },
+  {
+    "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+    "gpu": "NVIDIA GeForce RTX 5080",
     "test": "llm_prefill",
     "version": "1.2.2",
     "unit": "prompt-tokens/s",
