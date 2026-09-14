@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-14 21:12:35",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-138-generic",
+        "version": "#138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC ",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 128,
+        "freq": "3216.61Mhz"
+    },
+    "ram_info": {
+        "total": "251.42GB",
+        "available": "217.08GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 5080",
+            "memory_total": "16303 MB",
+            "driver_version": "580.173.02",
+            "power_limit": 250.0,
+            "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+            "serial": "0",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260914-211235",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-14 21:17:36",
+    "test_results": [
+        {
+            "Test Name": "quantized_gemm",
+            "Version": "1.2.2",
+            "Description": "Quantized GEMM (Synthetic Projection Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 2214910000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 54.9,
+            "Max Temp (C)": 57.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 168.3,
+            "Max Power (W)": 172.0,
+            "Avg Clock(MHz)": 2871.8,
+            "Min Clock (MHz)": 270.0,
+            "Max Clock (MHz)": 2895.0,
+            "Avg GPU Util (%)": 98.9,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16150.4,
+            "Memory Total (MiB)": 16303.0,
+            "Energy (Wh)": 14.061,
+            "Thermal Rise (C)": 13.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 13160487.23,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 30.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-120/quantized_gemm 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260914-211235/reliability/quantized_gemm/gpu0/ras.json"
+        }
+    ]
+}

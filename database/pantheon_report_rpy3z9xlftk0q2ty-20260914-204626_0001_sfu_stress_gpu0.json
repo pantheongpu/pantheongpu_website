@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-14 20:46:26",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.14.0-24-generic",
+        "version": "#24~24.04.3-Ubuntu SMP PREEMPT_DYNAMIC Mon Jul  7 16:39:17 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 96,
+        "logical_cores": 192,
+        "freq": "1623.82Mhz"
+    },
+    "ram_info": {
+        "total": "377.34GB",
+        "available": "229.06GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 5090",
+            "memory_total": "32607 MB",
+            "driver_version": "575.57.08",
+            "power_limit": 520.0,
+            "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
+            "serial": "0",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260914-204626",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-14 20:51:28",
+    "test_results": [
+        {
+            "Test Name": "sfu_stress",
+            "Version": "1.2.2",
+            "Description": "SFU Virus (Transcendental Math)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 5.60623,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 73.7,
+            "Max Temp (C)": 79.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 517.1,
+            "Max Power (W)": 526.0,
+            "Avg Clock(MHz)": 2744.7,
+            "Min Clock (MHz)": 28.0,
+            "Max Clock (MHz)": 2812.0,
+            "Avg GPU Util (%)": 94.9,
+            "Max GPU Util (%)": 98.0,
+            "Peak Memory (MiB)": 1058.7,
+            "Memory Total (MiB)": 32607.0,
+            "Energy (Wh)": 43.204,
+            "Thermal Rise (C)": 37.0,
+            "Throttle Time (s)": 300.3,
+            "Efficiency": 10.84,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 39.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-120/sfu_stress 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260914-204626/reliability/sfu_stress/gpu0/ras.json"
+        }
+    ]
+}
