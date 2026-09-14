@@ -86268,6 +86268,20 @@
     "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
   },
   {
+    "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 956.879,
+    "date": "2026-09-14 18:05:22",
+    "temp_max": 66.0,
+    "power_max": 348.3,
+    "clock_avg": 2753.1,
+    "throttle_time": 0.0,
+    "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
+  },
+  {
     "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "allocation_fragmentation",
