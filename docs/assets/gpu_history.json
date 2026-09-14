@@ -33770,6 +33770,20 @@
   {
     "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
     "gpu": "NVIDIA RTX A5000",
+    "test": "march_test",
+    "version": "1.2.2",
+    "unit": "march-ops/s",
+    "score": 5919470000.0,
+    "date": "2026-09-14 19:24:00",
+    "temp_max": 53.0,
+    "power_max": 229.3,
+    "clock_avg": 1902.3,
+    "throttle_time": 297.7,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -87371,6 +87385,20 @@
     "power_max": 308.0,
     "clock_avg": 1901.4,
     "throttle_time": 0.0,
+    "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
+  },
+  {
+    "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "test": "march_test",
+    "version": "1.2.2",
+    "unit": "march-ops/s",
+    "score": 6139660000.0,
+    "date": "2026-09-14 19:24:24",
+    "temp_max": 65.0,
+    "power_max": 262.2,
+    "clock_avg": 1914.7,
+    "throttle_time": 1.0,
     "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
   },
   {
