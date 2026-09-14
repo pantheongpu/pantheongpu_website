@@ -87432,6 +87432,20 @@
   {
     "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
     "gpu": "NVIDIA GeForce RTX 3090",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1908730000.0,
+    "date": "2026-09-14 19:18:50",
+    "temp_max": 70.0,
+    "power_max": 334.8,
+    "clock_avg": 1900.0,
+    "throttle_time": 2.0,
+    "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
+  },
+  {
+    "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
+    "gpu": "NVIDIA GeForce RTX 3090",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
