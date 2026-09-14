@@ -33798,6 +33798,20 @@
   {
     "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
     "gpu": "NVIDIA RTX A5000",
+    "test": "memory_hammer",
+    "version": "1.2.2",
+    "unit": "aggressor-reads/s",
+    "score": 55487600000.0,
+    "date": "2026-09-14 19:35:08",
+    "temp_max": 53.0,
+    "power_max": 229.6,
+    "clock_avg": 1675.2,
+    "throttle_time": 300.6,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -86530,6 +86544,20 @@
     "temp_max": 51.0,
     "power_max": 190.5,
     "clock_avg": 2766.6,
+    "throttle_time": 0.0,
+    "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
+  },
+  {
+    "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "galpat",
+    "version": "1.2.2",
+    "unit": "gallop-reads/s",
+    "score": 12849300000.0,
+    "date": "2026-09-14 19:34:39",
+    "temp_max": 44.0,
+    "power_max": 159.7,
+    "clock_avg": 2766.3,
     "throttle_time": 0.0,
     "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
   },
