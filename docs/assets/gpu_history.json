@@ -44298,6 +44298,20 @@
   {
     "uuid": "GPU-82081293-1e13-3547-c945-6954905ebc67",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 4360110000.0,
+    "date": "2026-09-14 23:23:53",
+    "temp_max": 62.0,
+    "power_max": 373.3,
+    "clock_avg": 2866.1,
+    "throttle_time": 0.0,
+    "card": "GPU-82081293-1e13-3547-c945-6954905ebc67"
+  },
+  {
+    "uuid": "GPU-82081293-1e13-3547-c945-6954905ebc67",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
