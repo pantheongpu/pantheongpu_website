@@ -86620,6 +86620,20 @@
   {
     "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
     "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1945410000.0,
+    "date": "2026-09-14 19:23:30",
+    "temp_max": 59.0,
+    "power_max": 281.8,
+    "clock_avg": 2754.4,
+    "throttle_time": 0.0,
+    "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
+  },
+  {
+    "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
+    "gpu": "NVIDIA GeForce RTX 4090",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
