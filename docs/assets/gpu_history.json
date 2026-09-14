@@ -33840,6 +33840,20 @@
   {
     "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
     "gpu": "NVIDIA RTX A5000",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1655360000.0,
+    "date": "2026-09-14 19:18:26",
+    "temp_max": 53.0,
+    "power_max": 229.9,
+    "clock_avg": 1750.9,
+    "throttle_time": 301.0,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
@@ -86516,6 +86530,20 @@
     "temp_max": 57.0,
     "power_max": 264.3,
     "clock_avg": 2765.8,
+    "throttle_time": 0.0,
+    "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
+  },
+  {
+    "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 244006000.0,
+    "date": "2026-09-14 19:17:55",
+    "temp_max": 57.0,
+    "power_max": 266.1,
+    "clock_avg": 2760.1,
     "throttle_time": 0.0,
     "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
   },
