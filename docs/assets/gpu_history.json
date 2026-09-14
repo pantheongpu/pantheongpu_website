@@ -33782,6 +33782,20 @@
     "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
   },
   {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 13.7702,
+    "date": "2026-09-14 18:39:29",
+    "temp_max": 51.0,
+    "power_max": 210.6,
+    "clock_avg": 1734.2,
+    "throttle_time": 300.5,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
     "uuid": "GPU-641ba32dcd70",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "atomic_virus",
@@ -86432,6 +86446,20 @@
     "temp_max": 66.0,
     "power_max": 342.1,
     "clock_avg": 2751.2,
+    "throttle_time": 0.0,
+    "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
+  },
+  {
+    "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "mma_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 358.68,
+    "date": "2026-09-14 18:38:53",
+    "temp_max": 58.0,
+    "power_max": 227.7,
+    "clock_avg": 2753.6,
     "throttle_time": 0.0,
     "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
   },
