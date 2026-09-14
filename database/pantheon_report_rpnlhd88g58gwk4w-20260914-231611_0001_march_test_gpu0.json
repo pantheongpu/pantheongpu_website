@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-14 23:16:11",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-138-generic",
+        "version": "#138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC ",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 128,
+        "freq": "3266.61Mhz"
+    },
+    "ram_info": {
+        "total": "251.42GB",
+        "available": "222.80GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 5080",
+            "memory_total": "16303 MB",
+            "driver_version": "580.173.02",
+            "power_limit": 307.0,
+            "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+            "serial": "0",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260914-231611",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-14 23:21:13",
+    "test_results": [
+        {
+            "Test Name": "march_test",
+            "Version": "1.2.2",
+            "Description": "March C- (Linear Memory Test)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 16651100000.0,
+            "Unit": "march-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 51.8,
+            "Max Temp (C)": 53.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 147.7,
+            "Max Power (W)": 159.5,
+            "Avg Clock(MHz)": 2874.8,
+            "Min Clock (MHz)": 270.0,
+            "Max Clock (MHz)": 2895.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16150.4,
+            "Memory Total (MiB)": 16303.0,
+            "Energy (Wh)": 12.364,
+            "Thermal Rise (C)": 11.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 112735951.25,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 30.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-120/march_test 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260914-231611/reliability/march_test/gpu0/ras.json"
+        }
+    ]
+}
