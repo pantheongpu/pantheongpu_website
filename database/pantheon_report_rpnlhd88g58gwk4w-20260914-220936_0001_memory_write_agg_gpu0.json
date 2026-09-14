@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-14 22:09:36",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-138-generic",
+        "version": "#138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC ",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 64,
+        "logical_cores": 128,
+        "freq": "3302.88Mhz"
+    },
+    "ram_info": {
+        "total": "251.42GB",
+        "available": "219.86GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA GeForce RTX 5080",
+            "memory_total": "16303 MB",
+            "driver_version": "580.173.02",
+            "power_limit": 267.0,
+            "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+            "serial": "0",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20260914-220936",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-14 22:14:39",
+    "test_results": [
+        {
+            "Test Name": "memory_write_agg",
+            "Version": "1.2.2",
+            "Description": "Memory Write (Crosstalk Background)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 879.897,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 60.7,
+            "Max Temp (C)": 62.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 212.5,
+            "Max Power (W)": 216.5,
+            "Avg Clock(MHz)": 2760.6,
+            "Min Clock (MHz)": 270.0,
+            "Max Clock (MHz)": 2790.0,
+            "Avg GPU Util (%)": 99.4,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 16176.4,
+            "Memory Total (MiB)": 16303.0,
+            "Energy (Wh)": 17.838,
+            "Thermal Rise (C)": 16.0,
+            "Throttle Time (s)": 300.7,
+            "Efficiency": 4240.07,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 32.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/root/.cache/pantheongpu/builds/1.2.2/cuda-120/memory_write 0 300 99 --init_pattern crosstalk --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260914-220936/reliability/memory_write_agg/gpu0/ras.json"
+        }
+    ]
+}
