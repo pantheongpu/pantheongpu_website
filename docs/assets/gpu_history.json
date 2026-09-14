@@ -33670,6 +33670,34 @@
     "card": "GPU-601128bb-04f6-8be0-6b42-33a101b6b14e"
   },
   {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-14 17:54:52",
+    "temp_max": 28.0,
+    "power_max": 80.9,
+    "clock_avg": 294.1,
+    "throttle_time": 0.0,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
+    "uuid": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da",
+    "gpu": "NVIDIA RTX A5000",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 710.986,
+    "date": "2026-09-14 18:00:26",
+    "temp_max": 52.0,
+    "power_max": 229.9,
+    "clock_avg": 1678.9,
+    "throttle_time": 302.7,
+    "card": "GPU-60cbb0b8-837c-2d68-f054-f13863d532da"
+  },
+  {
     "uuid": "GPU-641ba32dcd70",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "atomic_virus",
@@ -86226,6 +86254,20 @@
     "card": "GPU-f1a0559a-784a-2eb5-6a25-551bee9875df"
   },
   {
+    "uuid": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-14 17:59:48",
+    "temp_max": 30.0,
+    "power_max": 98.9,
+    "clock_avg": 341.4,
+    "throttle_time": 0.0,
+    "card": "GPU-f7d26c5d-0b94-89a5-0c4e-512ee6d294b0"
+  },
+  {
     "uuid": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "allocation_fragmentation",
@@ -86826,6 +86868,20 @@
     "clock_avg": 2324.9,
     "throttle_time": 0.0,
     "card": "GPU-f9750ac5-b687-ee55-c53d-95b64c8ce377"
+  },
+  {
+    "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-14 17:55:16",
+    "temp_max": 43.0,
+    "power_max": 110.4,
+    "clock_avg": 314.7,
+    "throttle_time": 140.3,
+    "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
   },
   {
     "uuid": "Unknown",
