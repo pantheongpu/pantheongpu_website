@@ -86884,6 +86884,20 @@
     "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
   },
   {
+    "uuid": "GPU-ff35f785-e61e-386f-318c-17b939ef3874",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "test": "memory_read",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 892.499,
+    "date": "2026-09-14 18:00:50",
+    "temp_max": 69.0,
+    "power_max": 330.2,
+    "clock_avg": 1741.9,
+    "throttle_time": 301.3,
+    "card": "GPU-ff35f785-e61e-386f-318c-17b939ef3874"
+  },
+  {
     "uuid": "Unknown",
     "gpu": "NVIDIA A100-SXM4-80GB",
     "test": "atomic_virus",
