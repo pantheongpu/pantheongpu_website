@@ -48204,6 +48204,20 @@
   {
     "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
     "gpu": "NVIDIA GeForce RTX 5080",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 278477000.0,
+    "date": "2026-09-14 21:07:02",
+    "temp_max": 55.0,
+    "power_max": 158.9,
+    "clock_avg": 2872.9,
+    "throttle_time": 0.0,
+    "card": "GPU-869a1314-aebc-b858-da83-369d88aa0b97"
+  },
+  {
+    "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+    "gpu": "NVIDIA GeForce RTX 5080",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -62576,6 +62590,20 @@
     "temp_max": 57.0,
     "power_max": 320.6,
     "clock_avg": 2946.8,
+    "throttle_time": 0.0,
+    "card": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a"
+  },
+  {
+    "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "llm_prefill",
+    "version": "1.2.2",
+    "unit": "prompt-tokens/s",
+    "score": 545759000.0,
+    "date": "2026-09-14 21:08:38",
+    "temp_max": 57.0,
+    "power_max": 320.8,
+    "clock_avg": 2939.6,
     "throttle_time": 0.0,
     "card": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a"
   },
