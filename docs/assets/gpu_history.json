@@ -48174,6 +48174,20 @@
     "card": "GPU-869a1314-aebc-b858-da83-369d88aa0b97"
   },
   {
+    "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+    "gpu": "NVIDIA GeForce RTX 5080",
+    "test": "memory_write_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 879.852,
+    "date": "2026-09-14 20:11:32",
+    "temp_max": 63.0,
+    "power_max": 215.6,
+    "clock_avg": 2760.7,
+    "throttle_time": 300.7,
+    "card": "GPU-869a1314-aebc-b858-da83-369d88aa0b97"
+  },
+  {
     "uuid": "GPU-882e1d2d-127c-23aa-38ec-2c2e8e09dc3b",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "allocation_fragmentation",
