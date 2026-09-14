@@ -48148,6 +48148,20 @@
   {
     "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
     "gpu": "NVIDIA GeForce RTX 5080",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 18.7697,
+    "date": "2026-09-14 20:22:39",
+    "temp_max": 71.0,
+    "power_max": 266.6,
+    "clock_avg": 2819.9,
+    "throttle_time": 79.3,
+    "card": "GPU-869a1314-aebc-b858-da83-369d88aa0b97"
+  },
+  {
+    "uuid": "GPU-869a1314-aebc-b858-da83-369d88aa0b97",
+    "gpu": "NVIDIA GeForce RTX 5080",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
