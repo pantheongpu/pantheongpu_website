@@ -62582,6 +62582,20 @@
   {
     "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "sfu_stress",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 5.60623,
+    "date": "2026-09-14 20:46:26",
+    "temp_max": 79.0,
+    "power_max": 526.0,
+    "clock_avg": 2744.7,
+    "throttle_time": 300.3,
+    "card": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a"
+  },
+  {
+    "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "tensor_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
