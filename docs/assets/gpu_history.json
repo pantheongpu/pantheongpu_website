@@ -44128,6 +44128,20 @@
     "card": "GPU-80f15586-93db-dd5d-0420-d8773897c785"
   },
   {
+    "uuid": "GPU-82081293-1e13-3547-c945-6954905ebc67",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-14 22:00:33",
+    "temp_max": 29.0,
+    "power_max": 63.6,
+    "clock_avg": 306.6,
+    "throttle_time": 0.0,
+    "card": "GPU-82081293-1e13-3547-c945-6954905ebc67"
+  },
+  {
     "uuid": "GPU-83118f2b-acda-1b06-7897-11dfdc46945f",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "allocation_fragmentation",
