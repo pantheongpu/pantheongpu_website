@@ -62694,6 +62694,20 @@
   {
     "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
     "gpu": "NVIDIA GeForce RTX 5090",
+    "test": "memory_hammer",
+    "version": "1.2.2",
+    "unit": "aggressor-reads/s",
+    "score": 355477000000.0,
+    "date": "2026-09-14 21:30:51",
+    "temp_max": 66.0,
+    "power_max": 436.9,
+    "clock_avg": 2932.0,
+    "throttle_time": 145.2,
+    "card": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a"
+  },
+  {
+    "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
+    "gpu": "NVIDIA GeForce RTX 5090",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
