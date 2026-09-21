@@ -63464,6 +63464,20 @@
   {
     "uuid": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_pc_pingpong",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 1218.35,
+    "date": "2026-09-21 14:14:46",
+    "temp_max": 44.0,
+    "power_max": 273.6,
+    "clock_avg": 2419.0,
+    "throttle_time": 0.0,
+    "card": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08"
+  },
+  {
+    "uuid": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "memory_retention",
     "version": "1.2.2",
     "unit": "retained-MiB",
