@@ -27176,6 +27176,20 @@
   {
     "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
     "gpu": "NVIDIA L40S",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 181.125,
+    "date": "2026-09-21 11:12:32",
+    "temp_max": 55.0,
+    "power_max": 183.3,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
+  },
+  {
+    "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
+    "gpu": "NVIDIA L40S",
     "test": "memory_thermal_asym",
     "version": "1.2.2",
     "unit": "TFLOPS",
