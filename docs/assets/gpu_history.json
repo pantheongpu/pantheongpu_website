@@ -20594,6 +20594,20 @@
     "card": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35"
   },
   {
+    "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
+    "gpu": "NVIDIA A10G",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.85794,
+    "date": "2026-09-21 10:13:09",
+    "temp_max": 51.0,
+    "power_max": 169.8,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35"
+  },
+  {
     "uuid": "GPU-45cc97b0e0f4",
     "gpu": "NVIDIA L40S",
     "test": "allocation_fragmentation",
@@ -87509,6 +87523,20 @@
     "date": "2026-09-21 09:11:56",
     "temp_max": 41.0,
     "power_max": 67.8,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
+  },
+  {
+    "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
+    "gpu": "NVIDIA L40S",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.77304,
+    "date": "2026-09-21 10:13:00",
+    "temp_max": 67.0,
+    "power_max": 179.8,
     "clock_avg": 2040.0,
     "throttle_time": 0.0,
     "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
