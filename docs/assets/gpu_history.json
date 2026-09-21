@@ -80222,6 +80222,20 @@
   {
     "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
     "gpu": "NVIDIA A10G",
+    "test": "memory_cache_fracture",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 152.901,
+    "date": "2026-09-21 11:21:57",
+    "temp_max": 54.0,
+    "power_max": 190.3,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d"
+  },
+  {
+    "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
+    "gpu": "NVIDIA A10G",
     "test": "memory_thermal_asym",
     "version": "1.2.2",
     "unit": "TFLOPS",
