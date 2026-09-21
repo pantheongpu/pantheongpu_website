@@ -27204,6 +27204,20 @@
   {
     "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
     "gpu": "NVIDIA L40S",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 67.3901,
+    "date": "2026-09-21 12:13:36",
+    "temp_max": 72.0,
+    "power_max": 238.3,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
+  },
+  {
+    "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
+    "gpu": "NVIDIA L40S",
     "test": "memory_thermal_asym",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -63346,6 +63360,20 @@
     "temp_max": 45.0,
     "power_max": 286.0,
     "clock_avg": 2420.1,
+    "throttle_time": 0.0,
+    "card": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08"
+  },
+  {
+    "uuid": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "memory_retention_bake",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 101.838,
+    "date": "2026-09-21 12:12:41",
+    "temp_max": 58.0,
+    "power_max": 371.6,
+    "clock_avg": 2421.3,
     "throttle_time": 0.0,
     "card": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08"
   },
