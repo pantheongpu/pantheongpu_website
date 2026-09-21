@@ -36862,6 +36862,20 @@
     "card": "GPU-6c5c37f1-1340-7429-fc63-7f07d8f31e3a"
   },
   {
+    "uuid": "GPU-6c5c37f1-1340-7429-fc63-7f07d8f31e3a",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 39.4864,
+    "date": "2026-09-21 17:15:29",
+    "temp_max": 66.0,
+    "power_max": 133.8,
+    "clock_avg": 2394.9,
+    "throttle_time": 0.0,
+    "card": "GPU-6c5c37f1-1340-7429-fc63-7f07d8f31e3a"
+  },
+  {
     "uuid": "GPU-6c61e793-1275-3db7-a55e-b4d856b80151",
     "gpu": "NVIDIA T4G",
     "test": "memory_cache_fracture",
@@ -73887,6 +73901,20 @@
     "date": "2026-09-21 16:14:24",
     "temp_max": 78.0,
     "power_max": 161.6,
+    "clock_avg": 2406.4,
+    "throttle_time": 0.0,
+    "card": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a"
+  },
+  {
+    "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 39.4117,
+    "date": "2026-09-21 17:15:29",
+    "temp_max": 71.0,
+    "power_max": 140.6,
     "clock_avg": 2406.4,
     "throttle_time": 0.0,
     "card": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a"
