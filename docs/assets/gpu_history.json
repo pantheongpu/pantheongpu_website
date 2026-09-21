@@ -73318,6 +73318,20 @@
     "card": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a"
   },
   {
+    "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 2.99563,
+    "date": "2026-09-21 10:08:08",
+    "temp_max": 82.0,
+    "power_max": 165.6,
+    "clock_avg": 2180.3,
+    "throttle_time": 3505.9,
+    "card": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a"
+  },
+  {
     "uuid": "GPU-c95a293c-e7d0-00ea-02f2-8efdf62c2b16",
     "gpu": "NVIDIA T4G",
     "test": "allocation_fragmentation",
