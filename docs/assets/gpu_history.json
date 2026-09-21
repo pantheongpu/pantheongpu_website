@@ -27328,6 +27328,20 @@
     "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
   },
   {
+    "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
+    "gpu": "NVIDIA L40S",
+    "test": "memory_tsv_thrasher",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 432.831,
+    "date": "2026-09-21 16:17:49",
+    "temp_max": 57.0,
+    "power_max": 158.0,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
+  },
+  {
     "uuid": "GPU-5514326b-afcd-178f-4b8a-362ea8ba213e",
     "gpu": "NVIDIA GH200 480GB",
     "test": "cache_lat",
