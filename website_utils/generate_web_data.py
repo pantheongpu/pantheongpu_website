@@ -50,6 +50,14 @@ KNOWN_TEST_UNITS = {
 # do not present single-GPU-incompatible results in the public leaderboard.
 PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
 
+# A run of a few seconds measures start-up, not the card. The only ones in the
+# database are debug runs from early releases, and they never reached the
+# leaderboard while it kept one row per card, workload and release: a real run
+# on the same card always outscored them. Now that run length is part of that
+# key they would get rows of their own, so they are kept out explicitly. They
+# stay in the raw reports and in each card's history.
+MIN_LEADERBOARD_DURATION_S = 10
+
 # Ten AI workloads shared a single kernel body before v1.0.19 -- six of them
 # compiled to byte-identical SASS -- yet each published its own invented unit,
 # as though it had measured something the others had not. The numbers are real
@@ -235,9 +243,20 @@ def card_identity(row):
 
 
 def record_key(row):
+    """One leaderboard row per card, workload, release and run length.
+
+    Duration is part of the key because a longer run is a different
+    measurement, not a retry: an hour-long run heat-soaks the card and usually
+    scores below a five-minute one on the same silicon. Without it the two
+    collide and the best-score rule silently drops the long run.
+    """
     test = normalize(row.get("test"), "unknown").lower()
     version = normalize(row.get("version"), "1.0.0")
-    return f"{card_identity(row)}|{test}|{version}"
+    try:
+        duration = int(float(row.get("duration") or 0))
+    except (TypeError, ValueError):
+        duration = 0
+    return f"{card_identity(row)}|{test}|{version}|{duration}s"
 
 
 def to_float(value, default=0.0):
@@ -593,7 +612,10 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     run["_kind"] = data.get("record_kind")
                     history.append(run)
 
-                    # TRACK BY UNIQUE SILICON AND SOFTWARE VERSION
+                    if 0 < to_float(record["duration"]) < MIN_LEADERBOARD_DURATION_S:
+                        continue
+
+                    # TRACK BY UNIQUE SILICON, SOFTWARE VERSION AND RUN LENGTH
                     key = record_key(record)
 
                     if key not in best_runs:

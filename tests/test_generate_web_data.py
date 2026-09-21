@@ -12,6 +12,7 @@ from website_utils.generate_web_data import (
     main,
     normalize_gpu_name,
     record_key,
+    MIN_LEADERBOARD_DURATION_S,
     to_float,
     unsupported_workload_reason,
 )
@@ -411,9 +412,43 @@ def test_record_key_normalizes_test_name_and_version():
         "uuid": " GPU-UUID ",
         "test": " Memory_Write ",
         "version": " 1.0.7 ",
+        "duration": 300,
     }
 
-    assert record_key(row) == "GPU-UUID|memory_write|1.0.7"
+    assert record_key(row) == "GPU-UUID|memory_write|1.0.7|300s"
+
+
+def test_record_key_keeps_run_lengths_apart():
+    short = {"uuid": "GPU-UUID", "test": "memory_read", "version": "1.2.2",
+             "duration": 300}
+    long = dict(short, duration="3600")
+
+    assert record_key(short) != record_key(long)
+    assert record_key(long).endswith("|3600s")
+    assert record_key(dict(short, duration="N/A")).endswith("|0s")
+
+
+def test_long_and_short_runs_on_one_card_both_reach_the_leaderboard(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    gpu = [{"id": 0, "name": "GPU Alpha", "uuid": "GPU-UUID", "serial": "S1",
+            "memory_total": "12288 MB", "driver_version": "580.1"}]
+
+    def run(name, seconds, score):
+        write_report(db_dir, name, gpu, [{
+            "Test Name": "memory_read", "GPU ID": 0, "Score": score,
+            "Unit": "GB/s", "Duration (s)": seconds}])
+
+    run("pantheon_report_5min.json", 300, 900)
+    run("pantheon_report_1h.json", 3600, 850)      # heat-soaked, scores lower
+    run("pantheon_report_debug.json", 1, 950)      # start-up, not the card
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert sorted((row["duration"], row["score"]) for row in rows) == [
+        (300, 900), (3600, 850)]
+    assert MIN_LEADERBOARD_DURATION_S > 1
 
 
 def test_to_float_returns_default_for_bad_values():
