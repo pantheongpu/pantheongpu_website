@@ -63714,6 +63714,20 @@
     "card": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08"
   },
   {
+    "uuid": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 25.7768,
+    "date": "2026-09-21 17:17:58",
+    "temp_max": 43.0,
+    "power_max": 213.9,
+    "clock_avg": 2339.4,
+    "throttle_time": 0.0,
+    "card": "GPU-a7e096c5-b135-5535-6457-adbc1e6b7d08"
+  },
+  {
     "uuid": "GPU-aa49b317-3f78-981d-3e3e-e2f14b79fc6a",
     "gpu": "NVIDIA GeForce RTX 5090",
     "test": "atomic_virus",
