@@ -27428,6 +27428,20 @@
   {
     "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
     "gpu": "NVIDIA L40S",
+    "test": "scheduler",
+    "version": "1.2.2",
+    "unit": "KIPS",
+    "score": 453.755,
+    "date": "2026-09-21 20:22:07",
+    "temp_max": 55.0,
+    "power_max": 83.3,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
+  },
+  {
+    "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
+    "gpu": "NVIDIA L40S",
     "test": "tlb_avalanche",
     "version": "1.2.2",
     "unit": "GB/s",
