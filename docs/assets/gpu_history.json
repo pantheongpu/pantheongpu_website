@@ -20596,6 +20596,20 @@
   {
     "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
     "gpu": "NVIDIA A10G",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 17.3279,
+    "date": "2026-09-21 19:22:42",
+    "temp_max": 74.0,
+    "power_max": 301.2,
+    "clock_avg": 1637.5,
+    "throttle_time": 3600.2,
+    "card": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35"
+  },
+  {
+    "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
+    "gpu": "NVIDIA A10G",
     "test": "memory_bank_thrash",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -88393,6 +88407,20 @@
     "power_max": 67.8,
     "clock_avg": 2040.0,
     "throttle_time": 0.0,
+    "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
+  },
+  {
+    "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
+    "gpu": "NVIDIA L40S",
+    "test": "int_virus",
+    "version": "1.2.2",
+    "unit": "TOPS",
+    "score": 37.0034,
+    "date": "2026-09-21 19:22:36",
+    "temp_max": 84.0,
+    "power_max": 355.5,
+    "clock_avg": 1973.4,
+    "throttle_time": 3597.2,
     "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
   },
   {
