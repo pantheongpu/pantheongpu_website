@@ -80136,6 +80136,20 @@
     "card": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d"
   },
   {
+    "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
+    "gpu": "NVIDIA A10G",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 1.85684,
+    "date": "2026-09-21 10:20:54",
+    "temp_max": 53.0,
+    "power_max": 177.8,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d"
+  },
+  {
     "uuid": "GPU-ddac1a5b-8baa-e2d3-0572-436b3198b360",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "cache_lat",
