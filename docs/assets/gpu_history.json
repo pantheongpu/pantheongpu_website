@@ -28072,6 +28072,20 @@
   {
     "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
     "gpu": "NVIDIA L40S",
+    "test": "speculative_decode",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 2608550000.0,
+    "date": "2026-09-22 21:10:23",
+    "temp_max": 69.0,
+    "power_max": 206.8,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
+  },
+  {
+    "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
+    "gpu": "NVIDIA L40S",
     "test": "tensor_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
