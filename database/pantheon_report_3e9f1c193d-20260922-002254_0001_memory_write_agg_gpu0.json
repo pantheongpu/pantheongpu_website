@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-22 00:22:54",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1012-aws",
+        "version": "#12~24.04.1-Ubuntu SMP PREEMPT Wed Aug 12 14:00:57 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3600.95Mhz"
+    },
+    "ram_info": {
+        "total": "30.07GB",
+        "available": "28.52GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
+            "serial": "1790226126026",
+            "memory_type": "GDDR7",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260922-002254",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-22 01:22:58",
+    "test_results": [
+        {
+            "Test Name": "memory_write_agg",
+            "Version": "1.2.2",
+            "Description": "Memory Write (Crosstalk Background)",
+            "GPU ID": 0,
+            "Duration (s)": 3600,
+            "Mem Usage (%)": 99,
+            "Score": 732.433,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 79.7,
+            "Max Temp (C)": 84.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 164.9,
+            "Max Power (W)": 165.3,
+            "Avg Clock(MHz)": 2003.1,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2332.0,
+            "Avg GPU Util (%)": 100.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 32338.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 165.083,
+            "Thermal Rise (C)": 40.0,
+            "Throttle Time (s)": 3602.7,
+            "Efficiency": 4548.28,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-120/memory_write 0 3600 99 --init_pattern crosstalk --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20260922-002254/reliability/memory_write_agg/gpu0/ras.json"
+        }
+    ]
+}
