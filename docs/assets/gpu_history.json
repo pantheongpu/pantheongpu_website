@@ -82112,6 +82112,20 @@
   {
     "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
     "gpu": "NVIDIA A10G",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 327700.0,
+    "date": "2026-09-22 10:52:46",
+    "temp_max": 46.0,
+    "power_max": 152.8,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d"
+  },
+  {
+    "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
+    "gpu": "NVIDIA A10G",
     "test": "baseline_metrics",
     "version": "1.2.2",
     "unit": "GB/s",
