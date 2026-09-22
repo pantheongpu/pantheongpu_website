@@ -27960,6 +27960,20 @@
   {
     "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
     "gpu": "NVIDIA L40S",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1742540000.0,
+    "date": "2026-09-22 22:11:26",
+    "temp_max": 72.0,
+    "power_max": 221.2,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-55085b87-4e2a-964f-4893-cd983a507764"
+  },
+  {
+    "uuid": "GPU-55085b87-4e2a-964f-4893-cd983a507764",
+    "gpu": "NVIDIA L40S",
     "test": "omni_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
