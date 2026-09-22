@@ -76120,6 +76120,20 @@
   {
     "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 2337990000.0,
+    "date": "2026-09-22 22:39:14",
+    "temp_max": 91.0,
+    "power_max": 165.6,
+    "clock_avg": 2140.6,
+    "throttle_time": 3547.3,
+    "card": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a"
+  },
+  {
+    "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "omni_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
