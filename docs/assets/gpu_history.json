@@ -36218,6 +36218,20 @@
     "card": "GPU-688165e4-89c5-f458-97a2-adbc8e379463"
   },
   {
+    "uuid": "GPU-688165e4-89c5-f458-97a2-adbc8e379463",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 43.3391,
+    "date": "2026-09-22 04:00:21",
+    "temp_max": 45.0,
+    "power_max": 191.8,
+    "clock_avg": 2335.4,
+    "throttle_time": 0.0,
+    "card": "GPU-688165e4-89c5-f458-97a2-adbc8e379463"
+  },
+  {
     "uuid": "GPU-690e5856-c600-c88f-0cae-05bc9d7ae984",
     "gpu": "NVIDIA GeForce RTX 5070",
     "test": "atomic_virus",
