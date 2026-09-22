@@ -91268,6 +91268,20 @@
   {
     "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
     "gpu": "NVIDIA L40S",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1742540000.0,
+    "date": "2026-09-22 22:38:26",
+    "temp_max": 75.0,
+    "power_max": 221.0,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
+  },
+  {
+    "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
+    "gpu": "NVIDIA L40S",
     "test": "omni_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
