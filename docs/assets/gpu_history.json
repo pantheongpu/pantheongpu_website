@@ -20946,6 +20946,20 @@
   {
     "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
     "gpu": "NVIDIA A10G",
+    "test": "transformer_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 69.0328,
+    "date": "2026-09-22 12:40:01",
+    "temp_max": 40.0,
+    "power_max": 106.1,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35"
+  },
+  {
+    "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
+    "gpu": "NVIDIA A10G",
     "test": "voltage",
     "version": "1.2.2",
     "unit": "TFLOPS",
