@@ -20834,6 +20834,20 @@
   {
     "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
     "gpu": "NVIDIA A10G",
+    "test": "pulse_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 6.43495,
+    "date": "2026-09-22 08:35:50",
+    "temp_max": 40.0,
+    "power_max": 99.9,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35"
+  },
+  {
+    "uuid": "GPU-4091c73b-2335-1e57-c84a-89623b9dda35",
+    "gpu": "NVIDIA A10G",
     "test": "ras_validator",
     "version": "1.2.2",
     "unit": "GB/s",
