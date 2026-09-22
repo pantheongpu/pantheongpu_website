@@ -90232,6 +90232,20 @@
   {
     "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
     "gpu": "NVIDIA L40S",
+    "test": "omni_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 52.1525,
+    "date": "2026-09-22 12:27:58",
+    "temp_max": 84.0,
+    "power_max": 252.8,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
+  },
+  {
+    "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
+    "gpu": "NVIDIA L40S",
     "test": "pcie_bandwidth",
     "version": "1.2.2",
     "unit": "GB/s",
