@@ -91016,6 +91016,20 @@
   {
     "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
     "gpu": "NVIDIA L40S",
+    "test": "quantized_gemm",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1743660000.0,
+    "date": "2026-09-22 19:35:17",
+    "temp_max": 82.0,
+    "power_max": 228.5,
+    "clock_avg": 2034.2,
+    "throttle_time": 0.0,
+    "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
+  },
+  {
+    "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
+    "gpu": "NVIDIA L40S",
     "test": "ras_validator",
     "version": "1.2.2",
     "unit": "GB/s",
