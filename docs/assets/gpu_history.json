@@ -36878,6 +36878,20 @@
   {
     "uuid": "GPU-688165e4-89c5-f458-97a2-adbc8e379463",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "speculative_decode",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 5665820000.0,
+    "date": "2026-09-22 21:27:21",
+    "temp_max": 44.0,
+    "power_max": 279.3,
+    "clock_avg": 2419.3,
+    "throttle_time": 0.0,
+    "card": "GPU-688165e4-89c5-f458-97a2-adbc8e379463"
+  },
+  {
+    "uuid": "GPU-688165e4-89c5-f458-97a2-adbc8e379463",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "tensor_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
