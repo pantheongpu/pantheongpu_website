@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-22 09:32:27",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1012-aws",
+        "version": "#12~24.04.1-Ubuntu SMP PREEMPT Wed Aug 12 14:00:57 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3749.82Mhz"
+    },
+    "ram_info": {
+        "total": "30.07GB",
+        "available": "28.51GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-6c5c37f1-1340-7429-fc63-7f07d8f31e3a",
+            "serial": "1790926036199",
+            "memory_type": "GDDR7",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260922-093227",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-22 10:32:29",
+    "test_results": [
+        {
+            "Test Name": "tensor_virus",
+            "Version": "1.2.2",
+            "Description": "Tensor Virus (FP16 Matrix Power)",
+            "GPU ID": 0,
+            "Duration (s)": 3600,
+            "Mem Usage (%)": 99,
+            "Score": 28.4338,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 87.6,
+            "Max Temp (C)": 89.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 164.3,
+            "Max Power (W)": 166.2,
+            "Avg Clock(MHz)": 2363.6,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2400.0,
+            "Avg GPU Util (%)": 96.3,
+            "Max GPU Util (%)": 97.0,
+            "Peak Memory (MiB)": 790.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 164.413,
+            "Thermal Rise (C)": 58.0,
+            "Throttle Time (s)": 3107.0,
+            "Efficiency": 173.06,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-120/tensor_virus 0 3600 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
+            "RAS Report": "results/20260922-093227/reliability/tensor_virus/gpu0/ras.json"
+        }
+    ]
+}
