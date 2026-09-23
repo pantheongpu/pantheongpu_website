@@ -7546,6 +7546,20 @@
     "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
   },
   {
+    "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
+    "gpu": "Tesla T4",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.878415,
+    "date": "2026-09-23 09:46:01",
+    "temp_max": 50.0,
+    "power_max": 70.9,
+    "clock_avg": 1473.6,
+    "throttle_time": 3599.7,
+    "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
+  },
+  {
     "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
     "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "test": "atomic_virus",
