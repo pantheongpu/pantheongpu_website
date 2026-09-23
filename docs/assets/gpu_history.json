@@ -75952,6 +75952,20 @@
   {
     "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "allocation_fragmentation",
+    "version": "1.2.2",
+    "unit": "alloc-events/s",
+    "score": 31336.3,
+    "date": "2026-09-23 00:41:19",
+    "temp_max": 55.0,
+    "power_max": 68.5,
+    "clock_avg": 2398.8,
+    "throttle_time": 0.0,
+    "card": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a"
+  },
+  {
+    "uuid": "GPU-c8ccd73c-36c3-8f06-4b8e-8925404c465a",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "atomic_virus",
     "version": "1.2.2",
     "unit": "MAPS",
@@ -91152,6 +91166,20 @@
     "clock_avg": 939.5,
     "throttle_time": 299.9,
     "card": "GPU-efdcfbf5-267f-bcf6-b7a1-97ab8b55301c"
+  },
+  {
+    "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
+    "gpu": "NVIDIA L40S",
+    "test": "allocation_fragmentation",
+    "version": "1.2.2",
+    "unit": "alloc-events/s",
+    "score": 10100.8,
+    "date": "2026-09-23 00:40:31",
+    "temp_max": 62.0,
+    "power_max": 94.2,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-f095bed2-9501-1545-389e-7b241430e7ac"
   },
   {
     "uuid": "GPU-f095bed2-9501-1545-389e-7b241430e7ac",
