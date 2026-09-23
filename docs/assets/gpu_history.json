@@ -18256,6 +18256,20 @@
     "card": "GPU-3a87b0a238bb"
   },
   {
+    "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
+    "gpu": "NVIDIA T4G",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-23 08:57:30",
+    "temp_max": 78.0,
+    "power_max": 45.4,
+    "clock_avg": 1590.0,
+    "throttle_time": 0.0,
+    "card": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e"
+  },
+  {
     "uuid": "GPU-3b47dd5c1cd4",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "cache_lat",
@@ -83886,6 +83900,20 @@
     "clock_avg": 1406.0,
     "throttle_time": 0.0,
     "card": "GPU-d9851dfc7925"
+  },
+  {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-23 08:57:32",
+    "temp_max": 78.0,
+    "power_max": 47.4,
+    "clock_avg": 1590.0,
+    "throttle_time": 0.0,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
   },
   {
     "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
