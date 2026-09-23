@@ -72786,6 +72786,20 @@
     "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
   },
   {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.87772,
+    "date": "2026-09-23 09:46:34",
+    "temp_max": 49.0,
+    "power_max": 70.7,
+    "clock_avg": 1459.1,
+    "throttle_time": 3599.8,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
     "test": "baseline_metrics",
