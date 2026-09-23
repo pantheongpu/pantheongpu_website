@@ -26084,6 +26084,20 @@
   {
     "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
     "gpu": "NVIDIA L4",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 237.568,
+    "date": "2026-09-23 22:39:00",
+    "temp_max": 83.0,
+    "power_max": 72.3,
+    "clock_avg": 1358.3,
+    "throttle_time": 3605.4,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
     "test": "mma_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -73623,6 +73637,20 @@
     "power_max": 72.2,
     "clock_avg": 2038.5,
     "throttle_time": 264.3,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
+    "test": "memory_write",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 237.696,
+    "date": "2026-09-23 22:38:09",
+    "temp_max": 82.0,
+    "power_max": 72.3,
+    "clock_avg": 1405.6,
+    "throttle_time": 3605.1,
     "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
   },
   {
