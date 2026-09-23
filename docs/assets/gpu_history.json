@@ -25592,6 +25592,20 @@
     "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
   },
   {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.941808,
+    "date": "2026-09-23 09:25:10",
+    "temp_max": 83.0,
+    "power_max": 72.8,
+    "clock_avg": 1651.4,
+    "throttle_time": 3599.2,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
     "uuid": "GPU-51d4371d-dd68-e7b1-cceb-10cf6162d77a",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "mma_virus",
@@ -72769,6 +72783,20 @@
     "power_max": 28.3,
     "clock_avg": 2040.0,
     "throttle_time": 0.0,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
+    "test": "memory_thermal_asym",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.941147,
+    "date": "2026-09-23 09:24:21",
+    "temp_max": 83.0,
+    "power_max": 72.4,
+    "clock_avg": 1682.1,
+    "throttle_time": 3598.1,
     "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
   },
   {
