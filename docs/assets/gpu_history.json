@@ -83708,6 +83708,20 @@
   {
     "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
     "gpu": "NVIDIA A10G",
+    "test": "galpat",
+    "version": "1.2.2",
+    "unit": "gallop-reads/s",
+    "score": 6923130000.0,
+    "date": "2026-09-23 05:11:32",
+    "temp_max": 40.0,
+    "power_max": 128.0,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d"
+  },
+  {
+    "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
+    "gpu": "NVIDIA A10G",
     "test": "graph_replay",
     "version": "1.2.2",
     "unit": "graph-steps/s",
