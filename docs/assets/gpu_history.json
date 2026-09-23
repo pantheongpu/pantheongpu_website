@@ -7630,6 +7630,20 @@
     "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
   },
   {
+    "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
+    "gpu": "Tesla T4",
+    "test": "memory_tsv_thrasher",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 220.718,
+    "date": "2026-09-23 15:52:21",
+    "temp_max": 46.0,
+    "power_max": 63.1,
+    "clock_avg": 1590.0,
+    "throttle_time": 0.0,
+    "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
+  },
+  {
     "uuid": "GPU-0fa526c3-4f36-f449-6ef8-389cfacfc64c",
     "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "test": "atomic_virus",
@@ -73105,6 +73119,20 @@
     "power_max": 70.7,
     "clock_avg": 1459.1,
     "throttle_time": 3599.8,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
+    "test": "memory_tsv_thrasher",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 220.686,
+    "date": "2026-09-23 15:52:55",
+    "temp_max": 47.0,
+    "power_max": 64.8,
+    "clock_avg": 1590.0,
+    "throttle_time": 0.0,
     "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
   },
   {
