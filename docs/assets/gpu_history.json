@@ -73178,6 +73178,20 @@
     "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
   },
   {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 7.71134,
+    "date": "2026-09-23 16:54:01",
+    "temp_max": 48.0,
+    "power_max": 71.1,
+    "clock_avg": 1449.2,
+    "throttle_time": 3600.3,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
     "test": "baseline_metrics",
