@@ -25916,6 +25916,20 @@
   {
     "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
     "gpu": "NVIDIA L4",
+    "test": "ras_validator",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 253.173,
+    "date": "2026-09-23 17:33:43",
+    "temp_max": 83.0,
+    "power_max": 72.7,
+    "clock_avg": 1887.4,
+    "throttle_time": 3604.6,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
     "test": "tlb_avalanche",
     "version": "1.2.2",
     "unit": "GB/s",
