@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-24 15:16:42",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1012-aws",
+        "version": "#12~24.04.1-Ubuntu SMP PREEMPT Wed Aug 12 14:00:57 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "2946.72Mhz"
+    },
+    "ram_info": {
+        "total": "30.97GB",
+        "available": "29.78GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
+            "serial": "1654521004550",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260924-151642",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-24 16:16:44",
+    "test_results": [
+        {
+            "Test Name": "kv_cache_churn",
+            "Version": "1.2.2",
+            "Description": "KV Cache Churn (Paged/Ragged Cache Updates)",
+            "GPU ID": 0,
+            "Duration (s)": 3600,
+            "Mem Usage (%)": 99,
+            "Score": 572731000.0,
+            "Unit": "cache-updates/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 48.0,
+            "Max Temp (C)": 49.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 69.7,
+            "Max Power (W)": 71.1,
+            "Avg Clock(MHz)": 1538.5,
+            "Min Clock (MHz)": 1485.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 100.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15214.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 69.705,
+            "Thermal Rise (C)": 12.0,
+            "Throttle Time (s)": 3599.5,
+            "Efficiency": 8217087.52,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-75/kv_cache_churn 0 3600 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260924-151642/reliability/kv_cache_churn/gpu0/ras.json"
+        }
+    ]
+}
