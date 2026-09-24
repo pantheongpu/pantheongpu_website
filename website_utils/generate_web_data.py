@@ -444,6 +444,37 @@ def update_methodology_coverage(rows, methodology_file):
     Path(methodology_file).write_text(updated, encoding="utf-8")
 
 
+# Other Pantheon suites write reports with the same test_results shape on
+# purpose, so their rows can be joined with GPU rows on (Test Name, Unit). That
+# shape is also what this generator uses to recognise a report, so without a
+# guard it ingests them: a pantheontt mock report was published, in a trial run,
+# as a real card called "Unknown GPU 0" from manufacturer "Unknown", credited to
+# Pantheon 1.0.0, with a made-up score of 100. Two separate reasons to skip:
+#
+#   * the report says it is not a measurement (a mock or simulator run);
+#   * it comes from a suite whose device identity this generator does not read
+#     yet. Those cards have no gpu_static_info, so every one would appear as
+#     "Unknown GPU 0". They are skipped, loudly, until the site decides how
+#     non-GPU accelerators are presented; that is a presentation decision, not
+#     something to default into.
+OTHER_SUITES = {
+    "pantheon_tt_version": "Tenstorrent (pantheontt)",
+    "pantheon_neuron_version": "AWS Neuron (pantheonneuron)",
+}
+
+
+def not_a_gpu_measurement(data):
+    """Why ``data`` must not reach the GPU leaderboard, or None if it may."""
+    if data.get("publishable") is False or data.get("mock") is True:
+        return f"not a measurement ({data.get('backend', 'mock')} backend)"
+    if str(data.get("backend", "hardware")).lower() in {"mock", "ttsim", "simulator"}:
+        return f"not a measurement ({data['backend']} backend)"
+    for key, suite in OTHER_SUITES.items():
+        if key in data and not data.get("gpu_static_info"):
+            return f"{suite} report: not presented on the GPU leaderboard yet"
+    return None
+
+
 def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
@@ -474,6 +505,11 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                 run_status = str(data.get("run_status", "complete")).lower()
                 if run_status in {"partial", "failed", "incomplete"}:
                     print(f"[SKIPPED] {run_status} benchmark report: {f}")
+                    continue
+
+                skip_reason = not_a_gpu_measurement(data)
+                if skip_reason:
+                    print(f"[SKIPPED] {skip_reason}: {f}")
                     continue
 
                 # Store the entire GPU info dictionary by ID

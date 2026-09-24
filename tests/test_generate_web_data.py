@@ -615,3 +615,75 @@ def test_declared_memory_fields_are_published_and_default_to_na(tmp_path):
     assert rows["GPU-NEW"]["memory_vendor"] == "SK hynix"
     assert rows["GPU-OLD"]["memory_type"] == "N/A"
     assert rows["GPU-OLD"]["memory_vendor"] == "N/A"
+
+
+def _write_json(db_dir, name, report):
+    path = db_dir / name
+    path.write_text(json.dumps(report), encoding="utf-8")
+    return path
+
+
+def test_a_mock_report_from_another_suite_is_not_published(tmp_path):
+    """Reproduces the trial run: a pantheontt MOCK report went in as a real card,
+    'Unknown GPU 0', with a made-up mma_virus score of 100."""
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    _write_json(db_dir, "pantheon_tt_report_mock.json", {
+        "pantheon_tt_version": "0.1.0", "timestamp": "2026-09-24 16:18:20",
+        "mock": True, "backend": "mock", "publishable": False,
+        "devices": [{"index": 0, "board_id": "mock-0000", "board_type": "mock"}],
+        "test_results": [{"Test Name": "mma_virus", "Devices": [0], "Score": 100.0,
+                          "Unit": "TFLOPS", "Duration (s)": 0.05}],
+    })
+    assert main(db_dir=db_dir, output_file=output_file) == []
+
+
+def test_a_real_report_from_a_suite_this_page_cannot_identify_is_skipped(tmp_path):
+    """Even a physical Tenstorrent card would appear as 'Unknown GPU 0' credited
+    to Pantheon 1.0.0, because it has no gpu_static_info. Skip it until the site
+    decides how non-GPU accelerators are shown, rather than defaulting into that."""
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    _write_json(db_dir, "pantheon_tt_report_real.json", {
+        "pantheon_tt_version": "0.1.0", "timestamp": "2026-09-24 16:18:20",
+        "mock": False, "backend": "hardware", "publishable": True,
+        "devices": [{"index": 0, "board_id": "0000040000000001", "board_type": "p150a"}],
+        "test_results": [{"Test Name": "memory_read", "Devices": [0], "Score": 410.0,
+                          "Unit": "GB/s", "Duration (s)": 300}],
+    })
+    assert main(db_dir=db_dir, output_file=output_file) == []
+
+
+def test_a_simulator_report_is_not_a_measurement(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    write_report(
+        db_dir, "pantheon_report_sim.json",
+        [{"id": 0, "name": "Simulated GPU", "memory_total": "98304 MiB"}],
+        [{"Test Name": "memory_write", "GPU ID": 0, "Score": 20, "Unit": "GB/s",
+          "Duration (s)": 300}],
+        version="1.2.2",
+    )
+    report = json.loads((db_dir / "pantheon_report_sim.json").read_text())
+    report["backend"] = "ttsim"
+    (db_dir / "pantheon_report_sim.json").write_text(json.dumps(report))
+    assert main(db_dir=db_dir, output_file=output_file) == []
+
+
+def test_ordinary_gpu_reports_are_untouched_by_the_guard(tmp_path):
+    """No backend, no mock flag, no other-suite version: exactly what every
+    published GPU report looks like. It must still be published."""
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    write_report(
+        db_dir, "pantheon_report_gpu.json",
+        [{"id": 0, "name": "NVIDIA RTX 4090", "uuid": "GPU-1234", "memory_total": "24564 MiB"}],
+        [{"Test Name": "memory_write", "GPU ID": 0, "Score": 900, "Unit": "GB/s",
+          "Duration (s)": 300}],
+        version="1.2.2",
+    )
+    assert len(main(db_dir=db_dir, output_file=output_file)) == 1
