@@ -85414,6 +85414,20 @@
     "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
   },
   {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 4.31899,
+    "date": "2026-09-24 03:16:45",
+    "temp_max": 81.0,
+    "power_max": 68.5,
+    "clock_avg": 1243.3,
+    "throttle_time": 3600.3,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
+  },
+  {
     "uuid": "GPU-dc3d482e-14e8-9375-04ae-1a165399064d",
     "gpu": "NVIDIA A10G",
     "test": "allocation_fragmentation",
