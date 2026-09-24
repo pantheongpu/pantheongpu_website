@@ -19070,6 +19070,20 @@
   {
     "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
     "gpu": "NVIDIA T4G",
+    "test": "rope_stress",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 743568000.0,
+    "date": "2026-09-24 17:31:23",
+    "temp_max": 79.0,
+    "power_max": 68.1,
+    "clock_avg": 1087.1,
+    "throttle_time": 3600.1,
+    "card": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e"
+  },
+  {
+    "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
+    "gpu": "NVIDIA T4G",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
@@ -86489,6 +86503,20 @@
     "power_max": 67.8,
     "clock_avg": 990.3,
     "throttle_time": 3603.2,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
+  },
+  {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
+    "test": "rope_stress",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 703653000.0,
+    "date": "2026-09-24 17:31:23",
+    "temp_max": 78.0,
+    "power_max": 68.2,
+    "clock_avg": 1033.5,
+    "throttle_time": 3600.3,
     "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
   },
   {
