@@ -26868,6 +26868,20 @@
   {
     "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
     "gpu": "NVIDIA L4",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 806443000.0,
+    "date": "2026-09-24 21:02:14",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1428.4,
+    "throttle_time": 3600.3,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
     "test": "omni_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
