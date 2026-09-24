@@ -18762,6 +18762,20 @@
   {
     "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
     "gpu": "NVIDIA T4G",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "unit": "cache-updates/s",
+    "score": 575022000.0,
+    "date": "2026-09-24 15:29:18",
+    "temp_max": 79.0,
+    "power_max": 68.3,
+    "clock_avg": 1234.6,
+    "throttle_time": 3599.5,
+    "card": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e"
+  },
+  {
+    "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
+    "gpu": "NVIDIA T4G",
     "test": "llm_decode",
     "version": "1.2.2",
     "unit": "tokens/s",
@@ -26457,6 +26471,20 @@
     "power_max": 48.9,
     "clock_avg": 2040.0,
     "throttle_time": 0.0,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
+    "test": "fused_attention",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1595790000.0,
+    "date": "2026-09-24 15:57:02",
+    "temp_max": 83.0,
+    "power_max": 72.3,
+    "clock_avg": 1453.5,
+    "throttle_time": 3600.6,
     "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
   },
   {
@@ -74482,6 +74510,20 @@
   {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
+    "test": "fused_attention",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1596410000.0,
+    "date": "2026-09-24 15:56:11",
+    "temp_max": 83.0,
+    "power_max": 72.3,
+    "clock_avg": 1506.4,
+    "throttle_time": 3600.7,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
     "test": "incinerator",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -86069,6 +86111,20 @@
     "power_max": 69.5,
     "clock_avg": 947.7,
     "throttle_time": 3600.4,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
+  },
+  {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "unit": "cache-updates/s",
+    "score": 573260000.0,
+    "date": "2026-09-24 15:29:18",
+    "temp_max": 78.0,
+    "power_max": 67.8,
+    "clock_avg": 1153.1,
+    "throttle_time": 3600.5,
     "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
   },
   {
