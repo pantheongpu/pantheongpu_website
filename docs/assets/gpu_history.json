@@ -74468,6 +74468,20 @@
   {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
+    "test": "kv_cache_churn",
+    "version": "1.2.2",
+    "unit": "cache-updates/s",
+    "score": 933446000.0,
+    "date": "2026-09-24 14:55:08",
+    "temp_max": 81.0,
+    "power_max": 72.3,
+    "clock_avg": 1693.1,
+    "throttle_time": 3600.1,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
     "test": "llm_decode",
     "version": "1.2.2",
     "unit": "tokens/s",
