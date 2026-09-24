@@ -74860,6 +74860,20 @@
   {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
+    "test": "rope_stress",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1609180000.0,
+    "date": "2026-09-24 16:57:13",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1434.8,
+    "throttle_time": 3600.4,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
     "test": "scheduler",
     "version": "1.2.2",
     "unit": "KIPS",
