@@ -74104,6 +74104,20 @@
   {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 208039.0,
+    "date": "2026-09-24 09:49:57",
+    "temp_max": 83.0,
+    "power_max": 68.1,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
     "test": "baseline_metrics",
     "version": "1.2.2",
     "unit": "GB/s",
