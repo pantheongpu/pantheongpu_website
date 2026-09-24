@@ -7842,6 +7842,20 @@
   {
     "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
     "gpu": "Tesla T4",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 460454000.0,
+    "date": "2026-09-24 21:23:00",
+    "temp_max": 48.0,
+    "power_max": 71.1,
+    "clock_avg": 1354.0,
+    "throttle_time": 3600.2,
+    "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
+  },
+  {
+    "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
+    "gpu": "Tesla T4",
     "test": "omni_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
@@ -74533,6 +74547,20 @@
     "power_max": 71.4,
     "clock_avg": 1517.6,
     "throttle_time": 3600.1,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
+    "test": "moe_router",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 453439000.0,
+    "date": "2026-09-24 21:23:33",
+    "temp_max": 47.0,
+    "power_max": 71.3,
+    "clock_avg": 1332.3,
+    "throttle_time": 3599.7,
     "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
   },
   {
