@@ -26966,6 +26966,20 @@
   {
     "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
     "gpu": "NVIDIA L4",
+    "test": "speculative_decode",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 1205960000.0,
+    "date": "2026-09-24 20:01:12",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1533.1,
+    "throttle_time": 3600.3,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
     "test": "tensor_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
