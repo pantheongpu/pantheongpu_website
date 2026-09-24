@@ -73962,6 +73962,20 @@
     "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
   },
   {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 7.42385,
+    "date": "2026-09-24 02:42:41",
+    "temp_max": 83.0,
+    "power_max": 72.8,
+    "clock_avg": 1971.6,
+    "throttle_time": 3598.0,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
     "uuid": "GPU-c0b70a70-5cb8-75a0-7c4e-b6195ff4cd68",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "allocation_fragmentation",
