@@ -74356,6 +74356,20 @@
   {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 12.0549,
+    "date": "2026-09-24 08:48:55",
+    "temp_max": 83.0,
+    "power_max": 72.7,
+    "clock_avg": 1619.1,
+    "throttle_time": 3600.1,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
     "test": "tlb_avalanche",
     "version": "1.2.2",
     "unit": "GB/s",
