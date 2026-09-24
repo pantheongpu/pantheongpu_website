@@ -85626,6 +85626,20 @@
   {
     "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
     "gpu": "NVIDIA T4G",
+    "test": "sfu_stress",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.474187,
+    "date": "2026-09-24 06:19:53",
+    "temp_max": 80.0,
+    "power_max": 68.4,
+    "clock_avg": 1185.8,
+    "throttle_time": 3599.6,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
+  },
+  {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
     "test": "tlb_avalanche",
     "version": "1.2.2",
     "unit": "GB/s",
