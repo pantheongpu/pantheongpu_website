@@ -85640,6 +85640,20 @@
   {
     "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
     "gpu": "NVIDIA T4G",
+    "test": "atomic_virus",
+    "version": "1.2.2",
+    "unit": "MAPS",
+    "score": 154195.0,
+    "date": "2026-09-24 10:24:03",
+    "temp_max": 80.0,
+    "power_max": 69.3,
+    "clock_avg": 1394.9,
+    "throttle_time": 3599.9,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
+  },
+  {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
     "test": "baseline_metrics",
     "version": "1.2.2",
     "unit": "GB/s",
