@@ -7800,6 +7800,20 @@
   {
     "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
     "gpu": "Tesla T4",
+    "test": "sfu_stress",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 0.544414,
+    "date": "2026-09-24 06:07:20",
+    "temp_max": 50.0,
+    "power_max": 71.2,
+    "clock_avg": 1371.2,
+    "throttle_time": 3600.0,
+    "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
+  },
+  {
+    "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
+    "gpu": "Tesla T4",
     "test": "tlb_avalanche",
     "version": "1.2.2",
     "unit": "GB/s",
