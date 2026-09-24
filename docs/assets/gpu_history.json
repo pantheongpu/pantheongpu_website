@@ -26306,6 +26306,20 @@
     "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
   },
   {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
+    "test": "voltage",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 7.35936,
+    "date": "2026-09-24 02:43:31",
+    "temp_max": 84.0,
+    "power_max": 72.8,
+    "clock_avg": 1944.4,
+    "throttle_time": 3600.2,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
     "uuid": "GPU-51d4371d-dd68-e7b1-cceb-10cf6162d77a",
     "gpu": "NVIDIA H100 80GB HBM3",
     "test": "mma_virus",
