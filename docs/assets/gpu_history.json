@@ -26126,6 +26126,20 @@
   {
     "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
     "gpu": "NVIDIA L4",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 253.007,
+    "date": "2026-09-24 01:42:23",
+    "temp_max": 83.0,
+    "power_max": 72.4,
+    "clock_avg": 1581.7,
+    "throttle_time": 3605.3,
+    "card": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752"
+  },
+  {
+    "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+    "gpu": "NVIDIA L4",
     "test": "memory_retention",
     "version": "1.2.2",
     "unit": "retained-MiB",
