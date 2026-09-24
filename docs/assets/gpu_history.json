@@ -73544,6 +73544,20 @@
   {
     "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
     "gpu": "Tesla T4",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 257.389,
+    "date": "2026-09-24 02:03:40",
+    "temp_max": 47.0,
+    "power_max": 72.1,
+    "clock_avg": 1226.6,
+    "throttle_time": 3603.4,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
     "test": "memory_retention",
     "version": "1.2.2",
     "unit": "retained-MiB",
