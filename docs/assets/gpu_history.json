@@ -73586,6 +73586,20 @@
   {
     "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
     "gpu": "Tesla T4",
+    "test": "cache_lat",
+    "version": "1.2.2",
+    "unit": "dependent-loads/s",
+    "score": 1946080000.0,
+    "date": "2026-09-24 05:06:49",
+    "temp_max": 46.0,
+    "power_max": 70.9,
+    "clock_avg": 1316.9,
+    "throttle_time": 3599.7,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
     "test": "fp64_virus",
     "version": "1.2.2",
     "unit": "TFLOPS",
