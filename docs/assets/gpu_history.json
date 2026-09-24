@@ -7842,6 +7842,20 @@
   {
     "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
     "gpu": "Tesla T4",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 7.91558,
+    "date": "2026-09-24 09:10:27",
+    "temp_max": 49.0,
+    "power_max": 71.6,
+    "clock_avg": 1304.1,
+    "throttle_time": 3599.9,
+    "card": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce"
+  },
+  {
+    "uuid": "GPU-0eb464af-de5a-6415-4a60-e18cfe83b1ce",
+    "gpu": "Tesla T4",
     "test": "tlb_avalanche",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -74029,6 +74043,20 @@
     "power_max": 71.2,
     "clock_avg": 1368.1,
     "throttle_time": 3599.8,
+    "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
+  },
+  {
+    "uuid": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588",
+    "gpu": "Tesla T4",
+    "test": "tensor_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 7.87379,
+    "date": "2026-09-24 09:11:00",
+    "temp_max": 48.0,
+    "power_max": 72.7,
+    "clock_avg": 1309.0,
+    "throttle_time": 3600.2,
     "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
   },
   {
