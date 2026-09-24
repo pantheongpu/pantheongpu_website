@@ -18594,6 +18594,20 @@
   {
     "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
     "gpu": "NVIDIA T4G",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 257.531,
+    "date": "2026-09-24 02:15:40",
+    "temp_max": 79.0,
+    "power_max": 68.3,
+    "clock_avg": 843.1,
+    "throttle_time": 3603.1,
+    "card": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e"
+  },
+  {
+    "uuid": "GPU-3b3d52ac-3611-b32d-96e2-1b3fa0914e8e",
+    "gpu": "NVIDIA T4G",
     "test": "memory_retention",
     "version": "1.2.2",
     "unit": "retained-MiB",
@@ -85173,6 +85187,20 @@
     "power_max": 67.8,
     "clock_avg": 552.3,
     "throttle_time": 3603.7,
+    "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
+  },
+  {
+    "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+    "gpu": "NVIDIA T4G",
+    "test": "memory_read_agg",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 258.143,
+    "date": "2026-09-24 02:15:39",
+    "temp_max": 78.0,
+    "power_max": 67.7,
+    "clock_avg": 553.9,
+    "throttle_time": 3602.8,
     "card": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26"
   },
   {
