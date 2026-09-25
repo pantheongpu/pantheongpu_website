@@ -75350,6 +75350,20 @@
   {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
+    "test": "rag_embedding",
+    "version": "1.2.2",
+    "unit": "ai-ops/s",
+    "score": 50874100.0,
+    "date": "2026-09-25 01:05:34",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1509.6,
+    "throttle_time": 3601.1,
+    "card": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27"
+  },
+  {
+    "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
+    "gpu": "NVIDIA L4",
     "test": "ras_validator",
     "version": "1.2.2",
     "unit": "GB/s",
