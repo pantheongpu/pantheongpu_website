@@ -75278,6 +75278,20 @@
     "card": "GPU-be27e8fe-d36b-276a-6f54-0473f830f588"
   },
   {
+    "uuid": "GPU-be9ebab0-2379-ea71-2577-7c575eb82ddc",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "baseline_metrics",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 0.0,
+    "date": "2026-09-25 12:46:23",
+    "temp_max": 43.0,
+    "power_max": 124.8,
+    "clock_avg": 1830.0,
+    "throttle_time": 0.0,
+    "card": "GPU-be9ebab0-2379-ea71-2577-7c575eb82ddc"
+  },
+  {
     "uuid": "GPU-c09f32b2-12b1-a252-b0e5-b88c461dbd27",
     "gpu": "NVIDIA L4",
     "test": "allocation_fragmentation",
