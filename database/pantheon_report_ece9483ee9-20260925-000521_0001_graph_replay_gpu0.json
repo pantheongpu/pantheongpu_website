@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-25 00:05:21",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1012-aws",
+        "version": "#12~24.04.1-Ubuntu SMP PREEMPT Wed Aug 12 14:00:57 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3161.68Mhz"
+    },
+    "ram_info": {
+        "total": "30.15GB",
+        "available": "28.80GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA L4",
+            "memory_total": "23034 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 72.0,
+            "uuid": "GPU-51cd590b-f6c4-efb0-5fcd-3be7cf2f5752",
+            "serial": "1651324014469",
+            "memory_type": "GDDR6",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260925-000521",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-25 01:05:23",
+    "test_results": [
+        {
+            "Test Name": "graph_replay",
+            "Version": "1.2.2",
+            "Description": "Graph Replay (CUDA Graphs / HIP Graphs)",
+            "GPU ID": 0,
+            "Duration (s)": 3600,
+            "Mem Usage (%)": 99,
+            "Score": 202315000.0,
+            "Unit": "graph-steps/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 80.9,
+            "Max Temp (C)": 83.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 72.0,
+            "Max Power (W)": 72.2,
+            "Avg Clock(MHz)": 1544.2,
+            "Min Clock (MHz)": 1515.0,
+            "Max Clock (MHz)": 2040.0,
+            "Avg GPU Util (%)": 100.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 22812.9,
+            "Memory Total (MiB)": 23034.0,
+            "Energy (Wh)": 72.057,
+            "Thermal Rise (C)": 29.0,
+            "Throttle Time (s)": 3600.5,
+            "Efficiency": 2809930.56,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-89/graph_replay 0 3600 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260925-000521/reliability/graph_replay/gpu0/ras.json"
+        }
+    ]
+}
