@@ -89278,6 +89278,20 @@
     "card": "GPU-df94d9f1-b551-8797-0f4f-d04093507ddd"
   },
   {
+    "uuid": "GPU-df94d9f1-b551-8797-0f4f-d04093507ddd",
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "tlb_avalanche",
+    "version": "1.2.2",
+    "unit": "GB/s",
+    "score": 61.1291,
+    "date": "2026-09-25 20:57:36",
+    "temp_max": 43.0,
+    "power_max": 281.7,
+    "clock_avg": 1830.0,
+    "throttle_time": 0.0,
+    "card": "GPU-df94d9f1-b551-8797-0f4f-d04093507ddd"
+  },
+  {
     "uuid": "GPU-dfe1c418-65c0-2f6a-3637-d70de841eed8",
     "gpu": "NVIDIA L4",
     "test": "cache_lat",
