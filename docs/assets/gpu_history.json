@@ -75294,6 +75294,20 @@
   {
     "uuid": "GPU-be9ebab0-2379-ea71-2577-7c575eb82ddc",
     "gpu": "NVIDIA H100 80GB HBM3",
+    "test": "fp64_virus",
+    "version": "1.2.2",
+    "unit": "TFLOPS",
+    "score": 20.1962,
+    "date": "2026-09-26 02:00:02",
+    "temp_max": 76.0,
+    "power_max": 552.2,
+    "clock_avg": 1830.0,
+    "throttle_time": 0.0,
+    "card": "GPU-be9ebab0-2379-ea71-2577-7c575eb82ddc"
+  },
+  {
+    "uuid": "GPU-be9ebab0-2379-ea71-2577-7c575eb82ddc",
+    "gpu": "NVIDIA H100 80GB HBM3",
     "test": "int_virus",
     "version": "1.2.2",
     "unit": "TOPS",
