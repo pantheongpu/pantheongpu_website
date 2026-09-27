@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-25 17:54:26",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1012-aws",
+        "version": "#12~24.04.1-Ubuntu SMP PREEMPT Wed Aug 12 14:00:57 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "freq": "2809.86Mhz"
+    },
+    "ram_info": {
+        "total": "249.69GB",
+        "available": "245.69GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 700.0,
+            "uuid": "GPU-df94d9f1-b551-8797-0f4f-d04093507ddd",
+            "serial": "1650324030330",
+            "memory_type": "HBM3",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260925-175426",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-25 18:54:28",
+    "test_results": [
+        {
+            "Test Name": "memory_pc_pingpong",
+            "Version": "1.2.2",
+            "Description": "Memory Pseudo-Channel Ping-Pong (Crossbar)",
+            "GPU ID": 0,
+            "Duration (s)": 3600,
+            "Mem Usage (%)": 99,
+            "Score": 2144.28,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 46.0,
+            "Max Temp (C)": 47.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 350.3,
+            "Max Power (W)": 352.2,
+            "Avg Clock(MHz)": 1830.0,
+            "Min Clock (MHz)": 1830.0,
+            "Max Clock (MHz)": 1830.0,
+            "Avg GPU Util (%)": 100.0,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 80818.8,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 350.414,
+            "Thermal Rise (C)": 15.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 6268.18,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-90a/memory_pc_pingpong 0 3600 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260925-175426/reliability/memory_pc_pingpong/gpu0/ras.json"
+        }
+    ]
+}

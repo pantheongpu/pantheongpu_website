@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-09-25 03:41:50",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1012-aws",
+        "version": "#12~24.04.1-Ubuntu SMP PREEMPT Wed Aug 12 13:54:00 UTC 2026",
+        "arch": "aarch64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "N/A"
+    },
+    "ram_info": {
+        "total": "15.30GB",
+        "available": "14.53GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA T4G",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-dbd23276-e610-23ea-59eb-bc4beeef5d26",
+            "serial": "1562121018828",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20260925-034150",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-09-25 04:41:52",
+    "test_results": [
+        {
+            "Test Name": "media_enc_virus",
+            "Version": "1.2.2",
+            "Description": "Media Enc Virus (Fixed-Function Encoder)",
+            "GPU ID": 0,
+            "Duration (s)": 3600,
+            "Mem Usage (%)": 99,
+            "Score": 33.8766,
+            "Unit": "FPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 75.9,
+            "Max Temp (C)": 78.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 47.0,
+            "Max Power (W)": 49.5,
+            "Avg Clock(MHz)": 1590.0,
+            "Min Clock (MHz)": 1590.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 1.0,
+            "Max GPU Util (%)": 1.0,
+            "Peak Memory (MiB)": 721.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 47.05,
+            "Thermal Rise (C)": 2.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.72,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": 0.0,
+            "Volts SoC (mV)": 0.0,
+            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-75/media_enc_virus 0 3600 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20260925-034150/reliability/media_enc_virus/gpu0/ras.json"
+        }
+    ]
+}
