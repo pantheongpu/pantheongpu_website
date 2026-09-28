@@ -1817,6 +1817,7 @@ def test_uninstall_covers_every_current_channel():
     page = read("docs/getting-started.md")
     script = read("docs/uninstall.sh")
     assert "sudo apt-get remove pantheon-gpu" in page
+    assert "conda remove pantheon-gpu" in page
     assert "sudo dnf remove pantheon-gpu" in page
     assert "docker rmi ghcr.io/pantheongpu/pantheon" in page
     assert "Releases up to v1.0.19" in page
@@ -2035,3 +2036,31 @@ def test_every_version_literal_matches_the_latest_release():
                  "packaging/docker/Dockerfile.rocm"):
         assert path in workflow, f"{path} is rewritten but not staged for the release-page PR"
 
+
+
+def test_install_page_covers_conda_forge_and_the_github_action():
+    """conda-forge has carried pantheon-gpu since 2026-09-28 and the GitHub
+    Action was published the day before, and for days neither was mentioned
+    anywhere a user would look. A channel that exists and is not on the install
+    page might as well not exist."""
+    import re as _re
+
+    page = read("docs/getting-started.md")
+    conda = _re.search(r'=== "conda"(.*?)(?=\n=== |\n## )', page, _re.S)
+    assert conda, "the conda tab should exist"
+    assert "conda install -c conda-forge pantheon-gpu" in conda.group(1)
+    # Same rule as the other packaged routes: nobody who installed a package
+    # is told to run the source entry point.
+    assert "python3 pantheon.py" not in conda.group(1)
+    # conda-forge follows PyPI by hours or days, so the tab must not promise a
+    # version: a literal here would be wrong after every release.
+    assert not _re.search(r"\b\d+\.\d+\.\d+\b", conda.group(1)), conda.group(1)
+
+    action = page.split("## Check a runner's GPUs in GitHub Actions", 1)
+    assert len(action) == 2, "the GitHub Actions section should exist"
+    section = action[1].split("\n## ", 1)[0]
+    assert "uses: pantheongpu/gpu-health-check@v0" in section
+    assert "self-hosted" in section
+    assert "github.com/marketplace/actions/pantheon-gpu-health-check" in section
+
+    assert "PyPI, conda-forge, apt, COPR and Docker" in read("docs/index.md")
