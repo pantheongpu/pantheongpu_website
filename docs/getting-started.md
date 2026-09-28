@@ -35,8 +35,7 @@ Install the compiler for your platform. You only need one:
     ```
 
 Pantheon is open source. Building from source lets you read exactly what will
-run on your hardware; the PyPI or Debian package is quicker if you just want
-to run it.
+run on your hardware; a package is quicker if you just want to run it.
 
 === "PyPI"
 
@@ -55,6 +54,24 @@ to run it.
     first run compiles the workloads for your GPU into a per-user cache. That
     takes a minute or so once, and needs `make`, a C++ compiler, and the CUDA
     or ROCm toolkit from the tabs above.
+
+=== "conda"
+
+    ```bash
+    conda install -c conda-forge pantheon-gpu
+    ```
+
+    From [conda-forge](https://anaconda.org/conda-forge/pantheon-gpu), so
+    `mamba` and `micromamba` install it the same way. It installs both
+    `pantheon` and `pantheon-gpu`; they are the same program.
+
+    The package carries the kernel sources rather than prebuilt binaries, so
+    the first run compiles the workloads for your GPU into a per-user cache.
+    That takes a minute or so once, and needs `make`, a C++ compiler, and the
+    CUDA or ROCm toolkit from the tabs above.
+
+    A release reaches conda-forge a little after it reaches PyPI.
+    `conda search -c conda-forge pantheon-gpu` shows which versions are there.
 
 === "Docker"
 
@@ -205,6 +222,32 @@ well.
 `pantheon --test quick` is the ten-minute version: idle baseline, memory read,
 a march test, a retention check and one power-limited compute load.
 
+## Check a runner's GPUs in GitHub Actions
+
+On a self-hosted runner with a GPU, one step tests the cards before the job
+uses them, and fails the job if a card is faulty:
+
+```yaml
+jobs:
+  train:
+    runs-on: [self-hosted, gpu]
+    steps:
+      - uses: pantheongpu/gpu-health-check@v0
+      - uses: actions/checkout@v4
+      - run: python train.py
+```
+
+The action installs Pantheon, runs a short set of workloads on every GPU of
+the runner, writes each card's result into the job summary and keeps the full
+reports as a workflow artifact. A check that could not run fails the job too,
+so a green tick means a card was tested. The runner needs the same things as
+any other install: the GPU's driver and compiler, `make`, a C++ compiler and
+Python.
+
+[Pantheon GPU Health Check](https://github.com/marketplace/actions/pantheon-gpu-health-check)
+on the GitHub Marketplace lists its options. GitHub's own hosted runners have
+no GPU, so this is for runners you host or rent.
+
 ## Profiling and reports
 
 Verification of workload output is on by default; pass `--skip_verify` to turn it off. Use `--profile` to collect performance counters, traces, and a per-workload HTML summary:
@@ -229,6 +272,7 @@ Remove the package the way it was installed:
 
 ```bash
 pipx uninstall pantheon-gpu                    # PyPI or a downloaded wheel
+conda remove pantheon-gpu                      # conda-forge
 sudo apt-get remove pantheon-gpu               # apt repository
 sudo dnf remove pantheon-gpu                   # Fedora COPR
 docker rmi ghcr.io/pantheongpu/pantheon:latest # container image
