@@ -248,6 +248,8 @@ Python.
 on the GitHub Marketplace lists its options. GitHub's own hosted runners have
 no GPU, so this is for runners you host or rent.
 
+For Slurm, NHC and ReFrame, see [Integrations](integrations.md).
+
 ## Profiling and reports
 
 Verification of workload output is on by default; pass `--skip_verify` to turn it off. Use `--profile` to collect performance counters, traces, and a per-workload HTML summary:

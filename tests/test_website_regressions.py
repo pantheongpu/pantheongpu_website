@@ -2064,3 +2064,32 @@ def test_install_page_covers_conda_forge_and_the_github_action():
     assert "github.com/marketplace/actions/pantheon-gpu-health-check" in section
 
     assert "PyPI, conda-forge, apt, COPR and Docker" in read("docs/index.md")
+
+
+def test_integrations_page_is_reachable_and_carries_no_copy_of_the_source():
+    mkdocs = read("mkdocs.yml")
+    page = read("docs/integrations.md")
+
+    assert "  - Integrations: integrations.md\n" in mkdocs
+    assert "[Integrations](integrations.md)" in read("docs/getting-started.md")
+    # The files live in the source repository. The page links to them there,
+    # and this repository keeps no copy that could drift.
+    for path in ("integrations/pantheon_node_check.py", "integrations/slurm",
+                 "integrations/nhc", "integrations/reframe"):
+        assert f"https://github.com/pantheongpu/pantheon/" in page
+        assert path in page
+    copies = [p for p in ROOT.rglob("pantheon_node_check.py") if ".git" not in p.parts]
+    assert copies == []
+    # A run that tested nothing must never read as a pass.
+    assert "It is never a pass" in page
+    assert "NO GPU TESTED" in page
+
+
+def test_header_logo_is_sharp_on_dense_screens():
+    """icon.png was 77 px wide, which a dense screen scales up and blurs."""
+    from PIL import Image
+
+    icon = Image.open(ROOT / "docs" / "assets" / "icon.png")
+    width, height = icon.size
+    assert width == height
+    assert width >= 128

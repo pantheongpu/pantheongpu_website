@@ -12,6 +12,7 @@ nav:
   - Home: index.md
   - Releases: release.md
   - Getting Started: getting-started.md
+  - Integrations: integrations.md
   - Benchmarks:
     - Live Benchmarks: benchmarks.md
     - Comparisons: benchmark-comparisons.md
