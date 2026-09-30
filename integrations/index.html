@@ -6,15 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Programs and cloud credits that support PantheonGPU compatibility testing, benchmark coverage, and GPU infrastructure validation.">
+        <meta name="description" content="Run PantheonGPU from Slurm, NHC, ReFrame and GitHub Actions, with a node check that answers with a verdict and an exit code.">
       
       
       
-        <link rel="canonical" href="https://pantheongpu.com/programs-support/">
+        <link rel="canonical" href="https://pantheongpu.com/integrations/">
       
       
-        <link rel="prev" href="../community/">
+        <link rel="prev" href="../getting-started/">
       
+      
+        <link rel="next" href="../benchmarks/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>Programs & Support - PANTHEON</title>
+        <title>Integrations - PANTHEON</title>
       
     
     
@@ -77,13 +79,13 @@
   
   <meta property="og:site_name" content="PANTHEON">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Programs & Support">
-  <meta property="og:description" content="Programs and cloud credits that support PantheonGPU compatibility testing, benchmark coverage, and GPU infrastructure validation.">
-  <meta property="og:url" content="https://pantheongpu.com/programs-support/">
+  <meta property="og:title" content="Integrations">
+  <meta property="og:description" content="Run PantheonGPU from Slurm, NHC, ReFrame and GitHub Actions, with a node check that answers with a verdict and an exit code.">
+  <meta property="og:url" content="https://pantheongpu.com/integrations/">
   <meta property="og:image" content="https://pantheongpu.com/assets/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Programs & Support">
-  <meta name="twitter:description" content="Programs and cloud credits that support PantheonGPU compatibility testing, benchmark coverage, and GPU infrastructure validation.">
+  <meta name="twitter:title" content="Integrations">
+  <meta name="twitter:description" content="Run PantheonGPU from Slurm, NHC, ReFrame and GitHub Actions, with a node check that answers with a verdict and an exit code.">
   <meta name="twitter:image" content="https://pantheongpu.com/assets/logo.png">
   
 
@@ -106,7 +108,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#programs-support" class="md-skip">
+        <a href="#put-pantheongpu-where-your-cluster-already-looks" class="md-skip">
           Skip to content
         </a>
       
@@ -141,7 +143,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Programs & Support
+              Integrations
             
           </span>
         </div>
@@ -303,9 +305,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../integrations/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -382,12 +386,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../community/" class="md-tabs__link">
           
   
@@ -535,10 +537,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../integrations/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -554,6 +583,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-node-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The node check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slurm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nhc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NHC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReFrame
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-much-load-a-check-puts-on-a-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much load a check puts on a card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-tested-and-what-we-did-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we tested, and what we did not
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2751,31 +2866,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -2793,7 +2903,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2836,37 +2946,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Programs & Support
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../programs-support/" class="md-nav__link">
         
   
   
@@ -2882,70 +2965,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#nvidia-inception" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NVIDIA Inception
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#aws-activate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AWS Activate
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lambda-cloud" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lambda Cloud
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-the-resources-are-used" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How the resources are used
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2985,10 +3004,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#nvidia-inception" class="md-nav__link">
+  <a href="#the-node-check" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NVIDIA Inception
+        The node check
       
     </span>
   </a>
@@ -2996,10 +3015,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#aws-activate" class="md-nav__link">
+  <a href="#slurm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        AWS Activate
+        Slurm
       
     </span>
   </a>
@@ -3007,10 +3026,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lambda-cloud" class="md-nav__link">
+  <a href="#nhc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lambda Cloud
+        NHC
       
     </span>
   </a>
@@ -3018,10 +3037,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-the-resources-are-used" class="md-nav__link">
+  <a href="#reframe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How the resources are used
+        ReFrame
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-much-load-a-check-puts-on-a-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much load a check puts on a card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-we-tested-and-what-we-did-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What we tested, and what we did not
       
     </span>
   </a>
@@ -3045,18 +3086,169 @@
 
 
 
-<h1 id="programs-support">Programs &amp; Support</h1>
-<p>PantheonGPU participates in startup and infrastructure programs that help expand GPU compatibility testing, benchmark coverage, and validation across datacenter hardware.</p>
-<h2 id="nvidia-inception">NVIDIA Inception</h2>
-<p>PantheonGPU is a member of NVIDIA Inception. This membership does not imply NVIDIA endorsement or investment.</p>
-<h2 id="aws-activate">AWS Activate</h2>
-<p>PantheonGPU has received $10,000 in AWS Activate promotional cloud credits.</p>
-<p>These credits provide access to eligible AWS infrastructure for development, testing, benchmarking, data storage, and other PantheonGPU infrastructure needs. They are promotional cloud credits, not funding or investment.</p>
-<h2 id="lambda-cloud">Lambda Cloud</h2>
-<p>PantheonGPU has received $7,500 in Lambda Cloud credits.</p>
-<p>These resources can be used to expand testing and benchmarking across datacenter-class GPU systems. They are cloud credits, not funding or investment.</p>
-<h2 id="how-the-resources-are-used">How the resources are used</h2>
-<p>Infrastructure credits help PantheonGPU test across a broader range of GPU architectures and environments, while expanding its benchmark database and compatibility coverage. See the <a href="../benchmarks/">benchmark database</a> and <a href="../tests/">test documentation</a> for the resulting validation work.</p>
+<div class="page-intro">
+<p class="page-intro__eyebrow">Integrations</p>
+<h1 id="put-pantheongpu-where-your-cluster-already-looks">Put PantheonGPU where your cluster already looks</h1>
+<p>A scheduler wants a yes or a no about a node, not a table. These files turn a Pantheon run into that answer. They are in the source repository under <a href="https://github.com/pantheongpu/pantheon/tree/main/integrations"><code>integrations/</code></a>, and they work with Pantheon 1.2.2 and later.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What it does</th>
+<th>Files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anything that reads an exit code</td>
+<td>Runs the workloads you name and answers with a verdict for the node and for each card</td>
+<td><a href="https://github.com/pantheongpu/pantheon/blob/main/integrations/pantheon_node_check.py"><code>pantheon_node_check.py</code></a></td>
+</tr>
+<tr>
+<td>Slurm</td>
+<td>Tests the cards of a job when it ends, and accepts a node before it goes into service</td>
+<td><a href="https://github.com/pantheongpu/pantheon/tree/main/integrations/slurm"><code>slurm/</code></a></td>
+</tr>
+<tr>
+<td>NHC</td>
+<td>Adds <code>check_pantheon</code> to the node health check that Slurm or PBS runs</td>
+<td><a href="https://github.com/pantheongpu/pantheon/tree/main/integrations/nhc"><code>nhc/</code></a></td>
+</tr>
+<tr>
+<td>ReFrame</td>
+<td>A regression test with a score and a temperature for each card</td>
+<td><a href="https://github.com/pantheongpu/pantheon/tree/main/integrations/reframe"><code>reframe/</code></a></td>
+</tr>
+<tr>
+<td>GitHub Actions</td>
+<td>Checks the cards of a self-hosted runner before a job uses them</td>
+<td><a href="https://github.com/marketplace/actions/pantheon-gpu-health-check">Pantheon GPU Health Check</a></td>
+</tr>
+</tbody>
+</table>
+<p>Each one is a plain file that you copy. None of them is installed with the <code>pantheon-gpu</code> package.</p>
+<h2 id="the-node-check">The node check</h2>
+<p><code>pantheon_node_check.py</code> needs Python 3.9 or later and nothing else. It runs Pantheon, reads the reports, and prints one line for the node and one for each card:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span>pantheon_node_check.py<span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--duration<span class="w"> </span><span class="m">8</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">PANTHEON HEALTHY: 1 GPU HEALTHY</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">GPU 0 (NVIDIA GeForce RTX 3060): HEALTHY, memory_read 336.269 GB/s, march_test 2901230000.0 march-ops/s</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="go">  note: PCIe link recovery during memory_read, march_test: link power-state cycling, not a fault</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="go">0</span>
+</code></pre></div>
+<p>A card that returns wrong data, here with Pantheon's own fault injection:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>pantheon_node_check.py<span class="w"> </span>--gpu<span class="w"> </span><span class="m">0</span><span class="w"> </span>--test<span class="w"> </span>march_test<span class="w"> </span>--duration<span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">PANTHEON FAULT: GPU 0 FAULT (march_test failed: memory errors detected or the workload aborted)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">GPU 0 (NVIDIA GeForce RTX 3060): FAULT, march_test failed: memory errors detected or the workload aborted</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="gp">$ </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$?</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="go">2</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Exit code</th>
+<th>Verdict</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>HEALTHY</code></td>
+<td>Every workload completed and nothing was found</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>SKIPPED</code></td>
+<td>The job has no GPU, so nothing was tested</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>WATCH</code></td>
+<td>The card works, and something deserves a look: heat, correctable errors, or a workload that did not complete</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>FAULT</code></td>
+<td>A memory test failed, or the card counted uncorrectable errors during the run</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>INCOMPLETE</code>, <code>NO GPU TESTED</code>, <code>NOT RUN</code></td>
+<td>Nothing was tested or the run did not finish. It is never a pass</td>
+</tr>
+</tbody>
+</table>
+<p>The verdict comes from the reports and not from Pantheon's exit code. Pantheon exits with an error when a workload fails; errors that a card counted during a run that completed are in the report only.</p>
+<p>Without <code>nvcc</code> or <code>hipcc</code> on the node, Pantheon runs on a CPU backend that tests no hardware. The check answers <code>NO GPU TESTED</code> and exit code 3 in that case.</p>
+<h2 id="slurm">Slurm</h2>
+<p>The epilog tests the cards of each job that had a GPU, for 10 seconds, and drains the node when a card has a fault. Only a fault drains the node; a warning goes to the log.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>install<span class="w"> </span>-m<span class="w"> </span><span class="m">755</span><span class="w"> </span>pantheon_node_check.py<span class="w"> </span>/usr/local/sbin/pantheon_node_check.py
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>install<span class="w"> </span>-m<span class="w"> </span><span class="m">755</span><span class="w"> </span>slurm/epilog.sh<span class="w"> </span>/etc/slurm/epilog.d/50-pantheon.sh
+</code></pre></div>
+<p>After a job on a card with an injected fault, on our test cluster:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>scontrol<span class="w"> </span>show<span class="w"> </span>node<span class="w"> </span>node1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;State=[A-Z+]+|Reason=.*&#39;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">State=IDLE+DRAIN</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Reason=PANTHEON FAULT: GPU 0 FAULT (march_test failed: memory errors detected or the workload aborted) [root@2026-09-29T16:18:37]</span>
+</code></pre></div>
+<p><code>slurm/burnin.sbatch</code> is an acceptance job for one node. It runs four workloads on every card, keeps the reports, and fails when the verdict is not <code>HEALTHY</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sbatch<span class="w"> </span>--nodelist<span class="o">=</span>node042<span class="w"> </span>--gres<span class="o">=</span>gpu:8<span class="w"> </span>burnin.sbatch
+</code></pre></div>
+<p>The <a href="https://github.com/pantheongpu/pantheon/blob/main/integrations/slurm/README.md">Slurm README</a> has the settings and what each costs in time.</p>
+<h2 id="nhc">NHC</h2>
+<p>NHC's own GPU check calls <code>nvidia-healthmon</code>, which NVIDIA no longer ships. <code>check_pantheon</code> tests the memory of each card, and it is the same check on NVIDIA and on AMD cards. In <code>/etc/nhc/nhc.conf</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>* || export TIMEOUT=90
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>* || check_pantheon
+</code></pre></div>
+<p>The check loads the GPUs, so let NHC run it on idle nodes only, with <code>HealthCheckNodeState=IDLE</code> in <code>slurm.conf</code>. The <a href="https://github.com/pantheongpu/pantheon/blob/main/integrations/nhc/README.md">NHC README</a> has the rest.</p>
+<h2 id="reframe">ReFrame</h2>
+<p>The test runs one workload on the GPUs of a node and reports the score and the highest temperature of each card as performance values, so a card that got slower shows up against the reference of its node type.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gp">$ </span>reframe<span class="w"> </span>-C<span class="w"> </span>settings_example.py<span class="w"> </span>-c<span class="w"> </span>pantheon_check.py<span class="w"> </span>-r<span class="w"> </span>--exec-policy<span class="w"> </span>serial<span class="w"> </span>-S<span class="w"> </span><span class="nv">devices</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>-S<span class="w"> </span><span class="nv">duration</span><span class="o">=</span><span class="m">5</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">[  PASSED  ] Ran 4/4 test case(s) from 4 check(s) (0 failure(s), 0 expected failure(s), 0 skipped, 0 aborted)</span>
+</code></pre></div>
+<p>The <a href="https://github.com/pantheongpu/pantheon/blob/main/integrations/reframe/README.md">ReFrame README</a> lists the variables.</p>
+<h2 id="how-much-load-a-check-puts-on-a-card">How much load a check puts on a card</h2>
+<p>The workload sets the load, so a check can be as gentle as it needs to be. Average power during the run, as the median over the cards in our <a href="../benchmarks/">database</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Workload</th>
+<th>A100 SXM4 40GB (limit 400 W)</th>
+<th>L40S (limit 350 W)</th>
+<th>H100 PCIe (limit 350 W)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>galpat</code>, memory pattern test</td>
+<td>101 W</td>
+<td>87 W</td>
+<td>91 W</td>
+</tr>
+<tr>
+<td><code>march_test</code>, memory pattern test</td>
+<td>176 W</td>
+<td>185 W</td>
+<td>176 W</td>
+</tr>
+<tr>
+<td><code>memory_read</code>, memory bandwidth</td>
+<td>283 W</td>
+<td>218 W</td>
+<td>346 W</td>
+</tr>
+<tr>
+<td><code>incinerator</code>, compute</td>
+<td>307 W</td>
+<td>265 W</td>
+<td>289 W</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-we-tested-and-what-we-did-not">What we tested, and what we did not</h2>
+<p>We ran the node check on two RTX 3060 cards, with and without an injected fault. We ran the epilog, the acceptance job and the NHC check under Slurm 23.11.4 on a one-node test cluster with Pantheon on its CPU backend, and the ReFrame test with ReFrame 4.10.4 on an RTX 3060.</p>
+<p>We have not run these files on a cluster with real GPUs under Slurm, on AMD cards, or with MIG devices. If you do, tell us how it went in the <a href="https://github.com/pantheongpu/pantheon/discussions">discussions</a>.</p>
 
 
 
@@ -3147,7 +3339,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../community/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Community Overview">
+          <a href="../getting-started/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3157,11 +3349,27 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Community Overview
+                Getting Started
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../benchmarks/" class="md-footer__link md-footer__link--next" aria-label="Next: Live Benchmarks">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Live Benchmarks
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
