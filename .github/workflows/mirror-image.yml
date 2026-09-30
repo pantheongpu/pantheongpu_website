@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   mirror:
-    # On the runner host and not in a container: the job needs the docker daemon.
+    # On the runner host, outside any pinned image: the job needs the docker daemon.
     runs-on: [self-hosted, Linux, X64]
     env:
       VERSION: ${{ inputs.version }}
