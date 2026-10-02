@@ -1,0 +1,57 @@
+name: Mirror Image to Docker Hub
+
+# Copies the tags of one released version from GHCR to Docker Hub. The release
+# workflow does this for new releases; this one is for versions released
+# before the Docker Hub organisation existed.
+#
+# Needs the secrets DOCKERHUB_USERNAME and DOCKERHUB_TOKEN (an access token
+# with read and write scope on the docker.io/pantheongpu organisation).
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Released version to copy, for example 1.2.2"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  mirror:
+    # On the runner host, outside any pinned image: the job needs the docker daemon.
+    runs-on: [self-hosted, Linux, X64]
+    env:
+      VERSION: ${{ inputs.version }}
+      IMAGE: ghcr.io/pantheongpu/pantheon
+      HUB_IMAGE: docker.io/pantheongpu/pantheon
+    steps:
+      - name: Copy the tags
+        shell: bash
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DOCKERHUB_TOKEN}" ]; then
+            echo "::error::DOCKERHUB_TOKEN is not configured"
+            exit 1
+          fi
+          printf '%s' "$DOCKERHUB_TOKEN" | docker login docker.io -u "$DOCKERHUB_USERNAME" --password-stdin
+          for tag in "${VERSION}-cuda12.8" "${VERSION}" "${VERSION}-rocm6.4"; do
+            docker pull "${IMAGE}:${tag}"
+            docker tag "${IMAGE}:${tag}" "${HUB_IMAGE}:${tag}"
+            docker push "${HUB_IMAGE}:${tag}"
+          done
+          # latest and latest-rocm follow the newest version only.
+          newest="$(git ls-remote --tags https://github.com/pantheongpu/pantheon.git 'v*' \
+            | sed 's#.*refs/tags/v##; s#\^{}##' | sort -V | tail -n 1)"
+          if [ "${newest}" = "${VERSION}" ]; then
+            docker tag "${IMAGE}:${VERSION}-cuda12.8" "${HUB_IMAGE}:latest"
+            docker tag "${IMAGE}:${VERSION}-rocm6.4" "${HUB_IMAGE}:latest-rocm"
+            docker push "${HUB_IMAGE}:latest"
+            docker push "${HUB_IMAGE}:latest-rocm"
+          fi
+          docker logout docker.io

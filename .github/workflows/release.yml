@@ -592,6 +592,24 @@ jobs:
           docker push "${IMAGE}:latest-rocm"
           docker logout ghcr.io
 
+      - name: Push the same tags to Docker Hub
+        # Docker Hub is where marketplace renters search for an image. The
+        # push runs only when the organisation's token is configured; without
+        # it the release still completes with the GHCR image alone.
+        if: ${{ env.DOCKERHUB_TOKEN != '' }}
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          HUB_IMAGE: docker.io/pantheongpu/pantheon
+        run: |
+          set -euo pipefail
+          printf '%s' "$DOCKERHUB_TOKEN" | docker login docker.io -u "$DOCKERHUB_USERNAME" --password-stdin
+          for tag in "${VERSION}-cuda12.8" "${VERSION}" latest "${VERSION}-rocm6.4" latest-rocm; do
+            docker tag "${IMAGE}:${tag}" "${HUB_IMAGE}:${tag}"
+            docker push "${HUB_IMAGE}:${tag}"
+          done
+          docker logout docker.io
+
   publish-copr:
     needs: release
     if: ${{ !inputs.dry_run }}
