@@ -22,7 +22,7 @@ permissions:
 jobs:
   mirror:
     # On the runner host, outside any pinned image: the job needs the docker daemon.
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     env:
       VERSION: ${{ inputs.version }}
       IMAGE: ghcr.io/pantheongpu/pantheon
