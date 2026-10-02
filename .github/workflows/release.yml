@@ -54,7 +54,7 @@ defaults:
 
 jobs:
   release:
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     outputs:
       version: ${{ steps.version.outputs.version }}
     container:
@@ -482,7 +482,7 @@ jobs:
   publish-pypi:
     needs: release
     if: ${{ !inputs.dry_run && inputs.publish_pypi }}
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     permissions:
       # Trusted publishing swaps this for a short-lived upload credential, so
       # no PyPI API token has to be stored in this repository.
@@ -520,7 +520,7 @@ jobs:
   publish-containers:
     needs: release
     if: ${{ !inputs.dry_run }}
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     permissions:
       contents: read
       packages: write
@@ -613,7 +613,7 @@ jobs:
   publish-copr:
     needs: release
     if: ${{ !inputs.dry_run }}
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     container:
       image: ubuntu:24.04
     env:
