@@ -402,11 +402,32 @@ def test_clean_uninstall_script_covers_package_portable_and_cache_files():
     assert "uninstall-smoke:" in workflow
 
 
+# Which self-hosted runner each workflow is pinned to. The org runner on
+# server1 (label pantheongpu) takes the light jobs: tests, the docs build, the
+# site publish and housekeeping. Jobs that pull, build or push multi-gigabyte
+# images stay on the website's own runner (label pantheon-website): server1
+# also carries a production database whose writers stop below 30 GB free, so
+# nothing that can take tens of gigabytes may land there.
+RUNNER_FOR_WORKFLOW = {
+    "ci.yml": "runs-on: [self-hosted, Linux, X64, pantheongpu]",
+    "deploy.yml": "runs-on: [self-hosted, Linux, X64, pantheongpu]",
+    "sanitize-imports.yml": "runs-on: [self-hosted, Linux, X64, pantheongpu]",
+    "prune-actions-storage.yml": "runs-on: [self-hosted, Linux, X64, pantheongpu]",
+    "channel-smoke.yml": "runs-on: [self-hosted, Linux, X64, pantheon-website]",
+    "mirror-image.yml": "runs-on: [self-hosted, Linux, X64, pantheon-website]",
+    "mirror-pantheon-release.yml": "runs-on: [self-hosted, Linux, X64, pantheon-website]",
+    "release.yml": "runs-on: [self-hosted, Linux, X64, pantheon-website]",
+}
+
+
 def test_all_workflow_jobs_use_self_hosted_linux_runners():
     workflow_dir = ROOT / ".github/workflows"
     workflows = list(workflow_dir.glob("*.yml")) + list(workflow_dir.glob("*.yaml"))
 
     assert workflows
+    assert sorted(p.name for p in workflows) == sorted(RUNNER_FOR_WORKFLOW), (
+        "a new workflow has to be pinned to one of the two runners"
+    )
     for workflow_path in workflows:
         workflow = workflow_path.read_text(encoding="utf-8")
         runs_on_lines = [
@@ -415,9 +436,12 @@ def test_all_workflow_jobs_use_self_hosted_linux_runners():
         ]
         assert runs_on_lines, f"{workflow_path.name} does not define a runner"
         assert all(
-            line == "runs-on: [self-hosted, Linux, X64]"
+            line == RUNNER_FOR_WORKFLOW[workflow_path.name]
             for line in runs_on_lines
-        ), f"{workflow_path.name} contains a non-self-hosted runner"
+        ), f"{workflow_path.name} is not pinned to its runner"
+        # A bare three-label runs-on would match every self-hosted runner in
+        # the organisation, including the live playground host.
+        assert "runs-on: [self-hosted, Linux, X64]" not in workflow
         # Jobs run in a pinned container so the self-hosted runner's own
         # packages cannot drift into a build -- except where a job must run
         # outside one. Two reasons are accepted, and each must be recorded in

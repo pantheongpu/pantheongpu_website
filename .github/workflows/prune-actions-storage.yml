@@ -39,7 +39,7 @@ defaults:
 
 jobs:
   prune:
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheongpu]
     container:
       image: ubuntu:24.04
     steps:

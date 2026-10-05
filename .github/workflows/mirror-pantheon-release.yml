@@ -30,7 +30,7 @@ defaults:
 
 jobs:
   mirror-release:
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     container:
       image: ubuntu:24.04
     steps:
