@@ -22,7 +22,7 @@ defaults:
 
 jobs:
   test:
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheongpu]
     container:
       image: ubuntu:24.04
     strategy:
@@ -75,7 +75,7 @@ jobs:
         run: python -m mkdocs build --strict
 
   uninstall-smoke:
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheongpu]
     container:
       image: ubuntu:24.04
 

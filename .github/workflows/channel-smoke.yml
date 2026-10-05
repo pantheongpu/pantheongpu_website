@@ -28,7 +28,7 @@ jobs:
   channels:
     # Runs outside a pinned image: every check drives the host docker daemon
     # to create the pristine environment it tests in.
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, pantheon-website]
     timeout-minutes: 30
     steps:
       - name: Determine the released version
