@@ -2101,7 +2101,8 @@ def test_integrations_page_is_reachable_and_carries_no_copy_of_the_source():
         "    - Install and first run: getting-started.md\n"
         "    - Integrations: integrations.md\n"
     ) in mkdocs
-    assert "  - Integrations: integrations.md\n" not in mkdocs
+    # Anchored on the newline: the nested entry above ends with the same text.
+    assert "\n  - Integrations: integrations.md\n" not in mkdocs
     assert "[Integrations](integrations.md)" in read("docs/getting-started.md")
     # The files live in the source repository. The page links to them there,
     # and this repository keeps no copy that could drift.
