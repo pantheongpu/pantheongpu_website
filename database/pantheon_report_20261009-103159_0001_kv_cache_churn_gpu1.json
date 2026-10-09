@@ -1,0 +1,108 @@
+{
+    "pantheon_version": "1.2.2",
+    "timestamp": "2026-10-09 10:31:59",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-38-generic",
+        "version": "#38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 16,
+        "logical_cores": 32,
+        "freq": "1164.06Mhz"
+    },
+    "ram_info": {
+        "total": "29.95GB",
+        "available": "27.73GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "AMD",
+            "manufacturer": "AMD",
+            "name": "AMD Radeon RX 6800",
+            "memory_total": "16368 MB",
+            "driver_version": "ROCm Driver",
+            "power_limit": 203.0,
+            "uuid": "0xfd3d6d912de3c917",
+            "serial": "N/A",
+            "memory_type": "N/A",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "rocm-smi"
+        },
+        {
+            "id": 1,
+            "type": "AMD",
+            "manufacturer": "AMD",
+            "name": "AMD Radeon RX 6700 XT",
+            "memory_total": "12272 MB",
+            "driver_version": "ROCm Driver",
+            "power_limit": 186.0,
+            "uuid": "0x0",
+            "serial": "N/A",
+            "memory_type": "N/A",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "rocm-smi"
+        },
+        {
+            "id": 2,
+            "type": "AMD",
+            "manufacturer": "AMD",
+            "name": "AMD Radeon Graphics",
+            "memory_total": "512 MB",
+            "driver_version": "ROCm Driver",
+            "power_limit": "N/A",
+            "uuid": "0x0",
+            "serial": "N/A",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: rocm-smi reports no vendor"
+        }
+    ],
+    "toolkit_version": "7.2.0",
+    "run_id": "20261009-103159",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-09 10:37:03",
+    "test_results": [
+        {
+            "Test Name": "kv_cache_churn",
+            "Version": "1.2.2",
+            "Description": "KV Cache Churn (Paged/Ragged Cache Updates)",
+            "GPU ID": 1,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 1155140000.0,
+            "Unit": "cache-updates/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 86.0,
+            "Max Temp (C)": 88.0,
+            "Avg Mem Temp (C)": 95.6,
+            "Max Mem Temp (C)": 98.0,
+            "Avg Power (W)": 132.0,
+            "Max Power (W)": 135.0,
+            "Avg Clock(MHz)": 2660.8,
+            "Min Clock (MHz)": 2670.0,
+            "Max Clock (MHz)": 2675.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 0.0,
+            "Memory Total (MiB)": 0.0,
+            "Energy (Wh)": 11.063,
+            "Thermal Rise (C)": 32.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 8751060.61,
+            "PCIe Gen": "N/A",
+            "PCIe Width": "N/A",
+            "Limit Reason": "N/A",
+            "Max Fan (%)": 0.0,
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "/home/saqib/pantheon/cache-fat/1.2.2/hip-gfx1030/kv_cache_churn 1 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261009-103159/reliability/kv_cache_churn/gpu1/ras.json"
+        }
+    ]
+}
