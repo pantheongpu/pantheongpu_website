@@ -631,10 +631,22 @@ def test_toolkit_coverage_lists_only_hardware_backed_versions():
     assert "## Toolkit and driver coverage" in methodology
     assert "| Platform | Toolkit | Driver versions | GPU models tested |" in methodology
     assert "| CUDA | 12.8 |" in methodology
-    # No published AMD runs yet: the section must say so rather than
-    # showing an empty or fabricated ROCm row.
-    assert "| ROCm |" not in methodology
-    assert "No AMD ROCm hardware runs have been published yet" in methodology
+    # A ROCm row must be backed by published AMD results: none while there are
+    # no AMD runs (the section says so instead of showing an empty or
+    # fabricated row), and once there are, a row that never counts more AMD
+    # models than have results.
+    web_data = json.loads(read("docs/assets/web_data.json"))
+    amd_models = {row["gpu"] for row in web_data if row.get("manufacturer") == "AMD"}
+    rocm_rows = [line for line in methodology.splitlines() if line.startswith("| ROCm |")]
+    if amd_models:
+        assert rocm_rows, "AMD results are published but the coverage table has no ROCm row"
+        assert "No AMD ROCm hardware runs have been published yet" not in methodology
+        for line in rocm_rows:
+            counted = int(line.rstrip(" |").rsplit("|", 1)[1])
+            assert 1 <= counted <= len(amd_models), line
+    else:
+        assert not rocm_rows
+        assert "No AMD ROCm hardware runs have been published yet" in methodology
 
 
 def test_database_reports_contain_no_host_identifiers():
@@ -1892,8 +1904,15 @@ def _database_gpu_names():
         if not isinstance(data, dict) or not data.get("test_results"):
             continue
         status = str(data.get("run_status", "complete")).lower()
+        # gpu_static_info lists every GPU in the machine, including ones that
+        # were never benchmarked (a CPU's integrated graphics next to the cards
+        # under test). A card with no results has no data to lose, so only
+        # cards that appear in test_results are accounted for here.
+        tested = {row.get("GPU ID") for row in data["test_results"] if isinstance(row, dict)}
         for card in (data.get("gpu_static_info") or []):
             if isinstance(card, dict) and card.get("name"):
+                if card.get("id") is not None and tested and card["id"] not in tested:
+                    continue
                 seen[card["name"]].add(status)
     return seen
 
