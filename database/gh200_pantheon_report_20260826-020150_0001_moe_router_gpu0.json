@@ -68,7 +68,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheon/build/moe_router 0 300 50 --verify",
+            "Command Lines": "~/pantheon/build/moe_router 0 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260826-020150/reliability/moe_router/gpu0/ras.json"

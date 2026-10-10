@@ -65,7 +65,7 @@
       "Max Fan (%)": 65.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/tools/pantheongpu/build/cache_latency 0 60 50 --verify"
+      "Command Lines": "~/tools/pantheongpu/build/cache_latency 0 60 50 --verify"
     }
   ]
 }

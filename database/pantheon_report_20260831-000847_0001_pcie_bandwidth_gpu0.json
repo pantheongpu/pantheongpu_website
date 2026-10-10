@@ -68,7 +68,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheon/build/pcie_bandwidth 0 300 99 --verify",
+            "Command Lines": "~/pantheon/build/pcie_bandwidth 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260831-000847/reliability/pcie_bandwidth/gpu0/ras.json"

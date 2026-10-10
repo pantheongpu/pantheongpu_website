@@ -145,7 +145,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu/build/fp64_virus 7 300 50 --verify",
+            "Command Lines": "~/pantheongpu/build/fp64_virus 7 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260824-150847/reliability/fp64_virus/gpu7/ras.json"

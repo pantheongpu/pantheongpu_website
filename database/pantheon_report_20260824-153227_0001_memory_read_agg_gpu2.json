@@ -145,7 +145,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu/build/memory_read_agg 2 300 50 --verify",
+            "Command Lines": "~/pantheongpu/build/memory_read_agg 2 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260824-153227/reliability/memory_read_agg/gpu2/ras.json"

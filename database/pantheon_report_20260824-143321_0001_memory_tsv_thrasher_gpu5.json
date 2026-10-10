@@ -145,7 +145,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu/build/memory_tsv_thrasher 5 300 50 --verify",
+            "Command Lines": "~/pantheongpu/build/memory_tsv_thrasher 5 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260824-143321/reliability/memory_tsv_thrasher/gpu5/ras.json"

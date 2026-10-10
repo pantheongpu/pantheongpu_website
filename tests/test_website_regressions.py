@@ -663,6 +663,42 @@ def test_database_reports_contain_no_host_identifiers():
         assert '"ip_address"' not in flattened, report_path.name
 
 
+def test_database_reports_name_no_user_home_directory():
+    # A result row's Command Lines carry the absolute path of the workload
+    # binary, which sits under the operator's home directory. The user name in
+    # it is as much a host identifier as the hostname, and the repository is
+    # public, so website_utils/sanitize_reports.py rewrites those paths to ~.
+    home = re.compile(r"/(?:home|Users)/[^/\s\"']+")
+    offenders = [p.name for p in sorted((ROOT / "database").rglob("*.json"))
+                 if home.search(p.read_text(encoding="utf-8"))]
+    assert offenders == [], offenders[:5]
+
+
+def test_database_file_names_carry_no_host_names():
+    names = [p.name for p in (ROOT / "database").rglob("*.json")]
+    assert [n for n in names if re.search(r"server\d|maheen|saqib", n, re.I)] == []
+
+
+def test_sanitizer_rewrites_home_directories_to_a_tilde(tmp_path):
+    import sanitize_reports
+
+    cases = {
+        "/home/alice/.cache/pantheongpu/builds/1.2.2/cuda-86/memory_read 0 30": "~/.cache/pantheongpu/builds/1.2.2/cuda-86/memory_read 0 30",
+        "/Users/bob/pantheon/build/memory_write": "~/pantheon/build/memory_write",
+        "/mnt/c/Users/carol/OneDrive/pantheon/build/memory_write": "~/OneDrive/pantheon/build/memory_write",
+        "/usr/local/cuda/bin/ncu --csv": "/usr/local/cuda/bin/ncu --csv",
+        "results/20260822-021044/ras.json": "results/20260822-021044/ras.json",
+    }
+    for before, after in cases.items():
+        assert sanitize_reports.scrub_host_paths(before) == after
+
+    report = tmp_path / "pantheon_report_x.json"
+    report.write_text('{\n  "test_results": [{"Command Lines": "/home/alice/b/x 0 1"}]\n}\n', encoding="utf-8")
+    assert sanitize_reports.sanitize_report(report) is True
+    assert report.read_text(encoding="utf-8") == '{\n  "test_results": [{"Command Lines": "~/b/x 0 1"}]\n}\n'
+    assert sanitize_reports.sanitize_report(report) is False
+
+
 def test_report_sanitizer_is_available():
     sanitizer = read("website_utils/sanitize_reports.py")
 

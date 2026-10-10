@@ -15,6 +15,11 @@ scrubbed: the owner decided (2026-08-31) to publish them verbatim. They are
 load-bearing for per-card identity, dedup and history on the dashboards, and
 they identify a card, not a host. Only host identifiers are removed.
 
+Reports also record where Pantheon ran: the ``Command Lines`` of a result row
+carry the absolute path of the workload binary, and so the operator's home
+directory and user name. Any ``/home/<name>``, ``/Users/<name>`` or
+``/mnt/<drive>/Users/<name>`` path is rewritten to ``~``.
+
 Run this after copying new reports into ``database/``:
 
     python3 website_utils/sanitize_reports.py
@@ -105,20 +110,33 @@ def public_gpu_id(raw):
     return _public_gpu_id(raw)
 
 
+# A user's home directory, as it appears inside a path: the operator's name must
+# not reach a public tree. Everything after the name is kept.
+_HOME_PATH = re.compile(r"(?<![\w.~])(?:/mnt/[a-z])?/(?:home|Users)/[^/\s\"'\\]+")
+
+
+def scrub_host_paths(text):
+    """Replace the home directory of any user in `text` with ``~``."""
+    return _HOME_PATH.sub("~", text)
+
+
 def sanitize_report(path):
     """Remove host identifiers from one report. Returns True if changed.
 
     GPU UUIDs and serials are left exactly as the report recorded them.
     """
-    raw = path.read_text(encoding="utf-8")
+    original = path.read_bytes().decode("utf-8")
+    # Paths are scrubbed in the text, so the file keeps its layout; the
+    # replacement has no characters that JSON escapes.
+    raw = scrub_host_paths(original)
     data = json.loads(raw)
 
-    changed = False
-    if "network_info" in data:
-        del data["network_info"]
-        changed = True
-    if not changed:
-        return False
+    if "network_info" not in data:
+        if raw == original:
+            return False
+        path.write_bytes(raw.encode("utf-8"))
+        return True
+    del data["network_info"]
     indent_match = re.search(r'\n(\s+)"', raw)
     indent = len(indent_match.group(1)) if indent_match else 4
     trailing = "\n" if raw.endswith("\n") else ""
@@ -135,7 +153,7 @@ def main():
     # privacy scrub must not depend on a naming convention.
     for path in sorted(DB_DIR.rglob("*.json")):
         if sanitize_report(path):
-            print(f"[SANITIZED] removed network_info: {path.name}")
+            print(f"[SANITIZED] {path.name}")
             changed += 1
     print(f"[Sanitize] {changed} report(s) rewritten.")
 

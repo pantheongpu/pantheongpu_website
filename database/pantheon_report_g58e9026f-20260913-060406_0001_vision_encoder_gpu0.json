@@ -85,7 +85,7 @@
             "Max Fan (%)": 76.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.2/cuda-86/vision_encoder 0 300 99 --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.2/cuda-86/vision_encoder 0 300 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
             "RAS Report": "results/20260913-060406/reliability/vision_encoder/gpu0/ras.json"

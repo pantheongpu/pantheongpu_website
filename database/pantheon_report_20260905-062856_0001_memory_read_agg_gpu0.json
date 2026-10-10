@@ -69,7 +69,7 @@
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
             "Status": "FAIL",
-            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/memory_read 0 300 99 --init_pattern rail_to_rail --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.0/cuda-90a/memory_read 0 300 99 --init_pattern rail_to_rail --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260905-062856/reliability/memory_read_agg/gpu0/ras.json"

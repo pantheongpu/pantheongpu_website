@@ -68,7 +68,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.1.0/cuda-90a/memory_write 0 300 50 --init_pattern crosstalk --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.1.0/cuda-90a/memory_write 0 300 50 --init_pattern crosstalk --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260831-212219/reliability/memory_write_agg/gpu0/ras.json"

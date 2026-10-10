@@ -64,7 +64,7 @@
             "Max Fan (%)": 55.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.0/cuda-86/graph_replay 0 300 99 --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.0/cuda-86/graph_replay 0 300 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
             "RAS Report": "results/20260908-215759/reliability/graph_replay/gpu0/ras.json"

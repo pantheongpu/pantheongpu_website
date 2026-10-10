@@ -99,7 +99,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": "N/A",
             "Volts SoC (mV)": "N/A",
-            "Command Lines": "/home/saqib/pantheon/cache/1.2.2/hip-gfx1030/rope_stress 0 300 99 --verify",
+            "Command Lines": "~/pantheon/cache/1.2.2/hip-gfx1030/rope_stress 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20261009-102947/reliability/rope_stress/gpu0/ras.json"

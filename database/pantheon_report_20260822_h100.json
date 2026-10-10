@@ -64,7 +64,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/idle 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/idle 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/baseline_metrics/gpu0/ras.json"
@@ -102,7 +102,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_thermal_asym 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_thermal_asym 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_thermal_asym/gpu0/ras.json"
@@ -140,7 +140,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_cache_fracture 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_cache_fracture 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_cache_fracture/gpu0/ras.json"
@@ -178,7 +178,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_retention_bake 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_retention_bake 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_retention_bake/gpu0/ras.json"
@@ -216,7 +216,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_pc_pingpong 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_pc_pingpong 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_pc_pingpong/gpu0/ras.json"
@@ -254,7 +254,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_bank_thrash 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_bank_thrash 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_bank_thrash/gpu0/ras.json"
@@ -292,7 +292,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_tsv_thrasher 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_tsv_thrasher 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_tsv_thrasher/gpu0/ras.json"
@@ -330,7 +330,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/tlb_avalanche 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/tlb_avalanche 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/tlb_avalanche/gpu0/ras.json"
@@ -368,7 +368,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/ras_validator 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/ras_validator 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/ras_validator/gpu0/ras.json"
@@ -406,7 +406,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/int_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/int_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/int_virus/gpu0/ras.json"
@@ -444,7 +444,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/scheduler_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/scheduler_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/scheduler/gpu0/ras.json"
@@ -482,7 +482,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/mma_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/mma_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/mma_virus/gpu0/ras.json"
@@ -520,7 +520,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/fp64_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/fp64_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/fp64_virus/gpu0/ras.json"
@@ -558,7 +558,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_write 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_write 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_write/gpu0/ras.json"
@@ -596,7 +596,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_write_agg 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_write_agg 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_write_agg/gpu0/ras.json"
@@ -634,7 +634,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_read 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_read 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_read/gpu0/ras.json"
@@ -672,7 +672,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/memory_read_agg 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/memory_read_agg 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/memory_read_agg/gpu0/ras.json"
@@ -710,7 +710,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/compute_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/compute_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/voltage/gpu0/ras.json"
@@ -748,7 +748,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/compute_virus_agg 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/compute_virus_agg 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/incinerator/gpu0/ras.json"
@@ -786,7 +786,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/cache_latency 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/cache_latency 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/cache_lat/gpu0/ras.json"
@@ -824,7 +824,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/sfu_stress 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/sfu_stress 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/sfu_stress/gpu0/ras.json"
@@ -862,7 +862,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/pcie_bandwidth 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/pcie_bandwidth 0 300 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.bad_tlp +2 || vendor_ras.pcie.l0_to_recovery +2 || vendor_ras.pcie.lcrc +2 || vendor_ras.pcie.naks_sent +2",
             "RAS Report": "results/20260822-040707/reliability/pcie_bandwidth/gpu0/ras.json"
@@ -900,7 +900,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/pulse_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/pulse_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/pulse_virus/gpu0/ras.json"
@@ -938,7 +938,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/tensor_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/tensor_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/tensor_virus/gpu0/ras.json"
@@ -976,7 +976,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/atomic_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/atomic_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/atomic_virus/gpu0/ras.json"
@@ -1014,7 +1014,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/omni_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/omni_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/omni_virus/gpu0/ras.json"
@@ -1052,7 +1052,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/p2p_thrasher 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/p2p_thrasher 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/p2p_thrasher/gpu0/ras.json"
@@ -1090,7 +1090,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/all_reduce 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/all_reduce 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/all_reduce/gpu0/ras.json"
@@ -1128,7 +1128,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/transformer_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/transformer_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/transformer_virus/gpu0/ras.json"
@@ -1166,7 +1166,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/llm_decode 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/llm_decode 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/llm_decode/gpu0/ras.json"
@@ -1204,7 +1204,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/llm_prefill 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/llm_prefill 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/llm_prefill/gpu0/ras.json"
@@ -1242,7 +1242,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/kv_cache_churn 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/kv_cache_churn 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/kv_cache_churn/gpu0/ras.json"
@@ -1280,7 +1280,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/fused_attention 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/fused_attention 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/fused_attention/gpu0/ras.json"
@@ -1318,7 +1318,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/rope_stress 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/rope_stress 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/rope_stress/gpu0/ras.json"
@@ -1356,7 +1356,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/quantized_gemm 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/quantized_gemm 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/quantized_gemm/gpu0/ras.json"
@@ -1394,7 +1394,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/serving_mix 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/serving_mix 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/serving_mix/gpu0/ras.json"
@@ -1432,7 +1432,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/speculative_decode 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/speculative_decode 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/speculative_decode/gpu0/ras.json"
@@ -1470,7 +1470,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/moe_router 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/moe_router 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/moe_router/gpu0/ras.json"
@@ -1508,7 +1508,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/transformer_train_step 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/transformer_train_step 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/transformer_train_step/gpu0/ras.json"
@@ -1546,7 +1546,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/allocation_fragmentation 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/allocation_fragmentation 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/allocation_fragmentation/gpu0/ras.json"
@@ -1584,7 +1584,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/graph_replay 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/graph_replay 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/graph_replay/gpu0/ras.json"
@@ -1622,7 +1622,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/rag_embedding 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/rag_embedding 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/rag_embedding/gpu0/ras.json"
@@ -1660,7 +1660,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/vision_encoder 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/vision_encoder 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/vision_encoder/gpu0/ras.json"
@@ -1698,7 +1698,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/rt_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/rt_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/rt_virus/gpu0/ras.json"
@@ -1736,7 +1736,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheongpu-lambda/build/media_enc_virus 0 300 99 --verify",
+            "Command Lines": "~/pantheongpu-lambda/build/media_enc_virus 0 300 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260822-040707/reliability/media_enc_virus/gpu0/ras.json"

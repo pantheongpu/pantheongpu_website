@@ -68,7 +68,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.0/cuda-90a/llm_decode 0 300 50 --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.0/cuda-90a/llm_decode 0 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260903-142619/reliability/llm_decode/gpu0/ras.json"

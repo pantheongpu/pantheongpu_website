@@ -68,7 +68,7 @@
             "Max Fan (%)": 61.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.0/cuda-86/rope_stress 0 300 99 --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.0/cuda-86/rope_stress 0 300 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
             "RAS Report": "results/20260908-211910/reliability/rope_stress/gpu0/ras.json"

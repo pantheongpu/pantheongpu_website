@@ -71,7 +71,7 @@
             "Max Fan (%)": 69.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/maheen/.cache/pantheongpu/builds/1.2.2/cuda-86/memory_read 0 300 99 --init_pattern rail_to_rail --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.2/cuda-86/memory_read 0 300 99 --init_pattern rail_to_rail --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
             "RAS Report": "results/20260913-124805/reliability/memory_read_agg/gpu0/ras.json"

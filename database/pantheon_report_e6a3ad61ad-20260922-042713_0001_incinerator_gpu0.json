@@ -71,7 +71,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-120/compute_virus_agg 0 3600 99 --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.2/cuda-120/compute_virus_agg 0 3600 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
             "RAS Report": "results/20260922-042713/reliability/incinerator/gpu0/ras.json"

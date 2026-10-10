@@ -71,7 +71,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/.cache/pantheongpu/builds/1.2.2/cuda-89/transformer_train_step 0 3600 99 --verify",
+            "Command Lines": "~/.cache/pantheongpu/builds/1.2.2/cuda-89/transformer_train_step 0 3600 99 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260924-220226/reliability/transformer_train_step/gpu0/ras.json"

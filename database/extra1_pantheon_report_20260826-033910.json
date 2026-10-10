@@ -75,7 +75,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheon/build/allocation_fragmentation 0 300 50 --verify",
+            "Command Lines": "~/pantheon/build/allocation_fragmentation 0 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260826-033910/reliability/allocation_fragmentation/gpu0/ras.json"
@@ -113,7 +113,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/ubuntu/pantheon/build/allocation_fragmentation 1 300 50 --verify",
+            "Command Lines": "~/pantheon/build/allocation_fragmentation 1 300 50 --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20260826-033910/reliability/allocation_fragmentation/gpu1/ras.json"
