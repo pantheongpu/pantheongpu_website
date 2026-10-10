@@ -318,11 +318,13 @@ def test_no_version_pinned_selectors_in_stylesheets():
 
 
 def test_documentation_pages_keep_the_navigation_sidebar():
-    # Only the landing page and the two full-width data pages hide the
-    # sidebar; prose documentation pages must keep it so the layout does not
-    # jump between pages.
+    # Only the landing page hides the sidebar. Everywhere else it carries the
+    # section's page list, so a page that hides it leaves a visitor no way to
+    # the other pages of the section. That includes the two data pages, which
+    # hid it to give their charts room; the charts do not need it.
     for page in ("docs/methodology.md", "docs/getting-started.md",
-                 "docs/community.md", "docs/programs-support.md"):
+                 "docs/community.md", "docs/programs-support.md",
+                 "docs/benchmark-comparisons.md", "docs/gpu-history.md"):
         assert "hide:" not in read(page).split("# ")[0], page
 
 
