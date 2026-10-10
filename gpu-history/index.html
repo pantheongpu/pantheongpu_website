@@ -2975,12 +2975,19 @@
 A UUID names one physical card, not the machine it sat in, and it follows
 the card across releases and owners, which is what a history needs. Host
 details (hostnames, network information) are removed before a report is
-published. Cards from early reports that carried no UUID are grouped by
-model, memory size and driver instead and labelled as having no GPU ID.</p>
+published. Cards whose report carried no usable UUID (early reports, and
+AMD reports that give 0x0) are grouped by model, serial number when there
+is one, memory size and driver instead and labelled as having
+no GPU ID. Two identical cards with the same driver cannot be told apart
+that way and share one series.</p>
 <p>When a workload's metric changed between releases, each unit is drawn as its
 own series. Values in different units are not comparable, and joining them
 into one line would show a step that is a change of units rather than a
 change in the hardware.</p>
+<p>Runs of different lengths are drawn as separate series as well. A longer run
+heat-soaks the card and usually scores lower than a short one on the same
+silicon, so mixing a 30 s, a 300 s and a 3600 s result in one line would
+show a decline that is not there.</p>
 </div>
 <div class="benchmark-controls">
   <label for="gpuHistoryCard">Card</label>

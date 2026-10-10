@@ -2968,12 +2968,20 @@
 <p>Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Runs that could not run</p>
-<p>A workload that reported zero throughput never executed its measured path
-(ray tracing without an OptiX SDK, video encode without an encoder). Those
-runs are listed with the reason in
-<a href="../assets/unsupported_workloads.json">unsupported_workloads.json</a> instead of
-appearing here as a zero.</p>
+<p class="admonition-title">Runs without a result</p>
+<p>Some runs have no result to publish, and none of them appears here as a
+zero. Each is listed with its reason in
+<a href="../assets/unsupported_workloads.json">unsupported_workloads.json</a> under one of
+three statuses:</p>
+<ul>
+<li><code>UNSUPPORTED</code>: the card cannot run the workload at all (for example, an
+  A100 has no video encoder).</li>
+<li><code>NO_MEASUREMENT</code>: the workload reported zero throughput, so its measured
+  path never ran (ray tracing without an OptiX SDK, video encode without an
+  encoder).</li>
+<li><code>FAILED</code>: the workload reported a failure (status FAIL, unit ERR). The
+  report does not say why, so a failure is not a statement about the card.</li>
+</ul>
 </div>
 <p><a class="md-button md-button--primary" href="../benchmark-comparisons/">Compare leaders by workload</a>
 <a class="md-button" href="../methodology/">Read the benchmark methodology</a></p>
