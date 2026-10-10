@@ -325,6 +325,18 @@ def infer_manufacturer(declared, gpu_name):
     return declared_text
 
 
+def is_failed_run(test):
+    """True when the report says the workload failed rather than measured.
+
+    Pantheon writes a failed workload as ``Status: FAIL`` with the unit ``ERR``
+    and a score of 0.0. That is a failure to report, not a throughput of zero
+    and not a card without the capability; for the memory diagnostics it is the
+    result the tool exists to find.
+    """
+    return (str(test.get("Status") or "").upper() == "FAIL"
+            or str(test.get("Unit") or "").upper() == "ERR")
+
+
 def is_unmeasured(test_name, score_val, unit):
     """True when a run reported a throughput of exactly zero.
 
@@ -574,6 +586,20 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
 
                     if is_retired_metric(unit, version_str):
                         print(f"[SKIPPED] retired metric {unit!r} on {version_str} in {f}: {test_name}")
+                        continue
+
+                    if is_failed_run(test):
+                        print(f"[SKIPPED] failed run in {f}: {test_name}")
+                        unsupported.append({
+                            "gpu": gpu_name,
+                            "manufacturer": manufacturer,
+                            "test": test_name,
+                            "version": version_str,
+                            "status": "FAILED",
+                            "reason": "the workload reported a failure, so there is no measurement to publish; "
+                                      "this is not a statement that the card lacks the capability",
+                            "source_report": Path(f).name,
+                        })
                         continue
 
                     if is_unmeasured(test_name, score_val, unit):

@@ -10,10 +10,12 @@
 
 !!! note "Runs that could not run"
     A workload that reported zero throughput never executed its measured path
-    (ray tracing without an OptiX SDK, video encode without an encoder). Those
-    runs are listed with the reason in
-    [unsupported_workloads.json](assets/unsupported_workloads.json) instead of
-    appearing here as a zero.
+    (ray tracing without an OptiX SDK, video encode without an encoder). A
+    workload that reported a failure has no measurement either, and for the
+    memory diagnostics a failure is the finding, not a missing capability.
+    Both are listed with the reason in
+    [unsupported_workloads.json](assets/unsupported_workloads.json), with the
+    status `NO_MEASUREMENT` or `FAILED`, instead of appearing here as a zero.
 
 [Compare leaders by workload](benchmark-comparisons.md){ .md-button .md-button--primary }
 [Read the benchmark methodology](methodology.md){ .md-button }

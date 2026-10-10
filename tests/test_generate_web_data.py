@@ -535,6 +535,33 @@ def test_retired_ai_units_are_skipped_only_before_the_fix_release(tmp_path):
     assert rows[0]["score"] == 4321.0
 
 
+def test_failed_runs_are_listed_as_failed_and_never_published(tmp_path):
+    """A workload that reports Status FAIL / Unit ERR has no measurement.
+
+    It is not a card without the capability, and a failed memory diagnostic is
+    the finding the tool exists to produce, so it must not be filed as "the
+    path did not run on this host". Even baseline_metrics is dropped when it
+    failed."""
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(db_dir, "pantheon_report_failed.json",
+                 [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-FAIL"}],
+                 [{"Test Name": "march_test", "GPU ID": 0, "Score": 0.0, "Unit": "ERR", "Status": "FAIL"},
+                  {"Test Name": "baseline_metrics", "GPU ID": 0, "Score": 0.0, "Unit": "ERR", "Status": "FAIL"},
+                  {"Test Name": "memory_read", "GPU ID": 0, "Score": 1500.0, "Unit": "GB/s"}],
+                 version="1.2.0")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert [row["test"] for row in rows] == ["memory_read"]
+    unsupported = json.loads((output_file.parent / "unsupported_workloads.json").read_text())
+    assert sorted((u["test"], u["status"]) for u in unsupported) == [
+        ("baseline_metrics", "FAILED"), ("march_test", "FAILED")]
+    assert all("not a statement that the card lacks the capability" in u["reason"] for u in unsupported)
+
+
 def test_is_retired_metric_needs_both_the_unit_and_an_old_release():
     assert is_retired_metric("tokens/s", "1.0.18")
     assert is_retired_metric("tokens/s", "v1.0.18")

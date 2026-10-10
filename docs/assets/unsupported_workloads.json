@@ -256,8 +256,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_thermal_asym",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_0f55c95af1-20260909-202617_0001_memory_thermal_asym_gpu0.json"
   },
   {
@@ -265,8 +265,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_cache_fracture",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_0f55c95af1-20260909-202752_0001_memory_cache_fracture_gpu0.json"
   },
   {
@@ -283,8 +283,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_cache_fracture",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-022838_0001_memory_cache_fracture_gpu0.json"
   },
   {
@@ -292,8 +292,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_retention_bake",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023009_0001_memory_retention_bake_gpu0.json"
   },
   {
@@ -301,8 +301,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_retention",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023127_0001_memory_retention_gpu0.json"
   },
   {
@@ -310,8 +310,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_pc_pingpong",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023246_0001_memory_pc_pingpong_gpu0.json"
   },
   {
@@ -319,8 +319,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_bank_thrash",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023403_0001_memory_bank_thrash_gpu0.json"
   },
   {
@@ -328,8 +328,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_tsv_thrasher",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023522_0001_memory_tsv_thrasher_gpu0.json"
   },
   {
@@ -337,8 +337,8 @@
     "manufacturer": "NVIDIA",
     "test": "tlb_avalanche",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023642_0001_tlb_avalanche_gpu0.json"
   },
   {
@@ -346,8 +346,8 @@
     "manufacturer": "NVIDIA",
     "test": "ras_validator",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-023801_0001_ras_validator_gpu0.json"
   },
   {
@@ -355,8 +355,8 @@
     "manufacturer": "NVIDIA",
     "test": "mma_virus",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-042642_0001_mma_virus_gpu0.json"
   },
   {
@@ -364,8 +364,8 @@
     "manufacturer": "NVIDIA",
     "test": "fp64_virus",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_14396ca2d4-20260910-043407_0001_fp64_virus_gpu0.json"
   },
   {
@@ -659,10 +659,19 @@
   {
     "gpu": "NVIDIA H100 80GB HBM3",
     "manufacturer": "NVIDIA",
+    "test": "baseline_metrics",
+    "version": "1.2.0",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
+    "source_report": "pantheon_report_20260905-061041_0001_baseline_metrics_gpu0.json"
+  },
+  {
+    "gpu": "NVIDIA H100 80GB HBM3",
+    "manufacturer": "NVIDIA",
     "test": "memory_thermal_asym",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061145_0001_memory_thermal_asym_gpu0.json"
   },
   {
@@ -670,8 +679,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_cache_fracture",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061250_0001_memory_cache_fracture_gpu0.json"
   },
   {
@@ -679,8 +688,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_retention_bake",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061354_0001_memory_retention_bake_gpu0.json"
   },
   {
@@ -688,8 +697,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_retention",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061458_0001_memory_retention_gpu0.json"
   },
   {
@@ -697,8 +706,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_pc_pingpong",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061603_0001_memory_pc_pingpong_gpu0.json"
   },
   {
@@ -706,8 +715,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_bank_thrash",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061708_0001_memory_bank_thrash_gpu0.json"
   },
   {
@@ -715,8 +724,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_tsv_thrasher",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061812_0001_memory_tsv_thrasher_gpu0.json"
   },
   {
@@ -724,8 +733,8 @@
     "manufacturer": "NVIDIA",
     "test": "tlb_avalanche",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-061917_0001_tlb_avalanche_gpu0.json"
   },
   {
@@ -733,8 +742,8 @@
     "manufacturer": "NVIDIA",
     "test": "ras_validator",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062021_0001_ras_validator_gpu0.json"
   },
   {
@@ -742,8 +751,8 @@
     "manufacturer": "NVIDIA",
     "test": "int_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062125_0001_int_virus_gpu0.json"
   },
   {
@@ -751,8 +760,8 @@
     "manufacturer": "NVIDIA",
     "test": "scheduler",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062230_0001_scheduler_gpu0.json"
   },
   {
@@ -760,8 +769,8 @@
     "manufacturer": "NVIDIA",
     "test": "mma_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062334_0001_mma_virus_gpu0.json"
   },
   {
@@ -769,8 +778,8 @@
     "manufacturer": "NVIDIA",
     "test": "fp64_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062439_0001_fp64_virus_gpu0.json"
   },
   {
@@ -778,8 +787,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_write",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062543_0001_memory_write_gpu0.json"
   },
   {
@@ -787,8 +796,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_write_agg",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062647_0001_memory_write_agg_gpu0.json"
   },
   {
@@ -796,8 +805,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_read",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062751_0001_memory_read_gpu0.json"
   },
   {
@@ -805,8 +814,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_read_agg",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-062856_0001_memory_read_agg_gpu0.json"
   },
   {
@@ -814,8 +823,8 @@
     "manufacturer": "NVIDIA",
     "test": "voltage",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063000_0001_voltage_gpu0.json"
   },
   {
@@ -823,8 +832,8 @@
     "manufacturer": "NVIDIA",
     "test": "incinerator",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063105_0001_incinerator_gpu0.json"
   },
   {
@@ -832,8 +841,8 @@
     "manufacturer": "NVIDIA",
     "test": "cache_lat",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063209_0001_cache_lat_gpu0.json"
   },
   {
@@ -841,8 +850,8 @@
     "manufacturer": "NVIDIA",
     "test": "sfu_stress",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063313_0001_sfu_stress_gpu0.json"
   },
   {
@@ -850,8 +859,8 @@
     "manufacturer": "NVIDIA",
     "test": "pcie_bandwidth",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063418_0001_pcie_bandwidth_gpu0.json"
   },
   {
@@ -859,8 +868,8 @@
     "manufacturer": "NVIDIA",
     "test": "pulse_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063522_0001_pulse_virus_gpu0.json"
   },
   {
@@ -868,8 +877,8 @@
     "manufacturer": "NVIDIA",
     "test": "tensor_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063626_0001_tensor_virus_gpu0.json"
   },
   {
@@ -877,8 +886,8 @@
     "manufacturer": "NVIDIA",
     "test": "atomic_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063730_0001_atomic_virus_gpu0.json"
   },
   {
@@ -886,8 +895,8 @@
     "manufacturer": "NVIDIA",
     "test": "omni_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063834_0001_omni_virus_gpu0.json"
   },
   {
@@ -895,8 +904,8 @@
     "manufacturer": "NVIDIA",
     "test": "transformer_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-063938_0001_transformer_virus_gpu0.json"
   },
   {
@@ -904,8 +913,8 @@
     "manufacturer": "NVIDIA",
     "test": "llm_decode",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064042_0001_llm_decode_gpu0.json"
   },
   {
@@ -913,8 +922,8 @@
     "manufacturer": "NVIDIA",
     "test": "llm_prefill",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064146_0001_llm_prefill_gpu0.json"
   },
   {
@@ -922,8 +931,8 @@
     "manufacturer": "NVIDIA",
     "test": "kv_cache_churn",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064250_0001_kv_cache_churn_gpu0.json"
   },
   {
@@ -931,8 +940,8 @@
     "manufacturer": "NVIDIA",
     "test": "fused_attention",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064354_0001_fused_attention_gpu0.json"
   },
   {
@@ -940,8 +949,8 @@
     "manufacturer": "NVIDIA",
     "test": "rope_stress",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064458_0001_rope_stress_gpu0.json"
   },
   {
@@ -949,8 +958,8 @@
     "manufacturer": "NVIDIA",
     "test": "quantized_gemm",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064602_0001_quantized_gemm_gpu0.json"
   },
   {
@@ -958,8 +967,8 @@
     "manufacturer": "NVIDIA",
     "test": "serving_mix",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064706_0001_serving_mix_gpu0.json"
   },
   {
@@ -967,8 +976,8 @@
     "manufacturer": "NVIDIA",
     "test": "speculative_decode",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064810_0001_speculative_decode_gpu0.json"
   },
   {
@@ -976,8 +985,8 @@
     "manufacturer": "NVIDIA",
     "test": "moe_router",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-064914_0001_moe_router_gpu0.json"
   },
   {
@@ -985,8 +994,8 @@
     "manufacturer": "NVIDIA",
     "test": "transformer_train_step",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065018_0001_transformer_train_step_gpu0.json"
   },
   {
@@ -994,8 +1003,8 @@
     "manufacturer": "NVIDIA",
     "test": "allocation_fragmentation",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065122_0001_allocation_fragmentation_gpu0.json"
   },
   {
@@ -1003,8 +1012,8 @@
     "manufacturer": "NVIDIA",
     "test": "graph_replay",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065227_0001_graph_replay_gpu0.json"
   },
   {
@@ -1012,8 +1021,8 @@
     "manufacturer": "NVIDIA",
     "test": "rag_embedding",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065331_0001_rag_embedding_gpu0.json"
   },
   {
@@ -1021,8 +1030,8 @@
     "manufacturer": "NVIDIA",
     "test": "vision_encoder",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065435_0001_vision_encoder_gpu0.json"
   },
   {
@@ -1030,8 +1039,8 @@
     "manufacturer": "NVIDIA",
     "test": "media_enc_virus",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: no video encoder was available to the workload, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065539_0001_media_enc_virus_gpu0.json"
   },
   {
@@ -1039,8 +1048,8 @@
     "manufacturer": "NVIDIA",
     "test": "galpat",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065643_0001_galpat_gpu0.json"
   },
   {
@@ -1048,8 +1057,8 @@
     "manufacturer": "NVIDIA",
     "test": "march_test",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065747_0001_march_test_gpu0.json"
   },
   {
@@ -1057,8 +1066,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_hammer",
     "version": "1.2.0",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_20260905-065851_0001_memory_hammer_gpu0.json"
   },
   {
@@ -1138,8 +1147,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_write",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-135611_0001_memory_write_gpu0.json"
   },
   {
@@ -1147,8 +1156,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_write_agg",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-135726_0001_memory_write_agg_gpu0.json"
   },
   {
@@ -1156,8 +1165,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_read",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-135840_0001_memory_read_gpu0.json"
   },
   {
@@ -1165,8 +1174,8 @@
     "manufacturer": "NVIDIA",
     "test": "memory_read_agg",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-140232_0001_memory_read_agg_gpu0.json"
   },
   {
@@ -1174,8 +1183,8 @@
     "manufacturer": "NVIDIA",
     "test": "omni_virus",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-161837_0001_omni_virus_gpu0.json"
   },
   {
@@ -1183,8 +1192,8 @@
     "manufacturer": "NVIDIA",
     "test": "llm_decode",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-163738_0001_llm_decode_gpu0.json"
   },
   {
@@ -1192,8 +1201,8 @@
     "manufacturer": "NVIDIA",
     "test": "llm_prefill",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-164458_0001_llm_prefill_gpu0.json"
   },
   {
@@ -1201,8 +1210,8 @@
     "manufacturer": "NVIDIA",
     "test": "kv_cache_churn",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-164747_0001_kv_cache_churn_gpu0.json"
   },
   {
@@ -1210,8 +1219,8 @@
     "manufacturer": "NVIDIA",
     "test": "fused_attention",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-165145_0001_fused_attention_gpu0.json"
   },
   {
@@ -1219,8 +1228,8 @@
     "manufacturer": "NVIDIA",
     "test": "rope_stress",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-165257_0001_rope_stress_gpu0.json"
   },
   {
@@ -1228,8 +1237,8 @@
     "manufacturer": "NVIDIA",
     "test": "quantized_gemm",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-165408_0001_quantized_gemm_gpu0.json"
   },
   {
@@ -1237,8 +1246,8 @@
     "manufacturer": "NVIDIA",
     "test": "serving_mix",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-165614_0001_serving_mix_gpu0.json"
   },
   {
@@ -1246,8 +1255,8 @@
     "manufacturer": "NVIDIA",
     "test": "speculative_decode",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-170029_0001_speculative_decode_gpu0.json"
   },
   {
@@ -1255,8 +1264,8 @@
     "manufacturer": "NVIDIA",
     "test": "moe_router",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-170140_0001_moe_router_gpu0.json"
   },
   {
@@ -1264,8 +1273,8 @@
     "manufacturer": "NVIDIA",
     "test": "transformer_train_step",
     "version": "1.2.2",
-    "status": "NO_MEASUREMENT",
-    "reason": "reported 0 ERR: the measured path did not run on this host, so there is no measurement to publish",
+    "status": "FAILED",
+    "reason": "the workload reported a failure, so there is no measurement to publish; this is not a statement that the card lacks the capability",
     "source_report": "pantheon_report_d5bd937ab8-20260910-170252_0001_transformer_train_step_gpu0.json"
   },
   {

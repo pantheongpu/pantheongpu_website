@@ -1805,8 +1805,13 @@ def test_published_rows_carry_no_unmeasured_zero_scores():
 
     unsupported = json.loads(read("docs/assets/unsupported_workloads.json"))
     statuses = {entry["status"] for entry in unsupported}
-    assert "NO_MEASUREMENT" in statuses
+    assert "NO_MEASUREMENT" in statuses and "FAILED" in statuses
     assert all(entry["reason"] for entry in unsupported)
+
+
+def test_published_rows_carry_no_failed_runs():
+    """A failure is listed in unsupported_workloads.json, never on the leaderboard."""
+    assert [row for row in _published_rows() if str(row["unit"]).upper() == "ERR"] == []
 
 
 def test_published_vendor_is_never_unknown_for_a_named_card():
