@@ -8,12 +8,19 @@
 !!! note "Data provenance"
     Benchmark results are collected from third-party cloud and community systems, including providers such as Vast.ai and RunPod. They are not collected, certified, or endorsed by NVIDIA, AMD, or their employees.
 
-!!! note "Runs that could not run"
-    A workload that reported zero throughput never executed its measured path
-    (ray tracing without an OptiX SDK, video encode without an encoder). Those
-    runs are listed with the reason in
-    [unsupported_workloads.json](assets/unsupported_workloads.json) instead of
-    appearing here as a zero.
+!!! note "Runs without a result"
+    Some runs have no result to publish, and none of them appears here as a
+    zero. Each is listed with its reason in
+    [unsupported_workloads.json](assets/unsupported_workloads.json) under one of
+    three statuses:
+
+    - `UNSUPPORTED`: the card cannot run the workload at all (for example, an
+      A100 has no video encoder).
+    - `NO_MEASUREMENT`: the workload reported zero throughput, so its measured
+      path never ran (ray tracing without an OptiX SDK, video encode without an
+      encoder).
+    - `FAILED`: the workload reported a failure (status FAIL, unit ERR). The
+      report does not say why, so a failure is not a statement about the card.
 
 [Compare leaders by workload](benchmark-comparisons.md){ .md-button .md-button--primary }
 [Read the benchmark methodology](methodology.md){ .md-button }

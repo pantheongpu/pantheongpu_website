@@ -10,6 +10,14 @@ Pantheon releases up to v1.0.16 record the benchmark host's hostname and IP
 address in a ``network_info`` block. This repository is public, so that block
 must never be committed.
 
+A report also records the command lines that launched it, and those carry the
+benchmark user's home directory (``/home/alice/.cache/...``). That names a
+person, so every ``/home/<name>`` is rewritten to ``/home/user`` in every string
+of the report, except the generic ``ubuntu``, ``user`` and ``root`` homes. The
+rewrite is done on the file text, so JSON formatting and key order are kept
+and the diff is only the replaced paths. Git history keeps whatever was
+committed before this scrub existed.
+
 GPU identifiers -- the UUID and serial in ``gpu_static_info`` -- are NOT
 scrubbed: the owner decided (2026-08-31) to publish them verbatim. They are
 load-bearing for per-card identity, dedup and history on the dashboards, and
@@ -41,6 +49,24 @@ DB_DIR = Path(__file__).resolve().parents[1] / "database"
 
 PS_HOST_ARTIFACT = "System.Management.Automation.Internal.Host.InternalHost"
 _DOTTED_IP = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
+
+# Home directories that name no one and stay as they are.
+GENERIC_HOMES = {"ubuntu", "user", "root"}
+NEUTRAL_HOME = "/home/user"
+_HOME_PATH = re.compile(r"/home/([A-Za-z0-9_][A-Za-z0-9_.-]*)")
+
+
+def scrub_home_paths(text):
+    """Replace ``/home/<name>`` with ``/home/user`` unless <name> is generic.
+
+    Works on any text, including raw JSON, and touches nothing else.
+    """
+    def replace(match):
+        if match.group(1) in GENERIC_HOMES:
+            return match.group(0)
+        return NEUTRAL_HOME
+
+    return _HOME_PATH.sub(replace, text)
 
 
 def _is_octet(token):
@@ -106,25 +132,29 @@ def public_gpu_id(raw):
 
 
 def sanitize_report(path):
-    """Remove host identifiers from one report. Returns True if changed.
+    """Remove host identifiers and user home paths from one report.
+
+    Returns True if the file changed.
 
     GPU UUIDs and serials are left exactly as the report recorded them.
     """
-    raw = path.read_text(encoding="utf-8")
+    # newline="" keeps CRLF files byte-identical apart from the scrubbed text.
+    with open(path, "r", encoding="utf-8", newline="") as handle:
+        raw = handle.read()
     data = json.loads(raw)
 
-    changed = False
+    text = raw
     if "network_info" in data:
         del data["network_info"]
-        changed = True
-    if not changed:
+        indent_match = re.search(r'\n(\s+)"', raw)
+        indent = len(indent_match.group(1)) if indent_match else 4
+        trailing = "\n" if raw.endswith("\n") else ""
+        text = json.dumps(data, indent=indent) + trailing
+    text = scrub_home_paths(text)
+    if text == raw:
         return False
-    indent_match = re.search(r'\n(\s+)"', raw)
-    indent = len(indent_match.group(1)) if indent_match else 4
-    trailing = "\n" if raw.endswith("\n") else ""
-    with open(path, "w", encoding="utf-8") as handle:
-        json.dump(data, handle, indent=indent)
-        handle.write(trailing)
+    with open(path, "w", encoding="utf-8", newline="") as handle:
+        handle.write(text)
     return True
 
 
@@ -135,7 +165,7 @@ def main():
     # privacy scrub must not depend on a naming convention.
     for path in sorted(DB_DIR.rglob("*.json")):
         if sanitize_report(path):
-            print(f"[SANITIZED] removed network_info: {path.name}")
+            print(f"[SANITIZED] host identifiers or home paths removed: {path.name}")
             changed += 1
     print(f"[Sanitize] {changed} report(s) rewritten.")
 

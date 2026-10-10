@@ -71,7 +71,7 @@
             "Max Fan (%)": 61.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/maheen/.cache/pantheongpu/builds/1.2.2/cuda-86/memory_cache_fracture 0 300 99 --verify",
+            "Command Lines": "/home/user/.cache/pantheongpu/builds/1.2.2/cuda-86/memory_cache_fracture 0 300 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
             "RAS Report": "results/20260913-072742/reliability/memory_cache_fracture/gpu0/ras.json"

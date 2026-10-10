@@ -99,7 +99,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": "N/A",
             "Volts SoC (mV)": "N/A",
-            "Command Lines": "/home/saqib/pantheon/cache-fat/1.2.2/hip-gfx1030/memory_read 1 300 99 --init_pattern rail_to_rail --verify",
+            "Command Lines": "/home/user/pantheon/cache-fat/1.2.2/hip-gfx1030/memory_read 1 300 99 --init_pattern rail_to_rail --verify",
             "RAS Status": "CLEAN",
             "RAS Error Delta": "None",
             "RAS Report": "results/20261009-092453/reliability/memory_read_agg/gpu1/ras.json"

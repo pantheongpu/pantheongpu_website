@@ -54,7 +54,7 @@
       "Max Fan (%)": 0.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/idle 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/idle 0 120 50 --verify"
     },
     {
       "Test Name": "memory_thermal_asym",
@@ -79,7 +79,7 @@
       "Max Fan (%)": 51.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_thermal_asym 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_thermal_asym 0 120 50 --verify"
     },
     {
       "Test Name": "memory_cache_fracture",
@@ -104,7 +104,7 @@
       "Max Fan (%)": 58.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_cache_fracture 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_cache_fracture 0 120 50 --verify"
     },
     {
       "Test Name": "memory_retention_bake",
@@ -129,7 +129,7 @@
       "Max Fan (%)": 58.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_retention_bake 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_retention_bake 0 120 50 --verify"
     },
     {
       "Test Name": "memory_pc_pingpong",
@@ -154,7 +154,7 @@
       "Max Fan (%)": 64.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_pc_pingpong 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_pc_pingpong 0 120 50 --verify"
     },
     {
       "Test Name": "memory_bank_thrash",
@@ -179,7 +179,7 @@
       "Max Fan (%)": 62.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_bank_thrash 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_bank_thrash 0 120 50 --verify"
     },
     {
       "Test Name": "memory_tsv_thrasher",
@@ -204,7 +204,7 @@
       "Max Fan (%)": 60.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_tsv_thrasher 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_tsv_thrasher 0 120 50 --verify"
     },
     {
       "Test Name": "tlb_avalanche",
@@ -229,7 +229,7 @@
       "Max Fan (%)": 59.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/tlb_avalanche 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/tlb_avalanche 0 120 50 --verify"
     },
     {
       "Test Name": "ras_validator",
@@ -254,7 +254,7 @@
       "Max Fan (%)": 88.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/ras_validator 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/ras_validator 0 120 50 --verify"
     },
     {
       "Test Name": "int_virus",
@@ -279,7 +279,7 @@
       "Max Fan (%)": 70.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/int_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/int_virus 0 120 50 --verify"
     },
     {
       "Test Name": "scheduler",
@@ -304,7 +304,7 @@
       "Max Fan (%)": 60.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/scheduler_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/scheduler_virus 0 120 50 --verify"
     },
     {
       "Test Name": "mma_virus",
@@ -329,7 +329,7 @@
       "Max Fan (%)": 46.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/mma_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/mma_virus 0 120 50 --verify"
     },
     {
       "Test Name": "fp64_virus",
@@ -354,7 +354,7 @@
       "Max Fan (%)": 45.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/fp64_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/fp64_virus 0 120 50 --verify"
     },
     {
       "Test Name": "memory_write",
@@ -379,7 +379,7 @@
       "Max Fan (%)": 58.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_write 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_write 0 120 50 --verify"
     },
     {
       "Test Name": "memory_write_agg",
@@ -404,7 +404,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_write_agg 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_write_agg 0 120 50 --verify"
     },
     {
       "Test Name": "memory_read",
@@ -429,7 +429,7 @@
       "Max Fan (%)": 100.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_read 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_read 0 120 50 --verify"
     },
     {
       "Test Name": "memory_read_agg",
@@ -454,7 +454,7 @@
       "Max Fan (%)": 79.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_read_agg 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/memory_read_agg 0 120 50 --verify"
     },
     {
       "Test Name": "voltage",
@@ -479,7 +479,7 @@
       "Max Fan (%)": 70.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/compute_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/compute_virus 0 120 50 --verify"
     },
     {
       "Test Name": "incinerator",
@@ -504,7 +504,7 @@
       "Max Fan (%)": 59.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/compute_virus_agg 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/compute_virus_agg 0 120 50 --verify"
     },
     {
       "Test Name": "cache_lat",
@@ -529,7 +529,7 @@
       "Max Fan (%)": 59.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/cache_latency 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/cache_latency 0 120 50 --verify"
     },
     {
       "Test Name": "sfu_stress",
@@ -554,7 +554,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/sfu_stress 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/sfu_stress 0 120 50 --verify"
     },
     {
       "Test Name": "pcie_bandwidth",
@@ -579,7 +579,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/pcie_bandwidth 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/pcie_bandwidth 0 120 50 --verify"
     },
     {
       "Test Name": "pulse_virus",
@@ -604,7 +604,7 @@
       "Max Fan (%)": 45.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/pulse_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/pulse_virus 0 120 50 --verify"
     },
     {
       "Test Name": "tensor_virus",
@@ -629,7 +629,7 @@
       "Max Fan (%)": 58.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/tensor_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/tensor_virus 0 120 50 --verify"
     },
     {
       "Test Name": "atomic_virus",
@@ -654,7 +654,7 @@
       "Max Fan (%)": 59.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/atomic_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/atomic_virus 0 120 50 --verify"
     },
     {
       "Test Name": "omni_virus",
@@ -679,7 +679,7 @@
       "Max Fan (%)": 60.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/omni_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/omni_virus 0 120 50 --verify"
     },
     {
       "Test Name": "p2p_thrasher",
@@ -704,7 +704,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/p2p_thrasher 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/p2p_thrasher 0 120 50 --verify"
     },
     {
       "Test Name": "all_reduce",
@@ -729,7 +729,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/all_reduce 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/all_reduce 0 120 50 --verify"
     },
     {
       "Test Name": "transformer_virus",
@@ -754,7 +754,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/transformer_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/transformer_virus 0 120 50 --verify"
     },
     {
       "Test Name": "llm_decode",
@@ -779,7 +779,7 @@
       "Max Fan (%)": 54.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/llm_decode 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/llm_decode 0 120 50 --verify"
     },
     {
       "Test Name": "llm_prefill",
@@ -804,7 +804,7 @@
       "Max Fan (%)": 54.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/llm_prefill 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/llm_prefill 0 120 50 --verify"
     },
     {
       "Test Name": "kv_cache_churn",
@@ -829,7 +829,7 @@
       "Max Fan (%)": 55.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/kv_cache_churn 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/kv_cache_churn 0 120 50 --verify"
     },
     {
       "Test Name": "fused_attention",
@@ -854,7 +854,7 @@
       "Max Fan (%)": 55.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/fused_attention 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/fused_attention 0 120 50 --verify"
     },
     {
       "Test Name": "rope_stress",
@@ -879,7 +879,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/rope_stress 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/rope_stress 0 120 50 --verify"
     },
     {
       "Test Name": "quantized_gemm",
@@ -904,7 +904,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/quantized_gemm 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/quantized_gemm 0 120 50 --verify"
     },
     {
       "Test Name": "serving_mix",
@@ -929,7 +929,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/serving_mix 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/serving_mix 0 120 50 --verify"
     },
     {
       "Test Name": "speculative_decode",
@@ -954,7 +954,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/speculative_decode 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/speculative_decode 0 120 50 --verify"
     },
     {
       "Test Name": "moe_router",
@@ -979,7 +979,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/moe_router 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/moe_router 0 120 50 --verify"
     },
     {
       "Test Name": "transformer_train_step",
@@ -1004,7 +1004,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/transformer_train_step 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/transformer_train_step 0 120 50 --verify"
     },
     {
       "Test Name": "allocation_fragmentation",
@@ -1029,7 +1029,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/allocation_fragmentation 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/allocation_fragmentation 0 120 50 --verify"
     },
     {
       "Test Name": "graph_replay",
@@ -1054,7 +1054,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/graph_replay 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/graph_replay 0 120 50 --verify"
     },
     {
       "Test Name": "rag_embedding",
@@ -1079,7 +1079,7 @@
       "Max Fan (%)": 57.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/rag_embedding 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/rag_embedding 0 120 50 --verify"
     },
     {
       "Test Name": "vision_encoder",
@@ -1104,7 +1104,7 @@
       "Max Fan (%)": 56.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/vision_encoder 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/vision_encoder 0 120 50 --verify"
     },
     {
       "Test Name": "rt_virus",
@@ -1129,7 +1129,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/rt_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/rt_virus 0 120 50 --verify"
     },
     {
       "Test Name": "media_enc_virus",
@@ -1154,7 +1154,7 @@
       "Max Fan (%)": 61.0,
       "Volts Core (mV)": 0.0,
       "Volts SoC (mV)": 0.0,
-      "Command Lines": "/home/saqib/pantheon-benchmarks/pantheongpu-1.0.14/build/media_enc_virus 0 120 50 --verify"
+      "Command Lines": "/home/user/pantheon-benchmarks/pantheongpu-1.0.14/build/media_enc_virus 0 120 50 --verify"
     }
   ]
 }
