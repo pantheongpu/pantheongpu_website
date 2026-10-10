@@ -527,6 +527,9 @@ jobs:
     env:
       VERSION: ${{ needs.release.outputs.version }}
       IMAGE: ghcr.io/pantheongpu/pantheon
+      # Resolved once here: a step's own `env:` is not visible to its `if:`,
+      # so the Docker Hub step cannot test its own DOCKERHUB_TOKEN.
+      HAS_DOCKERHUB: ${{ secrets.DOCKERHUB_TOKEN != '' }}
     steps:
       - name: Reclaim workspace files left root-owned by container jobs
         run: |
@@ -596,7 +599,7 @@ jobs:
         # Docker Hub is where marketplace renters search for an image. The
         # push runs only when the organisation's token is configured; without
         # it the release still completes with the GHCR image alone.
-        if: ${{ env.DOCKERHUB_TOKEN != '' }}
+        if: ${{ env.HAS_DOCKERHUB == 'true' }}
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

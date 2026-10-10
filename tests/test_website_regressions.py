@@ -467,8 +467,9 @@ def test_all_workflow_jobs_use_self_hosted_linux_runners():
 def test_readme_pairs_install_commands_with_native_uninstall_commands():
     readme = read("README.md")
 
-    assert 'sudo apt install "./pantheongpu_${VERSION}_amd64.deb"' in readme
-    assert "sudo apt-get remove pantheongpu" in readme
+    assert "sudo apt install ./pantheon-gpu_*_all.deb" in readme
+    assert "sudo apt-get remove pantheon-gpu" in readme
+    assert "sudo apt-get remove pantheongpu" in readme  # releases up to v1.0.19
     assert "sudo ./install.sh" in readme
     assert "sudo rm -f /usr/local/bin/pantheon && sudo rm -rf /opt/pantheongpu" in readme
     assert "curl -fsSL https://pantheongpu.com/uninstall.sh | sudo sh" in readme
@@ -885,14 +886,13 @@ def test_readme_documents_release_mirroring_secret():
     assert "Mirror Pantheon Releases" in readme
     assert "PANTHEON_SOURCE_REPO_TOKEN" in readme
     assert "PANTHEON_WEBSITE_RELEASE_TOKEN" in readme
-    assert "Public Binary Downloads" in readme
-    assert "VERSION=1.0.18" in readme
+    assert "Installing Pantheon and Downloading Releases" in readme
     assert "pantheon --test baseline_metrics --duration 10" in readme
-    assert "tag like `v1.0.18`" in readme
+    assert "tag like `v1.0.19`" in readme
     assert "tag like `v1.0.8`" not in readme
     assert "`*.deb`" in readme
     assert "repository dispatch" in readme
-    assert "private source repository paths" in readme
+    assert "source-tree paths" in readme
     assert "public website repo" in readme
     assert "pantheongpu/pantheongpu" in readme
     assert "overwrite" in readme
@@ -2144,3 +2144,74 @@ def test_header_logo_is_sharp_on_dense_screens():
     width, height = icon.size
     assert width == height
     assert width >= 128
+
+
+def test_readme_describes_the_current_release_flow():
+    """The README said the source was private and told readers to install
+    `pantheongpu_1.0.18_amd64.deb`, three releases after the package was
+    renamed `pantheon-gpu_<ver>_all.deb` and the source went public. It must
+    not name the retired package, call the source private, or pin a version
+    that goes stale at the next release."""
+    readme = read("README.md")
+
+    assert not re.search(r"pantheongpu_[^\s\"']*_amd64\.deb", readme)
+    assert not re.search(
+        r"(?is)\bsource\b[^.\n]{0,80}\bprivate\b|\bprivate\b[^.\n]{0,80}\bsource\b",
+        readme,
+    ), "the source is public at pantheongpu/pantheon"
+    assert "private `pantheongpu/pantheongpu`" not in readme
+    assert "[`pantheongpu/pantheon`](https://github.com/pantheongpu/pantheon)" in readme
+    assert "pantheon-gpu_<version>_all.deb" in readme
+    # The only version literals left are the historical v1.0.19 boundary and
+    # the documented "tag like" example for the legacy mirror.
+    assert not re.search(r"VERSION=\d", readme)
+    assert set(re.findall(r"(?<![\d.])v?\d+\.\d+\.\d+(?![\d.])", readme)) <= {"v1.0.19", "1.0.19"}
+    # The legacy mirror is described as legacy, not as how releases ship.
+    assert "Mirror Pantheon Releases (legacy)" in readme
+    assert "Publishing a Release" in readme
+
+
+def test_no_step_condition_reads_a_variable_defined_only_in_its_own_env():
+    """A step's own `env:` is not visible to its `if:`.
+
+    The Docker Hub push gated itself on `env.DOCKERHUB_TOKEN != ''` while
+    setting DOCKERHUB_TOKEN only in that step's `env:`, so the condition was
+    always false and the push could never run. The value has to be resolved
+    where the `if:` can see it: the workflow or job `env:`, or $GITHUB_ENV.
+    """
+    import yaml
+
+    offenders = []
+    checked = 0
+    for path in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+        text = path.read_text(encoding="utf-8")
+        workflow = yaml.safe_load(text)
+        workflow_env = set((workflow.get("env") or {}))
+        for job_name, job in (workflow.get("jobs") or {}).items():
+            job_env = set((job.get("env") or {}))
+            scripts = "\n".join(str(st.get("run", "")) for st in job.get("steps") or [])
+            exported = set(re.findall(r"(\w+)=[^\n]*\$GITHUB_ENV", scripts))
+            visible = workflow_env | job_env | exported
+            for step in job.get("steps") or []:
+                condition = step.get("if")
+                if condition is None:
+                    continue
+                checked += 1
+                own_env = set((step.get("env") or {}))
+                for name in re.findall(r"\benv\.(\w+)", str(condition)):
+                    if name in own_env and name not in visible:
+                        offenders.append(
+                            f"{path.name}:{job_name}:{step.get('name')}: env.{name}")
+
+    assert checked, "no step conditions were inspected"
+    assert not offenders, offenders
+
+
+def test_docker_hub_push_is_gated_on_a_job_level_flag():
+    workflow = read(".github/workflows/release.yml")
+    job = workflow.split("publish-containers:", 1)[1].split("publish-copr:", 1)[0]
+    head, step = job.split("Push the same tags to Docker Hub", 1)
+
+    assert "HAS_DOCKERHUB: ${{ secrets.DOCKERHUB_TOKEN != '' }}" in head
+    assert "if: ${{ env.HAS_DOCKERHUB == 'true' }}" in step
+    assert "DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}" in step
