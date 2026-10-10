@@ -53,7 +53,7 @@
         const model = runs.length ? runs[0].gpu : "Unknown GPU";
         // Cards without a UUID are identified by their attributes, which makes
         // for a long opaque string; show the model and how many runs it has.
-        const id = card.startsWith("GPU-") ? card : "no GPU ID";
+        const id = card.startsWith("GPU-") || /^0x[0-9a-f]{8,}$/i.test(card) ? card : "no GPU ID";
         return `${model} — ${id} (${runs.length} runs)`;
     }
 

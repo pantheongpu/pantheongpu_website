@@ -232,7 +232,9 @@ def card_identity(row):
     it were one card swinging wildly.
     """
     uuid = normalize(row.get("uuid"))
-    if uuid.lower() not in {"unknown", "n/a", "none"}:
+    # rocm-smi reports "0x0" when it cannot read a card's unique id; every such
+    # card would otherwise be one card.
+    if uuid.lower() not in {"unknown", "n/a", "none", "0x0", "0x"}:
         return uuid
     return "|".join([
         normalize(row.get("gpu")),

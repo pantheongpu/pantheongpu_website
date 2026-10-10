@@ -535,6 +535,25 @@ def test_retired_ai_units_are_skipped_only_before_the_fix_release(tmp_path):
     assert rows[0]["score"] == 4321.0
 
 
+def test_amd_cards_that_report_a_zero_id_are_not_one_card(tmp_path):
+    """rocm-smi gives some cards the unique id 0x0; two of them are two cards."""
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+
+    write_report(db_dir, "pantheon_report_amd_zero.json",
+                 [{"id": 0, "name": "AMD Radeon RX 6700 XT", "uuid": "0x0", "memory_total": "12272"},
+                  {"id": 1, "name": "AMD Radeon RX 6800", "uuid": "0x0", "memory_total": "16368"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 300.0, "Unit": "GB/s"},
+                  {"Test Name": "memory_read", "GPU ID": 1, "Score": 400.0, "Unit": "GB/s"}],
+                 version="1.2.2")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert sorted((row["gpu"], row["score"]) for row in rows) == [
+        ("AMD Radeon RX 6700 XT", 300.0), ("AMD Radeon RX 6800", 400.0)]
+
+
 def test_is_retired_metric_needs_both_the_unit_and_an_old_release():
     assert is_retired_metric("tokens/s", "1.0.18")
     assert is_retired_metric("tokens/s", "v1.0.18")
