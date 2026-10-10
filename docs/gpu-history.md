@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Per-card history
 
 <div class="page-intro">
