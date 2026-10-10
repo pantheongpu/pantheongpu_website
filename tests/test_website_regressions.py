@@ -1077,6 +1077,22 @@ def test_sanitizer_scrubs_home_paths_together_with_network_info(tmp_path):
     assert data["test_results"][0]["Command Lines"] == "/home/user/run"
 
 
+def test_windows_and_macos_home_directories_are_scrubbed_too():
+    sr = _load_sanitizer()
+    assert sr.scrub_home_paths("/Users/bob/pantheon/build/memory_write") == "/home/user/pantheon/build/memory_write"
+    assert sr.scrub_home_paths("/mnt/c/Users/carol/OneDrive/build/x") == "/home/user/OneDrive/build/x"
+    assert sr.scrub_home_paths("/home/ubuntu/.cache/x") == "/home/ubuntu/.cache/x"
+    assert sr.scrub_home_paths("/usr/local/cuda/bin/ncu") == "/usr/local/cuda/bin/ncu"
+
+
+def test_published_reports_name_no_user_or_host_in_paths_or_file_names():
+    root = Path(__file__).resolve().parent.parent
+    paths = sorted((root / "database").rglob("*.json"))
+    assert [p.name for p in paths if re.search(r"server\d|maheen|saqib", p.name, re.I)] == []
+    windows = re.compile(r"/Users/|/mnt/[a-z]/")
+    assert [p.name for p in paths if windows.search(p.read_text(encoding="utf-8", errors="replace"))] == []
+
+
 def test_published_reports_carry_no_personal_home_paths():
     """338 reports once named the benchmark users in their command lines.
 

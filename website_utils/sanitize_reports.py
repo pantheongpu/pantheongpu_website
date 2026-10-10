@@ -53,11 +53,14 @@ _DOTTED_IP = re.compile(r"^\d{1,3}(\.\d{1,3}){3}$")
 # Home directories that name no one and stay as they are.
 GENERIC_HOMES = {"ubuntu", "user", "root"}
 NEUTRAL_HOME = "/home/user"
-_HOME_PATH = re.compile(r"/home/([A-Za-z0-9_][A-Za-z0-9_.-]*)")
+# macOS and Windows homes too: a Windows machine running Pantheon under WSL
+# shows its account as /mnt/c/Users/<name>.
+_HOME_PATH = re.compile(r"(?:/mnt/[a-z])?/(?:home|Users)/([A-Za-z0-9_][A-Za-z0-9_.-]*)")
 
 
 def scrub_home_paths(text):
-    """Replace ``/home/<name>`` with ``/home/user`` unless <name> is generic.
+    """Replace ``/home/<name>``, ``/Users/<name>`` and ``/mnt/<drive>/Users/<name>``
+    with ``/home/user`` unless <name> is generic.
 
     Works on any text, including raw JSON, and touches nothing else.
     """
