@@ -65,7 +65,7 @@
             "Max Fan (%)": 0.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/idle 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/idle 0 60 99"
         },
         {
             "Test Name": "memory_thermal_asym",
@@ -90,7 +90,7 @@
             "Max Fan (%)": 66.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_thermal_asym 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_thermal_asym 0 60 99"
         },
         {
             "Test Name": "memory_cache_fracture",
@@ -115,7 +115,7 @@
             "Max Fan (%)": 71.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_cache_fracture 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_cache_fracture 0 60 99"
         },
         {
             "Test Name": "memory_retention_bake",
@@ -140,7 +140,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_retention_bake 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_retention_bake 0 60 99"
         },
         {
             "Test Name": "memory_pc_pingpong",
@@ -165,7 +165,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_pc_pingpong 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_pc_pingpong 0 60 99"
         },
         {
             "Test Name": "memory_bank_thrash",
@@ -190,7 +190,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_bank_thrash 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_bank_thrash 0 60 99"
         },
         {
             "Test Name": "memory_tsv_thrasher",
@@ -215,7 +215,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_tsv_thrasher 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_tsv_thrasher 0 60 99"
         },
         {
             "Test Name": "tlb_avalanche",
@@ -240,7 +240,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/tlb_avalanche 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/tlb_avalanche 0 60 99"
         },
         {
             "Test Name": "ras_validator",
@@ -265,7 +265,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/ras_validator 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/ras_validator 0 60 99"
         },
         {
             "Test Name": "int_virus",
@@ -290,7 +290,7 @@
             "Max Fan (%)": 81.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/int_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/int_virus 0 60 99"
         },
         {
             "Test Name": "scheduler",
@@ -315,7 +315,7 @@
             "Max Fan (%)": 81.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/scheduler_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/scheduler_virus 0 60 99"
         },
         {
             "Test Name": "mma_virus",
@@ -340,7 +340,7 @@
             "Max Fan (%)": 72.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/mma_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/mma_virus 0 60 99"
         },
         {
             "Test Name": "fp64_virus",
@@ -365,7 +365,7 @@
             "Max Fan (%)": 69.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/fp64_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/fp64_virus 0 60 99"
         },
         {
             "Test Name": "memory_write",
@@ -390,7 +390,7 @@
             "Max Fan (%)": 72.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_write 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_write 0 60 99"
         },
         {
             "Test Name": "memory_write_agg",
@@ -415,7 +415,7 @@
             "Max Fan (%)": 75.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_write_agg 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_write_agg 0 60 99"
         },
         {
             "Test Name": "memory_read",
@@ -440,7 +440,7 @@
             "Max Fan (%)": 76.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_read 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_read 0 60 99"
         },
         {
             "Test Name": "memory_read_agg",
@@ -465,7 +465,7 @@
             "Max Fan (%)": 77.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/memory_read_agg 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/memory_read_agg 0 60 99"
         },
         {
             "Test Name": "voltage",
@@ -490,7 +490,7 @@
             "Max Fan (%)": 77.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/compute_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/compute_virus 0 60 99"
         },
         {
             "Test Name": "incinerator",
@@ -515,7 +515,7 @@
             "Max Fan (%)": 77.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/compute_virus_agg 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/compute_virus_agg 0 60 99"
         },
         {
             "Test Name": "cache_lat",
@@ -540,7 +540,7 @@
             "Max Fan (%)": 78.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/cache_latency 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/cache_latency 0 60 99"
         },
         {
             "Test Name": "sfu_stress",
@@ -565,7 +565,7 @@
             "Max Fan (%)": 77.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/sfu_stress 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/sfu_stress 0 60 99"
         },
         {
             "Test Name": "pcie_bandwidth",
@@ -590,7 +590,7 @@
             "Max Fan (%)": 78.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/pcie_bandwidth 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/pcie_bandwidth 0 60 99"
         },
         {
             "Test Name": "pulse_virus",
@@ -615,7 +615,7 @@
             "Max Fan (%)": 71.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/pulse_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/pulse_virus 0 60 99"
         },
         {
             "Test Name": "tensor_virus",
@@ -640,7 +640,7 @@
             "Max Fan (%)": 72.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/tensor_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/tensor_virus 0 60 99"
         },
         {
             "Test Name": "atomic_virus",
@@ -665,7 +665,7 @@
             "Max Fan (%)": 72.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/atomic_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/atomic_virus 0 60 99"
         },
         {
             "Test Name": "omni_virus",
@@ -690,7 +690,7 @@
             "Max Fan (%)": 78.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/omni_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/omni_virus 0 60 99"
         },
         {
             "Test Name": "p2p_thrasher",
@@ -715,7 +715,7 @@
             "Max Fan (%)": 79.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/p2p_thrasher 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/p2p_thrasher 0 60 99"
         },
         {
             "Test Name": "all_reduce",
@@ -740,7 +740,7 @@
             "Max Fan (%)": 79.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/all_reduce 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/all_reduce 0 60 99"
         },
         {
             "Test Name": "transformer_virus",
@@ -765,7 +765,7 @@
             "Max Fan (%)": 65.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/transformer_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/transformer_virus 0 60 99"
         },
         {
             "Test Name": "llm_decode",
@@ -790,7 +790,7 @@
             "Max Fan (%)": 69.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/llm_decode 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/llm_decode 0 60 99"
         },
         {
             "Test Name": "llm_prefill",
@@ -815,7 +815,7 @@
             "Max Fan (%)": 72.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/llm_prefill 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/llm_prefill 0 60 99"
         },
         {
             "Test Name": "kv_cache_churn",
@@ -840,7 +840,7 @@
             "Max Fan (%)": 72.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/kv_cache_churn 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/kv_cache_churn 0 60 99"
         },
         {
             "Test Name": "fused_attention",
@@ -865,7 +865,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/fused_attention 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/fused_attention 0 60 99"
         },
         {
             "Test Name": "rope_stress",
@@ -890,7 +890,7 @@
             "Max Fan (%)": 73.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/rope_stress 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/rope_stress 0 60 99"
         },
         {
             "Test Name": "quantized_gemm",
@@ -915,7 +915,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/quantized_gemm 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/quantized_gemm 0 60 99"
         },
         {
             "Test Name": "serving_mix",
@@ -940,7 +940,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/serving_mix 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/serving_mix 0 60 99"
         },
         {
             "Test Name": "speculative_decode",
@@ -965,7 +965,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/speculative_decode 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/speculative_decode 0 60 99"
         },
         {
             "Test Name": "moe_router",
@@ -990,7 +990,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/moe_router 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/moe_router 0 60 99"
         },
         {
             "Test Name": "transformer_train_step",
@@ -1015,7 +1015,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/transformer_train_step 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/transformer_train_step 0 60 99"
         },
         {
             "Test Name": "allocation_fragmentation",
@@ -1040,7 +1040,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/allocation_fragmentation 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/allocation_fragmentation 0 60 99"
         },
         {
             "Test Name": "graph_replay",
@@ -1065,7 +1065,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/graph_replay 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/graph_replay 0 60 99"
         },
         {
             "Test Name": "rag_embedding",
@@ -1090,7 +1090,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/rag_embedding 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/rag_embedding 0 60 99"
         },
         {
             "Test Name": "vision_encoder",
@@ -1115,7 +1115,7 @@
             "Max Fan (%)": 74.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/vision_encoder 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/vision_encoder 0 60 99"
         },
         {
             "Test Name": "rt_virus",
@@ -1140,7 +1140,7 @@
             "Max Fan (%)": 81.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/rt_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/rt_virus 0 60 99"
         },
         {
             "Test Name": "media_enc_virus",
@@ -1165,7 +1165,7 @@
             "Max Fan (%)": 81.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/tools/pantheongpu/build/media_enc_virus 0 60 99"
+            "Command Lines": "/home/user/tools/pantheongpu/build/media_enc_virus 0 60 99"
         }
     ]
 }

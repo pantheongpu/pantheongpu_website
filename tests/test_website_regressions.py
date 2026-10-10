@@ -690,6 +690,22 @@ def test_ci_checks_generated_data_drift_and_dependency_health():
     assert "cancel-in-progress: true" in ci
     assert "python -m pip check" in deploy
     assert "cmp -s /tmp/pantheon-web-data-before.json docs/assets/web_data.json" in deploy
+    # Every generated file is compared, not just the leaderboard: a PR could
+    # otherwise merge a stale gpu_history.json or unsupported_workloads.json.
+    for workflow in (ci, deploy):
+        for before, current in (
+            ("pantheon-web-data-before.json", "docs/assets/web_data.json"),
+            ("pantheon-gpu-history-before.json", "docs/assets/gpu_history.json"),
+            ("pantheon-unsupported-before.json",
+             "docs/assets/unsupported_workloads.json"),
+            ("pantheon-methodology-before.md", "docs/methodology.md"),
+        ):
+            assert f"cp {current} /tmp/{before}" in workflow
+            assert f"cmp -s /tmp/{before} {current}" in workflow
+    for generated in ("docs/assets/gpu_history.json",
+                      "docs/assets/unsupported_workloads.json",
+                      "docs/methodology.md"):
+        assert generated in mirror.split("git diff --exit-code --", 1)[1].split("\n", 1)[0]
     assert 'git config --global --add safe.directory "$GITHUB_WORKSPACE"' in deploy
     assert "python -m pip check" in mirror
     assert "git diff --exit-code -- docs/assets/web_data.json" in mirror
@@ -1017,6 +1033,106 @@ def test_sanitizer_preserves_gpu_identity(tmp_path):
     gpu = data["gpu_static_info"][0]
     assert gpu["uuid"] == "GPU-58e902aa-1111-2222-3333-444444444444"
     assert gpu["serial"] == "1650123456789"
+
+
+def _load_sanitizer():
+    import importlib.util
+    root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location(
+        "sr", root / "website_utils" / "sanitize_reports.py")
+    sr = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr)
+    return sr
+
+
+def test_sanitizer_rewrites_personal_home_paths_only(tmp_path):
+    """Command lines carry the benchmark user's home directory.
+
+    Every /home/<name> becomes /home/user, in any string field, except the
+    generic homes. The rewrite is on the file text, so the formatting and key
+    order of the report survive and the diff is only the replaced paths."""
+    sr = _load_sanitizer()
+    report = tmp_path / "pantheon_report_20261010-000000.json"
+    original = (
+        '{\n'
+        '  "pantheon_version": "1.2.2",\n'
+        '  "note": "built in /home/alice/pantheon",\n'
+        '  "gpu_static_info": [{"uuid": "GPU-58e902aa-1111", "serial": "1650123456789"}],\n'
+        '  "test_results": [\n'
+        '    {"Test Name": "memory_read", "Command Lines":'
+        ' "/home/saqib/.cache/x/memory_read 0 300; /home/maheen/y; /home/ubuntu/z;'
+        ' /home/user/w; /home/root-ish/q; /root/ok"}\n'
+        '  ]\n'
+        '}\n')
+    report.write_text(original)
+
+    assert sr.sanitize_report(report) is True
+    text = report.read_text()
+    assert text == (original
+                    .replace("/home/alice", "/home/user")
+                    .replace("/home/saqib", "/home/user")
+                    .replace("/home/maheen", "/home/user")
+                    .replace("/home/root-ish", "/home/user"))
+    assert "/home/ubuntu/z" in text and "/root/ok" in text
+    assert "GPU-58e902aa-1111" in text and "1650123456789" in text
+    # A second pass has nothing left to do.
+    assert sr.sanitize_report(report) is False
+
+
+def test_sanitizer_scrubs_home_paths_together_with_network_info(tmp_path):
+    sr = _load_sanitizer()
+    report = tmp_path / "pantheon_report_20261010-000001.json"
+    report.write_text(json.dumps({
+        "network_info": {"hostname": "bench-host"},
+        "test_results": [{"Command Lines": "/home/saqib/run"}],
+    }, indent=4) + "\n")
+
+    assert sr.sanitize_report(report) is True
+    data = json.loads(report.read_text())
+    assert "network_info" not in data
+    assert data["test_results"][0]["Command Lines"] == "/home/user/run"
+
+
+def test_published_reports_carry_no_personal_home_paths():
+    """338 reports once named the benchmark users in their command lines.
+
+    Fix with: python3 website_utils/sanitize_reports.py"""
+    root = Path(__file__).resolve().parent.parent
+    sr = _load_sanitizer()
+    offenders = []
+    for path in sorted((root / "database").rglob("*.json")):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if "/home/" in text and sr.scrub_home_paths(text) != text:
+            offenders.append(path.name)
+    assert offenders == [], (
+        "reports still carry a personal home directory; run "
+        f"python3 website_utils/sanitize_reports.py. First: {offenders[:5]}")
+    for name in ("saqib", "maheen"):
+        assert not any(
+            f"/home/{name}" in p.read_text(encoding="utf-8", errors="replace")
+            for p in (root / "database").rglob("*.json")), name
+
+
+def test_failed_workloads_are_not_described_as_unmeasured_paths():
+    unsupported = json.loads(read("docs/assets/unsupported_workloads.json"))
+    failed = [e for e in unsupported if e["status"] == "FAILED"]
+    assert failed
+    assert not any("did not run on this host" in e["reason"] for e in failed)
+    assert all(e["status"] in {"UNSUPPORTED", "NO_MEASUREMENT", "FAILED"} for e in unsupported)
+    keys = [json.dumps({k: v for k, v in e.items() if k != "source_report"}, sort_keys=True)
+            for e in unsupported]
+    assert len(keys) == len(set(keys)), "unsupported_workloads.json repeats an entry"
+    page = read("docs/benchmarks.md")
+    for status in ("UNSUPPORTED", "NO_MEASUREMENT", "FAILED"):
+        assert f"`{status}`" in page, status
+    assert not any(row["unit"] == "ERR" for row in _published_rows())
+
+
+def test_published_data_has_no_placeholder_driver_or_zero_memory():
+    rows = _published_rows()
+    assert not [r for r in rows if r["driver"] == "ROCm Driver"]
+    assert not [r for r in rows if r["memory_total"] == 0]
+    assert "ROCm Driver" not in read("docs/methodology.md")
 
 
 def test_best_run_grouping_does_not_cross_versions_or_units():
@@ -2207,11 +2323,67 @@ def test_no_step_condition_reads_a_variable_defined_only_in_its_own_env():
     assert not offenders, offenders
 
 
-def test_docker_hub_push_is_gated_on_a_job_level_flag():
+def test_docker_hub_push_is_gated_by_a_step_output_not_its_own_env():
+    """A step's `if` cannot see that step's own `env:`, so the old
+    `if: env.DOCKERHUB_TOKEN != ''` was always false and the push never ran."""
     workflow = read(".github/workflows/release.yml")
-    job = workflow.split("publish-containers:", 1)[1].split("publish-copr:", 1)[0]
-    head, step = job.split("Push the same tags to Docker Hub", 1)
 
-    assert "HAS_DOCKERHUB: ${{ secrets.DOCKERHUB_TOKEN != '' }}" in head
-    assert "if: ${{ env.HAS_DOCKERHUB == 'true' }}" in step
-    assert "DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}" in step
+    assert "if: ${{ env.DOCKERHUB_TOKEN != '' }}" not in workflow
+    assert "id: dockerhub" in workflow
+    assert '"enabled=true" >> "$GITHUB_OUTPUT"' in workflow
+    gate, push = workflow.split("- name: Push the same tags to Docker Hub", 1)
+    assert "if: ${{ steps.dockerhub.outputs.enabled == 'true' }}" in push.split("run:", 1)[0]
+    # The secret is exposed to the check and the push, not to the whole job.
+    assert workflow.count("DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}") == 2
+
+
+def test_workflows_never_splice_event_data_into_shell_scripts():
+    """`${{ inputs.* }}` and `${{ github.event.* }}` inside a run: block are
+    expanded before the shell parses the script, so a crafted value runs as
+    code. They have to arrive through env: and be read as "$VAR"."""
+    import yaml
+
+    for path in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+        workflow = yaml.safe_load(path.read_text(encoding="utf-8"))
+        for job_name, job in workflow["jobs"].items():
+            for step in job.get("steps", []):
+                script = step.get("run", "")
+                for expression in re.findall(r"\$\{\{(.*?)\}\}", script, re.S):
+                    assert not re.search(
+                        r"\b(inputs|github\.event|github\.head_ref|github\.ref_name"
+                        r"|steps\.[\w-]+\.outputs)\b", expression), (
+                        f"{path.name}:{job_name}: '{expression.strip()}' is "
+                        "interpolated into a run: script; pass it through env:")
+    assert 'requested="$REF"' in read(".github/workflows/release.yml")
+
+
+def test_benchmark_table_clears_the_pager_on_an_empty_result():
+    """With no matching rows renderTable returned before renderPager, so the
+    old "1-100 of N" bar and Prev/Next stayed next to "No results found"."""
+    tables_js = read("docs/js/tables.js")
+
+    empty = tables_js.split("No results found", 1)[1].split("return;", 1)[0]
+    assert "renderPager(0, 0, 0, 1)" in empty
+
+
+def test_xlsx_export_reads_numbers_out_of_unit_suffixed_strings():
+    """vram is "12288 MB" in the data; Number() of that is NaN, which left the
+    whole VRAM (MiB) column blank in the workbook."""
+    tables_js = read("docs/js/tables.js")
+
+    assert "function xlsxNumber(raw)" in tables_js
+    row_fn = tables_js.split("function xlsxRow(", 1)[1].split("function xlsxHeader", 1)[0]
+    assert "xlsxNumber(raw)" in row_fn
+    assert not re.search(r"(?<!xlsx)Number\(raw\)",
+                         row_fn.split("col.key in XLSX_COLUMN_UNITS", 1)[1])
+    assert 'vram: "MiB"' in tables_js.split("const XLSX_COLUMN_UNITS", 1)[1].split("};", 1)[0]
+
+
+def test_history_labels_every_real_gpu_id_not_just_nvidia_uuids():
+    """AMD cards carry ids such as 0xfd3d6d912de3c917; only a card with no id
+    (or the 0x0 placeholder) is "no GPU ID"."""
+    history_js = read("docs/js/gpu-history.js")
+
+    assert 'card.startsWith("GPU-") ? card' not in history_js
+    assert "hasGpuId(card) ? card : \"no GPU ID\"" in history_js
+    assert "0x0*" in history_js

@@ -7,6 +7,10 @@ from website_utils.generate_web_data import (
     infer_manufacturer,
     infer_unit,
     is_retired_metric,
+    card_identity,
+    clean_driver,
+    is_failed_workload,
+    is_unknown_id,
     is_unmeasured,
     is_unknown_version,
     main,
@@ -413,9 +417,10 @@ def test_record_key_normalizes_test_name_and_version():
         "test": " Memory_Write ",
         "version": " 1.0.7 ",
         "duration": 300,
+        "unit": "GB/s",
     }
 
-    assert record_key(row) == "GPU-UUID|memory_write|1.0.7|300s"
+    assert record_key(row) == "GPU-UUID|memory_write|1.0.7|300s|GB/s"
 
 
 def test_record_key_keeps_run_lengths_apart():
@@ -424,8 +429,8 @@ def test_record_key_keeps_run_lengths_apart():
     long = dict(short, duration="3600")
 
     assert record_key(short) != record_key(long)
-    assert record_key(long).endswith("|3600s")
-    assert record_key(dict(short, duration="N/A")).endswith("|0s")
+    assert "|3600s|" in record_key(long)
+    assert "|0s|" in record_key(dict(short, duration="N/A"))
 
 
 def test_long_and_short_runs_on_one_card_both_reach_the_leaderboard(tmp_path):
@@ -687,3 +692,192 @@ def test_ordinary_gpu_reports_are_untouched_by_the_guard(tmp_path):
         version="1.2.2",
     )
     assert len(main(db_dir=db_dir, output_file=output_file)) == 1
+
+
+def _read_assets(output_file):
+    folder = output_file.parent
+    return {
+        name: json.loads((folder / name).read_text(encoding="utf-8"))
+        for name in ("unsupported_workloads.json", "gpu_history.json")
+    }
+
+
+def _setup(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    return db_dir, tmp_path / "docs" / "assets" / "web_data.json"
+
+
+def test_zero_style_ids_are_unknown():
+    for value in ("0x0", "0x00", "0", "00", "", "N/A", "None", "unknown", None, " 0x0 "):
+        assert is_unknown_id(value), value
+    for value in ("GPU-58e902aa-1111", "0xfd3d6d912de3c917", "1650123456789"):
+        assert not is_unknown_id(value), value
+
+
+def test_cards_without_a_uuid_are_not_merged_by_a_zero_uuid(tmp_path):
+    """AMD reports give 0x0; every such card used to collapse into one."""
+    db_dir, output_file = _setup(tmp_path)
+    amd = {"id": 0, "name": "AMD Radeon RX 6700 XT", "uuid": "0x0",
+           "memory_total": "12272 MB", "driver_version": "ROCm Driver"}
+    write_report(db_dir, "pantheon_report_a.json",
+                 [dict(amd, serial="SER-A")],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 10.0, "Unit": "GB/s"}])
+    write_report(db_dir, "pantheon_report_b.json",
+                 [dict(amd, serial="SER-B")],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 20.0, "Unit": "GB/s"}])
+    write_report(db_dir, "pantheon_report_c.json",
+                 [dict(amd, name="AMD Radeon Graphics", serial="N/A")],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 5.0, "Unit": "GB/s"}])
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert sorted(r["score"] for r in rows) == [5.0, 10.0, 20.0]
+    cards = {r["card"] for r in _read_assets(output_file)["gpu_history.json"]}
+    assert len(cards) == 3
+    # The serial is carried only where it identifies the card, and an unusable
+    # serial is not repeated.
+    by_score = {r["score"]: r for r in rows}
+    assert by_score[10.0]["serial"] == "SER-A"
+    assert "serial" not in by_score[5.0]
+
+
+def test_real_uuid_identity_is_untouched_and_serial_is_not_copied(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    write_report(db_dir, "pantheon_report_a.json",
+                 [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-REAL-1", "serial": "999"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 10.0, "Unit": "GB/s"}])
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert rows[0]["uuid"] == "GPU-REAL-1"
+    assert "serial" not in rows[0]
+    assert card_identity(rows[0]) == "GPU-REAL-1"
+
+
+def test_fallback_identity_uses_the_serial_only_when_it_is_real():
+    base = {"uuid": "0x0", "gpu": "G", "vram": "1 MB", "driver": "1"}
+    assert card_identity(dict(base, serial="S1")) != card_identity(dict(base, serial="S2"))
+    assert card_identity(dict(base, serial="0")) == card_identity(dict(base, serial="N/A"))
+    assert card_identity(dict(base)) == card_identity(dict(base, uuid="Unknown"))
+
+
+def test_failed_workloads_have_their_own_status_and_no_score(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    write_report(db_dir, "pantheon_report_fail.json",
+                 [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-F"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 0.0, "Unit": "ERR", "Status": "FAIL"},
+                  {"Test Name": "baseline_metrics", "GPU ID": 0, "Score": 0.0, "Unit": "ERR", "Status": "FAIL"},
+                  {"Test Name": "rt_virus", "GPU ID": 0, "Score": 0.0, "Unit": "GRays/s"},
+                  {"Test Name": "memory_write", "GPU ID": 0, "Score": 900.0, "Unit": "GB/s"}],
+                 version="1.2.0")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+    assets = _read_assets(output_file)
+
+    assert [r["test"] for r in rows] == ["memory_write"]
+    assert all(r["test"] == "memory_write" for r in assets["gpu_history.json"])
+    statuses = {u["test"]: u for u in assets["unsupported_workloads.json"]}
+    assert statuses["memory_read"]["status"] == "FAILED"
+    assert statuses["baseline_metrics"]["status"] == "FAILED"
+    assert statuses["rt_virus"]["status"] == "NO_MEASUREMENT"
+    assert "did not run" not in statuses["memory_read"]["reason"]
+    assert "FAIL" in statuses["memory_read"]["reason"]
+    assert is_failed_workload({"Status": "FAIL"})
+    assert is_failed_workload({"Unit": "ERR", "Score": 0})
+    assert not is_failed_workload({"Status": "PASS", "Unit": "GB/s"})
+    assert not is_failed_workload({})
+
+
+def test_repeated_unsupported_entries_are_listed_once(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    for i in range(3):
+        write_report(db_dir, f"pantheon_report_rt_{i}.json",
+                     [{"id": 0, "name": "NVIDIA H100", "uuid": f"GPU-{i}"}],
+                     [{"Test Name": "rt_virus", "GPU ID": 0, "Score": 0.0, "Unit": "GRays/s"}],
+                     version="1.0.16")
+    write_report(db_dir, "pantheon_report_rt_new.json",
+                 [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-9"}],
+                 [{"Test Name": "rt_virus", "GPU ID": 0, "Score": 0.0, "Unit": "GRays/s"}],
+                 version="1.2.0")
+
+    main(db_dir=db_dir, output_file=output_file)
+    entries = _read_assets(output_file)["unsupported_workloads.json"]
+
+    assert sorted(e["version"] for e in entries) == ["1.0.16", "1.2.0"]
+
+
+def test_history_keeps_run_length_apart(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    for name, duration, stamp in (("short", 30, "2026-05-20 10:00:00"),
+                                  ("long", 3600, "2026-05-20 10:00:00")):
+        path = write_report(
+            db_dir, f"pantheon_report_{name}.json",
+            [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-H"}],
+            [{"Test Name": "memory_read", "GPU ID": 0, "Score": 1500.0, "Unit": "GB/s",
+              "Duration (s)": duration}])
+        report = json.loads(path.read_text())
+        report["timestamp"] = stamp
+        path.write_text(json.dumps(report))
+
+    main(db_dir=db_dir, output_file=output_file)
+    history = _read_assets(output_file)["gpu_history.json"]
+
+    # Same card, workload, release, score and timestamp: only the run length
+    # tells them apart, so neither may be collapsed into the other.
+    assert sorted(run["duration"] for run in history) == [30, 3600]
+
+
+def test_history_chart_draws_one_series_per_run_length():
+    from pathlib import Path
+    script = (Path(__file__).resolve().parent.parent / "docs" / "js" / "gpu-history.js").read_text()
+    assert "run.duration" in script
+    assert "`${unit}|${duration}`" in script
+
+
+def test_amd_placeholders_are_not_published_as_readings(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    methodology = tmp_path / "methodology.md"
+    methodology.write_text("<!-- TOOLKIT_COVERAGE:START -->\n<!-- TOOLKIT_COVERAGE:END -->\n")
+    path = write_report(
+        db_dir, "pantheon_report_amd.json",
+        [{"id": 0, "name": "AMD Radeon RX 6700 XT", "uuid": "0xabc",
+          "driver_version": "ROCm Driver", "memory_total": "12272 MB"}],
+        [{"Test Name": "memory_read", "GPU ID": 0, "Score": 10.0, "Unit": "GB/s",
+          "Memory Total (MiB)": 0.0, "Max Fan (%)": 0.0}])
+    report = json.loads(path.read_text())
+    report["toolkit_version"] = "7.2.0"
+    path.write_text(json.dumps(report))
+
+    rows = main(db_dir=db_dir, output_file=output_file, methodology_file=methodology)
+
+    assert rows[0]["memory_total"] == "N/A"
+    assert rows[0]["fan_max"] == "N/A"
+    assert rows[0]["driver"] == "N/A"
+    assert "ROCm Driver" not in methodology.read_text()
+    assert "| ROCm | 7.2.0 | not recorded | 1 |" in methodology.read_text()
+    assert clean_driver("ROCm Driver") == "N/A"
+    assert clean_driver("595.97") == "595.97"
+    assert clean_driver(None) == "N/A"
+
+
+def test_a100_match_does_not_catch_the_rtx_a1000():
+    for name in ("NVIDIA A100-SXM4-80GB", "NVIDIA A100 80GB PCIe", "NVIDIA A100"):
+        assert unsupported_workload_reason("media_enc_virus", name), name
+    for name in ("NVIDIA RTX A1000", "NVIDIA RTX A1000 Laptop GPU"):
+        assert unsupported_workload_reason("media_enc_virus", name) is None, name
+
+
+def test_power_fallback_and_throughput_rows_do_not_compete(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    write_report(db_dir, "pantheon_report_a.json",
+                 [{"id": 0, "name": "NVIDIA H100", "uuid": "GPU-W"}],
+                 [{"Test Name": "tensor_virus", "GPU ID": 0, "Score": "N/A", "Max Power (W)": 700.0},
+                  {"Test Name": "tensor_virus", "GPU ID": 0, "Score": 400.0, "Unit": "TFLOPS"}],
+                 version="1.2.0")
+
+    rows = main(db_dir=db_dir, output_file=output_file)
+
+    assert sorted(r["unit"] for r in rows) == ["TFLOPS", "Watts"]
+    base = {"uuid": "U", "test": "t", "version": "1", "duration": 5}
+    assert record_key(dict(base, unit="Watts")) != record_key(dict(base, unit="TFLOPS"))

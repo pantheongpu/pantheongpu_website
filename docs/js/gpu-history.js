@@ -4,9 +4,12 @@
 // slows down over time cannot be seen there: the good early run wins and every
 // later, worse run is dropped. This page plots every run of one card instead.
 //
-// A series is split by unit. When a workload's metric changed between releases
-// the numbers are not comparable, and drawing them as one line would show a
-// step that is a units change rather than a change in the hardware.
+// A series is split by unit and by run length. When a workload's metric changed
+// between releases the numbers are not comparable, and drawing them as one line
+// would show a step that is a units change rather than a change in the
+// hardware. A 30 s run and a 3600 s run of the same workload are not
+// comparable either (an hour-long run heat-soaks the card), so each run length
+// is its own line.
 
 (function () {
     let historyRuns = [];
@@ -48,12 +51,24 @@
         return new URL(`assets/${fileName}`, document.baseURI).href;
     }
 
+    function hasGpuId(card) {
+        const id = String(card || "").trim();
+        if (!id || id.includes("|")) return false;
+        if (/^(unknown|n\/a|none)$/i.test(id)) return false;
+        // Placeholder hex ids such as 0x0 or 0x0000000000000000.
+        if (/^0x0*$/i.test(id)) return false;
+        return true;
+    }
+
     function cardLabel(card) {
         const runs = historyRuns.filter(run => run.card === card);
         const model = runs.length ? runs[0].gpu : "Unknown GPU";
-        // Cards without a UUID are identified by their attributes, which makes
-        // for a long opaque string; show the model and how many runs it has.
-        const id = card.startsWith("GPU-") ? card : "no GPU ID";
+        // Cards without an ID are identified by their attributes, which makes
+        // for a long opaque string (it contains "|"); show the model and how
+        // many runs it has. Any real ID is shown as published: NVIDIA UUIDs
+        // ("GPU-...") and AMD unique IDs ("0x...") alike. "0x0" is what a
+        // driver reports when it has no ID, so it counts as none.
+        const id = hasGpuId(card) ? card : "no GPU ID";
         return `${model} — ${id} (${runs.length} runs)`;
     }
 
@@ -72,22 +87,33 @@
         if (status) status.textContent = message || "";
     }
 
+    function durationLabel(duration) {
+        return duration > 0 ? `${duration} s` : "length not recorded";
+    }
+
     function seriesFor(card, test) {
         const runs = historyRuns
             .filter(run => run.card === card && run.test === test)
             .sort((a, b) => String(a.date).localeCompare(String(b.date)));
 
-        const byUnit = new Map();
+        // One series per (unit, run length). Reports published before the run
+        // length was kept in the history have none; they share one series.
+        const bySeries = new Map();
         runs.forEach(run => {
             const unit = run.unit || "";
-            if (!byUnit.has(unit)) byUnit.set(unit, []);
-            byUnit.get(unit).push({
+            const duration = Number(run.duration) || 0;
+            const key = `${unit}|${duration}`;
+            if (!bySeries.has(key)) bySeries.set(key, { unit, duration, points: [] });
+            bySeries.get(key).points.push({
                 x: new Date(String(run.date).replace(" ", "T")).getTime(),
                 y: Number(run.score),
                 version: run.version,
+                unit,
             });
         });
-        return byUnit;
+        // Longest runs last, so the legend reads from short to long.
+        return Array.from(bySeries.values())
+            .sort((a, b) => a.unit.localeCompare(b.unit) || a.duration - b.duration);
     }
 
     function draw() {
@@ -96,10 +122,18 @@
         const target = document.getElementById("gpuHistoryChart");
         if (!cardSelect || !testSelect || !target) return;
 
-        const byUnit = seriesFor(cardSelect.value, testSelect.value);
+        const groups = seriesFor(cardSelect.value, testSelect.value);
         const theme = historyTheme();
-        const series = Array.from(byUnit.entries())
-            .map(([unit, points]) => ({ name: unit || "score", data: points }));
+        const units = new Set(groups.map(g => g.unit));
+        const durations = new Set(groups.map(g => g.duration));
+        const series = groups.map(g => {
+            const unitName = g.unit || "score";
+            // Name a series by what tells it apart from the others.
+            const name = durations.size > 1
+                ? (units.size > 1 ? `${unitName}, ${durationLabel(g.duration)}` : durationLabel(g.duration))
+                : unitName;
+            return { name, data: g.points };
+        });
         const total = series.reduce((sum, s) => sum + s.data.length, 0);
 
         if (chart) { chart.destroy(); chart = null; }
@@ -116,9 +150,14 @@
                 : "No runs recorded for this workload on this card.");
             return;
         }
-        setStatus(series.length > 1
-            ? "This workload's metric changed between releases, so each unit is drawn as its own series. Values in different units are not comparable."
-            : "");
+        const notes = [];
+        if (units.size > 1) {
+            notes.push("This workload's metric changed between releases, so each unit is drawn as its own series. Values in different units are not comparable.");
+        }
+        if (durations.size > 1) {
+            notes.push("Runs of different lengths are drawn as separate series: a longer run heat-soaks the card, so a 300 s result and a 3600 s result are not comparable.");
+        }
+        setStatus(notes.join(" "));
 
         chart = new ApexCharts(target, {
             chart: {
@@ -154,7 +193,7 @@
                     formatter: (value, opts) => {
                         const point = opts?.w?.config?.series?.[opts.seriesIndex]
                             ?.data?.[opts.dataPointIndex];
-                        const unit = opts?.w?.config?.series?.[opts.seriesIndex]?.name || "";
+                        const unit = point?.unit || "";
                         return point?.version
                             ? `${value} ${unit} (v${point.version})`
                             : `${value} ${unit}`;

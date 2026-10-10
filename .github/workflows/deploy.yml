@@ -59,6 +59,8 @@ jobs:
       - name: Generate Web Data
         run: |
           cp docs/assets/web_data.json /tmp/pantheon-web-data-before.json
+          cp docs/assets/gpu_history.json /tmp/pantheon-gpu-history-before.json
+          cp docs/assets/unsupported_workloads.json /tmp/pantheon-unsupported-before.json
           cp docs/methodology.md /tmp/pantheon-methodology-before.md
           python website_utils/generate_web_data.py
 
@@ -70,6 +72,14 @@ jobs:
           }
           cmp -s /tmp/pantheon-web-data-before.json docs/assets/web_data.json || {
             echo "::error::docs/assets/web_data.json is not in sync with database/*.json. Run python website_utils/generate_web_data.py and commit the result."
+            exit 1
+          }
+          cmp -s /tmp/pantheon-gpu-history-before.json docs/assets/gpu_history.json || {
+            echo "::error::docs/assets/gpu_history.json is not in sync with database/*.json. Run python website_utils/generate_web_data.py and commit the result."
+            exit 1
+          }
+          cmp -s /tmp/pantheon-unsupported-before.json docs/assets/unsupported_workloads.json || {
+            echo "::error::docs/assets/unsupported_workloads.json is not in sync with database/*.json. Run python website_utils/generate_web_data.py and commit the result."
             exit 1
           }
 
