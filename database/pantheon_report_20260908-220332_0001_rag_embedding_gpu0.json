@@ -68,7 +68,7 @@
             "Max Fan (%)": 58.0,
             "Volts Core (mV)": 0.0,
             "Volts SoC (mV)": 0.0,
-            "Command Lines": "/home/saqib/.cache/pantheongpu/builds/1.2.0/cuda-86/rag_embedding 0 300 99 --verify",
+            "Command Lines": "/home/user/.cache/pantheongpu/builds/1.2.0/cuda-86/rag_embedding 0 300 99 --verify",
             "RAS Status": "WARNING",
             "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
             "RAS Report": "results/20260908-220332/reliability/rag_embedding/gpu0/ras.json"
