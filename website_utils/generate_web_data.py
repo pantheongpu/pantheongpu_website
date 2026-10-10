@@ -1,6 +1,7 @@
 import os
 import json
 import math
+import re
 from pathlib import Path
 
 try:  # run as a script (python3 website_utils/generate_web_data.py)
@@ -108,9 +109,14 @@ ABSENT_WHEN_ZERO = {
     "clock_max",
     "clock_min",
     "energy_wh",
+    # AMD reports carry a total of 0 MiB and a fan of 0 % when the driver
+    # exposes neither; a card has memory, and a fan that is not there did not
+    # run at 0 %.
+    "fan_max",
     "gpu_util_avg",
     "gpu_util_max",
     "memory_peak",
+    "memory_total",
     "power_max",
     "temp_max",
     "temp_mem",
@@ -129,6 +135,7 @@ HISTORY_FIELDS = (
     "version",
     "unit",
     "score",
+    "duration",
     "date",
     "temp_max",
     "power_max",
@@ -144,6 +151,9 @@ def dedupe_history(history):
     minutes apart, so a chart drawn from the raw list plots every measurement
     two or three times. Only the certain duplicates are removed:
 
+    Run length is part of the identity: a 30 s and a 300 s run that happen to
+    score the same are different measurements, not one measurement twice.
+
     * where a group mixes a per-test record with summaries repeating it, the
       per-test records win -- that is the file the run actually wrote;
     * otherwise entries identical down to the timestamp collapse to one.
@@ -155,7 +165,7 @@ def dedupe_history(history):
     groups = {}
     for run in history:
         key = (run["card"], run.get("test"), run.get("version"),
-               str(run.get("score")), run.get("unit"))
+               str(run.get("score")), run.get("unit"), str(run.get("duration")))
         groups.setdefault(key, []).append(run)
 
     kept = []
@@ -173,6 +183,26 @@ def dedupe_history(history):
     return kept
 
 
+def dedupe_unsupported(entries):
+    """One entry per card model, workload, release, status and reason.
+
+    The same card model run many times reports the same gap each time (13
+    copies of one H100 rt_virus entry); listing them separately only hides the
+    distinct ones. The first source report in file order is kept as the example.
+    """
+    seen = set()
+    kept = []
+    for entry in entries:
+        key = tuple(json.dumps(entry.get(field), sort_keys=True)
+                    for field in ("gpu", "manufacturer", "test", "version",
+                                  "status", "reason"))
+        if key in seen:
+            continue
+        seen.add(key)
+        kept.append(entry)
+    return kept
+
+
 def sensor_reading(value):
     """Return the reading, or "N/A" when the value encodes an absent sensor."""
     if value is None or value == "":
@@ -187,11 +217,15 @@ GPU_NAME_ALIASES = {
 }
 
 
+# "a100" must stand alone: a bare substring test also matched the RTX A1000.
+A100_NAME = re.compile(r"(?<![a-z0-9])a100(?![a-z0-9])")
+
+
 def unsupported_workload_reason(test_name, gpu_name):
     """Return a capability reason for a workload, or None when applicable."""
     test_key = normalize(test_name, "").lower()
     gpu_key = normalize(gpu_name, "").lower()
-    if test_key == "media_enc_virus" and "a100" in gpu_key:
+    if test_key == "media_enc_virus" and A100_NAME.search(gpu_key):
         return "NVIDIA A100 does not expose an NVENC encoder"
     return None
 
@@ -222,6 +256,32 @@ def public_gpu_id(raw):
     return _public_gpu_id(raw)
 
 
+# Spellings drivers and tools use for "no value". The AMD stack reports a UUID
+# of 0x0, and a card with no serial shows up as 0, N/A or nothing at all.
+_UNKNOWN_MARKERS = {"unknown", "n/a", "na", "none", "null", "[n/a]", "-"}
+_ZERO_ID = re.compile(r"^(0x)?0+$")
+
+# Drivers that name a stack rather than a version. AMD reports carry the text
+# "ROCm Driver" in the driver_version field; it is not a version of anything.
+PLACEHOLDER_DRIVERS = _UNKNOWN_MARKERS | {"rocm driver"}
+
+
+def is_unknown_id(value):
+    """True for a UUID or serial that identifies nothing.
+
+    Besides the spelled-out markers this covers all-zero values (0, 0x0, 0x00)
+    because no real card has a zero UUID or serial.
+    """
+    text = str(value if value is not None else "").strip().lower()
+    return text == "" or text in _UNKNOWN_MARKERS or bool(_ZERO_ID.match(text))
+
+
+def clean_driver(value):
+    """The driver version, or "N/A" when the report only holds a placeholder."""
+    text = normalize(value, "N/A")
+    return "N/A" if text.lower() in PLACEHOLDER_DRIVERS else text
+
+
 def card_identity(row):
     """Identify one physical card.
 
@@ -230,33 +290,45 @@ def card_identity(row):
     "Unknown" would merge every anonymous card into a single series, and a
     history chart drawn from it would show other people's hardware as though
     it were one card swinging wildly.
+
+    The fallback uses what a report says about the card: model, serial (when
+    it is a real one), memory size and driver. The power limit is left out on
+    purpose: older Pantheon releases did not record it, so it would split one
+    card's history by release. Cards that share model, memory size and driver
+    and have no serial cannot be told apart, which is the limit of the data.
     """
     uuid = normalize(row.get("uuid"))
-    if uuid.lower() not in {"unknown", "n/a", "none"}:
+    if not is_unknown_id(uuid):
         return uuid
+    serial = row.get("serial")
     return "|".join([
         normalize(row.get("gpu")),
-        normalize(row.get("serial")),
+        "N/A" if is_unknown_id(serial) else normalize(serial),
         normalize(row.get("vram"), "N/A"),
         normalize(row.get("driver"), "N/A"),
     ])
 
 
 def record_key(row):
-    """One leaderboard row per card, workload, release and run length.
+    """One leaderboard row per card, workload, release, run length and unit.
 
     Duration is part of the key because a longer run is a different
     measurement, not a retry: an hour-long run heat-soaks the card and usually
     scores below a five-minute one on the same silicon. Without it the two
     collide and the best-score rule silently drops the long run.
+
+    The unit is part of it because a Watts fallback (peak power, kept when no
+    throughput was recorded) is a different quantity from a throughput; with
+    the unit left out the two competed on raw magnitude.
     """
     test = normalize(row.get("test"), "unknown").lower()
     version = normalize(row.get("version"), "1.0.0")
+    unit = normalize(row.get("unit"), "")
     try:
         duration = int(float(row.get("duration") or 0))
     except (TypeError, ValueError):
         duration = 0
-    return f"{card_identity(row)}|{test}|{version}|{duration}s"
+    return f"{card_identity(row)}|{test}|{version}|{duration}s|{unit}"
 
 
 def to_float(value, default=0.0):
@@ -341,6 +413,28 @@ def is_unmeasured(test_name, score_val, unit):
         return float(score_val) == 0.0
     except (TypeError, ValueError):
         return False
+
+
+FAILED_STATUSES = {"fail", "failed", "error"}
+FAILED_UNIT = "ERR"
+
+
+def is_failed_workload(test):
+    """True when the report itself says the workload failed.
+
+    Pantheon writes Status "FAIL", Score 0 and Unit "ERR" for a workload that
+    errored. That is a failure to run, not a host that lacks a capability, and
+    not a score; it must not reach the leaderboard, and it must not be
+    described as a measured path that did not run.
+    """
+    status = normalize(test.get("Status"), "").lower()
+    unit = normalize(test.get("Unit"), "")
+    return status in FAILED_STATUSES or unit.upper() == FAILED_UNIT
+
+
+def failed_reason(test):
+    return ("the workload reported FAIL (score 0, unit ERR); the report does "
+            "not say why, so there is no measurement to publish")
 
 
 def unmeasured_reason(test_name, unit):
@@ -546,7 +640,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     serial = g_info.get("serial", "Unknown")
                     power_limit = g_info.get("power_limit", "N/A")
                     vram = g_info.get("memory_total", "N/A")
-                    driver = g_info.get("driver_version", "N/A")
+                    driver = clean_driver(g_info.get("driver_version"))
                     # Declared by the board's VBIOS memory table (one value per
                     # card), reported by pantheon >= 1.2.1; older reports have
                     # neither key. See the source repo README, "Memory type and
@@ -570,6 +664,19 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         version_str = report_version
                     if is_unknown_version(version_str):
                         print(f"[SKIPPED] Unknown Pantheon version in {f}: {test_name}")
+                        continue
+
+                    if is_failed_workload(test):
+                        print(f"[SKIPPED] failed workload in {f}: {test_name}")
+                        unsupported.append({
+                            "gpu": gpu_name,
+                            "manufacturer": manufacturer,
+                            "test": test_name,
+                            "version": version_str,
+                            "status": "FAILED",
+                            "reason": failed_reason(test),
+                            "source_report": Path(f).name,
+                        })
                         continue
 
                     if is_retired_metric(unit, version_str):
@@ -629,6 +736,12 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         "driver": driver,
                         "toolkit": toolkit
                     }
+
+                    # A card with no usable UUID is told apart by its serial, so
+                    # carry it. Cards that do have a UUID are identified by it
+                    # and their serial is not repeated on every row.
+                    if is_unknown_id(uuid) and not is_unknown_id(serial):
+                        record["serial"] = normalize(serial)
 
                     # An absent sensor must not reach the site as a reading.
                     for field in ABSENT_WHEN_ZERO:
@@ -692,6 +805,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
     with open(history_output, 'w', encoding="utf-8") as f:
         json.dump(history, f, indent=2, cls=NumpyEncoder, allow_nan=False)
 
+    unsupported = dedupe_unsupported(unsupported)
     unsupported_output = output_file.with_name(UNSUPPORTED_OUTPUT_FILE.name)
     with open(unsupported_output, 'w', encoding="utf-8") as f:
         json.dump(unsupported, f, indent=2, cls=NumpyEncoder, allow_nan=False)
