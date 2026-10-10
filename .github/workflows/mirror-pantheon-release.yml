@@ -218,8 +218,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.source.outputs.tag }}
         run: |
-          if gh release view "${{ steps.source.outputs.tag }}" >/dev/null 2>&1; then
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
@@ -230,8 +231,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.source.outputs.tag }}
         run: |
-          gh release delete "${{ steps.source.outputs.tag }}" --yes --cleanup-tag
+          gh release delete "$RELEASE_TAG" --yes --cleanup-tag
 
       - name: Create mirrored website release
         if: ${{ steps.options.outputs.overwrite == 'true' || steps.mirrored.outputs.exists != 'true' }}
@@ -309,7 +311,7 @@ jobs:
         run: |
           python -m pytest
           python website_utils/generate_web_data.py
-          git diff --exit-code -- docs/assets/web_data.json
+          git diff --exit-code -- docs/assets/web_data.json docs/assets/gpu_history.json docs/assets/unsupported_workloads.json docs/methodology.md
           python -m mkdocs build --strict
 
       - name: Deploy website

@@ -48,12 +48,24 @@
         return new URL(`assets/${fileName}`, document.baseURI).href;
     }
 
+    function hasGpuId(card) {
+        const id = String(card || "").trim();
+        if (!id || id.includes("|")) return false;
+        if (/^(unknown|n\/a|none)$/i.test(id)) return false;
+        // Placeholder hex ids such as 0x0 or 0x0000000000000000.
+        if (/^0x0*$/i.test(id)) return false;
+        return true;
+    }
+
     function cardLabel(card) {
         const runs = historyRuns.filter(run => run.card === card);
         const model = runs.length ? runs[0].gpu : "Unknown GPU";
-        // Cards without a UUID are identified by their attributes, which makes
-        // for a long opaque string; show the model and how many runs it has.
-        const id = card.startsWith("GPU-") ? card : "no GPU ID";
+        // Cards without an ID are identified by their attributes, which makes
+        // for a long opaque string (it contains "|"); show the model and how
+        // many runs it has. Any real ID is shown as published: NVIDIA UUIDs
+        // ("GPU-...") and AMD unique IDs ("0x...") alike. "0x0" is what a
+        // driver reports when it has no ID, so it counts as none.
+        const id = hasGpuId(card) ? card : "no GPU ID";
         return `${model} — ${id} (${runs.length} runs)`;
     }
 

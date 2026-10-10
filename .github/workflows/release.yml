@@ -85,6 +85,10 @@ jobs:
 
       - name: Determine version
         id: version
+        env:
+          # A dispatch input is attacker-shaped text; it reaches the script
+          # as data, never spliced into the shell source.
+          REF: ${{ inputs.ref }}
         run: |
           set -euo pipefail
           git config --global --add safe.directory "$GITHUB_WORKSPACE/pantheon-src"
@@ -95,7 +99,7 @@ jobs:
           fi
           # A tag that disagrees with VERSION means one of them is wrong, and
           # publishing either way produces a release nobody can reason about.
-          requested="${{ inputs.ref }}"
+          requested="$REF"
           if printf '%s' "$requested" | grep -Eq '^v[0-9]'; then
             if [ "v${version}" != "$requested" ]; then
               echo "::error::ref ${requested} does not match VERSION ${version}"
@@ -592,11 +596,24 @@ jobs:
           docker push "${IMAGE}:latest-rocm"
           docker logout ghcr.io
 
+      - name: Check for a Docker Hub token
+        id: dockerhub
+        # A step's `if` cannot see that step's own `env:`, so the secret is
+        # read here, in a step of its own, and only a yes/no leaves it.
+        env:
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          if [ -n "$DOCKERHUB_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Push the same tags to Docker Hub
         # Docker Hub is where marketplace renters search for an image. The
         # push runs only when the organisation's token is configured; without
         # it the release still completes with the GHCR image alone.
-        if: ${{ env.DOCKERHUB_TOKEN != '' }}
+        if: ${{ steps.dockerhub.outputs.enabled == 'true' }}
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
