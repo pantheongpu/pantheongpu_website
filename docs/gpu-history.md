@@ -26,6 +26,14 @@
     silicon, so mixing a 30 s, a 300 s and a 3600 s result in one line would
     show a decline that is not there.
 
+    A workload that Pantheon reworked on purpose is split in the same way. Eleven
+    workloads score differently from release 1.2.3 on (the list is under
+    [Scores that changed between releases](methodology.md#scores-that-changed-between-releases)),
+    so their results from 1.2.3 on are drawn as a separate series, labelled
+    "from 1.2.3", apart from the earlier ones. Joined into one line, a card
+    tested under both releases would seem to jump by tens of per cent when only
+    the test changed.
+
 <div class="benchmark-controls">
   <label for="gpuHistoryCard">Card</label>
   <select id="gpuHistoryCard" aria-label="Select a GPU to plot"></select>

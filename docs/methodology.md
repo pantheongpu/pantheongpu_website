@@ -66,10 +66,22 @@ Profiling is expensive and does not change what a score means. Measured at `--du
 
 Pantheon compares the available reliability data before and after every workload. Driver support varies by vendor, GPU, operating system, and permissions. Treat unsupported counters as unavailable, not as evidence that an error count is zero.
 
+## Scores that changed between releases
+
+Some releases change what a workload measures. A result from the new release is then a different measurement from an older one, even on the same card, and the two should not be compared or joined into one trend. [Per-card history](gpu-history.md) draws them as separate series.
+
+| Release | Workloads | What changed |
+| --- | --- | --- |
+| 1.2.3 | `voltage`, `incinerator`, `fp64_virus`, `pulse_virus`, `tensor_virus`, `sfu_stress`, `memory_thermal_asym`, `memory_retention_bake`, `mma_virus`, `omni_virus` | Reworked. The arithmetic in these tests could saturate, which left their verification vacuous and their power draw low; it is now bounded. `mma_virus` and `omni_virus` also run the vendor BF16 GEMM by default (`--gemm 0` selects the old path). Scores and power draw changed on purpose: on an A10G the change runs from -51% (`mma_virus`) to +227% (`voltage`). |
+| 1.2.3 | `galpat` | Compares all four 32-bit lanes of every cell it reads, where it compared one. The same card scores about 6% lower. |
+
+A build of the source tree between the 1.2.2 and 1.2.3 releases reports 1.2.2 although it scores the new way, so a 1.2.2 result from a source checkout can sit on the wrong side of the line.
+
 ## Comparing results fairly
 
 - Compare like with like: the same workload and equivalent command line settings.
 - Prefer runs with the same Pantheon release and a similar duration.
+- Do not compare a result with one from before the release that changed its workload (see above).
 - Check the driver, toolkit, clock, temperature, power, and throttle fields before drawing conclusions.
 - Do not rank unrelated workloads by their displayed number or unit.
 - Keep raw JSON reports when submitting or discussing a result so others can inspect the context.

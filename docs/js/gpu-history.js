@@ -4,16 +4,72 @@
 // slows down over time cannot be seen there: the good early run wins and every
 // later, worse run is dropped. This page plots every run of one card instead.
 //
-// A series is split by unit and by run length. When a workload's metric changed
-// between releases the numbers are not comparable, and drawing them as one line
-// would show a step that is a units change rather than a change in the
-// hardware. A 30 s run and a 3600 s run of the same workload are not
-// comparable either (an hour-long run heat-soaks the card), so each run length
-// is its own line.
+// A series is split by unit, by run length and by scoring change. When a
+// workload's metric changed between releases the numbers are not comparable,
+// and drawing them as one line would show a step that is a units change rather
+// than a change in the hardware. A 30 s run and a 3600 s run of the same
+// workload are not comparable either (an hour-long run heat-soaks the card), so
+// each run length is its own line. The same goes for a workload that was
+// reworked on purpose: its results before and after the release that reworked
+// it are different measurements, so they are drawn apart (SCORING_CHANGES).
 
 (function () {
     let historyRuns = [];
     let chart = null;
+
+    // Workloads whose scoring was changed on purpose, by the release that
+    // changed it. A result from that release on is not comparable with an
+    // earlier one: the same card scores differently because the test is a
+    // different test. Keep this in step with the table in docs/methodology.md;
+    // tests/test_website_regressions.py checks that the two agree.
+    const SCORING_CHANGES = {
+        "1.2.3": [
+            "voltage", "incinerator", "fp64_virus", "pulse_virus", "tensor_virus",
+            "sfu_stress", "memory_thermal_asym", "memory_retention_bake",
+            "mma_virus", "omni_virus", "galpat",
+        ],
+    };
+
+    function versionParts(version) {
+        const match = /^v?(\d+)\.(\d+)(?:\.(\d+))?/.exec(String(version || "").trim());
+        return match ? [Number(match[1]), Number(match[2]), Number(match[3] || 0)] : null;
+    }
+
+    // True when `version` is `floor` or newer. A version that cannot be read
+    // ("Legacy", blank) counts as older than everything.
+    function versionAtLeast(version, floor) {
+        const have = versionParts(version);
+        const need = versionParts(floor);
+        if (!have || !need) return false;
+        for (let i = 0; i < 3; i++) {
+            if (have[i] !== need[i]) return have[i] > need[i];
+        }
+        return true;
+    }
+
+    // The newest scoring change that applies to this result, or "" when the
+    // result predates every change to this workload.
+    function scoringEpoch(test, version) {
+        let epoch = "";
+        Object.keys(SCORING_CHANGES).forEach(changed => {
+            if (SCORING_CHANGES[changed].includes(test) && versionAtLeast(version, changed)
+                && (!epoch || versionAtLeast(changed, epoch))) {
+                epoch = changed;
+            }
+        });
+        return epoch;
+    }
+
+    // The oldest release that changed this workload's scoring, or "".
+    function firstScoringChange(test) {
+        let first = "";
+        Object.keys(SCORING_CHANGES).forEach(changed => {
+            if (SCORING_CHANGES[changed].includes(test) && (!first || versionAtLeast(first, changed))) {
+                first = changed;
+            }
+        });
+        return first;
+    }
 
     function historyTheme() {
         const dark = document.body.getAttribute("data-md-color-scheme") !== "default";
@@ -96,14 +152,16 @@
             .filter(run => run.card === card && run.test === test)
             .sort((a, b) => String(a.date).localeCompare(String(b.date)));
 
-        // One series per (unit, run length). Reports published before the run
-        // length was kept in the history have none; they share one series.
+        // One series per (unit, run length, scoring change). Reports published
+        // before the run length was kept in the history have none; they share
+        // one series.
         const bySeries = new Map();
         runs.forEach(run => {
             const unit = run.unit || "";
             const duration = Number(run.duration) || 0;
-            const key = `${unit}|${duration}`;
-            if (!bySeries.has(key)) bySeries.set(key, { unit, duration, points: [] });
+            const epoch = scoringEpoch(test, run.version);
+            const key = `${unit}|${duration}|${epoch}`;
+            if (!bySeries.has(key)) bySeries.set(key, { unit, duration, epoch, points: [] });
             bySeries.get(key).points.push({
                 x: new Date(String(run.date).replace(" ", "T")).getTime(),
                 y: Number(run.score),
@@ -113,7 +171,8 @@
         });
         // Longest runs last, so the legend reads from short to long.
         return Array.from(bySeries.values())
-            .sort((a, b) => a.unit.localeCompare(b.unit) || a.duration - b.duration);
+            .sort((a, b) => a.unit.localeCompare(b.unit) || a.duration - b.duration
+                || a.epoch.localeCompare(b.epoch, undefined, { numeric: true }));
     }
 
     function draw() {
@@ -126,13 +185,16 @@
         const theme = historyTheme();
         const units = new Set(groups.map(g => g.unit));
         const durations = new Set(groups.map(g => g.duration));
+        const epochs = new Set(groups.map(g => g.epoch));
+        const firstChange = firstScoringChange(testSelect.value);
         const series = groups.map(g => {
             const unitName = g.unit || "score";
             // Name a series by what tells it apart from the others.
-            const name = durations.size > 1
-                ? (units.size > 1 ? `${unitName}, ${durationLabel(g.duration)}` : durationLabel(g.duration))
-                : unitName;
-            return { name, data: g.points };
+            const parts = [];
+            if (units.size > 1) parts.push(unitName);
+            if (durations.size > 1) parts.push(durationLabel(g.duration));
+            if (epochs.size > 1) parts.push(g.epoch ? `from ${g.epoch}` : `before ${firstChange}`);
+            return { name: parts.length ? parts.join(", ") : unitName, data: g.points };
         });
         const total = series.reduce((sum, s) => sum + s.data.length, 0);
 
@@ -156,6 +218,9 @@
         }
         if (durations.size > 1) {
             notes.push("Runs of different lengths are drawn as separate series: a longer run heat-soaks the card, so a 300 s result and a 3600 s result are not comparable.");
+        }
+        if (epochs.size > 1) {
+            notes.push(`This workload's scoring changed in Pantheon ${firstChange}, so results from that release on are drawn as their own series. They are not comparable with earlier results.`);
         }
         setStatus(notes.join(" "));
 
