@@ -26160,6 +26160,21 @@
     "card": "GPU-46dd3a81-8dd0-5ca1-b4e1-5a041f2679ab"
   },
   {
+    "uuid": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7",
+    "gpu": "NVIDIA A10G",
+    "test": "baseline_metrics",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 0.0,
+    "duration": 300,
+    "date": "2026-10-13 21:37:47",
+    "temp_max": 45.0,
+    "power_max": 65.2,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7"
+  },
+  {
     "uuid": "GPU-4b906db59fd0",
     "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "atomic_virus",
@@ -73395,6 +73410,21 @@
     "card": "GPU-a15c9495-9720-8544-a576-1590537cc2a8"
   },
   {
+    "uuid": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874",
+    "gpu": "Tesla T4",
+    "test": "baseline_metrics",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 0.0,
+    "duration": 300,
+    "date": "2026-10-13 21:37:38",
+    "temp_max": 42.0,
+    "power_max": 35.6,
+    "clock_avg": 1590.0,
+    "throttle_time": 0.0,
+    "card": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874"
+  },
+  {
     "uuid": "GPU-a4247a4c-a87b-06cf-e87a-64a31b566b93",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "cache_lat",
@@ -96973,6 +97003,21 @@
     "clock_avg": 2414.0,
     "throttle_time": 0.0,
     "card": "GPU-ddac1a5b-8baa-e2d3-0572-436b3198b360"
+  },
+  {
+    "uuid": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "baseline_metrics",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 0.0,
+    "duration": 300,
+    "date": "2026-10-13 21:37:19",
+    "temp_max": 41.0,
+    "power_max": 41.5,
+    "clock_avg": 2392.7,
+    "throttle_time": 0.0,
+    "card": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1"
   },
   {
     "uuid": "GPU-df94d9f1-b551-8797-0f4f-d04093507ddd",
