@@ -31,6 +31,12 @@ Source: https://github.com/pantheongpu/pantheon/tree/v1.2.3
 - Report memory temperature and thermal throttling correctly on NVIDIA (#17)
 - Document what --profile actually requires and what its counters mean (#16)
 
+**Scores that are not comparable with 1.2.2:**
+
+Ten workloads were reworked in #26 and #28, so their scores and power draw changed on purpose: `voltage`, `incinerator`, `fp64_virus`, `pulse_virus`, `tensor_virus`, `sfu_stress`, `memory_thermal_asym`, `memory_retention_bake`, `mma_virus` and `omni_virus`. Do not set a 1.2.3 result for these beside a 1.2.2 result. `galpat` also changes: it now checks all four 32-bit lanes of every cell it reads instead of one, so the same card scores about 6% lower. `mma_virus` now runs the vendor BF16 GEMM by default; `--gemm 0` selects the old WMMA path. On an A10G, none of the other 35 workloads moved by more than 0.4%.
+
+**AMD:** every kernel now compiles with ROCm 6.4 and 7.2, including `fused_attention`, which did not build on any ROCm release before. We have not yet run this release on AMD hardware.
+
 Install from PyPI (`pipx install pantheon-gpu`), the apt or
 COPR repositories, the container image
 (`ghcr.io/pantheongpu/pantheon:1.2.3`), or the wheel below:
