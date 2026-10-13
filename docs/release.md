@@ -4,7 +4,59 @@ Download stable releases of the Pantheon GPU toolkit. The newest release is list
 
 ---
 
-## Pantheon v1.2.2 (Latest)
+## Pantheon v1.2.3 (Latest)
+**Release Date:** October 13, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.2.3
+
+**Changes since v1.2.2:**
+
+- Build fused_attention on ROCm, and compile every kernel for HIP in CI (#37)
+- Fix PCIe AER collection, combined thermal throttle labels, and the --suite docs (#31)
+- Correct the README's Efficiency formula and throttle reason labels (#33)
+- Keep the operator's home directory out of published reports (#29)
+- Fix missing sensors, kernel verification, and skipped-workload exit status (#35)
+- Fix verdicts: thermal throttling, skipped and failed workloads, hung tests, PCIe error counters, dmesg blame (#34)
+- Follow-up to #26: working memory stream and no crash in omni_virus, fixed BF16 GEMM, safe chain constants (#28)
+- Fix power stress in omni_virus and the arithmetic tests, add a vendor GEMM tensor stream (#26)
+- Add a Grafana dashboard for the node check's Prometheus metrics (#27)
+- Add Prometheus metrics, a Kubernetes Job and Helm chart, and an Apptainer definition (#24)
+- Compile the workloads ahead of time: --build-only, PANTHEON_PLATFORM, PANTHEON_CUDA_ARCH (#25)
+- Add integrations: a node check, Slurm, NHC and ReFrame (#23)
+- README: say how to install a release (#22)
+- Test only the cards a job was given: honour CUDA_VISIBLE_DEVICES (#21)
+- Remove the percentiles and the baselines file; keep the grouped verdict (#20)
+- End every run with a verdict, percentiles against the public database, and a quick suite (#18)
+- Report memory temperature and thermal throttling correctly on NVIDIA (#17)
+- Document what --profile actually requires and what its counters mean (#16)
+
+Install from PyPI (`pipx install pantheon-gpu`), the apt or
+COPR repositories, the container image
+(`ghcr.io/pantheongpu/pantheon:1.2.3`), or the wheel below:
+
+```
+pip install pantheon_gpu-1.2.3-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Kernels compile on first run into a per-user cache (roughly a
+minute, once) and need a CUDA or ROCm toolchain; use
+`--platform mock` to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.2.3 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.3/pantheon-gpu_1.2.3_all.deb) | `.deb` | 201.0 KB |
+| [Pantheon v1.2.3 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.3/pantheon_gpu-1.2.3-py3-none-any.whl) | `.whl` | 383.7 KB |
+| [Pantheon v1.2.3 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.3/pantheon-1.2.3-source.tar.gz) | `.tar.gz` | 361.1 KB |
+| [Pantheon v1.2.3 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.3/pantheon_gpu-1.2.3.tar.gz) | `.tar.gz` | 297.5 KB |
+| [Pantheon v1.2.3 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.3/pantheon-1.2.3-source.zip) | `.zip` | 490.6 KB |
+| [Pantheon v1.2.3 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.3/SHA256SUMS) | `SHA256SUMS` | 484 B |
+
+---
+
+## Pantheon v1.2.2
 **Release Date:** September 9, 2026
 
 ### Release Notes
