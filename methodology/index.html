@@ -855,6 +855,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scores-that-changed-between-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scores that changed between releases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#comparing-results-fairly" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3096,6 +3107,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scores-that-changed-between-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scores that changed between releases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#comparing-results-fairly" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3236,10 +3258,35 @@ that have real hardware results behind them.</p>
 <h2 id="verification-and-reliability">Verification and reliability</h2>
 <p><code>--verify</code> checks workload-specific output where verification is implemented. A successful verification result means the test completed its defined correctness check. It does not certify the GPU for every possible workload or operating condition.</p>
 <p>Pantheon compares the available reliability data before and after every workload. Driver support varies by vendor, GPU, operating system, and permissions. Treat unsupported counters as unavailable, not as evidence that an error count is zero.</p>
+<h2 id="scores-that-changed-between-releases">Scores that changed between releases</h2>
+<p>Some releases change what a workload measures. A result from the new release is then a different measurement from an older one, even on the same card, and the two should not be compared or joined into one trend. <a href="../gpu-history/">Per-card history</a> draws them as separate series.</p>
+<table>
+<thead>
+<tr>
+<th>Release</th>
+<th>Workloads</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.2.3</td>
+<td><code>voltage</code>, <code>incinerator</code>, <code>fp64_virus</code>, <code>pulse_virus</code>, <code>tensor_virus</code>, <code>sfu_stress</code>, <code>memory_thermal_asym</code>, <code>memory_retention_bake</code>, <code>mma_virus</code>, <code>omni_virus</code></td>
+<td>Reworked. The arithmetic in these tests could saturate, which left their verification vacuous and their power draw low; it is now bounded. <code>mma_virus</code> and <code>omni_virus</code> also run the vendor BF16 GEMM by default (<code>--gemm 0</code> selects the old path). Scores and power draw changed on purpose: on an A10G the change runs from -51% (<code>mma_virus</code>) to +227% (<code>voltage</code>).</td>
+</tr>
+<tr>
+<td>1.2.3</td>
+<td><code>galpat</code></td>
+<td>Compares all four 32-bit lanes of every cell it reads, where it compared one. The same card scores about 6% lower.</td>
+</tr>
+</tbody>
+</table>
+<p>A build of the source tree between the 1.2.2 and 1.2.3 releases reports 1.2.2 although it scores the new way, so a 1.2.2 result from a source checkout can sit on the wrong side of the line.</p>
 <h2 id="comparing-results-fairly">Comparing results fairly</h2>
 <ul>
 <li>Compare like with like: the same workload and equivalent command line settings.</li>
 <li>Prefer runs with the same Pantheon release and a similar duration.</li>
+<li>Do not compare a result with one from before the release that changed its workload (see above).</li>
 <li>Check the driver, toolkit, clock, temperature, power, and throttle fields before drawing conclusions.</li>
 <li>Do not rank unrelated workloads by their displayed number or unit.</li>
 <li>Keep raw JSON reports when submitting or discussing a result so others can inspect the context.</li>
