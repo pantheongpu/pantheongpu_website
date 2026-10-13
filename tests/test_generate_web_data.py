@@ -832,7 +832,8 @@ def test_history_chart_draws_one_series_per_run_length():
     from pathlib import Path
     script = (Path(__file__).resolve().parent.parent / "docs" / "js" / "gpu-history.js").read_text()
     assert "run.duration" in script
-    assert "`${unit}|${duration}`" in script
+    # Run length is one part of the series key; the scoring change is the other.
+    assert "`${unit}|${duration}|${epoch}`" in script
 
 
 def test_amd_placeholders_are_not_published_as_readings(tmp_path):

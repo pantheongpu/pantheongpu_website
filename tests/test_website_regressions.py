@@ -1,7 +1,11 @@
 import json
 import importlib.util
 import re
+import shutil
+import subprocess
 from pathlib import Path
+
+import pytest
 
 from website_utils.generate_web_data import main as generate_web_data
 
@@ -2389,3 +2393,103 @@ def test_history_labels_every_real_gpu_id_not_just_nvidia_uuids():
     assert 'card.startsWith("GPU-") ? card' not in history_js
     assert "hasGpuId(card) ? card : \"no GPU ID\"" in history_js
     assert "0x0*" in history_js
+
+
+def _scoring_changes_in_history_script():
+    """{release: {workloads}} read out of SCORING_CHANGES in gpu-history.js."""
+    script = read("docs/js/gpu-history.js")
+    block = re.search(r"const SCORING_CHANGES = \{(.*?)\n    \};", script, re.S)
+    assert block, "gpu-history.js must define SCORING_CHANGES"
+    changes = {}
+    for release, names in re.findall(r'"(\d+\.\d+\.\d+)":\s*\[(.*?)\]', block.group(1), re.S):
+        changes[release] = set(re.findall(r'"([a-z0-9_]+)"', names))
+    return changes
+
+
+def test_history_chart_and_methodology_list_the_same_scoring_changes():
+    """The chart splits a card's history at a release that reworked a workload,
+    and the methodology page tells readers which ones. Two lists would drift."""
+    changes = _scoring_changes_in_history_script()
+    assert changes, "SCORING_CHANGES is empty"
+
+    methodology = read("docs/methodology.md")
+    heading = "## Scores that changed between releases"
+    assert heading in methodology
+    section = methodology.split(heading, 1)[1].split("\n## ", 1)[0]
+    documented = {}
+    for line in section.splitlines():
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if line.startswith("|") and len(cells) == 3 and re.fullmatch(r"\d+\.\d+\.\d+", cells[0]):
+            documented.setdefault(cells[0], set()).update(re.findall(r"`([a-z0-9_]+)`", cells[1]))
+
+    assert documented == changes
+
+
+def test_history_page_points_to_the_scoring_changes_and_series_are_split_by_them():
+    history = read("docs/gpu-history.md")
+    script = read("docs/js/gpu-history.js")
+
+    assert "methodology.md#scores-that-changed-between-releases" in history
+    assert "const epoch = scoringEpoch(test, run.version);" in script
+    assert "const key = `${unit}|${duration}|${epoch}`;" in script
+    assert "Do not compare a result with one from before the release that changed its workload" \
+        in read("docs/methodology.md")
+
+
+def _history_series(tmp_path, runs, card, test):
+    """Which series gpu-history.js would draw, run under Node with a stub DOM."""
+    data = tmp_path / "runs.json"
+    data.write_text(json.dumps(runs), encoding="utf-8")
+    result = subprocess.run(
+        ["node", str(ROOT / "tests" / "gpu_history_harness.js"),
+         str(ROOT / "docs" / "js" / "gpu-history.js"), str(data), card, test],
+        capture_output=True, text=True, timeout=60)
+    assert result.returncode == 0, result.stderr
+    return json.loads(result.stdout)
+
+
+def _run(test, version, score, date, unit="TFLOPS", duration=300, card="GPU-aaaa"):
+    return {"card": card, "gpu": "NVIDIA Test Card", "test": test, "version": version, "score": score,
+            "date": date, "unit": unit, "duration": duration}
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="needs Node to run the chart script")
+def test_history_chart_separates_a_reworked_workload_at_its_release(tmp_path):
+    runs = [_run("voltage", "1.2.1", 9.1, "2026-09-01 10:00:00"),
+            _run("voltage", "1.2.2", 9.2, "2026-09-12 10:00:00"),
+            _run("voltage", "1.2.3", 30.2, "2026-10-14 10:00:00"),
+            _run("voltage", "1.2.4", 30.1, "2026-11-01 10:00:00")]
+    out = _history_series(tmp_path, runs, "GPU-aaaa", "voltage")
+
+    assert [s["name"] for s in out["series"]] == ["before 1.2.3", "from 1.2.3"]
+    assert [[p["version"] for p in s["points"]] for s in out["series"]] == [["1.2.1", "1.2.2"], ["1.2.3", "1.2.4"]]
+    assert "scoring changed in Pantheon 1.2.3" in out["status"]
+    assert "not comparable with earlier results" in out["status"]
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="needs Node to run the chart script")
+def test_history_chart_leaves_unchanged_workloads_and_one_sided_history_alone(tmp_path):
+    runs = [_run("memory_read", "1.2.2", 500.0, "2026-09-12 10:00:00", unit="GB/s"),
+            _run("memory_read", "1.2.3", 501.0, "2026-10-14 10:00:00", unit="GB/s"),
+            _run("tensor_virus", "1.2.2", 17.9, "2026-09-12 10:00:00"),
+            _run("tensor_virus", "1.2.2", 17.8, "2026-09-13 10:00:00"),
+            _run("omni_virus", "1.2.3", 32.3, "2026-10-14 10:00:00"),
+            _run("omni_virus", "1.2.3", 32.4, "2026-10-15 10:00:00")]
+
+    for test, unit in (("memory_read", "GB/s"), ("tensor_virus", "TFLOPS"), ("omni_virus", "TFLOPS")):
+        out = _history_series(tmp_path, runs, "GPU-aaaa", test)
+        assert [s["name"] for s in out["series"]] == [unit], test
+        assert "scoring changed" not in out["status"], test
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="needs Node to run the chart script")
+def test_history_chart_treats_unreadable_versions_as_older_and_keeps_other_splits(tmp_path):
+    runs = [_run("galpat", "Legacy", 7.0e9, "2026-08-01 10:00:00", unit="gallop-reads/s"),
+            _run("galpat", "1.2.2", 6.9e9, "2026-09-12 10:00:00", unit="gallop-reads/s"),
+            _run("galpat", "1.2.3", 6.5e9, "2026-10-14 10:00:00", unit="gallop-reads/s"),
+            _run("galpat", "1.2.3", 6.4e9, "2026-10-14 12:00:00", unit="gallop-reads/s", duration=3600)]
+    out = _history_series(tmp_path, runs, "GPU-aaaa", "galpat")
+
+    names = [s["name"] for s in out["series"]]
+    assert names == ["300 s, before 1.2.3", "300 s, from 1.2.3", "3600 s, from 1.2.3"]
+    assert [p["version"] for p in out["series"][0]["points"]] == ["Legacy", "1.2.2"]
