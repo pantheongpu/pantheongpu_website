@@ -287,6 +287,21 @@
   {
     "uuid": "0xfd3d6d912de3c917",
     "gpu": "AMD Radeon RX 6800",
+    "test": "memory_pc_pingpong",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 254.697,
+    "duration": 300,
+    "date": "2026-10-14 02:33:37",
+    "temp_max": 71.0,
+    "power_max": 118.0,
+    "clock_avg": 2277.2,
+    "throttle_time": 0.0,
+    "card": "0xfd3d6d912de3c917"
+  },
+  {
+    "uuid": "0xfd3d6d912de3c917",
+    "gpu": "AMD Radeon RX 6800",
     "test": "memory_read",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -326,6 +341,21 @@
     "temp_max": 57.0,
     "power_max": 56.0,
     "clock_avg": 32.0,
+    "throttle_time": 0.0,
+    "card": "0xfd3d6d912de3c917"
+  },
+  {
+    "uuid": "0xfd3d6d912de3c917",
+    "gpu": "AMD Radeon RX 6800",
+    "test": "memory_retention",
+    "version": "1.2.3",
+    "unit": "retained-MiB",
+    "score": 16178.0,
+    "duration": 300,
+    "date": "2026-10-14 02:28:01",
+    "temp_max": 53.0,
+    "power_max": 26.0,
+    "clock_avg": 8.0,
     "throttle_time": 0.0,
     "card": "0xfd3d6d912de3c917"
   },
@@ -93347,6 +93377,21 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_bank_thrash",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 228.494,
+    "duration": 300,
+    "date": "2026-10-14 02:33:55",
+    "temp_max": 79.0,
+    "power_max": 311.3,
+    "clock_avg": 1906.4,
+    "throttle_time": 302.7,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "memory_cache_fracture",
     "version": "1.2.0",
     "unit": "GB/s",
@@ -93432,6 +93477,21 @@
     "power_max": 287.7,
     "clock_avg": 1897.2,
     "throttle_time": 285.6,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_pc_pingpong",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 760.754,
+    "duration": 300,
+    "date": "2026-10-14 02:28:23",
+    "temp_max": 74.0,
+    "power_max": 287.8,
+    "clock_avg": 1901.4,
+    "throttle_time": 253.6,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
