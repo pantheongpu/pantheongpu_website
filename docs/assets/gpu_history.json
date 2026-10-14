@@ -347,6 +347,21 @@
   {
     "uuid": "0xfd3d6d912de3c917",
     "gpu": "AMD Radeon RX 6800",
+    "test": "memory_thermal_asym",
+    "version": "1.2.3",
+    "unit": "TFLOPS",
+    "score": 3.48375,
+    "duration": 300,
+    "date": "2026-10-14 02:11:12",
+    "temp_max": 81.0,
+    "power_max": 177.0,
+    "clock_avg": 2275.0,
+    "throttle_time": 0.0,
+    "card": "0xfd3d6d912de3c917"
+  },
+  {
+    "uuid": "0xfd3d6d912de3c917",
+    "gpu": "AMD Radeon RX 6800",
     "test": "memory_tsv_thrasher",
     "version": "1.2.2",
     "unit": "GB/s",
@@ -93332,6 +93347,21 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_cache_fracture",
+    "version": "1.2.3",
+    "unit": "GB/s",
+    "score": 207.832,
+    "duration": 300,
+    "date": "2026-10-14 02:11:45",
+    "temp_max": 79.0,
+    "power_max": 316.1,
+    "clock_avg": 1903.2,
+    "throttle_time": 300.7,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "memory_hammer",
     "version": "1.2.0",
     "unit": "aggressor-reads/s",
@@ -93522,6 +93552,21 @@
     "power_max": 334.0,
     "clock_avg": 1893.0,
     "throttle_time": 288.5,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_thermal_asym",
+    "version": "1.2.3",
+    "unit": "TFLOPS",
+    "score": 6.31287,
+    "duration": 300,
+    "date": "2026-10-14 02:06:13",
+    "temp_max": 79.0,
+    "power_max": 337.6,
+    "clock_avg": 1893.4,
+    "throttle_time": 285.5,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
