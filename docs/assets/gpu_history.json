@@ -885,6 +885,21 @@
     "card": "0xfd3d6d912de3c917"
   },
   {
+    "uuid": "0xfd3d6d912de3c917",
+    "gpu": "AMD Radeon RX 6800",
+    "test": "voltage",
+    "version": "1.2.3",
+    "unit": "TFLOPS",
+    "score": 12.9866,
+    "duration": 300,
+    "date": "2026-10-14 03:41:03",
+    "temp_max": 86.0,
+    "power_max": 185.0,
+    "clock_avg": 2275.0,
+    "throttle_time": 0.0,
+    "card": "0xfd3d6d912de3c917"
+  },
+  {
     "uuid": "0x0",
     "gpu": "AMD Radeon RX 6700 XT",
     "test": "allocation_fragmentation",
@@ -94452,6 +94467,21 @@
     "power_max": 317.8,
     "clock_avg": 1917.1,
     "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "voltage",
+    "version": "1.2.3",
+    "unit": "TFLOPS",
+    "score": 31.6617,
+    "duration": 300,
+    "date": "2026-10-14 03:40:34",
+    "temp_max": 82.0,
+    "power_max": 350.0,
+    "clock_avg": 1756.3,
+    "throttle_time": 300.3,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
