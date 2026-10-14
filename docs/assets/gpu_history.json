@@ -4112,6 +4112,21 @@
   {
     "uuid": "GPU-0191d7ef-ab13-187a-2caa-7eecbf32361b",
     "gpu": "NVIDIA A10",
+    "test": "fused_attention",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 2889940000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:39:29",
+    "temp_max": 73.0,
+    "power_max": 150.4,
+    "clock_avg": 1286.5,
+    "throttle_time": 300.2,
+    "card": "GPU-0191d7ef-ab13-187a-2caa-7eecbf32361b"
+  },
+  {
+    "uuid": "GPU-0191d7ef-ab13-187a-2caa-7eecbf32361b",
+    "gpu": "NVIDIA A10",
     "test": "incinerator",
     "version": "1.2.3",
     "unit": "TFLOPS",
@@ -4137,6 +4152,21 @@
     "power_max": 155.3,
     "clock_avg": 1237.9,
     "throttle_time": 301.6,
+    "card": "GPU-0191d7ef-ab13-187a-2caa-7eecbf32361b"
+  },
+  {
+    "uuid": "GPU-0191d7ef-ab13-187a-2caa-7eecbf32361b",
+    "gpu": "NVIDIA A10",
+    "test": "kv_cache_churn",
+    "version": "1.2.3",
+    "unit": "cache-updates/s",
+    "score": 1702300000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:33:54",
+    "temp_max": 74.0,
+    "power_max": 150.1,
+    "clock_avg": 1511.3,
+    "throttle_time": 301.1,
     "card": "GPU-0191d7ef-ab13-187a-2caa-7eecbf32361b"
   },
   {
@@ -26672,6 +26702,21 @@
   {
     "uuid": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7",
     "gpu": "NVIDIA A10G",
+    "test": "fused_attention",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 2870950000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:30:12",
+    "temp_max": 72.0,
+    "power_max": 208.1,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7"
+  },
+  {
+    "uuid": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7",
+    "gpu": "NVIDIA A10G",
     "test": "incinerator",
     "version": "1.2.3",
     "unit": "TFLOPS",
@@ -26980,6 +27025,21 @@
     "date": "2026-10-13 22:27:46",
     "temp_max": 68.0,
     "power_max": 187.2,
+    "clock_avg": 1710.0,
+    "throttle_time": 0.0,
+    "card": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7"
+  },
+  {
+    "uuid": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7",
+    "gpu": "NVIDIA A10G",
+    "test": "rope_stress",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 2892070000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:35:45",
+    "temp_max": 75.0,
+    "power_max": 221.0,
     "clock_avg": 1710.0,
     "throttle_time": 0.0,
     "card": "GPU-493f256d-e584-2b1a-9e38-bb12401605f7"
@@ -48047,6 +48107,21 @@
   {
     "uuid": "GPU-75d24b21-6d8b-690f-0854-38cc47a7eb17",
     "gpu": "NVIDIA T4G",
+    "test": "quantized_gemm",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 384314000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:31:26",
+    "temp_max": 78.0,
+    "power_max": 69.0,
+    "clock_avg": 1120.5,
+    "throttle_time": 300.3,
+    "card": "GPU-75d24b21-6d8b-690f-0854-38cc47a7eb17"
+  },
+  {
+    "uuid": "GPU-75d24b21-6d8b-690f-0854-38cc47a7eb17",
+    "gpu": "NVIDIA T4G",
     "test": "ras_validator",
     "version": "1.2.3",
     "unit": "GB/s",
@@ -48087,6 +48162,21 @@
     "power_max": 50.4,
     "clock_avg": 1590.0,
     "throttle_time": 0.0,
+    "card": "GPU-75d24b21-6d8b-690f-0854-38cc47a7eb17"
+  },
+  {
+    "uuid": "GPU-75d24b21-6d8b-690f-0854-38cc47a7eb17",
+    "gpu": "NVIDIA T4G",
+    "test": "serving_mix",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 95125300.0,
+    "duration": 300,
+    "date": "2026-10-14 00:36:58",
+    "temp_max": 78.0,
+    "power_max": 69.2,
+    "clock_avg": 1150.3,
+    "throttle_time": 300.4,
     "card": "GPU-75d24b21-6d8b-690f-0854-38cc47a7eb17"
   },
   {
@@ -52547,6 +52637,21 @@
   {
     "uuid": "GPU-7de07eb7-ea3d-80fc-4f01-3c37c4de12a7",
     "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "fused_attention",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 6682710000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:35:04",
+    "temp_max": 58.0,
+    "power_max": 287.2,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7de07eb7-ea3d-80fc-4f01-3c37c4de12a7"
+  },
+  {
+    "uuid": "GPU-7de07eb7-ea3d-80fc-4f01-3c37c4de12a7",
+    "gpu": "NVIDIA A100-SXM4-40GB",
     "test": "incinerator",
     "version": "1.2.3",
     "unit": "TFLOPS",
@@ -52570,6 +52675,21 @@
     "date": "2026-10-13 22:37:51",
     "temp_max": 76.0,
     "power_max": 404.9,
+    "clock_avg": 1406.0,
+    "throttle_time": 0.0,
+    "card": "GPU-7de07eb7-ea3d-80fc-4f01-3c37c4de12a7"
+  },
+  {
+    "uuid": "GPU-7de07eb7-ea3d-80fc-4f01-3c37c4de12a7",
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "test": "kv_cache_churn",
+    "version": "1.2.3",
+    "unit": "cache-updates/s",
+    "score": 4494250000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:29:29",
+    "temp_max": 49.0,
+    "power_max": 224.3,
     "clock_avg": 1406.0,
     "throttle_time": 0.0,
     "card": "GPU-7de07eb7-ea3d-80fc-4f01-3c37c4de12a7"
@@ -75572,6 +75692,21 @@
   {
     "uuid": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874",
     "gpu": "Tesla T4",
+    "test": "quantized_gemm",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 459312000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:29:57",
+    "temp_max": 52.0,
+    "power_max": 71.3,
+    "clock_avg": 1358.3,
+    "throttle_time": 300.3,
+    "card": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874"
+  },
+  {
+    "uuid": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874",
+    "gpu": "Tesla T4",
     "test": "ras_validator",
     "version": "1.2.3",
     "unit": "GB/s",
@@ -75612,6 +75747,21 @@
     "power_max": 40.6,
     "clock_avg": 1590.0,
     "throttle_time": 0.0,
+    "card": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874"
+  },
+  {
+    "uuid": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874",
+    "gpu": "Tesla T4",
+    "test": "serving_mix",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 113119000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:35:30",
+    "temp_max": 52.0,
+    "power_max": 71.1,
+    "clock_avg": 1379.6,
+    "throttle_time": 300.3,
     "card": "GPU-a1b9b74f-b8dc-6c97-b106-4687bc61f874"
   },
   {
@@ -77237,6 +77387,21 @@
   {
     "uuid": "GPU-ab92d6ab-c2ea-ecca-a6c8-62f5d61c4035",
     "gpu": "NVIDIA L4",
+    "test": "fused_attention",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 1595940000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:33:16",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1432.4,
+    "throttle_time": 300.5,
+    "card": "GPU-ab92d6ab-c2ea-ecca-a6c8-62f5d61c4035"
+  },
+  {
+    "uuid": "GPU-ab92d6ab-c2ea-ecca-a6c8-62f5d61c4035",
+    "gpu": "NVIDIA L4",
     "test": "incinerator",
     "version": "1.2.3",
     "unit": "TFLOPS",
@@ -77547,6 +77712,21 @@
     "power_max": 72.4,
     "clock_avg": 1920.6,
     "throttle_time": 305.8,
+    "card": "GPU-ab92d6ab-c2ea-ecca-a6c8-62f5d61c4035"
+  },
+  {
+    "uuid": "GPU-ab92d6ab-c2ea-ecca-a6c8-62f5d61c4035",
+    "gpu": "NVIDIA L4",
+    "test": "rope_stress",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 1609500000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:38:49",
+    "temp_max": 83.0,
+    "power_max": 72.2,
+    "clock_avg": 1370.0,
+    "throttle_time": 300.5,
     "card": "GPU-ab92d6ab-c2ea-ecca-a6c8-62f5d61c4035"
   },
   {
@@ -99797,6 +99977,21 @@
   {
     "uuid": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "fused_attention",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 4657140000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:29:38",
+    "temp_max": 75.0,
+    "power_max": 157.5,
+    "clock_avg": 2397.4,
+    "throttle_time": 0.0,
+    "card": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1"
+  },
+  {
+    "uuid": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "incinerator",
     "version": "1.2.3",
     "unit": "TFLOPS",
@@ -100107,6 +100302,21 @@
     "power_max": 142.2,
     "clock_avg": 2398.3,
     "throttle_time": 0.0,
+    "card": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1"
+  },
+  {
+    "uuid": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "rope_stress",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 4712620000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:35:10",
+    "temp_max": 82.0,
+    "power_max": 165.4,
+    "clock_avg": 2382.9,
+    "throttle_time": 91.1,
     "card": "GPU-de36b1b0-4d3b-d1ef-2bc7-70be53dc85b1"
   },
   {
@@ -103637,6 +103847,21 @@
   {
     "uuid": "GPU-e2f0a744-ca77-25ce-71e8-91b5a9b5dec3",
     "gpu": "NVIDIA L40S",
+    "test": "fused_attention",
+    "version": "1.2.3",
+    "unit": "ai-ops/s",
+    "score": 3455940000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:35:17",
+    "temp_max": 53.0,
+    "power_max": 202.6,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
+    "card": "GPU-e2f0a744-ca77-25ce-71e8-91b5a9b5dec3"
+  },
+  {
+    "uuid": "GPU-e2f0a744-ca77-25ce-71e8-91b5a9b5dec3",
+    "gpu": "NVIDIA L40S",
     "test": "incinerator",
     "version": "1.2.3",
     "unit": "TFLOPS",
@@ -103662,6 +103887,21 @@
     "power_max": 355.0,
     "clock_avg": 1942.5,
     "throttle_time": 295.2,
+    "card": "GPU-e2f0a744-ca77-25ce-71e8-91b5a9b5dec3"
+  },
+  {
+    "uuid": "GPU-e2f0a744-ca77-25ce-71e8-91b5a9b5dec3",
+    "gpu": "NVIDIA L40S",
+    "test": "kv_cache_churn",
+    "version": "1.2.3",
+    "unit": "cache-updates/s",
+    "score": 1498280000.0,
+    "duration": 300,
+    "date": "2026-10-14 00:29:44",
+    "temp_max": 50.0,
+    "power_max": 175.5,
+    "clock_avg": 2040.0,
+    "throttle_time": 0.0,
     "card": "GPU-e2f0a744-ca77-25ce-71e8-91b5a9b5dec3"
   },
   {
