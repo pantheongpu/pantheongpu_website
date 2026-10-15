@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.3",
+    "timestamp": "2026-10-15 20:59:00",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "3037.68Mhz"
+    },
+    "ram_info": {
+        "total": "1.10TB",
+        "available": "1.08TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 4,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 400.0,
+            "uuid": "GPU-519bf0bd-ee6a-29a6-f256-04eb738f16a4",
+            "serial": "1324220068706",
+            "memory_type": "HBM2",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261015-205900",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-15 21:04:02",
+    "test_results": [
+        {
+            "Test Name": "voltage",
+            "Version": "1.2.3",
+            "Description": "Voltage Virus (ALU Hammer)",
+            "GPU ID": 4,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 19.0192,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 65.8,
+            "Max Temp (C)": 68.0,
+            "Avg Mem Temp (C)": 57.2,
+            "Max Mem Temp (C)": 59.0,
+            "Avg Power (W)": 211.4,
+            "Max Power (W)": 214.6,
+            "Avg Clock(MHz)": 1410.0,
+            "Min Clock (MHz)": 1410.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 97.9,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 995.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 17.645,
+            "Thermal Rise (C)": 22.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 89.97,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/compute_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261015-205900/reliability/voltage/gpu4/ras.json"
+        }
+    ]
+}
