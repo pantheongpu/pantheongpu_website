@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.3",
+    "timestamp": "2026-10-15 20:14:44",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "3081.79Mhz"
+    },
+    "ram_info": {
+        "total": "1.10TB",
+        "available": "1.08TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 7,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 400.0,
+            "uuid": "GPU-b1c6c4e8-b710-9bd1-41fc-70c484503ca0",
+            "serial": "1324220061591",
+            "memory_type": "HBM2",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261015-201444",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-15 20:19:46",
+    "test_results": [
+        {
+            "Test Name": "int_virus",
+            "Version": "1.2.3",
+            "Description": "Integer Virus (INT32/Logic Pipeline)",
+            "GPU ID": 7,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 21.1842,
+            "Unit": "TOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 55.9,
+            "Max Temp (C)": 58.0,
+            "Avg Mem Temp (C)": 51.7,
+            "Max Mem Temp (C)": 52.0,
+            "Avg Power (W)": 323.8,
+            "Max Power (W)": 333.6,
+            "Avg Clock(MHz)": 1410.0,
+            "Min Clock (MHz)": 1410.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 98.8,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 995.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 27.025,
+            "Thermal Rise (C)": 26.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.07,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/int_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261015-201444/reliability/int_virus/gpu7/ras.json"
+        }
+    ]
+}
