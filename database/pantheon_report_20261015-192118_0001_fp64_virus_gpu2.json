@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.3",
+    "timestamp": "2026-10-15 19:21:18",
+    "os_info": {
+        "system": "Linux",
+        "release": "5.15.0-1083-aws",
+        "version": "#90~20.04.1-Ubuntu SMP Tue Apr 22 09:59:53 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "2525.00Mhz"
+    },
+    "ram_info": {
+        "total": "747.74GB",
+        "available": "740.78GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 2,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla V100-SXM2-32GB",
+            "memory_total": "32768 MB",
+            "driver_version": "550.163.01",
+            "power_limit": 300.0,
+            "uuid": "GPU-10de142a-aeac-22ac-9317-7bbcbd9a0761",
+            "serial": "1564819008955",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.1",
+    "run_id": "20261015-192118",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-15 19:26:22",
+    "test_results": [
+        {
+            "Test Name": "fp64_virus",
+            "Version": "1.2.3",
+            "Description": "FP64 Chokehold (Double Precision)",
+            "GPU ID": 2,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 7.73652,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 59.0,
+            "Max Temp (C)": 61.0,
+            "Avg Mem Temp (C)": 55.2,
+            "Max Mem Temp (C)": 57.0,
+            "Avg Power (W)": 192.3,
+            "Max Power (W)": 195.0,
+            "Avg Clock(MHz)": 1525.4,
+            "Min Clock (MHz)": 135.0,
+            "Max Clock (MHz)": 1530.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 623.6,
+            "Memory Total (MiB)": 32768.0,
+            "Energy (Wh)": 16.098,
+            "Thermal Rise (C)": 13.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 40.23,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/fp64_virus 0 300 99 --verify",
+            "RAS Status": "UNAVAILABLE",
+            "RAS Error Delta": "RAS/AER telemetry is not exposed by this system",
+            "RAS Report": "results/20261015-192118/reliability/fp64_virus/gpu2/ras.json"
+        }
+    ]
+}
