@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 16:53:39",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3101.13Mhz"
+    },
+    "ram_info": {
+        "total": "30.97GB",
+        "available": "29.78GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-beea7e6c-51d0-bf46-39ac-835413a4f318",
+            "serial": "1563320004072",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261017-165339",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 16:58:40",
+    "test_results": [
+        {
+            "Test Name": "speculative_decode",
+            "Version": "1.2.4",
+            "Description": "Speculative Decode (Synthetic Draft/Verify Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 716702000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 45.5,
+            "Max Temp (C)": 47.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 69.5,
+            "Max Power (W)": 70.4,
+            "Avg Clock(MHz)": 1424.9,
+            "Min Clock (MHz)": 1335.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15214.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.801,
+            "Thermal Rise (C)": 8.0,
+            "Throttle Time (s)": 300.1,
+            "Efficiency": 10312258.99,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/speculative_decode 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-165339/reliability/speculative_decode/gpu0/ras.json"
+        }
+    ]
+}
