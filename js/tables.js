@@ -367,6 +367,7 @@ function renderTable(data) {
     if (data.length === 0) {
         let visibleCount = COL_DEFS.filter(c => c.visible).length;
         tbody.innerHTML = `<tr><td colspan='${visibleCount}' style='text-align:center; padding: 20px;'>No results found</td></tr>`;
+        renderPager(0, 0, 0, 1);
         return;
     }
 
@@ -864,6 +865,20 @@ function downloadBlob(blob, filename) {
     URL.revokeObjectURL(url);
 }
 
+// A measured quantity as a number, or null when the run never measured it.
+// Some columns arrive as text with the unit attached ("12288 MB" for vram and
+// sometimes memory_total); the header already names the unit, so the cell
+// keeps only the number. Plain Number("12288 MB") would be NaN and the cell
+// would silently come out blank.
+function xlsxNumber(raw) {
+    if (isMissingValue(raw)) return null;
+    if (typeof raw === "number") return Number.isFinite(raw) ? raw : null;
+    const match = String(raw).trim().match(/^[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/);
+    if (!match) return null;
+    const num = Number(match[0]);
+    return Number.isFinite(num) ? num : null;
+}
+
 // One benchmark row, typed for a spreadsheet rather than formatted for a
 // cell. Numbers stay numbers; a value the run never measured becomes a blank
 // rather than the text "N/A", which would turn its column into text and
@@ -885,8 +900,8 @@ function xlsxRow(row, columns) {
             return;
         }
         if (col.key in XLSX_COLUMN_UNITS) {
-            const num = Number(raw);
-            cells.push(isMissingValue(raw) || !Number.isFinite(num) ? "" : num);
+            const num = xlsxNumber(raw);
+            cells.push(num === null ? "" : num);
             return;
         }
         const formatted = formatCellValue(row, col.key);
