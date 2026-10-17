@@ -18,6 +18,12 @@ Source: https://github.com/pantheongpu/pantheon/tree/v1.2.4
 - Choose the default GEMM format from the part: no BF16 default below Ampere (#39)
 - Integrations: point the image tags at 1.2.3 (#38)
 
+**Turing and Volta (T4, T4G, V100):** 1.2.3 ran `mma_virus` and `omni_virus` on a BF16 GEMM path these cards handle about 40 times slower, without saying so. 1.2.4 chooses the default from the card: below Ampere (compute capability 8.0) both tests keep the WMMA tensor stream and print why. Do not use 1.2.3 results for these two workloads on those cards. Ampere and later are unchanged.
+
+**Multi-GPU NVIDIA hosts:** each workload now starts with only its own card visible. Before, a stray context on GPU 0 could cause random out-of-memory failures when every card was tested at once.
+
+**AMD parts without matrix cores (RDNA2, gfx9 before MFMA):** `mma_virus`, `omni_virus` and `transformer_virus` now skip with a reason instead of failing to build.
+
 Install from PyPI (`pipx install pantheon-gpu`), the apt or
 COPR repositories, the container image
 (`ghcr.io/pantheongpu/pantheon:1.2.4`), or the wheel below:
