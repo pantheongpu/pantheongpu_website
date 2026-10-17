@@ -1,5 +1,5 @@
 Name:           pantheon-gpu
-Version:        1.2.3
+Version:        1.2.4
 Release:        1%{?dist}
 Summary:        GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm
 

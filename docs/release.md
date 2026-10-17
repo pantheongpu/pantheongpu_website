@@ -4,7 +4,46 @@ Download stable releases of the Pantheon GPU toolkit. The newest release is list
 
 ---
 
-## Pantheon v1.2.3 (Latest)
+## Pantheon v1.2.4 (Latest)
+**Release Date:** October 17, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.2.4
+
+**Changes since v1.2.3:**
+
+- Start each NVIDIA workload with only its own card visible (#41)
+- Report a driver with an older NVENC API as a skip in media_enc_virus (#42)
+- Skip the matrix workloads cleanly on AMD parts with no matrix instructions (#40)
+- Choose the default GEMM format from the part: no BF16 default below Ampere (#39)
+- Integrations: point the image tags at 1.2.3 (#38)
+
+Install from PyPI (`pipx install pantheon-gpu`), the apt or
+COPR repositories, the container image
+(`ghcr.io/pantheongpu/pantheon:1.2.4`), or the wheel below:
+
+```
+pip install pantheon_gpu-1.2.4-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Kernels compile on first run into a per-user cache (roughly a
+minute, once) and need a CUDA or ROCm toolchain; use
+`--platform mock` to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.2.4 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.4/pantheon-gpu_1.2.4_all.deb) | `.deb` | 202.8 KB |
+| [Pantheon v1.2.4 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.4/pantheon_gpu-1.2.4-py3-none-any.whl) | `.whl` | 386.2 KB |
+| [Pantheon v1.2.4 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.4/pantheon-1.2.4-source.tar.gz) | `.tar.gz` | 366.2 KB |
+| [Pantheon v1.2.4 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.4/pantheon_gpu-1.2.4.tar.gz) | `.tar.gz` | 300.2 KB |
+| [Pantheon v1.2.4 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.4/pantheon-1.2.4-source.zip) | `.zip` | 496.3 KB |
+| [Pantheon v1.2.4 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.4/SHA256SUMS) | `SHA256SUMS` | 484 B |
+
+---
+
+## Pantheon v1.2.3
 **Release Date:** October 13, 2026
 
 ### Release Notes
