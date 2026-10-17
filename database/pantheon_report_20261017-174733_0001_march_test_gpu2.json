@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 17:47:33",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 240,
+        "logical_cores": 240,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.71TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 2,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-80GB",
+            "memory_total": "81920 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-ac9d4913-550b-d33c-9629-5e628e574401",
+            "serial": "1323422024186",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-174733",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 17:52:37",
+    "test_results": [
+        {
+            "Test Name": "march_test",
+            "Version": "1.2.4",
+            "Description": "March C- (Linear Memory Test)",
+            "GPU ID": 2,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 17086900000.0,
+            "Unit": "march-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 47.5,
+            "Max Temp (C)": 49.0,
+            "Avg Mem Temp (C)": 48.8,
+            "Max Mem Temp (C)": 51.0,
+            "Avg Power (W)": 186.7,
+            "Max Power (W)": 198.5,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 81115.1,
+            "Memory Total (MiB)": 81920.0,
+            "Energy (Wh)": 15.669,
+            "Thermal Rise (C)": 14.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 91520621.32,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/march_test 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-174733/reliability/march_test/gpu2/ras.json"
+        }
+    ]
+}
