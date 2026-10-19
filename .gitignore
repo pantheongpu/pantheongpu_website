@@ -34,6 +34,7 @@ MANIFEST
 # The RPM spec is a source file, not a PyInstaller artifact; the blanket
 # pattern above silently kept it out of a release commit once.
 !packaging/rpm/*.spec
+!packaging/rpm/fedora/*.spec
 
 # Installer logs
 pip-log.txt

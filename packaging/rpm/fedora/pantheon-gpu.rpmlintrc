@@ -1,0 +1,6 @@
+# The kernel sources (.cu, .cpp, .h) are the package's payload. Pantheon
+# compiles them at run time for the GPU that is present, so they must ship in
+# the main package; there is no development use for them.
+Filters = [
+    'pantheon-gpu\.noarch: W: devel-file-in-non-devel-package',
+]
