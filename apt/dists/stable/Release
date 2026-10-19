@@ -1,0 +1,22 @@
+Origin: Pantheon
+Label: Pantheon
+Suite: stable
+Codename: stable
+Architectures: all amd64 arm64
+Components: main
+Description: Pantheon GPU stress testing and diagnostics
+Date: Thu, 01 Jan 1970 00:00:00 UTC
+MD5Sum:
+ 7981b33650b26d6d2c362ed92a2e5d4b 5395 main/binary-all/Packages
+ f8a9d0d8e0f2f550c8eda066145904cd 1185 main/binary-all/Packages.gz
+ 7981b33650b26d6d2c362ed92a2e5d4b 5395 main/binary-amd64/Packages
+ f8a9d0d8e0f2f550c8eda066145904cd 1185 main/binary-amd64/Packages.gz
+ 7981b33650b26d6d2c362ed92a2e5d4b 5395 main/binary-arm64/Packages
+ f8a9d0d8e0f2f550c8eda066145904cd 1185 main/binary-arm64/Packages.gz
+SHA256:
+ d6d16bb0588981f0a488ce0d103e5ab9c55cea8cd50f6c5ff7adbc12f9147e07 5395 main/binary-all/Packages
+ 83943dc0ca1400c48eadc2c3b9ce85d9c317c79c076bfb2522de851509a4fd70 1185 main/binary-all/Packages.gz
+ d6d16bb0588981f0a488ce0d103e5ab9c55cea8cd50f6c5ff7adbc12f9147e07 5395 main/binary-amd64/Packages
+ 83943dc0ca1400c48eadc2c3b9ce85d9c317c79c076bfb2522de851509a4fd70 1185 main/binary-amd64/Packages.gz
+ d6d16bb0588981f0a488ce0d103e5ab9c55cea8cd50f6c5ff7adbc12f9147e07 5395 main/binary-arm64/Packages
+ 83943dc0ca1400c48eadc2c3b9ce85d9c317c79c076bfb2522de851509a4fd70 1185 main/binary-arm64/Packages.gz
