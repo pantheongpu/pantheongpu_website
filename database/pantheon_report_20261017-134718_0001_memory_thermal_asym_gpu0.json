@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 13:47:18",
+    "os_info": {
+        "system": "Linux",
+        "release": "5.15.0-1083-aws",
+        "version": "#90~20.04.1-Ubuntu SMP Tue Apr 22 09:59:53 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "2518.75Mhz"
+    },
+    "ram_info": {
+        "total": "747.74GB",
+        "available": "741.28GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla V100-SXM2-32GB",
+            "memory_total": "32768 MB",
+            "driver_version": "550.163.01",
+            "power_limit": 300.0,
+            "uuid": "GPU-0113c074-8d07-104c-a4fd-e7116498629f",
+            "serial": "1325119054055",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.1",
+    "run_id": "20261017-134718",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 13:52:21",
+    "test_results": [
+        {
+            "Test Name": "memory_thermal_asym",
+            "Version": "1.2.4",
+            "Description": "Memory Asymmetric Thermal (Stack Isolator)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 6.78096,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 57.1,
+            "Max Temp (C)": 66.0,
+            "Avg Mem Temp (C)": 61.6,
+            "Max Mem Temp (C)": 70.0,
+            "Avg Power (W)": 245.0,
+            "Max Power (W)": 256.4,
+            "Avg Clock(MHz)": 1525.4,
+            "Min Clock (MHz)": 135.0,
+            "Max Clock (MHz)": 1530.0,
+            "Avg GPU Util (%)": 98.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 17005.6,
+            "Memory Total (MiB)": 32768.0,
+            "Energy (Wh)": 20.523,
+            "Thermal Rise (C)": 36.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 27.68,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/memory_thermal_asym 0 300 99 --verify",
+            "RAS Status": "UNAVAILABLE",
+            "RAS Error Delta": "RAS/AER telemetry is not exposed by this system",
+            "RAS Report": "results/20261017-134718/reliability/memory_thermal_asym/gpu0/ras.json"
+        }
+    ]
+}

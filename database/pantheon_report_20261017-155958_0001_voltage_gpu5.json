@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 15:59:58",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 124,
+        "logical_cores": 124,
+        "freq": "2900.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.71TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 5,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-39738ae3-0826-af3d-b49b-64cc52d70cb1",
+            "serial": "1561221034104",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-155958",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 16:05:01",
+    "test_results": [
+        {
+            "Test Name": "voltage",
+            "Version": "1.2.4",
+            "Description": "Voltage Virus (ALU Hammer)",
+            "GPU ID": 5,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 18.68,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 55.7,
+            "Max Temp (C)": 57.0,
+            "Avg Mem Temp (C)": 47.8,
+            "Max Mem Temp (C)": 49.0,
+            "Avg Power (W)": 195.1,
+            "Max Power (W)": 197.9,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 96.8,
+            "Max GPU Util (%)": 98.0,
+            "Peak Memory (MiB)": 992.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 16.305,
+            "Thermal Rise (C)": 17.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 95.75,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/compute_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-155958/reliability/voltage/gpu5/ras.json"
+        }
+    ]
+}

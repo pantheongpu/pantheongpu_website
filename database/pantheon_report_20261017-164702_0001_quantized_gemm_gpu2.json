@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 16:47:02",
+    "os_info": {
+        "system": "Linux",
+        "release": "5.15.0-1083-aws",
+        "version": "#90~20.04.1-Ubuntu SMP Tue Apr 22 09:59:53 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "2525.10Mhz"
+    },
+    "ram_info": {
+        "total": "747.74GB",
+        "available": "740.70GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 2,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla V100-SXM2-32GB",
+            "memory_total": "32768 MB",
+            "driver_version": "550.163.01",
+            "power_limit": 300.0,
+            "uuid": "GPU-38ae45b3-f785-091b-b58d-b980c5f3d55c",
+            "serial": "1325019041003",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.1",
+    "run_id": "20261017-164702",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 16:52:05",
+    "test_results": [
+        {
+            "Test Name": "quantized_gemm",
+            "Version": "1.2.4",
+            "Description": "Quantized GEMM (Synthetic Projection Proxy)",
+            "GPU ID": 2,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 364795000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 35.7,
+            "Max Temp (C)": 36.0,
+            "Avg Mem Temp (C)": 36.3,
+            "Max Mem Temp (C)": 37.0,
+            "Avg Power (W)": 90.1,
+            "Max Power (W)": 93.4,
+            "Avg Clock(MHz)": 1525.4,
+            "Min Clock (MHz)": 135.0,
+            "Max Clock (MHz)": 1530.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 32449.6,
+            "Memory Total (MiB)": 32768.0,
+            "Energy (Wh)": 7.534,
+            "Thermal Rise (C)": 4.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 4048779.13,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/quantized_gemm 0 300 99 --verify",
+            "RAS Status": "UNAVAILABLE",
+            "RAS Error Delta": "RAS/AER telemetry is not exposed by this system",
+            "RAS Report": "results/20261017-164702/reliability/quantized_gemm/gpu2/ras.json"
+        }
+    ]
+}

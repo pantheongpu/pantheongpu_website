@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 16:58:13",
+    "os_info": {
+        "system": "Linux",
+        "release": "5.15.0-1083-aws",
+        "version": "#90~20.04.1-Ubuntu SMP Tue Apr 22 09:59:53 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "2525.01Mhz"
+    },
+    "ram_info": {
+        "total": "747.74GB",
+        "available": "740.88GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 3,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla V100-SXM2-32GB",
+            "memory_total": "32768 MB",
+            "driver_version": "550.163.01",
+            "power_limit": 300.0,
+            "uuid": "GPU-731b4c08-cc1b-551f-2d8b-851b731660d0",
+            "serial": "1325119053503",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.1",
+    "run_id": "20261017-165813",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 17:03:16",
+    "test_results": [
+        {
+            "Test Name": "speculative_decode",
+            "Version": "1.2.4",
+            "Description": "Speculative Decode (Synthetic Draft/Verify Proxy)",
+            "GPU ID": 3,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 554697000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 34.6,
+            "Max Temp (C)": 35.0,
+            "Avg Mem Temp (C)": 35.4,
+            "Max Mem Temp (C)": 37.0,
+            "Avg Power (W)": 94.7,
+            "Max Power (W)": 96.6,
+            "Avg Clock(MHz)": 1525.4,
+            "Min Clock (MHz)": 135.0,
+            "Max Clock (MHz)": 1530.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 32449.6,
+            "Memory Total (MiB)": 32768.0,
+            "Energy (Wh)": 7.925,
+            "Thermal Rise (C)": 5.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 5857412.88,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/speculative_decode 0 300 99 --verify",
+            "RAS Status": "UNAVAILABLE",
+            "RAS Error Delta": "RAS/AER telemetry is not exposed by this system",
+            "RAS Report": "results/20261017-165813/reliability/speculative_decode/gpu3/ras.json"
+        }
+    ]
+}
