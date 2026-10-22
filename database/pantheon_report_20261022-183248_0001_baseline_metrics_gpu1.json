@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 18:32:48",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 22:29:18 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 56,
+        "logical_cores": 56,
+        "freq": "2499.68Mhz"
+    },
+    "ram_info": {
+        "total": "393.43GB",
+        "available": "385.42GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX A6000",
+            "memory_total": "49140 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 300.0,
+            "uuid": "GPU-e1fa58c0-de23-f6c6-ec58-d78675d24cfc",
+            "serial": "1320921021492",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261022-183248",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 18:37:53",
+    "test_results": [
+        {
+            "Test Name": "baseline_metrics",
+            "Version": "1.2.4",
+            "Description": "Baseline Idle Metrics (No Load)",
+            "GPU ID": 1,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.0,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 26.1,
+            "Max Temp (C)": 36.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 25.5,
+            "Max Power (W)": 72.1,
+            "Avg Clock(MHz)": 305.9,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1800.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 872.2,
+            "Memory Total (MiB)": 49140.0,
+            "Energy (Wh)": 2.133,
+            "Thermal Rise (C)": 1.0,
+            "Throttle Time (s)": 2.0,
+            "Efficiency": 0.0,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Idle",
+            "Max Fan (%)": 30.0,
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/idle 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +4",
+            "RAS Report": "results/20261022-183248/reliability/baseline_metrics/gpu1/ras.json"
+        }
+    ]
+}
