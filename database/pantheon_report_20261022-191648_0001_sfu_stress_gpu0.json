@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 19:16:48",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3339.09Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.39GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-6051e50b-ea24-df21-cad4-b3094272a31e",
+            "serial": "1794125601108",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261022-191648",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 19:21:49",
+    "test_results": [
+        {
+            "Test Name": "sfu_stress",
+            "Version": "1.2.4",
+            "Description": "SFU Virus (Transcendental Math)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 16.4668,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 50.9,
+            "Max Temp (C)": 52.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 316.4,
+            "Max Power (W)": 331.3,
+            "Avg Clock(MHz)": 2412.1,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2422.0,
+            "Avg GPU Util (%)": 98.7,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 1267.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 26.411,
+            "Thermal Rise (C)": 23.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 52.04,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/sfu_stress 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261022-191648/reliability/sfu_stress/gpu0/ras.json"
+        }
+    ]
+}
