@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 09:33:26",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "freq": "2847.86Mhz"
+    },
+    "ram_info": {
+        "total": "249.69GB",
+        "available": "245.66GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 700.0,
+            "uuid": "GPU-aa96aa57-6376-989e-41db-9decbc2dfb9b",
+            "serial": "1651024016760",
+            "memory_type": "HBM3",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261022-093326",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 09:38:28",
+    "test_results": [
+        {
+            "Test Name": "tensor_virus",
+            "Version": "1.2.4",
+            "Description": "Tensor Virus (Packed FP16 Vector Pipe)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 75.7315,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 58.6,
+            "Max Temp (C)": 61.0,
+            "Avg Mem Temp (C)": 54.1,
+            "Max Mem Temp (C)": 57.0,
+            "Avg Power (W)": 440.6,
+            "Max Power (W)": 448.1,
+            "Avg Clock(MHz)": 1830.0,
+            "Min Clock (MHz)": 1830.0,
+            "Max Clock (MHz)": 1830.0,
+            "Avg GPU Util (%)": 94.2,
+            "Max GPU Util (%)": 96.0,
+            "Peak Memory (MiB)": 1072.8,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 36.782,
+            "Thermal Rise (C)": 26.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 171.88,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/tensor_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261022-093326/reliability/tensor_virus/gpu0/ras.json"
+        }
+    ]
+}
