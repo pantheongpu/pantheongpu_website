@@ -1,0 +1,86 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 16:11:49",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3344.31Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.47GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-3edbcf9a-6ee2-2d9c-77a0-7a1958431b4c",
+            "serial": "1791526600925",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.0",
+    "run_id": "20261022-161149",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 16:27:17",
+    "test_results": [
+        {
+            "Test Name": "baseline_metrics",
+            "Version": "1.2.4",
+            "Description": "Baseline Idle Metrics (No Load)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 45,
+            "Score": 0.0,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 27.0,
+            "Max Temp (C)": 27.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 86.9,
+            "Max Power (W)": 89.8,
+            "Avg Clock(MHz)": 2347.0,
+            "Min Clock (MHz)": 2347.0,
+            "Max Clock (MHz)": 2355.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 1193.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 7.242,
+            "Thermal Rise (C)": 0.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.0,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/idle 0 300 45 --verify",
+            "Profiler Command Lines": "/usr/local/cuda-13.0/bin/ncu --csv --set full --metrics sm__throughput.avg.pct_of_peak_sustained_elapsed,sm__inst_executed.sum,sm__warps_active.avg.pct_of_peak_sustained_active,sm__warps_active.avg.per_cycle_active,sm__ctas_active.avg.pct_of_peak_sustained_active,sm__cycles_active.avg.pct_of_peak_sustained_elapsed,sm__cycles_elapsed.avg,gpu__time_duration.sum,sm__inst_executed_pipe_fma.sum,sm__inst_executed_pipe_fp64.sum,sm__inst_executed_pipe_tensor.sum,sm__inst_executed_pipe_adu.sum,sm__inst_executed_pipe_alu.sum,sm__inst_executed_pipe_cbu.sum,sm__inst_executed_pipe_lsu.sum,sm__inst_executed_pipe_tex.sum,sm__inst_executed_pipe_uniform.sum,sm__inst_executed_pipe_xu.sum,sm__inst_executed_pipe_ipa.sum,smsp__thread_inst_executed_per_inst_executed.ratio,sm__sass_average_branch_targets_threads_uniform.pct,smsp__inst_executed_op_global_ld.sum,smsp__inst_executed_op_global_st.sum,smsp__inst_executed_op_shared_ld.sum,smsp__inst_executed_op_shared_st.sum,smsp__inst_executed_op_local_ld.sum,smsp__inst_executed_op_local_st.sum,dram__throughput.avg.pct_of_peak_sustained_elapsed,dram__bytes.sum.per_second,dram__cycles_active.avg.pct_of_peak_sustained_elapsed,lts__throughput.avg.pct_of_peak_sustained_elapsed,lts__t_sectors.avg.pct_of_peak_sustained_elapsed,lts__t_sectors_op_read.sum,lts__t_sectors_op_write.sum,lts__t_sectors_op_atom.sum,lts__t_sector_hit_rate.pct,lts__t_requests_op_read.sum,lts__t_requests_op_write.sum,lts__t_requests_op_atom.sum,l1tex__throughput.avg.pct_of_peak_sustained_elapsed,l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum,l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum,l1tex__t_sectors_pipe_lsu_mem_local_op_ld.sum,l1tex__t_sectors_pipe_lsu_mem_local_op_st.sum,l1tex__t_requests_pipe_lsu_mem_global_op_ld.sum,l1tex__t_requests_pipe_lsu_mem_global_op_st.sum,smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,smsp__sass_average_data_bytes_per_sector_mem_global_op_st.pct,smsp__sass_average_data_bytes_per_sector_mem_local_op_ld.pct,smsp__sass_average_data_bytes_per_sector_mem_local_op_st.pct,smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_ld.pct,smsp__sass_average_data_bytes_per_wavefront_mem_shared_op_st.pct,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum,l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_st.sum,smsp__issue_active.avg.pct_of_peak_sustained_active,smsp__warps_eligible.avg.per_cycle_active,smsp__warps_issue_stalled_branch_resolving.avg.per_cycle_active,smsp__warps_issue_stalled_dispatch_stall.avg.per_cycle_active,smsp__warps_issue_stalled_drain.avg.per_cycle_active,smsp__warps_issue_stalled_lg_throttle.avg.per_cycle_active,smsp__warps_issue_stalled_membar.avg.per_cycle_active,smsp__warps_issue_stalled_misc.avg.per_cycle_active,smsp__warps_issue_stalled_sleeping.avg.per_cycle_active,smsp__warps_issue_stalled_tex_throttle.avg.per_cycle_active,pcie__read_bytes.sum,pcie__write_bytes.sum,pcie__read_bytes.sum.per_second,pcie__write_bytes.sum.per_second ./build/idle 0 300 45 --verify",
+            "Profiler Counter Files": "results/20261022-161149/profiles/baseline_metrics/gpu0/hardware_counters.csv",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +6",
+            "RAS Report": "results/20261022-161149/profiles/baseline_metrics/gpu0/ras.json",
+            "Profile Artifact Directory": "results/20261022-161149/profiles/baseline_metrics/gpu0",
+            "Profile Manifest": "results/20261022-161149/profiles/baseline_metrics/gpu0/profile_manifest.json",
+            "Profiler Trace Files": "results/20261022-161149/profiles/baseline_metrics/gpu0/trace.nsys-rep",
+            "Profile HTML Summary": "results/20261022-161149/profiles/baseline_metrics/gpu0/profile_summary.html"
+        }
+    ]
+}
