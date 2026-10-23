@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 18:14:47",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 124,
+        "logical_cores": 124,
+        "freq": "2900.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.71TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 3,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-1e1efb2e-0b06-84ce-8a5e-baf271778242",
+            "serial": "1561221033956",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-181447",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 18:19:50",
+    "test_results": [
+        {
+            "Test Name": "galpat",
+            "Version": "1.2.4",
+            "Description": "GALPAT (Galloping Pattern, Region-Bounded)",
+            "GPU ID": 3,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 7570530000.0,
+            "Unit": "gallop-reads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 43.2,
+            "Max Temp (C)": 44.0,
+            "Avg Mem Temp (C)": 47.1,
+            "Max Mem Temp (C)": 48.0,
+            "Avg Power (W)": 102.4,
+            "Max Power (W)": 103.7,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 40562.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 8.552,
+            "Thermal Rise (C)": 3.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 73930957.03,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/galpat 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-181447/reliability/galpat/gpu3/ras.json"
+        }
+    ]
+}

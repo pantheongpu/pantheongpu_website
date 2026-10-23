@@ -1,0 +1,108 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 14:15:53",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-38-generic",
+        "version": "#38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 16,
+        "logical_cores": 32,
+        "freq": "1509.66Mhz"
+    },
+    "ram_info": {
+        "total": "29.95GB",
+        "available": "13.46GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "AMD",
+            "manufacturer": "AMD",
+            "name": "AMD Radeon RX 6800",
+            "memory_total": "16368 MB",
+            "driver_version": "ROCm Driver",
+            "power_limit": 203.0,
+            "uuid": "0xfd3d6d912de3c917",
+            "serial": "N/A",
+            "memory_type": "N/A",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "rocm-smi"
+        },
+        {
+            "id": 1,
+            "type": "AMD",
+            "manufacturer": "AMD",
+            "name": "AMD Radeon RX 6700 XT",
+            "memory_total": "12272 MB",
+            "driver_version": "ROCm Driver",
+            "power_limit": 186.0,
+            "uuid": "0x0",
+            "serial": "N/A",
+            "memory_type": "N/A",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "rocm-smi"
+        },
+        {
+            "id": 2,
+            "type": "AMD",
+            "manufacturer": "AMD",
+            "name": "AMD Radeon Graphics",
+            "memory_total": "512 MB",
+            "driver_version": "ROCm Driver",
+            "power_limit": "N/A",
+            "uuid": "0x0",
+            "serial": "N/A",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: rocm-smi reports no vendor"
+        }
+    ],
+    "toolkit_version": "7.2.0",
+    "run_id": "20261017-141553",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 14:20:56",
+    "test_results": [
+        {
+            "Test Name": "tlb_avalanche",
+            "Version": "1.2.4",
+            "Description": "TLB Avalanche (MMU Page Walk Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 0.924365,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 66.1,
+            "Max Temp (C)": 71.0,
+            "Avg Mem Temp (C)": 68.2,
+            "Max Mem Temp (C)": 74.0,
+            "Avg Power (W)": 64.8,
+            "Max Power (W)": 67.0,
+            "Avg Clock(MHz)": 2269.5,
+            "Min Clock (MHz)": 2130.0,
+            "Max Clock (MHz)": 2270.0,
+            "Avg GPU Util (%)": 98.9,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 16238.6,
+            "Memory Total (MiB)": 16368.0,
+            "Energy (Wh)": 5.412,
+            "Thermal Rise (C)": 6.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 14.61,
+            "PCIe Gen": "N/A",
+            "PCIe Width": "N/A",
+            "Limit Reason": "N/A",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/tlb_avalanche 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-141553/reliability/tlb_avalanche/gpu0/ras.json"
+        }
+    ]
+}

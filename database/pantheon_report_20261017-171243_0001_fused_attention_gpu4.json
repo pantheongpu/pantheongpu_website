@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 17:12:43",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 124,
+        "logical_cores": 124,
+        "freq": "2900.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.71TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 4,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-fc8c9df2-10a3-e5ce-88a7-61ea2636d66f",
+            "serial": "1561221034027",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-171243",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 17:17:46",
+    "test_results": [
+        {
+            "Test Name": "fused_attention",
+            "Version": "1.2.4",
+            "Description": "Fused Attention (Synthetic Path Proxy)",
+            "GPU ID": 4,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 6663580000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 65.4,
+            "Max Temp (C)": 69.0,
+            "Avg Mem Temp (C)": 79.1,
+            "Max Mem Temp (C)": 83.0,
+            "Avg Power (W)": 279.9,
+            "Max Power (W)": 286.2,
+            "Avg Clock(MHz)": 1406.0,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 98.5,
+            "Max GPU Util (%)": 99.0,
+            "Peak Memory (MiB)": 40562.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 23.4,
+            "Thermal Rise (C)": 24.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 23807002.5,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/fused_attention 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-171243/reliability/fused_attention/gpu4/ras.json"
+        }
+    ]
+}

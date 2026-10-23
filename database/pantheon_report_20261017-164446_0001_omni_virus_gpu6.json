@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 16:44:46",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 124,
+        "logical_cores": 124,
+        "freq": "2900.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.71TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 6,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-40GB",
+            "memory_total": "40960 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-dd74c7ba-d3dc-7e51-1efb-cb8d27549bdb",
+            "serial": "1325220045628",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-164446",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 16:49:52",
+    "test_results": [
+        {
+            "Test Name": "omni_virus",
+            "Version": "1.2.4",
+            "Description": "Omni Virus (Tensor + Mem + FP16/FP32 + SFU Async)",
+            "GPU ID": 6,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 138.08,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 61.6,
+            "Max Temp (C)": 65.0,
+            "Avg Mem Temp (C)": 60.8,
+            "Max Mem Temp (C)": 64.0,
+            "Avg Power (W)": 336.8,
+            "Max Power (W)": 498.0,
+            "Avg Clock(MHz)": 1330.8,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 99.4,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 40568.4,
+            "Memory Total (MiB)": 40960.0,
+            "Energy (Wh)": 28.45,
+            "Thermal Rise (C)": 28.0,
+            "Throttle Time (s)": 267.4,
+            "Efficiency": 409.98,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/omni_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-164446/reliability/omni_virus/gpu6/ras.json"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 14:38:05",
+    "os_info": {
+        "system": "Linux",
+        "release": "5.15.0-1083-aws",
+        "version": "#90~20.04.1-Ubuntu SMP Tue Apr 22 09:59:53 UTC 2025",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 48,
+        "logical_cores": 96,
+        "freq": "2506.32Mhz"
+    },
+    "ram_info": {
+        "total": "747.74GB",
+        "available": "740.65GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 5,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla V100-SXM2-32GB",
+            "memory_total": "32768 MB",
+            "driver_version": "550.163.01",
+            "power_limit": 300.0,
+            "uuid": "GPU-357bc624-699f-9e06-3812-ec7b1c5c0399",
+            "serial": "1325119055283",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.1",
+    "run_id": "20261017-143805",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 14:43:09",
+    "test_results": [
+        {
+            "Test Name": "int_virus",
+            "Version": "1.2.4",
+            "Description": "Integer Virus (INT32/Logic Pipeline)",
+            "GPU ID": 5,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 16.9457,
+            "Unit": "TOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 67.7,
+            "Max Temp (C)": 73.0,
+            "Avg Mem Temp (C)": 57.0,
+            "Max Mem Temp (C)": 63.0,
+            "Avg Power (W)": 296.6,
+            "Max Power (W)": 303.7,
+            "Avg Clock(MHz)": 1373.2,
+            "Min Clock (MHz)": 135.0,
+            "Max Clock (MHz)": 1447.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 623.6,
+            "Memory Total (MiB)": 32768.0,
+            "Energy (Wh)": 24.819,
+            "Thermal Rise (C)": 34.0,
+            "Throttle Time (s)": 281.4,
+            "Efficiency": 0.06,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/int_virus 0 300 99 --verify",
+            "RAS Status": "UNAVAILABLE",
+            "RAS Error Delta": "RAS/AER telemetry is not exposed by this system",
+            "RAS Report": "results/20261017-143805/reliability/int_virus/gpu5/ras.json"
+        }
+    ]
+}

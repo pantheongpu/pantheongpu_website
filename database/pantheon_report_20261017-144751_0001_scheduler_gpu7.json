@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 14:47:51",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 240,
+        "logical_cores": 240,
+        "freq": "2450.00Mhz"
+    },
+    "ram_info": {
+        "total": "1.73TB",
+        "available": "1.71TB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 7,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA A100-SXM4-80GB",
+            "memory_total": "81920 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 400.0,
+            "uuid": "GPU-4915c61e-00fb-a8a3-e7bb-d920b30730c2",
+            "serial": "1323422022964",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-144751",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 14:52:53",
+    "test_results": [
+        {
+            "Test Name": "scheduler",
+            "Version": "1.2.4",
+            "Description": "Scheduler Virus (Context Switch / KIPS)",
+            "GPU ID": 7,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 278.859,
+            "Unit": "KIPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 42.7,
+            "Max Temp (C)": 48.0,
+            "Avg Mem Temp (C)": 39.4,
+            "Max Mem Temp (C)": 44.0,
+            "Avg Power (W)": 92.4,
+            "Max Power (W)": 96.1,
+            "Avg Clock(MHz)": 1405.2,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1410.0,
+            "Avg GPU Util (%)": 91.7,
+            "Max GPU Util (%)": 95.0,
+            "Peak Memory (MiB)": 1251.1,
+            "Memory Total (MiB)": 81920.0,
+            "Energy (Wh)": 7.719,
+            "Thermal Rise (C)": 1.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 3.02,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/scheduler_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-144751/reliability/scheduler/gpu7/ras.json"
+        }
+    ]
+}

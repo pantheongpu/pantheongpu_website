@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 15:44:18",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 13,
+        "logical_cores": 26,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "221.18GB",
+        "available": "216.92GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 700.0,
+            "uuid": "GPU-b2f9f8f8-c411-2e80-048b-6af9621dc962",
+            "serial": "1654923016135",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-154418",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 15:49:20",
+    "test_results": [
+        {
+            "Test Name": "cache_lat",
+            "Version": "1.2.4",
+            "Description": "Cache Latency",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 28809300000.0,
+            "Unit": "dependent-loads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 41.1,
+            "Max Temp (C)": 42.0,
+            "Avg Mem Temp (C)": 57.6,
+            "Max Mem Temp (C)": 58.0,
+            "Avg Power (W)": 366.9,
+            "Max Power (W)": 371.8,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 90.9,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 66602.0,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 30.698,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 78520850.37,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/cache_latency 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-154418/reliability/cache_lat/gpu0/ras.json"
+        }
+    ]
+}

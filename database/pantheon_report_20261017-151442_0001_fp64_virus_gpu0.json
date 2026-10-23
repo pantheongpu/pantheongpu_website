@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-17 15:14:42",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 26,
+        "logical_cores": 26,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "221.18GB",
+        "available": "217.04GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 PCIe",
+            "memory_total": "81559 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 350.0,
+            "uuid": "GPU-d747c921-6f91-67c9-3e34-44f7ff5636cc",
+            "serial": "1654722011626",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261017-151442",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-17 15:19:45",
+    "test_results": [
+        {
+            "Test Name": "fp64_virus",
+            "Version": "1.2.4",
+            "Description": "FP64 Chokehold (Double Precision)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 17.4338,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 77.6,
+            "Max Temp (C)": 79.0,
+            "Avg Mem Temp (C)": 72.1,
+            "Max Mem Temp (C)": 74.0,
+            "Avg Power (W)": 210.3,
+            "Max Power (W)": 301.8,
+            "Avg Clock(MHz)": 1313.3,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1755.0,
+            "Avg GPU Util (%)": 94.8,
+            "Max GPU Util (%)": 98.0,
+            "Peak Memory (MiB)": 982.0,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 17.586,
+            "Thermal Rise (C)": 31.0,
+            "Throttle Time (s)": 299.7,
+            "Efficiency": 82.9,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Thermal",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/fp64_virus 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261017-151442/reliability/fp64_virus/gpu0/ras.json"
+        }
+    ]
+}
