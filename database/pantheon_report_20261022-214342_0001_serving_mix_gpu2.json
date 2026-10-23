@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 21:43:42",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 22:29:18 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 56,
+        "logical_cores": 56,
+        "freq": "2499.68Mhz"
+    },
+    "ram_info": {
+        "total": "393.43GB",
+        "available": "385.36GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 2,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX A6000",
+            "memory_total": "49140 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 300.0,
+            "uuid": "GPU-c4002036-6245-b3e8-49d6-01f488ec95bd",
+            "serial": "1320921025338",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261022-214342",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 21:48:45",
+    "test_results": [
+        {
+            "Test Name": "serving_mix",
+            "Version": "1.2.4",
+            "Description": "Serving Mix (Synthetic Request-Pressure Proxy)",
+            "GPU ID": 2,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 352755000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 61.1,
+            "Max Temp (C)": 63.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 221.2,
+            "Max Power (W)": 225.0,
+            "Avg Clock(MHz)": 1886.1,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1905.0,
+            "Avg GPU Util (%)": 99.4,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 48660.2,
+            "Memory Total (MiB)": 49140.0,
+            "Energy (Wh)": 18.511,
+            "Thermal Rise (C)": 18.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 1594733.27,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 32.0,
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/serving_mix 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +2",
+            "RAS Report": "results/20261022-214342/reliability/serving_mix/gpu2/ras.json"
+        }
+    ]
+}

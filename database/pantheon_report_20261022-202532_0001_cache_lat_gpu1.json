@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 20:25:32",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 22:29:18 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 56,
+        "logical_cores": 56,
+        "freq": "2499.68Mhz"
+    },
+    "ram_info": {
+        "total": "393.43GB",
+        "available": "385.30GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 1,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX A6000",
+            "memory_total": "49140 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 300.0,
+            "uuid": "GPU-e1fa58c0-de23-f6c6-ec58-d78675d24cfc",
+            "serial": "1320921021492",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261022-202532",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 20:30:35",
+    "test_results": [
+        {
+            "Test Name": "cache_lat",
+            "Version": "1.2.4",
+            "Description": "Cache Latency",
+            "GPU ID": 1,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 5932130000.0,
+            "Unit": "dependent-loads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 50.1,
+            "Max Temp (C)": 51.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 201.2,
+            "Max Power (W)": 207.3,
+            "Avg Clock(MHz)": 1884.7,
+            "Min Clock (MHz)": 210.0,
+            "Max Clock (MHz)": 1920.0,
+            "Avg GPU Util (%)": 85.8,
+            "Max GPU Util (%)": 90.0,
+            "Peak Memory (MiB)": 33672.2,
+            "Memory Total (MiB)": 49140.0,
+            "Energy (Wh)": 16.862,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 29483747.51,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": 33.0,
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/cache_latency 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261022-202532/reliability/cache_lat/gpu1/ras.json"
+        }
+    ]
+}

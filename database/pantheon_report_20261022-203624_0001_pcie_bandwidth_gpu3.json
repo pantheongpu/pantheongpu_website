@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 20:36:24",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-1046-nvidia",
+        "version": "#49-Ubuntu SMP PREEMPT_DYNAMIC Wed Jan 28 19:07:52 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 52,
+        "logical_cores": 104,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "885.42GB",
+        "available": "871.03GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 3,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "580.105.08",
+            "power_limit": 700.0,
+            "uuid": "GPU-ba19e409-ffef-6378-86bc-55b0a1f9b1a9",
+            "serial": "1654023025800",
+            "memory_type": "HBM3",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261022-203624",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 20:41:27",
+    "test_results": [
+        {
+            "Test Name": "pcie_bandwidth",
+            "Version": "1.2.4",
+            "Description": "PCIe Thrasher (Host <-> Device)",
+            "GPU ID": 3,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 32.1544,
+            "Unit": "GB/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 28.6,
+            "Max Temp (C)": 29.0,
+            "Avg Mem Temp (C)": 29.8,
+            "Max Mem Temp (C)": 31.0,
+            "Avg Power (W)": 120.8,
+            "Max Power (W)": 131.3,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 1584.7,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 10.109,
+            "Thermal Rise (C)": 1.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 272.57,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/pcie_bandwidth 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.bad_tlp +1 || vendor_ras.pcie.l0_to_recovery +1 || vendor_ras.pcie.lcrc +1 || vendor_ras.pcie.naks_sent +1",
+            "RAS Report": "results/20261022-203624/reliability/pcie_bandwidth/gpu3/ras.json"
+        }
+    ]
+}

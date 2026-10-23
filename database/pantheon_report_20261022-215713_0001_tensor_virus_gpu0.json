@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 21:57:13",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3356.76Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.41GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-e9f72a40-524e-8eb5-299d-af41c12775dd",
+            "serial": "1793725605836",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261022-215713",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 22:02:14",
+    "test_results": [
+        {
+            "Test Name": "tensor_virus",
+            "Version": "1.2.4",
+            "Description": "Tensor Virus (Packed FP16 Vector Pipe)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 106.289,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 47.8,
+            "Max Temp (C)": 49.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 336.4,
+            "Max Power (W)": 372.9,
+            "Avg Clock(MHz)": 2410.9,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2422.0,
+            "Avg GPU Util (%)": 97.5,
+            "Max GPU Util (%)": 98.0,
+            "Peak Memory (MiB)": 1269.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 28.087,
+            "Thermal Rise (C)": 26.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 315.96,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/tensor_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261022-215713/reliability/tensor_virus/gpu0/ras.json"
+        }
+    ]
+}

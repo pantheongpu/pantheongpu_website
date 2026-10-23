@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-22 08:52:01",
+    "os_info": {
+        "system": "Linux",
+        "release": "6.8.0-60-generic",
+        "version": "#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 52,
+        "logical_cores": 104,
+        "freq": "2000.00Mhz"
+    },
+    "ram_info": {
+        "total": "885.42GB",
+        "available": "872.55GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 3,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA H100 80GB HBM3",
+            "memory_total": "81559 MB",
+            "driver_version": "570.148.08",
+            "power_limit": 700.0,
+            "uuid": "GPU-c45b5149-768d-97e2-f9ae-d7ba4114dc95",
+            "serial": "1650824010836",
+            "memory_type": "N/A",
+            "memory_vendor": "N/A",
+            "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"
+        }
+    ],
+    "toolkit_version": "12.8",
+    "run_id": "20261022-085201",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-22 08:57:04",
+    "test_results": [
+        {
+            "Test Name": "quantized_gemm",
+            "Version": "1.2.4",
+            "Description": "Quantized GEMM (Synthetic Projection Proxy)",
+            "GPU ID": 3,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 7740510000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 49.6,
+            "Max Temp (C)": 50.0,
+            "Avg Mem Temp (C)": 66.1,
+            "Max Mem Temp (C)": 68.0,
+            "Avg Power (W)": 505.4,
+            "Max Power (W)": 509.2,
+            "Avg Clock(MHz)": 1974.6,
+            "Min Clock (MHz)": 345.0,
+            "Max Clock (MHz)": 1980.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 80758.0,
+            "Memory Total (MiB)": 81559.0,
+            "Energy (Wh)": 42.26,
+            "Thermal Rise (C)": 15.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 15315611.4,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/quantized_gemm 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261022-085201/reliability/quantized_gemm/gpu3/ras.json"
+        }
+    ]
+}
