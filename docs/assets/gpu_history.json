@@ -29792,6 +29792,21 @@
   {
     "uuid": "GPU-27f7c9aa-5ad3-8102-fab2-fec8e0d326d1",
     "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "allocation_fragmentation",
+    "version": "1.2.4",
+    "unit": "alloc-events/s",
+    "score": 32908.7,
+    "duration": 300,
+    "date": "2026-10-23 10:34:46",
+    "temp_max": 34.0,
+    "power_max": 98.4,
+    "clock_avg": 1845.0,
+    "throttle_time": 0.0,
+    "card": "GPU-27f7c9aa-5ad3-8102-fab2-fec8e0d326d1"
+  },
+  {
+    "uuid": "GPU-27f7c9aa-5ad3-8102-fab2-fec8e0d326d1",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
     "test": "atomic_virus",
     "version": "1.2.4",
     "unit": "MAPS",
@@ -170996,6 +171011,21 @@
     "temp_max": 29.0,
     "power_max": 115.1,
     "clock_avg": 2355.7,
+    "throttle_time": 0.0,
+    "card": "GPU-e9f72a40-524e-8eb5-299d-af41c12775dd"
+  },
+  {
+    "uuid": "GPU-e9f72a40-524e-8eb5-299d-af41c12775dd",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "test": "allocation_fragmentation",
+    "version": "1.2.4",
+    "unit": "alloc-events/s",
+    "score": 33703.4,
+    "duration": 300,
+    "date": "2026-10-23 10:37:28",
+    "temp_max": 30.0,
+    "power_max": 123.6,
+    "clock_avg": 2357.1,
     "throttle_time": 0.0,
     "card": "GPU-e9f72a40-524e-8eb5-299d-af41c12775dd"
   },
