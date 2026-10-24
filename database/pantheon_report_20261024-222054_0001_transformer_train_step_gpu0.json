@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-24 22:20:54",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3751.96Mhz"
+    },
+    "ram_info": {
+        "total": "30.07GB",
+        "available": "28.49GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-e1bd8219-6e1f-4368-f3d1-d9217cbd402b",
+            "serial": "1790326021225",
+            "memory_type": "GDDR7",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261024-222054",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-24 22:25:56",
+    "test_results": [
+        {
+            "Test Name": "transformer_train_step",
+            "Version": "1.2.4",
+            "Description": "Transformer Train Step (Forward/Backward Proxy)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 8996840000.0,
+            "Unit": "ai-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 89.3,
+            "Max Temp (C)": 92.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 160.5,
+            "Max Power (W)": 165.1,
+            "Avg Clock(MHz)": 1845.4,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2025.0,
+            "Avg GPU Util (%)": 97.4,
+            "Max GPU Util (%)": 98.0,
+            "Peak Memory (MiB)": 32308.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 13.422,
+            "Thermal Rise (C)": 27.0,
+            "Throttle Time (s)": 299.6,
+            "Efficiency": 56055077.88,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/transformer_train_step 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261024-222054/reliability/transformer_train_step/gpu0/ras.json"
+        }
+    ]
+}
