@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-24 23:00:37",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3088.14Mhz"
+    },
+    "ram_info": {
+        "total": "30.97GB",
+        "available": "29.75GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "Tesla T4",
+            "memory_total": "15360 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 70.0,
+            "uuid": "GPU-8730f705-653b-6429-a7e6-bd1fc58dfa76",
+            "serial": "1560921108951",
+            "memory_type": "GDDR6",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261024-230037",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-24 23:05:45",
+    "test_results": [
+        {
+            "Test Name": "march_test",
+            "Version": "1.2.4",
+            "Description": "March C- (Linear Memory Test)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 1381540000.0,
+            "Unit": "march-ops/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 46.6,
+            "Max Temp (C)": 48.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 67.4,
+            "Max Power (W)": 71.7,
+            "Avg Clock(MHz)": 1589.4,
+            "Min Clock (MHz)": 1575.0,
+            "Max Clock (MHz)": 1590.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 15214.2,
+            "Memory Total (MiB)": 15360.0,
+            "Energy (Wh)": 5.758,
+            "Thermal Rise (C)": 9.0,
+            "Throttle Time (s)": 14.7,
+            "Efficiency": 20497626.11,
+            "PCIe Gen": 3.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/march_test 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261024-230037/reliability/march_test/gpu0/ras.json"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-24 20:39:59",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "2992.39Mhz"
+    },
+    "ram_info": {
+        "total": "30.15GB",
+        "available": "28.79GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA L4",
+            "memory_total": "23034 MB",
+            "driver_version": "595.91.07",
+            "power_limit": 72.0,
+            "uuid": "GPU-5b8d2d35-3e3b-9312-8c59-c6a886ed2789",
+            "serial": "1794324007692",
+            "memory_type": "GDDR6",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261024-203959",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-24 20:45:01",
+    "test_results": [
+        {
+            "Test Name": "incinerator",
+            "Version": "1.2.4",
+            "Description": "Incinerator (LDS Stress)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 17.7108,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 81.2,
+            "Max Temp (C)": 83.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 71.8,
+            "Max Power (W)": 72.6,
+            "Avg Clock(MHz)": 1528.0,
+            "Min Clock (MHz)": 1500.0,
+            "Max Clock (MHz)": 2040.0,
+            "Avg GPU Util (%)": 95.9,
+            "Max GPU Util (%)": 97.0,
+            "Peak Memory (MiB)": 686.9,
+            "Memory Total (MiB)": 23034.0,
+            "Energy (Wh)": 5.991,
+            "Thermal Rise (C)": 16.0,
+            "Throttle Time (s)": 300.2,
+            "Efficiency": 246.67,
+            "PCIe Gen": 4.0,
+            "PCIe Width": 8.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/compute_virus_agg 0 300 99 --verify",
+            "RAS Status": "CLEAN",
+            "RAS Error Delta": "None",
+            "RAS Report": "results/20261024-203959/reliability/incinerator/gpu0/ras.json"
+        }
+    ]
+}
