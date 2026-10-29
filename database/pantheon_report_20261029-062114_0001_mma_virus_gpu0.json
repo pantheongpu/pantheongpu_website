@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-29 06:21:14",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 8,
+        "logical_cores": 8,
+        "freq": "3749.48Mhz"
+    },
+    "ram_info": {
+        "total": "30.07GB",
+        "available": "28.51GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+            "memory_total": "32623 MB",
+            "driver_version": "595.112.07",
+            "power_limit": 165.0,
+            "uuid": "GPU-a3ec9fd1-8727-8381-52cd-8b11960e07b8",
+            "serial": "1790926092864",
+            "memory_type": "GDDR7",
+            "memory_vendor": "SK hynix",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261029-062114",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-29 06:26:45",
+    "test_results": [
+        {
+            "Test Name": "mma_virus",
+            "Version": "1.2.4",
+            "Description": "MMA Virus (Physical Matrix/Tensor Cores)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 112.442,
+            "Unit": "TFLOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 72.9,
+            "Max Temp (C)": 88.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 153.6,
+            "Max Power (W)": 165.2,
+            "Avg Clock(MHz)": 1501.5,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2407.0,
+            "Avg GPU Util (%)": 90.6,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 1334.1,
+            "Memory Total (MiB)": 32623.0,
+            "Energy (Wh)": 14.12,
+            "Thermal Rise (C)": 57.0,
+            "Throttle Time (s)": 300.2,
+            "Efficiency": 732.04,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "Power",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/mma_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261029-062114/reliability/mma_virus/gpu0/ras.json"
+        }
+    ]
+}
