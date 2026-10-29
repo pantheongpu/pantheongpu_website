@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-28 20:10:54",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3195.50Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.47GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.112.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-5b36df9c-536c-5294-6ff2-02ac330a4bb5",
+            "serial": "1794425604115",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261028-201054",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-28 20:15:56",
+    "test_results": [
+        {
+            "Test Name": "media_enc_virus",
+            "Version": "1.2.4",
+            "Description": "Media Enc Virus (Fixed-Function Encoder)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 42.5185,
+            "Unit": "FPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 31.3,
+            "Max Temp (C)": 33.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 88.6,
+            "Max Power (W)": 89.5,
+            "Avg Clock(MHz)": 2316.6,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2325.0,
+            "Avg GPU Util (%)": 0.0,
+            "Max GPU Util (%)": 0.0,
+            "Peak Memory (MiB)": 1367.9,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 7.392,
+            "Thermal Rise (C)": 2.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.48,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/media_enc_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261028-201054/reliability/media_enc_virus/gpu0/ras.json"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-29 09:23:28",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3353.55Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.44GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.112.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-8c3dae29-6477-1af0-3eda-522e45fff0ff",
+            "serial": "1794825605578",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261029-092328",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-29 09:28:30",
+    "test_results": [
+        {
+            "Test Name": "memory_hammer",
+            "Version": "1.2.4",
+            "Description": "Memory Hammer (Row Disturb)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 362533000000.0,
+            "Unit": "aggressor-reads/s",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 52.4,
+            "Max Temp (C)": 54.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 335.3,
+            "Max Power (W)": 341.4,
+            "Avg Clock(MHz)": 2412.2,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2422.0,
+            "Avg GPU Util (%)": 99.7,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 96995.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 27.991,
+            "Thermal Rise (C)": 21.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 1081219803.16,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/memory_hammer 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261029-092328/reliability/memory_hammer/gpu0/ras.json"
+        }
+    ]
+}
