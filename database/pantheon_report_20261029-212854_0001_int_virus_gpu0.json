@@ -1,0 +1,80 @@
+{
+    "pantheon_version": "1.2.4",
+    "timestamp": "2026-10-29 21:28:54",
+    "os_info": {
+        "system": "Linux",
+        "release": "7.0.0-1014-aws",
+        "version": "#14~24.04.1-Ubuntu SMP PREEMPT Fri Sep 18 21:24:59 UTC 2026",
+        "arch": "x86_64"
+    },
+    "cpu_info": {
+        "physical_cores": 4,
+        "logical_cores": 8,
+        "freq": "3502.14Mhz"
+    },
+    "ram_info": {
+        "total": "62.27GB",
+        "available": "59.45GB"
+    },
+    "gpu_static_info": [
+        {
+            "id": 0,
+            "type": "NVIDIA",
+            "manufacturer": "NVIDIA",
+            "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "memory_total": "97887 MB",
+            "driver_version": "595.112.07",
+            "power_limit": 600.0,
+            "uuid": "GPU-59e51ae3-f309-39fb-5c91-b292acf3d2b4",
+            "serial": "1792226029710",
+            "memory_type": "GDDR7",
+            "memory_vendor": "Samsung",
+            "memory_vendor_source": "nvidia-rm"
+        }
+    ],
+    "toolkit_version": "13.2",
+    "run_id": "20261029-212854",
+    "record_kind": "completed_workload",
+    "run_status": "complete",
+    "completed_at": "2026-10-29 21:33:55",
+    "test_results": [
+        {
+            "Test Name": "int_virus",
+            "Version": "1.2.4",
+            "Description": "Integer Virus (INT32/Logic Pipeline)",
+            "GPU ID": 0,
+            "Duration (s)": 300,
+            "Mem Usage (%)": 99,
+            "Score": 44.8336,
+            "Unit": "TOPS",
+            "Throughput Variance (%)": "N/A",
+            "Avg Temp (C)": 65.0,
+            "Max Temp (C)": 67.0,
+            "Avg Mem Temp (C)": "N/A",
+            "Max Mem Temp (C)": "N/A",
+            "Avg Power (W)": 472.7,
+            "Max Power (W)": 478.7,
+            "Avg Clock(MHz)": 2414.6,
+            "Min Clock (MHz)": 180.0,
+            "Max Clock (MHz)": 2422.0,
+            "Avg GPU Util (%)": 99.3,
+            "Max GPU Util (%)": 100.0,
+            "Peak Memory (MiB)": 1267.4,
+            "Memory Total (MiB)": 97887.0,
+            "Energy (Wh)": 39.467,
+            "Thermal Rise (C)": 34.0,
+            "Throttle Time (s)": 0.0,
+            "Efficiency": 0.09,
+            "PCIe Gen": 5.0,
+            "PCIe Width": 16.0,
+            "Limit Reason": "None",
+            "Max Fan (%)": "N/A",
+            "Volts Core (mV)": "N/A",
+            "Volts SoC (mV)": "N/A",
+            "Command Lines": "./build/int_virus 0 300 99 --verify",
+            "RAS Status": "WARNING",
+            "RAS Error Delta": "vendor_ras.pcie.l0_to_recovery +1",
+            "RAS Report": "results/20261029-212854/reliability/int_virus/gpu0/ras.json"
+        }
+    ]
+}
