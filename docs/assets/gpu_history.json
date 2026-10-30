@@ -9437,6 +9437,21 @@
   {
     "uuid": "GPU-0499c985-7e0f-f700-fc9b-049496254089",
     "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
+    "test": "moe_router",
+    "version": "1.2.4",
+    "unit": "ai-ops/s",
+    "score": 1383760000.0,
+    "duration": 300,
+    "date": "2026-10-30 23:01:20",
+    "temp_max": 56.0,
+    "power_max": 90.4,
+    "clock_avg": 1199.0,
+    "throttle_time": 261.2,
+    "card": "GPU-0499c985-7e0f-f700-fc9b-049496254089"
+  },
+  {
+    "uuid": "GPU-0499c985-7e0f-f700-fc9b-049496254089",
+    "gpu": "NVIDIA RTX PRO 4500 Blackwell Server Edition",
     "test": "omni_virus",
     "version": "1.2.4",
     "unit": "TFLOPS",
