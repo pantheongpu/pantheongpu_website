@@ -13997,6 +13997,21 @@
   {
     "uuid": "GPU-0b2e2d27-a7c1-8648-a1f9-764c3cfd438c",
     "gpu": "NVIDIA L40S",
+    "test": "galpat",
+    "version": "1.2.4",
+    "unit": "gallop-reads/s",
+    "score": 5147310000.0,
+    "duration": 300,
+    "date": "2026-10-31 14:11:03",
+    "temp_max": 37.0,
+    "power_max": 77.8,
+    "clock_avg": 1065.0,
+    "throttle_time": 0.0,
+    "card": "GPU-0b2e2d27-a7c1-8648-a1f9-764c3cfd438c"
+  },
+  {
+    "uuid": "GPU-0b2e2d27-a7c1-8648-a1f9-764c3cfd438c",
+    "gpu": "NVIDIA L40S",
     "test": "graph_replay",
     "version": "1.2.4",
     "unit": "graph-steps/s",
