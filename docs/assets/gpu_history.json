@@ -13997,6 +13997,21 @@
   {
     "uuid": "GPU-0b2e2d27-a7c1-8648-a1f9-764c3cfd438c",
     "gpu": "NVIDIA L40S",
+    "test": "kv_cache_churn",
+    "version": "1.2.4",
+    "unit": "cache-updates/s",
+    "score": 1487720000.0,
+    "duration": 300,
+    "date": "2026-10-31 10:29:08",
+    "temp_max": 64.0,
+    "power_max": 173.0,
+    "clock_avg": 1065.0,
+    "throttle_time": 0.0,
+    "card": "GPU-0b2e2d27-a7c1-8648-a1f9-764c3cfd438c"
+  },
+  {
+    "uuid": "GPU-0b2e2d27-a7c1-8648-a1f9-764c3cfd438c",
+    "gpu": "NVIDIA L40S",
     "test": "llm_decode",
     "version": "1.2.4",
     "unit": "tokens/s",
