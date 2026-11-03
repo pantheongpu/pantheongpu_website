@@ -15,6 +15,8 @@ description: The people behind PantheonGPU. Saqib Khan is the CEO and Founder an
 <div class="pantheon-team-grid" markdown>
 
 <div class="pantheon-use-case" markdown>
+![Saqib Khan](assets/team/saqib-khan.jpg){ .pantheon-team-photo width="96" height="96" loading="lazy" }
+
 <p class="pantheon-card__label">CEO and Founder</p>
 
 ### Saqib Khan
@@ -26,6 +28,8 @@ Founded PantheonGPU and leads the company and the direction of the Pantheon proj
 </div>
 
 <div class="pantheon-use-case" markdown>
+![Placeholder portrait for Maheen Khalid](assets/team/maheen-khalid.svg){ .pantheon-team-photo width="96" height="96" loading="lazy" }
+
 <p class="pantheon-card__label">Developer and Tester</p>
 
 ### Maheen Khalid
@@ -60,6 +64,7 @@ Questions about using Pantheon are best asked in [GitHub Discussions](https://gi
     "@type": "Person",
     "name": "Saqib Khan",
     "jobTitle": "CEO and Founder",
+    "image": "https://pantheongpu.com/assets/team/saqib-khan.jpg",
     "sameAs": [
       "https://www.linkedin.com/in/saqib-khan-2a0ab164/",
       "https://github.com/saqibkh"
