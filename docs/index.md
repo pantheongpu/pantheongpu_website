@@ -75,4 +75,4 @@ Detect changes after driver, CUDA or ROCm, firmware, operating system, container
 
 ## Who builds Pantheon
 
-PantheonGPU is built by Saqib Khan (CEO and Founder) and Maheen Khalid (Developer and Tester). [Meet the team](team/).
+PantheonGPU is built by Saqib Khan (CEO and Founder) and Maheen Khalid (Founding Engineer). [Meet the team](team/).
