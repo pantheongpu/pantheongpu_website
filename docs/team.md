@@ -1,6 +1,6 @@
 ---
 title: Team
-description: The people behind PantheonGPU. Saqib Khan is the CEO and Founder and Maheen Khalid is the Developer and Tester, with their LinkedIn and GitHub profiles.
+description: The people behind PantheonGPU. Saqib Khan is the CEO and Founder and Maheen Khalid is the Founding Engineer, with their LinkedIn and GitHub profiles.
 ---
 
 # Team
@@ -30,11 +30,11 @@ Founded PantheonGPU and leads the company and the direction of the Pantheon proj
 <div class="pantheon-use-case" markdown>
 ![Placeholder portrait for Maheen Khalid](assets/team/maheen-khalid.svg){ .pantheon-team-photo width="96" height="96" loading="lazy" }
 
-<p class="pantheon-card__label">Developer and Tester</p>
+<p class="pantheon-card__label">Founding Engineer</p>
 
 ### Maheen Khalid
 
-Works on the development and testing of Pantheon.
+Works on the engineering of Pantheon, including its development and testing.
 
 [LinkedIn](https://www.linkedin.com/in/maheen-khalid-b8938a182/){ .md-button }
 [GitHub](https://github.com/maheenkhalid96){ .md-button }
@@ -74,7 +74,7 @@ Questions about using Pantheon are best asked in [GitHub Discussions](https://gi
     {
       "@type": "Person",
       "name": "Maheen Khalid",
-      "jobTitle": "Developer and Tester",
+      "jobTitle": "Founding Engineer",
       "sameAs": [
         "https://www.linkedin.com/in/maheen-khalid-b8938a182/",
         "https://github.com/maheenkhalid96"

@@ -2503,7 +2503,7 @@ def test_history_chart_treats_unreadable_versions_as_older_and_keeps_other_split
 TEAM = {
     "Saqib Khan": ("CEO and Founder",
                    "https://www.linkedin.com/in/saqib-khan-2a0ab164/", "https://github.com/saqibkh"),
-    "Maheen Khalid": ("Developer and Tester",
+    "Maheen Khalid": ("Founding Engineer",
                       "https://www.linkedin.com/in/maheen-khalid-b8938a182/", "https://github.com/maheenkhalid96"),
 }
 
