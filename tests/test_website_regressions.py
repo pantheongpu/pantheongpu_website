@@ -170,10 +170,10 @@ def test_research_reports_page_is_available():
     article = read("docs/reports/silicon-segregation.md")
     tensor_article = read("docs/reports/tensor-lineage.md")
 
-    assert "  - Research:" in mkdocs
-    assert "    - Overview: reports.md" in mkdocs
-    assert '    - "Silicon Segregation": reports/silicon-segregation.md' in mkdocs
-    assert '    - "Tracing the Tensor Lineage": reports/tensor-lineage.md' in mkdocs
+    assert "\n    - Research:\n" in mkdocs, "Research is a section of the Community tab"
+    assert "      - Overview: reports.md" in mkdocs
+    assert '      - "Silicon Segregation": reports/silicon-segregation.md' in mkdocs
+    assert '      - "Tracing the Tensor Lineage": reports/tensor-lineage.md' in mkdocs
     assert "# Research & Reports" in reports
     assert "Long-form analysis, papers, benchmark notes" in reports
     assert "## Featured" in reports
@@ -2518,8 +2518,29 @@ def test_team_page_names_the_team_with_their_roles_and_profiles():
     assert "| PantheonGPU" not in page.split("---", 2)[1]
 
 
-def test_team_page_is_one_click_from_every_page_and_from_home():
-    assert "  - Team: team.md" in read("mkdocs.yml")
+def _nav_tabs():
+    """The top-level entries of the navigation in mkdocs.yml, each with the lines nested under it."""
+    nav = read("mkdocs.yml").split("\nnav:\n", 1)[1].split("\ntheme:", 1)[0]
+    tabs, current = {}, None
+    for line in nav.splitlines():
+        if re.match(r"^  - \S", line):
+            current = re.sub(r"^  - ([^:]+):.*", r"\1", line)
+            tabs[current] = []
+        elif current and line.strip():
+            tabs[current].append(line)
+    return tabs
+
+
+def test_research_and_team_live_under_the_community_tab_not_as_tabs_of_their_own():
+    tabs = _nav_tabs()
+    assert "Community" in tabs and "Research" not in tabs and "Team" not in tabs, list(tabs)
+    community = tabs["Community"]
+    assert "    - Research:" in community
+    assert "    - Team: team.md" in community
+    assert "    - Programs & Support: programs-support.md" in community
+
+
+def test_team_page_is_linked_from_home():
     home = read("docs/index.md")
     assert "](team/)" in home
     for name in TEAM:
@@ -2537,3 +2558,22 @@ def test_team_page_structured_data_matches_the_visible_team():
         role, linkedin, github = TEAM[person["name"]]
         assert person["jobTitle"] == role
         assert set(person["sameAs"]) == {linkedin, github}
+    # Only a real photograph is marked up as the person's image, and it has to be on the site.
+    photo = data["founder"]["image"]
+    assert photo.startswith("https://pantheongpu.com/assets/team/")
+    assert (ROOT / "docs" / photo.removeprefix("https://pantheongpu.com/")).exists()
+    assert "image" not in data["member"][0]
+
+
+def test_team_page_portraits_exist_are_small_carry_alt_text_and_no_camera_data():
+    page = read("docs/team.md")
+    images = re.findall(r"!\[([^\]]*)\]\(([^)]+)\)", page)
+    assert len(images) == len(TEAM), images
+    for alt, src in images:
+        path = ROOT / "docs" / src
+        assert path.exists(), src
+        assert path.stat().st_size < 100_000, f"{src} is large for an avatar"
+        assert any(name in alt for name in TEAM), alt
+    pil = pytest.importorskip("PIL.Image")
+    with pil.open(ROOT / "docs/assets/team/saqib-khan.jpg") as photo:
+        assert not photo.getexif(), "the photo must not carry location or camera metadata"
