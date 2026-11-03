@@ -327,9 +327,21 @@ def test_documentation_pages_keep_the_navigation_sidebar():
     # the other pages of the section. That includes the two data pages, which
     # hid it to give their charts room; the charts do not need it.
     for page in ("docs/methodology.md", "docs/getting-started.md",
-                 "docs/community.md", "docs/programs-support.md",
+                 "docs/community.md", "docs/programs-support.md", "docs/team.md",
                  "docs/benchmark-comparisons.md", "docs/gpu-history.md"):
         assert "hide:" not in read(page).split("# ")[0], page
+
+
+def test_team_page_names_the_founding_team_with_public_profiles():
+    # Programs that vet a startup (Google for Startups turned an application down for this) look for a public page
+    # that names the founders and the leadership, with a way to check each of them.
+    team = read("docs/team.md")
+    for fragment in ("Saqib Khan", "CEO AND FOUNDER",
+                     "https://www.linkedin.com/in/saqib-khan-2a0ab164/", "https://github.com/saqibkh",
+                     "Maheen Khalid", "FOUNDING ENGINEER",
+                     "https://www.linkedin.com/in/maheen-khalid-b8938a182/", "https://github.com/maheenkhalid96"):
+        assert fragment in team, fragment
+    assert "team.md" in read("mkdocs.yml")
 
 
 def test_export_button_is_labeled_as_csv():
