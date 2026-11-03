@@ -332,18 +332,6 @@ def test_documentation_pages_keep_the_navigation_sidebar():
         assert "hide:" not in read(page).split("# ")[0], page
 
 
-def test_team_page_names_the_founding_team_with_public_profiles():
-    # Programs that vet a startup (Google for Startups turned an application down for this) look for a public page
-    # that names the founders and the leadership, with a way to check each of them.
-    team = read("docs/team.md")
-    for fragment in ("Saqib Khan", "CEO AND FOUNDER",
-                     "https://www.linkedin.com/in/saqib-khan-2a0ab164/", "https://github.com/saqibkh",
-                     "Maheen Khalid", "FOUNDING ENGINEER",
-                     "https://www.linkedin.com/in/maheen-khalid-b8938a182/", "https://github.com/maheenkhalid96"):
-        assert fragment in team, fragment
-    assert "team.md" in read("mkdocs.yml")
-
-
 def test_export_button_is_labeled_as_csv():
     benchmarks = read("docs/benchmarks.md")
     tables_js = read("docs/js/tables.js")
@@ -2505,3 +2493,47 @@ def test_history_chart_treats_unreadable_versions_as_older_and_keeps_other_split
     names = [s["name"] for s in out["series"]]
     assert names == ["300 s, before 1.2.3", "300 s, from 1.2.3", "3600 s, from 1.2.3"]
     assert [p["version"] for p in out["series"][0]["points"]] == ["Legacy", "1.2.2"]
+
+
+# --- the team page -------------------------------------------------------------------
+# Programs that vet a startup (Google for Startups turned PantheonGPU down for "we could not
+# verify information about your company's founding team") ask for a public page that names the
+# team. These keep it findable, accurate and consistent with the structured data on it.
+
+TEAM = {
+    "Saqib Khan": ("CEO and Founder",
+                   "https://www.linkedin.com/in/saqib-khan-2a0ab164/", "https://github.com/saqibkh"),
+    "Maheen Khalid": ("Developer and Tester",
+                      "https://www.linkedin.com/in/maheen-khalid-b8938a182/", "https://github.com/maheenkhalid96"),
+}
+
+
+def test_team_page_names_the_team_with_their_roles_and_profiles():
+    page = read("docs/team.md")
+    for name, (role, linkedin, github) in TEAM.items():
+        assert f"### {name}" in page, name
+        assert role in page, role
+        assert f"]({linkedin})" in page, f"{name}: LinkedIn"
+        assert f"]({github})" in page, f"{name}: GitHub"
+    assert "| PantheonGPU" not in page.split("---", 2)[1]
+
+
+def test_team_page_is_one_click_from_every_page_and_from_home():
+    assert "  - Team: team.md" in read("mkdocs.yml")
+    home = read("docs/index.md")
+    assert "](team/)" in home
+    for name in TEAM:
+        assert name in home, name
+
+
+def test_team_page_structured_data_matches_the_visible_team():
+    page = read("docs/team.md")
+    block = page.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]
+    data = json.loads(block)
+    assert data["@type"] == "Organization" and data["name"] == "PantheonGPU"
+    people = [data["founder"]] + data["member"]
+    assert {p["name"] for p in people} == set(TEAM)
+    for person in people:
+        role, linkedin, github = TEAM[person["name"]]
+        assert person["jobTitle"] == role
+        assert set(person["sameAs"]) == {linkedin, github}

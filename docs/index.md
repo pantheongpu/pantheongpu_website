@@ -72,3 +72,7 @@ Detect changes after driver, CUDA or ROCm, firmware, operating system, container
 - Local JSON, CSV, HTML, and trace reports
 - A public performance database for comparing systems
 - Open source under Apache 2.0: every workload is readable, buildable, and runnable from source
+
+## Who builds Pantheon
+
+PantheonGPU is built by Saqib Khan (CEO and Founder) and Maheen Khalid (Developer and Tester). [Meet the team](team/).
