@@ -2577,3 +2577,13 @@ def test_team_page_portraits_exist_are_small_carry_alt_text_and_no_camera_data()
     pil = pytest.importorskip("PIL.Image")
     with pil.open(ROOT / "docs/assets/team/saqib-khan.jpg") as photo:
         assert not photo.getexif(), "the photo must not carry location or camera metadata"
+
+
+def test_team_page_names_the_legal_entity_behind_the_brand():
+    # The registration documents a program asks for (a Certificate of Formation, an EIN letter) say
+    # K Digital Systems LLC; the site and the applications say PantheonGPU. The page is where a reviewer
+    # can link the two, in words and in the structured data.
+    page = read("docs/team.md")
+    assert "PantheonGPU is a project of K Digital Systems LLC" in page
+    block = page.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]
+    assert json.loads(block)["parentOrganization"]["name"] == "K Digital Systems LLC"
