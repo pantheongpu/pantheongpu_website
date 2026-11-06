@@ -1835,7 +1835,7 @@ def test_funding_manifest_is_published_and_points_at_the_source_repo():
     assert manifest["entity"]["email"].endswith("@pantheongpu.com")
     assert manifest["entity"]["webpageUrl"]["url"] == "https://pantheongpu.com"
     (project,) = manifest["projects"]
-    assert project["licenses"] == ["spdx:Apache-2.0"]
+    assert project["licenses"] == ["spdx:AGPL-3.0-only"]
     assert project["repositoryUrl"]["url"] == "https://github.com/pantheongpu/pantheon"
     assert project["repositoryUrl"]["wellKnown"] == (
         "https://github.com/pantheongpu/pantheon/blob/main/.well-known/funding-manifest-urls"
@@ -1848,6 +1848,90 @@ def test_funding_manifest_is_published_and_points_at_the_source_repo():
     assert len(manifest["entity"]["description"]) <= 2000
     assert len(project["description"]) <= 2000
     assert len(project["tags"]) <= 10
+
+
+def test_site_describes_pantheon_as_agpl_not_apache():
+    """Pantheon's source repository moved to AGPL-3.0-only after v1.2.4. The
+    pages that state the license must say so: a page that still calls Apache the
+    current license would contradict the repository."""
+    for name in ("mkdocs.yml", "docs/index.md", "docs/team.md", "docs/funding.json"):
+        text = read(name)
+        assert "AGPL" in text, f"{name} must name the AGPL"
+        assert "Apache" not in text, f"{name} still names Apache as the license"
+
+
+def test_readme_leaves_the_logos_out_of_the_mit_license():
+    """The names and logos fall under the trademark policy, not under the MIT
+    license that covers the rest of this repository."""
+    readme = read("README.md")
+    for logo in ("logo.png", "favicon.ico", "favicon.png", "icon.png"):
+        assert logo in readme, f"README must say {logo} is not under the MIT license"
+        assert (ROOT / "docs" / "assets" / logo).exists(), f"{logo} is not in docs/assets"
+    assert "TRADEMARK.md" in readme
+
+
+def load_build_wheel():
+    spec = importlib.util.spec_from_file_location(
+        "build_wheel_under_test", ROOT / "packaging" / "wheel" / "build_wheel.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_wheel_license_follows_the_source_tree(tmp_path):
+    """build_wheel.py builds old and new tags, so it must read the license from
+    the tree it is given instead of stamping one license on every release."""
+    import tomllib
+
+    builder = load_build_wheel()
+    trees = {name: tmp_path / name for name in ("agpl", "apache", "other")}
+    for tree in trees.values():
+        tree.mkdir()
+    (trees["agpl"] / "LICENSE").write_text(
+        "                    GNU AFFERO GENERAL PUBLIC LICENSE\n"
+        "                       Version 3, 19 November 2007\n", encoding="utf-8")
+    (trees["apache"] / "LICENSE").write_text(
+        "                                 Apache License\n"
+        "                           Version 2.0, January 2004\n", encoding="utf-8")
+    (trees["other"] / "LICENSE").write_text("MIT License\n", encoding="utf-8")
+
+    assert builder.license_expression(trees["agpl"]) == "AGPL-3.0-only"
+    assert builder.license_expression(trees["apache"]) == "Apache-2.0"
+    with pytest.raises(SystemExit):
+        builder.license_expression(trees["other"])
+    with pytest.raises(SystemExit):
+        builder.license_expression(tmp_path / "missing")
+
+    work = tmp_path / "work"
+    work.mkdir()
+    builder.write_pyproject(work, "1.2.5", "AGPL-3.0-only")
+    project = tomllib.loads((work / "pyproject.toml").read_text(encoding="utf-8"))
+    assert project["project"]["license"] == {"text": "AGPL-3.0-only"}
+    assert "LICENSES/*" in project["tool"]["setuptools"]["license-files"]
+
+
+def test_distro_packaging_names_the_license_of_the_version_it_builds():
+    """v1.2.4 is the last Apache-2.0 release; every later one is AGPL-3.0-only.
+    The RPM spec and the PKGBUILD each pin one version, so their license has to
+    change in the same PR that bumps it."""
+    last_apache = (1, 2, 4)
+
+    def expected(version):
+        parts = tuple(int(part) for part in version.split(".")[:3])
+        return "Apache-2.0" if parts <= last_apache else "AGPL-3.0-only"
+
+    spec = read("packaging/rpm/pantheon-gpu.spec")
+    spec_version = re.search(r"^Version:\s*(\S+)", spec, re.M).group(1)
+    spec_license = re.search(r"^License:\s*(\S+)", spec, re.M).group(1)
+    assert spec_license == expected(spec_version), (
+        f"the spec builds {spec_version}, so its License must be "
+        f"{expected(spec_version)}")
+
+    pkgbuild = read("packaging/aur/PKGBUILD")
+    pkgver = re.search(r"^pkgver=(\S+)", pkgbuild, re.M).group(1)
+    pkg_license = re.search(r"^license=\('([^']+)'\)", pkgbuild, re.M).group(1)
+    assert pkg_license == expected(pkgver), (
+        f"the PKGBUILD builds {pkgver}, so its license must be {expected(pkgver)}")
 
 
 def test_identity_text_matches_the_raw_uuid_policy():

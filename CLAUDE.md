@@ -51,6 +51,12 @@ Python 3.11 and 3.12 and fails if generated data has drifted.
    explicit rather than incidental.
 4. `docs/getting-started.md` pins the version in its install command, and a
    test asserts that exact string. Both need updating in the same PR.
+5. v1.2.4 was the last Apache-2.0 release; the first release after it is
+   AGPL-3.0-only. In the same PR that bumps the version, set `License:` in
+   `packaging/rpm/pantheon-gpu.spec` and `license=` in `packaging/aur/PKGBUILD`
+   to `AGPL-3.0-only` (a test fails if they disagree with the version). The
+   wheel reads its license from the source tree's `LICENSE`. Also update the
+   `license` field of the conda-forge recipe in the bot's version PR.
 
 ## Hard Rules
 - **This repo is public.** Benchmark reports must not contain host identifiers
