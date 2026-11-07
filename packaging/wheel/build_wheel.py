@@ -41,6 +41,26 @@ def read_version(source: Path) -> str:
     return version
 
 
+def license_expression(source: Path) -> str:
+    """SPDX expression for the tree being packaged, read from its LICENSE.
+
+    The source repository changed license after v1.2.4: Apache-2.0 before,
+    AGPL-3.0-only after. This script builds both old and new tags, so it reads
+    the answer from the tree instead of hard-coding one. A LICENSE it does not
+    recognise stops the build rather than being labelled with a guess.
+    """
+    path = source / "LICENSE"
+    if not path.exists():
+        raise SystemExit(f"{source} has no LICENSE; cannot say how it is licensed")
+    head = " ".join(path.read_text(encoding="utf-8")[:600].split())
+    if "GNU AFFERO GENERAL PUBLIC LICENSE Version 3" in head:
+        return "AGPL-3.0-only"
+    if "Apache License Version 2.0" in head:
+        return "Apache-2.0"
+    raise SystemExit(f"{path} is not a license this script knows; "
+                     "add it to license_expression() before releasing")
+
+
 def stage(source: Path, work: Path) -> Path:
     pkg = work / PACKAGE
     pkg.mkdir(parents=True)
@@ -89,7 +109,7 @@ def stage(source: Path, work: Path) -> Path:
     return pkg
 
 
-def write_pyproject(work: Path, version: str) -> None:
+def write_pyproject(work: Path, version: str, spdx: str) -> None:
     (work / "pyproject.toml").write_text(textwrap.dedent(f'''\
         [build-system]
         requires = ["setuptools>=68"]
@@ -101,7 +121,7 @@ def write_pyproject(work: Path, version: str) -> None:
         description = "GPU stress testing and diagnostics for NVIDIA CUDA and AMD ROCm"
         readme = "README.md"
         requires-python = ">=3.9"
-        license = {{ text = "Apache-2.0" }}
+        license = {{ text = "{spdx}" }}
         dependencies = [
             "psutil",
             "pandas",
@@ -132,6 +152,7 @@ def write_pyproject(work: Path, version: str) -> None:
         [tool.setuptools]
         packages = ["{PACKAGE}"]
         include-package-data = true
+        license-files = ["LICEN[CS]E*", "NOTICE*", "LICENSES/*", "COMMERCIAL.md", "TRADEMARK.md"]
 
         [tool.setuptools.package-data]
         "{PACKAGE}" = ["Makefile", "VERSION", "kernels/**/*"]
@@ -151,17 +172,22 @@ def main() -> int:
             raise SystemExit(f"{source} does not look like a Pantheon tree: missing {required}")
 
     version = read_version(source)
+    spdx = license_expression(source)
     work = args.workdir.resolve()
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True)
 
     stage(source, work)
-    write_pyproject(work, version)
+    write_pyproject(work, version, spdx)
     shutil.copy2(source / "README.md", work / "README.md")
-    for extra in ("LICENSE", "NOTICE"):
+    # The AGPL tree also carries the Apache text for the releases made under it,
+    # and the commercial and trademark pages that NOTICE points at.
+    for extra in ("LICENSE", "NOTICE", "COMMERCIAL.md", "TRADEMARK.md"):
         if (source / extra).exists():
             shutil.copy2(source / extra, work / extra)
+    if (source / "LICENSES").is_dir():
+        shutil.copytree(source / "LICENSES", work / "LICENSES")
 
     args.outdir.mkdir(parents=True, exist_ok=True)
     result = subprocess.run(
