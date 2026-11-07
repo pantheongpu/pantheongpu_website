@@ -46,7 +46,7 @@ Works on the engineering of Pantheon, including its development and testing.
 
 PantheonGPU is a project of K Digital Systems LLC, a limited liability company registered in Texas.
 
-PantheonGPU maintains Pantheon, an open source suite of more than 45 workloads that tests compute, memory, interconnect, thermals and stability, and AI workloads on NVIDIA and AMD GPUs. It is released under the AGPL-3.0 license, with a commercial license available.
+PantheonGPU maintains Pantheon, an open source suite of more than 45 workloads that tests compute, memory, interconnect, thermals and stability, and AI workloads on NVIDIA and AMD GPUs. It is released under the Apache 2.0 license.
 
 - Website: [pantheongpu.com](https://pantheongpu.com). Every release and benchmark result is published there: see [Releases](release.md) and [Live Benchmarks](benchmarks.md).
 - Source code and organization: [github.com/pantheongpu](https://github.com/pantheongpu)
