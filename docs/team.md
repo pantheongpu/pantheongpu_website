@@ -1,6 +1,6 @@
 ---
 title: Team
-description: The people behind PantheonGPU. Saqib Khan is the CEO and Founder and Maheen Khalid is the Founding Engineer, with their LinkedIn and GitHub profiles.
+description: The people behind PantheonGPU. Saqib Khan is the CEO and Founder, Maheen Khalid is the Founding Engineer and Shahab Khan is the Accounts Manager, with their LinkedIn profiles and, where they have one, GitHub.
 ---
 
 # Team
@@ -38,6 +38,16 @@ Works on the engineering of Pantheon, including its development and testing.
 
 [LinkedIn](https://www.linkedin.com/in/maheen-khalid-b8938a182/){ .md-button }
 [GitHub](https://github.com/maheenkhalid96){ .md-button }
+</div>
+
+<div class="pantheon-use-case" markdown>
+![Placeholder portrait for Shahab Khan](assets/team/shahab-khan.svg){ .pantheon-team-photo width="96" height="96" loading="lazy" }
+
+<p class="pantheon-card__label">Accounts Manager</p>
+
+### Shahab Khan
+
+[LinkedIn](https://www.linkedin.com/in/shahab-khan-99068226/){ .md-button }
 </div>
 
 </div>
@@ -84,6 +94,14 @@ Questions about using Pantheon are best asked in [GitHub Discussions](https://gi
       "sameAs": [
         "https://www.linkedin.com/in/maheen-khalid-b8938a182/",
         "https://github.com/maheenkhalid96"
+      ]
+    },
+    {
+      "@type": "Person",
+      "name": "Shahab Khan",
+      "jobTitle": "Accounts Manager",
+      "sameAs": [
+        "https://www.linkedin.com/in/shahab-khan-99068226/"
       ]
     }
   ]
