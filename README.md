@@ -12,17 +12,6 @@ for questions, result showcases, and workload ideas. Use the repository's issue
 forms for benchmark submissions and reproducible hardware regressions. See
 [Community](docs/community.md) for the reporting and Discord-launch policy.
 
-## Licenses
-
-We release this repository under the MIT license (see `LICENSE`), with one
-exception: the Pantheon and PantheonGPU names and logos (`docs/assets/logo.png`,
-`favicon.ico`, `favicon.png` and `icon.png`) are not covered by it. They fall
-under the [trademark policy](https://github.com/pantheongpu/pantheon/blob/main/TRADEMARK.md).
-
-Pantheon itself, in [pantheongpu/pantheon](https://github.com/pantheongpu/pantheon),
-is released under the AGPL-3.0-only license, with a commercial license
-available. Releases made before that change remain available under Apache-2.0.
-
 ## Repository Layout
 
 - `docs/` - MkDocs pages, styles, JavaScript, images, and generated web assets.
