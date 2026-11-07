@@ -250,7 +250,11 @@ function formatCellValue(row, key, display = false) {
     if (key === "uuid") {
         // Reports before v1.0.8 carried no UUID. Say so rather than print
         // "Unknown" as though it were an identifier shared by every such card.
-        return isMissingValue(val) || val === "Unknown" ? "no GPU ID" : val;
+        // The same goes for the all-zero id (0x0) an AMD driver reports on a card
+        // with no unique id, such as the RX 6700 XT: the history page already
+        // calls it "no GPU ID", and the table must not show it as if it were one.
+        return isMissingValue(val) || val === "Unknown" || /^(0x)?0+$/i.test(String(val).trim())
+            ? "no GPU ID" : val;
     }
     if (key === "score" || key === "throughput") {
         if (row.unit === "Watts") {

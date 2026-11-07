@@ -1942,6 +1942,9 @@ def test_explorer_labels_power_fallback_and_anonymous_cards():
     tables = read("docs/js/tables.js")
     assert "power only, no throughput" in tables
     assert '"no GPU ID"' in tables
+    # An AMD driver with no unique id reports 0x0 (the RX 6700 XT): it is no id, as it is on the history page.
+    uuid_cell = tables.split('if (key === "uuid")', 1)[1].split("if (key ===", 1)[0]
+    assert "/^(0x)?0+$/i" in uuid_cell
 
 
 def test_history_chart_is_transparent_in_dark_mode():
