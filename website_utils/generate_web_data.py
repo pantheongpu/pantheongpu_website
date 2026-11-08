@@ -6,8 +6,10 @@ from pathlib import Path
 
 try:  # run as a script (python3 website_utils/generate_web_data.py)
     from gpu_identity import public_gpu_id as _public_gpu_id
+    from memory_specs import SPEC_SOURCE, spec_memory_type
 except ImportError:  # imported as a package (tests, other modules)
     from website_utils.gpu_identity import public_gpu_id as _public_gpu_id
+    from website_utils.memory_specs import SPEC_SOURCE, spec_memory_type
 
 try:
     import numpy as np
@@ -647,6 +649,15 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     # vendor", for why "declared" is the honest word.
                     memory_type = normalize(g_info.get("memory_type"), "N/A")
                     memory_vendor = normalize(g_info.get("memory_vendor"), "N/A")
+                    # The type is a property of the product, so when the driver
+                    # gave none (older releases, older drivers, WSL) it is filled
+                    # from the model's specification and marked as such. The
+                    # vendor is a property of the board and is never filled in.
+                    memory_type_source = None
+                    if is_unknown_id(memory_type):
+                        spec_type = spec_memory_type(gpu_name)
+                        if spec_type:
+                            memory_type, memory_type_source = spec_type, SPEC_SOURCE
                     toolkit = data.get("toolkit_version", "N/A")
 
                     # Score Normalization
@@ -736,6 +747,8 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                         "driver": driver,
                         "toolkit": toolkit
                     }
+                    if memory_type_source:
+                        record["memory_type_source"] = memory_type_source
 
                     # A card with no usable UUID is told apart by its serial, so
                     # carry it. Cards that do have a UUID are identified by it

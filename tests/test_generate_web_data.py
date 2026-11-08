@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import pytest
 
@@ -20,6 +21,9 @@ from website_utils.generate_web_data import (
     to_float,
     unsupported_workload_reason,
 )
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def write_report(db_dir, name, gpu_info, test_results, version="1.0.0", run_status=None):
@@ -611,15 +615,76 @@ def test_declared_memory_fields_are_published_and_default_to_na(tmp_path):
                    "memory_vendor": "SK hynix", "memory_vendor_source": "nvidia-rm"}],
                  [{"Test Name": "memory_read", "GPU ID": 0, "Score": 250.0, "Unit": "GB/s"}], version="1.2.1")
     write_report(db_dir, "pantheon_report_old.json",
-                 [{"id": 0, "name": "NVIDIA L4", "uuid": "GPU-OLD"}],
+                 [{"id": 0, "name": "NVIDIA Unlisted Prototype", "uuid": "GPU-OLD"}],
                  [{"Test Name": "memory_read", "GPU ID": 0, "Score": 250.0, "Unit": "GB/s"}], version="1.2.0")
 
     rows = {row["uuid"]: row for row in main(db_dir=db_dir, output_file=output_file)}
 
     assert rows["GPU-NEW"]["memory_type"] == "GDDR6"
     assert rows["GPU-NEW"]["memory_vendor"] == "SK hynix"
+    assert "memory_type_source" not in rows["GPU-NEW"]
+    # A model the specification table does not list has nothing to fill from.
     assert rows["GPU-OLD"]["memory_type"] == "N/A"
     assert rows["GPU-OLD"]["memory_vendor"] == "N/A"
+    assert "memory_type_source" not in rows["GPU-OLD"]
+
+
+def test_memory_type_is_filled_from_the_specification_but_the_vendor_never_is(tmp_path):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir()
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    # Reports with no memory fields at all: releases before 1.2.1, and 570-series drivers that refused the query.
+    write_report(db_dir, "pantheon_report_a100.json",
+                 [{"id": 0, "name": "NVIDIA A100-SXM4-80GB", "uuid": "GPU-A100",
+                   "memory_type": "N/A", "memory_vendor": "N/A",
+                   "memory_vendor_source": "unavailable: FB_GET_INFO_V2 returned status 0x1f"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 1500.0, "Unit": "GB/s"}], version="1.2.4")
+    write_report(db_dir, "pantheon_report_rx.json",
+                 [{"id": 1, "name": "AMD Radeon RX 6700 XT", "uuid": "0x0"}],
+                 [{"Test Name": "memory_read", "GPU ID": 1, "Score": 280.0, "Unit": "GB/s"}], version="1.2.0")
+    # The driver answered, and its answer differs from the table's spelling: the driver wins.
+    write_report(db_dir, "pantheon_report_measured.json",
+                 [{"id": 0, "name": "NVIDIA A100-SXM4-80GB", "uuid": "GPU-MEASURED",
+                   "memory_type": "HBM2", "memory_vendor": "SK hynix", "memory_vendor_source": "nvidia-rm"}],
+                 [{"Test Name": "memory_read", "GPU ID": 0, "Score": 1500.0, "Unit": "GB/s"}], version="1.2.5")
+
+    rows = {row["uuid"]: row for row in main(db_dir=db_dir, output_file=output_file)}
+
+    assert rows["GPU-A100"]["memory_type"] == "HBM2e"
+    assert rows["GPU-A100"]["memory_type_source"] == "specification"
+    assert rows["GPU-A100"]["memory_vendor"] == "N/A"
+    assert rows["0x0"]["memory_type"] == "GDDR6"
+    assert rows["0x0"]["memory_type_source"] == "specification"
+    assert rows["0x0"]["memory_vendor"] == "N/A"
+    assert rows["GPU-MEASURED"]["memory_type"] == "HBM2"
+    assert rows["GPU-MEASURED"]["memory_vendor"] == "SK hynix"
+    assert "memory_type_source" not in rows["GPU-MEASURED"]
+
+
+def test_specification_memory_types_are_well_formed_and_agree_with_every_measured_card():
+    from website_utils.memory_specs import SPEC_MEMORY_TYPES, spec_memory_type
+
+    kinds = {"GDDR6", "GDDR6X", "GDDR7", "HBM2", "HBM2e", "HBM3", "HBM3e"}
+    assert set(SPEC_MEMORY_TYPES.values()) <= kinds
+    assert spec_memory_type("  nvidia   a100-sxm4-80gb ") == "HBM2e"
+    assert spec_memory_type("NVIDIA Unlisted Prototype") is None
+    assert spec_memory_type(None) is None
+
+    # The table must never contradict what a driver measured. The driver names the generation (HBM2 for
+    # HBM2e), so compare on that. A row with a vendor was measured: the vendor is never filled in.
+    def family(kind):
+        return kind[:-1] if kind.endswith("e") else kind
+
+    data = json.loads((ROOT / "docs" / "assets" / "web_data.json").read_text(encoding="utf-8"))
+    measured = {}
+    for row in data:
+        if row.get("memory_vendor") in (None, "", "N/A", "Unknown") or "memory_type_source" in row:
+            continue
+        spec = spec_memory_type(row["gpu"])
+        if spec:
+            measured.setdefault(row["gpu"], set()).add(row["memory_type"])
+            assert family(row["memory_type"]) == family(spec), (row["gpu"], row["memory_type"], spec)
+    assert measured, "no measured card matched the table, so the check above proved nothing"
 
 
 def _write_json(db_dir, name, report):

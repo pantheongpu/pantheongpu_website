@@ -12,15 +12,38 @@ The explorer carries **Mem Type** and **Mem Vendor** columns. Pantheon 1.2.1
 and later report them for each GPU: the memory type (GDDR6, GDDR7, HBM3 and so
 on) and the vendor (Samsung, SK hynix, Micron) are read from the driver's own
 memory information table on NVIDIA and from `rocm-smi` on AMD. Results from
-earlier releases, and cards whose driver does not expose the table, read N/A
-in both columns, and a value can be present for the vendor and absent for the
-type.
+earlier releases, and cards whose driver does not expose the table, carry no
+reported value. A value can be present for the vendor and absent for the type.
+
+For those results **Mem Type** is filled in from the card's published
+specification, because a product has one memory type; a row filled this way
+carries `memory_type_source: "specification"` in `web_data.json`, and a type the
+driver reported is never replaced. The driver names a generation (HBM2 for an
+HBM2e stack), so a measured row can read HBM2 where the specification says
+HBM2e. **Mem Vendor** is never filled in like this: the vendor belongs to the
+individual board, not to the product, so it stays N/A when the driver did not
+report it.
 
 Read those values as the vendor the board's VBIOS was configured for -- one
 value per card, not a survey of the chips. A repaired card fitted with another
 vendor's memory would still report the original, so the declared vendor is
 what the column means; the memory diagnostics are what measure the chips
 themselves.
+
+## Why a column reads N/A or "no GPU ID"
+
+N/A means the run did not read the value. It does not mean zero, and a few
+columns are blank for every card of some kinds on purpose:
+
+| Column | When it reads N/A |
+| --- | --- |
+| Mem Vendor | The driver did not report it: releases before 1.2.1, NVIDIA drivers older than 580 in Pantheon through 1.2.4 (they refuse the request unless it names that driver's own size), and a card behind WSL, which has no driver device to ask. |
+| Mem Temp | Only some boards have a readable memory temperature sensor. The HBM boards in the data (V100, A100, H100, GH200) report one; most GDDR boards do not. |
+| Fan % | Passive data-centre boards have no fan. Pantheon through 1.2.4 also did not record the fan on AMD cards. |
+| Core (mV), SoC (mV) | Pantheon reads NVIDIA through NVML, which has no voltage query. Pantheon through 1.2.4 did not record voltage on AMD cards. |
+| PCIe Gen, PCIe Width, Limit Reason | Pantheon through 1.2.4 did not record them on AMD cards. |
+| Throughput Variance | Filled only when a workload prints several throughput samples in one run; most print one. |
+| GPU ID | Reads "no GPU ID" for reports before 1.0.8 and for cards whose driver has no unique id: an AMD driver reports `0x0` for the RX 6700 XT. |
 
 <!-- TOOLKIT_COVERAGE:START -->
 ## Toolkit and driver coverage
