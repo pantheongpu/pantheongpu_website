@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Placeholder portrait">
+  <rect width="200" height="200" fill="#dfe4f7"/>
+  <path d="M28 200c0-40 31-60 72-60s72 20 72 60z" fill="#5c6bc0"/>
+  <rect x="87" y="116" width="26" height="30" rx="9" fill="#c5cae9"/>
+  <ellipse cx="100" cy="92" rx="30" ry="36" fill="#e8eaf6"/>
+</svg>

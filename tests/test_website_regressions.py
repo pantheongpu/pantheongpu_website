@@ -2505,6 +2505,9 @@ TEAM = {
                    "https://www.linkedin.com/in/saqib-khan-2a0ab164/", "https://github.com/saqibkh"),
     "Maheen Khalid": ("Founding Engineer",
                       "https://www.linkedin.com/in/maheen-khalid-b8938a182/", "https://github.com/maheenkhalid96"),
+    # No GitHub profile was given for him, so none is shown: the page links only what each person gave.
+    "Shahab Khan": ("Accounts Manager",
+                    "https://www.linkedin.com/in/shahab-khan-99068226/", None),
 }
 
 
@@ -2514,7 +2517,8 @@ def test_team_page_names_the_team_with_their_roles_and_profiles():
         assert f"### {name}" in page, name
         assert role in page, role
         assert f"]({linkedin})" in page, f"{name}: LinkedIn"
-        assert f"]({github})" in page, f"{name}: GitHub"
+        if github:
+            assert f"]({github})" in page, f"{name}: GitHub"
     assert "| PantheonGPU" not in page.split("---", 2)[1]
 
 
@@ -2557,12 +2561,12 @@ def test_team_page_structured_data_matches_the_visible_team():
     for person in people:
         role, linkedin, github = TEAM[person["name"]]
         assert person["jobTitle"] == role
-        assert set(person["sameAs"]) == {linkedin, github}
+        assert set(person["sameAs"]) == {linkedin, github} - {None}
     # Only a real photograph is marked up as the person's image, and it has to be on the site.
     photo = data["founder"]["image"]
     assert photo.startswith("https://pantheongpu.com/assets/team/")
     assert (ROOT / "docs" / photo.removeprefix("https://pantheongpu.com/")).exists()
-    assert "image" not in data["member"][0]
+    assert all("image" not in member for member in data["member"])
 
 
 def test_team_page_portraits_exist_are_small_carry_alt_text_and_no_camera_data():
