@@ -2011,7 +2011,11 @@ def test_declared_memory_vendor_flows_from_report_to_explorer():
 
 
 def test_every_explorer_column_exists_in_the_published_rows():
-    keys = set(re.findall(r'key:\s*"([a-z_]+)"', read("docs/js/tables.js").split("];", 1)[0]))
+    columns = read("docs/js/tables.js").split("];", 1)[0]
+    # A "late" column is one a newer Pantheon fills in: it has no data until reports that carry it are published, and
+    # the explorer keeps it out of the column chooser until then. Every other column must have a field today.
+    keys = {key for line in columns.splitlines() if "late: true" not in line
+            for key in re.findall(r'key:\s*"([a-z_]+)"', line)}
     row_keys = set(_published_rows()[0])
     missing = sorted(keys - row_keys)
     assert not missing, f"explorer columns with no data field: {missing}"
@@ -2594,3 +2598,83 @@ def test_team_page_names_the_legal_entity_behind_the_brand():
     assert "PantheonGPU is a project of K Digital Systems LLC" in page
     block = page.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]
     assert json.loads(block)["parentOrganization"]["name"] == "K Digital Systems LLC"
+
+
+# --- The explorer's columns for Pantheon's newer fields ---------------------------------------
+
+def _explorer(tmp_path, rows, cells=(), xlsx=None):
+    """What tables.js would show for `rows`, run under Node with a stub DOM."""
+    data = tmp_path / "explorer.json"
+    data.write_text(json.dumps({"rows": rows, "cells": cells, "xlsx": xlsx}), encoding="utf-8")
+    result = subprocess.run(
+        ["node", str(ROOT / "tests" / "tables_columns_harness.js"), str(ROOT / "docs" / "js" / "tables.js"), str(data)],
+        capture_output=True, text=True, timeout=60)
+    assert result.returncode == 0, result.stderr
+    return json.loads(result.stdout)
+
+
+NEEDS_NODE = pytest.mark.skipif(shutil.which("node") is None, reason="needs Node to run the explorer script")
+
+
+@NEEDS_NODE
+def test_every_field_the_generator_publishes_has_an_explorer_column(tmp_path):
+    from website_utils.generate_web_data import DEVICE_SPEC_FIELDS, RUN_CONTEXT_FIELDS
+
+    published = {k for k, _ in RUN_CONTEXT_FIELDS} | {k for k, _ in DEVICE_SPEC_FIELDS} | {"peak_bandwidth_gbs", "bandwidth_pct"}
+    out = _explorer(tmp_path, [])
+    assert set(out["lateKeys"]) == published, sorted(set(out["lateKeys"]) ^ published)
+    assert out["lateVisibleByDefault"] == []                    # hidden until someone asks for them
+    # Every numeric column has a unit entry (for the cell and the spreadsheet header); only the VBIOS is text.
+    assert set(out["lateKeys"]) - set(out["lateUnitKeys"]) == {"vbios"}
+
+
+def test_only_heat_readings_are_coloured_not_the_start_temperature_or_a_rated_limit():
+    tables = read("docs/js/tables.js")
+    heat = tables.split("const HEAT_COLORED = new Set([", 1)[1].split("]", 1)[0]
+    assert set(re.findall(r'"([a-z_]+)"', heat)) == {"temp_max", "temp_mem", "temp_edge", "temp_hotspot"}
+    # The colour is chosen by that set, not by a substring that would also catch start_temp and temp_slowdown.
+    assert "HEAT_COLORED.has(col.key)" in tables and 'col.key.includes("temp")' not in tables
+
+
+@NEEDS_NODE
+def test_a_late_column_is_offered_only_once_a_published_row_has_it(tmp_path):
+    plain = {"gpu": "NVIDIA Test", "test": "memory_read", "version": "1.2.4", "score": 1.0, "unit": "GB/s"}
+    out = _explorer(tmp_path, [plain])
+    assert "Mem Vendor" in out["chooser"] and "Avg Mem Clock" not in out["chooser"]
+    assert not any(label in out["chooser"] for label in ("Power Violation", "% of Peak Memory BW", "VBIOS"))
+
+    newer = dict(plain, version="1.2.5", mem_clock_avg=4928.2, bandwidth_pct=81.6, other_gpu_procs=0)
+    out = _explorer(tmp_path, [plain, newer])
+    assert {"Avg Mem Clock", "% of Peak Memory BW", "Other GPU Procs"} <= set(out["chooser"])
+    assert "Power Violation" not in out["chooser"]              # still nothing for this one
+
+
+@NEEDS_NODE
+def test_late_cells_carry_the_right_unit_and_a_zero_is_shown_not_hidden(tmp_path):
+    row = {"mem_clock_avg": 4928.2, "power_violation_s": 63.97, "throttle_thermal_s": 0.0, "temp_edge": 42.0,
+           "start_power": 10.6, "other_gpu_procs": 0, "start_util": 0.0, "bandwidth_pct": 81.6,
+           "peak_bandwidth_gbs": 320.1, "bus_width_bits": 256, "vbios": "90.04.96.00.02", "pcie_max_gen": 3}
+    keys = list(row) + ["thermal_margin"]
+    out = _explorer(tmp_path, [row], cells=[[0, key] for key in keys])
+    shown = dict(zip(keys, out["cells"]))
+    assert shown["mem_clock_avg"] == "4928.2 MHz"
+    # "power_violation_s" holds seconds: the generic rule for keys containing "power" would have called it watts.
+    assert shown["power_violation_s"] == "63.97 s" and shown["start_power"] == "10.6 W"
+    assert shown["throttle_thermal_s"] == "0 s" and shown["start_util"] == "0 %" and shown["other_gpu_procs"] == "0"
+    assert shown["temp_edge"] == "42 °C"
+    assert shown["bandwidth_pct"] == "81.6 %" and shown["peak_bandwidth_gbs"] == "320.1 GB/s"
+    assert shown["bus_width_bits"] == "256 bit" and shown["pcie_max_gen"] == "3"
+    assert shown["vbios"] == "90.04.96.00.02"
+    assert shown["thermal_margin"] == "N/A"                     # a row that has no value reads N/A
+
+
+@NEEDS_NODE
+def test_late_columns_export_as_numbers_with_the_unit_in_the_header(tmp_path):
+    row = {"mem_clock_avg": 4928.2, "power_violation_s": 63.97, "other_gpu_procs": 0, "vbios": "90.04.96.00.02"}
+    keys = ["mem_clock_avg", "power_violation_s", "other_gpu_procs", "vbios", "thermal_margin"]
+    out = _explorer(tmp_path, [row], xlsx={"keys": keys, "row": 0})
+    exported = dict(zip(out["xlsxHeader"], out["xlsxRow"]))
+    assert len(out["xlsxHeader"]) == len(out["xlsxRow"]) == 5
+    # Numbers stay numbers (a zero too), the VBIOS stays text, and an absent value is a blank, not "N/A".
+    assert exported == {"Avg Mem Clock (MHz)": 4928.2, "Power Violation (s)": 63.97, "Other GPU Procs": 0,
+                        "VBIOS": "90.04.96.00.02", "Thermal Margin (°C)": ""}

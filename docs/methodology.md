@@ -44,6 +44,36 @@ columns are blank for every card of some kinds on purpose:
 | PCIe Gen, PCIe Width, Limit Reason | Pantheon through 1.2.4 did not record them on AMD cards. |
 | Throughput Variance | Filled only when a workload prints several throughput samples in one run; most print one. |
 | GPU ID | Reads "no GPU ID" for reports before 1.0.8 and for cards whose driver has no unique id: an AMD driver reports `0x0` for the RX 6700 XT. |
+| Avg and Max Mem Clock, Edge and Hotspot Temp, Thermal Margin, the throttle and violation seconds, the Start columns, Other GPU Procs, Host Load, the host CPU columns | Written by Pantheon releases after 1.2.4, so every earlier result reads N/A. The explorer lists these columns in its column chooser only once a published result has them. Hotspot Temp is AMD's; the throttle seconds, the violation seconds and Other GPU Procs are NVIDIA's (they need NVML) and read N/A on AMD. |
+| Peak Memory BW, % of Peak Memory BW | Derived from the card's bus width and maximum memory clock, which only those releases record, and only where the vendor's clock convention is known: every NVIDIA card, and AMD cards with GDDR6. The share is shown for the two device-memory workloads, `memory_read` and `memory_write`. |
+| Rated Clock, Rated Mem Clock, Memory Bus Width, PCIe Max Gen and Width, CUDA Cores, Compute Units, VBIOS, Slowdown Temp | The card's own limits as its driver reports them. CUDA Cores is NVIDIA's and Compute Units is AMD's, so one of the two is always N/A; a driver or a VM that does not answer one leaves it N/A (CUDA Cores reads N/A under WSL). |
+
+## The newer columns
+
+Pantheon releases after 1.2.4 record how a card was limited and what it started from. These columns are hidden by
+default; add them from the column chooser once a published result has them.
+
+- **Avg Mem Clock, Max Mem Clock.** Most workloads are memory-bound, so this is what explains a bandwidth score that
+  is low while the graphics clock looks fine. Read it next to **Rated Mem Clock**.
+- **Edge Temp, Hotspot Temp, Thermal Margin.** Peak Temp is the hotspot on AMD and the edge sensor on NVIDIA, so it
+  does not compare across vendors; these two do. Thermal Margin is the card's own slowdown temperature minus Peak
+  Temp, and is negative when the card went past it.
+- **Power Cap Active, Thermal Limit Active, Power Brake Active, Power Violation, Thermal Violation.** The first three
+  are the seconds a limit was *active*, from per-second samples. The violation columns are the driver's own cumulative
+  counters read before and after the run: the seconds the card was actually held below the clock it wanted. A card
+  can sit at its power limit for the whole run and lose almost nothing to it: an RTX 3080 Ti memory-bandwidth run of
+  60 s read 61 s of power cap active and 0.56 s of power violation. Use the first to see that a limit is in play and
+  the second to see what it cost. The counters are the driver's bookkeeping and differ between drivers; the Windows
+  driver under WSL also advances them while the card is idle.
+- **Start Temp, Start Power, Start GPU Util, Start Mem Used, Start Clock, Start Mem Clock, Other GPU Procs, Host Load.**
+  The state just before the workload launched. A card still hot or clocked up from the previous run reads that way,
+  which tells a cold start from a back-to-back one; Other GPU Procs counts processes already holding the card.
+- **Host CPU Util, Busiest Host Core, Host CPU Clock.** A GPU that is less busy while one host core sits near 100% is
+  waiting for the host to hand it work.
+- **Peak Memory BW, % of Peak Memory BW.** Bus width / 8 x maximum memory clock x transfers per clock (2 for NVIDIA,
+  whose tools report the DDR clock; 16 for AMD GDDR6). The share is shown for `memory_read` and `memory_write` only,
+  the workloads whose score is sequential device-memory bandwidth, and not for a run that started with another process
+  on the card (its score is the share it got). A share above 100% would mean the data stayed in a cache.
 
 <!-- TOOLKIT_COVERAGE:START -->
 ## Toolkit and driver coverage

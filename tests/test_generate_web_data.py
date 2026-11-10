@@ -947,3 +947,126 @@ def test_power_fallback_and_throughput_rows_do_not_compete(tmp_path):
     assert sorted(r["unit"] for r in rows) == ["TFLOPS", "Watts"]
     base = {"uuid": "U", "test": "t", "version": "1", "duration": 5}
     assert record_key(dict(base, unit="Watts")) != record_key(dict(base, unit="TFLOPS"))
+
+
+# --- What a Pantheon newer than 1.2.4 adds: clocks, limits, start state, rated specs ----------------
+# Values below are from real runs on a Tesla T4 (driver 570) and an RX 6700 XT (ROCm 7.2).
+
+T4_STATIC = {"id": 0, "type": "NVIDIA", "name": "Tesla T4", "uuid": "GPU-t4", "memory_total": "15360 MB",
+             "memory_type": "GDDR6", "memory_vendor": "Samsung", "max_graphics_clock_mhz": 1590,
+             "max_memory_clock_mhz": 5001, "memory_bus_width_bits": 256, "pcie_max_gen": 3, "pcie_max_width": 16,
+             "cuda_cores": 2560, "compute_units": "N/A", "vbios_version": "90.04.96.00.02", "temp_slowdown_c": 93}
+T4_ROW = {"Test Name": "memory_read", "GPU ID": 0, "Score": 261.34, "Unit": "GB/s", "Avg Mem Clock (MHz)": 4928.2,
+          "Max Mem Clock (MHz)": 5000.0, "Max Edge Temp (C)": 42.0, "Max Hotspot Temp (C)": "N/A",
+          "Thermal Margin (C)": 51.0, "Throttle Power (s)": 63.7, "Throttle Thermal (s)": 0.0,
+          "Throttle Power Brake (s)": 0.0, "Power Violation (s)": 63.97, "Thermal Violation (s)": 0.0,
+          "Start Temp (C)": 22.0, "Start Power (W)": 10.6, "Start GPU Util (%)": 0.0, "Start Mem Used (MiB)": 446.3,
+          "Start Clock (MHz)": 300.0, "Start Mem Clock (MHz)": 405.0, "Other GPU Processes": 0,
+          "Host Load 1m (start)": 1.04, "Avg CPU Util (%)": 5.0, "Avg Busiest Core (%)": 12.6,
+          "Avg CPU Clock (MHz)": 2802.5}
+RX6700_STATIC = {"id": 1, "type": "AMD", "name": "AMD Radeon RX 6700 XT", "uuid": "0x0", "memory_total": "12272 MB",
+                 "memory_type": "GDDR6", "memory_vendor": "Samsung", "max_graphics_clock_mhz": 2855,
+                 "max_memory_clock_mhz": 1000, "memory_bus_width_bits": 192, "pcie_max_gen": 4, "pcie_max_width": 16,
+                 "cuda_cores": "N/A", "compute_units": 40, "vbios_version": "113-D5121100-101", "temp_slowdown_c": 110}
+RX6700_ROW = {"Test Name": "memory_read", "GPU ID": 1, "Score": 381.734, "Unit": "GB/s", "Avg Mem Clock (MHz)": 969.9,
+              "Max Mem Clock (MHz)": 1000.0, "Max Edge Temp (C)": 65.0, "Max Hotspot Temp (C)": 78.0,
+              "Thermal Margin (C)": 32.0, "Throttle Power (s)": "N/A", "Throttle Thermal (s)": "N/A",
+              "Power Violation (s)": "N/A", "Other GPU Processes": "N/A", "Start GPU Util (%)": 0.0}
+
+
+def _published_rows(tmp_path, static, row, **overrides):
+    db_dir = tmp_path / "database"
+    db_dir.mkdir(parents=True, exist_ok=True)
+    output_file = tmp_path / "docs" / "assets" / "web_data.json"
+    write_report(db_dir, "pantheon_report_x.json", [static], [dict(row, **overrides)], version="1.2.5")
+    return main(db_dir=db_dir, output_file=output_file)
+
+
+def test_new_run_columns_and_rated_specs_are_published_when_the_report_carries_them(tmp_path):
+    (row,) = _published_rows(tmp_path, T4_STATIC, T4_ROW)
+
+    assert row["mem_clock_avg"] == 4928.2 and row["mem_clock_max"] == 5000.0
+    assert row["temp_edge"] == 42.0 and row["thermal_margin"] == 51.0
+    assert (row["throttle_power_s"], row["power_violation_s"]) == (63.7, 63.97)
+    assert (row["start_temp"], row["start_mem_used"], row["start_mem_clock"]) == (22.0, 446.3, 405.0)
+    assert row["host_load"] == 1.04 and row["cpu_busiest_avg"] == 12.6 and row["cpu_util_avg"] == 5.0
+    assert (row["max_clock_mhz"], row["max_mem_clock_mhz"], row["bus_width_bits"]) == (1590, 5001, 256)
+    assert (row["pcie_max_gen"], row["pcie_max_width"], row["cuda_cores"]) == (3, 16, 2560)
+    assert row["vbios"] == "90.04.96.00.02" and row["temp_slowdown"] == 93
+    # A reading the tool wrote as N/A is left out, not published as the text "N/A".
+    assert "temp_hotspot" not in row and "compute_units" not in row
+
+
+def test_a_measured_zero_is_published_but_na_never_is(tmp_path):
+    # Zero seconds throttled, an idle card at the start, no other process: all measurements, all kept. (The
+    # ABSENT_WHEN_ZERO rule is for fields where an old tool wrote 0 for "no sensor"; these are written as N/A.)
+    (row,) = _published_rows(tmp_path, T4_STATIC, T4_ROW)
+    assert row["throttle_thermal_s"] == 0.0 and row["throttle_brake_s"] == 0.0 and row["thermal_violation_s"] == 0.0
+    assert row["start_util"] == 0.0 and row["other_gpu_procs"] == 0
+
+    (amd,) = _published_rows(tmp_path / "amd", RX6700_STATIC, RX6700_ROW)
+    for absent in ("throttle_power_s", "throttle_thermal_s", "power_violation_s", "other_gpu_procs"):
+        assert absent not in amd, absent
+    assert amd["temp_hotspot"] == 78.0 and amd["compute_units"] == 40 and "cuda_cores" not in amd
+
+
+def test_reports_without_the_new_fields_publish_none_of_them(tmp_path):
+    from website_utils.generate_web_data import DEVICE_SPEC_FIELDS, RUN_CONTEXT_FIELDS
+
+    old_static = {"id": 0, "type": "NVIDIA", "name": "Tesla T4", "uuid": "GPU-old", "memory_total": "15360 MB"}
+    old_row = {"Test Name": "memory_read", "GPU ID": 0, "Score": 261.34, "Unit": "GB/s", "Avg Power (W)": 60.0}
+    (row,) = _published_rows(tmp_path, old_static, old_row)
+
+    new_keys = {k for k, _ in RUN_CONTEXT_FIELDS} | {k for k, _ in DEVICE_SPEC_FIELDS} | {"peak_bandwidth_gbs", "bandwidth_pct"}
+    assert not (new_keys & set(row)), sorted(new_keys & set(row))
+
+
+def test_peak_memory_bandwidth_and_the_share_of_it_a_run_reached(tmp_path):
+    (t4,) = _published_rows(tmp_path / "t4", T4_STATIC, T4_ROW)
+    assert t4["peak_bandwidth_gbs"] == 320.1                       # 256 bit / 8 x 5001 MHz x 2, the T4's published 320 GB/s
+    assert t4["bandwidth_pct"] == 81.6                              # 261.34 / 320.1
+
+    (rx,) = _published_rows(tmp_path / "rx", RX6700_STATIC, RX6700_ROW)
+    assert rx["peak_bandwidth_gbs"] == 384.0                        # 192 bit / 8 x 1000 MHz x 16, the 6700 XT's published 384 GB/s
+    assert rx["bandwidth_pct"] == 99.4
+
+
+def test_the_share_of_peak_is_only_for_device_memory_bandwidth_workloads(tmp_path):
+    # pcie_bandwidth is also GB/s, but it measures the PCIe link: its share of DRAM peak would be meaningless.
+    (pcie,) = _published_rows(tmp_path / "a", T4_STATIC, T4_ROW, **{"Test Name": "pcie_bandwidth", "Score": 12.0})
+    assert pcie["peak_bandwidth_gbs"] == 320.1 and "bandwidth_pct" not in pcie
+    (write,) = _published_rows(tmp_path / "b", T4_STATIC, T4_ROW, **{"Test Name": "memory_write", "Score": 220.6})
+    assert write["bandwidth_pct"] == 68.9
+    (compute,) = _published_rows(tmp_path / "c", T4_STATIC, T4_ROW, **{"Test Name": "memory_read", "Score": 12.0, "Unit": "TFLOPS"})
+    assert "bandwidth_pct" not in compute
+
+
+def test_the_share_of_peak_is_not_claimed_for_a_run_that_shared_the_card(tmp_path):
+    # Real runs: a second process held the card, so the score is the share this run got, not what the card can do.
+    (row,) = _published_rows(tmp_path, T4_STATIC, T4_ROW, **{"Other GPU Processes": 1, "Score": 116.467})
+    assert row["other_gpu_procs"] == 1 and row["peak_bandwidth_gbs"] == 320.1
+    assert "bandwidth_pct" not in row
+    # An unknown count (AMD, or no NVML) does not suppress it: nothing says the card was shared.
+    (amd,) = _published_rows(tmp_path / "amd", RX6700_STATIC, RX6700_ROW)
+    assert amd["bandwidth_pct"] == 99.4
+
+
+def test_no_peak_is_claimed_where_the_clock_convention_is_unknown_or_a_number_is_missing(tmp_path):
+    from website_utils.generate_web_data import peak_bandwidth_gbs
+
+    assert peak_bandwidth_gbs(T4_STATIC, "GDDR6") == 320.1
+    assert peak_bandwidth_gbs(RX6700_STATIC, "GDDR6") == 384.0
+    assert peak_bandwidth_gbs(dict(RX6700_STATIC), "HBM3") is None             # AMD, not GDDR6: no rule
+    assert peak_bandwidth_gbs(dict(T4_STATIC, type="MOCK"), "GDDR6") is None   # an unknown vendor has no rule
+    for broken in ({"memory_bus_width_bits": "N/A"}, {"max_memory_clock_mhz": "N/A"}, {"max_memory_clock_mhz": 0},
+                   {"memory_bus_width_bits": None}, {"memory_bus_width_bits": True}):
+        assert peak_bandwidth_gbs(dict(T4_STATIC, **broken), "GDDR6") is None, broken
+
+
+def test_reading_present_keeps_zero_and_drops_placeholders():
+    from website_utils.generate_web_data import reading_present
+
+    for kept in (0, 0.0, 12.5, "94.02.91.00.07", "Enabled"):
+        assert reading_present(kept), kept
+    for dropped in (None, "", "N/A", "n/a", " unknown ", "None", True):
+        assert not reading_present(dropped), dropped
