@@ -101,6 +101,11 @@ const LATE_COLUMN_UNITS = {
     temp_slowdown: "\u00b0C",
 };
 
+// The temperature columns that are readings of how hot the run got, and so are coloured when it was hot. The start
+// temperature is where the card began and "temp_slowdown" is a rated limit: neither is a heat warning, and a limit
+// shown in red would read as a card in trouble.
+const HEAT_COLORED = new Set(["temp_max", "temp_mem", "temp_edge", "temp_hotspot"]);
+
 // A late column is offered in the chooser only once some published row has a value for it.
 function columnHasData(col) {
     return !col.late || rawData.some(row => !isMissingValue(row[col.key]));
@@ -464,7 +469,7 @@ function renderTable(data) {
                 else if (col.key === "test") {
                     td.className = "benchmark-cell-test";
                 }
-                else if (col.key.includes("temp")) {
+                else if (HEAT_COLORED.has(col.key)) {
                     const tempColor = getColorForTemp(row[col.key]);
                     if (tempColor) td.style.color = tempColor;
                 }

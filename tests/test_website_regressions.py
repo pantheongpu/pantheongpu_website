@@ -2628,6 +2628,14 @@ def test_every_field_the_generator_publishes_has_an_explorer_column(tmp_path):
     assert set(out["lateKeys"]) - set(out["lateUnitKeys"]) == {"vbios"}
 
 
+def test_only_heat_readings_are_coloured_not_the_start_temperature_or_a_rated_limit():
+    tables = read("docs/js/tables.js")
+    heat = tables.split("const HEAT_COLORED = new Set([", 1)[1].split("]", 1)[0]
+    assert set(re.findall(r'"([a-z_]+)"', heat)) == {"temp_max", "temp_mem", "temp_edge", "temp_hotspot"}
+    # The colour is chosen by that set, not by a substring that would also catch start_temp and temp_slowdown.
+    assert "HEAT_COLORED.has(col.key)" in tables and 'col.key.includes("temp")' not in tables
+
+
 @NEEDS_NODE
 def test_a_late_column_is_offered_only_once_a_published_row_has_it(tmp_path):
     plain = {"gpu": "NVIDIA Test", "test": "memory_read", "version": "1.2.4", "score": 1.0, "unit": "GB/s"}
