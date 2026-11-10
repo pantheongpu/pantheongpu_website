@@ -44,7 +44,67 @@ const COL_DEFS = [
     // 2026-08-31): it identifies the card, not a host, and it is what per-card
     // history and dedup join on. Host identifiers are stripped upstream.
     { key: "uuid",        label: "GPU ID",      visible: false },
+
+    // --- Clocks, limits, the state a run started in, and what the card is rated for ---
+    // Written by Pantheon releases after 1.2.4. "late" columns stay out of the column chooser until a published
+    // report carries a value for them, so nobody is offered a column that is N/A on every row; they are hidden by
+    // default either way. See "Why a column reads N/A" in the methodology.
+    { key: "mem_clock_avg",       label: "Avg Mem Clock",        visible: false, late: true },
+    { key: "mem_clock_max",       label: "Max Mem Clock",        visible: false, late: true },
+    { key: "temp_edge",           label: "Edge Temp",            visible: false, late: true },
+    { key: "temp_hotspot",        label: "Hotspot Temp",         visible: false, late: true },
+    { key: "thermal_margin",      label: "Thermal Margin",       visible: false, late: true },
+    { key: "throttle_power_s",    label: "Power Cap Active",     visible: false, late: true },
+    { key: "throttle_thermal_s",  label: "Thermal Limit Active", visible: false, late: true },
+    { key: "throttle_brake_s",    label: "Power Brake Active",   visible: false, late: true },
+    { key: "power_violation_s",   label: "Power Violation",      visible: false, late: true },
+    { key: "thermal_violation_s", label: "Thermal Violation",    visible: false, late: true },
+    { key: "start_temp",          label: "Start Temp",           visible: false, late: true },
+    { key: "start_power",         label: "Start Power",          visible: false, late: true },
+    { key: "start_util",          label: "Start GPU Util",       visible: false, late: true },
+    { key: "start_mem_used",      label: "Start Mem Used",       visible: false, late: true },
+    { key: "start_clock",         label: "Start Clock",          visible: false, late: true },
+    { key: "start_mem_clock",     label: "Start Mem Clock",      visible: false, late: true },
+    { key: "other_gpu_procs",     label: "Other GPU Procs",      visible: false, late: true },
+    { key: "host_load",           label: "Host Load (1m)",       visible: false, late: true },
+    { key: "cpu_util_avg",        label: "Host CPU Util",        visible: false, late: true },
+    { key: "cpu_busiest_avg",     label: "Busiest Host Core",    visible: false, late: true },
+    { key: "cpu_clock_avg",       label: "Host CPU Clock",       visible: false, late: true },
+    { key: "peak_bandwidth_gbs",  label: "Peak Memory BW",       visible: false, late: true },
+    { key: "bandwidth_pct",       label: "% of Peak Memory BW",  visible: false, late: true },
+    { key: "max_clock_mhz",       label: "Rated Clock",          visible: false, late: true },
+    { key: "max_mem_clock_mhz",   label: "Rated Mem Clock",      visible: false, late: true },
+    { key: "bus_width_bits",      label: "Memory Bus Width",     visible: false, late: true },
+    { key: "pcie_max_gen",        label: "PCIe Max Gen",         visible: false, late: true },
+    { key: "pcie_max_width",      label: "PCIe Max Width",       visible: false, late: true },
+    { key: "cuda_cores",          label: "CUDA Cores",           visible: false, late: true },
+    { key: "compute_units",       label: "Compute Units",        visible: false, late: true },
+    { key: "vbios",               label: "VBIOS",                visible: false, late: true },
+    { key: "temp_slowdown",       label: "Slowdown Temp",        visible: false, late: true },
 ];
+
+// The unit of each late column, for the cell and for the spreadsheet header. They are named by what they are, not
+// by the substrings the generic rules below match on ("power_violation_s" holds seconds, not watts), so these are
+// looked up first. An empty unit means a bare number.
+const LATE_COLUMN_UNITS = {
+    mem_clock_avg: "MHz", mem_clock_max: "MHz",
+    temp_edge: "\u00b0C", temp_hotspot: "\u00b0C", thermal_margin: "\u00b0C",
+    throttle_power_s: "s", throttle_thermal_s: "s", throttle_brake_s: "s",
+    power_violation_s: "s", thermal_violation_s: "s",
+    start_temp: "\u00b0C", start_power: "W", start_util: "%", start_mem_used: "MiB",
+    start_clock: "MHz", start_mem_clock: "MHz",
+    other_gpu_procs: "", host_load: "",
+    cpu_util_avg: "%", cpu_busiest_avg: "%", cpu_clock_avg: "MHz",
+    peak_bandwidth_gbs: "GB/s", bandwidth_pct: "%",
+    max_clock_mhz: "MHz", max_mem_clock_mhz: "MHz", bus_width_bits: "bit",
+    pcie_max_gen: "", pcie_max_width: "", cuda_cores: "", compute_units: "",
+    temp_slowdown: "\u00b0C",
+};
+
+// A late column is offered in the chooser only once some published row has a value for it.
+function columnHasData(col) {
+    return !col.late || rawData.some(row => !isMissingValue(row[col.key]));
+}
 
 let rawData = [];
 let bestRuns = [];
@@ -255,6 +315,9 @@ function formatCellValue(row, key, display = false) {
         // calls it "no GPU ID", and the table must not show it as if it were one.
         return isMissingValue(val) || val === "Unknown" || /^(0x)?0+$/i.test(String(val).trim())
             ? "no GPU ID" : val;
+    }
+    if (Object.prototype.hasOwnProperty.call(LATE_COLUMN_UNITS, key)) {
+        return formatMetric(val, LATE_COLUMN_UNITS[key]);
     }
     if (key === "score" || key === "throughput") {
         if (row.unit === "Watts") {
@@ -756,7 +819,8 @@ function initColumnMenu() {
     
     let selectAllCheck = document.createElement("input");
     selectAllCheck.type = "checkbox";
-    selectAllCheck.checked = COL_DEFS.every(c => c.visible);
+    const chooserColumns = COL_DEFS.filter(columnHasData);
+    selectAllCheck.checked = chooserColumns.every(c => c.visible);
     selectAllCheck.style.marginRight = "10px";
 
     selectAllLabel.appendChild(selectAllCheck);
@@ -767,7 +831,7 @@ function initColumnMenu() {
     // --- Create Individual Columns ---
     let itemCheckboxes = [];
 
-    COL_DEFS.forEach((col, index) => {
+    chooserColumns.forEach(col => {
         let div = document.createElement("div");
         div.style.marginBottom = "5px";
         let label = document.createElement("label");
@@ -782,7 +846,7 @@ function initColumnMenu() {
         
         // When an individual column is toggled
         check.onchange = () => {
-            COL_DEFS[index].visible = check.checked;
+            col.visible = check.checked;
             selectAllCheck.checked = itemCheckboxes.every(c => c.checked);
             applyFilters(); 
         };
@@ -799,7 +863,7 @@ function initColumnMenu() {
         let isChecked = selectAllCheck.checked;
         itemCheckboxes.forEach((c, index) => {
             c.checked = isChecked;
-            COL_DEFS[index].visible = isChecked;
+            chooserColumns[index].visible = isChecked;
         });
         applyFilters();
     };
@@ -845,6 +909,8 @@ const XLSX_COLUMN_UNITS = {
     // map to "" -- a suffix would render "Fan % (%)" and "Core (mV) (mV)".
     fan_max: "", volts_core: "", volts_soc: "", power_limit: "",
 };
+// The late columns are numbers too (vbios is text, so it is not in the list).
+Object.assign(XLSX_COLUMN_UNITS, LATE_COLUMN_UNITS);
 
 // Both exports read this, so the CSV and the workbook cannot drift apart in
 // which rows or columns they carry.

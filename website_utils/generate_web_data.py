@@ -127,6 +127,103 @@ ABSENT_WHEN_ZERO = {
 }
 
 
+# What a Pantheon release newer than 1.2.4 writes into each result row (the column on the right) and into gpu_static_info.
+# A field is published only when the report carries a value, so the data file does not grow, and no column fills with N/A,
+# until reports that have these are published. The tool writes "N/A" for what it could not read and a real 0 for a measured
+# zero (no throttling, an idle card, no other process), so ABSENT_WHEN_ZERO deliberately does not apply here.
+RUN_CONTEXT_FIELDS = (
+    ("mem_clock_avg", "Avg Mem Clock (MHz)"),
+    ("mem_clock_max", "Max Mem Clock (MHz)"),
+    ("temp_edge", "Max Edge Temp (C)"),
+    ("temp_hotspot", "Max Hotspot Temp (C)"),
+    ("thermal_margin", "Thermal Margin (C)"),
+    ("throttle_power_s", "Throttle Power (s)"),
+    ("throttle_thermal_s", "Throttle Thermal (s)"),
+    ("throttle_brake_s", "Throttle Power Brake (s)"),
+    ("power_violation_s", "Power Violation (s)"),
+    ("thermal_violation_s", "Thermal Violation (s)"),
+    ("start_temp", "Start Temp (C)"),
+    ("start_power", "Start Power (W)"),
+    ("start_util", "Start GPU Util (%)"),
+    ("start_mem_used", "Start Mem Used (MiB)"),
+    ("start_clock", "Start Clock (MHz)"),
+    ("start_mem_clock", "Start Mem Clock (MHz)"),
+    ("other_gpu_procs", "Other GPU Processes"),
+    ("host_load", "Host Load 1m (start)"),
+    ("cpu_util_avg", "Avg CPU Util (%)"),
+    ("cpu_busiest_avg", "Avg Busiest Core (%)"),
+    ("cpu_clock_avg", "Avg CPU Clock (MHz)"),
+)
+# What each card is rated for: the web column on the left, the gpu_static_info key on the right.
+DEVICE_SPEC_FIELDS = (
+    ("max_clock_mhz", "max_graphics_clock_mhz"),
+    ("max_mem_clock_mhz", "max_memory_clock_mhz"),
+    ("bus_width_bits", "memory_bus_width_bits"),
+    ("pcie_max_gen", "pcie_max_gen"),
+    ("pcie_max_width", "pcie_max_width"),
+    ("cuda_cores", "cuda_cores"),
+    ("compute_units", "compute_units"),
+    ("vbios", "vbios_version"),
+    ("temp_slowdown", "temp_slowdown_c"),
+)
+# The two workloads whose score is sequential device-memory bandwidth in GB/s. Every other GB/s workload measures
+# something else (PCIe, a thrasher, a cache), where a share of DRAM peak would be wrong.
+DEVICE_MEMORY_BANDWIDTH_TESTS = {"memory_read", "memory_write"}
+# Data transfers per memory clock, by how each vendor's tool reports the clock. NVML's memory clock is the DDR clock
+# for every memory type (T4 and A10G GDDR6, 3080 Ti GDDR6X, A100/H100 HBM: bus/8 x clock x 2 gives each card's
+# published bandwidth). rocm-smi's is the GDDR6 command clock: 16 transfers per clock (RX 6700 XT 384 GB/s, RX 6800
+# 512 GB/s). An AMD card with any other memory type has no rule here, so it has no peak.
+NVIDIA_TRANSFERS_PER_CLOCK = 2
+AMD_GDDR6_TRANSFERS_PER_CLOCK = 16
+
+
+def reading_present(value):
+    """True for a value the tool measured: a number, zero included, or text. False for None, "" and "N/A"."""
+    if value is None or isinstance(value, bool):
+        return False
+    if isinstance(value, str):
+        return value.strip().lower() not in {"", "n/a", "na", "unknown", "none"}
+    return True
+
+
+def peak_bandwidth_gbs(g_info, memory_type):
+    """The card's peak device-memory bandwidth in GB/s from its bus width and maximum memory clock, or None.
+
+    None unless both numbers were reported and the vendor's clock convention is known (see above)."""
+    bus, clock = g_info.get("memory_bus_width_bits"), g_info.get("max_memory_clock_mhz")
+    if not all(isinstance(v, (int, float)) and not isinstance(v, bool) and v > 0 for v in (bus, clock)):
+        return None
+    vendor = str(g_info.get("type") or "").upper()
+    if vendor == "NVIDIA":
+        rate = NVIDIA_TRANSFERS_PER_CLOCK
+    elif vendor == "AMD" and str(memory_type).upper() == "GDDR6":
+        rate = AMD_GDDR6_TRANSFERS_PER_CLOCK
+    else:
+        return None
+    return round(bus / 8 * clock * rate / 1000, 1)
+
+
+def published_extras(test, g_info, test_name, unit, score, memory_type):
+    """The fields a newer Pantheon adds to a result, as a dict holding only what the report carries."""
+    extras = {}
+    for web_key, column in RUN_CONTEXT_FIELDS:
+        if reading_present(test.get(column)):
+            extras[web_key] = test[column]
+    for web_key, key in DEVICE_SPEC_FIELDS:
+        if reading_present(g_info.get(key)):
+            extras[web_key] = g_info[key]
+    peak = peak_bandwidth_gbs(g_info, memory_type)
+    if peak is not None:
+        extras["peak_bandwidth_gbs"] = peak
+        # A share of peak says something about the card only when the card was the run's alone: with another process on
+        # it the score is the share it got, so it is left out (the process count itself stays published).
+        shared = isinstance(extras.get("other_gpu_procs"), (int, float)) and extras["other_gpu_procs"] > 0
+        if (test_name in DEVICE_MEMORY_BANDWIDTH_TESTS and unit == "GB/s" and isinstance(score, (int, float))
+                and score > 0 and not shared):
+            extras["bandwidth_pct"] = round(100.0 * score / peak, 1)
+    return extras
+
+
 # Every run of a card, rather than its best. Kept deliberately narrow: this
 # file grows with every benchmark ever published, and the leaderboard already
 # carries the full detail for the run it selected.
@@ -755,6 +852,9 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     # and their serial is not repeated on every row.
                     if is_unknown_id(uuid) and not is_unknown_id(serial):
                         record["serial"] = normalize(serial)
+
+                    # Clocks, limits and start state, and what the card is rated for (Pantheon releases after 1.2.4).
+                    record.update(published_extras(test, g_info, test_name, unit, score_val, memory_type))
 
                     # An absent sensor must not reach the site as a reading.
                     for field in ABSENT_WHEN_ZERO:
