@@ -4,7 +4,54 @@ Download stable releases of the Pantheon GPU toolkit. The newest release is list
 
 ---
 
-## Pantheon v1.2.4 (Latest)
+## Pantheon v1.2.5 (Latest)
+**Release Date:** November 11, 2026
+
+### Release Notes
+Source: https://github.com/pantheongpu/pantheon/tree/v1.2.5
+
+**Changes since v1.2.4:**
+
+- AMD monitor: do not read from sysfs what rocm-smi already supplied
+- Collect memory clock, throttle seconds by reason, start state, thermal margin and rated limits
+- Record the host CPU and what it was doing during each workload
+- Collect the fields that read N/A: memory type on older NVIDIA drivers, and AMD memory type, driver, PCIe, voltage, fan (#54)
+- Revert the AGPL relicense: Pantheon stays Apache-2.0 (#53)
+- Relicense future releases to AGPL-3.0-only with a commercial option, add a CLA and a trademark policy (#52)
+- CI: run every workload on simulated GPUs (pantheonsim) when a change touches the workloads (#51)
+- Add nccl_all_reduce: one all-reduce across every selected GPU, through NCCL (RCCL on AMD) (#50)
+- p2p_matrix: a failed peer copy is an interconnect WATCH, and record the 8x H100 NVSwitch run (#49)
+- NVLink follow-up from an 8x V100 run: read the counters per field, and add p2p_matrix (#48)
+- Check the NVLink links and the GPU fabric on multi-GPU NVIDIA nodes (#47)
+- Integrations: point the image tags at 1.2.4 (#45)
+- README: badges, quick start and what it is / isn't (#46)
+
+Install from PyPI (`pipx install pantheon-gpu`), the apt or
+COPR repositories, the container image
+(`ghcr.io/pantheongpu/pantheon:1.2.5`), or the wheel below:
+
+```
+pip install pantheon_gpu-1.2.5-py3-none-any.whl
+pantheon --test baseline_metrics --duration 10
+```
+
+Kernels compile on first run into a per-user cache (roughly a
+minute, once) and need a CUDA or ROCm toolchain; use
+`--platform mock` to exercise the tooling with no GPU.
+
+### Downloads
+| File | Format | Size |
+| :--- | :--- | :--- |
+| [Pantheon v1.2.5 Debian Package](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.5/pantheon-gpu_1.2.5_all.deb) | `.deb` | 225.5 KB |
+| [Pantheon v1.2.5 Python Wheel](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.5/pantheon_gpu-1.2.5-py3-none-any.whl) | `.whl` | 423.5 KB |
+| [Pantheon v1.2.5 Source Tarball](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.5/pantheon-1.2.5-source.tar.gz) | `.tar.gz` | 426.6 KB |
+| [Pantheon v1.2.5 Source Distribution](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.5/pantheon_gpu-1.2.5.tar.gz) | `.tar.gz` | 349.0 KB |
+| [Pantheon v1.2.5 Source ZIP](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.5/pantheon-1.2.5-source.zip) | `.zip` | 562.7 KB |
+| [Pantheon v1.2.5 Checksums](https://github.com/pantheongpu/pantheongpu_website/releases/download/v1.2.5/SHA256SUMS) | `SHA256SUMS` | 484 B |
+
+---
+
+## Pantheon v1.2.4
 **Release Date:** October 17, 2026
 
 ### Release Notes
