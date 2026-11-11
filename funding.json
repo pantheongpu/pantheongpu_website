@@ -5,7 +5,7 @@
     "role": "owner",
     "name": "PantheonGPU",
     "email": "saqibkhan@pantheongpu.com",
-    "description": "PantheonGPU is a small US company that builds and maintains Pantheon, an open source (AGPL-3.0) GPU health and diagnostics suite, and publishes a public database of GPU test results at pantheongpu.com. The suite is written and maintained by its founder, Saqib Khan, who spent more than ten years in firmware testing and processor simulation at IBM and in accelerator validation at AMD before starting the project. The company sells validation services around the suite. The suite itself, its methodology and its results database are free and open.",
+    "description": "PantheonGPU is a small US company that builds and maintains Pantheon, an open source (Apache-2.0) GPU health and diagnostics suite, and publishes a public database of GPU test results at pantheongpu.com. The suite is written and maintained by its founder, Saqib Khan, who spent more than ten years in firmware testing and processor simulation at IBM and in accelerator validation at AMD before starting the project. The company sells validation services around the suite. The suite itself, its methodology and its results database are free and open.",
     "webpageUrl": {
       "url": "https://pantheongpu.com"
     }
@@ -23,7 +23,7 @@
         "wellKnown": "https://github.com/pantheongpu/pantheon/blob/main/.well-known/funding-manifest-urls"
       },
       "licenses": [
-        "spdx:AGPL-3.0-only"
+        "spdx:Apache-2.0"
       ],
       "tags": [
         "gpu",
