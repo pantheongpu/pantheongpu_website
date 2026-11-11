@@ -12,19 +12,24 @@ Source: https://github.com/pantheongpu/pantheon/tree/v1.2.5
 
 **Changes since v1.2.4:**
 
-- AMD monitor: do not read from sysfs what rocm-smi already supplied
-- Collect memory clock, throttle seconds by reason, start state, thermal margin and rated limits
-- Record the host CPU and what it was doing during each workload
-- Collect the fields that read N/A: memory type on older NVIDIA drivers, and AMD memory type, driver, PCIe, voltage, fan (#54)
-- Revert the AGPL relicense: Pantheon stays Apache-2.0 (#53)
-- Relicense future releases to AGPL-3.0-only with a commercial option, add a CLA and a trademark policy (#52)
-- CI: run every workload on simulated GPUs (pantheonsim) when a change touches the workloads (#51)
+- Report each card's memory clock, edge and hotspot temperature, thermal margin, seconds held back by each limit, the state a run started in, host CPU load, and the clocks, bus width, PCIe link, core count and temperatures the card is rated for (#55)
+- Collect the fields that read N/A: memory type and vendor on older NVIDIA drivers, and AMD memory type, driver, PCIe link, voltage and fan (#54)
 - Add nccl_all_reduce: one all-reduce across every selected GPU, through NCCL (RCCL on AMD) (#50)
 - p2p_matrix: a failed peer copy is an interconnect WATCH, and record the 8x H100 NVSwitch run (#49)
 - NVLink follow-up from an 8x V100 run: read the counters per field, and add p2p_matrix (#48)
 - Check the NVLink links and the GPU fabric on multi-GPU NVIDIA nodes (#47)
-- Integrations: point the image tags at 1.2.4 (#45)
+- CI: run every workload on simulated GPUs (pantheonsim) when a change touches the workloads (#51)
 - README: badges, quick start and what it is / isn't (#46)
+- Integrations: point the image tags at 1.2.4 (#45)
+- (#52 relicensed to AGPL and #53 reverted it before any release: no net change. Pantheon stays Apache-2.0.)
+
+**Scores are comparable with 1.2.4.** No existing workload changed.
+
+**Multi-GPU NVIDIA nodes:** a card that passes every test alone passes a node that has lost an NVLink link. Pantheon now reads each GPU's NVLink links and fabric state before and after a run and reports a finding as `interconnect` (a WATCH, never a FAULT). Two new workloads load the links: `p2p_matrix` (how fast each GPU sends to every other) and `nccl_all_reduce` (the collective a training job makes).
+
+**Reports carry more:** memory clock, both temperature sensors, the seconds each limit was active next to the seconds the driver counted as held back, the state the card started in, and what it is rated for. The new columns read N/A where a card or driver does not say, never a zero. Memory type and vendor now read on NVIDIA drivers older than 580, and AMD cards report their memory type, driver version, PCIe link, voltage and fan.
+
+**Not covered:** the interconnect checks were run on an 8x V100 NVLink mesh and an 8x H100 NVSwitch node, not on A100 or B200. RCCL on AMD compiles in CI but has not run. AMD throttle seconds are not collected. On the Windows driver under WSL the violation counters also advance while a card idles.
 
 Install from PyPI (`pipx install pantheon-gpu`), the apt or
 COPR repositories, the container image
