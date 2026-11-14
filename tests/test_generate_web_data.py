@@ -1070,3 +1070,19 @@ def test_reading_present_keeps_zero_and_drops_placeholders():
         assert reading_present(kept), kept
     for dropped in (None, "", "N/A", "n/a", " unknown ", "None", True):
         assert not reading_present(dropped), dropped
+
+
+def test_toolkit_coverage_lists_drivers_that_tie_on_the_version_key_in_a_fixed_order():
+    # "7.0.0-42-generic" and "7.0.0-43-generic" both sort as [7, 0, 0]; the order used to follow the set's hash order, so the
+    # committed methodology page and the CI freshness check disagreed from one run to the next
+    from website_utils.generate_web_data import render_toolkit_coverage
+
+    def row(driver):
+        return {"gpu": "AMD Radeon RX 6800", "manufacturer": "AMD", "toolkit": "7.2.0", "driver": driver}
+
+    drivers = ["7.0.0-43-generic", "7.0.0-42-generic", "7.0.0-44-generic"]
+    forward = render_toolkit_coverage([row(d) for d in drivers])
+    backward = render_toolkit_coverage([row(d) for d in reversed(drivers)])
+
+    assert forward == backward
+    assert "| ROCm | 7.2.0 | 7.0.0-42-generic, 7.0.0-43-generic, 7.0.0-44-generic | 1 |" in forward
