@@ -613,7 +613,9 @@ def render_toolkit_coverage(rows):
     for (platform, toolkit), entry in sorted(
         coverage.items(), key=lambda item: (item[0][0], toolkit_sort_key(item[0][1]))
     ):
-        drivers = ", ".join(sorted(entry["drivers"], key=toolkit_sort_key)) or "not recorded"
+        # toolkit_sort_key reads "7.0.0-42-generic" and "7.0.0-43-generic" both as [7, 0, 0]; the drivers are a set, so
+        # without the string tie-break their order changed from run to run and the CI freshness check failed at random
+        drivers = ", ".join(sorted(entry["drivers"], key=lambda d: (toolkit_sort_key(d), d))) or "not recorded"
         lines.append(f"| {platform} | {toolkit} | {drivers} | {len(entry['gpus'])} |")
     if not any(platform == "ROCm" for platform, _ in coverage):
         lines.extend([

@@ -94,7 +94,7 @@ that have real hardware results behind them.
 | CUDA | 13.0 | 595.71, 595.91.07, 595.97, 595.112.07 | 8 |
 | CUDA | 13.2 | 595.91.07, 595.112.07, 596.36, 610.88 | 9 |
 | CUDA | 13.3 | 595.91.07 | 1 |
-| ROCm | 7.2.0 | not recorded | 2 |
+| ROCm | 7.2.0 | 7.0.0-42-generic, 7.0.0-43-generic | 2 |
 <!-- TOOLKIT_COVERAGE:END -->
 
 ## Reproducing a result
