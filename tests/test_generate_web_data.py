@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from website_utils.generate_web_data import (
+    declared_setting,
     load_tuned_reports,
     power_cap_setting,
     first_present,
@@ -1177,3 +1178,56 @@ def test_every_listed_report_is_in_the_database_and_listed_once():
     present = {p.name for p in DB_DIR.rglob("*.json")}
     # A renamed or removed file would silently put its run back on the leaderboard.
     assert sorted(set(listed) - present) == []
+
+
+def _declared_run(db_dir, name, score, setting, stamp):
+    path = write_report(db_dir, name, [dict(TUNED_GPU)],
+                        [{"Test Name": "graph_replay", "GPU ID": 0, "Score": score, "Unit": "TFLOPS"}], version="1.2.5")
+    report = json.loads(path.read_text())
+    report["timestamp"] = stamp
+    if setting is not None:
+        report["run_setting"] = setting
+    path.write_text(json.dumps(report))
+
+
+def test_a_report_that_declares_its_setting_is_kept_off_the_leaderboard_without_a_manifest(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    _declared_run(db_dir, "pantheon_report_stock.json", 100.0, None, "2026-05-20 10:00:00")
+    _declared_run(db_dir, "pantheon_report_locked.json", 103.0, "graphics clock locked at 1200 MHz", "2026-05-20 12:00:00")
+
+    rows = main(db_dir=db_dir, output_file=output_file, tuned_file=tmp_path / "absent.json")
+    history = _read_assets(output_file)["gpu_history.json"]
+
+    assert [r["score"] for r in rows] == [100.0]
+    assert {(r["score"], r.get("tuned")) for r in history} == {(100.0, None), (103.0, "graphics clock locked at 1200 MHz")}
+
+
+def test_a_declared_setting_wins_over_the_manifest_and_the_power_cap(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    path = db_dir / "pantheon_report_both.json"
+    gpu = [dict(TUNED_GPU, power_limit_enforced=250.0)]
+    write_report(db_dir, path.name, gpu, [{"Test Name": "graph_replay", "GPU ID": 0, "Score": 90.0, "Unit": "TFLOPS"}],
+                 version="1.2.5")
+    report = json.loads(path.read_text())
+    report["run_setting"] = "power limit 250 W and a memory clock level 2"
+    path.write_text(json.dumps(report))
+    manifest = _manifest(tmp_path, [{"setting": "from the manifest", "reports": [path.name]}])
+
+    main(db_dir=db_dir, output_file=output_file, tuned_file=manifest)
+
+    assert [r["tuned"] for r in _read_assets(output_file)["gpu_history.json"]] == ["power limit 250 W and a memory clock level 2"]
+
+
+def test_a_declared_setting_is_cut_down_to_words_and_plain_punctuation():
+    assert declared_setting({"run_setting": "  graphics clock locked at 85% (1635 MHz)\n"}) == \
+        "graphics clock locked at 85% (1635 MHz)"
+    # markup characters, quotes and control characters never reach the page
+    cleaned = declared_setting({"run_setting": '<img src=x onerror="alert(1)">locked'})
+    assert cleaned == "img src=x onerror=alert(1)locked"
+    assert not set(cleaned) & set("<>\"'&`")
+    assert declared_setting({"run_setting": "a\x00b\x1bc"}) == "abc"
+    assert len(declared_setting({"run_setting": "x" * 1000})) == 200
+    # absent, blank, empty after cleaning, or not text: no setting
+    for value in (None, "", "   ", "<>\"'", 5, ["a"]):
+        assert declared_setting({"run_setting": value}) is None
+    assert declared_setting({}) is None

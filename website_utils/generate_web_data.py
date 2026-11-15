@@ -716,9 +716,31 @@ def power_cap_setting(g_info):
     return None
 
 
-def tuned_setting(report_name, g_info, listed):
-    """What the card was set to for this run, or None for a stock run."""
-    return listed.get(report_name) or power_cap_setting(g_info)
+# What a declared setting may contain. The text comes from the report and is shown on the site, so it is cut down to words and plain
+# punctuation: no markup characters, no quotes, no control characters.
+DECLARED_SETTING_MAX_CHARS = 200
+_DECLARED_SETTING_UNSAFE = re.compile(r"[^\w .,;:%()/+=@#-]")
+
+
+def declared_setting(data):
+    """The setting the operator declared for the run, or None.
+
+    Pantheon writes PANTHEON_RUN_SETTING into every report of a run as run_setting. A locked clock or a memory clock level cannot be read
+    back from the card, so this is what makes such a run recognisable without listing its file name in tuned_reports.json.
+    """
+    value = data.get("run_setting")
+    if not isinstance(value, str):
+        return None
+    text = " ".join(_DECLARED_SETTING_UNSAFE.sub("", value).split())
+    return text[:DECLARED_SETTING_MAX_CHARS].rstrip() or None
+
+
+def tuned_setting(report_name, g_info, listed, declared=None):
+    """What the card was set to for this run, or None for a stock run.
+
+    The operator's own words come first, then the manifest, then the enforced power limit.
+    """
+    return declared or listed.get(report_name) or power_cap_setting(g_info)
 
 
 def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None, tuned_file=TUNED_REPORTS_FILE):
@@ -902,7 +924,7 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None, tuned_fi
                         record["memory_type_source"] = memory_type_source
 
                     # Run at a changed power limit, clock lock or memory clock level.
-                    setting = tuned_setting(Path(f).name, g_info, listed_tuned)
+                    setting = tuned_setting(Path(f).name, g_info, listed_tuned, declared_setting(data))
                     if setting:
                         record["tuned"] = setting
 
