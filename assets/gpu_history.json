@@ -35430,6 +35430,7 @@
     "power_max": 93.1,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35445,6 +35446,7 @@
     "power_max": 144.7,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35475,6 +35477,7 @@
     "power_max": 213.0,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35490,6 +35493,7 @@
     "power_max": 109.2,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35505,6 +35509,7 @@
     "power_max": 239.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35520,6 +35525,7 @@
     "power_max": 89.1,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35535,6 +35541,7 @@
     "power_max": 222.9,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35550,6 +35557,7 @@
     "power_max": 224.1,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35580,6 +35588,7 @@
     "power_max": 189.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35595,6 +35604,7 @@
     "power_max": 221.5,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35610,6 +35620,7 @@
     "power_max": 222.2,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35625,6 +35636,7 @@
     "power_max": 210.0,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35640,6 +35652,7 @@
     "power_max": 72.2,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35685,6 +35698,7 @@
     "power_max": 219.6,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35715,6 +35729,7 @@
     "power_max": 279.8,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35730,6 +35745,7 @@
     "power_max": 279.7,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35805,6 +35821,7 @@
     "power_max": 270.2,
     "clock_avg": 1845.0,
     "throttle_time": 301.4,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35820,6 +35837,7 @@
     "power_max": 270.7,
     "clock_avg": 1845.0,
     "throttle_time": 301.4,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35835,6 +35853,7 @@
     "power_max": 494.6,
     "clock_avg": 1845.0,
     "throttle_time": 300.2,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35850,6 +35869,7 @@
     "power_max": 239.7,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35865,6 +35885,7 @@
     "power_max": 442.9,
     "clock_avg": 1845.0,
     "throttle_time": 192.2,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35880,6 +35901,7 @@
     "power_max": 90.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35895,6 +35917,7 @@
     "power_max": 80.2,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35910,6 +35933,7 @@
     "power_max": 235.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35925,6 +35949,7 @@
     "power_max": 232.6,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35955,6 +35980,7 @@
     "power_max": 244.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35970,6 +35996,7 @@
     "power_max": 228.3,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -35985,6 +36012,7 @@
     "power_max": 211.6,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -36000,6 +36028,7 @@
     "power_max": 226.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -36015,6 +36044,7 @@
     "power_max": 231.0,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -36045,6 +36075,7 @@
     "power_max": 287.1,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -36060,6 +36091,7 @@
     "power_max": 170.3,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -36075,6 +36107,7 @@
     "power_max": 225.4,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -36090,6 +36123,7 @@
     "power_max": 132.1,
     "clock_avg": 1845.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1845 MHz throughout (card maximum 2430 MHz)",
     "card": "GPU-1ddf4dbd-c306-a367-d9c7-1ce550276744"
   },
   {
@@ -120255,6 +120289,7 @@
     "power_max": 31.6,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120270,6 +120305,7 @@
     "power_max": 35.7,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120300,6 +120336,7 @@
     "power_max": 57.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120315,6 +120352,7 @@
     "power_max": 29.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120330,6 +120368,7 @@
     "power_max": 61.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120345,6 +120384,7 @@
     "power_max": 40.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120360,6 +120400,7 @@
     "power_max": 60.4,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120375,6 +120416,7 @@
     "power_max": 44.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120405,6 +120447,7 @@
     "power_max": 51.6,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120420,6 +120463,7 @@
     "power_max": 60.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120435,6 +120479,7 @@
     "power_max": 60.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120450,6 +120495,7 @@
     "power_max": 50.6,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120465,6 +120511,7 @@
     "power_max": 27.8,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120510,6 +120557,7 @@
     "power_max": 57.6,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120540,6 +120588,7 @@
     "power_max": 60.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120555,6 +120604,7 @@
     "power_max": 60.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120630,6 +120680,7 @@
     "power_max": 55.4,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120645,6 +120696,7 @@
     "power_max": 55.4,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120660,6 +120712,7 @@
     "power_max": 49.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120675,6 +120728,7 @@
     "power_max": 59.8,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120690,6 +120744,7 @@
     "power_max": 58.7,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120705,6 +120760,7 @@
     "power_max": 28.7,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120720,6 +120776,7 @@
     "power_max": 36.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120735,6 +120792,7 @@
     "power_max": 62.2,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120750,6 +120808,7 @@
     "power_max": 61.5,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120780,6 +120839,7 @@
     "power_max": 63.4,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120795,6 +120855,7 @@
     "power_max": 60.3,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120810,6 +120871,7 @@
     "power_max": 37.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120825,6 +120887,7 @@
     "power_max": 59.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120840,6 +120903,7 @@
     "power_max": 39.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120870,6 +120934,7 @@
     "power_max": 68.7,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120885,6 +120950,7 @@
     "power_max": 35.1,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120900,6 +120966,7 @@
     "power_max": 60.7,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -120915,6 +120982,7 @@
     "power_max": 37.2,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-7cff8aad-ac38-6a84-2f51-c64b2acbcfcc"
   },
   {
@@ -138330,6 +138398,7 @@
     "power_max": 79.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138345,6 +138414,7 @@
     "power_max": 123.0,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138375,6 +138445,7 @@
     "power_max": 183.1,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138390,6 +138461,7 @@
     "power_max": 81.2,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138405,6 +138477,7 @@
     "power_max": 200.2,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138420,6 +138493,7 @@
     "power_max": 78.1,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138435,6 +138509,7 @@
     "power_max": 192.3,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138450,6 +138525,7 @@
     "power_max": 176.0,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138480,6 +138556,7 @@
     "power_max": 169.0,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138495,6 +138572,7 @@
     "power_max": 191.6,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138510,6 +138588,7 @@
     "power_max": 192.9,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138525,6 +138604,7 @@
     "power_max": 176.2,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138540,6 +138620,7 @@
     "power_max": 65.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138585,6 +138666,7 @@
     "power_max": 160.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138615,6 +138697,7 @@
     "power_max": 219.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138630,6 +138713,7 @@
     "power_max": 218.2,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138705,6 +138789,7 @@
     "power_max": 188.3,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138720,6 +138805,7 @@
     "power_max": 192.8,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138735,6 +138821,7 @@
     "power_max": 295.4,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138750,6 +138837,7 @@
     "power_max": 203.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138765,6 +138853,7 @@
     "power_max": 251.8,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138780,6 +138869,7 @@
     "power_max": 74.4,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138795,6 +138885,7 @@
     "power_max": 93.9,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138810,6 +138901,7 @@
     "power_max": 201.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138825,6 +138917,7 @@
     "power_max": 198.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138855,6 +138948,7 @@
     "power_max": 206.0,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138870,6 +138964,7 @@
     "power_max": 194.2,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138885,6 +138980,7 @@
     "power_max": 134.8,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138900,6 +138996,7 @@
     "power_max": 193.2,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138915,6 +139012,7 @@
     "power_max": 137.8,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138945,6 +139043,7 @@
     "power_max": 232.3,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138960,6 +139059,7 @@
     "power_max": 111.4,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138975,6 +139075,7 @@
     "power_max": 194.7,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -138990,6 +139091,7 @@
     "power_max": 183.3,
     "clock_avg": 1065.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1065 MHz throughout (card maximum 2520 MHz)",
     "card": "GPU-890438cb-edd4-fb3d-603e-88fe125622f1"
   },
   {
@@ -207615,6 +207717,7 @@
     "power_max": 25.8,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207630,6 +207733,7 @@
     "power_max": 29.8,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207660,6 +207764,7 @@
     "power_max": 51.8,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207675,6 +207780,7 @@
     "power_max": 22.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207690,6 +207796,7 @@
     "power_max": 54.8,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207705,6 +207812,7 @@
     "power_max": 24.0,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207720,6 +207828,7 @@
     "power_max": 53.0,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207735,6 +207844,7 @@
     "power_max": 37.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207765,6 +207875,7 @@
     "power_max": 51.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207780,6 +207891,7 @@
     "power_max": 52.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207795,6 +207907,7 @@
     "power_max": 53.6,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207810,6 +207923,7 @@
     "power_max": 50.0,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207825,6 +207939,7 @@
     "power_max": 21.3,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207870,6 +207985,7 @@
     "power_max": 34.4,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207900,6 +208016,7 @@
     "power_max": 57.6,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207915,6 +208032,7 @@
     "power_max": 57.7,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -207990,6 +208108,7 @@
     "power_max": 59.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208005,6 +208124,7 @@
     "power_max": 59.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208020,6 +208140,7 @@
     "power_max": 62.4,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208035,6 +208156,7 @@
     "power_max": 54.6,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208050,6 +208172,7 @@
     "power_max": 61.8,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208065,6 +208188,7 @@
     "power_max": 25.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208080,6 +208204,7 @@
     "power_max": 26.3,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208095,6 +208220,7 @@
     "power_max": 55.8,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208110,6 +208236,7 @@
     "power_max": 54.2,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208140,6 +208267,7 @@
     "power_max": 55.9,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208155,6 +208283,7 @@
     "power_max": 53.3,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208170,6 +208299,7 @@
     "power_max": 32.1,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208185,6 +208315,7 @@
     "power_max": 53.1,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208200,6 +208331,7 @@
     "power_max": 32.4,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208230,6 +208362,7 @@
     "power_max": 59.6,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208245,6 +208378,7 @@
     "power_max": 28.0,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208260,6 +208394,7 @@
     "power_max": 53.4,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -208275,6 +208410,7 @@
     "power_max": 39.2,
     "clock_avg": 795.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 795 MHz throughout (card maximum 2040 MHz)",
     "card": "GPU-d2721d08-78ce-2e9c-448b-6a61f3ac1e8f"
   },
   {
@@ -219195,6 +219331,7 @@
     "power_max": 53.6,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219210,6 +219347,7 @@
     "power_max": 91.7,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219240,6 +219378,7 @@
     "power_max": 132.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219255,6 +219394,7 @@
     "power_max": 60.1,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219270,6 +219410,7 @@
     "power_max": 143.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219285,6 +219426,7 @@
     "power_max": 93.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219300,6 +219442,7 @@
     "power_max": 138.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219315,6 +219458,7 @@
     "power_max": 139.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219345,6 +219489,7 @@
     "power_max": 123.1,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219360,6 +219505,7 @@
     "power_max": 136.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219375,6 +219521,7 @@
     "power_max": 137.0,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219390,6 +219537,7 @@
     "power_max": 113.2,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219405,6 +219553,7 @@
     "power_max": 49.3,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219450,6 +219599,7 @@
     "power_max": 140.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219480,6 +219630,7 @@
     "power_max": 142.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219495,6 +219646,7 @@
     "power_max": 142.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219570,6 +219722,7 @@
     "power_max": 137.4,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219585,6 +219738,7 @@
     "power_max": 137.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219600,6 +219754,7 @@
     "power_max": 145.5,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219615,6 +219770,7 @@
     "power_max": 145.7,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219630,6 +219786,7 @@
     "power_max": 149.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219645,6 +219802,7 @@
     "power_max": 53.0,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219660,6 +219818,7 @@
     "power_max": 67.9,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219675,6 +219834,7 @@
     "power_max": 145.2,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219690,6 +219850,7 @@
     "power_max": 143.2,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219720,6 +219881,7 @@
     "power_max": 149.1,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219735,6 +219897,7 @@
     "power_max": 137.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219750,6 +219913,7 @@
     "power_max": 108.6,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219765,6 +219929,7 @@
     "power_max": 136.0,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219780,6 +219945,7 @@
     "power_max": 107.4,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219810,6 +219976,7 @@
     "power_max": 169.2,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219825,6 +219992,7 @@
     "power_max": 69.8,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219840,6 +220008,7 @@
     "power_max": 140.0,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -219855,6 +220024,7 @@
     "power_max": 142.5,
     "clock_avg": 1320.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 1320 MHz throughout (card maximum 1710 MHz)",
     "card": "GPU-ded5ed92-c36d-1f4c-5986-4c01a8618273"
   },
   {
@@ -226470,6 +226640,7 @@
     "power_max": 35.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226485,6 +226656,7 @@
     "power_max": 40.8,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226530,6 +226702,7 @@
     "power_max": 33.6,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226560,6 +226733,7 @@
     "power_max": 47.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226590,6 +226764,7 @@
     "power_max": 51.2,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226620,6 +226795,7 @@
     "power_max": 59.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226665,6 +226841,7 @@
     "power_max": 57.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226680,6 +226857,7 @@
     "power_max": 32.5,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226725,6 +226903,7 @@
     "power_max": 64.8,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226845,6 +227024,7 @@
     "power_max": 62.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226860,6 +227040,7 @@
     "power_max": 62.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226875,6 +227056,7 @@
     "power_max": 39.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226905,6 +227087,7 @@
     "power_max": 52.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226920,6 +227103,7 @@
     "power_max": 33.2,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -226935,6 +227119,7 @@
     "power_max": 40.4,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -227025,6 +227210,7 @@
     "power_max": 44.6,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -227055,6 +227241,7 @@
     "power_max": 46.0,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -227100,6 +227287,7 @@
     "power_max": 33.9,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
@@ -227130,6 +227318,7 @@
     "power_max": 43.5,
     "clock_avg": 585.0,
     "throttle_time": 0.0,
+    "tuned": "profile run with the graphics clock held at 585 MHz throughout (card maximum 1590 MHz)",
     "card": "GPU-e54602ca-3ec2-7c72-9248-ac266d7f3945"
   },
   {
