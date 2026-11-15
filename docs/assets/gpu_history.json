@@ -200702,6 +200702,21 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "allocation_fragmentation",
+    "version": "1.2.5",
+    "unit": "alloc-events/s",
+    "score": 9942.1,
+    "duration": 300,
+    "date": "2026-11-14 18:26:18",
+    "temp_max": 54.0,
+    "power_max": 111.3,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "atomic_virus",
     "version": "1.2.0",
     "unit": "MAPS",
@@ -201287,6 +201302,21 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "galpat",
+    "version": "1.2.5",
+    "unit": "gallop-reads/s",
+    "score": 6582390000.0,
+    "duration": 300,
+    "date": "2026-11-14 19:50:52",
+    "temp_max": 61.0,
+    "power_max": 146.5,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "graph_replay",
     "version": "1.2.0",
     "unit": "graph-steps/s",
@@ -201357,6 +201387,21 @@
     "power_max": 297.4,
     "clock_avg": 1905.6,
     "throttle_time": 197.1,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "graph_replay",
+    "version": "1.2.5",
+    "unit": "graph-steps/s",
+    "score": 481744000.0,
+    "duration": 300,
+    "date": "2026-11-14 18:46:34",
+    "temp_max": 67.0,
+    "power_max": 205.9,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201917,6 +201962,21 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "march_test",
+    "version": "1.2.5",
+    "unit": "march-ops/s",
+    "score": 6223180000.0,
+    "duration": 300,
+    "date": "2026-11-14 20:06:48",
+    "temp_max": 64.0,
+    "power_max": 176.7,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "media_enc_virus",
     "version": "1.2.0",
     "unit": "FPS",
@@ -201986,6 +202046,21 @@
     "temp_max": 60.0,
     "power_max": 137.7,
     "clock_avg": 1944.2,
+    "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "media_enc_virus",
+    "version": "1.2.5",
+    "unit": "FPS",
+    "score": 32.998,
+    "duration": 300,
+    "date": "2026-11-14 19:34:52",
+    "temp_max": 54.0,
+    "power_max": 105.2,
+    "clock_avg": 1635.0,
     "throttle_time": 0.0,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
@@ -202302,6 +202377,21 @@
     "power_max": 274.1,
     "clock_avg": 1669.0,
     "throttle_time": 299.7,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "memory_hammer",
+    "version": "1.2.5",
+    "unit": "aggressor-reads/s",
+    "score": 59637100000.0,
+    "duration": 300,
+    "date": "2026-11-14 20:22:37",
+    "temp_max": 67.0,
+    "power_max": 268.2,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204032,6 +204122,21 @@
   {
     "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
     "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "rag_embedding",
+    "version": "1.2.5",
+    "unit": "ai-ops/s",
+    "score": 120499000.0,
+    "duration": 300,
+    "date": "2026-11-14 19:02:36",
+    "temp_max": 68.0,
+    "power_max": 215.2,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
     "test": "ras_validator",
     "version": "1.2.0",
     "unit": "GB/s",
@@ -205047,6 +205152,21 @@
     "power_max": 297.3,
     "clock_avg": 1903.5,
     "throttle_time": 294.7,
+    "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
+  },
+  {
+    "uuid": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "test": "vision_encoder",
+    "version": "1.2.5",
+    "unit": "ai-ops/s",
+    "score": 240929000.0,
+    "duration": 300,
+    "date": "2026-11-14 19:18:48",
+    "temp_max": 68.0,
+    "power_max": 208.5,
+    "clock_avg": 1635.0,
+    "throttle_time": 0.0,
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
