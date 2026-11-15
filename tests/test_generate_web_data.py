@@ -1180,6 +1180,26 @@ def test_every_listed_report_is_in_the_database_and_listed_once():
     assert sorted(set(listed) - present) == []
 
 
+def test_every_held_clock_report_really_held_its_clock():
+    """A report listed as a held-clock run must show it: average and maximum graphics clock equal and far below the card's maximum."""
+    from website_utils.generate_web_data import DB_DIR, TUNED_REPORTS_FILE
+    prefix = "profile run with the graphics clock held at "
+    manifest = json.loads(Path(TUNED_REPORTS_FILE).read_text(encoding="utf-8"))
+    held = {g["setting"]: g["reports"] for g in manifest["groups"] if g["setting"].startswith(prefix)}
+    assert held, "no held-clock group in the manifest"
+    by_name = {p.name: p for p in DB_DIR.rglob("*.json")}
+    for setting, names in held.items():
+        clock = float(setting[len(prefix):].split(" MHz")[0])
+        for name in names:
+            report = json.loads(by_name[name].read_text(encoding="utf-8"))
+            info = report["gpu_static_info"][0]
+            for test in report["test_results"]:
+                avg = first_present(test, ["Avg Clock (MHz)", "Avg Clock(MHz)"], None)
+                peak = first_present(test, ["Max Clock (MHz)", "Max Clock(MHz)"], None)
+                assert avg == peak == clock, (name, avg, peak, clock)
+                assert peak < 0.95 * info["max_graphics_clock_mhz"], name
+
+
 def _declared_run(db_dir, name, score, setting, stamp):
     path = write_report(db_dir, name, [dict(TUNED_GPU)],
                         [{"Test Name": "graph_replay", "GPU ID": 0, "Score": score, "Unit": "TFLOPS"}], version="1.2.5")
