@@ -23,6 +23,7 @@ OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "web_data.json"
 UNSUPPORTED_OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "unsupported_workloads.json"
 HISTORY_OUTPUT_FILE = ROOT_DIR / "docs" / "assets" / "gpu_history.json"
 METHODOLOGY_FILE = ROOT_DIR / "docs" / "methodology.md"
+TUNED_REPORTS_FILE = ROOT_DIR / "website_utils" / "tuned_reports.json"
 
 COVERAGE_START = "<!-- TOOLKIT_COVERAGE:START -->"
 COVERAGE_END = "<!-- TOOLKIT_COVERAGE:END -->"
@@ -60,6 +61,14 @@ PUBLIC_EXCLUDED_TESTS = {"all_reduce", "p2p_thrasher"}
 # key they would get rows of their own, so they are kept out explicitly. They
 # stay in the raw reports and in each card's history.
 MIN_LEADERBOARD_DURATION_S = 10
+
+# A run at a power limit, a locked clock or a chosen memory clock level is a
+# measurement of the setting, not of the card as shipped. It is kept in the
+# card's history, marked, and it does not compete for a leaderboard row: the
+# leaderboard keeps the best score, and a setting that changes nothing for a
+# workload (a clock lock on a memory-bound one) would otherwise win a row by
+# run-to-run noise. Readings of the enforced limit differ by rounding.
+POWER_CAP_TOLERANCE_W = 0.5
 
 # Ten AI workloads shared a single kernel body before v1.0.19 -- six of them
 # compiled to byte-identical SASS -- yet each published its own invented unit,
@@ -240,6 +249,7 @@ HISTORY_FIELDS = (
     "power_max",
     "clock_avg",
     "throttle_time",
+    "tuned",
 )
 
 
@@ -670,9 +680,51 @@ def not_a_gpu_measurement(data):
     return None
 
 
-def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
+def load_tuned_reports(path):
+    """Report file name -> the setting the card was run at, from the manifest.
+
+    A run at a locked clock or a chosen memory clock level records nothing in
+    its report that says so; only the observed clocks differ. The manifest
+    names those reports. A missing file means no report is listed.
+    """
+    path = Path(path)
+    if not path.is_file():
+        return {}
+    with open(path, "r", encoding="utf-8") as fp:
+        manifest = json.load(fp)
+    listed = {}
+    for group in manifest.get("groups", []):
+        setting = str(group["setting"])
+        for name in group["reports"]:
+            if listed.get(name, setting) != setting:
+                raise ValueError(f"{name} is listed under two settings in {path.name}")
+            listed[name] = setting
+    return listed
+
+
+def power_cap_setting(g_info):
+    """"power limit 298 W (default 350 W)" when the run enforced less than the card's default.
+
+    Pantheon records both limits (the power_limit_default and power_limit_enforced
+    columns), so a run under a lowered cap marks itself and needs no manifest.
+    """
+    enforced, default = g_info.get("power_limit_enforced"), g_info.get("power_limit_default")
+    if (isinstance(enforced, (int, float)) and isinstance(default, (int, float))
+            and not isinstance(enforced, bool) and not isinstance(default, bool)
+            and enforced < default - POWER_CAP_TOLERANCE_W):
+        return f"power limit {enforced:g} W (default {default:g} W)"
+    return None
+
+
+def tuned_setting(report_name, g_info, listed):
+    """What the card was set to for this run, or None for a stock run."""
+    return listed.get(report_name) or power_cap_setting(g_info)
+
+
+def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None, tuned_file=TUNED_REPORTS_FILE):
     db_dir = Path(db_dir)
     output_file = Path(output_file)
+    listed_tuned = load_tuned_reports(tuned_file)
     best_runs = {}
     history = []
     errors = []
@@ -849,6 +901,11 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     if memory_type_source:
                         record["memory_type_source"] = memory_type_source
 
+                    # Run at a changed power limit, clock lock or memory clock level.
+                    setting = tuned_setting(Path(f).name, g_info, listed_tuned)
+                    if setting:
+                        record["tuned"] = setting
+
                     # A card with no usable UUID is told apart by its serial, so
                     # carry it. Cards that do have a UUID are identified by it
                     # and their serial is not repeated on every row.
@@ -875,6 +932,9 @@ def main(db_dir=DB_DIR, output_file=OUTPUT_FILE, methodology_file=None):
                     run["card"] = card_identity(record)
                     run["_kind"] = data.get("record_kind")
                     history.append(run)
+
+                    if setting:
+                        continue
 
                     if 0 < to_float(record["duration"]) < MIN_LEADERBOARD_DURATION_S:
                         continue

@@ -94,7 +94,7 @@ that have real hardware results behind them.
 | CUDA | 13.0 | 595.71, 595.91.07, 595.97, 595.112.07 | 8 |
 | CUDA | 13.2 | 595.91.07, 595.112.07, 596.36, 610.88 | 9 |
 | CUDA | 13.3 | 595.91.07 | 1 |
-| ROCm | 7.2.0 | 7.0.0-42-generic, 7.0.0-43-generic | 2 |
+| ROCm | 7.2.0 | 7.0.0-42-generic | 2 |
 <!-- TOOLKIT_COVERAGE:END -->
 
 ## Reproducing a result
@@ -132,12 +132,19 @@ Some releases change what a workload measures. A result from the new release is 
 
 A build of the source tree between the 1.2.2 and 1.2.3 releases reports 1.2.2 although it scores the new way, so a 1.2.2 result from a source checkout can sit on the wrong side of the line.
 
+## Runs at a changed setting
+
+Some runs are made on purpose with the card set away from how it ships: a lowered power limit, a locked graphics clock, or a chosen memory clock level. Those results describe the setting, not the card, so they are **kept off the leaderboard** and shown only in the per-card history, where each one is drawn as its own series and named after the setting. The leaderboard keeps the best score per card, workload and release; without this rule a setting that changes nothing for a workload (a clock lock on a memory-bound one) would win a row by run-to-run noise.
+
+A lowered power limit marks itself: the report records the enforced and the default limit, and a run whose enforced limit is below the default is treated as changed. A locked clock or a memory clock level leaves no trace in the report except the observed clocks, so those reports are named in `website_utils/tuned_reports.json`. If a card has only changed-setting runs of a workload, that workload has no leaderboard row for it.
+
 ## Comparing results fairly
 
 - Compare like with like: the same workload and equivalent command line settings.
 - Prefer runs with the same Pantheon release and a similar duration.
 - Do not compare a result with one from before the release that changed its workload (see above).
 - Check the driver, toolkit, clock, temperature, power, and throttle fields before drawing conclusions.
+- Do not compare a run at a changed setting (see above) with a stock run as if they were the same card.
 - Do not rank unrelated workloads by their displayed number or unit.
 - Keep raw JSON reports when submitting or discussing a result so others can inspect the context.
 

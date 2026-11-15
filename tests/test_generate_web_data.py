@@ -4,6 +4,8 @@ from pathlib import Path
 import pytest
 
 from website_utils.generate_web_data import (
+    load_tuned_reports,
+    power_cap_setting,
     first_present,
     infer_manufacturer,
     infer_unit,
@@ -898,7 +900,7 @@ def test_history_chart_draws_one_series_per_run_length():
     script = (Path(__file__).resolve().parent.parent / "docs" / "js" / "gpu-history.js").read_text()
     assert "run.duration" in script
     # Run length is one part of the series key; the scoring change is the other.
-    assert "`${unit}|${duration}|${epoch}`" in script
+    assert "`${unit}|${duration}|${epoch}|${tuned}`" in script
 
 
 def test_amd_placeholders_are_not_published_as_readings(tmp_path):
@@ -1086,3 +1088,92 @@ def test_toolkit_coverage_lists_drivers_that_tie_on_the_version_key_in_a_fixed_o
 
     assert forward == backward
     assert "| ROCm | 7.2.0 | 7.0.0-42-generic, 7.0.0-43-generic, 7.0.0-44-generic | 1 |" in forward
+
+
+# --- runs at a changed setting stay off the leaderboard -----------------------------------------------------------
+
+TUNED_GPU = {"id": 0, "name": "GPU Alpha", "uuid": "GPU-UUID", "serial": "S1", "memory_total": "12288 MB",
+             "driver_version": "580.1", "power_limit": 350.0, "power_limit_default": 350.0,
+             "power_limit_enforced": 350.0}
+
+
+def _tuned_run(db_dir, name, score, enforced=350.0, test="graph_replay", stamp="2026-05-20 10:00:00"):
+    gpu = [dict(TUNED_GPU, power_limit_enforced=enforced)]
+    path = write_report(db_dir, name, gpu, [{"Test Name": test, "GPU ID": 0, "Score": score, "Unit": "TFLOPS"}],
+                        version="1.2.5")
+    report = json.loads(path.read_text())
+    report["timestamp"] = stamp
+    path.write_text(json.dumps(report))
+
+
+def _manifest(tmp_path, groups):
+    path = tmp_path / "tuned.json"
+    path.write_text(json.dumps({"groups": groups}), encoding="utf-8")
+    return path
+
+
+def test_a_run_under_a_lowered_power_limit_does_not_take_the_leaderboard_row(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    _tuned_run(db_dir, "pantheon_report_stock.json", 100.0, stamp="2026-05-20 10:00:00")
+    _tuned_run(db_dir, "pantheon_report_capped.json", 103.0, enforced=298.0, stamp="2026-05-20 12:00:00")
+
+    rows = main(db_dir=db_dir, output_file=output_file, tuned_file=tmp_path / "absent.json")
+    history = _read_assets(output_file)["gpu_history.json"]
+
+    # The higher score belongs to the capped run, so the stock score stays the card's score.
+    assert [r["score"] for r in rows] == [100.0]
+    assert "tuned" not in rows[0]
+    # Both runs are in the card's history, and only the capped one carries the setting.
+    assert {(r["score"], r.get("tuned")) for r in history} == {
+        (100.0, None), (103.0, "power limit 298 W (default 350 W)")}
+
+
+def test_a_listed_report_is_kept_off_the_leaderboard_and_marked_in_the_history(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    _tuned_run(db_dir, "pantheon_report_stock.json", 100.0)
+    _tuned_run(db_dir, "pantheon_report_locked.json", 103.0, stamp="2026-05-20 12:00:00")
+    manifest = _manifest(tmp_path, [{"setting": "graphics clock locked at 85%",
+                                     "reports": ["pantheon_report_locked.json"]}])
+
+    rows = main(db_dir=db_dir, output_file=output_file, tuned_file=manifest)
+    history = _read_assets(output_file)["gpu_history.json"]
+
+    assert [r["score"] for r in rows] == [100.0]
+    assert {(r["score"], r.get("tuned")) for r in history} == {(100.0, None), (103.0, "graphics clock locked at 85%")}
+
+
+def test_a_workload_run_only_at_a_changed_setting_has_no_leaderboard_row(tmp_path):
+    db_dir, output_file = _setup(tmp_path)
+    _tuned_run(db_dir, "pantheon_report_capped.json", 90.0, enforced=250.0)
+
+    rows = main(db_dir=db_dir, output_file=output_file, tuned_file=tmp_path / "absent.json")
+
+    assert rows == []
+    assert len(_read_assets(output_file)["gpu_history.json"]) == 1
+
+
+def test_a_power_limit_at_the_default_or_unrecorded_is_a_stock_run():
+    assert power_cap_setting({"power_limit_enforced": 350.0, "power_limit_default": 350.0}) is None
+    # a reading that rounds a fraction of a watt below the default is not a cap
+    assert power_cap_setting({"power_limit_enforced": 349.8, "power_limit_default": 350.0}) is None
+    # reports from before the columns existed, and placeholder values, never count as tuned
+    assert power_cap_setting({"power_limit": 350.0}) is None
+    assert power_cap_setting({"power_limit_enforced": "N/A", "power_limit_default": 350.0}) is None
+    assert power_cap_setting({"power_limit_enforced": 186, "power_limit_default": 203.0}) == \
+        "power limit 186 W (default 203 W)"
+
+
+def test_a_report_listed_under_two_settings_is_refused(tmp_path):
+    manifest = _manifest(tmp_path, [{"setting": "a", "reports": ["r.json"]},
+                                    {"setting": "b", "reports": ["r.json"]}])
+    with pytest.raises(ValueError, match="two settings"):
+        load_tuned_reports(manifest)
+
+
+def test_every_listed_report_is_in_the_database_and_listed_once():
+    from website_utils.generate_web_data import DB_DIR, TUNED_REPORTS_FILE
+    listed = load_tuned_reports(TUNED_REPORTS_FILE)
+    assert listed, "the manifest lists no report"
+    present = {p.name for p in DB_DIR.rglob("*.json")}
+    # A renamed or removed file would silently put its run back on the leaderboard.
+    assert sorted(set(listed) - present) == []

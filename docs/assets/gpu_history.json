@@ -57,6 +57,7 @@
     "power_max": 90.0,
     "clock_avg": 2275.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -72,6 +73,7 @@
     "power_max": 83.0,
     "clock_avg": 2272.9,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -132,6 +134,7 @@
     "power_max": 128.0,
     "clock_avg": 2275.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -147,6 +150,7 @@
     "power_max": 122.0,
     "clock_avg": 2272.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -222,6 +226,7 @@
     "power_max": 8.0,
     "clock_avg": 1.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -237,6 +242,7 @@
     "power_max": 27.0,
     "clock_avg": 3.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -297,6 +303,7 @@
     "power_max": 133.0,
     "clock_avg": 2275.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -312,6 +319,7 @@
     "power_max": 114.0,
     "clock_avg": 2272.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -387,6 +395,7 @@
     "power_max": 95.0,
     "clock_avg": 2275.2,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -402,6 +411,7 @@
     "power_max": 112.0,
     "clock_avg": 2268.0,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -447,6 +457,7 @@
     "power_max": 153.0,
     "clock_avg": 2273.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -462,6 +473,7 @@
     "power_max": 134.0,
     "clock_avg": 2268.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -522,6 +534,7 @@
     "power_max": 58.0,
     "clock_avg": 2280.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -537,6 +550,7 @@
     "power_max": 75.0,
     "clock_avg": 2272.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -597,6 +611,7 @@
     "power_max": 147.0,
     "clock_avg": 2276.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -612,6 +627,7 @@
     "power_max": 132.0,
     "clock_avg": 2273.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -672,6 +688,7 @@
     "power_max": 186.0,
     "clock_avg": 2250.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -687,6 +704,7 @@
     "power_max": 205.0,
     "clock_avg": 2231.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -762,6 +780,7 @@
     "power_max": 164.0,
     "clock_avg": 2275.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -777,6 +796,7 @@
     "power_max": 181.0,
     "clock_avg": 2260.1,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -837,6 +857,7 @@
     "power_max": 136.0,
     "clock_avg": 2267.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -852,6 +873,7 @@
     "power_max": 122.0,
     "clock_avg": 2272.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -912,6 +934,7 @@
     "power_max": 141.0,
     "clock_avg": 2273.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -927,6 +950,7 @@
     "power_max": 122.0,
     "clock_avg": 2272.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -987,6 +1011,7 @@
     "power_max": 148.0,
     "clock_avg": 2271.2,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1002,6 +1027,7 @@
     "power_max": 129.0,
     "clock_avg": 2272.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1062,6 +1088,7 @@
     "power_max": 145.0,
     "clock_avg": 2277.5,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1077,6 +1104,7 @@
     "power_max": 138.0,
     "clock_avg": 2272.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1152,6 +1180,7 @@
     "power_max": 137.0,
     "clock_avg": 2275.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1167,6 +1196,7 @@
     "power_max": 123.0,
     "clock_avg": 2268.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1242,6 +1272,7 @@
     "power_max": 123.0,
     "clock_avg": 2275.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1257,6 +1288,7 @@
     "power_max": 105.0,
     "clock_avg": 2252.0,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1317,6 +1349,7 @@
     "power_max": 136.0,
     "clock_avg": 2269.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1332,6 +1365,7 @@
     "power_max": 144.0,
     "clock_avg": 2268.2,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1407,6 +1441,7 @@
     "power_max": 117.0,
     "clock_avg": 2277.9,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1422,6 +1457,7 @@
     "power_max": 104.0,
     "clock_avg": 2267.9,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1497,6 +1533,7 @@
     "power_max": 144.0,
     "clock_avg": 2264.2,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1512,6 +1549,7 @@
     "power_max": 125.0,
     "clock_avg": 2273.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1587,6 +1625,7 @@
     "power_max": 146.0,
     "clock_avg": 2270.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1602,6 +1641,7 @@
     "power_max": 127.0,
     "clock_avg": 2272.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1677,6 +1717,7 @@
     "power_max": 11.0,
     "clock_avg": 8.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1692,6 +1733,7 @@
     "power_max": 31.0,
     "clock_avg": 26.9,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1767,6 +1809,7 @@
     "power_max": 186.0,
     "clock_avg": 2249.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1782,6 +1825,7 @@
     "power_max": 205.0,
     "clock_avg": 2238.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1857,6 +1901,7 @@
     "power_max": 177.0,
     "clock_avg": 2276.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1872,6 +1917,7 @@
     "power_max": 145.0,
     "clock_avg": 2262.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1947,6 +1993,7 @@
     "power_max": 135.0,
     "clock_avg": 2275.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -1962,6 +2009,7 @@
     "power_max": 115.0,
     "clock_avg": 2265.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2037,6 +2085,7 @@
     "power_max": 171.0,
     "clock_avg": 2271.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2052,6 +2101,7 @@
     "power_max": 145.0,
     "clock_avg": 2267.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2127,6 +2177,7 @@
     "power_max": 173.0,
     "clock_avg": 2269.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2142,6 +2193,7 @@
     "power_max": 144.0,
     "clock_avg": 2268.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2202,6 +2254,7 @@
     "power_max": 152.0,
     "clock_avg": 2271.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2217,6 +2270,7 @@
     "power_max": 133.0,
     "clock_avg": 2267.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2277,6 +2331,7 @@
     "power_max": 192.0,
     "clock_avg": 1983.9,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2292,6 +2347,7 @@
     "power_max": 208.0,
     "clock_avg": 2107.0,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2352,6 +2408,7 @@
     "power_max": 58.0,
     "clock_avg": 2262.5,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2367,6 +2424,7 @@
     "power_max": 53.0,
     "clock_avg": 2265.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2427,6 +2485,7 @@
     "power_max": 49.0,
     "clock_avg": 2279.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2442,6 +2501,7 @@
     "power_max": 47.0,
     "clock_avg": 1064.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2502,6 +2562,7 @@
     "power_max": 149.0,
     "clock_avg": 2264.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2517,6 +2578,7 @@
     "power_max": 131.0,
     "clock_avg": 2266.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2577,6 +2639,7 @@
     "power_max": 146.0,
     "clock_avg": 2273.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2592,6 +2655,7 @@
     "power_max": 132.0,
     "clock_avg": 2269.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2667,6 +2731,7 @@
     "power_max": 144.0,
     "clock_avg": 2273.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2682,6 +2747,7 @@
     "power_max": 121.0,
     "clock_avg": 2259.0,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2742,6 +2808,7 @@
     "power_max": 158.0,
     "clock_avg": 2270.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2757,6 +2824,7 @@
     "power_max": 140.0,
     "clock_avg": 2266.9,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2862,6 +2930,7 @@
     "power_max": 144.0,
     "clock_avg": 2273.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2877,6 +2946,7 @@
     "power_max": 133.0,
     "clock_avg": 2267.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2937,6 +3007,7 @@
     "power_max": 186.0,
     "clock_avg": 2204.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -2952,6 +3023,7 @@
     "power_max": 203.0,
     "clock_avg": 2197.0,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3012,6 +3084,7 @@
     "power_max": 144.0,
     "clock_avg": 2270.9,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3027,6 +3100,7 @@
     "power_max": 128.0,
     "clock_avg": 2266.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3087,6 +3161,7 @@
     "power_max": 186.0,
     "clock_avg": 2203.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3102,6 +3177,7 @@
     "power_max": 203.0,
     "clock_avg": 2208.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3177,6 +3253,7 @@
     "power_max": 65.0,
     "clock_avg": 2275.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3192,6 +3269,7 @@
     "power_max": 60.0,
     "clock_avg": 2274.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3252,6 +3330,7 @@
     "power_max": 188.0,
     "clock_avg": 2187.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3267,6 +3346,7 @@
     "power_max": 170.0,
     "clock_avg": 2267.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3327,6 +3407,7 @@
     "power_max": 144.0,
     "clock_avg": 2271.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3342,6 +3423,7 @@
     "power_max": 129.0,
     "clock_avg": 2267.2,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3417,6 +3499,7 @@
     "power_max": 186.0,
     "clock_avg": 2257.5,
     "throttle_time": 0.0,
+    "tuned": "power limit 186 W (default 203 W)",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -3432,6 +3515,7 @@
     "power_max": 202.0,
     "clock_avg": 2263.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "0xfd3d6d912de3c917"
   },
   {
@@ -4077,6 +4161,7 @@
     "power_max": 108.0,
     "clock_avg": 2671.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4092,6 +4177,7 @@
     "power_max": 100.0,
     "clock_avg": 2663.2,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4107,6 +4193,7 @@
     "power_max": 131.0,
     "clock_avg": 2670.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4122,6 +4209,7 @@
     "power_max": 125.0,
     "clock_avg": 2661.1,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4137,6 +4225,7 @@
     "power_max": 6.0,
     "clock_avg": 1.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4152,6 +4241,7 @@
     "power_max": 22.0,
     "clock_avg": 1.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4167,6 +4257,7 @@
     "power_max": 136.0,
     "clock_avg": 2670.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4182,6 +4273,7 @@
     "power_max": 117.0,
     "clock_avg": 2662.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4197,6 +4289,7 @@
     "power_max": 99.0,
     "clock_avg": 2671.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4212,6 +4305,7 @@
     "power_max": 116.0,
     "clock_avg": 2663.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4227,6 +4321,7 @@
     "power_max": 156.0,
     "clock_avg": 1463.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4242,6 +4337,7 @@
     "power_max": 133.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4257,6 +4353,7 @@
     "power_max": 73.0,
     "clock_avg": 2672.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4272,6 +4369,7 @@
     "power_max": 87.0,
     "clock_avg": 2663.1,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4287,6 +4385,7 @@
     "power_max": 154.0,
     "clock_avg": 2378.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4302,6 +4401,7 @@
     "power_max": 131.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4317,6 +4417,7 @@
     "power_max": 174.0,
     "clock_avg": 2636.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4332,6 +4433,7 @@
     "power_max": 186.0,
     "clock_avg": 2615.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4347,6 +4449,7 @@
     "power_max": 164.0,
     "clock_avg": 2670.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4362,6 +4465,7 @@
     "power_max": 183.0,
     "clock_avg": 2650.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4377,6 +4481,7 @@
     "power_max": 139.0,
     "clock_avg": 2670.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4392,6 +4497,7 @@
     "power_max": 119.0,
     "clock_avg": 2662.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4407,6 +4513,7 @@
     "power_max": 146.0,
     "clock_avg": 2126.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4422,6 +4529,7 @@
     "power_max": 123.0,
     "clock_avg": 2663.1,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4437,6 +4545,7 @@
     "power_max": 153.0,
     "clock_avg": 1492.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4452,6 +4561,7 @@
     "power_max": 132.0,
     "clock_avg": 2661.9,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4467,6 +4577,7 @@
     "power_max": 162.0,
     "clock_avg": 2670.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4482,6 +4593,7 @@
     "power_max": 151.0,
     "clock_avg": 2654.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4497,6 +4609,7 @@
     "power_max": 136.0,
     "clock_avg": 2670.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4512,6 +4625,7 @@
     "power_max": 116.0,
     "clock_avg": 2661.9,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4527,6 +4641,7 @@
     "power_max": 127.0,
     "clock_avg": 2670.2,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4542,6 +4657,7 @@
     "power_max": 106.0,
     "clock_avg": 2656.1,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4557,6 +4673,7 @@
     "power_max": 163.0,
     "clock_avg": 2670.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4572,6 +4689,7 @@
     "power_max": 173.0,
     "clock_avg": 2662.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4587,6 +4705,7 @@
     "power_max": 123.0,
     "clock_avg": 2671.5,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4602,6 +4721,7 @@
     "power_max": 109.0,
     "clock_avg": 2663.1,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4617,6 +4737,7 @@
     "power_max": 153.0,
     "clock_avg": 2052.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4632,6 +4753,7 @@
     "power_max": 130.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4647,6 +4769,7 @@
     "power_max": 151.0,
     "clock_avg": 2117.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4662,6 +4785,7 @@
     "power_max": 128.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4677,6 +4801,7 @@
     "power_max": 7.0,
     "clock_avg": 19.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4692,6 +4817,7 @@
     "power_max": 24.0,
     "clock_avg": 24.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4707,6 +4833,7 @@
     "power_max": 174.0,
     "clock_avg": 2635.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4722,6 +4849,7 @@
     "power_max": 186.0,
     "clock_avg": 2613.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4737,6 +4865,7 @@
     "power_max": 174.0,
     "clock_avg": 2660.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4752,6 +4881,7 @@
     "power_max": 150.0,
     "clock_avg": 2662.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4767,6 +4897,7 @@
     "power_max": 140.0,
     "clock_avg": 2670.1,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4782,6 +4913,7 @@
     "power_max": 118.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4797,6 +4929,7 @@
     "power_max": 175.0,
     "clock_avg": 2661.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4812,6 +4945,7 @@
     "power_max": 147.0,
     "clock_avg": 2661.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4827,6 +4961,7 @@
     "power_max": 176.0,
     "clock_avg": 2656.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4842,6 +4977,7 @@
     "power_max": 147.0,
     "clock_avg": 2647.2,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4857,6 +4993,7 @@
     "power_max": 156.0,
     "clock_avg": 2169.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4872,6 +5009,7 @@
     "power_max": 132.0,
     "clock_avg": 2662.3,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4887,6 +5025,7 @@
     "power_max": 179.0,
     "clock_avg": 2431.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4902,6 +5041,7 @@
     "power_max": 192.0,
     "clock_avg": 2515.8,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4917,6 +5057,7 @@
     "power_max": 65.0,
     "clock_avg": 2665.2,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4932,6 +5073,7 @@
     "power_max": 59.0,
     "clock_avg": 2635.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4947,6 +5089,7 @@
     "power_max": 40.0,
     "clock_avg": 2675.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4962,6 +5105,7 @@
     "power_max": 47.0,
     "clock_avg": 895.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4977,6 +5121,7 @@
     "power_max": 155.0,
     "clock_avg": 1619.3,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -4992,6 +5137,7 @@
     "power_max": 132.0,
     "clock_avg": 2661.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5007,6 +5153,7 @@
     "power_max": 153.0,
     "clock_avg": 2603.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5022,6 +5169,7 @@
     "power_max": 131.0,
     "clock_avg": 2660.5,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5037,6 +5185,7 @@
     "power_max": 150.0,
     "clock_avg": 2670.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5052,6 +5201,7 @@
     "power_max": 122.0,
     "clock_avg": 2662.7,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5067,6 +5217,7 @@
     "power_max": 164.0,
     "clock_avg": 1417.9,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5082,6 +5233,7 @@
     "power_max": 140.0,
     "clock_avg": 2660.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5097,6 +5249,7 @@
     "power_max": 152.0,
     "clock_avg": 2318.7,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5112,6 +5265,7 @@
     "power_max": 133.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5127,6 +5281,7 @@
     "power_max": 174.0,
     "clock_avg": 2570.9,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5142,6 +5297,7 @@
     "power_max": 182.0,
     "clock_avg": 2544.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5157,6 +5313,7 @@
     "power_max": 150.0,
     "clock_avg": 2105.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5172,6 +5329,7 @@
     "power_max": 127.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5187,6 +5345,7 @@
     "power_max": 172.0,
     "clock_avg": 2592.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5202,6 +5361,7 @@
     "power_max": 186.0,
     "clock_avg": 2568.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5217,6 +5377,7 @@
     "power_max": 67.0,
     "clock_avg": 2671.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5232,6 +5393,7 @@
     "power_max": 66.0,
     "clock_avg": 2663.6,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5247,6 +5409,7 @@
     "power_max": 175.0,
     "clock_avg": 1548.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5262,6 +5425,7 @@
     "power_max": 176.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5277,6 +5441,7 @@
     "power_max": 149.0,
     "clock_avg": 2246.5,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5292,6 +5457,7 @@
     "power_max": 128.0,
     "clock_avg": 2662.4,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5307,6 +5473,7 @@
     "power_max": 174.0,
     "clock_avg": 2648.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 174 W (default 186 W)",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -5322,6 +5489,7 @@
     "power_max": 186.0,
     "clock_avg": 2629.0,
     "throttle_time": 0.0,
+    "tuned": "memory clock level 2",
     "card": "AMD Radeon RX 6700 XT|N/A|12272 MB|7.0.0-43-generic"
   },
   {
@@ -200697,6 +200865,7 @@
     "power_max": 157.6,
     "clock_avg": 1947.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -200712,6 +200881,7 @@
     "power_max": 111.3,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -200787,6 +200957,7 @@
     "power_max": 289.0,
     "clock_avg": 1913.8,
     "throttle_time": 6.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -200802,6 +200973,7 @@
     "power_max": 176.7,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -200907,6 +201079,7 @@
     "power_max": 93.5,
     "clock_avg": 299.6,
     "throttle_time": 4.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -200922,6 +201095,7 @@
     "power_max": 95.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -200997,6 +201171,7 @@
     "power_max": 295.2,
     "clock_avg": 1917.4,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201012,6 +201187,7 @@
     "power_max": 197.1,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201117,6 +201293,7 @@
     "power_max": 192.1,
     "clock_avg": 1938.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201132,6 +201309,7 @@
     "power_max": 126.3,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201207,6 +201385,7 @@
     "power_max": 297.9,
     "clock_avg": 1887.5,
     "throttle_time": 298.7,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201222,6 +201401,7 @@
     "power_max": 216.5,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201297,6 +201477,7 @@
     "power_max": 216.0,
     "clock_avg": 1942.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201312,6 +201493,7 @@
     "power_max": 146.5,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201387,6 +201569,7 @@
     "power_max": 297.4,
     "clock_avg": 1905.6,
     "throttle_time": 197.1,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201402,6 +201585,7 @@
     "power_max": 205.9,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201477,6 +201661,7 @@
     "power_max": 298.0,
     "clock_avg": 1678.8,
     "throttle_time": 300.3,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201492,6 +201677,7 @@
     "power_max": 274.1,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201597,6 +201783,7 @@
     "power_max": 297.9,
     "clock_avg": 1560.8,
     "throttle_time": 300.2,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201612,6 +201799,7 @@
     "power_max": 336.9,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201687,6 +201875,7 @@
     "power_max": 281.6,
     "clock_avg": 1917.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201702,6 +201891,7 @@
     "power_max": 190.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201777,6 +201967,7 @@
     "power_max": 297.8,
     "clock_avg": 1909.5,
     "throttle_time": 160.9,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201792,6 +201983,7 @@
     "power_max": 203.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201867,6 +202059,7 @@
     "power_max": 297.8,
     "clock_avg": 1910.2,
     "throttle_time": 282.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201882,6 +202075,7 @@
     "power_max": 204.0,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201957,6 +202151,7 @@
     "power_max": 256.4,
     "clock_avg": 1935.8,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -201972,6 +202167,7 @@
     "power_max": 176.7,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202047,6 +202243,7 @@
     "power_max": 137.7,
     "clock_avg": 1944.2,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202062,6 +202259,7 @@
     "power_max": 105.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202167,6 +202365,7 @@
     "power_max": 297.6,
     "clock_avg": 1884.0,
     "throttle_time": 302.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202182,6 +202381,7 @@
     "power_max": 219.5,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202287,6 +202487,7 @@
     "power_max": 298.2,
     "clock_avg": 1870.6,
     "throttle_time": 300.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202302,6 +202503,7 @@
     "power_max": 224.8,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202377,6 +202579,7 @@
     "power_max": 274.1,
     "clock_avg": 1669.0,
     "throttle_time": 299.7,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202392,6 +202595,7 @@
     "power_max": 268.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202497,6 +202701,7 @@
     "power_max": 289.4,
     "clock_avg": 1872.9,
     "throttle_time": 299.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202512,6 +202717,7 @@
     "power_max": 227.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202617,6 +202823,7 @@
     "power_max": 278.5,
     "clock_avg": 1669.8,
     "throttle_time": 299.2,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202632,6 +202839,7 @@
     "power_max": 273.2,
     "clock_avg": 1635.0,
     "throttle_time": 17.1,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202737,6 +202945,7 @@
     "power_max": 277.6,
     "clock_avg": 1670.6,
     "throttle_time": 300.2,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202752,6 +202961,7 @@
     "power_max": 273.7,
     "clock_avg": 1635.0,
     "throttle_time": 25.2,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202857,6 +203067,7 @@
     "power_max": 125.9,
     "clock_avg": 300.1,
     "throttle_time": 3.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202872,6 +203083,7 @@
     "power_max": 118.9,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202977,6 +203189,7 @@
     "power_max": 298.0,
     "clock_avg": 1662.5,
     "throttle_time": 300.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -202992,6 +203205,7 @@
     "power_max": 288.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203097,6 +203311,7 @@
     "power_max": 298.0,
     "clock_avg": 1800.1,
     "throttle_time": 299.4,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203112,6 +203327,7 @@
     "power_max": 247.9,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203217,6 +203433,7 @@
     "power_max": 292.9,
     "clock_avg": 1876.8,
     "throttle_time": 300.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203232,6 +203449,7 @@
     "power_max": 225.0,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203337,6 +203555,7 @@
     "power_max": 291.3,
     "clock_avg": 1699.1,
     "throttle_time": 300.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203352,6 +203571,7 @@
     "power_max": 275.8,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203457,6 +203677,7 @@
     "power_max": 290.8,
     "clock_avg": 1688.4,
     "throttle_time": 300.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203472,6 +203693,7 @@
     "power_max": 275.7,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203577,6 +203799,7 @@
     "power_max": 297.9,
     "clock_avg": 1732.2,
     "throttle_time": 300.4,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203592,6 +203815,7 @@
     "power_max": 253.1,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203667,6 +203891,7 @@
     "power_max": 298.0,
     "clock_avg": 1869.6,
     "throttle_time": 299.5,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203682,6 +203907,7 @@
     "power_max": 208.9,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203757,6 +203983,7 @@
     "power_max": 298.3,
     "clock_avg": 1729.5,
     "throttle_time": 303.3,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203772,6 +203999,7 @@
     "power_max": 260.1,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203847,6 +204075,7 @@
     "power_max": 143.4,
     "clock_avg": 1950.0,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203862,6 +204091,7 @@
     "power_max": 108.7,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203937,6 +204167,7 @@
     "power_max": 138.7,
     "clock_avg": 1660.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -203952,6 +204183,7 @@
     "power_max": 131.4,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204027,6 +204259,7 @@
     "power_max": 297.9,
     "clock_avg": 1880.4,
     "throttle_time": 299.7,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204042,6 +204275,7 @@
     "power_max": 218.5,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204117,6 +204351,7 @@
     "power_max": 297.7,
     "clock_avg": 1893.1,
     "throttle_time": 298.6,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204132,6 +204367,7 @@
     "power_max": 215.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204237,6 +204473,7 @@
     "power_max": 294.7,
     "clock_avg": 1826.8,
     "throttle_time": 300.2,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204252,6 +204489,7 @@
     "power_max": 243.0,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204327,6 +204565,7 @@
     "power_max": 297.9,
     "clock_avg": 1863.1,
     "throttle_time": 299.7,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204342,6 +204581,7 @@
     "power_max": 225.6,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204492,6 +204732,7 @@
     "power_max": 298.2,
     "clock_avg": 1907.8,
     "throttle_time": 187.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204507,6 +204748,7 @@
     "power_max": 205.9,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204582,6 +204824,7 @@
     "power_max": 298.2,
     "clock_avg": 1825.8,
     "throttle_time": 300.1,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204597,6 +204840,7 @@
     "power_max": 214.1,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204672,6 +204916,7 @@
     "power_max": 296.2,
     "clock_avg": 1917.8,
     "throttle_time": 254.4,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204687,6 +204932,7 @@
     "power_max": 203.3,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204762,6 +205008,7 @@
     "power_max": 297.8,
     "clock_avg": 1832.4,
     "throttle_time": 300.2,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204777,6 +205024,7 @@
     "power_max": 213.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204882,6 +205130,7 @@
     "power_max": 290.5,
     "clock_avg": 1909.3,
     "throttle_time": 1.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204897,6 +205146,7 @@
     "power_max": 198.0,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204972,6 +205222,7 @@
     "power_max": 298.0,
     "clock_avg": 1742.2,
     "throttle_time": 299.7,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -204987,6 +205238,7 @@
     "power_max": 265.6,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -205062,6 +205314,7 @@
     "power_max": 230.7,
     "clock_avg": 1930.6,
     "throttle_time": 0.0,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -205077,6 +205330,7 @@
     "power_max": 147.2,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -205152,6 +205406,7 @@
     "power_max": 297.3,
     "clock_avg": 1903.5,
     "throttle_time": 294.7,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -205167,6 +205422,7 @@
     "power_max": 208.5,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -205257,6 +205513,7 @@
     "power_max": 298.0,
     "clock_avg": 1666.4,
     "throttle_time": 300.3,
+    "tuned": "power limit 298 W (default 350 W)",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
@@ -205272,6 +205529,7 @@
     "power_max": 280.1,
     "clock_avg": 1635.0,
     "throttle_time": 0.0,
+    "tuned": "graphics clock locked at 85% of the clock the card sustains under load",
     "card": "GPU-cd8cd258-8258-ad6b-1694-a1e9c5218330"
   },
   {
