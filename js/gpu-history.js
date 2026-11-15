@@ -4,7 +4,7 @@
 // slows down over time cannot be seen there: the good early run wins and every
 // later, worse run is dropped. This page plots every run of one card instead.
 //
-// A series is split by unit, by run length and by scoring change. When a
+// A series is split by unit, by run length, by scoring change and by setting. When a
 // workload's metric changed between releases the numbers are not comparable,
 // and drawing them as one line would show a step that is a units change rather
 // than a change in the hardware. A 30 s run and a 3600 s run of the same
@@ -12,6 +12,10 @@
 // each run length is its own line. The same goes for a workload that was
 // reworked on purpose: its results before and after the release that reworked
 // it are different measurements, so they are drawn apart (SCORING_CHANGES).
+// A run at a changed power limit, locked clock or memory clock level (the
+// history entry's "tuned" field names the setting) measures the setting rather
+// than the card as shipped, so each setting is its own line apart from the
+// stock runs.
 
 (function () {
     let historyRuns = [];
@@ -152,7 +156,7 @@
             .filter(run => run.card === card && run.test === test)
             .sort((a, b) => String(a.date).localeCompare(String(b.date)));
 
-        // One series per (unit, run length, scoring change). Reports published
+        // One series per (unit, run length, scoring change, setting). Reports published
         // before the run length was kept in the history have none; they share
         // one series.
         const bySeries = new Map();
@@ -160,8 +164,9 @@
             const unit = run.unit || "";
             const duration = Number(run.duration) || 0;
             const epoch = scoringEpoch(test, run.version);
-            const key = `${unit}|${duration}|${epoch}`;
-            if (!bySeries.has(key)) bySeries.set(key, { unit, duration, epoch, points: [] });
+            const tuned = run.tuned || "";
+            const key = `${unit}|${duration}|${epoch}|${tuned}`;
+            if (!bySeries.has(key)) bySeries.set(key, { unit, duration, epoch, tuned, points: [] });
             bySeries.get(key).points.push({
                 x: new Date(String(run.date).replace(" ", "T")).getTime(),
                 y: Number(run.score),
@@ -172,7 +177,8 @@
         // Longest runs last, so the legend reads from short to long.
         return Array.from(bySeries.values())
             .sort((a, b) => a.unit.localeCompare(b.unit) || a.duration - b.duration
-                || a.epoch.localeCompare(b.epoch, undefined, { numeric: true }));
+                || a.epoch.localeCompare(b.epoch, undefined, { numeric: true })
+                || a.tuned.localeCompare(b.tuned));
     }
 
     function draw() {
@@ -186,6 +192,7 @@
         const units = new Set(groups.map(g => g.unit));
         const durations = new Set(groups.map(g => g.duration));
         const epochs = new Set(groups.map(g => g.epoch));
+        const anyTuned = groups.some(g => g.tuned);
         const firstChange = firstScoringChange(testSelect.value);
         const series = groups.map(g => {
             const unitName = g.unit || "score";
@@ -194,6 +201,7 @@
             if (units.size > 1) parts.push(unitName);
             if (durations.size > 1) parts.push(durationLabel(g.duration));
             if (epochs.size > 1) parts.push(g.epoch ? `from ${g.epoch}` : `before ${firstChange}`);
+            if (anyTuned) parts.push(g.tuned || "stock");
             return { name: parts.length ? parts.join(", ") : unitName, data: g.points };
         });
         const total = series.reduce((sum, s) => sum + s.data.length, 0);
@@ -221,6 +229,9 @@
         }
         if (epochs.size > 1) {
             notes.push(`This workload's scoring changed in Pantheon ${firstChange}, so results from that release on are drawn as their own series. They are not comparable with earlier results.`);
+        }
+        if (anyTuned) {
+            notes.push("Runs at a changed power limit, locked clock or memory clock level are drawn as their own series, named after the setting. They measure the setting rather than the card as shipped, and they are not on the leaderboard.");
         }
         setStatus(notes.join(" "));
 
