@@ -2438,7 +2438,7 @@ def test_history_page_points_to_the_scoring_changes_and_series_are_split_by_them
 
     assert "methodology.md#scores-that-changed-between-releases" in history
     assert "const epoch = scoringEpoch(test, run.version);" in script
-    assert "const key = `${unit}|${duration}|${epoch}`;" in script
+    assert "const key = `${unit}|${duration}|${epoch}|${tuned}`;" in script
     assert "Do not compare a result with one from before the release that changed its workload" \
         in read("docs/methodology.md")
 
@@ -2458,6 +2458,27 @@ def _history_series(tmp_path, runs, card, test):
 def _run(test, version, score, date, unit="TFLOPS", duration=300, card="GPU-aaaa"):
     return {"card": card, "gpu": "NVIDIA Test Card", "test": test, "version": version, "score": score,
             "date": date, "unit": unit, "duration": duration}
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="needs Node to run the chart script")
+def test_history_chart_draws_runs_at_a_changed_setting_as_their_own_series(tmp_path):
+    cap = "power limit 298 W (default 350 W)"
+    lock = "graphics clock locked at 85% of the clock the card sustains under load"
+    runs = [_run("graph_replay", "1.2.5", 469.0, "2026-11-14 06:00:00"),
+            {**_run("graph_replay", "1.2.5", 481.0, "2026-11-14 12:00:00"), "tuned": lock},
+            {**_run("graph_replay", "1.2.5", 468.0, "2026-11-14 18:00:00"), "tuned": cap},
+            _run("graph_replay", "1.2.5", 470.0, "2026-11-13 06:00:00")]
+    out = _history_series(tmp_path, runs, "GPU-aaaa", "graph_replay")
+
+    # Stock first, then each setting by name; the setting's runs never join the stock line.
+    assert [s["name"] for s in out["series"]] == ["stock", lock, cap]
+    assert [len(s["points"]) for s in out["series"]] == [2, 1, 1]
+    assert "not on the leaderboard" in out["status"]
+
+    # A card with stock runs only keeps its old, unlabelled series and no note about settings.
+    plain = _history_series(tmp_path, [r for r in runs if "tuned" not in r], "GPU-aaaa", "graph_replay")
+    assert [s["name"] for s in plain["series"]] == ["TFLOPS"]
+    assert "not on the leaderboard" not in plain["status"]
 
 
 @pytest.mark.skipif(shutil.which("node") is None, reason="needs Node to run the chart script")
